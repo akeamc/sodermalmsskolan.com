@@ -1,4 +1,4 @@
-import styles from "./Layout.module.css";
+import styles from "./Layout.module.scss";
 import React from "react";
 import { Text } from "./Text";
 import { Navigation } from "./Navigation";
@@ -34,9 +34,9 @@ class Header extends React.Component<{ title: string }> {
   render() {
     return (
       <div className={styles.header}>
-        <h1 className={styles.pageTitle}>
-          <Text>{this.props.title}</Text>
-        </h1>
+        <h2 className={styles.pageTitle}>
+          <Text className={styles.pageTitle}>{this.props.title}</Text>
+        </h2>
       </div>
     );
   }

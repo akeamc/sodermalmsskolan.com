@@ -1,4 +1,4 @@
-import styles from "./Menu.module.css";
+import styles from "./Menu.module.scss";
 import React from "react";
 import { Day } from "./Day";
 
@@ -6,6 +6,7 @@ import { getMenus, Menu } from "../../services/menu";
 import { Text } from "../basic/Text";
 import { Status } from "../../services/status";
 import { Spinner } from "../basic/Spinner";
+import moment from "moment";
 
 export class Menus extends React.Component<
   {
@@ -29,7 +30,6 @@ export class Menus extends React.Component<
   }
 
   fetchData() {
-    this.setState({ status: Status.Loading });
     getMenus(this.props.start, this.props.end)
       .then(menus => {
         this.setState({
@@ -50,11 +50,14 @@ export class Menus extends React.Component<
       previous.start !== this.props.start ||
       previous.end !== this.props.end
     ) {
+      this.setState({ status: Status.Loading });
       this.fetchData();
     }
   }
 
   render() {
+    const now = moment();
+
     switch (this.state.status) {
       case Status.Loading:
         return <Spinner></Spinner>;
@@ -65,10 +68,19 @@ export class Menus extends React.Component<
           return <Text>Menyn är inte tillgänglig.</Text>;
         }
 
+        let foundNextDay = !now.add(1, "day").isSame(this.props.start, "day");
+
         return (
           <div className={styles.menu}>
             {this.state.menus.map(menu => {
-              return <Day menu={menu}></Day>;
+              let highlight = false;
+
+              if (!foundNextDay && moment(menu.timestamp).isSameOrAfter(now, "day")) {
+                highlight = true;
+                foundNextDay = true;
+              }
+
+              return <Day menu={menu} highlight={highlight}></Day>;
             })}
           </div>
         );

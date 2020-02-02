@@ -1,41 +1,40 @@
+@import "../../styles/mixins";
+
 .appWrapper {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 16px;
   max-width: 1440px;
   -webkit-font-smoothing: antialiased;
-}
 
-@media screen and (min-width: 600px) {
-  .appWrapper {
+  @include sm {
     padding: 0 40px;
   }
-}
 
-@media screen and (min-width: 1024px) {
-  .appWrapper {
+  @include md {
     padding: 0 60px;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .appWrapper {
+  @include lg {
     padding: 0 80px;
   }
 }
 
 .header {
   padding: 48px 0;
-}
 
-@media screen and (min-width: 600px) {
-  .header {
+  @include sm {
     padding: 120px 0;
   }
 }
 
 .pageTitle {
-  font-size: 48px;
+  font-size: 24px;
+  line-height: 1.15;
   font-weight: 400;
   letter-spacing: -0.022em;
+
+  @include sm {
+    font-size: 44px;
+  }
 }

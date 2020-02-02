@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Text } from "./Text";
 import React from "react";
-import styles from "./Footer.module.css";
+import styles from "./Footer.module.scss";
 
 export class Footer extends React.Component {
   render() {

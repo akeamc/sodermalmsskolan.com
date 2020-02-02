@@ -1,4 +1,4 @@
-import styles from "./Navigation.module.css";
+import styles from "./Navigation.module.scss";
 import React from "react";
 import { Text } from "./Text";
 import Link from "next/link";

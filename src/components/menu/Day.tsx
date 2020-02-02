@@ -1,4 +1,4 @@
-import styles from "./Day.module.css";
+import styles from "./Day.module.scss";
 import React from "react";
 import { H2, Text, Paragraph } from "../basic/Text";
 import { Menu } from "../../services/menu";
@@ -13,7 +13,7 @@ const days = [
   "Söndag"
 ];
 
-export class Day extends React.Component<{ menu: Menu }> {
+export class Day extends React.Component<{ menu: Menu; highlight?: boolean }> {
   prettyDate(date: Date | string) {
     date = new Date(date);
 
@@ -31,10 +31,13 @@ export class Day extends React.Component<{ menu: Menu }> {
   }
 
   render() {
-    const { menu } = this.props;
+    const { menu, highlight } = this.props;
 
     return (
-      <tr className={styles.day}>
+      <tr
+        className={styles.day}
+        {...(highlight ? { "data-highlight": "yes" } : {})}
+      >
         <td>{this.prettyDate(menu.timestamp)}</td>
         <td>
           {menu.dishes.map(dish => {

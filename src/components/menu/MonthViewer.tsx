@@ -1,8 +1,9 @@
 import { Menus } from "./Menus";
 import React from "react";
-import { Text, H2 } from "../basic/Text";
+import { Text, H1 } from "../basic/Text";
 import moment from "moment";
-import styles from "./MonthViewer.module.css";
+import styles from "./MonthViewer.module.scss";
+import * as icons from "react-feather";
 
 const months = [
   "Januari",
@@ -59,7 +60,8 @@ export class MonthViewer extends React.Component<
     return (
       <div>
         <div className={styles.pagination}>
-          <a className={styles.paginationButton} onClick={this.previous}>
+          <a className={styles.previous} onClick={this.previous}>
+            <icons.ChevronLeft size={16} />
             <Text>
               {
                 months[
@@ -70,7 +72,7 @@ export class MonthViewer extends React.Component<
               }
             </Text>
           </a>
-          <a className={styles.paginationButton} onClick={this.next}>
+          <a className={styles.next} onClick={this.next}>
             <Text>
               {
                 months[
@@ -80,9 +82,10 @@ export class MonthViewer extends React.Component<
                 ]
               }
             </Text>
+            <icons.ChevronRight size={16} />
           </a>
         </div>
-        <H2>{months[focus.getMonth()] + " " + focus.getFullYear()}</H2>
+        <H1>{months[focus.getMonth()] + " " + focus.getFullYear()}</H1>
         <Menus start={start} end={end}></Menus>
       </div>
     );
