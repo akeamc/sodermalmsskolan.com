@@ -19,8 +19,8 @@ export class Layout extends React.Component<{
             content="initial-scale=1.0, width=device-width"
           />
         </Head>
-        <Navigation></Navigation>
         <div className={styles.appWrapper}>
+          <Navigation></Navigation>
           {title && <Header title={title}></Header>}
           {this.props.children}
           <Footer></Footer>

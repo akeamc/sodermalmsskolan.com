@@ -9,8 +9,12 @@ export class Navigation extends React.Component {
       <div className={styles.wrapper}>
         <ul className={styles.ul}>
           <NavLink href="/">Start</NavLink>
-          <NavLink href="https://södermalmsskolan.com/blogg">Blogg</NavLink>
-          <NavLink href="https://discord.gg/4hEnTpd">Discord</NavLink>
+          <NavLink external href="https://södermalmsskolan.com/blogg">
+            Blogg
+          </NavLink>
+          <NavLink external href="https://discord.gg/4hEnTpd">
+            Discord
+          </NavLink>
         </ul>
       </div>
     );
@@ -19,16 +23,23 @@ export class Navigation extends React.Component {
 
 class NavLink extends React.Component<{
   href: string;
+  external?: boolean;
   children: string;
 }> {
   render() {
     return (
       <li className={styles.li}>
-        <Link href={this.props.href}>
-          <a className={styles.a}>
+        {this.props.external ? (
+          <a href={this.props.href} className={styles.a}>
             <Text>{this.props.children}</Text>
           </a>
-        </Link>
+        ) : (
+          <Link href={this.props.href}>
+            <a className={styles.a}>
+              <Text>{this.props.children}</Text>
+            </a>
+          </Link>
+        )}
       </li>
     );
   }

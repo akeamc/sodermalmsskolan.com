@@ -1,0 +1,36 @@
+.day {
+}
+
+.day td {
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+@media screen and (min-width: 600px) {
+  .day td {
+    padding: 8px 16px;
+  }
+}
+
+.datewrapper {
+  text-align: center;
+}
+
+.date {
+  font-size: 24px;
+  font-feature-settings: "tnum" 1, "ss01" 1;
+  display: block;
+  line-height: 1;
+}
+
+.weekday {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.dish {
+  display: block;
+  margin: 8px 0;
+  line-height: 1.15;
+}

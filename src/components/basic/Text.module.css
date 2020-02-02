@@ -2,6 +2,7 @@
 
 .text {
   font-family: "Inter", sans-serif;
+  word-wrap: break-word;
 }
 
 @supports (font-variation-settings: normal) {
@@ -10,13 +11,16 @@
   }
 }
 
-.text {
-  
-}
-
 .h1 {
   font-size: 40px;
   margin: 0.5em 0;
   line-height: 1.15;
   font-weight: 400;
+}
+
+.h2 {
+  font-size: 32px;
+  margin: 0.5em 0;
+  line-height: 1.15;
+  font-weight: 500;
 }

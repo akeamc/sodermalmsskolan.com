@@ -1,0 +1,6 @@
+.menu {
+  display: table;
+  border-collapse: collapse;
+  border-style: hidden;
+  width: 100%;
+}

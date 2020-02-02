@@ -2,6 +2,7 @@
   background-color: #fff;
   height: 64px;
   width: 100%;
+  margin: 0 -16px;
 }
 
 .ul {
@@ -21,4 +22,9 @@
   color: inherit;
   font-weight: 500;
   display: inline-block;
+  transition: color 0.1s;
+}
+
+.a:hover {
+  color: #000000a0;
 }
