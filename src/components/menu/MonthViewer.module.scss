@@ -4,7 +4,8 @@
   margin-bottom: 8px;
 }
 
-.previous, .next {
+.previous,
+.next {
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
@@ -15,6 +16,7 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   line-height: 18px;
+  user-select: none;
 
   svg {
     display: inline-block;

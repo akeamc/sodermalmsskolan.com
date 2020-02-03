@@ -2,9 +2,9 @@ import styles from "./Menu.module.scss";
 import React from "react";
 import { Day } from "./Day";
 
-import { getMenus, Menu } from "../../services/menu";
+import { getMenus, Menu } from "../../utils/menu";
 import { Text } from "../basic/Text";
-import { Status } from "../../services/status";
+import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import moment from "moment";
 
@@ -75,7 +75,10 @@ export class Menus extends React.Component<
             {this.state.menus.map(menu => {
               let highlight = false;
 
-              if (!foundNextDay && moment(menu.timestamp).isSameOrAfter(now, "day")) {
+              if (
+                !foundNextDay &&
+                moment(menu.timestamp).isSameOrAfter(now, "day")
+              ) {
                 highlight = true;
                 foundNextDay = true;
               }
