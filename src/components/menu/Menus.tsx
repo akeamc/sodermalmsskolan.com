@@ -68,7 +68,7 @@ export class Menus extends React.Component<
           return <Text>Menyn är inte tillgänglig.</Text>;
         }
 
-        let foundNextDay = !now.add(1, "day").isSame(this.props.start, "day");
+        let foundNextDay = !now.isSame(this.props.start, "month");
 
         return (
           <div className={styles.menu}>

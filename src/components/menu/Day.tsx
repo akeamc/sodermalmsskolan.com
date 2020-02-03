@@ -19,12 +19,7 @@ export class Day extends React.Component<{ menu: Menu; highlight?: boolean }> {
 
     return (
       <p className={styles.datewrapper}>
-        <Text className={styles.date}>
-          {date
-            .getUTCDate()
-            .toString()
-            .padStart(2, "0")}
-        </Text>
+        <Text className={styles.date}>{date.getUTCDate().toString()}</Text>
         <Text className={styles.weekday}>{days[date.getUTCDay() - 1]}</Text>
       </p>
     );
