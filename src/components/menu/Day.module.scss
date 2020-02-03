@@ -9,7 +9,7 @@
 
 .day td {
   vertical-align: middle;
-  border: 1px solid #E8EAED;
+  border: 1px solid #e8eaed;
   padding: 8px;
 }
 
@@ -21,7 +21,7 @@
 
 .datewrapper {
   text-align: center;
-  color: #5F6368;
+  color: #5f6368;
 }
 
 .date {
@@ -43,6 +43,10 @@
   @include sm {
     font-size: 14px;
   }
+}
+
+.mainContentWrapper {
+  width: 100%;
 }
 
 .dish {

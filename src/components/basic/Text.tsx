@@ -2,12 +2,14 @@ import styles from "./Text.module.scss";
 import React from "react";
 
 interface ITextContainer {
-  children: (JSX.Element | string) | (JSX.Element | string)[]
+  children: (JSX.Element | string) | (JSX.Element | string)[];
 }
 
-export class Text extends React.Component<ITextContainer & {
-  className?: string
-}> {
+export class Text extends React.Component<
+  ITextContainer & {
+    className?: string;
+  }
+> {
   render() {
     return (
       <span className={(this.props.className || "") + " " + styles.text}>

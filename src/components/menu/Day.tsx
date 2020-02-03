@@ -1,7 +1,7 @@
 import styles from "./Day.module.scss";
 import React from "react";
 import { H2, Text, Paragraph } from "../basic/Text";
-import { Menu } from "../../services/menu";
+import { Menu } from "../../utils/menu";
 
 const days = [
   "Måndag",
@@ -34,7 +34,7 @@ export class Day extends React.Component<{ menu: Menu; highlight?: boolean }> {
         {...(highlight ? { "data-highlight": "yes" } : {})}
       >
         <td>{this.prettyDate(menu.timestamp)}</td>
-        <td>
+        <td className={styles.mainContentWrapper}>
           {menu.dishes.map(dish => {
             return <Text className={styles.dish}>{dish}</Text>;
           })}
