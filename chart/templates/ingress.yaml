@@ -1,0 +1,57 @@
+{{- if .Values.ingress.http.enabled -}}
+{{- $serviceName := include "fullname" . -}}
+{{- $servicePort := .Values.service.externalPort -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ template "fullname" . }}-http
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    {{- range $key, $value := .Values.ingress.http.annotations }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  entryPoints:
+{{ toYaml .Values.ingress.http.entryPoints | indent 4 }}
+  routes:
+  - kind: Rule
+    match: {{ .Values.ingress.http.match }}
+    services:
+    - name: {{ $serviceName }}
+      port: {{ $servicePort }}
+{{- end -}}
+---
+{{- if .Values.ingress.https.enabled -}}
+{{- $serviceName := include "fullname" . -}}
+{{- $servicePort := .Values.service.externalPort -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ template "fullname" . }}-https
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    {{- range $key, $value := .Values.ingress.https.annotations }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  entryPoints:
+{{ toYaml .Values.ingress.https.entryPoints | indent 4 }}
+  routes:
+  - kind: Rule
+    match: {{ .Values.ingress.https.match }}
+    services:
+    - name: {{ $serviceName }}
+      port: {{ $servicePort }}
+  {{- if .Values.ingress.https.tls }}
+  tls:
+{{ toYaml .Values.ingress.https.tls | indent 4 }}
+  {{- end -}}
+{{- end -}}
