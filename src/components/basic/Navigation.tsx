@@ -1,6 +1,6 @@
 import styles from "./Navigation.module.scss";
 import React from "react";
-import { Text } from "./Text";
+import { Text } from "./Typography";
 import Link from "next/link";
 
 export class Navigation extends React.Component {
@@ -9,12 +9,13 @@ export class Navigation extends React.Component {
       <div className={styles.wrapper}>
         <ul className={styles.ul}>
           <NavLink href="/">Start</NavLink>
-          <NavLink external href="https://södermalmsskolan.com/blogg">
+          <NavLink href="/meny">Meny</NavLink>
+          {/* <NavLink external href="https://södermalmsskolan.com/blogg">
             Blogg
           </NavLink>
           <NavLink external href="https://discord.gg/4hEnTpd">
             Discord
-          </NavLink>
+          </NavLink> */}
         </ul>
       </div>
     );

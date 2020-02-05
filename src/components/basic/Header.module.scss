@@ -1,0 +1,9 @@
+@import "../../styles/breakpoints";
+
+.header {
+  margin: 48px 0;
+
+  @include mobile {
+    margin: 120px 0;
+  }
+}

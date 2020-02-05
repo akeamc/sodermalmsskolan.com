@@ -1,0 +1,57 @@
+@import "./variables";
+
+// Breakpoints
+@mixin mobile {
+  @media screen and (min-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: $bp-laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin desktop-large {
+  @media screen and (min-width: $bp-desktop-large) {
+    @content;
+  }
+}
+
+@mixin desktop-xlarge {
+  @media screen and (min-width: $bp-desktop-xlarge) {
+    @content;
+  }
+}
+
+// Custom breakpoints
+@mixin less-than-bp($bp) {
+  @media screen and (max-width: $bp) {
+    @content;
+  }
+}
+
+@mixin greater-than-bp($bp) {
+  @media screen and (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin between-bp($bp-smaller, $bp-larger) {
+  @media screen and (min-width: $bp-smaller) and (max-width: $bp-larger) {
+    @content;
+  }
+}

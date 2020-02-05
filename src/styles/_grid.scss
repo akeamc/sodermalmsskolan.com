@@ -1,0 +1,106 @@
+@import "./variables";
+@import "./breakpoints";
+
+// 12-Column CSS Grid System
+//
+// In mobile, there are 4 grid columns
+// In desktop, there are 12 grid columns
+//
+// By default, any item within a grid has a width of 100%
+//
+// Examples:
+// To fill up full-width in mobile & up: `col-4`
+// To fill up quarter-width on desktop: `col-3-lg`
+// To fill up full-width in mobile, half-width in tablet: `col4 col-6-lg`
+//
+// Offsets:
+// In order to have an offset, you'll do something like this:
+// To have an offset of 1 column and a width of 4 in desktop: `col-offset-1-lg col-4-lg`
+// To have an offset of 1 column and a width of 2 columns in mobile: `col-offset-1 col-2`
+// To reset an offset that you may have in mobile: `col-offset-1 col-2 col-offset-0-lg`
+
+@function getDesktopSpan($mobileSpan) {
+  @return $mobileSpan * 3;
+}
+
+@for $i from 1 through $grid-columns-mobile {
+  $grid-span: #{$i};
+  $grid-span-desktop: #{getDesktopSpan($i)};
+
+  @for $j from 1 through $grid-columns-mobile {
+    .col-offset-#{$j - 1}.col-#{$i} {
+      grid-column: #{$j} / span $grid-span;
+      @include desktop {
+        grid-column: #{getDesktopSpan($j)} / span $grid-span-desktop;
+      }
+    }
+  }
+
+  .col-#{$i} {
+    grid-column-start: span $grid-span;
+    @include desktop {
+      grid-column-start: span $grid-span-desktop;
+    }
+  }
+}
+
+@for $i from 1 through $grid-columns-tablet {
+  $grid-span-tablet: #{$i};
+  $grid-span-desktop: #{getDesktopSpan($i)};
+
+  @for $j from 1 through $grid-columns-tablet {
+    .col-offset-#{$j - 1}-md.col-#{$i}-md {
+      @include tablet {
+        grid-column: #{$j} / span $grid-span-tablet;
+      }
+      @include desktop {
+        grid-column: #{getDesktopSpan($j)} / span $grid-span-desktop;
+      }
+    }
+  }
+
+  .col-#{$i}-md {
+    @include tablet {
+      grid-column-start: span $grid-span-tablet;
+    }
+    @include desktop {
+      grid-column-start: span $grid-span-desktop;
+    }
+  }
+}
+
+@for $i from 1 through $grid-columns-desktop {
+  $grid-span-desktop: #{$i};
+
+  @for $j from 1 through $grid-columns-desktop {
+    .col-offset-#{$j - 1}-lg.col-#{$i}-lg {
+      @include desktop {
+        grid-column: #{$j} / span $grid-span-desktop;
+      }
+    }
+  }
+
+  .col-#{$i}-lg {
+    @include desktop {
+      grid-column-start: span $grid-span-desktop;
+    }
+  }
+}
+
+@for $i from 1 through $grid-columns-desktop-large {
+  $grid-span-desktop: #{$i};
+
+  @for $j from 1 through $grid-columns-desktop-large {
+    .col-offset-#{$j - 1}-xl.col-#{$i}-xl {
+      @include desktop-large {
+        grid-column: #{$j} / span $grid-span-desktop;
+      }
+    }
+  }
+
+  .col-#{$i}-xl {
+    @include desktop-large {
+      grid-column-start: span $grid-span-desktop;
+    }
+  }
+}

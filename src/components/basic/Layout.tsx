@@ -1,6 +1,5 @@
 import styles from "./Layout.module.scss";
 import React from "react";
-import { Text } from "./Text";
 import { Navigation } from "./Navigation";
 import Head from "next/head";
 import { Footer } from "./Footer";
@@ -8,6 +7,7 @@ import { initGA, logPageView } from "../../utils/analytics";
 
 export class Layout extends React.Component<{
   title?: string;
+  children: JSX.Element[] | JSX.Element;
 }> {
   componentDidMount() {
     if (!window["GA_INITIALIZED"]) {
@@ -18,12 +18,14 @@ export class Layout extends React.Component<{
   }
 
   render() {
-    const { title } = this.props;
+    const { title, children } = this.props;
 
     return (
       <div>
         <Head>
-          <title>södermalmsskolan.com</title>
+          <title>
+            {title ? title + " - södermalmsskolan.com" : "södermalmsskolan.com"}
+          </title>
           <meta
             name="description"
             content="Vi visar vad Quality of Life Services egentligen betyder."
@@ -36,46 +38,33 @@ export class Layout extends React.Component<{
             rel="apple-touch-icon"
             sizes="180x180"
             href="/apple-touch-icon.png"
-          ></link>
+          />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
             href="/favicon-32x32.png"
-          ></link>
+          />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
             href="/favicon-16x16.png"
-          ></link>
-          <link rel="manifest" href="/site.webmanifest"></link>
-          <link
-            rel="mask-icon"
-            href="/safari-pinned-tab.svg"
-            color="#000000"
-          ></link>
+          />
+          <link rel="manifest" href="/site.webmanifest" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="#ffffff" />
+          <script
+            async
+            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          />
         </Head>
         <div className={styles.appWrapper}>
           <Navigation></Navigation>
-          {title && <Header title={title}></Header>}
-          {this.props.children}
+          {children}
           <Footer></Footer>
         </div>
-      </div>
-    );
-  }
-}
-
-class Header extends React.Component<{ title: string }> {
-  render() {
-    return (
-      <div className={styles.header}>
-        <h2 className={styles.pageTitle}>
-          <Text className={styles.pageTitle}>{this.props.title}</Text>
-        </h2>
       </div>
     );
   }

@@ -3,7 +3,7 @@ import React from "react";
 import { Day } from "./Day";
 
 import { getMenus, Menu } from "../../utils/menu";
-import { Text } from "../basic/Text";
+import { Text } from "../basic/Typography";
 import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import moment from "moment";
@@ -72,7 +72,7 @@ export class Menus extends React.Component<
 
         return (
           <div className={styles.menu}>
-            {this.state.menus.map(menu => {
+            {this.state.menus.map((menu, index) => {
               let highlight = false;
 
               if (
@@ -83,7 +83,7 @@ export class Menus extends React.Component<
                 foundNextDay = true;
               }
 
-              return <Day menu={menu} highlight={highlight}></Day>;
+              return <Day menu={menu} highlight={highlight} key={index}></Day>;
             })}
           </div>
         );

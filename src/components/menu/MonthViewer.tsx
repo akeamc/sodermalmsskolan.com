@@ -1,6 +1,6 @@
 import { Menus } from "./Menus";
 import React from "react";
-import { Text, H1 } from "../basic/Text";
+import { Text, H1 } from "../basic/Typography";
 import moment from "moment";
 import styles from "./MonthViewer.module.scss";
 import * as icons from "react-feather";

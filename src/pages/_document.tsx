@@ -9,10 +9,11 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="sv">
-        <Head />
+        <Head></Head>
         <body
           style={{
-            margin: 0
+            margin: 0,
+            overflowY: "scroll"
           }}
         >
           <Main />

@@ -1,8 +1,9 @@
 import { Layout } from "../components/basic/Layout";
-import { H1 } from "../components/basic/Text";
+import { H1, D2 } from "../components/basic/Typography";
 import React from "react";
 import { Button } from "../components/basic/Button";
 import Link from "next/link";
+import { Header } from "../components/basic/Header";
 
 export default class Error extends React.Component<{ statusCode: number }> {
   static getInitialProps({ res, error }) {
@@ -15,6 +16,9 @@ export default class Error extends React.Component<{ statusCode: number }> {
       case 404:
         return (
           <Layout title="Sidan hittades inte">
+            <Header>
+              <D2>Sidan hittades inte</D2>
+            </Header>
             <Link href="/">
               <a>
               <Button>Gå hem</Button>

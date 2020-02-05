@@ -1,6 +1,6 @@
 import styles from "./Day.module.scss";
 import React from "react";
-import { H2, Text, Paragraph } from "../basic/Text";
+import { Text } from "../basic/Typography";
 import { Menu } from "../../utils/menu";
 
 const days = [
@@ -35,9 +35,26 @@ export class Day extends React.Component<{ menu: Menu; highlight?: boolean }> {
       >
         <td>{this.prettyDate(menu.timestamp)}</td>
         <td className={styles.mainContentWrapper}>
-          {menu.dishes.map(dish => {
-            return <Text className={styles.dish}>{dish}</Text>;
-          })}
+          <div className={styles.dishes}>
+            {menu.dishes.map((dish, index) => {
+              return (
+                <Text className={styles.dish} key={index}>
+                  {dish}
+                </Text>
+              );
+            })}
+          </div>
+          {menu.photos.length > 0 ? (
+            <div className={styles.photos}>
+              {menu.photos.map((photo, index) => {
+                return (
+                  <a className={styles.photo} href={photo.url}>
+                    <img src={photo.url} key={index} />
+                  </a>
+                );
+              })}
+            </div>
+          ) : null}
         </td>
       </tr>
     );
