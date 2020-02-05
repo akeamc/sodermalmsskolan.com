@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "./Text";
+import { Text } from "./Typography";
 import styles from "./Button.module.scss"
 
 export class Button extends React.Component<{

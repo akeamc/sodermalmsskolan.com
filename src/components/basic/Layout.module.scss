@@ -1,4 +1,4 @@
-@import "../../styles/mixins";
+@import "../../styles/breakpoints";
 
 .appWrapper {
   max-width: 1440px;
@@ -7,34 +7,15 @@
   max-width: 1440px;
   -webkit-font-smoothing: antialiased;
 
-  @include sm {
+  @include mobile {
     padding: 0 40px;
   }
 
-  @include md {
+  @include tablet {
     padding: 0 60px;
   }
 
-  @include lg {
+  @include desktop {
     padding: 0 80px;
-  }
-}
-
-.header {
-  padding: 48px 0;
-
-  @include sm {
-    padding: 120px 0;
-  }
-}
-
-.pageTitle {
-  font-size: 24px;
-  line-height: 1.15;
-  font-weight: 400;
-  letter-spacing: -0.022em;
-
-  @include sm {
-    font-size: 44px;
   }
 }

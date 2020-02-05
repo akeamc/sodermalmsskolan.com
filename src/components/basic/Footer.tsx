@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Text } from "./Text";
+import { Text } from "./Typography";
 import React from "react";
 import styles from "./Footer.module.scss";
 
@@ -9,6 +9,7 @@ export class Footer extends React.Component {
       <div className={styles.footer}>
         <FooterSection title="Navigera">
           <FooterLink href="/">Start</FooterLink>
+          <FooterLink href="/meny">Meny</FooterLink>
           <FooterLink external href="https://södermalmsskolan.com/blogg">
             Blogg
           </FooterLink>

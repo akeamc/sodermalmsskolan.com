@@ -1,27 +1,26 @@
-@import "../../styles/mixins";
+@import "../../styles/breakpoints";
 
 .day {
   &[data-highlight] {
     border-top: 2px solid #1a73e8;
     background-color: #1a73e810;
   }
-}
 
-.day td {
-  vertical-align: middle;
-  border: 1px solid #e8eaed;
-  padding: 8px;
-}
+  td {
+    vertical-align: middle;
+    border: 1px solid #e8eaed;
+    padding: 8px;
 
-@media screen and (min-width: 600px) {
-  .day td {
-    padding: 8px 16px;
+    @include mobile {
+      padding: 8px 16px;
+    }
   }
 }
 
 .datewrapper {
   text-align: center;
   color: #5f6368;
+  margin: 0;
 }
 
 .date {
@@ -31,7 +30,7 @@
   display: block;
   line-height: 1;
 
-  @include sm {
+  @include mobile {
     font-size: 24px;
   }
 }
@@ -40,7 +39,7 @@
   margin-top: 0.5em;
   font-size: 12px;
 
-  @include sm {
+  @include mobile {
     font-size: 14px;
   }
 }
@@ -49,8 +48,45 @@
   width: 100%;
 }
 
+.dishes {
+  margin: 8px 0;
+}
+
 .dish {
   display: block;
   margin: 8px 0;
   line-height: 1.15;
+}
+
+.photos {
+  margin: 8px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 4px;
+
+  @include mobile {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include tablet {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(9, 1fr);
+  }
+
+  @include desktop-large {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.photo {
+  grid-column: span 1;
+
+  img {
+    display: block;
+    border-radius: 4px;
+    width: 100%;
+  }
 }

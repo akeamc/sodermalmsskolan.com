@@ -14,17 +14,19 @@
   float: left;
   list-style: none;
   line-height: 64px;
-  padding: 0 16px;
+  padding: 0 24px;
 }
 
 .a {
   text-decoration: none;
   color: inherit;
-  font-weight: 500;
+  font-weight: 600;
   display: inline-block;
   transition: color 0.1s;
-}
+  font-size: 14px;
+  color: #5F6368;
 
-.a:hover {
-  color: #00000080;
+  &:hover {
+    color: #1A73E8;
+  }
 }

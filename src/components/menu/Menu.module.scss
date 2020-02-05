@@ -3,5 +3,6 @@
   border-collapse: collapse;
   border-left-style: hidden;
   border-right-style: hidden;
-  width: 100%;
+  width: inherit;
+  table-layout: fixed;
 }
