@@ -1,6 +1,6 @@
 import { Menus } from "./Menus";
 import React from "react";
-import { Text, H1 } from "../basic/Typography";
+import { Text, H4 } from "../basic/Typography";
 import moment from "moment";
 import styles from "./MonthViewer.module.scss";
 import * as icons from "react-feather";
@@ -85,7 +85,7 @@ export class MonthViewer extends React.Component<
             <icons.ChevronRight size={16} />
           </a>
         </div>
-        <H1>{months[focus.getMonth()] + " " + focus.getFullYear()}</H1>
+        <H4>{months[focus.getMonth()] + " " + focus.getFullYear()}</H4>
         <Menus start={start} end={end}></Menus>
       </div>
     );
