@@ -10,6 +10,7 @@ export class Navigation extends React.Component {
         <ul className={styles.ul}>
           <NavLink href="/">Start</NavLink>
           <NavLink href="/meny">Meny</NavLink>
+          <NavLink href="/quizlet">Quizlet</NavLink>
           {/* <NavLink external href="https://södermalmsskolan.com/blogg">
             Blogg
           </NavLink>
