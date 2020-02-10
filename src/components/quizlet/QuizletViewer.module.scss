@@ -1,0 +1,16 @@
+@import "../../styles/breakpoints";
+
+.quizletViewer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 32px;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 48px;
+  }
+}
