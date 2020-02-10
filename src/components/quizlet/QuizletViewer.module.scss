@@ -1,6 +1,10 @@
 @import "../../styles/breakpoints";
 
 .quizletViewer {
+  
+}
+
+.cardContainer {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 32px;
@@ -11,6 +15,48 @@
 
   @include tablet {
     grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 48px;
+    grid-gap: 48px;
   }
+}
+
+.filter {
+  margin: 32px 0;
+
+  h5 {
+    margin: 0;
+    margin-bottom: 8px;
+  }
+}
+
+.filterOption {
+  margin-right: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  height: auto;
+  padding: 6px 8px;
+  transition: all .1s ease-in-out;
+  width: auto;
+  outline: none !important;
+  margin-bottom: 12px;
+  border: 1px solid #DADCE0;
+  background-color: transparent;
+  color: #1A73E8;
+
+  svg {
+    height: 14px;
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+}
+
+.filterOptionSelected {
+  background-color: #1A73E8;
+  color: #fff;
 }

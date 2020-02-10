@@ -9,15 +9,16 @@ export class StudySetCard extends React.Component<{ studySet: StudySet }> {
     const { studySet } = this.props;
 
     return (
+      <div className={styles.cardWrapper}>
       <a className={styles.studySetCard} href={studySet.url}>
         <H5>{studySet.name}</H5>
         <div className={styles.categories}>
           {studySet.categories.map((category, index) => {
-            console.log(category);
             return <Twemoji svg text={category} key={index} />;
           })}
         </div>
       </a>
+      </div>
     );
   }
 }
