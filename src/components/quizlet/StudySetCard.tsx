@@ -2,7 +2,7 @@ import React from "react";
 import { StudySet } from "../../utils/quizlet";
 import styles from "./StudySetCard.module.scss";
 import { H5 } from "../basic/Typography";
-import {Twemoji} from "react-emoji-render";
+import { Twemoji } from "react-emoji-render";
 
 export class StudySetCard extends React.Component<{ studySet: StudySet }> {
   render() {
@@ -14,7 +14,7 @@ export class StudySetCard extends React.Component<{ studySet: StudySet }> {
         <div className={styles.categories}>
           {studySet.categories.map((category, index) => {
             console.log(category);
-            return <Twemoji svg text={category} key={index} />
+            return <Twemoji svg text={category} key={index} />;
           })}
         </div>
       </a>
