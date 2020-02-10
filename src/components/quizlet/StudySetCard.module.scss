@@ -1,0 +1,19 @@
+.studySetCard {
+  border: 1px solid #DADCE0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  padding: 24px;
+
+  h5 {
+    margin: 0 0 24px 0;
+  }
+}
+
+.categories {
+  margin-top: 12px;
+
+  * {
+    margin-right: 8px;
+  }
+}

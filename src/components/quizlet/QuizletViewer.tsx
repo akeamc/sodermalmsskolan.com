@@ -5,6 +5,7 @@ import { Quizlet, StudySet } from "./../../utils/quizlet";
 import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import { StudySetCard } from "./StudySetCard";
+import styles from "./QuizletViewer.module.scss";
 
 export class QuizletViewer extends React.Component<
   {},
@@ -54,7 +55,7 @@ export class QuizletViewer extends React.Component<
         }
 
         return (
-          <div>
+          <div className={styles.quizletViewer}>
             {this.state.studySets.map((studySet, index) => {
               return <StudySetCard studySet={studySet} key={index}></StudySetCard>;
             })}

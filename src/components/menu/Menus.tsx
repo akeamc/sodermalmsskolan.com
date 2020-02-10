@@ -71,21 +71,25 @@ export class Menus extends React.Component<
         let foundNextDay = !now.isSame(this.props.start, "month");
 
         return (
-          <div className={styles.menu}>
-            {this.state.menus.map((menu, index) => {
-              let highlight = false;
+          <table className={styles.menu}>
+            <tbody>
+              {this.state.menus.map((menu, index) => {
+                let highlight = false;
 
-              if (
-                !foundNextDay &&
-                moment(menu.timestamp).isSameOrAfter(now, "day")
-              ) {
-                highlight = true;
-                foundNextDay = true;
-              }
+                if (
+                  !foundNextDay &&
+                  moment(menu.timestamp).isSameOrAfter(now, "day")
+                ) {
+                  highlight = true;
+                  foundNextDay = true;
+                }
 
-              return <Day menu={menu} highlight={highlight} key={index}></Day>;
-            })}
-          </div>
+                return (
+                  <Day menu={menu} highlight={highlight} key={index}></Day>
+                );
+              })}
+            </tbody>
+          </table>
         );
     }
   }

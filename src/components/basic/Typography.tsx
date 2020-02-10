@@ -52,9 +52,9 @@ export class H2 extends React.Component<ITextContainer> {
 export class H3 extends React.Component<ITextContainer> {
   render() {
     return (
-      <h2 className={styles.h3}>
+      <h3 className={styles.h3}>
         <Text>{this.props.children}</Text>
-      </h2>
+      </h3>
     );
   }
 }
@@ -62,9 +62,9 @@ export class H3 extends React.Component<ITextContainer> {
 export class H4 extends React.Component<ITextContainer> {
   render() {
     return (
-      <h2 className={styles.h4}>
+      <h4 className={styles.h4}>
         <Text>{this.props.children}</Text>
-      </h2>
+      </h4>
     );
   }
 }
@@ -72,9 +72,9 @@ export class H4 extends React.Component<ITextContainer> {
 export class H5 extends React.Component<ITextContainer> {
   render() {
     return (
-      <h2 className={styles.h5}>
+      <h5 className={styles.h5}>
         <Text>{this.props.children}</Text>
-      </h2>
+      </h5>
     );
   }
 }
@@ -82,9 +82,9 @@ export class H5 extends React.Component<ITextContainer> {
 export class H6 extends React.Component<ITextContainer> {
   render() {
     return (
-      <h2 className={styles.h6}>
+      <h6 className={styles.h6}>
         <Text>{this.props.children}</Text>
-      </h2>
+      </h6>
     );
   }
 }
