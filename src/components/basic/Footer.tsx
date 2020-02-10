@@ -10,6 +10,7 @@ export class Footer extends React.Component {
         <FooterSection title="Navigera">
           <FooterLink href="/">Start</FooterLink>
           <FooterLink href="/meny">Meny</FooterLink>
+          <FooterLink href="/quizlet">Quizlet</FooterLink>
           <FooterLink external href="https://södermalmsskolan.com/blogg">
             Blogg
           </FooterLink>
