@@ -1,7 +1,6 @@
 @import "../../styles/breakpoints";
 
 .quizletViewer {
-  
 }
 
 .cardContainer {
@@ -40,13 +39,24 @@
   display: inline-block;
   height: auto;
   padding: 6px 8px;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   width: auto;
   outline: none !important;
   margin-bottom: 12px;
-  border: 1px solid #DADCE0;
+  border: 1px solid #dadce0;
   background-color: transparent;
-  color: #1A73E8;
+  color: #1a73e8;
+  box-sizing: border-box;
+
+  span > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .filterEmoji {
+    height: 14px;
+    width: 14px;
+  }
 
   svg {
     height: 14px;
@@ -57,6 +67,7 @@
 }
 
 .filterOptionSelected {
-  background-color: #1A73E8;
+  background-color: #1a73e8;
   color: #fff;
+  border-color: #1a73e8;
 }

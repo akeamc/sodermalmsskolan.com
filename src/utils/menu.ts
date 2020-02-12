@@ -16,8 +16,6 @@ export async function getMenus(start: Date, end: Date): Promise<Menu[]> {
   }
 
   const data = await res.json();
-  
-  console.log(res, data);
 
   return data.menu;
 }

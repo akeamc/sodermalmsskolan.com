@@ -1,5 +1,5 @@
 .studySetCard {
-  border: 1px solid #DADCE0;
+  border: 1px solid #dadce0;
   border-radius: 8px;
   text-decoration: none;
   color: inherit;
@@ -12,13 +12,20 @@
 }
 
 .cardWrapper {
-  
 }
 
 .categories {
   margin-top: 12px;
 
-  * {
+  div {
+    display: inline-block;
     margin-right: 8px;
+    margin-top: 4px;
+
+    img {
+      display: block;
+      height: 16px;
+      width: 16px;
+    }
   }
 }

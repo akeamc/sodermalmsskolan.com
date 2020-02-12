@@ -5,7 +5,7 @@ import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import { StudySetCard } from "./StudySetCard";
 import styles from "./QuizletViewer.module.scss";
-import { Twemoji } from "react-emoji-render";
+import Twemoji from "react-twemoji";
 import * as icons from "react-feather";
 
 export class QuizletViewer extends React.Component<
@@ -81,14 +81,10 @@ export class QuizletViewer extends React.Component<
         }
 
         const filteredSets = this.state.studySets.filter(set => {
-          if (filter.length > 0) {
-            for (let category of this.state.filter) {
-              if (set.categories.includes(category)) {
-                return true;
-              }
+          for (let category of this.state.filter) {
+            if (!set.categories.includes(category)) {
+              return false;
             }
-
-            return false;
           }
 
           return true;
@@ -109,7 +105,9 @@ export class QuizletViewer extends React.Component<
                     }`}
                   >
                     <Text>
-                      <Twemoji svg text={category}></Twemoji>
+                      <Twemoji options={{ className: styles.filterEmoji }}>
+                        {category}
+                      </Twemoji>
                       {selected ? <icons.X /> : null}
                     </Text>
                   </button>
