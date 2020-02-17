@@ -16,7 +16,7 @@ export default class Home extends React.Component {
           </Grid>
         </Header>
         <Section>
-          <H1>Detta är en &alpha;-version av södermalmsskolan.com. Berätta gärna vad du tycker!</H1>
+          <H1>Detta är en alfaversion. Berätta gärna vad du tycker!</H1>
         </Section>
       </Layout>
     );
