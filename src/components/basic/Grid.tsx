@@ -44,11 +44,10 @@ export class GridArea extends React.Component<
       spanTablet = spanMobile,
       spanDesktop,
       spanDesktopLarge = spanDesktop,
-      offsetMobile = 0,
+      offsetMobile = "",
       offsetTablet = offsetMobile,
-      offsetDesktop = 0,
-      offsetDesktopLarge = offsetDesktop,
-      spanY = 1
+      offsetDesktop = "",
+      offsetDesktopLarge = offsetDesktop
     } = this.props;
 
     const classes = [
@@ -64,9 +63,6 @@ export class GridArea extends React.Component<
 
     return (
       <div
-        style={{
-          gridRow: `span ${spanY}`
-        }}
         className={classes.join(" ")}
       >
         {this.props.children}

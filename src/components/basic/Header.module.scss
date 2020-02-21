@@ -2,8 +2,28 @@
 
 .header {
   margin: 48px 0;
+  position: relative;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: -48px;
+    bottom: -48px;
+    margin-left: -50vw;
+    left: 50%;
+    width: 100vw;
+    z-index: -1;
+    display: block;
+    background-color: #f9f9f9;
+    content: "";
+  }
 
   @include mobile {
+    &::before {
+      top: -120px;
+      bottom: -120px;
+    }
+
     margin: 120px 0;
   }
 }

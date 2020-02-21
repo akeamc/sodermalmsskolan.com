@@ -1,51 +1,47 @@
+@import "../../styles/breakpoints";
+
 .footer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 32px;
   margin: 64px 0;
-}
 
-@media screen and (min-width: 600px) {
-  .footer {
+  @include mobile {
     grid-template-columns: repeat(3, 1fr);
   }
-}
 
-@media screen and (min-width: 1024px) {
-  .footer {
+  @include tablet {
     grid-template-columns: repeat(4, 1fr);
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .footer {
+  @include desktop {
     grid-template-columns: repeat(6, 1fr);
   }
-}
 
-.footer ul {
-  margin: 0;
-  padding: 0;
-}
+  ul {
+    margin: 0;
+    padding: 0;
 
-.footer ul li {
-  list-style: none;
-}
+    li {
+      list-style: none;
 
-.footer ul li a {
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 14px;
-  line-height: 20px;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
+      a {
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        line-height: 20px;
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
 
-.footer ul li a:hover {
-  color: rgba(0, 0, 0, 1);
+        &:hover {
+          color: rgba(0, 0, 0, 1);
+        }
+      }
+    }
+  }
 }
 
 .footerTitle {
   font-size: 14px;
   margin-bottom: 1em;
-  font-weight: 400;
+  font-weight: 500;
 }

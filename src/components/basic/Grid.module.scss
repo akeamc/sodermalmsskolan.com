@@ -27,12 +27,4 @@
   @include desktop-large {
     grid-column-gap: $grid-column-gap-desktop-large;
   }
-
-  // Default children take up full width
-  > * {
-    grid-column: span $grid-columns-mobile;
-    @include desktop {
-      grid-column: span $grid-columns-desktop;
-    }
-  }
 }

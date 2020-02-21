@@ -1,19 +1,27 @@
 @import "../../styles/breakpoints";
 
+.container {
+  height: 64px;
+  width: 100%;
+}
+
 .wrapper {
   background-color: #fff;
   height: 64px;
-  width: 100%;
-  margin: 0 -16px;
-
-  @include tablet {
-    margin: 0 -24px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .ul {
-  margin: 0;
+  margin: 0 32px;
   padding: 0;
+
+  @include tablet {
+    margin: 0 48px;
+  }
 }
 
 .li {

@@ -6,18 +6,14 @@ import Link from "next/link";
 export class Navigation extends React.Component {
   render() {
     return (
-      <div className={styles.wrapper}>
-        <ul className={styles.ul}>
-          <NavLink href="/">Start</NavLink>
-          <NavLink href="/meny">Meny</NavLink>
-          <NavLink href="/quizlet">Quizlet</NavLink>
-          {/* <NavLink external href="https://södermalmsskolan.com/blogg">
-            Blogg
-          </NavLink>
-          <NavLink external href="https://discord.gg/4hEnTpd">
-            Discord
-          </NavLink> */}
-        </ul>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <ul className={styles.ul}>
+            <NavLink href="/">Start</NavLink>
+            <NavLink href="/meny">Meny</NavLink>
+            <NavLink href="/quizlet">Quizlet</NavLink>
+          </ul>
+        </div>
       </div>
     );
   }
