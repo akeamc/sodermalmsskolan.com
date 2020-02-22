@@ -1,11 +1,9 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
 import { Section, Grid, GridArea } from "../components/basic/Grid";
-import { D2, H1, Paragraph } from "../components/basic/Typography";
+import { D2, Paragraph } from "../components/basic/Typography";
 import { Header } from "../components/basic/Header";
 import { Image } from "./../components/basic/Image";
-import { Button } from "../components/basic/Button";
-import Link from "next/link";
 
 export default class Home extends React.Component {
   render() {

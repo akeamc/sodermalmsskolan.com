@@ -16,7 +16,7 @@ export class StudySetCard extends React.Component<{ studySet: StudySet }> {
             <Text>
               {moment(studySet.timestamp)
                 .locale("sv")
-                .format("DD MMMM YYYY")}
+                .format("D MMMM YYYY")}
             </Text>
           </p>
           <H5>{studySet.name}</H5>

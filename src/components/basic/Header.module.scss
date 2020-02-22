@@ -18,6 +18,10 @@
     content: "";
   }
 
+  h1, h2 {
+    margin-top: 0;
+  }
+
   @include mobile {
     &::before {
       top: -120px;

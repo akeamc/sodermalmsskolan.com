@@ -1,13 +1,10 @@
 @import "../../styles/breakpoints";
-
-.container {
-  height: 64px;
-  width: 100%;
-}
+@import "../../styles/mixins";
+@import "../../styles/variables";
 
 .wrapper {
   background-color: #fff;
-  height: 64px;
+  height: $nav-height;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +13,7 @@
 }
 
 .ul {
-  margin: 0 32px;
+  margin: 0;
   padding: 0;
 
   @include tablet {
@@ -27,7 +24,7 @@
 .li {
   float: left;
   list-style: none;
-  line-height: 64px;
+  line-height: $nav-height;
   padding: 0 16px;
 
   @include tablet {

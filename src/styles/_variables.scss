@@ -16,3 +16,16 @@ $grid-column-gap-mobile: 16px;
 $grid-column-gap-tablet: 40px;
 $grid-column-gap-desktop: 20px;
 $grid-column-gap-desktop-large: 28px;
+
+// Nav
+$nav-height: 64px;
+
+// z-index
+$z-index-tooltip: 10;
+$z-index-nav-underlay: 98;
+$z-index-nav: 99;
+$z-index-drawer: 199;
+$z-index-modal: 299;
+$z-index-live-video: 300;
+$z-index-snackbar: 399;
+$z-index-popup: 499;

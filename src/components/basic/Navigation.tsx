@@ -6,14 +6,12 @@ import Link from "next/link";
 export class Navigation extends React.Component {
   render() {
     return (
-      <div className={styles.container}>
-        <div className={styles.wrapper}>
-          <ul className={styles.ul}>
-            <NavLink href="/">Start</NavLink>
-            <NavLink href="/meny">Meny</NavLink>
-            <NavLink href="/quizlet">Quizlet</NavLink>
-          </ul>
-        </div>
+      <div className={styles.wrapper}>
+        <ul className={styles.ul}>
+          <NavLink href="/">Start</NavLink>
+          <NavLink href="/meny">Meny</NavLink>
+          <NavLink href="/quizlet">Quizlet</NavLink>
+        </ul>
       </div>
     );
   }
