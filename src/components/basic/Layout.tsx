@@ -60,7 +60,7 @@ export class Layout extends React.Component<{
             src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
           />
         </Head>
-        <div className={styles.appWrapper}>
+        <div>
           <Navigation></Navigation>
           {children}
           <Footer></Footer>

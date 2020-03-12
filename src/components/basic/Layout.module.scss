@@ -1,26 +1,2 @@
 @import "../../styles/breakpoints";
 @import "../../styles/variables";
-
-.appWrapper {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 16px;
-  padding-top: $nav-height;
-  max-width: 1440px;
-  -webkit-font-smoothing: antialiased;
-
-  @include mobile {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  @include tablet {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-
-  @include desktop {
-    padding-left: 80px;
-    padding-right: 80px;
-  }
-}

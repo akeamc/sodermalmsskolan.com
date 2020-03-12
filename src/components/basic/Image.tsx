@@ -2,17 +2,17 @@ import React from "react";
 
 export class Image extends React.Component<{
   src: string;
-  roundedCorners?: boolean;
+  borderRadius?: number;
 }> {
   render() {
-    const { src, roundedCorners = true } = this.props;
+    const { src, borderRadius = 5 } = this.props;
 
     return (
       <img
         src={src}
         style={{
           width: "100%",
-          borderRadius: roundedCorners ? 5 : 0,
+          borderRadius,
           display: "block"
         }}
       />

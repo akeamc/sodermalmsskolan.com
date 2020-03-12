@@ -58,12 +58,43 @@ export class GridArea extends React.Component<
       `col-${spanDesktop}-lg`,
       `col-offset-${offsetDesktop}-lg`,
       `col-${spanDesktopLarge}-xl`,
-      `col-offset-${offsetDesktopLarge}-xl`,
+      `col-offset-${offsetDesktopLarge}-xl`
     ];
+
+    return <div className={classes.join(" ")}>{this.props.children}</div>;
+  }
+}
+
+export class FillScreenWidth extends React.Component<
+  IContainerProps,
+  { windowWidth: number }
+> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      windowWidth: 0
+    };
+  }
+
+  handleResize = () => {
+    this.setState({ windowWidth: document.body.clientWidth });
+  };
+
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  }
+
+  render() {
+    const { windowWidth: clientWidth } = this.state;
 
     return (
       <div
-        className={classes.join(" ")}
+        style={{
+          marginLeft: "50%",
+          transform: `translateX(-${clientWidth / 2}px)`,
+          width: clientWidth
+        }}
       >
         {this.props.children}
       </div>
