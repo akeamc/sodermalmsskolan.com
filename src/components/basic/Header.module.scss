@@ -1,33 +1,26 @@
 @import "../../styles/breakpoints";
+@import "../../styles/mixins";
+@import "../../styles/variables";
 
 .header {
-  margin: 48px 0;
-  position: relative;
+  margin-top: $nav-height;
+  padding: 48px 0;
 
-  &::before,
-  &::after {
-    position: absolute;
-    top: -48px;
-    bottom: -48px;
-    margin-left: -50vw;
-    left: 50%;
-    width: 100vw;
-    z-index: -1;
-    display: block;
-    background-color: #f9f9f9;
-    content: "";
-  }
+  @include dotted-background(10px, 2px, #fff, #ddd);
 
   h1, h2 {
     margin-top: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   @include mobile {
-    &::before {
-      top: -120px;
-      bottom: -120px;
-    }
-
-    margin: 120px 0;
+    padding: 120px 0;
   }
+}
+
+.wrapper {
+  @include max-width;
 }

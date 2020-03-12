@@ -6,26 +6,31 @@ import styles from "./Footer.module.scss";
 export class Footer extends React.Component {
   render() {
     return (
-      <div className={styles.footer}>
-        <FooterSection title="Navigera">
-          <FooterLink href="/">Start</FooterLink>
-          <FooterLink href="/meny">Meny</FooterLink>
-          <FooterLink href="/quizlet">Quizlet</FooterLink>
-          <FooterLink external href="https://södermalmsskolan.com/blogg">
-            Blogg
-          </FooterLink>
-        </FooterSection>
-        <FooterSection title="Följ oss">
-          <FooterLink external href="https://discord.gg/4hEnTpd">
-            Discord
-          </FooterLink>
-          <FooterLink
-            external
-            href="https://www.instagram.com/sodermalmsskolan.c0m/"
-          >
-            Instagram
-          </FooterLink>
-        </FooterSection>
+      <div className={styles.wrapper}>
+        <div className={styles.footer}>
+          <FooterSection title="Navigera">
+            <FooterLink href="/">Start</FooterLink>
+            <FooterLink href="/meny">Meny</FooterLink>
+            <FooterLink href="/quizlet">Quizlet</FooterLink>
+            <FooterLink external href="https://södermalmsskolan.com/blogg">
+              Blogg
+            </FooterLink>
+            <FooterLink external href="https://status.södermalmsskolan.com">
+              Serverstatus
+            </FooterLink>
+          </FooterSection>
+          <FooterSection title="Följ oss">
+            <FooterLink external href="https://discord.gg/4hEnTpd">
+              Discord
+            </FooterLink>
+            <FooterLink
+              external
+              href="https://www.instagram.com/sodermalmsskolan.c0m/"
+            >
+              Instagram
+            </FooterLink>
+          </FooterSection>
+        </div>
       </div>
     );
   }
