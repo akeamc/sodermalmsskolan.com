@@ -18,6 +18,17 @@ module.exports = withCSS(
         }
       }
     },
-    poweredByHeader: false
+    poweredByHeader: false,
+    env: {
+      apiUrl: "http://localhost:8080"
+    },
+    webpack: (config, { isServer }) => {
+      // Fixes npm packages that depend on `fs` module
+      if (!isServer) {
+        config.externals = ["tls", "net", "fs"];
+      }
+
+      return config;
+    }
   })
 );

@@ -1,12 +1,13 @@
 import React from "react";
 import { Text, H5 } from "../basic/Typography";
-import { Quizlet, StudySet } from "./../../utils/quizlet";
+import { APIClient } from "./../../utils/api";
 import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import { StudySetCard } from "./StudySetCard";
 import styles from "./QuizletViewer.module.scss";
 import Twemoji from "react-twemoji";
 import * as icons from "react-feather";
+import { StudySet } from "../../utils/quizlet";
 
 export class QuizletViewer extends React.Component<
   {},
@@ -17,6 +18,8 @@ export class QuizletViewer extends React.Component<
     categories: string[];
   }
 > {
+  private apiClient: APIClient;
+
   constructor(props) {
     super(props);
 
@@ -27,11 +30,13 @@ export class QuizletViewer extends React.Component<
       categories: []
     };
 
+    this.apiClient = new APIClient();
+
     this.fetchData();
   }
 
   fetchData() {
-    Quizlet.fetchStudySets()
+    this.apiClient.quizlet.getStudySets()
       .then(studySets => {
         this.setState({
           status: Status.Done,

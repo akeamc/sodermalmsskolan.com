@@ -1,39 +1,32 @@
-import fetch from "isomorphic-unfetch";
+import { User } from "./../models/User";
+import { RestClient } from 'typed-rest-client';
+import { BaseResponse } from './api';
+import { IRestResponse } from 'typed-rest-client';
 
 export interface StudySet {
   timestamp: Date;
-  author: string;
+  author: User;
   url: string;
   name: string;
   categories: string[];
 }
 
-export interface QuizletQuery {
-  category?: string;
+interface QuizletResponse extends BaseResponse {
+  sets: StudySet[];
 }
 
-export class Quizlet {
-  static async fetchStudySets({ category }: QuizletQuery = {}): Promise<StudySet[]> {
-    const res = await fetch(
-      `https://api.xn--sdermalmsskolan-8sb.com/quizlet/${category || ""}`
-    );
+export class QuizletClient {
+  private client: RestClient;
 
-    if (res.status != 200) {
-      throw new Error("Status code is not 200");
-    }
+  constructor(client: RestClient) {
+    this.client = client;
+  }
 
-    const data = await res.json();
+  async getStudySets(): Promise<
+    StudySet[]
+  > {
+    const res: IRestResponse<QuizletResponse> = await this.client.get("/quizlet");
 
-    const sets: StudySet[] = data.sets.map(set => {
-      return {
-        timestamp: new Date(set.timestamp),
-        author: set.author,
-        url: set.url,
-        name: set.name,
-        categories: set.categories
-      };
-    });
-
-    return sets;
+    return res.result.sets;
   }
 }

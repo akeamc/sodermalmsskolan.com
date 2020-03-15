@@ -1,7 +1,7 @@
 import styles from "./Day.module.scss";
 import React from "react";
 import { Text } from "../basic/Typography";
-import { Menu } from "../../utils/menu";
+import { Menu } from "../../utils/api";
 
 const days = [
   "Måndag",

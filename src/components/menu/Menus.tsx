@@ -1,12 +1,13 @@
 import styles from "./Menu.module.scss";
 import React from "react";
-import { Day } from "./Day";
 
-import { getMenus, Menu } from "../../utils/menu";
+import { APIClient } from "../../utils/api";
 import { Text } from "../basic/Typography";
 import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import moment from "moment";
+import { Day } from "./Day";
+import { Menu } from "../../utils/menu";
 
 export class Menus extends React.Component<
   {
@@ -18,6 +19,8 @@ export class Menus extends React.Component<
     menus: Menu[];
   }
 > {
+  private apiClient: APIClient;
+
   constructor(props) {
     super(props);
 
@@ -26,11 +29,12 @@ export class Menus extends React.Component<
       menus: []
     };
 
+    this.apiClient = new APIClient();
     this.fetchData();
   }
 
   fetchData() {
-    getMenus(this.props.start, this.props.end)
+    this.apiClient.menu.getMenu(this.props.start, this.props.end)
       .then(menus => {
         this.setState({
           status: Status.Done,

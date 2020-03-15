@@ -1,28 +1,11 @@
-import fetch from "isomorphic-unfetch";
-
-function unixTime(date): number {
-  return (date.getTime() / 1000) | 0;
-}
-
-export async function getMenus(start: Date, end: Date): Promise<Menu[]> {
-  const res = await fetch(
-    `https://api.xn--sdermalmsskolan-8sb.com/menu?start=${unixTime(
-      start
-    )}&end=${unixTime(end)}`
-  );
-
-  if (res.status != 200) {
-    throw new Error("Status code is not 200");
-  }
-
-  const data = await res.json();
-
-  return data.menu;
-}
+import { RestClient, IRestResponse } from "typed-rest-client";
+import { BaseResponse } from "./api";
+import { User } from "../models/User";
+import moment from "moment";
 
 export interface Photo {
   comment: string;
-  author: string;
+  author: User;
   timestamp: Date;
   url: string;
 }
@@ -31,4 +14,26 @@ export interface Menu {
   dishes: string[];
   timestamp: Date;
   photos: Photo[];
+}
+
+interface MenuResponse extends BaseResponse {
+  menu: Menu[];
+}
+
+export class MenuClient {
+  private client: RestClient;
+
+  constructor(client: RestClient) {
+    this.client = client;
+  }
+
+  async getMenu(start: Date, end: Date): Promise<Menu[]> {
+    const res: IRestResponse<MenuResponse> = await this.client.get("/menu", {
+      queryParameters: {
+        params: { start: moment(start).unix(), end: moment(end).unix() }
+      }
+    });
+
+    return res.result.menu;
+  }
 }
