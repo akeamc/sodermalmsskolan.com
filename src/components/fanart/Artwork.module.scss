@@ -1,0 +1,38 @@
+.artwork {
+  padding-bottom: 48px;
+  border-bottom: 1px solid #dadce0;
+}
+
+.imageWrapper {
+  width: 100%;
+  display: block;
+
+  img {
+    width: 100%;
+  }
+}
+
+.content {
+  margin-top: 24px;
+}
+
+.title {
+  font-size: 1rem;
+  letter-spacing: .00625em;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.details {
+  font-size: 0.875rem;
+  letter-spacing: .0178em;
+  color: #80868b;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.creator {
+  margin-right: 12px;
+}

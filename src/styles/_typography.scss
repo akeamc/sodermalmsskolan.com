@@ -1,0 +1,59 @@
+@import "./breakpoints";
+@import "./mixins";
+
+@import url("https://rsms.me/inter/inter.css");
+
+body, html {
+  font-family: "Inter", sans-serif;
+  word-wrap: break-word;
+}
+
+@supports (font-variation-settings: normal) {
+  body, html {
+    font-family: "Inter var", sans-serif;
+  }
+}
+
+h1 {
+  font-size: 18px;
+  margin: 1em 0;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+
+  @include mobile {
+    font-size: 24px;
+  }
+}
+
+h2 {
+  @include font(20px, 28px);
+  @include tablet {
+    @include font(32px, 40px);
+  }
+}
+
+h3 {
+  @include font(20px, 28px);
+  @include tablet {
+    @include font(28px, 36px);
+  }
+}
+
+h4 {
+  @include font(18px, 26px);
+  @include tablet {
+    @include font(24px, 32px);
+  }
+}
+
+h5 {
+  @include font(18px, 26px);
+  @include tablet {
+    @include font(22px, 28px);
+  }
+}
+
+h6 {
+  @include font(18px, 24px);
+}

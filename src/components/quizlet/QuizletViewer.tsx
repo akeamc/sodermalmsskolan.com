@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, H5 } from "../basic/Typography";
 import { APIClient } from "./../../utils/api";
 import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
@@ -36,7 +35,8 @@ export class QuizletViewer extends React.Component<
   }
 
   fetchData() {
-    this.apiClient.quizlet.getStudySets()
+    this.apiClient.quizlet
+      .getStudySets()
       .then(studySets => {
         this.setState({
           status: Status.Done,
@@ -79,10 +79,10 @@ export class QuizletViewer extends React.Component<
       case Status.Loading:
         return <Spinner></Spinner>;
       case Status.Error:
-        return <Text>Ett fel inträffade</Text>;
+        return <p>Ett fel inträffade</p>;
       case Status.Done:
         if (studySets.length == 0) {
-          return <Text>Inga study sets har publicerats.</Text>;
+          return <p>Inga study sets har publicerats.</p>;
         }
 
         const filteredSets = this.state.studySets.filter(set => {
@@ -98,7 +98,7 @@ export class QuizletViewer extends React.Component<
         return (
           <div className={styles.quizletViewer}>
             <div className={styles.filter}>
-              <H5>Filtrera</H5>
+              <h5>Filtrera</h5>
               {categories.map(category => {
                 const selected = filter.includes(category);
 
@@ -109,12 +109,10 @@ export class QuizletViewer extends React.Component<
                       selected ? styles.filterOptionSelected : null
                     }`}
                   >
-                    <Text>
-                      <Twemoji options={{ className: styles.filterEmoji }}>
-                        {category}
-                      </Twemoji>
-                      {selected ? <icons.X /> : null}
-                    </Text>
+                    <Twemoji options={{ className: styles.filterEmoji }}>
+                      {category}
+                    </Twemoji>
+                    {selected ? <icons.X /> : null}
                   </button>
                 );
               })}

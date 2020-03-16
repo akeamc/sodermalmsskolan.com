@@ -2,7 +2,6 @@ import styles from "./Menu.module.scss";
 import React from "react";
 
 import { APIClient } from "../../utils/api";
-import { Text } from "../basic/Typography";
 import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import moment from "moment";
@@ -66,10 +65,10 @@ export class Menus extends React.Component<
       case Status.Loading:
         return <Spinner></Spinner>;
       case Status.Error:
-        return <Text>Ett fel inträffade</Text>;
+        return <p>Ett fel inträffade</p>;
       case Status.Done:
         if (this.state.menus.length == 0) {
-          return <Text>Menyn är inte tillgänglig.</Text>;
+          return <p>Menyn är inte tillgänglig.</p>;
         }
 
         let foundNextDay = !now.isSame(this.props.start, "month");

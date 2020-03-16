@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
 import { Section, Grid, GridArea } from "../components/basic/Grid";
-import { D2, Paragraph } from "../components/basic/Typography";
+import { D2 } from "../components/basic/Typography";
 import { Header } from "../components/basic/Header";
 import { Image } from "./../components/basic/Image";
 
@@ -21,9 +21,9 @@ export default class Home extends React.Component {
         </Header>
         <Section>
           <GridArea spanMobile={4} spanDesktop={2}>
-            <Paragraph>
+            <p>
               Detta är en &alpha;-version. Berätta gärna vad du tycker!
-            </Paragraph>
+            </p>
           </GridArea>
         </Section>
       </Layout>

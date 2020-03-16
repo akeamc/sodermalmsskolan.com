@@ -1,7 +1,6 @@
 import styles from "./Day.module.scss";
 import React from "react";
-import { Text } from "../basic/Typography";
-import { Menu } from "../../utils/api";
+import { Menu } from "../../utils/menu";
 
 const days = [
   "Måndag",
@@ -19,8 +18,8 @@ export class Day extends React.Component<{ menu: Menu; highlight?: boolean }> {
 
     return (
       <p className={styles.datewrapper}>
-        <Text className={styles.date}>{date.getUTCDate().toString()}</Text>
-        <Text className={styles.weekday}>{days[date.getUTCDay() - 1]}</Text>
+        <p className={styles.date}>{date.getUTCDate().toString()}</p>
+        <p className={styles.weekday}>{days[date.getUTCDay() - 1]}</p>
       </p>
     );
   }
@@ -38,9 +37,9 @@ export class Day extends React.Component<{ menu: Menu; highlight?: boolean }> {
           <div className={styles.dishes}>
             {menu.dishes.map((dish, index) => {
               return (
-                <Text className={styles.dish} key={index}>
+                <p className={styles.dish} key={index}>
                   {dish}
-                </Text>
+                </p>
               );
             })}
           </div>

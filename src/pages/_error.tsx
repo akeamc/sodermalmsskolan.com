@@ -1,5 +1,5 @@
 import { Layout } from "../components/basic/Layout";
-import { H1, D2 } from "../components/basic/Typography";
+import { D2 } from "../components/basic/Typography";
 import React from "react";
 import { Button } from "../components/basic/Button";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default class Error extends React.Component<{ statusCode: number }> {
             </Header>
             <Link href="/">
               <a>
-              <Button>Gå hem</Button>
+                <Button>Gå hem</Button>
               </a>
             </Link>
           </Layout>
@@ -29,7 +29,7 @@ export default class Error extends React.Component<{ statusCode: number }> {
       default:
         return (
           <Layout title="Ett okänt fel inträffade">
-            <H1>Det är allt vi vet</H1>
+            <h1>Det är allt vi vet</h1>
           </Layout>
         );
     }

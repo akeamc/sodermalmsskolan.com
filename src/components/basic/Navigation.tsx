@@ -1,6 +1,5 @@
 import styles from "./Navigation.module.scss";
 import React from "react";
-import { Text } from "./Typography";
 import Link from "next/link";
 
 export class Navigation extends React.Component {
@@ -27,13 +26,11 @@ class NavLink extends React.Component<{
       <li className={styles.li}>
         {this.props.external ? (
           <a href={this.props.href} className={styles.a}>
-            <Text>{this.props.children}</Text>
+            {this.props.children}
           </a>
         ) : (
           <Link href={this.props.href}>
-            <a className={styles.a}>
-              <Text>{this.props.children}</Text>
-            </a>
+            <a className={styles.a}>{this.props.children}</a>
           </Link>
         )}
       </li>
