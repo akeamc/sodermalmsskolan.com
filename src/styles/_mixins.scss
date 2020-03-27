@@ -30,13 +30,7 @@
 }
 
 @mixin dotted-background($dot-space, $dot-size, $bg-color, $dot-color) {
-  background: linear-gradient(
-        90deg,
-        $bg-color ($dot-space - $dot-size),
-        transparent 1%
-      )
-      center,
-    linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
-    $dot-color;
+  background-image: radial-gradient($dot-color, $dot-size, transparent $dot-size);
+  background-position: center;
   background-size: $dot-space $dot-space;
 }
