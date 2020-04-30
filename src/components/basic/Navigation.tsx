@@ -10,6 +10,7 @@ export class Navigation extends React.Component {
           <NavLink href="/">Start</NavLink>
           <NavLink href="/meny">Meny</NavLink>
           <NavLink href="/quizlet">Quizlet</NavLink>
+          <NavLink href="/fanart">Konstverk</NavLink>
         </ul>
       </div>
     );
