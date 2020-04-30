@@ -10,6 +10,7 @@
   left: 0;
   right: 0;
   z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .ul {
@@ -39,9 +40,9 @@
   display: inline-block;
   transition: color 0.1s;
   font-size: 14px;
-  color: #5F6368;
+  color: #5f6368;
 
   &:hover {
-    color: #1A73E8;
+    color: #1a73e8;
   }
 }
