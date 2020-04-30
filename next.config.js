@@ -20,7 +20,7 @@ module.exports = withCSS(
     },
     poweredByHeader: false,
     env: {
-      apiUrl: "http://localhost:8080"
+      apiUrl: "https://api.xn--sdermalmsskolan-8sb.com"
     },
     webpack: (config, { isServer }) => {
       // Fixes npm packages that depend on `fs` module
