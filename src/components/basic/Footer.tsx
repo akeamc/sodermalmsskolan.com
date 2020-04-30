@@ -14,7 +14,7 @@ export class Footer extends React.Component {
             <FooterLink external href="https://södermalmsskolan.com/blogg">
               Blogg
             </FooterLink>
-            <FooterLink external href="https://status.södermalmsskolan.com">
+            <FooterLink external href="https://status.lynx.agency">
               Serverstatus
             </FooterLink>
           </FooterSection>
