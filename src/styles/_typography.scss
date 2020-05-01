@@ -3,13 +3,15 @@
 
 @import url("https://rsms.me/inter/inter.css");
 
-body, html {
+body,
+html {
   font-family: "Inter", sans-serif;
   word-wrap: break-word;
 }
 
 @supports (font-variation-settings: normal) {
-  body, html {
+  body,
+  html {
     font-family: "Inter var", sans-serif;
   }
 }

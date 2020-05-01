@@ -13,7 +13,7 @@ export default class Home extends React.Component {
           <D3>Konstverk</D3>
         </Header>
         <Section>
-          <GridArea spanMobile={4} spanDesktop={8} offsetDesktop={2}>
+          <GridArea spanMobile={4} spanDesktop={12}>
             <FanartViewer />
           </GridArea>
         </Section>

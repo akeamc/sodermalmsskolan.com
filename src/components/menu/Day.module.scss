@@ -29,6 +29,7 @@
   letter-spacing: -0.1em;
   display: block;
   line-height: 1;
+  margin: 6px 0;
 
   @include mobile {
     font-size: 24px;
@@ -36,7 +37,7 @@
 }
 
 .weekday {
-  margin-top: 0.5em;
+  margin: 6px 0;
   font-size: 12px;
 
   @include mobile {

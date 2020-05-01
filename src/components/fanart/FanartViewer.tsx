@@ -4,6 +4,7 @@ import { Artwork } from "../../utils/fanart";
 import { Spinner } from "../basic/Spinner";
 import React from "react";
 import { ArtworkComponent } from "./Artwork";
+import { Grid } from "../basic/Grid";
 import styles from "./FanartViewer.module.scss";
 
 export class FanartViewer extends React.Component<
@@ -17,7 +18,7 @@ export class FanartViewer extends React.Component<
 
     this.state = {
       status: Status.Loading,
-      artworks: null
+      artworks: null,
     };
 
     this.apiClient = new APIClient();
@@ -27,15 +28,15 @@ export class FanartViewer extends React.Component<
   fetchData() {
     this.apiClient.fanart
       .getFanart()
-      .then(artworks => {
+      .then((artworks) => {
         this.setState({
           status: Status.Done,
-          artworks
+          artworks,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
-          status: Status.Error
+          status: Status.Error,
         });
         console.error(error);
       });
@@ -52,14 +53,16 @@ export class FanartViewer extends React.Component<
       case Status.Done:
         return (
           <div className={styles.viewer}>
-            {artworks.map((artwork, index) => {
-              return (
-                <ArtworkComponent
-                  artwork={artwork}
-                  key={index}
-                ></ArtworkComponent>
-              );
-            })}
+            <Grid>
+              {artworks.map((artwork, index) => {
+                return (
+                  <ArtworkComponent
+                    artwork={artwork}
+                    key={index}
+                  ></ArtworkComponent>
+                );
+              })}
+            </Grid>
           </div>
         );
     }

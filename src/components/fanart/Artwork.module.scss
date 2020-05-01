@@ -1,39 +1,57 @@
+@import "../../styles/typography";
+
+$padding: 16px;
+
 .artwork {
-  padding-bottom: 48px;
-  border-bottom: 1px solid #dadce0;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.10);
+  padding: $padding;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .imageWrapper {
-  width: 100%;
   display: block;
+  margin: -$padding;
+  margin-bottom: 0;
+  cursor: zoom-in;
 
-  img {
+  .image {
     width: 100%;
-    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+
+    animation: imageAnimation 10s ease-in-out infinite;
+
+    &::after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+}
+
+@keyframes imageAnimation {
+  0%, 100% {
+    background-position: left top;
+  }
+
+  50% {
+    background-position: right bottom;
   }
 }
 
 .content {
-  margin-top: 24px;
-}
-
-.title {
-  font-size: 1rem;
-  letter-spacing: .00625em;
-  font-weight: 500;
-  line-height: 1.5;
-  margin: 0;
+  margin-top: 16px;
 }
 
 .details {
-  font-size: 0.875rem;
-  letter-spacing: .0178em;
-  color: #80868b;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.25;
   margin: 0;
-}
 
-.creator {
-  margin-right: 12px;
+  span:not(:last-child)::after {
+    content: "·";
+    margin: 0 12px;
+  }
 }

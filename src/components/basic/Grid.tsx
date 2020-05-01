@@ -19,12 +19,18 @@ export class Section extends React.Component<
   }
 }
 
+/**
+ * A grid container with 12 columns and an infinite number of rows. Designed to contain multiple instances of `GridArea`.
+ */
 export class Grid extends React.Component<IContainerProps> {
   render() {
     return <div className={styles.grid}>{this.props.children}</div>;
   }
 }
 
+/**
+ * An area in a `Grid`.
+ */
 export class GridArea extends React.Component<
   IContainerProps & {
     spanMobile: number;
@@ -47,7 +53,7 @@ export class GridArea extends React.Component<
       offsetMobile = "",
       offsetTablet = offsetMobile,
       offsetDesktop = "",
-      offsetDesktopLarge = offsetDesktop
+      offsetDesktopLarge = offsetDesktop,
     } = this.props;
 
     const classes = [
@@ -58,7 +64,7 @@ export class GridArea extends React.Component<
       `col-${spanDesktop}-lg`,
       `col-offset-${offsetDesktop}-lg`,
       `col-${spanDesktopLarge}-xl`,
-      `col-offset-${offsetDesktopLarge}-xl`
+      `col-offset-${offsetDesktopLarge}-xl`,
     ];
 
     return <div className={classes.join(" ")}>{this.props.children}</div>;
@@ -72,7 +78,7 @@ export class FillScreenWidth extends React.Component<
   constructor(props) {
     super(props);
     this.state = {
-      windowWidth: 0
+      windowWidth: 0,
     };
   }
 
@@ -93,7 +99,7 @@ export class FillScreenWidth extends React.Component<
         style={{
           marginLeft: "50%",
           transform: `translateX(-${clientWidth / 2}px)`,
-          width: clientWidth
+          width: clientWidth,
         }}
       >
         {this.props.children}
