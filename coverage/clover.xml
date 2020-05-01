@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1588343993259" clover="3.2.0">
+  <project timestamp="1588343993259" name="All files">
+    <metrics statements="12" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0" elements="18" coveredelements="4" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
+    <file name="next.config.js" path="C:\Users\akeam\Documents\Projects\södermalmsskolan.com\site\next.config.js">
+      <metrics statements="12" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="12" count="0" type="stmt"/>
+      <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="14" count="0" type="stmt"/>
+      <line num="15" count="0" type="stmt"/>
+      <line num="17" count="0" type="stmt"/>
+      <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="28" count="0" type="stmt"/>
+      <line num="31" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>
