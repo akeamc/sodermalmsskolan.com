@@ -1,6 +1,16 @@
 stages:
+  - test
   - publish
   - deploy
+
+test:
+  stage: test
+  image: node:12-alpine
+  before_script:
+    - npm install
+  script:
+    - npm run test
+
 
 publish:
   stage: publish
