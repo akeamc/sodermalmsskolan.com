@@ -43,12 +43,13 @@ export class Day extends React.Component<{ menu: Menu; highlight?: boolean }> {
               );
             })}
           </div>
-          {menu.photos.length > 0 ? (
+          {menu.messages.length > 0 ? (
             <div className={styles.photos}>
-              {menu.photos.map((photo, index) => {
+              {menu.messages.map((message, index) => {
+                const attachment = message.attachments[0];
                 return (
-                  <a className={styles.photo} href={photo.url}>
-                    <img src={photo.url} key={index} />
+                  <a className={styles.photo} href={attachment.url}>
+                    <img src={attachment.url} key={index} />
                   </a>
                 );
               })}

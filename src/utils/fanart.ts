@@ -1,24 +1,7 @@
 import { RestClient } from "typed-rest-client";
-import { User } from "../models/User";
 import { IRestResponse } from "typed-rest-client";
-import { BaseResponse } from "./api";
-
-export interface Image {
-  url: string;
-  width: number;
-  height: number;
-}
-
-export interface Artwork {
-  timestamp: Date;
-  author: User;
-  title: string;
-  image: Image;
-}
-
-export interface FanartResponse extends BaseResponse {
-  artworks: Artwork[];
-}
+import { MessagesResponse } from "./api";
+import { Message } from "../models/Discord";
 
 export class FanartClient {
   private client: RestClient;
@@ -27,9 +10,9 @@ export class FanartClient {
     this.client = client;
   }
 
-  async getFanart(): Promise<Artwork[]> {
-    const res: IRestResponse<FanartResponse> = await this.client.get("/fanart");
+  async getFanart(): Promise<Message[]> {
+    const res: IRestResponse<MessagesResponse> = await this.client.get("/fanart");
 
-    return res.result.artworks;
+    return res.result?.messages || [];
   }
 }

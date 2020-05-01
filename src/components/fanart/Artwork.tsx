@@ -1,17 +1,12 @@
-import { Artwork } from "../../utils/fanart";
 import React from "react";
 import styles from "./Artwork.module.scss";
 import moment from "moment";
 import { GridArea } from "../basic/Grid";
-
-interface Vector2D {
-  x: number;
-  y: number;
-}
+import { Message } from "../../models/Discord";
 
 export class ArtworkComponent extends React.Component<
   {
-    artwork: Artwork;
+    message: Message;
     key: number;
   },
   { animationDelay: number }
@@ -23,25 +18,27 @@ export class ArtworkComponent extends React.Component<
   }
 
   render() {
-    const { artwork, key } = this.props;
+    const { message, key } = this.props;
+
+    const attachment = message.attachments[0];
 
     return (
       <GridArea spanMobile={4} spanTablet={2} spanDesktop={3}>
         <div key={key} className={styles.artwork}>
-          <a className={styles.imageWrapper} href={artwork.image.url}>
+          <a className={styles.imageWrapper} href={attachment.url}>
             <div
               className={styles.image}
               style={{
-                backgroundImage: `url(${artwork.image.url})`,
+                backgroundImage: `url(${attachment.url})`,
                 animationDelay: this.state.animationDelay + "s"
               }}
             />
           </a>
           <div className={styles.content}>
             <p className={styles.details}>
-              <span className={styles.creator}>{artwork.author.username}</span>
+              <span className={styles.creator}>{message.author.username}</span>
               <span className={styles.timestamp}>
-                {moment(artwork.timestamp).locale("sv").format("D MMMM YYYY")}
+                {moment(message.createdAt).locale("sv").format("D MMMM YYYY")}
               </span>
             </p>
           </div>

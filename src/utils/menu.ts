@@ -1,6 +1,6 @@
 import { RestClient, IRestResponse } from "typed-rest-client";
 import { BaseResponse } from "./api";
-import { User } from "../models/User";
+import { User, Message } from "../models/Discord";
 import moment from "moment";
 
 export interface Photo {
@@ -13,7 +13,7 @@ export interface Photo {
 export interface Menu {
   dishes: string[];
   timestamp: Date;
-  photos: Photo[];
+  messages: Message[];
 }
 
 interface MenuResponse extends BaseResponse {

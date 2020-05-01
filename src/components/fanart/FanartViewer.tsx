@@ -1,15 +1,15 @@
 import { APIClient } from "../../utils/api";
 import { Status } from "../../utils/status";
-import { Artwork } from "../../utils/fanart";
 import { Spinner } from "../basic/Spinner";
 import React from "react";
 import { ArtworkComponent } from "./Artwork";
 import { Grid } from "../basic/Grid";
 import styles from "./FanartViewer.module.scss";
+import { Message } from "../../models/Discord";
 
 export class FanartViewer extends React.Component<
   {},
-  { status: Status; artworks: Artwork[] }
+  { status: Status; messages: Message[] }
 > {
   private apiClient: APIClient;
 
@@ -18,7 +18,7 @@ export class FanartViewer extends React.Component<
 
     this.state = {
       status: Status.Loading,
-      artworks: null,
+      messages: [],
     };
 
     this.apiClient = new APIClient();
@@ -31,7 +31,7 @@ export class FanartViewer extends React.Component<
       .then((artworks) => {
         this.setState({
           status: Status.Done,
-          artworks,
+          messages: artworks,
         });
       })
       .catch((error) => {
@@ -43,7 +43,7 @@ export class FanartViewer extends React.Component<
   }
 
   render() {
-    const { status, artworks } = this.state;
+    const { status, messages: artworks } = this.state;
 
     switch (status) {
       case Status.Loading:
@@ -54,10 +54,10 @@ export class FanartViewer extends React.Component<
         return (
           <div className={styles.viewer}>
             <Grid>
-              {artworks.map((artwork, index) => {
+              {artworks.map((message, index) => {
                 return (
                   <ArtworkComponent
-                    artwork={artwork}
+                    message={message}
                     key={index}
                   ></ArtworkComponent>
                 );

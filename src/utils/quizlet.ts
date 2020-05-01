@@ -1,4 +1,4 @@
-import { User } from "./../models/User";
+import { User } from "./../models/Discord";
 import { RestClient } from 'typed-rest-client';
 import { BaseResponse } from './api';
 import { IRestResponse } from 'typed-rest-client';
