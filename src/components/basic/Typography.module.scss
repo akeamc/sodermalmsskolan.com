@@ -1,13 +1,6 @@
 @import "../../styles/breakpoints";
 @import "../../styles/mixins";
 
-// Display headings
-.d1,
-.d2,
-.d3 {
-  color: #202124;
-}
-
 .d1 {
   @include font(64px, 76px);
 }

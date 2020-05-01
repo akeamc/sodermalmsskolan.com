@@ -9,7 +9,7 @@ export default class Quizlet extends React.Component {
   render() {
     return (
       <Layout title="Quizlet">
-        <Header>
+        <Header backgroundImage="https://i.imgur.com/7KH8RLQ.gif">
           <D3>Quizlet</D3>
         </Header>
         <Section>

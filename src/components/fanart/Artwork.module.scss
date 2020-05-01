@@ -3,7 +3,7 @@
 $padding: 16px;
 
 .artwork {
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
   padding: $padding;
   overflow: hidden;
   border-radius: 10px;
@@ -19,8 +19,8 @@ $padding: 16px;
     width: 100%;
     background-size: cover;
     background-position: center;
-
     animation: imageAnimation 10s ease-in-out infinite;
+    background-color: #000;
 
     &::after {
       content: "";
@@ -31,7 +31,8 @@ $padding: 16px;
 }
 
 @keyframes imageAnimation {
-  0%, 100% {
+  0%,
+  100% {
     background-position: left top;
   }
 

@@ -9,7 +9,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <Layout title="Fanart">
-        <Header>
+        <Header backgroundImage="https://media.discordapp.net/attachments/615945309885038593/615995344538566676/shrek.gif">
           <D3>Konstverk</D3>
         </Header>
         <Section>
