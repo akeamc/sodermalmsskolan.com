@@ -4,6 +4,11 @@ import styles from "./Artwork.module.scss";
 import moment from "moment";
 import { GridArea } from "../basic/Grid";
 
+interface Vector2D {
+  x: number;
+  y: number;
+}
+
 export class ArtworkComponent extends React.Component<
   {
     artwork: Artwork;

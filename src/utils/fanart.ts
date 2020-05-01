@@ -5,6 +5,8 @@ import { BaseResponse } from "./api";
 
 export interface Image {
   url: string;
+  width: number;
+  height: number;
 }
 
 export interface Artwork {
