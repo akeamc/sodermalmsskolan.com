@@ -1,58 +1,94 @@
-@import "../../styles/typography";
-
-$padding: 16px;
-
-.artwork {
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
-  padding: $padding;
-  overflow: hidden;
-  border-radius: 10px;
+.wrapper {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  transform: translateZ(0);
 }
 
-.imageWrapper {
-  display: block;
-  margin: -$padding;
-  margin-bottom: 0;
-  cursor: zoom-in;
+.artwork {
+  background-color: #fff;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 
-  .image {
+  img {
+    margin-bottom: 0;
     width: 100%;
-    background-size: cover;
-    background-position: center;
-    animation: imageAnimation 10s ease-in-out infinite;
-    background-color: #000;
+    display: block;
+  }
 
-    &::after {
-      content: "";
-      display: block;
-      padding-bottom: 100%;
+  .content {
+    padding: 16px;
+  }
+
+  .details {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0;
+
+    span:not(:last-child)::after {
+      content: "·";
+      margin: 0 12px;
     }
   }
 }
 
-@keyframes imageAnimation {
-  0%,
-  100% {
-    background-position: left top;
-  }
+// @import "../../styles/typography";
 
-  50% {
-    background-position: right bottom;
-  }
-}
+// $padding: 16px;
 
-.content {
-  margin-top: 16px;
-}
+// .artwork {
+//   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+//   padding: $padding;
+//   overflow: hidden;
+//   border-radius: 10px;
+// }
 
-.details {
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.25;
-  margin: 0;
+// .imageWrapper {
+//   display: block;
+//   margin: -$padding;
+//   margin-bottom: 0;
+//   cursor: zoom-in;
 
-  span:not(:last-child)::after {
-    content: "·";
-    margin: 0 12px;
-  }
-}
+//   .image {
+//     width: 100%;
+//     background-size: cover;
+//     background-position: center;
+//     animation: imageAnimation 10s ease-in-out infinite;
+//     background-color: #000;
+
+//     &::after {
+//       content: "";
+//       display: block;
+//       padding-bottom: 100%;
+//     }
+//   }
+// }
+
+// @keyframes imageAnimation {
+//   0%,
+//   100% {
+//     background-position: left top;
+//   }
+
+//   50% {
+//     background-position: right bottom;
+//   }
+// }
+
+// .content {
+//   margin-top: 16px;
+// }
+
+// .details {
+//   font-size: 13px;
+//   font-weight: 500;
+//   line-height: 1.25;
+//   margin: 0;
+
+//   span:not(:last-child)::after {
+//     content: "·";
+//     margin: 0 12px;
+//   }
+// }

@@ -53,16 +53,14 @@ export class FanartViewer extends React.Component<
       case Status.Done:
         return (
           <div className={styles.viewer}>
-            <Grid>
-              {artworks.map((message, index) => {
-                return (
-                  <ArtworkComponent
-                    message={message}
-                    key={index}
-                  ></ArtworkComponent>
-                );
-              })}
-            </Grid>
+            {artworks.map((message, index) => {
+              return (
+                <ArtworkComponent
+                  message={message}
+                  key={index}
+                ></ArtworkComponent>
+              );
+            })}
           </div>
         );
     }

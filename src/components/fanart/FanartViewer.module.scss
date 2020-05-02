@@ -1,4 +1,13 @@
+@import "../../styles/breakpoints";
+
+$gap: 24px;
+
 .viewer {
-  display: grid;
-  row-gap: 48px;
+  column-gap: $gap;
+  margin-bottom: -$gap;
+  column-width: 300px;
+
+  > * {
+    margin-bottom: $gap;
+  }
 }

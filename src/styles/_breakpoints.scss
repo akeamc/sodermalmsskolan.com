@@ -13,12 +13,6 @@
   }
 }
 
-@mixin laptop {
-  @media screen and (min-width: $bp-laptop) {
-    @content;
-  }
-}
-
 @mixin desktop {
   @media screen and (min-width: $bp-desktop) {
     @content;
