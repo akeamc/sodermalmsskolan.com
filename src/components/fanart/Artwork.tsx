@@ -46,27 +46,6 @@ export class ArtworkComponent extends React.Component<
           </div>
         </div>
       </div>
-      // <GridArea spanMobile={4} spanTablet={2} spanDesktop={3}>
-      //   <div key={key} className={styles.artwork}>
-      //     <a className={styles.imageWrapper} href={attachment.url}>
-      //       <div
-      //         className={styles.image}
-      //         style={{
-      //           backgroundImage: `url(${attachment.url})`,
-      //           animationDelay: this.state.animationDelay + "s",
-      //         }}
-      //       />
-      //     </a>
-      //     <div className={styles.content}>
-      //       <p className={styles.details}>
-      //         <span className={styles.creator}>{message.author.username}</span>
-      //         <span className={styles.timestamp}>
-      //           {moment(message.createdAt).locale("sv").format("D MMMM YYYY")}
-      //         </span>
-      //       </p>
-      //     </div>
-      //   </div>
-      // </GridArea>
     );
   }
 }

@@ -16,11 +16,13 @@ module.exports = withCSS(
         } else {
           return localName;
         }
-      }
+      },
     },
     poweredByHeader: false,
     env: {
-      apiUrl: "https://api.xn--sdermalmsskolan-8sb.com"
+      apiUrl: "https://api.xn--sdermalmsskolan-8sb.com",
+      adsenseClient: "ca-pub-1944185766034883",
+      adsenseSlot: "6292868735",
     },
     webpack: (config, { isServer }) => {
       // Fixes npm packages that depend on `fs` module
@@ -29,6 +31,6 @@ module.exports = withCSS(
       }
 
       return config;
-    }
+    },
   })
 );

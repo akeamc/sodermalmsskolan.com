@@ -4,6 +4,7 @@ import { Section, Grid, GridArea } from "../components/basic/Grid";
 import { D2 } from "../components/basic/Typography";
 import { Header } from "../components/basic/Header";
 import { Image } from "./../components/basic/Image";
+import AdSense from "react-adsense";
 
 export default class Home extends React.Component {
   render() {
@@ -19,11 +20,17 @@ export default class Home extends React.Component {
             </GridArea>
           </Grid>
         </Header>
+        <AdSense.Google
+          client={process.env.adsenseClient}
+          slot={process.env.adsenseSlot}
+          style={{ display: "block" }}
+          format="auto"
+          responsive="true"
+          layoutKey="-gw-1+2a-9x+5c"
+        />
         <Section>
           <GridArea spanMobile={4} spanDesktop={2}>
-            <p>
-              Detta är en &alpha;-version. Berätta gärna vad du tycker!
-            </p>
+            <p>Detta är en &alpha;-version. Berätta gärna vad du tycker!</p>
           </GridArea>
         </Section>
       </Layout>
