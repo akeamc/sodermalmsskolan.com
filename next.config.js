@@ -22,7 +22,7 @@ module.exports = withCSS(
     env: {
       apiUrl: "https://api.xn--sdermalmsskolan-8sb.com",
       adsenseClient: "ca-pub-1944185766034883",
-      adsenseSlot: "6292868735",
+      adsenseSlot: "5909725353",
     },
     webpack: (config, { isServer }) => {
       // Fixes npm packages that depend on `fs` module
