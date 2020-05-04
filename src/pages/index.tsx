@@ -26,7 +26,6 @@ export default class Home extends React.Component {
           style={{ display: "block" }}
           format="auto"
           responsive="true"
-          layoutKey="-gw-1+2a-9x+5c"
         />
         <Section>
           <GridArea spanMobile={4} spanDesktop={2}>
