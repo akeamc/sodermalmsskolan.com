@@ -20,7 +20,10 @@ module.exports = withCSS(
     },
     poweredByHeader: false,
     env: {
-      apiUrl: "https://api.xn--sdermalmsskolan-8sb.com"
+      apiUrl: "https://api.xn--sdermalmsskolan-8sb.com",
+      adsense: {
+        client: 
+      }
     },
     webpack: (config, { isServer }) => {
       // Fixes npm packages that depend on `fs` module
