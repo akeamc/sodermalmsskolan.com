@@ -14,6 +14,17 @@ export default class Menu extends React.Component {
         </Header>
         <Section>
           <GridArea spanMobile={4} spanDesktop={12}>
+            <AdSense.Google
+              client={process.env.adsenseClient}
+              slot={process.env.adsenseSlot}
+              style={{ display: "block" }}
+              format="auto"
+              responsive="true"
+            />
+          </GridArea>
+        </Section>
+        <Section>
+          <GridArea spanMobile={4} spanDesktop={12}>
             <MonthViewer />
           </GridArea>
         </Section>

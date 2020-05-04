@@ -20,13 +20,17 @@ export default class Home extends React.Component {
             </GridArea>
           </Grid>
         </Header>
-        <AdSense.Google
-          client={process.env.adsenseClient}
-          slot={process.env.adsenseSlot}
-          style={{ display: "block" }}
-          format="auto"
-          responsive="true"
-        />
+        <Section>
+          <GridArea spanMobile={4} spanDesktop={12}>
+            <AdSense.Google
+              client={process.env.adsenseClient}
+              slot={process.env.adsenseSlot}
+              style={{ display: "block" }}
+              format="auto"
+              responsive="true"
+            />
+          </GridArea>
+        </Section>
         <Section>
           <GridArea spanMobile={4} spanDesktop={2}>
             <p>Detta är en &alpha;-version. Berätta gärna vad du tycker!</p>
