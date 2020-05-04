@@ -4,6 +4,7 @@ import { MonthViewer } from "../components/menu/MonthViewer";
 import { Section, GridArea } from "../components/basic/Grid";
 import { Header } from "../components/basic/Header";
 import { D3 } from "../components/basic/Typography";
+import AdSense from "react-adsense";
 
 export default class Menu extends React.Component {
   render() {

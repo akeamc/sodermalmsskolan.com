@@ -4,6 +4,7 @@ import { Section, GridArea } from "../components/basic/Grid";
 import { D3 } from "../components/basic/Typography";
 import { Header } from "../components/basic/Header";
 import { FanartViewer } from "./../components/fanart/FanartViewer";
+import AdSense from "react-adsense";
 
 export default class Home extends React.Component {
   render() {
