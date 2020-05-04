@@ -3,7 +3,6 @@ import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import React from "react";
 import { ArtworkComponent } from "./Artwork";
-import { Grid } from "../basic/Grid";
 import styles from "./FanartViewer.module.scss";
 import { Message } from "../../models/Discord";
 
