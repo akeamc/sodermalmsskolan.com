@@ -11,6 +11,10 @@
   right: 0;
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  @include dark-mode {
+    background-color: $dark-mode-background;
+  }
 }
 
 .ul {
@@ -44,5 +48,13 @@
 
   &:hover {
     color: #1a73e8;
+  }
+
+  @include dark-mode {
+    color: #fff;
+
+    &:hover {
+      color: #ffffffcc;
+    }
   }
 }

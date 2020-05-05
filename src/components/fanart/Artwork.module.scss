@@ -1,3 +1,6 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
 .wrapper {
   display: inline-block;
   width: 100%;
@@ -10,6 +13,11 @@
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+
+  @include dark-mode {
+    background-color: $dark-mode-background;
+    color: #fff;
+  }
 
   img {
     margin-bottom: 0;

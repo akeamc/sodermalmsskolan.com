@@ -1,4 +1,6 @@
 @import "../../styles/breakpoints";
+@import "../../styles/mixins";
+@import "../../styles/variables";
 
 .quizletViewer {
 }
@@ -43,10 +45,14 @@
   width: auto;
   outline: none !important;
   margin-bottom: 12px;
-  border: 1px solid #dadce0;
+  border: 1px solid $border-color;
   background-color: transparent;
   color: #1a73e8;
   box-sizing: border-box;
+
+  @include dark-mode {
+    border-color: $dark-mode-border-color;
+  }
 
   span > div {
     display: inline-block;

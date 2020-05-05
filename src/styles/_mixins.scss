@@ -40,3 +40,9 @@
     $dot-color;
   background-size: $dot-space $dot-space;
 }
+
+@mixin dark-mode() {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}

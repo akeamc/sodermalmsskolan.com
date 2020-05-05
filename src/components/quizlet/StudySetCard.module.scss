@@ -1,10 +1,17 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
 .studySetCard {
-  border: 1px solid #dadce0;
+  border: 1px solid $border-color;
   border-radius: 8px;
   text-decoration: none;
   color: inherit;
   padding: 24px;
   display: block;
+
+  @include dark-mode {
+    border-color: $dark-mode-border-color;
+  }
 
   h5 {
     margin: 0 0 24px 0;

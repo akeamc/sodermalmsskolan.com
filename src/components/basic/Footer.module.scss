@@ -4,7 +4,11 @@
 .wrapper {
   padding-top: 64px;
   padding-bottom: 64px;
-  border-top: 1px solid #e8eaed;
+  border-top: 1px solid $border-color;
+
+  @include dark-mode {
+    border-color: $dark-mode-border-color
+  }
 }
 
 .footer {
@@ -42,6 +46,14 @@
 
         &:hover {
           color: rgba(0, 0, 0, 1);
+        }
+
+        @include dark-mode {
+          color: #ffffffaa;
+
+          &:hover {
+            color: #ffffff;
+          }
         }
       }
     }

@@ -7,6 +7,10 @@
 
   @include dotted-background(10px, 2px, #fff, #ddd);
 
+  @include dark-mode {
+    @include dotted-background(10px, 2px, $dark-mode-background, #2c2c2c);
+  }
+
   h1, h2 {
     margin-top: 0;
 
