@@ -27,6 +27,8 @@ export class ArtworkComponent extends React.Component<
 
     const attachment = this.attachment;
 
+    const displayName = message.member ? message.member.displayName : message.author.username;
+
     return (
       <div className={styles.wrapper}>
         <div
@@ -38,7 +40,7 @@ export class ArtworkComponent extends React.Component<
           <img src={attachment.url} />
           <div className={styles.content}>
             <p className={styles.details}>
-              <span className={styles.creator}>{message.author.username}</span>
+              <span className={styles.creator}>{displayName}</span>
               <span className={styles.timestamp}>
                 {moment(message.createdAt).locale("sv").format("D MMMM YYYY")}
               </span>
