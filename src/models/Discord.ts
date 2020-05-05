@@ -49,6 +49,20 @@ export class Attachment {
   }
 }
 
+export class GulidMember {
+  displayHexColor: string;
+  displayName: string;
+  joinedAt: Date | null;
+  nickname: string | null;
+
+  constructor({ displayHexColor, displayName, joinedAt, nickname }: { displayHexColor: string, displayName: string, joinedAt: Date | null, nickname: string | null }) {
+    this.displayHexColor = displayHexColor;
+    this.displayName = displayName;
+    this.joinedAt = joinedAt;
+    this.nickname = nickname;
+  }
+}
+
 export class Message {
   author: User;
   attachments: Attachment[];
@@ -56,6 +70,7 @@ export class Message {
   createdAt: Date;
   editedAt: Date | null;
   id: string;
+  member: GulidMember | null;
   pinned: boolean;
   system: boolean;
 
@@ -66,6 +81,7 @@ export class Message {
     createdAt,
     editedAt,
     id,
+    member,
     pinned,
     system,
   }: {
@@ -75,6 +91,7 @@ export class Message {
     createdAt: Date;
     editedAt: Date | null;
     id: string;
+    member: GulidMember | null;
     pinned: boolean;
     system: boolean;
   }) {
@@ -84,6 +101,7 @@ export class Message {
     this.createdAt = createdAt;
     this.editedAt = editedAt;
     this.id = id;
+    this.member = member;
     this.pinned = pinned;
     this.system = system;
   }
