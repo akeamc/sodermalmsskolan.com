@@ -2,24 +2,6 @@
 @import "../../styles/mixins";
 @import "../../styles/variables";
 
-.quizletViewer {
-}
-
-.cardContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 32px;
-
-  @include mobile {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include tablet {
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 48px;
-  }
-}
-
 .filter {
   margin: 32px 0;
 
@@ -54,7 +36,7 @@
     border-color: $dark-mode-border-color;
   }
 
-  span > div {
+  > div {
     display: inline-block;
     vertical-align: middle;
   }

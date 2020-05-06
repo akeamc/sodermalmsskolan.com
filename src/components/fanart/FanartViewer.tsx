@@ -3,13 +3,15 @@ import { Status } from "../../utils/status";
 import { Spinner } from "../basic/Spinner";
 import React from "react";
 import { ArtworkComponent } from "./Artwork";
-import styles from "./FanartViewer.module.scss";
 import { Message } from "../../models/Discord";
+import StackGrid from "react-stack-grid";
+import { SizeMe } from "react-sizeme";
+import { getBreakpoints } from "../../utils/breakpoints";
 
 export class FanartViewer extends React.Component<
   {},
   { status: Status; messages: Message[] }
-> {
+  > {
   private apiClient: APIClient;
 
   constructor(props) {
@@ -43,6 +45,7 @@ export class FanartViewer extends React.Component<
 
   render() {
     const { status, messages: artworks } = this.state;
+    const breakpoints = getBreakpoints();
 
     switch (status) {
       case Status.Loading:
@@ -51,16 +54,37 @@ export class FanartViewer extends React.Component<
         return <p>Ett fel inträffade</p>;
       case Status.Done:
         return (
-          <div className={styles.viewer}>
-            {artworks.map((message, index) => {
-              return (
-                <ArtworkComponent
-                  message={message}
-                  key={index}
-                ></ArtworkComponent>
-              );
-            })}
-          </div>
+          <SizeMe>{({ size: { width } }) => {
+            let columnWidth = 1;
+
+            if (width >= breakpoints.mobile) {
+              columnWidth = 0.5;
+            }
+
+            if (width >= breakpoints.tablet) {
+              columnWidth = 1 / 3;
+            }
+
+            if (width >= breakpoints.desktop) {
+              columnWidth = 0.25;
+            }
+
+            return <StackGrid
+              columnWidth={(columnWidth * 100) + "%"}
+              gutterWidth={24}
+              gutterHeight={24}
+              monitorImagesLoaded={true}
+            >
+              {artworks.map((message, index) => {
+                return (
+                  <ArtworkComponent
+                    message={message}
+                    key={index}
+                  ></ArtworkComponent>
+                );
+              })}
+            </StackGrid>
+          }}</SizeMe>
         );
     }
   }

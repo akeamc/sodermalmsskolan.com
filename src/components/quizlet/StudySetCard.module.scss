@@ -8,6 +8,7 @@
   color: inherit;
   padding: 24px;
   display: block;
+  box-sizing: border-box;
 
   @include dark-mode {
     border-color: $dark-mode-border-color;
@@ -23,9 +24,6 @@
   margin-bottom: 16px;
   font-size: 14px;
   font-weight: 500;
-}
-
-.cardWrapper {
 }
 
 .categories {

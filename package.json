@@ -22,6 +22,8 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-ga": "^2.7.0",
+    "react-sizeme": "^2.6.12",
+    "react-stack-grid": "^0.7.1",
     "react-twemoji": "^0.2.3",
     "typed-rest-client": "^1.7.3"
   },

@@ -49,3 +49,11 @@
     @content;
   }
 }
+
+:export {
+  mobile: $bp-mobile;
+  tablet: $bp-tablet;
+  desktop: $bp-desktop;
+  desktopLarge: $bp-desktop-large;
+  desktopExtraLarge: $bp-desktop-xlarge;
+}

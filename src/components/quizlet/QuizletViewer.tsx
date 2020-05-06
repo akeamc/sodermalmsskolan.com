@@ -7,6 +7,9 @@ import styles from "./QuizletViewer.module.scss";
 import Twemoji from "react-twemoji";
 import * as icons from "react-feather";
 import { StudySet } from "../../utils/quizlet";
+import StackGrid from "react-stack-grid";
+import { SizeMe } from "react-sizeme";
+import { getBreakpoints } from "../../utils/breakpoints";
 
 export class QuizletViewer extends React.Component<
   {},
@@ -16,7 +19,7 @@ export class QuizletViewer extends React.Component<
     filter: string[];
     categories: string[];
   }
-> {
+  > {
   private apiClient: APIClient;
 
   constructor(props) {
@@ -74,6 +77,7 @@ export class QuizletViewer extends React.Component<
 
   render() {
     const { status, studySets, filter, categories } = this.state;
+    const breakpoints = getBreakpoints();
 
     switch (status) {
       case Status.Loading:
@@ -96,33 +100,58 @@ export class QuizletViewer extends React.Component<
         });
 
         return (
-          <div className={styles.quizletViewer}>
-            <div className={styles.filter}>
-              <h5>Filtrera</h5>
-              {categories.map(category => {
-                const selected = filter.includes(category);
+          <SizeMe>
+            {({ size: { width } }) => {
+              let columnWidth = 1;
 
-                return (
-                  <button
-                    onClick={() => this.toggleFilter(category)}
-                    className={`${styles.filterOption} ${
-                      selected ? styles.filterOptionSelected : null
-                    }`}
+              if (width >= breakpoints.mobile) {
+                columnWidth = 0.5;
+              }
+
+              if (width >= breakpoints.tablet) {
+                columnWidth = 1 / 3;
+              }
+
+              if (width >= breakpoints.desktop) {
+                columnWidth = 0.25;
+              }
+
+              return (
+                <div>
+                  <div className={styles.filter}>
+                    <h5>Filtrera</h5>
+                    {categories.map(category => {
+                      const selected = filter.includes(category);
+
+                      return (
+                        <button
+                          onClick={() => this.toggleFilter(category)}
+                          className={`${styles.filterOption} ${
+                            selected ? styles.filterOptionSelected : null
+                            }`}
+                        >
+                          <Twemoji options={{ className: styles.filterEmoji }}>
+                            {category}
+                          </Twemoji>
+                          {selected ? <icons.X /> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <StackGrid
+                    ccolumnWidth={(columnWidth * 100) + "%"}
+                    gutterWidth={24}
+                    gutterHeight={24}
+                    monitorImagesLoaded={true}
                   >
-                    <Twemoji options={{ className: styles.filterEmoji }}>
-                      {category}
-                    </Twemoji>
-                    {selected ? <icons.X /> : null}
-                  </button>
-                );
-              })}
-            </div>
-            <div className={styles.cardContainer}>
-              {filteredSets.map((set, index) => {
-                return <StudySetCard studySet={set} key={index}></StudySetCard>;
-              })}
-            </div>
-          </div>
+                    {filteredSets.map((set, index) => {
+                      return <StudySetCard studySet={set} key={index}></StudySetCard>;
+                    })}
+                  </StackGrid>
+                </div>
+              )
+            }}
+          </SizeMe>
         );
     }
   }
