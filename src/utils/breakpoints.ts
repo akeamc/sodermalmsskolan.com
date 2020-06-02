@@ -18,6 +18,6 @@ export function getBreakpoints(): Breakpoints {
     tablet: getBreakpoint("tablet"),
     desktop: getBreakpoint("desktop"),
     desktopLarge: getBreakpoint("desktopLarge"),
-    desktopExtraLarge: getBreakpoint("desktopExtraLarge")
-  }
+    desktopExtraLarge: getBreakpoint("desktopExtraLarge"),
+  };
 }

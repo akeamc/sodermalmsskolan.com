@@ -1,35 +1,95 @@
-// Breakpoints
-$bp-mobile: 600px;
-$bp-tablet: 800px;
-$bp-desktop: 1024px;
-$bp-desktop-large: 1280px;
-$bp-desktop-xlarge: 2400px;
+// Color system
 
-// Grid
-$grid-columns-mobile: 4;
-$grid-columns-tablet: 4;
-$grid-columns-desktop: 12;
-$grid-columns-desktop-large: 12;
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
 
-$grid-column-gap-mobile: 16px;
-$grid-column-gap-tablet: 40px;
-$grid-column-gap-desktop: 20px;
-$grid-column-gap-desktop-large: 28px;
+$blue: #335eea;
 
-// Nav
-$nav-height: 64px;
+$primary: $blue;
 
-// z-index
-$z-index-tooltip: 10;
-$z-index-nav-underlay: 98;
-$z-index-nav: 99;
-$z-index-drawer: 199;
-$z-index-modal: 299;
-$z-index-live-video: 300;
-$z-index-snackbar: 399;
-$z-index-popup: 499;
+:export {
+  colorPrimary: $primary;
+}
 
-// Colors
-$dark-mode-background: #141414;
-$border-color: #e8eaed;
-$dark-mode-border-color: #2c2c2c;
+$spacer: 1rem;
+$spacers: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$spacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $spacer * 0.25,
+    ),
+    2: (
+      $spacer * 0.5,
+    ),
+    3: $spacer,
+    4: (
+      $spacer * 1.5,
+    ),
+    5: (
+      $spacer * 3,
+    ),
+    6: (
+      $spacer * 3.5,
+    ),
+    7: (
+      $spacer * 4,
+    ),
+    8: (
+      $spacer * 4.5,
+    ),
+    9: (
+      $spacer * 5,
+    ),
+    10: (
+      $spacer * 5.5,
+    ),
+    11: (
+      $spacer * 6,
+    ),
+    12: (
+      $spacer * 8,
+    ),
+    13: (
+      $spacer * 10,
+    ),
+    14: (
+      $spacer * 12,
+    ),
+    15: (
+      $spacer * 16,
+    ),
+  ),
+  $spacers
+);
+
+$font-family-sans-serif: "Inter var", "Inter", -apple-system, BlinkMacSystemFont,
+  "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+$font-size-base: 1.0625rem;
+$line-height-base: 1.6;
+
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.75;
+$h4-font-size: $font-size-base * 1.5;
+$h5-font-size: $font-size-base * 1.25;
+$h6-font-size: $font-size-base * 0.75;
+
+$display1-size: 6rem;
+$display2-size: 3.8125rem;
+$display3-size: 3rem;
+$display4-size: 3.5rem;
+
+$text-muted: $gray-600;

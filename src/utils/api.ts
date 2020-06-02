@@ -1,13 +1,13 @@
 import { RestClient } from "typed-rest-client";
 import { MenuClient } from "./menu";
-import { QuizletClient } from './quizlet';
+import { QuizletClient } from "./quizlet";
 import { FanartClient } from "./fanart";
 import { Message } from "../models/Discord";
 
 export interface BaseResponse {
   meta: {
     total: number;
-  }
+  };
 }
 
 export interface MessagesResponse extends BaseResponse {

@@ -1,39 +1,44 @@
-import styles from "./Navigation.module.scss";
 import React from "react";
+import { Logo } from "./Logo";
+import { colors } from "../../styles/variables";
 import Link from "next/link";
+import Container from "react-bootstrap/Container";
+import { AutoLink } from "./AutoLink";
 
 export class Navigation extends React.Component {
   render() {
     return (
-      <div className={styles.wrapper}>
-        <ul className={styles.ul}>
-          <NavLink href="/">Start</NavLink>
-          <NavLink href="/meny">Meny</NavLink>
-          <NavLink href="/quizlet">Quizlet</NavLink>
-          <NavLink href="/fanart">Konstverk</NavLink>
-        </ul>
+      <div className="navbar">
+        <Container>
+          <Link href="/">
+            <a className="brand-link">
+              <Logo color={colors.primary} className="logo" />
+            </a>
+          </Link>
+          <ul className="nav">
+            <NavLink url="https://xn--sdermalmsskolan-8sb.com/blogg">
+              Blogg
+            </NavLink>
+            <NavLink url="/meny">Meny</NavLink>
+            <NavLink url="/quizlet">Quizlet</NavLink>
+          </ul>
+        </Container>
       </div>
     );
   }
 }
 
 class NavLink extends React.Component<{
-  href: string;
-  external?: boolean;
+  url: string;
   children: string;
 }> {
   render() {
+    const { url, children } = this.props;
     return (
-      <li className={styles.li}>
-        {this.props.external ? (
-          <a href={this.props.href} className={styles.a}>
-            {this.props.children}
-          </a>
-        ) : (
-          <Link href={this.props.href}>
-            <a className={styles.a}>{this.props.children}</a>
-          </Link>
-        )}
+      <li className="nav-item">
+        <AutoLink href={url} className="nav-link">
+          {children}
+        </AutoLink>
       </li>
     );
   }

@@ -30,8 +30,8 @@ export class MenuClient {
   async getMenu(start: Date, end: Date): Promise<Menu[]> {
     const res: IRestResponse<MenuResponse> = await this.client.get("/menu", {
       queryParameters: {
-        params: { start: moment(start).unix(), end: moment(end).unix() }
-      }
+        params: { start: moment(start).unix(), end: moment(end).unix() },
+      },
     });
 
     return res.result.menu;

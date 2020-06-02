@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
           style={{
             margin: 0,
             overflowY: "scroll",
-            overflowX: "hidden"
+            overflowX: "hidden",
           }}
         >
           <Main />

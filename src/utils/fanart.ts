@@ -11,7 +11,9 @@ export class FanartClient {
   }
 
   async getFanart(): Promise<Message[]> {
-    const res: IRestResponse<MessagesResponse> = await this.client.get("/fanart");
+    const res: IRestResponse<MessagesResponse> = await this.client.get(
+      "/fanart"
+    );
 
     return res.result?.messages || [];
   }

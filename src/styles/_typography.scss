@@ -1,66 +1,50 @@
-@import "./breakpoints";
 @import "./mixins";
+@import "./variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~bootstrap/scss/variables";
 
 @import url("https://rsms.me/inter/inter.css");
 
-body,
-html {
-  font-family: "Inter", sans-serif;
-  word-wrap: break-word;
-  color: #000;
-
-  @include dark-mode {
-    color: #fff;
-  }
-}
-
-@supports (font-variation-settings: normal) {
-  body,
-  html {
-    font-family: "Inter var", sans-serif;
-  }
-}
-
-h1 {
-  font-size: 18px;
-  margin: 1em 0;
-  line-height: 1.15;
-  font-weight: 400;
-  letter-spacing: -0.022em;
-
-  @include mobile {
-    font-size: 24px;
-  }
-}
-
-h2 {
-  @include font(20px, 28px);
-  @include tablet {
-    @include font(32px, 40px);
-  }
-}
-
-h3 {
-  @include font(20px, 28px);
-  @include tablet {
-    @include font(28px, 36px);
-  }
-}
-
-h4 {
-  @include font(18px, 26px);
-  @include tablet {
-    @include font(24px, 32px);
-  }
-}
-
-h5 {
-  @include font(18px, 26px);
-  @include tablet {
-    @include font(22px, 28px);
-  }
-}
-
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
-  @include font(18px, 24px);
+  font-weight: 400;
+}
+
+.display-1,
+.display-2,
+.display-3,
+.display-4 {
+  letter-spacing: -0.02em;
+}
+
+h6,
+.h6 {
+  line-height: 1.55;
+
+  &.text-uppercase {
+    letter-spacing: 0.08em;
+  }
+
+  &.font-weight-bold {
+    font-weight: 600 !important;
+  }
+}
+
+h3,
+.h3 {
+  font-size: 1.125rem;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 1.3125rem;
+  }
 }

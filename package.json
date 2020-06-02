@@ -14,11 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
+    "bootstrap": "^4.5.0",
     "moment": "^2.24.0",
     "next": "^9.3.6",
     "node-sass": "^4.14.0",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-ga": "^2.7.0",
@@ -30,6 +32,8 @@
   "devDependencies": {
     "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
+    "eslint": "^7.1.0",
+    "eslint-plugin-jest": "^23.13.2",
     "jest": "^25.5.3",
     "typescript": "^3.8.3"
   }

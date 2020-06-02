@@ -1,0 +1,39 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+
+.navbar {
+  .container {
+    padding: 1.25rem 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .brand-link {
+    .logo {
+      height: 16px;
+    }
+  }
+
+  .nav {
+    margin-right: -1rem;
+
+    @include media-breakpoint-up(lg) {
+      margin-right: -1.5rem;
+    }
+
+    .nav-link {
+      color: #506690;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: #335eea;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  }
+}

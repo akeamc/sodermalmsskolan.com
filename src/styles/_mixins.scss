@@ -1,44 +1,7 @@
-@import "./breakpoints";
-
 @mixin font($fontSize, $lineHeight, $fontWeight: 400) {
   font-size: $fontSize;
   line-height: $lineHeight;
   font-weight: $fontWeight;
-}
-
-@mixin max-width {
-  margin: 0 auto;
-  padding: 0 16px;
-  max-width: 1440px;
-  -webkit-font-smoothing: antialiased;
-  overflow: visible;
-
-  @include mobile {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  @include tablet {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-
-  @include desktop {
-    padding-left: 80px;
-    padding-right: 80px;
-  }
-}
-
-@mixin dotted-background($dot-space, $dot-size, $bg-color, $dot-color) {
-  background: linear-gradient(
-        90deg,
-        $bg-color ($dot-space - $dot-size),
-        transparent 1%
-      )
-      center,
-    linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
-    $dot-color;
-  background-size: $dot-space $dot-space;
 }
 
 @mixin dark-mode() {

@@ -55,7 +55,17 @@ export class GulidMember {
   joinedAt: Date | null;
   nickname: string | null;
 
-  constructor({ displayHexColor, displayName, joinedAt, nickname }: { displayHexColor: string, displayName: string, joinedAt: Date | null, nickname: string | null }) {
+  constructor({
+    displayHexColor,
+    displayName,
+    joinedAt,
+    nickname,
+  }: {
+    displayHexColor: string;
+    displayName: string;
+    joinedAt: Date | null;
+    nickname: string | null;
+  }) {
     this.displayHexColor = displayHexColor;
     this.displayName = displayName;
     this.joinedAt = joinedAt;

@@ -13,7 +13,7 @@ export class Image extends React.Component<{
         style={{
           width: "100%",
           borderRadius,
-          display: "block"
+          display: "block",
         }}
       />
     );

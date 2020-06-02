@@ -28,7 +28,7 @@
     grid-template-columns: repeat($grid-columns-desktop, 1fr);
     grid-gap: $grid-column-gap-desktop;
   }
-  
+
   @include desktop-large {
     grid-gap: $grid-column-gap-desktop-large;
   }

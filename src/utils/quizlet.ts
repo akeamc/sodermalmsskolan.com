@@ -1,7 +1,7 @@
 import { User } from "./../models/Discord";
-import { RestClient } from 'typed-rest-client';
-import { BaseResponse } from './api';
-import { IRestResponse } from 'typed-rest-client';
+import { RestClient } from "typed-rest-client";
+import { BaseResponse } from "./api";
+import { IRestResponse } from "typed-rest-client";
 
 export interface StudySet {
   timestamp: Date;
@@ -22,10 +22,10 @@ export class QuizletClient {
     this.client = client;
   }
 
-  async getStudySets(): Promise<
-    StudySet[]
-  > {
-    const res: IRestResponse<QuizletResponse> = await this.client.get("/quizlet");
+  async getStudySets(): Promise<StudySet[]> {
+    const res: IRestResponse<QuizletResponse> = await this.client.get(
+      "/quizlet"
+    );
 
     return res.result.sets;
   }

@@ -1,11 +1,16 @@
+// Import variables before Bootstrap so we can override their variables.
 @import "./variables";
+@import "./~bootstrap/scss/bootstrap";
+
 @import "./mixins";
-@import "./breakpoints";
-@import "./grid";
 @import "./typography";
+@import "./button";
+//@import "./spacing";
+
+@import "./navbar";
 
 html {
-  @include dark-mode {
-    background-color: $dark-mode-background;
-  }
+  // @include dark-mode {
+  //   background-color: $dark-mode-background;
+  // }
 }
