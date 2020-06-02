@@ -1,6 +1,8 @@
 @import "~bootstrap/scss/mixins/breakpoints";
 
 .navbar {
+  padding: 0;
+
   .container {
     padding: 1.25rem 1rem;
     display: flex;
@@ -10,6 +12,22 @@
   .brand-link {
     .logo {
       height: 16px;
+    }
+  }
+
+  &.navbar-dark {
+    .container {
+      border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.2);
+    }
+
+    .nav {
+      .nav-link {
+        color: #fff;
+
+        &:hover {
+          color: #fff;
+        }
+      }
     }
   }
 

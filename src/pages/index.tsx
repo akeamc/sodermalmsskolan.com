@@ -3,17 +3,16 @@ import { Layout } from "../components/basic/Layout";
 import { Header } from "../components/basic/Header";
 import Button from "react-bootstrap/Button";
 import * as Icon from "react-feather";
-import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Navigation } from "../components/basic/Navigation";
+import { AutoLink } from "../components/basic/AutoLink";
 
 export default class Page extends React.Component {
   render() {
     return (
       <Layout>
-        <Navigation />
         <Header>
           <Col sm={12} md={5} lg={6} className="order-md-2">
             <img
@@ -30,7 +29,7 @@ export default class Page extends React.Component {
               Vi visar vad Quality of Life Services egentligen betyder.
             </p>
             <div className="text-center text-md-left">
-              <Link href="/meny">
+              <AutoLink href="/meny">
                 <Button variant="primary" className="mr-2">
                   Visa menyn{" "}
                   <Icon.ArrowRight
@@ -38,14 +37,12 @@ export default class Page extends React.Component {
                     size={20}
                   />
                 </Button>
-              </Link>
-              <Button
-                variant={null}
-                className="btn-primary-soft"
-                href="https://xn--sdermalmsskolan-8sb.com"
-              >
-                Blogg
-              </Button>
+              </AutoLink>
+              <AutoLink href="https://xn--sdermalmsskolan-8sb.com/blogg">
+                <Button variant={null} className="btn-primary-soft">
+                  Blogg
+                </Button>
+              </AutoLink>
             </div>
           </Col>
         </Header>

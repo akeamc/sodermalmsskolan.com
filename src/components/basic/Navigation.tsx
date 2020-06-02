@@ -5,14 +5,16 @@ import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import { AutoLink } from "./AutoLink";
 
-export class Navigation extends React.Component {
+export class Navigation extends React.Component<{ dark?: boolean }> {
   render() {
+    const { dark = false } = this.props;
+
     return (
-      <div className="navbar">
+      <div className={`navbar ${dark ? "navbar-dark" : null}`}>
         <Container>
           <Link href="/">
             <a className="brand-link">
-              <Logo color={colors.primary} className="logo" />
+              <Logo color={dark ? "#fff" : colors.primary} className="logo" />
             </a>
           </Link>
           <ul className="nav">

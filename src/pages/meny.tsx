@@ -2,18 +2,13 @@ import React from "react";
 import { Layout } from "../components/basic/Layout";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Link from "next/link";
 import { Header } from "../components/basic/Header";
-import { Navigation } from "../components/basic/Navigation";
 import Container from "react-bootstrap/Container";
-import * as Icon from "react-feather";
 
 export default class Page extends React.Component {
   render() {
     return (
       <Layout>
-        <Navigation />
         <Header>
           <Col sm={12} md={5} lg={6} className="order-md-2">
             <img
