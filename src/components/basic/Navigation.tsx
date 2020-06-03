@@ -5,12 +5,19 @@ import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import { AutoLink } from "./AutoLink";
 
-export class Navigation extends React.Component<{ dark?: boolean, fixed?: boolean }> {
+export class Navigation extends React.Component<{
+  dark?: boolean;
+  fixed?: boolean;
+}> {
   render() {
     const { dark = false, fixed = false } = this.props;
 
     return (
-      <div className={`navbar ${dark ? "navbar-dark" : "bg-white"} ${fixed ? "fixed-top" : null}`}>
+      <div
+        className={`navbar ${dark ? "navbar-dark" : "bg-white"} ${
+          fixed ? "fixed-top" : null
+        }`}
+      >
         <Container>
           <Link href="/">
             <a className="brand-link">
@@ -18,11 +25,10 @@ export class Navigation extends React.Component<{ dark?: boolean, fixed?: boolea
             </a>
           </Link>
           <ul className="nav">
-            <NavLink url="https://xn--sdermalmsskolan-8sb.com/blogg">
-              Blogg
-            </NavLink>
+            <NavLink url="/blogg">Blogg</NavLink>
             <NavLink url="/meny">Meny</NavLink>
             <NavLink url="/quizlet">Quizlet</NavLink>
+            <NavLink url="/om">Om</NavLink>
           </ul>
         </Container>
       </div>

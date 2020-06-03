@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export class AutoLink extends React.Component<{
   href: string;
-  children: JSX.Element | JSX.Element[] | string;
+  children: JSX.Element | JSX.Element[] | string | (JSX.Element | string)[];
   className?: string;
   style?: React.CSSProperties;
 }> {

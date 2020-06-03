@@ -17,12 +17,7 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
     transform 0.25s ease;
-
-  &:hover {
-    transform: translate3d(0, -3px, 0);
-    box-shadow: 0 1rem 2.5rem rgba(22, 28, 45, 0.1),
-      0 0.5rem 1rem -0.75rem rgba(22, 28, 45, 0.1) !important;
-  }
+  text-decoration: none !important;
 }
 
 .btn-primary {
@@ -42,4 +37,14 @@
     color: $primary;
     background-color: rgba(51, 94, 234, 0.15);
   }
+}
+
+.btn-sm {
+  padding: 0.5625rem 1rem;
+  border-radius: 0.375rem;
+}
+
+.btn-outline-gray-300 {
+  border-color: $gray-300;
+  color: $primary;
 }

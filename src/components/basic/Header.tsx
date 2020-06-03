@@ -3,22 +3,25 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import { Navigation } from "./Navigation";
 
-export class Header extends React.Component<{
-  children: JSX.Element | JSX.Element[];
-  style?: React.CSSProperties;
-  className?: string;
-  backgroundImage?: string;
-  useCustomPadding?: boolean;
-  fixedNav?: boolean;
-}, {
-  scrollPos: number
-}> {
+export class Header extends React.Component<
+  {
+    children?: JSX.Element | JSX.Element[];
+    style?: React.CSSProperties;
+    className?: string;
+    backgroundImage?: string;
+    useCustomPadding?: boolean;
+    fixedNav?: boolean;
+  },
+  {
+    scrollPos: number;
+  }
+> {
   constructor(props) {
     super(props);
 
     this.state = {
-      scrollPos: 0
-    }
+      scrollPos: 0,
+    };
   }
 
   render() {
@@ -28,7 +31,7 @@ export class Header extends React.Component<{
       className = "",
       backgroundImage,
       useCustomPadding = false,
-      fixedNav = false
+      fixedNav = false,
     } = this.props;
 
     const { scrollPos } = this.state;
@@ -53,31 +56,33 @@ export class Header extends React.Component<{
         }}
       >
         <Navigation dark={useDarkNavbar} fixed={fixedNav} />
-        <section
-          className={`${!useCustomPadding ? "pt-4 pt-md-11" : ""} ${
-            backgroundImage ? "pb-4 pb-md-11" : ""
+        {children ? (
+          <section
+            className={`${!useCustomPadding ? "pt-4 pt-md-11" : ""} ${
+              backgroundImage ? "pb-4 pb-md-11" : ""
             } ${className}`}
-          style={style}
-        >
-          <Container>
-            <Row className="align-items-center">{children}</Row>
-          </Container>
-        </section>
+            style={style}
+          >
+            <Container>
+              <Row className="align-items-center">{children}</Row>
+            </Container>
+          </section>
+        ) : null}
       </div>
     );
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.listenToScroll)
+    window.addEventListener("scroll", this.listenToScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.listenToScroll)
+    window.removeEventListener("scroll", this.listenToScroll);
   }
 
   listenToScroll = () => {
     this.setState({
       scrollPos: document.body.scrollTop || document.documentElement.scrollTop,
-    })
-  }
+    });
+  };
 }

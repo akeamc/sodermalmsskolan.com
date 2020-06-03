@@ -17,7 +17,7 @@ $blue: #335eea;
 $primary: $blue;
 
 $success: #42ba96;
-$danger:  #df4759;
+$danger: #df4759;
 
 :export {
   colorPrimary: $primary;
@@ -92,9 +92,12 @@ $h4-font-size: $font-size-base * 1.5;
 $h5-font-size: $font-size-base * 1.25;
 $h6-font-size: $font-size-base * 0.75;
 
-$display1-size: 6rem;
+$display1-size: 4.375rem;
 $display2-size: 3.8125rem;
 $display3-size: 3rem;
 $display4-size: 3.5rem;
 
-$text-muted: $gray-600;
+$text-muted: $gray-500;
+
+$hr-color: $gray-100;
+$hr-opacity: 1;

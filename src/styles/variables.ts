@@ -9,5 +9,5 @@ interface Colors {
 export const colors: Colors = {
   primary: styles.colorPrimary,
   success: styles.colorSuccess,
-  danger: styles.colorDanger
+  danger: styles.colorDanger,
 };

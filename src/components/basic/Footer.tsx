@@ -37,9 +37,11 @@ export class Footer extends React.Component {
               <FooterLink href="/">Start</FooterLink>
               <FooterLink href="/meny">Meny</FooterLink>
               <FooterLink href="/quizlet">Quizlet</FooterLink>
-              <FooterLink href="https://södermalmsskolan.com/blogg">
-                Blogg
-              </FooterLink>
+            </FooterSection>
+            <FooterSection title="Organisationen">
+              <FooterLink href="/">Blogg</FooterLink>
+              <FooterLink href="/om">Om oss</FooterLink>
+              <FooterLink href="/donationer">Donationer</FooterLink>
             </FooterSection>
             <FooterSection title="Resurser">
               <FooterLink href="https://status.lynx.agency">

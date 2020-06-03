@@ -13,7 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tryghost/content-api": "^1.4.1",
     "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "moment": "^2.24.0",
     "next": "^9.3.6",
@@ -27,6 +29,7 @@
     "react-sizeme": "^2.6.12",
     "react-stack-grid": "^0.7.1",
     "react-twemoji": "^0.2.3",
+    "rss-parser": "^3.8.0",
     "typed-rest-client": "^1.7.3"
   },
   "devDependencies": {
