@@ -1,5 +1,4 @@
 import Parser from "rss-parser";
-import axios from "axios";
 
 const parser = new Parser();
 
@@ -19,8 +18,7 @@ export async function getNext(limit = 10): Promise<FoodMenu[]> {
    * Turns out the proxy was working the entire time, I just forgot to switch from `parser.parseURL` to `parser.parseString`. It was parsing something and read it as an URL, and made an request to localhost:80. Come on.
    *  */
   const url = `${CORS_PROXY}https://skolmaten.se/sodermalmsskolan-gamla-maria/rss/days/?limit=${limit}`;
-  const { data } = await axios.get(url);
-  const feed = await parser.parseString(data);
+  const feed = await parser.parseURL(`${CORS_PROXY}https://skolmaten.se/sodermalmsskolan-gamla-maria/rss/days/?limit=${limit}`);
 
   if (feed.items) {
     return feed.items.map((item) => {
