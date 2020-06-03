@@ -5,12 +5,12 @@ import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import { AutoLink } from "./AutoLink";
 
-export class Navigation extends React.Component<{ dark?: boolean }> {
+export class Navigation extends React.Component<{ dark?: boolean, fixed?: boolean }> {
   render() {
-    const { dark = false } = this.props;
+    const { dark = false, fixed = false } = this.props;
 
     return (
-      <div className={`navbar ${dark ? "navbar-dark" : null}`}>
+      <div className={`navbar ${dark ? "navbar-dark" : "bg-white"} ${fixed ? "fixed-top" : null}`}>
         <Container>
           <Link href="/">
             <a className="brand-link">

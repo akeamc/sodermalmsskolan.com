@@ -10,14 +10,19 @@ $gray-600: #6c757d;
 $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
-$black: #000;
+$black: #161c2d;
 
 $blue: #335eea;
 
 $primary: $blue;
 
+$success: #42ba96;
+$danger:  #df4759;
+
 :export {
   colorPrimary: $primary;
+  colorSuccess: $success;
+  colorDanger: $danger;
 }
 
 $spacer: 1rem;

@@ -3,6 +3,10 @@
   background-position: center;
   position: relative;
 
+  &.header-wrapper-fixed-navbar {
+    padding-top: 5rem;
+  }
+
   &.header-wrapper-background {
     &::before {
       position: absolute;
@@ -11,7 +15,7 @@
       bottom: 0;
       left: 0;
       content: "";
-      background-color: rgba($color: #000000, $alpha: 0.2);
+      background-color: rgba($color: #000, $alpha: 0.2);
     }
   }
 

@@ -10,7 +10,7 @@ export default class Page extends React.Component {
   render() {
     return (
       <Layout>
-        <Header backgroundImage="/assets/shrek.png">
+        <Header backgroundImage="/assets/shrek.png" fixedNav>
           <Col sm={12}>
             <div className="py-8">
               <h1 className="display-2 text-center mb-4">

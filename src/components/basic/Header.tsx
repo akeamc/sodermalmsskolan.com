@@ -9,31 +9,54 @@ export class Header extends React.Component<{
   className?: string;
   backgroundImage?: string;
   useCustomPadding?: boolean;
+  fixedNav?: boolean;
+}, {
+  scrollPos: number
 }> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      scrollPos: 0
+    }
+  }
+
   render() {
-    let {
+    const {
       children,
       style = {},
       className = "",
       backgroundImage,
       useCustomPadding = false,
+      fixedNav = false
     } = this.props;
+
+    const { scrollPos } = this.state;
+
+    const useDarkNavbar = scrollPos <= 0 && fixedNav && !!backgroundImage;
+
+    let wrapperClassList = ["header-wrapper"];
+
+    if (backgroundImage) {
+      wrapperClassList.push("header-wrapper-background", "text-light");
+    }
+
+    if (fixedNav) {
+      wrapperClassList.push("header-wrapper-fixed-navbar");
+    }
 
     return (
       <div
-        className={
-          "header-wrapper" +
-          (backgroundImage ? " header-wrapper-background text-light" : null)
-        }
+        className={wrapperClassList.join(" ")}
         style={{
           backgroundImage: backgroundImage ? `url(${backgroundImage})` : null,
         }}
       >
-        <Navigation dark={!!backgroundImage} />
+        <Navigation dark={useDarkNavbar} fixed={fixedNav} />
         <section
           className={`${!useCustomPadding ? "pt-4 pt-md-11" : ""} ${
             backgroundImage ? "pb-4 pb-md-11" : ""
-          } ${className}`}
+            } ${className}`}
           style={style}
         >
           <Container>
@@ -42,5 +65,19 @@ export class Header extends React.Component<{
         </section>
       </div>
     );
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.listenToScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.listenToScroll)
+  }
+
+  listenToScroll = () => {
+    this.setState({
+      scrollPos: document.body.scrollTop || document.documentElement.scrollTop,
+    })
   }
 }
