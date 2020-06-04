@@ -13,8 +13,14 @@ export default class Page extends React.Component {
         <Header />
         <section className="py-8 py-md-11">
           <Container>
-            <Row>
-              <Col xs={12} md={6} lg={4}>
+            <Row className="align-items-center">
+              <Col xs={12} md={6} lg={8} className="order-md-2">
+                <img
+                  className="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0 rounded-lg"
+                  src="https://blogg.södermalmsskolan.com/content/images/size/w2000/2020/06/51B4F6D2-3A27-4358-9D00-BC57E8C01774.jpeg"
+                />
+              </Col>
+              <Col xs={12} md={6} lg={4} className="order-md-1">
                 <h1>Bakgrund.</h1>
                 <p className="text-muted">
                   Södermalmsskolan.com grundades i maj 2019 av Bo Strömberg och

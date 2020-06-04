@@ -82,7 +82,12 @@ export class WideCard extends React.Component<{
         <Row className="no-gutters">
           {badge ? (
             <Col xs={12}>
-              <span className="badge badge-pill badge-light badge-float badge-float-inside">
+              <span
+                className="badge badge-pill badge-light badge-float badge-float-inside"
+                style={{
+                  pointerEvents: "none",
+                }}
+              >
                 <span className="h6 text-uppercase">{badge}</span>
               </span>
             </Col>

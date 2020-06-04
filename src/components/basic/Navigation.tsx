@@ -4,11 +4,70 @@ import { colors } from "../../styles/variables";
 import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import { AutoLink } from "./AutoLink";
+import * as Icon from "react-feather";
 
-export class Navigation extends React.Component<{
-  dark?: boolean;
-  fixed?: boolean;
+class MobileNavigation extends React.Component<{
+  shown: boolean;
 }> {
+  render() {
+    return (
+      <>
+        <div
+          className={`mobile-nav d-md-none ${this.props.shown ? "shown" : ""}`}
+        >
+          <ul className="text-right">
+            <NavLink href="/">Start</NavLink>
+            <NavLink href="/blogg">Blogg</NavLink>
+            <NavLink href="/meny">Meny</NavLink>
+            <NavLink href="/quizlet">Quizlet</NavLink>
+            <NavLink href="/om">Om</NavLink>
+          </ul>
+        </div>
+        <div
+          className={`mobile-nav-overlay d-md-none ${
+            this.props.shown ? "shown" : ""
+          }`}
+        />
+      </>
+    );
+  }
+}
+
+export class Navigation extends React.Component<
+  {
+    dark?: boolean;
+    fixed?: boolean;
+  },
+  {
+    showMobileNav: boolean;
+  }
+> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showMobileNav: false,
+    };
+  }
+
+  setMobileNavState(shown: boolean) {
+    this.setState({
+      showMobileNav: shown,
+    });
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.hideMobileNav);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.hideMobileNav);
+  }
+
+  hideMobileNav = () => {
+    this.setMobileNavState(false);
+  };
+
   render() {
     const { dark = false, fixed = false } = this.props;
 
@@ -24,12 +83,19 @@ export class Navigation extends React.Component<{
               <Logo color={dark ? "#fff" : colors.primary} className="logo" />
             </a>
           </Link>
-          <ul className="nav">
-            <NavLink url="/blogg">Blogg</NavLink>
-            <NavLink url="/meny">Meny</NavLink>
-            <NavLink url="/quizlet">Quizlet</NavLink>
-            <NavLink url="/om">Om</NavLink>
+          <ul className="nav d-none d-md-flex">
+            <NavLink href="/blogg">Blogg</NavLink>
+            <NavLink href="/meny">Meny</NavLink>
+            <NavLink href="/quizlet">Quizlet</NavLink>
+            <NavLink href="/om">Om</NavLink>
           </ul>
+          <button
+            className="d-md-none navbar-toggler collapsed"
+            onClick={() => this.setMobileNavState(true)}
+          >
+            <Icon.Menu />
+          </button>
+          <MobileNavigation shown={this.state.showMobileNav} />
         </Container>
       </div>
     );
@@ -37,14 +103,14 @@ export class Navigation extends React.Component<{
 }
 
 class NavLink extends React.Component<{
-  url: string;
+  href: string;
   children: string;
 }> {
   render() {
-    const { url, children } = this.props;
+    const { href, children } = this.props;
     return (
       <li className="nav-item">
-        <AutoLink href={url} className="nav-link">
+        <AutoLink href={href} className="nav-link">
           {children}
         </AutoLink>
       </li>

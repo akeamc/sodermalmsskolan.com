@@ -29,13 +29,12 @@ export default class Page extends React.Component<{
           <Col xs={12} md={5} lg={6} className="order-md-2">
             <img
               src="https://cdn.discordapp.com/attachments/705522103985635394/717096876016664596/SHREK_BETA1.png"
-              className="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0"
+              className="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0 rounded-lg"
             />
           </Col>
           <Col xs={12} md={7} lg={6} className="order-md-1">
             <h1 className="display-3 text-center text-md-left mb-4">
-              Sodexo, DigiLär och{" "}
-              <span className="text-primary">Botrikames Amkingbrink</span>.
+              Sodexo, DigiLär och <span className="text-primary">memes</span>.
             </h1>
             <p className="lead text-muted text-center text-md-left mb-6 mb-lg-8">
               Vi visar vad Quality of Life Services egentligen betyder.

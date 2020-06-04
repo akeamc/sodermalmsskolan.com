@@ -91,9 +91,9 @@ export default class Page extends React.Component<{
             </Row>
 
             <Row>
-              {posts.map((post) => {
+              {posts.map((post, index) => {
                 return (
-                  <Col xs={12} md={6} lg={4} className="d-flex">
+                  <Col xs={12} md={6} lg={4} key={index} className="d-flex">
                     <NarrowCard
                       meta={{
                         authors: post.authors.map((author) => {
