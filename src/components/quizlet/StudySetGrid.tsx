@@ -37,7 +37,7 @@ export class StudySetGrid extends React.Component<{
     return (
       <Row>
         {this.props.sets.map((set) => (
-          <Col xs={12} md={6} lg={4} className="d-flex">
+          <Col xs={12} md={6} lg={4} key={set} className="d-flex">
             <StudySetGridItem studySet={set} />
           </Col>
         ))}
