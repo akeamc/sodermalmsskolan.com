@@ -39,7 +39,7 @@ export class Footer extends React.Component {
               <FooterLink href="/quizlet">Quizlet</FooterLink>
             </FooterSection>
             <FooterSection title="Organisationen">
-              <FooterLink href="/">Blogg</FooterLink>
+              <FooterLink href="/blogg">Blogg</FooterLink>
               <FooterLink href="/om">Om oss</FooterLink>
               <FooterLink href="/donationer">Donationer</FooterLink>
             </FooterSection>
