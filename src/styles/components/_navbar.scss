@@ -1,0 +1,121 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+
+$navbar-container-py: 1.25rem;
+
+.navbar {
+  padding: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
+
+  .container {
+    padding: $navbar-container-py 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .brand-link {
+    .logo {
+      height: 16px;
+    }
+  }
+
+  &.navbar-dark {
+    .container {
+      border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.2);
+      padding-bottom: calc(#{$navbar-container-py} - 1px);
+    }
+
+    .nav {
+      .nav-link {
+        color: #fff;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .nav {
+    margin-right: -1rem;
+
+    @include media-breakpoint-up(lg) {
+      margin-right: -1.5rem;
+    }
+
+    .nav-link {
+      color: #506690;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: #335eea;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  }
+}
+
+$mobile-nav-width: 290px;
+
+.mobile-nav {
+  background-color: #111;
+  color: $white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $mobile-nav-width;
+  z-index: 10000;
+  transform: translateX(100%);
+  transition: transform 0.25s ease-in-out;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .nav-link {
+      color: $white;
+    }
+  }
+
+  &.shown {
+    transform: translateX(0);
+  }
+}
+
+.mobile-nav-overlay {
+  background-color: rgba($color: #000, $alpha: 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+
+  &.shown {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.navbar-toggler {
+  &,
+  &:focus,
+  &:hover,
+  &:active {
+    padding: 0;
+    background-color: transparent;
+    color: $black;
+    border-color: transparent;
+    outline: none;
+  }
+}

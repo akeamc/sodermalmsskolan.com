@@ -1,13 +1,11 @@
-import styles from "./Layout.module.scss";
 import React from "react";
-import { Navigation } from "./Navigation";
 import Head from "next/head";
 import { Footer } from "./Footer";
 import { initGA, logPageView } from "../../utils/analytics";
 
 export class Layout extends React.Component<{
   title?: string;
-  children: JSX.Element[] | JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }> {
   componentDidMount() {
     if (!window["GA_INITIALIZED"]) {
@@ -61,9 +59,8 @@ export class Layout extends React.Component<{
           />
         </Head>
         <div>
-          <Navigation></Navigation>
           {children}
-          <Footer></Footer>
+          <Footer />
         </div>
       </div>
     );

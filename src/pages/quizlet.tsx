@@ -1,34 +1,40 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
-import { Section, GridArea } from "../components/basic/Grid";
+import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
-import { D3 } from "../components/basic/Typography";
-import { QuizletViewer } from "../components/quizlet/QuizletViewer";
-import AdSense from "react-adsense";
+import Container from "react-bootstrap/Container";
+import { StudySetGrid } from "../components/quizlet/StudySetGrid";
+import { getStudySets, StudySet } from "../api/quizlet/studysets";
 
-export default class Quizlet extends React.Component {
+export default class Page extends React.Component<{
+  studySets: StudySet[];
+}> {
+  static async getInitialProps() {
+    const studySets = await getStudySets();
+
+    return {
+      studySets,
+    };
+  }
+
   render() {
     return (
-      <Layout title="Quizlet">
-        <Header backgroundImage="https://i.imgur.com/7KH8RLQ.gif">
-          <D3>Quizlet</D3>
+      <Layout>
+        <Header>
+          <Col xs={12}>
+            <div className="py-8">
+              <h1 className="display-1 text-center mb-4">Quizlet.</h1>
+              <p className="lead text-center mb-4">
+                Quizlets till allt möjligt.
+              </p>
+            </div>
+          </Col>
         </Header>
-        <Section>
-          <GridArea spanMobile={4} spanDesktop={12}>
-            <AdSense.Google
-              client={process.env.adsenseClient}
-              slot={process.env.adsenseSlot}
-              style={{ display: "block" }}
-              format="auto"
-              responsive="true"
-            />
-          </GridArea>
-        </Section>
-        <Section>
-          <GridArea spanMobile={4} spanDesktop={12}>
-            <QuizletViewer></QuizletViewer>
-          </GridArea>
-        </Section>
+        <section className="py-8 py-md-11">
+          <Container>
+            <StudySetGrid sets={this.props.studySets} />
+          </Container>
+        </section>
       </Layout>
     );
   }

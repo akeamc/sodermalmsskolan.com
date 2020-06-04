@@ -1,41 +1,83 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
-import { Section, Grid, GridArea } from "../components/basic/Grid";
-import { D2 } from "../components/basic/Typography";
 import { Header } from "../components/basic/Header";
-import { Image } from "./../components/basic/Image";
-import AdSense from "react-adsense";
+import * as Icon from "react-feather";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { AutoLink } from "../components/basic/AutoLink";
+import { FoodMenu, getNext } from "../api/menu/menu";
+import { MenuGridItem } from "../components/basic/MenuGrid";
 
-export default class Home extends React.Component {
+export default class Page extends React.Component<{
+  nextMenu: FoodMenu;
+}> {
+  static async getInitialProps() {
+    const nextMenus = await getNext(1);
+
+    return {
+      nextMenu: nextMenus[0],
+    };
+  }
+
   render() {
+    const { nextMenu } = this.props;
+
     return (
       <Layout>
         <Header>
-          <Grid>
-            <GridArea spanMobile={4} offsetDesktop={1} spanDesktop={4}>
-              <D2>Vi visar vad Quality of Life Services betyder</D2>
-            </GridArea>
-            <GridArea spanMobile={4} offsetDesktop={7} spanDesktop={4}>
-              <Image src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg" />
-            </GridArea>
-          </Grid>
-        </Header>
-        <Section>
-          <GridArea spanMobile={4} spanDesktop={12}>
-            <AdSense.Google
-              client={process.env.adsenseClient}
-              slot={process.env.adsenseSlot}
-              style={{ display: "block" }}
-              format="auto"
-              responsive="true"
+          <Col xs={12} md={5} lg={6} className="order-md-2">
+            <img
+              src="https://cdn.discordapp.com/attachments/705522103985635394/717096876016664596/SHREK_BETA1.png"
+              className="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0 rounded-lg"
             />
-          </GridArea>
-        </Section>
-        <Section>
-          <GridArea spanMobile={4} spanDesktop={2}>
-            <p>Detta är en &alpha;-version. Berätta gärna vad du tycker!</p>
-          </GridArea>
-        </Section>
+          </Col>
+          <Col xs={12} md={7} lg={6} className="order-md-1">
+            <h1 className="display-3 text-center text-md-left mb-4">
+              Sodexo, DigiLär och <span className="text-primary">memes</span>.
+            </h1>
+            <p className="lead text-muted text-center text-md-left mb-6 mb-lg-8">
+              Vi visar vad Quality of Life Services egentligen betyder.
+            </p>
+            <div className="text-center text-md-left">
+              <AutoLink
+                className="btn btn-primary mr-2 lift lift-lg"
+                href="/meny"
+              >
+                Visa menyn{" "}
+                <Icon.ArrowRight
+                  className="d-none d-md-inline ml-2"
+                  size={20}
+                />
+              </AutoLink>
+              <AutoLink
+                className="btn btn-primary-soft lift lift-lg"
+                href="/blogg"
+              >
+                Blogg
+              </AutoLink>
+            </div>
+          </Col>
+        </Header>
+        <section className="py-8 py-md-11">
+          <Container>
+            <Row>
+              <Col xs={12} md={4}>
+                <MenuGridItem menu={nextMenu}></MenuGridItem>
+                <AutoLink
+                  className="btn btn-primary mr-2 lift lift-lg"
+                  href="/meny"
+                >
+                  Hela menyn{" "}
+                  <Icon.ArrowRight
+                    className="d-none d-md-inline ml-2"
+                    size={20}
+                  />
+                </AutoLink>
+              </Col>
+            </Row>
+          </Container>
+        </section>
       </Layout>
     );
   }

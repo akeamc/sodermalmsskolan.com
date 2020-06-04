@@ -1,11 +1,50 @@
+// Import variables before Bootstrap so we can override their variables.
 @import "./variables";
+@import "./~bootstrap/scss/bootstrap";
+
 @import "./mixins";
-@import "./breakpoints";
-@import "./grid";
 @import "./typography";
 
-html {
-  @include dark-mode {
-    background-color: $dark-mode-background;
+@import "./components/button";
+@import "./components/header";
+@import "./components/card";
+@import "./components/navbar";
+@import "./components/avatar";
+@import "./components/badge";
+
+.shadow-light-lg {
+  box-shadow: 0 1.5rem 4rem rgba(22, 28, 45, 0.05) !important;
+}
+
+.bg-cover {
+  background-size: cover;
+  background-position: center;
+}
+
+.lift {
+  transition: all 0.25s ease;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 1rem 2.5rem rgba(22, 28, 45, 0.1),
+      0 0.5rem 1rem -0.75rem rgba(22, 28, 45, 0.1);
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+.lift-lg {
+  &:focus,
+  &:hover {
+    box-shadow: 0 2rem 5rem rgba(22, 28, 45, 0.1),
+      0 0.5rem 1rem -0.75rem rgba(22, 28, 45, 0.05);
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+.no-gutters {
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
