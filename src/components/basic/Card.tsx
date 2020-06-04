@@ -29,9 +29,9 @@ export class NarrowCard extends React.Component<{
     return (
       <AutoLink
         href={href}
-        className="text-reset text-decoration-none d-flex mb-6"
+        className="text-reset text-decoration-none d-flex mb-6 w-100"
       >
-        <Card className="shadow-light-lg lift lift-lg">
+        <Card className="shadow-light-lg lift lift-lg w-100">
           {image ? <Card.Img src={image} /> : null}
           <Card.Body>{children}</Card.Body>
           {meta ? (

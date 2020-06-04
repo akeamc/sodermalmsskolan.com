@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import { FoodMenu, getNext } from "../api/menu/menu";
 import moment from "moment";
 import { AutoLink } from "../components/basic/AutoLink";
+import { MenuGrid } from "../components/basic/MenuGrid";
 
 export default class Page extends React.Component<{
   nextMenus: FoodMenu[];
@@ -44,24 +45,7 @@ export default class Page extends React.Component<{
         </Header>
         <section className="py-8 py-md-11">
           <Container>
-            <Row>
-              {nextMenus.map((menu) => (
-                <Col xs={12} md={4}>
-                  <span className="badge badge-pill badge-primary-soft mb-2">
-                    <span className="h6 text-uppercase">
-                      {moment(menu.timestamp)
-                        .locale("sv")
-                        .format("dddd D MMMM")}
-                    </span>
-                  </span>
-                  {menu.dishes.map((dish, index) => (
-                    <p key={index} className="text-muted">
-                      {dish}
-                    </p>
-                  ))}
-                </Col>
-              ))}
-            </Row>
+            <MenuGrid menus={nextMenus} />
             <Row>
               <Col xs={12}>
                 <small className="text-muted">

@@ -1,13 +1,22 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
 import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
-import { NarrowCard } from "../components/basic/Card";
+import { StudySetGrid } from "../components/quizlet/StudySetGrid";
+import { getStudySets, StudySet } from "../api/quizlet/studysets";
 
-export default class Page extends React.Component {
+export default class Page extends React.Component<{
+  studySets: StudySet[];
+}> {
+  static async getInitialProps() {
+    const studySets = await getStudySets();
+
+    return {
+      studySets,
+    };
+  }
+
   render() {
     return (
       <Layout>
@@ -23,26 +32,7 @@ export default class Page extends React.Component {
         </Header>
         <section className="py-8 py-md-11">
           <Container>
-            <Row>
-              <Col xs={12} md={6} lg={4} className="d-flex">
-                <NarrowCard
-                  meta={{
-                    authors: [
-                      {
-                        name: "ThePicoNerd",
-                        avatarUrl:
-                          "https://quizlet.com/cdn-cgi/image/f=auto,fit=cover,h=116,onerror=redirect,w=116/https://up.quizlet.com/upb7k-hYQwN-768.jpg",
-                      },
-                    ],
-                    date: new Date(),
-                  }}
-                  href="https://quizlet.com/491657594/tyskaprov-10-11-mars-2020-flash-cards/"
-                >
-                  <h3>Tyskaprov 10-11 mars 2020</h3>
-                  <p className="mb-0 text-muted">228 termer</p>
-                </NarrowCard>
-              </Col>
-            </Row>
+            <StudySetGrid sets={this.props.studySets} />
           </Container>
         </section>
       </Layout>

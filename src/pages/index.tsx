@@ -6,8 +6,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AutoLink } from "../components/basic/AutoLink";
-import moment from "moment";
 import { FoodMenu, getNext } from "../api/menu/menu";
+import { MenuGridItem } from "../components/basic/MenuGrid";
 
 export default class Page extends React.Component<{
   nextMenu: FoodMenu;
@@ -16,7 +16,7 @@ export default class Page extends React.Component<{
     const nextMenus = await getNext(1);
 
     return {
-      nextMenu: nextMenus[0] || { dishes: [], timestamp: new Date() },
+      nextMenu: nextMenus[0],
     };
   }
 
@@ -64,18 +64,7 @@ export default class Page extends React.Component<{
           <Container>
             <Row>
               <Col xs={12} md={4}>
-                <span className="badge badge-pill badge-primary-soft mb-2">
-                  <span className="h6 text-uppercase">
-                    {moment(nextMenu.timestamp)
-                      .locale("sv")
-                      .format("dddd D MMMM")}
-                  </span>
-                </span>
-                {nextMenu.dishes.map((dish, index) => (
-                  <p key={index} className="text-muted">
-                    {dish}
-                  </p>
-                ))}
+                <MenuGridItem menu={nextMenu}></MenuGridItem>
                 <AutoLink
                   className="btn btn-primary mr-2 lift lift-lg"
                   href="/meny"

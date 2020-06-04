@@ -25,7 +25,7 @@ export default class Page extends React.Component<{
   static async getInitialProps() {
     const posts = await getPosts(7);
     const featured = await getLastFeatured();
-    //console.log(featured);
+    
     return { posts: posts, featured: featured };
   }
 

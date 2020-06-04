@@ -69,14 +69,16 @@ export async function getPosts(limit = 10): Promise<Post[]> {
   return await api.posts.browse({
     limit,
     include: "tags,authors",
+    order: "published_at DESC"
   });
 }
 
 export async function getLastFeatured(): Promise<Post> {
   const featured: Post[] = await api.posts.browse({
-    featured: true,
+    filter: "featured:true",
     limit: 1,
     include: "tags,authors",
+    order: "published_at DESC"
   });
 
   return featured[0];
