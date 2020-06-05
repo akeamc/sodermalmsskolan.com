@@ -4,25 +4,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
 import Container from "react-bootstrap/Container";
-import moment from "moment";
 import { AutoLink } from "../components/basic/AutoLink";
 import { MenuGrid } from "../components/basic/MenuGrid";
-import { getNext, FoodMenu } from "../api/main/menu/foodmenus";
 
-export default class Page extends React.Component<{
-  nextMenus: FoodMenu[];
-}> {
-  static async getInitialProps() {
-    const nextMenus = await getNext(6);
-
-    return {
-      nextMenus,
-    };
-  }
-
+export default class Page extends React.Component {
   render() {
-    const { nextMenus } = this.props;
-
     return (
       <Layout>
         <Header>
@@ -45,7 +31,7 @@ export default class Page extends React.Component<{
         </Header>
         <section className="py-8 py-md-11">
           <Container>
-            <MenuGrid menus={nextMenus} />
+            <MenuGrid menus={6} />
             <Row>
               <Col xs={12}>
                 <small className="text-muted">

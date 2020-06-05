@@ -1,47 +1,53 @@
 import React from "react";
-import { StudySet } from "../../api/quizlet/studysets";
 import { NarrowCard } from "../basic/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { getStudySets } from "../../api/main/quizlet/studysets";
+import useSWR from "swr";
+import { StudySet } from "../../models/Quizlet";
+import Skeleton from "react-loading-skeleton";
 
 export class StudySetGridItem extends React.Component<{
-  studySet: StudySet;
+  studySet: StudySet | null;
+  loading?: boolean;
 }> {
   render() {
-    const { author, timestamp, count, url, name } = this.props.studySet;
+    const { studySet, loading = false } = this.props;
 
     return (
       <NarrowCard
         meta={{
           authors: [
             {
-              name: author.username,
-              avatarUrl: author.avatarURL,
+              name: studySet?.author?.username,
+              avatarUrl: studySet?.author?.avatarURL,
             },
           ],
-          date: timestamp,
+          date: studySet?.timestamp,
         }}
-        href={url}
+        href={studySet?.url}
+        loading={loading}
       >
-        <h3>{name}</h3>
-        <p className="mb-0 text-muted">{count} termer</p>
+        <h3>{loading ? <Skeleton /> : studySet?.name}</h3>
+        <p className="mb-0 text-muted">
+          {loading ? <Skeleton /> : <>{studySet?.count} termer </>}
+        </p>
       </NarrowCard>
     );
   }
 }
 
-export class StudySetGrid extends React.Component<{
-  sets: StudySet[];
-}> {
-  render() {
-    return (
-      <Row>
-        {this.props.sets.map((set, index) => (
-          <Col xs={12} md={6} lg={4} key={index} className="d-flex">
-            <StudySetGridItem studySet={set} />
-          </Col>
-        ))}
-      </Row>
-    );
-  }
-}
+export const StudySetGrid: React.FunctionComponent = () => {
+  const { data, error } = useSWR("/quizlet/studysets", getStudySets);
+  const placeholder = new Array(12).fill(null);
+
+  return (
+    <Row>
+      {(data || placeholder).map((set, index) => (
+        <Col xs={12} md={6} lg={4} key={index} className="d-flex">
+          <StudySetGridItem studySet={set} loading={!data} />
+        </Col>
+      ))}
+    </Row>
+  );
+};

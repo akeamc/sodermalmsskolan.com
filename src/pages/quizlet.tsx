@@ -4,19 +4,8 @@ import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
 import Container from "react-bootstrap/Container";
 import { StudySetGrid } from "../components/quizlet/StudySetGrid";
-import { getStudySets, StudySet } from "../api/quizlet/studysets";
 
-export default class Page extends React.Component<{
-  studySets: StudySet[];
-}> {
-  static async getInitialProps() {
-    const studySets = await getStudySets();
-
-    return {
-      studySets,
-    };
-  }
-
+export default class Page extends React.Component {
   render() {
     return (
       <Layout>
@@ -32,7 +21,7 @@ export default class Page extends React.Component<{
         </Header>
         <section className="py-8 py-md-11">
           <Container>
-            <StudySetGrid sets={this.props.studySets} />
+            <StudySetGrid />
           </Container>
         </section>
       </Layout>

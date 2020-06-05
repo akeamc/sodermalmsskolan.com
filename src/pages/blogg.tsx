@@ -4,35 +4,12 @@ import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import { WideCard, NarrowCard } from "../components/basic/Card";
-
-import { getPosts, getLastFeatured, Post } from "../api/ghost/posts";
 import { AutoLink } from "../components/basic/AutoLink";
+import { PostGrid } from "../components/blog/PostGrid";
+import { FeaturedPost } from "../components/blog/Featured";
 
-function lineClamp(lines: number): React.CSSProperties {
-  return {
-    display: "-webkit-box",
-    WebkitBoxOrient: "vertical",
-    WebkitLineClamp: lines,
-    overflow: "hidden",
-  };
-}
-
-export default class Page extends React.Component<{
-  posts: Post[];
-  featured: Post;
-}> {
-  static async getInitialProps() {
-    const posts = await getPosts(7);
-    const featured = await getLastFeatured();
-
-    return { posts: posts, featured: featured };
-  }
-
+export default class Page extends React.Component {
   render() {
-    const { featured } = this.props;
-    const posts = this.props.posts.filter((post) => post.id != featured.id);
-
     return (
       <Layout>
         <Header fixedNav>
@@ -45,30 +22,7 @@ export default class Page extends React.Component<{
         </Header>
         <section className="pt-7 pt-md-10">
           <Container>
-            <Row>
-              <Col xs={12}>
-                <WideCard
-                  badge={"Redaktörens val"}
-                  meta={{
-                    authors: featured.authors.map((author) => {
-                      return {
-                        name: author.name,
-                        avatarUrl: author.profile_image,
-                        url: author.url,
-                      };
-                    }),
-                    date: featured.created_at,
-                  }}
-                  image={featured.feature_image}
-                  href={featured.url}
-                >
-                  <h3>{featured.title}</h3>
-                  <p className="mb-0 text-muted" style={lineClamp(5)}>
-                    {featured.excerpt}
-                  </p>
-                </WideCard>
-              </Col>
-            </Row>
+            <FeaturedPost />
           </Container>
         </section>
         <section>
@@ -89,34 +43,7 @@ export default class Page extends React.Component<{
                 </AutoLink>
               </Col>
             </Row>
-
-            <Row>
-              {posts.map((post, index) => {
-                return (
-                  <Col xs={12} md={6} lg={4} key={index} className="d-flex">
-                    <NarrowCard
-                      meta={{
-                        authors: post.authors.map((author) => {
-                          return {
-                            name: author.name,
-                            avatarUrl: author.profile_image,
-                            url: author.url,
-                          };
-                        }),
-                        date: post.created_at,
-                      }}
-                      image={post.feature_image}
-                      href={post.url}
-                    >
-                      <h3>{post.title}</h3>
-                      <p className="mb-0 text-muted" style={lineClamp(3)}>
-                        {post.excerpt}
-                      </p>
-                    </NarrowCard>
-                  </Col>
-                );
-              })}
-            </Row>
+            <PostGrid posts={6} />
           </Container>
         </section>
       </Layout>

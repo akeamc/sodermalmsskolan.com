@@ -15,8 +15,7 @@ export async function getNext(limit = 10, offset = 0): Promise<FoodMenu[]> {
     const res = await client.get<FoodMenuResponse>("/menu/next");
 
     return res.result.menus;
-  }
-  catch(error) {
+  } catch (error) {
     console.error(error);
     return [];
   }
