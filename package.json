@@ -26,7 +26,6 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-ga": "^2.7.0",
-    "rss-parser": "^3.8.0",
     "typed-rest-client": "^1.7.3"
   },
   "devDependencies": {

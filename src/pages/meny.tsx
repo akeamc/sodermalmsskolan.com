@@ -4,10 +4,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
 import Container from "react-bootstrap/Container";
-import { FoodMenu, getNext } from "../api/menu/menu";
 import moment from "moment";
 import { AutoLink } from "../components/basic/AutoLink";
 import { MenuGrid } from "../components/basic/MenuGrid";
+import { getNext, FoodMenu } from "../api/main/menu/foodmenus";
 
 export default class Page extends React.Component<{
   nextMenus: FoodMenu[];
