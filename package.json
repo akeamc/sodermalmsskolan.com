@@ -24,6 +24,7 @@
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
     "react-bootstrap": "^1.0.1",
+    "react-confetti": "^5.0.1",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-ga": "^3.0.0",

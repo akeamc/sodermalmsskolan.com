@@ -6,15 +6,21 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AutoLink } from "../components/basic/AutoLink";
-import { FoodMenu, getNext } from "../api/main/menu/foodmenus";
+import { getNext } from "../api/main/menu/foodmenus";
 import { MenuGridItem } from "../components/basic/MenuGrid";
 import useSWR from "swr";
+import WindowConfetti from "../components/events/Confetti";
+import moment from "moment";
 
 const Page: React.FunctionComponent = () => {
   const { data, error } = useSWR(`/menu/next?limit=${1}`, () => getNext(1));
+  const daysLeft = Math.ceil(
+    moment(new Date("2020-08-19T09:50:00+0200")).diff(moment(), "days", true)
+  );
 
   return (
     <Layout>
+      <WindowConfetti />
       <Header>
         <Col xs={12} md={5} lg={6} className="order-md-2">
           <img
@@ -23,12 +29,20 @@ const Page: React.FunctionComponent = () => {
           />
         </Col>
         <Col xs={12} md={7} lg={6} className="order-md-1">
-          <h1 className="display-3 text-center text-md-left mb-4">
+          {/* <h1 className="display-3 text-center text-md-left mb-4">
             Sodexo, DigiLär och <span className="text-primary">memes</span>.
           </h1>
           <p className="lead text-muted text-center text-md-left mb-6 mb-lg-8">
             Vi visar vad Quality of Life Services egentligen betyder.
+          </p> */}
+          <h1 className="display-3 text-center text-md-left mb-4">
+            Glad sommar!
+          </h1>
+          <p className="lead text-muted text-center text-md-left mb-6 mb-lg-8">
+            Om {daysLeft} {Math.abs(daysLeft) == 1 ? "dag" : "dagar"} börjar
+            skolan.
           </p>
+
           <div className="text-center text-md-left">
             <AutoLink
               className="btn btn-primary mr-2 lift lift-lg"
