@@ -1,12 +1,12 @@
 import React from "react";
-import { Layout } from "../components/basic/Layout";
+import { Layout } from "../../components/basic/Layout";
 import Col from "react-bootstrap/Col";
-import { Header } from "../components/basic/Header";
+import { Header } from "../../components/basic/Header";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import { AutoLink } from "../components/basic/AutoLink";
-import { PostGrid } from "../components/blog/PostGrid";
-import { FeaturedPost } from "../components/blog/Featured";
+import { AutoLink } from "../../components/basic/AutoLink";
+import { PostGrid } from "../../components/blog/PostGrid";
+import { FeaturedPost } from "../../components/blog/Featured";
 
 export default class Page extends React.Component {
   render() {

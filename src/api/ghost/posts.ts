@@ -83,3 +83,8 @@ export async function getLastFeatured(): Promise<Post> {
 
   return featured[0];
 }
+
+export async function getPostBySlug(slug: string): Promise<Post> {
+  const post: Post = await api.posts.read({ slug });
+  return post;
+}
