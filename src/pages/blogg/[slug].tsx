@@ -18,6 +18,10 @@ export const getServerSideProps: GetServerSideProps = async ({
   try {
     const slug = query.slug?.toString();
     const post = await getPostBySlug(slug);
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=3600, stale-while-revalidate"
+    );
     return {
       props: { post, errorCode: null },
     };
