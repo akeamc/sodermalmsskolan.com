@@ -6,6 +6,10 @@ import Col from "react-bootstrap/Col";
 import { NarrowCard } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
 
+export function getPostUrl(slug: string | null): string {
+  return `/blogg/${slug ? slug : ""}`;
+}
+
 export function lineClamp(lines: number): React.CSSProperties {
   return {
     display: "-webkit-box",
@@ -23,6 +27,7 @@ class PostGridItem extends React.Component<{
   render() {
     const { post, loading = false, imageExpected = true } = this.props;
     const excerptRows = 3;
+    const postUrl = getPostUrl(post?.slug);
 
     return (
       <NarrowCard
@@ -37,7 +42,7 @@ class PostGridItem extends React.Component<{
           date: post?.created_at,
         }}
         image={post?.feature_image}
-        href={post?.url}
+        href={postUrl}
         loading={loading}
         imageExpected={imageExpected}
       >
@@ -54,7 +59,7 @@ export const PostGrid: React.FunctionComponent<{
   posts: number;
 }> = (props) => {
   const { posts } = props;
-  const { data, error } = useSWR(`blog/posts/latest?limit=${posts}`, () =>
+  const { data } = useSWR(`blog/posts/latest?limit=${posts}`, () =>
     getPosts(posts)
   );
   const placeholder: null[] = new Array(posts).fill(null);

@@ -39,10 +39,10 @@ $spacers: map-merge(
     ),
     3: $spacer,
     4: (
-      $spacer * 1.5,
+      $spacer * 1.25,
     ),
     5: (
-      $spacer * 3,
+      $spacer * 1.5,
     ),
     6: (
       $spacer * 3.5,
@@ -95,7 +95,7 @@ $h6-font-size: $font-size-base * 0.75;
 $display1-size: 4.375rem;
 $display2-size: 3.8125rem;
 $display3-size: 3rem;
-$display4-size: 3.5rem;
+$display4-size: 2.6875rem;
 
 $text-muted: $gray-500;
 

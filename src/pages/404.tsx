@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
 import Col from "react-bootstrap/Col";
-import Link from "next/link";
 import { Header } from "../components/basic/Header";
 import * as Icon from "react-feather";
 import { AutoLink } from "../components/basic/AutoLink";
