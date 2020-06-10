@@ -10,23 +10,31 @@
   > img,
   > div,
   > figure,
-  > iframe {
+  > iframe,
+  > blockquote {
     margin-top: map-get($spacers, 8);
     margin-bottom: map-get($spacers, 8);
   }
 
-  figure {
-img {
-  margin-bottom: 1rem;
-}
-
-  figcaption {
-    font-size: 88.2%;
-    color: $gray-600;
-    text-align: center;
-    margin-bottom: map-get($spacers, 3);
+  > blockquote {
+    font-size: 1.25rem;
+    padding: map-get($spacers, 2) 0;
+    padding-left: map-get($spacers, 4);
+    border-left: 2px solid scale-color($primary, $lightness: 50%);
   }
-}
+
+  figure {
+    img {
+      margin-bottom: 1rem;
+    }
+
+    figcaption {
+      font-size: 88.2%;
+      color: $gray-600;
+      text-align: center;
+      margin-bottom: map-get($spacers, 3);
+    }
+  }
 
   img {
     width: 100%;
