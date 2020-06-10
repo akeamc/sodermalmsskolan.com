@@ -9,7 +9,7 @@ export default class NotFound extends React.Component {
   render() {
     return (
       <Layout>
-        <Header backgroundImage="/assets/shrek.png" fixedNav>
+        <Header backgroundImage="/assets/Shrek.png" fixedNav>
           <Col xs={12}>
             <div className="py-8">
               <h1 className="display-2 text-center mb-4">
