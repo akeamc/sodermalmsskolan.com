@@ -19,9 +19,13 @@ module.exports = {
   },
   plugins: ["react", "jest"],
   rules: {
-    indent: ["error", 4],
+    indent: ["error", 2],
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
+    "no-unused-vars": [
+      "error",
+      { vars: "all", args: "after-used", ignoreRestSiblings: false },
+    ],
   },
 };

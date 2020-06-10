@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start -p 80",
     "test": "jest --forceExit --coverage",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",

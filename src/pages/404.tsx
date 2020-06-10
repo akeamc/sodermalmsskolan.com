@@ -1,16 +1,15 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
 import Col from "react-bootstrap/Col";
-import Link from "next/link";
 import { Header } from "../components/basic/Header";
 import * as Icon from "react-feather";
 import { AutoLink } from "../components/basic/AutoLink";
 
-export default class Page extends React.Component {
+export default class NotFound extends React.Component {
   render() {
     return (
       <Layout>
-        <Header backgroundImage="/assets/shrek.png" fixedNav>
+        <Header backgroundImage="/assets/Shrek.png" fixedNav>
           <Col xs={12}>
             <div className="py-8">
               <h1 className="display-2 text-center mb-4">

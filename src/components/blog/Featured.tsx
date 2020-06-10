@@ -3,7 +3,7 @@ import Col from "react-bootstrap/Col";
 import { Post, getLastFeatured } from "../../api/ghost/posts";
 import useSWR from "swr";
 import Row from "react-bootstrap/Row";
-import { lineClamp } from "./PostGrid";
+import { lineClamp, getPostUrl } from "./PostGrid";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
 
@@ -30,7 +30,7 @@ class FeaturedPostItem extends React.Component<{
           date: post?.created_at,
         }}
         image={post?.feature_image}
-        href={post?.url}
+        href={getPostUrl(post?.slug)}
         loading={loading}
         imageExpected={imageExpected}
       >
@@ -44,7 +44,7 @@ class FeaturedPostItem extends React.Component<{
 }
 
 export const FeaturedPost: React.FunctionComponent = () => {
-  const { data, error } = useSWR("/blog/featured", getLastFeatured);
+  const { data } = useSWR("/blog/featured", getLastFeatured);
   const loading = !data;
 
   return (

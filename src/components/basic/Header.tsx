@@ -53,21 +53,25 @@ export class Header extends React.Component<
         className={wrapperClassList.join(" ")}
         style={{
           backgroundImage: backgroundImage ? `url(${backgroundImage})` : null,
+          ...style,
         }}
       >
         <Navigation dark={useDarkNavbar} fixed={fixedNav} />
         {children ? (
-          <section
-            className={`${!useCustomPadding ? "pt-4 pt-md-11" : ""} ${
-              backgroundImage ? "pb-4 pb-md-11" : ""
-            } ${className}`}
-            style={style}
-          >
-            <Container>
-              <Row className="align-items-center">{children}</Row>
-            </Container>
-          </section>
-        ) : null}
+          <>
+            <section
+              className={`${!useCustomPadding ? "pt-4 pt-md-11" : ""} ${
+                backgroundImage ? "pb-4 pb-md-11" : ""
+              } ${className}`}
+            >
+              <Container>
+                <Row className="align-items-center">{children}</Row>
+              </Container>
+            </section>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }
