@@ -1,16 +1,5 @@
 import api from "./credentials";
-
-export interface Tag {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-  feature_image: string;
-  visibility: string;
-  meta_title: string | null;
-  meta_description: string | null;
-  url: string;
-}
+import { Tag } from "./tags";
 
 export interface Author {
   id: string;
@@ -70,12 +59,13 @@ export async function getPosts(limit = 10): Promise<Post[]> {
     limit,
     include: "tags,authors",
     order: "published_at DESC",
+    filter: "tag:-hash-skola",
   });
 }
 
 export async function getLastFeatured(): Promise<Post> {
   const featured: Post[] = await api.posts.browse({
-    filter: "featured:true",
+    filter: "featured:true,tag:-hash-skola",
     limit: 1,
     include: "tags,authors",
     order: "published_at DESC",
@@ -84,10 +74,12 @@ export async function getLastFeatured(): Promise<Post> {
   return featured[0];
 }
 
-export async function getPostBySlug(slug: string): Promise<Post> {
+export async function getPostBySlug(
+  slug: string
+): Promise<Post> {
   const post: Post = await api.posts.read({
     slug,
-    include: "tags,authors",
+    include: "tags,authors"
   });
   return post;
 }
