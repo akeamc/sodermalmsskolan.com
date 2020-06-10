@@ -7,9 +7,7 @@ import ArticleBody from "../../components/blog/article/ArticleBody";
 import useSWR from "swr";
 import { getPostBySlug } from "../../api/ghost/posts";
 import Skeleton from "react-loading-skeleton";
-import { Avatar } from "../../components/basic/Avatar";
 import Row from "react-bootstrap/Row";
-import moment from "moment";
 import MetaSection from "../../components/blog/article/MetaSection";
 
 const Page: React.FunctionComponent = () => {
