@@ -5,7 +5,7 @@ import { Header } from "../components/basic/Header";
 import * as Icon from "react-feather";
 import { AutoLink } from "../components/basic/AutoLink";
 
-export default class Page extends React.Component {
+export default class NotFound extends React.Component {
   render() {
     return (
       <Layout>
