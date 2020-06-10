@@ -3,6 +3,13 @@ import { Post } from "../../../api/ghost/posts";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import ReactHtmlParser from "react-html-parser";
+
+function transform(node, index) {
+  if (node.type === "tag" && node.name === "div") {
+    return null;
+  }
+}
 
 const ArticleBody: React.FunctionComponent<{
   data: Post | null;
@@ -22,7 +29,11 @@ const ArticleBody: React.FunctionComponent<{
                   <p>{<Skeleton count={5} />}</p>
                 </>
               ) : (
-                <div dangerouslySetInnerHTML={{ __html: data?.html }} />
+                <div>
+                  {ReactHtmlParser(data.html, {
+                    transform,
+                  })}
+                </div>
               )}
             </div>
           </Col>

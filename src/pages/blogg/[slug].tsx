@@ -37,8 +37,6 @@ const Page: React.FunctionComponent = ({
   post,
   errorCode,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const loading = false;
-
   if (errorCode) {
     return <NotFound />;
   }
@@ -54,31 +52,27 @@ const Page: React.FunctionComponent = ({
         <Container>
           <Row className="justify-content-center">
             <Col xs={12} md={10} lg={9} xl={8}>
-              <h1 className="display-4 text-center">
-                {loading ? <Skeleton /> : post.title}
-              </h1>
+              <h1 className="display-4 text-center">{post.title}</h1>
 
               <p className="lead mb-7 text-center text-muted">
-                {loading ? <Skeleton count={3} /> : post.custom_excerpt}
+                {post.custom_excerpt}
               </p>
               <MetaSection
-                loading={loading}
                 publishedAt={post?.published_at}
-                author={post?.primary_author}
+                authors={post?.authors}
               />
             </Col>
           </Row>
         </Container>
       </section>
-      <ArticleBody loading={loading} data={post || null} />
+      <ArticleBody data={post} />
       <section className="pt-6 pt-md-8 pb-8 pb-md-11">
         <Container>
           <Row className="justify-content-center">
             <Col xs={12} md={10} lg={9} xl={8}>
               <MetaSection
-                loading={loading}
                 publishedAt={post?.published_at}
-                author={post?.primary_author}
+                authors={post?.authors}
               />
             </Col>
           </Row>

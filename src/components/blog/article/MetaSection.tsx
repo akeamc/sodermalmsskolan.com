@@ -2,22 +2,38 @@ import { Author } from "../../../api/ghost/posts";
 import moment from "moment";
 import { Avatar } from "../../basic/Avatar";
 import Skeleton from "react-loading-skeleton";
+import { AutoLink } from "../../basic/AutoLink";
 
 const MetaSection: React.FunctionComponent<{
   publishedAt: Date;
-  author: Author;
+  authors: Author[];
   loading?: boolean;
 }> = (props) => {
-  const { publishedAt, author, loading } = props;
+  const { publishedAt, authors, loading } = props;
 
   return (
     <div className="row align-items-center py-5 border-top border-bottom">
       <div className="col-auto">
-        <Avatar size="lg" imageUrl={author?.profile_image} />
+        <Avatar
+          href={authors[0]?.url}
+          size="lg"
+          imageUrl={authors[0]?.profile_image}
+        />
       </div>
       <div className="col ml-n5">
         <h6 className="text-uppercase mb-0">
-          {loading ? <Skeleton width="50%" /> : author?.name}
+          {loading ? (
+            <Skeleton width="50%" />
+          ) : (
+            authors?.map((author, index) => (
+              <span key={index}>
+                {index > 0 && ", "}
+                <AutoLink className="text-reset" href={author.url}>
+                  {author.name}
+                </AutoLink>
+              </span>
+            ))
+          )}
         </h6>
 
         <time className="font-size-sm text-muted" dateTime="2019-05-20">
