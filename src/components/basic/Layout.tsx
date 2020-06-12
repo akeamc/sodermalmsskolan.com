@@ -5,7 +5,7 @@ import { initGA, logPageView } from "../../utils/analytics";
 
 export class Layout extends React.Component<{
   title?: string;
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | (JSX.Element | JSX.Element[])[];
 }> {
   componentDidMount() {
     if (!window["GA_INITIALIZED"]) {

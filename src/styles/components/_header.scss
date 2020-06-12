@@ -8,15 +8,8 @@
   }
 
   &.header-wrapper-background {
-    &::before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      content: "";
-      background-color: rgba($color: #000, $alpha: 0.5);
-    }
+    background-color: #aaa;
+    background-blend-mode: multiply;
   }
 
   .navbar {

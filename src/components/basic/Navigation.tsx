@@ -6,6 +6,32 @@ import Container from "react-bootstrap/Container";
 import { AutoLink } from "./AutoLink";
 import * as Icon from "react-feather";
 
+class NavLink extends React.Component<{
+  href: string;
+  children: string;
+}> {
+  render() {
+    const { href, children } = this.props;
+    return (
+      <li className="nav-item">
+        <AutoLink href={href} className="nav-link">
+          {children}
+        </AutoLink>
+      </li>
+    );
+  }
+}
+
+const NavLinks: React.FunctionComponent = () => (
+  <>
+    <NavLink href="/blogg">Blogg</NavLink>
+    <NavLink href="/meny">Meny</NavLink>
+    <NavLink href="/digibruh">Digibruh</NavLink>
+    <NavLink href="/quizlet">Quizlet</NavLink>
+    <NavLink href="/om">Om</NavLink>
+  </>
+);
+
 class MobileNavigation extends React.Component<{
   shown: boolean;
 }> {
@@ -16,11 +42,7 @@ class MobileNavigation extends React.Component<{
           className={`mobile-nav d-md-none ${this.props.shown ? "shown" : ""}`}
         >
           <ul className="text-right">
-            <NavLink href="/">Start</NavLink>
-            <NavLink href="/blogg">Blogg</NavLink>
-            <NavLink href="/meny">Meny</NavLink>
-            <NavLink href="/quizlet">Quizlet</NavLink>
-            <NavLink href="/om">Om</NavLink>
+            <NavLinks />
           </ul>
         </div>
         <div
@@ -84,10 +106,7 @@ export class Navigation extends React.Component<
             </a>
           </Link>
           <ul className="nav d-none d-md-flex">
-            <NavLink href="/blogg">Blogg</NavLink>
-            <NavLink href="/meny">Meny</NavLink>
-            <NavLink href="/quizlet">Quizlet</NavLink>
-            <NavLink href="/om">Om</NavLink>
+            <NavLinks />
           </ul>
           <button
             className="d-md-none navbar-toggler collapsed"
@@ -98,22 +117,6 @@ export class Navigation extends React.Component<
           <MobileNavigation shown={this.state.showMobileNav} />
         </Container>
       </div>
-    );
-  }
-}
-
-class NavLink extends React.Component<{
-  href: string;
-  children: string;
-}> {
-  render() {
-    const { href, children } = this.props;
-    return (
-      <li className="nav-item">
-        <AutoLink href={href} className="nav-link">
-          {children}
-        </AutoLink>
-      </li>
     );
   }
 }

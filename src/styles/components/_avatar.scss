@@ -1,33 +1,29 @@
+$avatar-sizes: (
+  sm: 1.5rem,
+  m: 1.875rem,
+  lg: 2.25rem,
+  xl: 4rem,
+  xxl: 5rem,
+  3xl: 6rem,
+  4xl: 7rem,
+  5xl: 8rem,
+);
+
 .avatar {
   position: relative;
   display: inline-block;
-  width: 1.875rem;
-  height: 1.875rem;
-  font-size: 0.625rem;
+  width: map-get($avatar-sizes, m);
+  height: map-get($avatar-sizes, m);
+  font-size: map-get($avatar-sizes, m) / 3;
+  border-radius: 50%;
 }
 
-.avatar-sm {
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 0.5rem;
-}
-
-.avatar-lg {
-  width: 2.25rem;
-  height: 2.25rem;
-  font-size: 0.75rem;
-}
-
-.avatar-xl {
-  width: 4rem;
-  height: 4rem;
-  font-size: 1.33333rem;
-}
-
-.avatar-xxl {
-  width: 5rem;
-  height: 5rem;
-  font-size: 1.66667rem;
+@each $name, $size in $avatar-sizes {
+  .avatar-#{$name} {
+    font-size: $size / 3;
+    width: $size;
+    height: $size;
+  }
 }
 
 .avatar-img {
@@ -36,6 +32,40 @@
   object-fit: cover;
 }
 
+.avatar-group-container {
+  .avatar-group {
+    margin: -2px;
+
+    .avatar {
+      box-sizing: content-box;
+    }
+  }
+}
+
 .avatar-group {
   display: inline-flex;
+  position: relative;
+  flex-direction: row-reverse;
+  padding-left: map-get($avatar-sizes, m) / 2;
+
+  .avatar {
+    margin-left: map-get($avatar-sizes, m) / -2;
+    border: 2px solid $white;
+
+    &:hover {
+      z-index: 1;
+    }
+  }
+
+  @each $name, $size in $avatar-sizes {
+    .avatar-#{$name} {
+      margin-left: $size / -2;
+    }
+  }
+}
+
+@each $name, $size in $avatar-sizes {
+  .avatar-group-#{$name} {
+    padding-left: $size / 2;
+  }
 }

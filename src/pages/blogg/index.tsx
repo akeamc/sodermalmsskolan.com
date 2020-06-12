@@ -5,8 +5,8 @@ import { Header } from "../../components/basic/Header";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import { AutoLink } from "../../components/basic/AutoLink";
-import { PostGrid } from "../../components/blog/PostGrid";
 import { FeaturedPost } from "../../components/blog/Featured";
+import { PostGridAuto } from "../../components/blog/PostGrid";
 
 export default class Page extends React.Component {
   render() {
@@ -43,7 +43,7 @@ export default class Page extends React.Component {
                 </AutoLink>
               </Col>
             </Row>
-            <PostGrid posts={6} />
+            <PostGridAuto posts={6} />
           </Container>
         </section>
       </Layout>
