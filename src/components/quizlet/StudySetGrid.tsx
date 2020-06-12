@@ -14,17 +14,16 @@ export class StudySetGridItem extends React.Component<{
 }> {
   render() {
     const { studySet, loading = false } = this.props;
+    const author = new GenericUser({
+      name: studySet?.author?.username,
+      avatarUrl: studySet?.author?.avatarURL,
+      url: `https://quizlet.com/${studySet?.author?.username}`,
+    });
 
     return (
       <NarrowCard
         meta={{
-          authors: [
-            new GenericUser({
-              name: studySet.author.username,
-              avatarUrl: studySet.author.avatarURL,
-              url: `https://quizlet.com/${studySet.author.username}`,
-            }),
-          ],
+          authors: [author],
           date: studySet?.timestamp,
         }}
         href={studySet?.url}
