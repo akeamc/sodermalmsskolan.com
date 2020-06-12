@@ -74,12 +74,22 @@ export async function getLastFeatured(): Promise<Post> {
   return featured[0];
 }
 
-export async function getPostBySlug(
-  slug: string
-): Promise<Post> {
+export async function getPostBySlug(slug: string): Promise<Post> {
   const post: Post = await api.posts.read({
     slug,
-    include: "tags,authors"
+    include: "tags,authors",
   });
   return post;
+}
+
+export async function getPostsByTag(
+  tag: string,
+  limit: string | number = "all"
+): Promise<Post[]> {
+  return await api.posts.browse({
+    limit,
+    include: "tags,authors",
+    order: "published_at DESC",
+    filter: `tag:${tag}`,
+  });
 }

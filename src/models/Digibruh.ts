@@ -1,82 +1,142 @@
-import { Tag } from "../api/ghost/tags";
+import { Tag, getTags } from "../api/ghost/tags";
+import { getPostsByTag, Post } from "../api/ghost/posts";
 
 export const digibruhTag = "hash-skola";
 
-export class Field {
+interface IField {
   name: string;
-  slug: string;
+  tagSlug: string;
+  description: string | null;
+}
+
+export class Field implements IField {
+  name: string;
+  tagSlug: string;
   description: string | null;
 
   static regex(subject: string) {
     return new RegExp(`hash-skola-${subject}-[a-z]+$`, "i");
   }
 
-  constructor(name: string, slug: string, description: string | null) {
+  constructor({ name, tagSlug: slug, description }: IField) {
     this.name = name;
-    this.slug = slug;
+    this.tagSlug = slug;
     this.description = description;
   }
 
+  getPosts = async (): Promise<Post[]> => {
+    return getPostsByTag(this.tagSlug);
+  };
+
+  toObject(): IField {
+    return {
+      name: this.name,
+      tagSlug: this.tagSlug,
+      description: this.description,
+    };
+  }
+
   static fromTag(tag: Tag): Field {
-    return new Field(
-      tag.name.substring(tag.name.indexOf("-")),
-      tag.slug,
-      tag.description
-    );
+    return new Field({
+      name: tag.name.substring(1),
+      tagSlug: tag.slug,
+      description: tag.description,
+    });
   }
 
   static fromTags(tags: Tag[], subject: string): Field[] {
     return tags
-      .filter((tag) => this.regex(subject).test(tag.slug))
-      .map(this.fromTag);
+      .filter((tag) => Field.regex(subject).test(tag.slug))
+      .map(Field.fromTag);
   }
 }
 
-export class Subject {
-  static regex = /hash-skola-[a-z]+$/i;
+interface ISubject {
   name: string;
-  tag: string;
+  tagSlug: string;
+  fields: IField[];
+  coverImage: string | null;
+  description: string | null;
+}
+
+export class Subject implements ISubject {
+  name: string;
+  tagSlug: string;
   fields: Field[];
-  coverImage?: string;
+  coverImage: string | null;
+  description: string | null;
+
+  static regex(subject: string = "[a-z]+") {
+    return new RegExp(`hash-skola-${subject}$`, "i");
+  }
 
   get slug() {
-    return this.tag.substring(this.tag.lastIndexOf("-") + 1);
+    return this.tagSlug.substring(this.tagSlug.lastIndexOf("-") + 1);
   }
 
   constructor({
     name,
-    tag,
+    tagSlug: tag,
     fields = [],
     coverImage = null,
-  }: {
-    name: string;
-    tag: string;
-    fields?: Field[];
-    coverImage?: string;
-  }) {
+    description = null,
+  }: ISubject) {
     this.name = name;
-    this.tag = tag;
-    this.fields = fields;
+    this.tagSlug = tag;
+    this.fields = fields.map((field) => new Field(field));
     this.coverImage = coverImage;
+    this.description = description;
   }
 
   static fromTag(tag: Tag, fields: Field[] = []): Subject {
     return new Subject({
       name: tag.name.substring(1),
-      tag: tag.slug,
+      tagSlug: tag.slug,
       fields,
       coverImage: tag.feature_image || null,
+      description: tag.description,
     });
   }
-}
 
-export function getSubjectsFromTags(tags: Tag[]): Subject[] {
-  return tags
-    .filter((tag) => Subject.regex.test(tag.slug))
-    .map((tag) => {
-      let subject = Subject.fromTag(tag);
-      let fields = Field.fromTags(tags, subject.slug);
-      subject.fields = fields;
-      return subject;
-    });
+  getPostUrl(post: Post): string {
+    return `/digibruh/${this.slug}/${post.slug}`;
+  }
+
+  getPosts = async (): Promise<Post[]> => {
+    return getPostsByTag(this.tagSlug);
+  };
+
+  toObject(): ISubject {
+    return {
+      name: this.name,
+      tagSlug: this.tagSlug,
+      fields: this.fields.map((field) => field.toObject()),
+      coverImage: this.coverImage,
+      description: this.description,
+    };
+  }
+
+  static async get(name: string): Promise<Subject> {
+    const tags = await getTags();
+
+    let tag = tags.find((tag) => Subject.regex(name).test(tag.slug));
+    let fields = Field.fromTags(tags, name);
+
+    if (!tag) {
+      throw new Error("Subject not found!");
+    }
+
+    return Subject.fromTag(tag, fields);
+  }
+
+  static fromTags(tags: Tag[]): Subject[] {
+    return tags
+      .filter((tag) => Subject.regex().test(tag.slug))
+      .map((tag) => {
+        let subject = Subject.fromTag(tag);
+        let fields = Field.fromTags(tags, subject.slug);
+        subject.fields = fields;
+        return subject;
+      });
+  }
 }
