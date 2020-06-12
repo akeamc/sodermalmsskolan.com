@@ -1,11 +1,12 @@
 import React from "react";
-import { getPosts, Post } from "../../api/ghost/posts";
+import { getPosts } from "../../api/ghost/post";
 import useSWR from "swr";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { NarrowCard } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
 import { GenericUser } from "../../models/User";
+import { PostOrPage, PostsOrPages } from "@tryghost/content-api";
 
 export function getPostUrl(slug: string | null): string {
   return `/blogg/${slug ? slug : ""}`;
@@ -21,7 +22,7 @@ export function lineClamp(lines: number): React.CSSProperties {
 }
 
 class PostGridItem extends React.Component<{
-  post: Post | null;
+  post: PostOrPage | null;
   loading?: boolean;
   imageExpected?: boolean;
 }> {
@@ -34,7 +35,7 @@ class PostGridItem extends React.Component<{
       <NarrowCard
         meta={{
           authors: post?.authors.map(GenericUser.fromAuthor),
-          date: post?.published_at,
+          date: new Date(post?.published_at),
         }}
         image={post?.feature_image}
         href={postUrl}
@@ -51,23 +52,32 @@ class PostGridItem extends React.Component<{
 }
 
 export const PostGrid: React.FunctionComponent<{
+  posts: PostOrPage[];
+  expectedNumberOfPosts?: number;
+}> = (props) => {
+  const { posts, expectedNumberOfPosts = 3 } = props;
+  const placeholder: PostOrPage[] = new Array(expectedNumberOfPosts).fill(null);
+
+  return (
+    <Row>
+      {(posts || placeholder).map((post, index) => {
+        return (
+          <Col xs={12} md={6} lg={4} key={index} className="d-flex">
+            <PostGridItem post={post} loading={!posts} />
+          </Col>
+        );
+      })}
+    </Row>
+  );
+};
+
+export const PostGridAuto: React.FunctionComponent<{
   posts: number;
 }> = (props) => {
   const { posts } = props;
   const { data } = useSWR(`blog/posts/latest?limit=${posts}`, () =>
     getPosts(posts)
   );
-  const placeholder: null[] = new Array(posts).fill(null);
 
-  return (
-    <Row>
-      {(data || placeholder).map((post, index) => {
-        return (
-          <Col xs={12} md={6} lg={4} key={index} className="d-flex">
-            <PostGridItem post={post} loading={!data} />
-          </Col>
-        );
-      })}
-    </Row>
-  );
+  return <PostGrid posts={data} expectedNumberOfPosts={posts} />;
 };

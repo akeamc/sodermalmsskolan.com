@@ -1,4 +1,4 @@
-import { getPostBySlug } from "../../api/ghost/posts";
+import { getPostBySlug } from "../../api/ghost/post";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../404";
 import { digibruhTag } from "../../models/Digibruh";
@@ -11,10 +11,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   try {
     const slug = query.slug?.toString();
     const post = await getPostBySlug(slug);
+
     res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
-    if (post.tags.map((tag) => tag.slug).includes(digibruhTag)) {
+
+    if (post?.tags?.map((tag) => tag.slug).includes(digibruhTag)) {
       throw new Error("Cannot view Digibruh article here.");
     }
+
     return {
       props: { post, errorCode: null },
     };

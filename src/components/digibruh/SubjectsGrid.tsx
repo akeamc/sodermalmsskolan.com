@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { getTags } from "../../api/ghost/tags";
+import { getTags } from "../../api/ghost/tag";
 import { Subject } from "../../models/Digibruh";
 import Row from "react-bootstrap/Row";
 import { NarrowCard } from "../basic/Card";

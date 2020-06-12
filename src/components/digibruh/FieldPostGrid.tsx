@@ -1,16 +1,16 @@
 import { Field, Subject } from "../../models/Digibruh";
 import useSWR from "swr";
 import { lineClamp } from "../blog/PostGrid";
-import { Post } from "../../api/ghost/posts";
 import { NarrowCard } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React from "react";
 import { GenericUser } from "../../models/User";
+import { PostOrPage } from "@tryghost/content-api";
 
 class FieldPostGridItem extends React.Component<{
-  post: Post | null;
+  post: PostOrPage | null;
   loading?: boolean;
   imageExpected?: boolean;
 }> {
@@ -27,7 +27,7 @@ class FieldPostGridItem extends React.Component<{
       <NarrowCard
         meta={{
           authors: post?.authors.map(GenericUser.fromAuthor),
-          date: post?.created_at,
+          date: new Date(post?.created_at),
         }}
         image={post?.feature_image}
         href={subject?.getPostUrl(post) || "#"}
@@ -48,7 +48,7 @@ const FieldPostGrid: React.FunctionComponent<{
 }> = (props) => {
   const { field } = props;
   let { data } = useSWR(`digibruh/fields/${field.tagSlug}`, field.getPosts);
-  const placeholder: null[] = new Array(3).fill(null);
+  const placeholder: PostOrPage[] = new Array(3).fill(null);
 
   return (
     <Row>

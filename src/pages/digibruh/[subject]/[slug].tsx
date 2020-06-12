@@ -1,4 +1,4 @@
-import { getPostBySlug } from "../../../api/ghost/posts";
+import { getPostBySlug } from "../../../api/ghost/post";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../404";
 import { digibruhTag, Subject } from "../../../models/Digibruh";

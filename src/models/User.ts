@@ -1,4 +1,5 @@
-import { Author } from "../api/ghost/posts";
+import { Author } from "@tryghost/content-api";
+import { getAuthorUrl } from "../api/ghost/author";
 
 export interface IGenericUser {
   name: string;
@@ -20,7 +21,7 @@ export class GenericUser implements IGenericUser {
   static fromAuthor(author: Author): GenericUser {
     return new GenericUser({
       name: author.name,
-      url: author.url,
+      url: getAuthorUrl(author.slug),
       avatarUrl: author.profile_image,
     });
   }

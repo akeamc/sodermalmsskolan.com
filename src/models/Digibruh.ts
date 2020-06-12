@@ -1,5 +1,6 @@
-import { Tag, getTags } from "../api/ghost/tags";
-import { getPostsByTag, Post, getPostBySlug } from "../api/ghost/posts";
+import { getTags } from "../api/ghost/tag";
+import { getPostsByTag, getPostBySlug } from "../api/ghost/post";
+import { PostsOrPages, Tag, PostOrPage } from "@tryghost/content-api";
 
 export const digibruhTag = "hash-skola";
 
@@ -24,7 +25,7 @@ export class Field implements IField {
     this.description = description;
   }
 
-  getPosts = async (): Promise<Post[]> => {
+  getPosts = async (): Promise<PostsOrPages> => {
     return getPostsByTag(this.tagSlug);
   };
 
@@ -98,15 +99,15 @@ export class Subject implements ISubject {
     });
   }
 
-  getPostUrl(post: Post): string {
+  getPostUrl(post: PostOrPage): string {
     return `/digibruh/${this.slug}/${post.slug}`;
   }
 
-  getPosts = async (): Promise<Post[]> => {
+  getPosts = async (): Promise<PostsOrPages> => {
     return getPostsByTag(this.tagSlug);
   };
 
-  getPost = async (slug: string): Promise<Post> => {
+  getPost = async (slug: string): Promise<PostOrPage> => {
     const post = await getPostBySlug(slug);
 
     if (!post.tags.some((tag) => Subject.regex(this.name))) {

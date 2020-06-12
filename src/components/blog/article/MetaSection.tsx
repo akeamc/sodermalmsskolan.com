@@ -1,9 +1,9 @@
-import { Author } from "../../../api/ghost/posts";
 import moment from "moment";
 import { AuthorGroup } from "../../basic/Avatar";
 import Skeleton from "react-loading-skeleton";
 import { AutoLink } from "../../basic/AutoLink";
 import { GenericUser } from "../../../models/User";
+import { Author } from "@tryghost/content-api";
 
 const MetaSection: React.FunctionComponent<{
   publishedAt: Date;

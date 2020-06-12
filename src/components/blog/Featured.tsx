@@ -1,15 +1,16 @@
 import { WideCard } from "../basic/Card";
 import Col from "react-bootstrap/Col";
-import { Post, getLastFeatured } from "../../api/ghost/posts";
+import { getLastFeatured } from "../../api/ghost/post";
 import useSWR from "swr";
 import Row from "react-bootstrap/Row";
 import { lineClamp, getPostUrl } from "./PostGrid";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
 import { GenericUser } from "../../models/User";
+import { PostOrPage } from "@tryghost/content-api";
 
 class FeaturedPostItem extends React.Component<{
-  post: Post | null;
+  post: PostOrPage | null;
   loading?: boolean;
   imageExpected?: boolean;
 }> {
@@ -22,7 +23,7 @@ class FeaturedPostItem extends React.Component<{
         badge={"Redaktörens val"}
         meta={{
           authors: post?.authors.map(GenericUser.fromAuthor),
-          date: post?.published_at,
+          date: new Date(post?.published_at),
         }}
         image={post?.feature_image}
         href={getPostUrl(post?.slug)}
