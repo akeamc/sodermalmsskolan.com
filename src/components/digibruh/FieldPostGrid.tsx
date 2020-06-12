@@ -27,7 +27,7 @@ class FieldPostGridItem extends React.Component<{
       <NarrowCard
         meta={{
           authors: post?.authors.map(GenericUser.fromAuthor),
-          date: new Date(post?.created_at),
+          date: new Date(post?.updated_at),
         }}
         image={post?.feature_image}
         href={subject?.getPostUrl(post) || "#"}

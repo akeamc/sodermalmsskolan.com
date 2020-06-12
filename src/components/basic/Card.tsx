@@ -66,7 +66,7 @@ export class NarrowCard extends React.Component<CardOptions> {
                 ) : null}
                 <p className="h6 text-uppercase text-muted mb-0 ml-auto">
                   <time dateTime={meta.date.toString()}>
-                    {moment(meta.date).locale("sv").format("d MMMM YYYY")}
+                    {moment(meta.date).locale("sv").format("D MMMM YYYY")}
                   </time>
                 </p>
               </>
@@ -149,7 +149,7 @@ export class WideCard extends React.Component<
                     ) : null}
                     <p className="h6 text-uppercase text-muted mb-0 ml-auto">
                       <time dateTime={meta.date.toString()}>
-                        {moment(meta.date).locale("sv").format("d MMMM YYYY")}
+                        {moment(meta.date).locale("sv").format("D MMMM YYYY")}
                       </time>
                     </p>
                   </>

@@ -69,7 +69,7 @@ const Page: React.FunctionComponent = ({
                 <Avatar
                   href={getAuthorUrl(author.slug)}
                   imageUrl={author?.profile_image}
-                  size="xxl"
+                  size="5xl"
                   className="mb-4 d-inline-block lift"
                 />
               ) : (
