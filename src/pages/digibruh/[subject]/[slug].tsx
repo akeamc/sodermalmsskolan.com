@@ -1,7 +1,7 @@
 import { getPostBySlug } from "../../../api/ghost/posts";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../404";
-import { digibruhTag } from "../../../models/Digibruh";
+import { digibruhTag, Subject } from "../../../models/Digibruh";
 import ArticlePage from "../../../components/blog/article/ArticlePage";
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -9,12 +9,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   try {
-    const slug = query.slug?.toString();
-    const post = await getPostBySlug(slug);
+    const subject = await Subject.get(query.subject?.toString());
+
+    const post = await subject.getPost(query.slug?.toString());
+
     res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
-    if (!post.tags.map((tag) => tag.slug).includes(digibruhTag)) {
-      throw new Error("Cannot view non-Digibruh article here.");
-    }
+
     return {
       props: { post, errorCode: null },
     };

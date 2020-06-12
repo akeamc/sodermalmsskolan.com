@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     es6: true,
     jest: true,
-    node: true
+    node: true,
   },
   rules: {
     "react/react-in-jsx-scope": "off",
