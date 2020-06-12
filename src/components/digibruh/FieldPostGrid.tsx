@@ -7,6 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React from "react";
+import { GenericUser } from "../../models/User";
 
 class FieldPostGridItem extends React.Component<{
   post: Post | null;
@@ -25,13 +26,7 @@ class FieldPostGridItem extends React.Component<{
     return (
       <NarrowCard
         meta={{
-          authors: post?.authors?.map((author) => {
-            return {
-              name: author.name,
-              avatarUrl: author.profile_image,
-              url: author.url,
-            };
-          }),
+          authors: post?.authors.map(GenericUser.fromAuthor),
           date: post?.created_at,
         }}
         image={post?.feature_image}

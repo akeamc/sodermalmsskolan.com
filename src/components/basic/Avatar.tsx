@@ -1,6 +1,6 @@
 import React from "react";
 import { AutoLink } from "./AutoLink";
-import { Author } from "../../api/ghost/posts";
+import { GenericUser } from "../../models/User";
 
 export class Avatar extends React.Component<{
   href?: string;
@@ -23,7 +23,7 @@ export class Avatar extends React.Component<{
 }
 
 export class AuthorGroup extends React.Component<{
-  authors: Author[];
+  authors: GenericUser[];
   size?: string;
   className?: string;
 }> {
@@ -41,7 +41,7 @@ export class AuthorGroup extends React.Component<{
             key={index}
             size={size}
             href={author.url}
-            imageUrl={author.profile_image}
+            imageUrl={author.avatarUrl}
           />
         ))}
       </div>

@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import { lineClamp, getPostUrl } from "./PostGrid";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
+import { GenericUser } from "../../models/User";
 
 class FeaturedPostItem extends React.Component<{
   post: Post | null;
@@ -20,14 +21,8 @@ class FeaturedPostItem extends React.Component<{
       <WideCard
         badge={"Redaktörens val"}
         meta={{
-          authors: post?.authors?.map((author) => {
-            return {
-              name: author.name,
-              avatarUrl: author.profile_image,
-              url: author.url,
-            };
-          }),
-          date: post?.created_at,
+          authors: post?.authors.map(GenericUser.fromAuthor),
+          date: post?.published_at,
         }}
         image={post?.feature_image}
         href={getPostUrl(post?.slug)}

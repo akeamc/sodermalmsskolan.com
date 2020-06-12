@@ -6,6 +6,7 @@ import { getStudySets } from "../../api/main/quizlet/studysets";
 import useSWR from "swr";
 import { StudySet } from "../../models/Quizlet";
 import Skeleton from "react-loading-skeleton";
+import { GenericUser } from "../../models/User";
 
 export class StudySetGridItem extends React.Component<{
   studySet: StudySet | null;
@@ -18,10 +19,11 @@ export class StudySetGridItem extends React.Component<{
       <NarrowCard
         meta={{
           authors: [
-            {
-              name: studySet?.author?.username,
-              avatarUrl: studySet?.author?.avatarURL,
-            },
+            new GenericUser({
+              name: studySet.author.username,
+              avatarUrl: studySet.author.avatarURL,
+              url: `https://quizlet.com/${studySet.author.username}`,
+            }),
           ],
           date: studySet?.timestamp,
         }}

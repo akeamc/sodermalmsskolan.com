@@ -1,8 +1,9 @@
 import { Author } from "../../../api/ghost/posts";
 import moment from "moment";
-import { Avatar, AuthorGroup } from "../../basic/Avatar";
+import { AuthorGroup } from "../../basic/Avatar";
 import Skeleton from "react-loading-skeleton";
 import { AutoLink } from "../../basic/AutoLink";
+import { GenericUser } from "../../../models/User";
 
 const MetaSection: React.FunctionComponent<{
   publishedAt: Date;
@@ -14,7 +15,7 @@ const MetaSection: React.FunctionComponent<{
   return (
     <div className="row align-items-center py-5 border-top border-bottom">
       <div className="col-auto">
-        <AuthorGroup authors={authors} />
+        <AuthorGroup authors={authors.map(GenericUser.fromAuthor)} />
       </div>
       <div className="col ml-n5">
         <h6 className="text-uppercase mb-0">

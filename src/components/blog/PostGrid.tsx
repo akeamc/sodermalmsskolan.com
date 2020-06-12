@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { NarrowCard } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
+import { GenericUser } from "../../models/User";
 
 export function getPostUrl(slug: string | null): string {
   return `/blogg/${slug ? slug : ""}`;
@@ -32,14 +33,8 @@ class PostGridItem extends React.Component<{
     return (
       <NarrowCard
         meta={{
-          authors: post?.authors?.map((author) => {
-            return {
-              name: author.name,
-              avatarUrl: author.profile_image,
-              url: author.url,
-            };
-          }),
-          date: post?.created_at,
+          authors: post?.authors.map(GenericUser.fromAuthor),
+          date: post?.published_at,
         }}
         image={post?.feature_image}
         href={postUrl}

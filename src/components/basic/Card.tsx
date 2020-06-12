@@ -3,13 +3,13 @@ import moment from "moment";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Avatar, AuthorGroup } from "./Avatar";
+import { AuthorGroup } from "./Avatar";
 import { AutoLink } from "./AutoLink";
 import Skeleton from "react-loading-skeleton";
-import { Author } from "../../api/ghost/posts";
+import { GenericUser } from "../../models/User";
 
 interface CardMeta {
-  authors?: Author[];
+  authors?: GenericUser[];
   date: Date;
 }
 
@@ -62,12 +62,7 @@ export class NarrowCard extends React.Component<CardOptions> {
             ) : (
               <>
                 {meta.authors ? (
-                  <>
-                    <AuthorGroup authors={meta.authors} />
-                    <h6 className="text-uppercase text-muted mr-2 mb-0">
-                      {meta.authors.map((author) => author.name).join(", ")}
-                    </h6>
-                  </>
+                  <AuthorGroup className="mr-2" authors={meta.authors} />
                 ) : null}
                 <p className="h6 text-uppercase text-muted mb-0 ml-auto">
                   <time dateTime={meta.date.toString()}>
@@ -146,7 +141,7 @@ export class WideCard extends React.Component<
                   <>
                     {meta.authors ? (
                       <>
-                        <AuthorGroup authors={meta.authors} />
+                        <AuthorGroup className="mr-2" authors={meta.authors} />
                         <h6 className="text-uppercase text-muted mr-2 mb-0">
                           {meta.authors.map((author) => author.name).join(", ")}
                         </h6>

@@ -30,12 +30,17 @@ $avatar-sizes: (
 }
 
 .avatar-group {
-  display: flex;
+  display: inline-flex;
+  position: relative;
   flex-direction: row-reverse;
   padding-left: map-get($avatar-sizes, m) / 2;
 
   .avatar {
     margin-left: map-get($avatar-sizes, m) / -2;
+
+    &:hover {
+      z-index: 1000;
+    }
 
     img {
       border: 2px solid $white;
