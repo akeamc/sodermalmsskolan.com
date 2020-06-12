@@ -1,5 +1,5 @@
 import { Tag, getTags } from "../api/ghost/tags";
-import { getPostsByTag, Post } from "../api/ghost/posts";
+import { getPostsByTag, Post, getPostBySlug } from "../api/ghost/posts";
 
 export const digibruhTag = "hash-skola";
 
@@ -104,6 +104,16 @@ export class Subject implements ISubject {
 
   getPosts = async (): Promise<Post[]> => {
     return getPostsByTag(this.tagSlug);
+  };
+
+  getPost = async (slug: string): Promise<Post> => {
+    const post = await getPostBySlug(slug);
+
+    if (!post.tags.some(tag => Subject.regex(this.name))) {
+      throw new Error("Post does not contain mandatory tag. This is not a Digibruh post.");
+    }
+
+    return post;
   };
 
   toObject(): ISubject {
