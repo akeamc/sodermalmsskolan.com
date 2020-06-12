@@ -56,20 +56,18 @@ const Page: React.FunctionComponent = ({
           </p>
         </Col>
       </Header>
-      {subject.fields.map((field) => (
-        <>
-          <section className="pt-7 pt-md-10">
-            <Container>
-              <Row className="row align-items-center mb-5">
-                <Col xs={12} className="col-md">
-                  <h3 className="mb-0">{field.name}</h3>
-                  <p className="mb-0 text-muted">{field.description}</p>
-                </Col>
-              </Row>
-              <FieldPostGrid field={field} />
-            </Container>
-          </section>
-        </>
+      {subject.fields.map((field, index) => (
+        <section className="pt-7 pt-md-10" key={index}>
+          <Container>
+            <Row className="row align-items-center mb-5">
+              <Col xs={12} className="col-md">
+                <h3 className="mb-0">{field.name}</h3>
+                <p className="mb-0 text-muted">{field.description}</p>
+              </Col>
+            </Row>
+            <FieldPostGrid field={field} />
+          </Container>
+        </section>
       ))}
     </Layout>
   );
