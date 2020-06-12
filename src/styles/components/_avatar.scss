@@ -29,6 +29,16 @@ $avatar-sizes: (
   object-fit: cover;
 }
 
+.avatar-group-container {
+  .avatar-group {
+    margin: -2px;
+
+    .avatar {
+      box-sizing: content-box;
+    }
+  }
+}
+
 .avatar-group {
   display: inline-flex;
   position: relative;
@@ -37,13 +47,10 @@ $avatar-sizes: (
 
   .avatar {
     margin-left: map-get($avatar-sizes, m) / -2;
+    border: 2px solid $white;
 
     &:hover {
-      z-index: 1000;
-    }
-
-    img {
-      border: 2px solid $white;
+      z-index: 1;
     }
   }
 

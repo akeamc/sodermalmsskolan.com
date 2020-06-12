@@ -31,19 +31,21 @@ export class AuthorGroup extends React.Component<{
     const { authors, size, className = "" } = this.props;
 
     return (
-      <div
-        className={`avatar-group ${
-          size ? `avatar-group-${size}` : ""
-        } ${className}`}
-      >
-        {authors.map((author, index) => (
-          <Avatar
-            key={index}
-            size={size}
-            href={author.url}
-            imageUrl={author.avatarUrl}
-          />
-        ))}
+      <div className="avatar-group-container">
+        <div
+          className={`avatar-group ${
+            size ? `avatar-group-${size}` : ""
+          } ${className}`}
+        >
+          {authors.map((author, index) => (
+            <Avatar
+              key={index}
+              size={size}
+              href={author.url}
+              imageUrl={author.avatarUrl}
+            />
+          ))}
+        </div>
       </div>
     );
   }
