@@ -109,8 +109,10 @@ export class Subject implements ISubject {
   getPost = async (slug: string): Promise<Post> => {
     const post = await getPostBySlug(slug);
 
-    if (!post.tags.some(tag => Subject.regex(this.name))) {
-      throw new Error("Post does not contain mandatory tag. This is not a Digibruh post.");
+    if (!post.tags.some((tag) => Subject.regex(this.name))) {
+      throw new Error(
+        "Post does not contain mandatory tag. This is not a Digibruh post."
+      );
     }
 
     return post;
