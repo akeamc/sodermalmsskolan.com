@@ -43,3 +43,14 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+.card-wide {
+  .card-img {
+    width: 100%;
+    border-radius: 0;
+
+    @include media-breakpoint-up(md) {
+      height: 100%;
+    }
+  }
+}

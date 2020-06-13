@@ -38,7 +38,7 @@ const Page: React.FunctionComponent = ({
     return <NotFound />;
   }
 
-  return <ArticlePage post={post} errorCode={errorCode} />;
+  return <ArticlePage digibruh post={post} errorCode={errorCode} />;
 };
 
 export default Page;

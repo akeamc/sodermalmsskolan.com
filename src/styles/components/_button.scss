@@ -48,3 +48,7 @@
   border-color: $gray-300;
   color: $primary;
 }
+
+.btn:disabled {
+  pointer-events: none;
+}

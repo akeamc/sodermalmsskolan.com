@@ -11,13 +11,22 @@ import { PostOrPage } from "@tryghost/content-api";
 
 export default class ArticlePage extends React.Component<{
   post: PostOrPage;
+  digibruh?: boolean;
   errorCode: number | null;
 }> {
   render() {
-    const { post, errorCode } = this.props;
+    const { post, errorCode, digibruh = false } = this.props;
     if (errorCode) {
       return <NotFound />;
     }
+
+    const meta = (
+      <MetaSection
+        date={new Date(digibruh ? post?.updated_at : post?.published_at)}
+        dateDescription={digibruh ? "Redigerad" : null}
+        authors={post?.authors}
+      />
+    );
 
     return (
       <Layout>
@@ -35,10 +44,7 @@ export default class ArticlePage extends React.Component<{
                 <p className="lead mb-7 text-center text-muted">
                   {post.custom_excerpt}
                 </p>
-                <MetaSection
-                  publishedAt={new Date(post?.published_at)}
-                  authors={post?.authors}
-                />
+                {meta}
               </Col>
             </Row>
           </Container>
@@ -48,10 +54,7 @@ export default class ArticlePage extends React.Component<{
           <Container>
             <Row className="justify-content-center">
               <Col xs={12} md={10} lg={9} xl={8}>
-                <MetaSection
-                  publishedAt={new Date(post?.published_at)}
-                  authors={post?.authors}
-                />
+                {meta}
               </Col>
             </Row>
           </Container>

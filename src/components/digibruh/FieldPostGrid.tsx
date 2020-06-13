@@ -11,13 +11,12 @@ import { PostOrPage } from "@tryghost/content-api";
 
 class FieldPostGridItem extends React.Component<{
   post: PostOrPage | null;
-  loading?: boolean;
   imageExpected?: boolean;
 }> {
   render() {
-    const { post, loading = false, imageExpected = true } = this.props;
+    const { post, imageExpected = true } = this.props;
     const excerptRows = 3;
-    const subject = post
+    const subject = post?.tags
       ? Subject.fromTag(
           post?.tags?.find((tag) => Subject.regex().test(tag.slug))
         )
@@ -31,31 +30,29 @@ class FieldPostGridItem extends React.Component<{
         }}
         image={post?.feature_image}
         href={subject?.getPostUrl(post) || "#"}
-        loading={loading}
+        loading={!post}
         imageExpected={imageExpected}
       >
-        <h3>{loading ? <Skeleton /> : post?.title}</h3>
+        <h3>{post ? post?.title : <Skeleton />}</h3>
         <p className="mb-0 text-muted" style={lineClamp(excerptRows)}>
-          {loading ? <Skeleton count={excerptRows} /> : post?.excerpt}
+          {post ? post?.excerpt : <Skeleton count={excerptRows} />}
         </p>
       </NarrowCard>
     );
   }
 }
 
-const FieldPostGrid: React.FunctionComponent<{
-  field: Field;
+export const FieldPostGrid: React.FunctionComponent<{
+  posts: PostOrPage[];
 }> = (props) => {
-  const { field } = props;
-  let { data } = useSWR(`digibruh/fields/${field.tagSlug}`, field.getPosts);
-  const placeholder: PostOrPage[] = new Array(3).fill(null);
+  const { posts } = props;
 
   return (
     <Row>
-      {(data || placeholder).map((post, index) => {
+      {(posts || []).map((post, index) => {
         return (
           <Col xs={12} md={6} lg={4} key={index} className="d-flex">
-            <FieldPostGridItem post={post} loading={!data} />
+            <FieldPostGridItem post={post} />
           </Col>
         );
       })}
@@ -63,4 +60,14 @@ const FieldPostGrid: React.FunctionComponent<{
   );
 };
 
-export default FieldPostGrid;
+export const FieldPostGridAuto: React.FunctionComponent<{
+  field: Field;
+}> = (props) => {
+  const { field } = props;
+  let { data } = useSWR(`digibruh/fields/${field.tagSlug}`, () =>
+    field.getPosts()
+  );
+  const placeholder: PostOrPage[] = new Array(3).fill(null);
+
+  return <FieldPostGrid posts={data || placeholder} />;
+};

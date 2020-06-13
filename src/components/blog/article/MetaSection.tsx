@@ -7,11 +7,15 @@ import { Author } from "@tryghost/content-api";
 import { getAuthorUrl } from "../../../api/ghost/author";
 
 const MetaSection: React.FunctionComponent<{
-  publishedAt: Date;
+  date: Date;
   authors: Author[];
+  /**
+   * What type of date is it? Published at, edited at or something else?
+   */
+  dateDescription?: string;
   loading?: boolean;
 }> = (props) => {
-  const { publishedAt, authors, loading } = props;
+  const { date: publishedAt, authors, dateDescription, loading } = props;
 
   return (
     <div className="row align-items-center py-5 border-top border-bottom">
@@ -26,7 +30,10 @@ const MetaSection: React.FunctionComponent<{
             authors?.map((author, index) => (
               <span key={index}>
                 {index > 0 && ", "}
-                <AutoLink className="text-reset" href={getAuthorUrl(author.slug)}>
+                <AutoLink
+                  className="text-reset"
+                  href={getAuthorUrl(author.slug)}
+                >
                   {author.name}
                 </AutoLink>
               </span>
@@ -39,7 +46,7 @@ const MetaSection: React.FunctionComponent<{
             <Skeleton width="50%" />
           ) : (
             <>
-              Publicerad{" "}
+              {dateDescription || "Publicerad"}{" "}
               {moment(publishedAt).locale("sv").format("D MMMM yyyy")}
             </>
           )}

@@ -95,7 +95,7 @@ export class WideCard extends React.Component<
     } = this.props;
 
     return (
-      <Card className="card-row shadow-light-lg lift lift-lg d-flex mb-6">
+      <Card className="card-row card-wide shadow-light-lg lift lift-lg d-flex mb-6">
         <Row className="no-gutters">
           {badge ? (
             <Col xs={12}>
@@ -111,21 +111,21 @@ export class WideCard extends React.Component<
           ) : null}
 
           {image || (imageExpected && loading) ? (
-            <>
+            <Col xs={12} md={6} className="order-md-2 d-flex">
               {loading ? (
-                <div className="col col-12 col-md-6 order-md-2">
+                <div>
                   <Skeleton height="100%" width="100%" />
                 </div>
               ) : (
                 <AutoLink
-                  className="col col-12 col-md-6 order-md-2 bg-cover"
+                  className="bg-cover card-img"
                   href={href}
                   style={{
                     backgroundImage: `url(${image})`,
                   }}
                 />
               )}
-            </>
+            </Col>
           ) : null}
 
           <Col xs={12} md={6} className="order-md-1">

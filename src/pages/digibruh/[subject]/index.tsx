@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../404";
 import { Subject } from "../../../models/Digibruh";
-import FieldPostGrid from "../../../components/digibruh/FieldPostGrid";
+import { FieldPostGridAuto } from "../../../components/digibruh/FieldPostGrid";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -65,7 +65,7 @@ const Page: React.FunctionComponent = ({
                 <p className="mb-0 text-muted">{field.description}</p>
               </Col>
             </Row>
-            <FieldPostGrid field={field} />
+            <FieldPostGridAuto field={field} />
           </Container>
         </section>
       ))}
