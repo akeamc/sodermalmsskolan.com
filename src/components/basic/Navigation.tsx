@@ -5,22 +5,29 @@ import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import { AutoLink } from "./AutoLink";
 import * as Icon from "react-feather";
+import { useRouter } from "next/router";
 
-class NavLink extends React.Component<{
+const NavLink: React.FunctionComponent<{
   href: string;
   children: string;
-}> {
-  render() {
-    const { href, children } = this.props;
-    return (
-      <li className="nav-item">
-        <AutoLink href={href} className="nav-link">
-          {children}
-        </AutoLink>
-      </li>
-    );
-  }
-}
+}> = (props) => {
+  const { href, children } = props;
+
+  const router = useRouter();
+
+  return (
+    <li className="nav-item">
+      <AutoLink
+        href={href}
+        className={`nav-link ${
+          router.pathname == href ? "nav-link-active" : ""
+        }`}
+      >
+        {children}
+      </AutoLink>
+    </li>
+  );
+};
 
 const NavLinks: React.FunctionComponent = () => (
   <>
@@ -31,29 +38,6 @@ const NavLinks: React.FunctionComponent = () => (
     <NavLink href="/om">Om</NavLink>
   </>
 );
-
-class MobileNavigation extends React.Component<{
-  shown: boolean;
-}> {
-  render() {
-    return (
-      <>
-        <div
-          className={`mobile-nav d-md-none ${this.props.shown ? "shown" : ""}`}
-        >
-          <ul className="text-right">
-            <NavLinks />
-          </ul>
-        </div>
-        <div
-          className={`mobile-nav-overlay d-md-none ${
-            this.props.shown ? "shown" : ""
-          }`}
-        />
-      </>
-    );
-  }
-}
 
 export class Navigation extends React.Component<
   {
@@ -109,12 +93,27 @@ export class Navigation extends React.Component<
             <NavLinks />
           </ul>
           <button
-            className="d-md-none navbar-toggler collapsed"
-            onClick={() => this.setMobileNavState(true)}
+            className={`d-md-none navbar-toggler collapsed ${
+              this.state.showMobileNav ? "nav-shown" : ""
+            }`}
+            onClick={() => this.setMobileNavState(!this.state.showMobileNav)}
           >
             <Icon.Menu />
           </button>
-          <MobileNavigation shown={this.state.showMobileNav} />
+          <div
+            className={`mobile-nav d-md-none ${
+              this.state.showMobileNav ? "shown" : ""
+            }`}
+          >
+            <ul className="text-right">
+              <NavLinks />
+            </ul>
+          </div>
+          <div
+            className={`mobile-nav-overlay d-md-none ${
+              this.state.showMobileNav ? "shown" : ""
+            }`}
+          />
         </Container>
       </div>
     );
