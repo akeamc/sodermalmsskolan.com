@@ -4,6 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import { AutoLink } from "../../basic/AutoLink";
 import { GenericUser } from "../../../models/User";
 import { Author } from "@tryghost/content-api";
+import { getAuthorUrl } from "../../../api/ghost/author";
 
 const MetaSection: React.FunctionComponent<{
   publishedAt: Date;
@@ -25,7 +26,7 @@ const MetaSection: React.FunctionComponent<{
             authors?.map((author, index) => (
               <span key={index}>
                 {index > 0 && ", "}
-                <AutoLink className="text-reset" href={author.url}>
+                <AutoLink className="text-reset" href={getAuthorUrl(author.slug)}>
                   {author.name}
                 </AutoLink>
               </span>
