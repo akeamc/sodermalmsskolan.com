@@ -37,7 +37,7 @@ export class AuthorGroup extends React.Component<{
             size ? `avatar-group-${size}` : ""
           } ${className}`}
         >
-          {authors.map((author, index) => (
+          {authors.reverse().map((author, index) => (
             <Avatar
               key={index}
               size={size}
