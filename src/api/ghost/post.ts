@@ -1,12 +1,30 @@
 import api from "./credentials";
-import { PostsOrPages, PostOrPage, LimitParam } from "@tryghost/content-api";
+import {
+  PostsOrPages,
+  PostOrPage,
+  LimitParam,
+  FilterParam,
+} from "@tryghost/content-api";
+import { digibruhTag } from "../../models/Digibruh";
+import { Params } from "next/dist/next-server/server/router";
 
-export async function getPosts(limit: LimitParam = 10): Promise<PostsOrPages> {
-  return await api.posts.browse({
-    limit,
+export const defaultParams = (): Params => {
+  return {
     include: ["tags", "authors"],
     order: "published_at DESC",
-    filter: "tag:-hash-skola",
+    filter: "tag:-" + digibruhTag,
+    limit: 6,
+  };
+};
+
+export async function getPosts(
+  limit: LimitParam = 10,
+  filter: FilterParam = `tag:-${digibruhTag}`
+): Promise<PostsOrPages> {
+  return api.posts.browse({
+    ...defaultParams(),
+    filter,
+    limit,
   });
 }
 
@@ -33,26 +51,17 @@ export async function getPostsByTag(
   tag: string,
   limit: LimitParam = "all"
 ): Promise<PostsOrPages> {
-  return await api.posts.browse({
-    limit,
-    include: ["tags", "authors"],
-    order: "published_at DESC",
-    filter: `tag:${tag}`,
-  });
+  return getPosts(limit, `tag:${tag}`);
 }
 
+/**
+ *
+ * @param slug
+ * @param limit
+ */
 export async function getPostsByAuthor(
   slug: string,
   limit: LimitParam = 10
 ): Promise<PostOrPage[]> {
-  const posts = await api.posts.browse({
-    limit,
-    include: ["tags", "authors"],
-    order: "published_at DESC",
-    filter: ["featured:true", "tag:-hash-skola", `authors.slug:${slug}`],
-  });
-
-  return posts.filter((post) =>
-    post.authors.some((author) => author.slug == slug)
-  );
+  return getPosts(limit, `tag:-${digibruhTag}+authors.slug:${slug}`);
 }

@@ -4,12 +4,15 @@ import { Layout } from "../../../components/basic/Layout";
 import { Header } from "../../../components/basic/Header";
 import Col from "react-bootstrap/Col";
 import { getAuthorBySlug, getAuthorUrl } from "../../../api/ghost/author";
-import { PostGrid } from "../../../components/blog/PostGrid";
+import { PostGridAuto } from "../../../components/blog/PostGrid";
 import useSWR from "swr";
-import { getPostsByAuthor } from "../../../api/ghost/post";
+import { getPosts } from "../../../api/ghost/post";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Avatar } from "../../../components/basic/Avatar";
+import { PostOrPage } from "@tryghost/content-api";
+import { digibruhTag } from "../../../models/Digibruh";
+import { FieldPostGrid } from "../../../components/digibruh/FieldPostGrid";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -44,9 +47,14 @@ const Page: React.FunctionComponent = ({
     return <NotFound />;
   }
 
-  const { data } = useSWR(`posts/author/${author.slug}`, () => {
-    return getPostsByAuthor(author.slug, 6);
-  });
+  const { data: digibruhArticles } = useSWR(
+    `blog/author/${author.slug}/posts`,
+    () => {
+      return getPosts("all", `authors.slug:${author.slug}+tag:${digibruhTag}`);
+    }
+  );
+
+  const placeholder: PostOrPage[] = new Array(6).fill(null);
 
   return (
     <Layout>
@@ -85,10 +93,24 @@ const Page: React.FunctionComponent = ({
         <Container>
           <Row className="row align-items-center mb-5">
             <Col xs={12} className="col-md">
-              <h3 className="mb-0">Inlägg</h3>
+              <h3 className="mb-0">Blogginlägg</h3>
             </Col>
           </Row>
-          <PostGrid posts={data} />
+          <PostGridAuto
+            params={{
+              filter: `author:${author?.slug}+tag:-${digibruhTag}`,
+            }}
+          />
+        </Container>
+      </section>
+      <section className="py-8 py-md-11">
+        <Container>
+          <Row className="row align-items-center mb-5">
+            <Col xs={12} className="col-md">
+              <h3 className="mb-0">Digibruh-artiklar</h3>
+            </Col>
+          </Row>
+          <FieldPostGrid posts={digibruhArticles || placeholder} />
         </Container>
       </section>
     </Layout>

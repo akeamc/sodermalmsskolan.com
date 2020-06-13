@@ -34,16 +34,8 @@ export default class Page extends React.Component {
                   Om skolmaten, våra digitala enheter och lite allt möjligt.
                 </p>
               </Col>
-              <Col xs={12} md="auto">
-                <AutoLink
-                  className="btn btn-outline-gray-300 d-none d-md-inline btn btn-outline-primary"
-                  href="https://xn--sdermalmsskolan-8sb.com/blogg"
-                >
-                  Visa alla
-                </AutoLink>
-              </Col>
             </Row>
-            <PostGridAuto posts={6} />
+            <PostGridAuto />
           </Container>
         </section>
       </Layout>
