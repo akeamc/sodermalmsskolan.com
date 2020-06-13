@@ -3,6 +3,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { PostOrPage } from "@tryghost/content-api";
+import ReactHtmlParser, { convertNodeToElement } from "react-html-parser";
+import ResponsiveEmbed from "react-responsive-embed";
+
+function transform(node, index) {
+  if (node.type == "tag" && node.name == "iframe") {
+    return <ResponsiveEmbed src={node.attribs?.src} allowFullScreen />;
+  }
+
+  return convertNodeToElement(node, index, transform);
+}
 
 const ArticleBody: React.FunctionComponent<{
   data: PostOrPage | null;
@@ -21,10 +31,9 @@ const ArticleBody: React.FunctionComponent<{
                 <p>{<Skeleton count={5} />}</p>
               </div>
             ) : (
-              <div
-                className="article-body"
-                dangerouslySetInnerHTML={{ __html: data.html }}
-              />
+              <div className="article-body">
+                {ReactHtmlParser(data?.html, { transform })}
+              </div>
             )}
           </Col>
         </Row>

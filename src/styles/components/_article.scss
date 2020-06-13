@@ -50,14 +50,11 @@
       }
     }
 
-    img {
-      margin-bottom: 1rem;
-    }
-
     figcaption {
       font-size: 88.2%;
       color: $gray-600;
       text-align: center;
+      margin-top: map-get($spacers, 3);
       margin-bottom: map-get($spacers, 3);
     }
   }
@@ -73,15 +70,11 @@
     margin-bottom: 0;
   }
 
-  .kg-gallery-container {
-    .kg-gallery-row {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-
-      .kg-gallery-image {
-        flex: 0.5625 1 0%;
-      }
+  .kg-embed-card {
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
   }
 }
