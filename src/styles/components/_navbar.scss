@@ -2,7 +2,7 @@
 
 $navbar-container-py: 1.25rem;
 
-$nav-link-color: #506690;
+$nav-link-color: $gray-900;
 
 .navbar {
   padding: 0;
@@ -54,7 +54,8 @@ $nav-link-color: #506690;
       font-size: 0.9375rem;
       transition: color 0.15s ease;
 
-      &:hover {
+      &:hover,
+      &-active {
         color: #335eea;
       }
 
@@ -76,40 +77,67 @@ $nav-link-color: #506690;
     color: $nav-link-color;
     border: none;
     outline: none;
+    z-index: 10001;
+    transition: all 0.25s ease-in-out;
+  }
+
+  &.nav-shown {
+    color: $white;
+    transform: rotateZ(90deg);
   }
 }
 
-$mobile-nav-width: 290px;
+$mobile-nav-width: 100vw;
 
 .mobile-nav {
   background-color: #111;
   color: $white;
   position: fixed;
   top: 0;
-  right: 0;
+  left: 100%;
   bottom: 0;
   width: $mobile-nav-width;
   z-index: 10000;
-  transform: translateX(100%);
   transition: transform 0.25s ease-in-out;
+  transform: translateX(0);
 
   ul {
     list-style: none;
     padding: 0;
+    padding-top: 67px;
     margin: 0;
+
+    li {
+      transform: translateX(100%);
+      opacity: 0;
+      transition: all 0.25s ease-in-out;
+
+      @for $i from 1 to 20 {
+        &:nth-child(#{$i}) {
+          transition-delay: $i * 70ms + 100ms;
+        }
+      }
+    }
 
     .nav-link {
       color: $white;
+      border-top: 1px solid rgba($white, 0.1);
+      font-size: 1.25rem;
     }
   }
 
   &.shown {
-    transform: translateX(0);
+    transform: translateX(-100%);
+
+    ul li {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 }
 
 .mobile-nav-overlay {
-  background-color: rgba($color: #000, $alpha: 0.5);
+  background-color: rgba(#000, 0.5);
   position: fixed;
   top: 0;
   right: 0;
