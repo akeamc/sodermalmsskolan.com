@@ -11,7 +11,8 @@
   > div,
   > figure,
   > iframe,
-  > blockquote {
+  > blockquote,
+  > hr {
     margin-top: map-get($spacers, 8);
     margin-bottom: map-get($spacers, 8);
   }
@@ -24,6 +25,31 @@
   }
 
   figure {
+    &.kg-width-full,
+    &.kg-width-wide {
+      display: flex;
+      justify-content: center;
+      flex-flow: wrap;
+    }
+
+    &.kg-width-full {
+      img {
+        width: 100vw;
+        border-radius: 0;
+      }
+    }
+
+    &.kg-width-wide {
+      img {
+        width: 100vw;
+        max-width: 1040px;
+
+        @media (max-width: 1040px) {
+          border-radius: 0;
+        }
+      }
+    }
+
     img {
       margin-bottom: 1rem;
     }
