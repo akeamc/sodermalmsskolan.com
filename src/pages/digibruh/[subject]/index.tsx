@@ -51,7 +51,7 @@ const Page: React.FunctionComponent = ({
           <h1 className="display-3 text-center text-md-left mb-4">
             {subject?.name}
           </h1>
-          <p className="lead text-white-50 text-center text-md-left mb-6 mb-lg-8">
+          <p className="lead text-white-80 text-center text-md-left mb-6 mb-lg-8">
             {subject?.description}
           </p>
         </Col>
