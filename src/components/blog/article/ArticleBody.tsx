@@ -4,11 +4,18 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { PostOrPage } from "@tryghost/content-api";
 import ReactHtmlParser, { convertNodeToElement } from "react-html-parser";
-import ResponsiveEmbed from "react-responsive-embed";
 
 function transform(node, index) {
   if (node.type == "tag" && node.name == "iframe") {
-    return <ResponsiveEmbed src={node.attribs?.src} allowFullScreen />;
+    return (
+      <div className="embed-responsive embed-responsive-16by9">
+        <iframe
+          className="embed-responsive-item"
+          src={node.attribs?.src}
+          allowFullScreen
+        />
+      </div>
+    );
   }
 
   return convertNodeToElement(node, index, transform);
