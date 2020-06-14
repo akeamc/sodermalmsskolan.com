@@ -15,7 +15,7 @@ export default class NotFound extends React.Component {
               <h1 className="display-2 text-center mb-4">
                 Sidan hittades inte.
               </h1>
-              <p className="lead text-white-50 text-center mb-4">
+              <p className="lead text-white-80 text-center mb-4">
                 Vi ber om ursäkt.
               </p>
               <div className="text-center">
