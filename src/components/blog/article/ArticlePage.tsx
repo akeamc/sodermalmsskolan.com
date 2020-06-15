@@ -49,7 +49,7 @@ export default class ArticlePage extends React.Component<{
             </Row>
           </Container>
         </section>
-        <ArticleBody data={post} />
+        <ArticleBody data={post} scrollSpy={digibruh} />
         <section className="pt-6 pt-md-8 pb-8 pb-md-11">
           <Container>
             <Row className="justify-content-center">
