@@ -67,7 +67,7 @@ const TableOfContentsList: React.FunctionComponent<{
           activeIndex >= entry.flatIndex &&
           activeIndex < (next?.flatIndex || endIndex + 1 || Infinity);
         return (
-          <li className={isActive ? "active" : ""}>
+          <li className={isActive ? "active" : ""} key={index}>
             <Link
               smooth={true}
               duration={500}
@@ -150,7 +150,7 @@ const ArticleBody: React.FunctionComponent<{
             xs={12}
             md={{
               span: 10,
-              offset: 1,
+              offset: scrollSpy ? 0 : 1,
             }}
             xl={{
               span: 8,

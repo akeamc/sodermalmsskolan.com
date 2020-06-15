@@ -22,7 +22,7 @@ export class Layout extends React.Component<{
       <div>
         <Head>
           <title>
-            {title ? title + " - södermalmsskolan.com" : "södermalmsskolan.com"}
+            {title ? title + " · södermalmsskolan.com" : "södermalmsskolan.com"}
           </title>
           <meta
             name="description"

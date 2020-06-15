@@ -9,7 +9,7 @@ import SubjectsGrid from "../../components/digibruh/SubjectsGrid";
 export default class Page extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Digibruh">
         <Header fixedNav>
           <Col xs={12}>
             <div className="py-8">

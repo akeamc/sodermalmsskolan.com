@@ -45,7 +45,7 @@ const Page: React.FunctionComponent = ({
   let subject = new Subject(subjectObj);
 
   return (
-    <Layout>
+    <Layout title={subject?.name}>
       <Header fixedNav backgroundImage={subject?.coverImage}>
         <Col xs={12}>
           <h1 className="display-3 text-center text-md-left mb-4">

@@ -4,14 +4,13 @@ import Col from "react-bootstrap/Col";
 import { Header } from "../../components/basic/Header";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import { AutoLink } from "../../components/basic/AutoLink";
 import { FeaturedPost } from "../../components/blog/Featured";
 import { PostGridAuto } from "../../components/blog/PostGrid";
 
 export default class Page extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Blogg">
         <Header fixedNav>
           <Col xs={12}>
             <div className="py-8">
