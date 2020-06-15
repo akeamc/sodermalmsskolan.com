@@ -8,7 +8,7 @@ import { StudySetGrid } from "../components/quizlet/StudySetGrid";
 export default class Page extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Quizlet">
         <Header>
           <Col xs={12}>
             <div className="py-8">

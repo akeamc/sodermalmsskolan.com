@@ -10,7 +10,7 @@ import { MenuGrid } from "../components/basic/MenuGrid";
 export default class Page extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Meny">
         <Header>
           <Col xs={12} md={5} className="order-md-2">
             <img

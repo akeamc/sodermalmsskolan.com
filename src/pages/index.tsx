@@ -13,7 +13,7 @@ import WindowConfetti from "../components/events/Confetti";
 import moment from "moment";
 
 const Page: React.FunctionComponent = () => {
-  const { data, error } = useSWR(`/menu/next?limit=${1}`, () => getNext(1));
+  const { data } = useSWR(`/menu/next?limit=${1}`, () => getNext(1));
   const daysLeft = Math.ceil(
     moment(new Date("2020-08-19T09:50:00+0200")).diff(moment(), "days", true)
   );

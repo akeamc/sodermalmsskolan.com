@@ -29,7 +29,7 @@ export default class ArticlePage extends React.Component<{
     );
 
     return (
-      <Layout>
+      <Layout title={post?.title}>
         <Header
           fixedNav
           backgroundImage={post?.feature_image}

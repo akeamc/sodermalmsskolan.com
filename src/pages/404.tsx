@@ -8,7 +8,7 @@ import { AutoLink } from "../components/basic/AutoLink";
 export default class NotFound extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Sidan hittades inte">
         <Header backgroundImage="/assets/Shrek.png" fixedNav>
           <Col xs={12}>
             <div className="py-8">

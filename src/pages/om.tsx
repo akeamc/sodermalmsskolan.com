@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 export default class Page extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Om">
         <Header />
         <section className="py-8 py-md-11">
           <Container>

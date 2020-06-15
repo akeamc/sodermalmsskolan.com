@@ -57,7 +57,7 @@ const Page: React.FunctionComponent = ({
   const placeholder: PostOrPage[] = new Array(6).fill(null);
 
   return (
-    <Layout>
+    <Layout title={author?.name}>
       <Header
         fixedNav
         backgroundImage={author?.cover_image}
