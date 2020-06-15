@@ -38,7 +38,7 @@ export default class ArticlePage extends React.Component<{
         <section className="pt-8 pt-md-11">
           <Container>
             <Row className="justify-content-center">
-              <Col xs={12} md={10} lg={9} xl={8}>
+              <Col xs={12} md={10} xl={8}>
                 <h1 className="display-4 text-center">{post.title}</h1>
 
                 <p className="lead mb-7 text-center text-muted">
