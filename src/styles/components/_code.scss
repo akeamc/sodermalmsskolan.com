@@ -1,8 +1,17 @@
-code {
+:not(pre) > code {
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: 85%;
   background-color: rgba($color: $gray-900, $alpha: 0.05);
   color: $gray-900;
+  border-radius: 3px;
+}
+
+pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
   border-radius: 3px;
 }
