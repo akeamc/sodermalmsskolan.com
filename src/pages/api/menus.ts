@@ -33,6 +33,7 @@ export default async (
       validator.toInt(limit)
     );
 
+    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
     return res.json({
       data: menus,
       meta: {
