@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { Footer } from "./Footer";
-import { initGA, logPageView } from "../../utils/analytics";
+import { initGA, logPageView } from "../../lib/utils/analytics";
 
 export class Layout extends React.Component<{
   title?: string;

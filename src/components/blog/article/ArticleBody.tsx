@@ -116,7 +116,7 @@ const ArticleBody: React.FunctionComponent<{
       /**
        * Use node.name in order to match the <h1>, <h2>, <h3> ... tags.
        */
-      return <node.name {...element.props} ref={ref} />;
+      return <node.name {...element.props} ref={ref} key={index} />;
     }
 
     if (node.name == "iframe") {

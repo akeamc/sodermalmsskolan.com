@@ -37,8 +37,10 @@
     "react-scroll": "^1.7.16",
     "react-sticky-box": "^0.9.3",
     "react-use-scrollspy": "^2.0.0",
+    "rss-parser": "^3.8.0",
     "swr": "^0.2.2",
-    "typed-rest-client": "^1.7.3"
+    "typed-rest-client": "^1.7.3",
+    "validator": "^13.1.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.155",

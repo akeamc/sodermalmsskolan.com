@@ -1,6 +1,6 @@
 import React from "react";
 import { AutoLink } from "./AutoLink";
-import { GenericUser } from "../../models/User";
+import { GenericUser } from "../../lib/models/User";
 
 export class Avatar extends React.Component<{
   href?: string;

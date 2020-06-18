@@ -1,13 +1,13 @@
 import React from "react";
-import { defaultParams } from "../../api/ghost/post";
+import { defaultParams } from "../../lib/api/ghost/post";
 import useSWR, { useSWRPages } from "swr";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { NarrowCard } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
-import { GenericUser } from "../../models/User";
+import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
-import api from "../../api/ghost/credentials";
+import api from "../../lib/api/ghost/credentials";
 
 export function getPostUrl(slug: string | null): string {
   return `/blogg/${slug ? slug : ""}`;
