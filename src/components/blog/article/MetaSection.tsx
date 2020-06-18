@@ -2,9 +2,9 @@ import moment from "moment";
 import { AuthorGroup } from "../../basic/Avatar";
 import Skeleton from "react-loading-skeleton";
 import { AutoLink } from "../../basic/AutoLink";
-import { GenericUser } from "../../../models/User";
+import { GenericUser } from "../../../lib/models/User";
 import { Author } from "@tryghost/content-api";
-import { getAuthorUrl } from "../../../api/ghost/author";
+import { getAuthorUrl } from "../../../lib/api/ghost/author";
 
 const MetaSection: React.FunctionComponent<{
   date: Date;

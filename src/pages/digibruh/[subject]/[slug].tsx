@@ -1,6 +1,6 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../404";
-import { Subject } from "../../../models/Digibruh";
+import { Subject } from "../../../lib/models/Digibruh";
 import ArticlePage from "../../../components/blog/article/ArticlePage";
 
 export const getServerSideProps: GetServerSideProps = async ({

@@ -1,7 +1,7 @@
-import { getPostBySlug } from "../../api/ghost/post";
+import { getPostBySlug } from "../../lib/api/ghost/post";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../404";
-import { digibruhTag } from "../../models/Digibruh";
+import { digibruhTag } from "../../lib/models/Digibruh";
 import ArticlePage from "../../components/blog/article/ArticlePage";
 
 export const getServerSideProps: GetServerSideProps = async ({

@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import { AuthorGroup } from "./Avatar";
 import { AutoLink } from "./AutoLink";
 import Skeleton from "react-loading-skeleton";
-import { GenericUser } from "../../models/User";
+import { GenericUser } from "../../lib/models/User";
 
 interface CardMeta {
   authors?: GenericUser[];

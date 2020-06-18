@@ -2,11 +2,11 @@ import React from "react";
 import { NarrowCard } from "../basic/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { getStudySets } from "../../api/main/quizlet/studysets";
+import { getStudySets } from "../../lib/api/main/quizlet/studysets";
 import useSWR from "swr";
-import { StudySet } from "../../models/Quizlet";
+import { StudySet } from "../../lib/models/Quizlet";
 import Skeleton from "react-loading-skeleton";
-import { GenericUser } from "../../models/User";
+import { GenericUser } from "../../lib/models/User";
 
 export class StudySetGridItem extends React.Component<{
   studySet: StudySet | null;

@@ -2,12 +2,12 @@ import React from "react";
 import moment from "moment";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import useSWR from "swr";
-import { FoodMenu, getNext } from "../../api/main/menu/foodmenus";
 import Skeleton from "react-loading-skeleton";
+import { useMenus } from "../../lib/api/main/menu/Menu";
+import { Menu } from "../../lib/api/main/menu/Menu";
 
 export class MenuGridItem extends React.Component<{
-  menu: FoodMenu | null;
+  menu: Menu | null;
   loading?: boolean;
 }> {
   render() {
@@ -44,14 +44,12 @@ export const MenuGrid: React.FunctionComponent<{
   menus: number;
 }> = (props) => {
   const { menus } = props;
-  const { data, error } = useSWR(`/menu/next?limit=${menus}`, () =>
-    getNext(menus)
-  );
-  const fallbackArray: null[] = new Array(menus).fill(null);
+  const { data, error } = useMenus({ limit: menus });
+  const fallbackArray: Menu[] = new Array(menus).fill(null);
 
   return (
     <Row>
-      {(data || fallbackArray).map((menu: FoodMenu) => (
+      {(data || fallbackArray).map((menu: Menu) => (
         <Col xs={12} md={4}>
           <MenuGridItem loading={!data} menu={menu} />
         </Col>

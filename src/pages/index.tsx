@@ -6,14 +6,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AutoLink } from "../components/basic/AutoLink";
-import { getNext } from "../api/main/menu/foodmenus";
 import { MenuGridItem } from "../components/basic/MenuGrid";
-import useSWR from "swr";
 import WindowConfetti from "../components/events/Confetti";
 import moment from "moment";
+import { useMenus } from "../lib/api/main/menu/Menu";
 
 const Page: React.FunctionComponent = () => {
-  const { data } = useSWR(`/menu/next?limit=${1}`, () => getNext(1));
+  const { data } = useMenus({ limit: 10 });
   const daysLeft = Math.ceil(
     moment(new Date("2020-08-19T09:50:00+0200")).diff(moment(), "days", true)
   );

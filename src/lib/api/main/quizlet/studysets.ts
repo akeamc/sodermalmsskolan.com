@@ -1,8 +1,7 @@
 import { StudySet } from "../../../models/Quizlet";
 import client from "../client";
-import { CollectionResponse } from "../Response";
 
-interface StudySetResponse extends CollectionResponse {
+interface StudySetResponse {
   sets: StudySet[];
 }
 

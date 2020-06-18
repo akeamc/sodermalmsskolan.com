@@ -3,15 +3,15 @@ import NotFound from "../../404";
 import { Layout } from "../../../components/basic/Layout";
 import { Header } from "../../../components/basic/Header";
 import Col from "react-bootstrap/Col";
-import { getAuthorBySlug, getAuthorUrl } from "../../../api/ghost/author";
+import { getAuthorBySlug, getAuthorUrl } from "../../../lib/api/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
 import useSWR from "swr";
-import { getPosts } from "../../../api/ghost/post";
+import { getPosts } from "../../../lib/api/ghost/post";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Avatar } from "../../../components/basic/Avatar";
 import { PostOrPage } from "@tryghost/content-api";
-import { digibruhTag } from "../../../models/Digibruh";
+import { digibruhTag } from "../../../lib/models/Digibruh";
 import { FieldPostGrid } from "../../../components/digibruh/FieldPostGrid";
 
 export const getServerSideProps: GetServerSideProps = async ({

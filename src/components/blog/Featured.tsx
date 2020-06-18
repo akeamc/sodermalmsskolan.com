@@ -1,12 +1,12 @@
 import { WideCard } from "../basic/Card";
 import Col from "react-bootstrap/Col";
-import { getLastFeatured } from "../../api/ghost/post";
+import { getLastFeatured } from "../../lib/api/ghost/post";
 import useSWR from "swr";
 import Row from "react-bootstrap/Row";
 import { lineClamp, getPostUrl } from "./PostGrid";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
-import { GenericUser } from "../../models/User";
+import { GenericUser } from "../../lib/models/User";
 import { PostOrPage } from "@tryghost/content-api";
 
 class FeaturedPostItem extends React.Component<{

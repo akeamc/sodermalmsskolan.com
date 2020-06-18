@@ -61,12 +61,19 @@ interface ISubject {
 }
 
 export class Subject implements ISubject {
+  /**
+   * The name of the subject.
+   */
   name: string;
   tagSlug: string;
   fields: Field[];
   coverImage: string | null;
   description: string | null;
 
+  /**
+   * Generate a regular expression to identify tags that are subjects.
+   * @param subject Specify a specific subject to identify, otherwise a wildcard is used.
+   */
   static regex(subject: string = "[a-z]+") {
     return new RegExp(`hash-skola-${subject}$`, "i");
   }

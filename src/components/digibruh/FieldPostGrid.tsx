@@ -1,4 +1,4 @@
-import { Field, Subject } from "../../models/Digibruh";
+import { Field, Subject } from "../../lib/models/Digibruh";
 import useSWR from "swr";
 import { lineClamp } from "../blog/PostGrid";
 import { NarrowCard } from "../basic/Card";
@@ -6,7 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React from "react";
-import { GenericUser } from "../../models/User";
+import { GenericUser } from "../../lib/models/User";
 import { PostOrPage } from "@tryghost/content-api";
 
 class FieldPostGridItem extends React.Component<{

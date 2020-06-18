@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../404";
-import { Subject } from "../../../models/Digibruh";
+import { Subject } from "../../../lib/models/Digibruh";
 import { FieldPostGridAuto } from "../../../components/digibruh/FieldPostGrid";
 
 export const getServerSideProps: GetServerSideProps = async ({
