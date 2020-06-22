@@ -14,7 +14,7 @@ import { useMenus } from "../lib/api/main/menu/Menu";
 const Page: React.FunctionComponent = () => {
   const { data } = useMenus({ limit: 10 });
   const daysLeft = Math.ceil(
-    moment(new Date("2020-08-19T09:50:00+0200")).diff(moment(), "days", true)
+    moment(new Date(1597788000000)).diff(moment(), "days", true)
   );
 
   return (
