@@ -8,6 +8,7 @@ import React from "react";
 import useScrollSpy from "../../basic/ScrollSpy";
 import StickyBox from "react-sticky-box";
 import { Link } from "react-scroll";
+import { renderMathInText } from "../../../lib/utils/katex";
 
 interface TableOfContentsEntry {
   ref: React.Ref<unknown>;
@@ -129,6 +130,15 @@ const ArticleBody: React.FunctionComponent<{
           />
         </div>
       );
+    }
+
+    if (node.type == "text") {
+      let katexParsed = renderMathInText(node.data);
+      if (katexParsed != null) {
+        return (
+          <span key={index} dangerouslySetInnerHTML={{ __html: katexParsed }} />
+        );
+      }
     }
 
     return convertNodeToElement(node, index, transform);
