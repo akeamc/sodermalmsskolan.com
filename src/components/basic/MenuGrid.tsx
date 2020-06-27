@@ -14,6 +14,8 @@ export class MenuGridItem extends React.Component<{
     const { menu, loading = false } = this.props;
     const fallbackValue = new Array(2).fill(<Skeleton count={2} />);
 
+    console.log(menu);
+
     if (menu || loading) {
       return (
         <>
@@ -49,11 +51,13 @@ export const MenuGrid: React.FunctionComponent<{
 
   return (
     <Row>
-      {(data || fallbackArray).map((menu: Menu) => (
-        <Col xs={12} md={4}>
-          <MenuGridItem loading={!data} menu={menu} />
-        </Col>
-      ))}
+      {((data?.length > 0 ? data : [null]) || fallbackArray).map(
+        (menu: Menu, index) => (
+          <Col xs={12} md={4} key={index}>
+            <MenuGridItem loading={!data} menu={menu} />
+          </Col>
+        )
+      )}
     </Row>
   );
 };
