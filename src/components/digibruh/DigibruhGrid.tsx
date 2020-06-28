@@ -47,12 +47,16 @@ class DigibruhGridItem extends React.Component<{
 export const DigibruhGrid: React.FunctionComponent<{
   items: IDigibruhGridItem[];
   imagesExpected: boolean;
+  expectedNumberOfItems?: number;
 }> = (props) => {
-  const { items, imagesExpected = true } = props;
+  const { items, imagesExpected = true, expectedNumberOfItems = 3 } = props;
+  const placeholder = new Array<IDigibruhGridItem>(expectedNumberOfItems).fill(
+    null
+  );
 
   return (
     <Row>
-      {(items || []).map((item, index) => {
+      {(items || placeholder).map((item, index) => {
         return (
           <Col xs={12} md={6} lg={4} key={index} className="d-flex">
             <DigibruhGridItem

@@ -69,8 +69,6 @@ export default class Digibruh {
     let digibruh = new Digibruh();
     digibruh.tags = await DigibruhTagArray.fetch();
 
-    console.log(digibruh.subjects);
-
     return digibruh;
   }
 }
