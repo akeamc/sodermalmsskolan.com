@@ -5,21 +5,21 @@ import {
   LimitParam,
   FilterParam,
 } from "@tryghost/content-api";
-import { digibruhTag } from "../../models/Digibruh";
 import { Params } from "next/dist/next-server/server/router";
+import Digibruh from "../../digibruh/Digibruh";
 
 export const defaultParams = (): Params => {
   return {
     include: ["tags", "authors"],
     order: "published_at DESC",
-    filter: "tag:-" + digibruhTag,
+    filter: "tag:-" + Digibruh.tagPrefix,
     limit: 6,
   };
 };
 
 export async function getPosts(
   limit: LimitParam = 10,
-  filter: FilterParam = `tag:-${digibruhTag}`
+  filter: FilterParam = `tag:-${Digibruh.tagPrefix}`
 ): Promise<PostsOrPages> {
   return api.posts.browse({
     ...defaultParams(),
@@ -63,5 +63,5 @@ export async function getPostsByAuthor(
   slug: string,
   limit: LimitParam = 10
 ): Promise<PostOrPage[]> {
-  return getPosts(limit, `tag:-${digibruhTag}+authors.slug:${slug}`);
+  return getPosts(limit, `tag:-${Digibruh.tagPrefix}+authors.slug:${slug}`);
 }

@@ -1,8 +1,8 @@
 import api from "./credentials";
-import { Tag } from "@tryghost/content-api";
+import { Tags } from "@tryghost/content-api";
 
-export async function getTags(): Promise<Tag[]> {
-  const tags: Tag[] = await api.tags.browse({
+export async function getTags(): Promise<Tags> {
+  const tags: Tags = await api.tags.browse({
     limit: "all",
   });
   return tags;

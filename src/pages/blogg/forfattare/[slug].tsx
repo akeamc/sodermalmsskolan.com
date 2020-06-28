@@ -5,14 +5,14 @@ import { Header } from "../../../components/basic/Header";
 import Col from "react-bootstrap/Col";
 import { getAuthorBySlug, getAuthorUrl } from "../../../lib/api/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
-import useSWR from "swr";
-import { getPosts } from "../../../lib/api/ghost/post";
+// import useSWR from "swr";
+// import { getPosts } from "../../../lib/api/ghost/post";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Avatar } from "../../../components/basic/Avatar";
 import { PostOrPage } from "@tryghost/content-api";
-import { digibruhTag } from "../../../lib/models/Digibruh";
-import { FieldPostGrid } from "../../../components/digibruh/FieldPostGrid";
+import Digibruh from "../../../lib/digibruh/Digibruh";
+import useSWR from "swr";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -47,11 +47,10 @@ const Page: React.FunctionComponent = ({
     return <NotFound />;
   }
 
-  const { data: digibruhArticles } = useSWR(
-    `blog/author/${author.slug}/posts`,
-    () => {
-      return getPosts("all", `authors.slug:${author.slug}+tag:${digibruhTag}`);
-    }
+  const {
+    data: digibruhArticles,
+  } = useSWR(`blog/author/${author.slug}/digibruh`, () =>
+    Digibruh.fetchPostsByAuthor(author.slug)
   );
 
   const placeholder: PostOrPage[] = new Array(6).fill(null);
@@ -98,12 +97,12 @@ const Page: React.FunctionComponent = ({
           </Row>
           <PostGridAuto
             params={{
-              filter: `author:${author?.slug}+tag:-${digibruhTag}`,
+              filter: `author:${author?.slug}+tag:-${Digibruh.tagPrefix}`,
             }}
           />
         </Container>
       </section>
-      <section className="py-8 py-md-11">
+      {/* <section className="py-8 py-md-11">
         <Container>
           <Row className="row align-items-center mb-5">
             <Col xs={12} className="col-md">
@@ -112,7 +111,7 @@ const Page: React.FunctionComponent = ({
           </Row>
           <FieldPostGrid posts={digibruhArticles || placeholder} />
         </Container>
-      </section>
+      </section> */}
     </Layout>
   );
 };

@@ -14,8 +14,6 @@ export class MenuGridItem extends React.Component<{
     const { menu, loading = false } = this.props;
     const fallbackValue = new Array(2).fill(<Skeleton count={2} />);
 
-    console.log(menu);
-
     if (menu || loading) {
       return (
         <>
