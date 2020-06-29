@@ -49,11 +49,13 @@ export const MenuGrid: React.FunctionComponent<{
 
   return (
     <Row>
-      {(data || fallbackArray).map((menu: Menu) => (
-        <Col xs={12} md={4}>
-          <MenuGridItem loading={!data} menu={menu} />
-        </Col>
-      ))}
+      {((data?.length > 0 ? data : [null]) || fallbackArray).map(
+        (menu: Menu, index) => (
+          <Col xs={12} md={4} key={index}>
+            <MenuGridItem loading={!data} menu={menu} />
+          </Col>
+        )
+      )}
     </Row>
   );
 };

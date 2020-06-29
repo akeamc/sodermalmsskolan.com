@@ -12,7 +12,7 @@ import moment from "moment";
 import { useMenus } from "../lib/api/main/menu/Menu";
 
 const Page: React.FunctionComponent = () => {
-  const { data } = useMenus({ limit: 10 });
+  const { data } = useMenus({ limit: 1 });
   const daysLeft = Math.ceil(
     moment(new Date(1597788000000)).diff(moment(), "days", true)
   );
@@ -63,10 +63,7 @@ const Page: React.FunctionComponent = () => {
         <Container>
           <Row>
             <Col xs={12} md={4}>
-              <MenuGridItem
-                menu={(data || [null])[0]}
-                loading={!data}
-              ></MenuGridItem>
+              <MenuGridItem menu={(data || [null])[0]} loading={!data} />
               <AutoLink
                 className="btn btn-primary mr-2 lift lift-lg"
                 href="/meny"

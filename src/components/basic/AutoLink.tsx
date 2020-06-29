@@ -9,15 +9,19 @@ export class AutoLink extends React.Component<{
   block?: boolean;
 }> {
   render() {
-    const { href, children, style, block } = this.props;
+    const { href = "", children, style, block } = this.props;
     const isExternal = href.indexOf("//") > -1;
 
     const className = `${this.props.className} ${
-      block ? "text-reset text-decoration-none d-block" : ""
+      block ? "text-reset text-decoration-none" : ""
     }`;
 
     return isExternal ? (
-      <a href={href} className={className} style={style}>
+      <a
+        href={href}
+        className={className}
+        style={{ display: block ? "block" : null, ...style }}
+      >
         {children}
       </a>
     ) : (
