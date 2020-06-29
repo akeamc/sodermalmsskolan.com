@@ -10,7 +10,12 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 0 2rem 1.5rem;
+  padding: 0 1rem 1.5rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .card-meta-divider {
@@ -19,21 +24,10 @@
 }
 
 .card-body {
-  padding: 2rem;
-}
+  padding: 1rem;
 
-.card-row {
-  .card-body {
-    @include media-breakpoint-up(sm) {
-      padding: 4rem 2.5rem;
-    }
-  }
-
-  .card-meta {
-    @include media-breakpoint-up(sm) {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
-    }
+  @include media-breakpoint-up(sm) {
+    padding: 2rem;
   }
 }
 

@@ -3,11 +3,12 @@ import Col from "react-bootstrap/Col";
 import { getLastFeatured } from "../../lib/api/ghost/post";
 import useSWR from "swr";
 import Row from "react-bootstrap/Row";
-import { lineClamp, getPostUrl } from "./PostGrid";
+import { getPostUrl } from "./PostGrid";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
 import { GenericUser } from "../../lib/models/User";
 import { PostOrPage } from "@tryghost/content-api";
+import { getLineClamp } from "../basic/CardGrid";
 
 class FeaturedPostItem extends React.Component<{
   post: PostOrPage | null;
@@ -31,7 +32,7 @@ class FeaturedPostItem extends React.Component<{
         imageExpected={imageExpected}
       >
         <h3>{loading ? <Skeleton /> : post.title}</h3>
-        <p className="mb-0 text-muted" style={lineClamp(excerptRows)}>
+        <p className="mb-0 text-muted" style={getLineClamp(excerptRows)}>
           {loading ? <Skeleton count={excerptRows} /> : post.excerpt}
         </p>
       </WideCard>

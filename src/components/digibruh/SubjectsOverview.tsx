@@ -1,6 +1,6 @@
 import React from "react";
 import { Subject } from "../../lib/digibruh/Subject";
-import { IDigibruhGridItem, DigibruhGrid } from "./DigibruhGrid";
+import { GridItem, CardGrid } from "../basic/CardGrid";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Skeleton from "react-loading-skeleton";
@@ -15,7 +15,7 @@ const SubjectsOverview: React.FunctionComponent = () => {
   return (
     <>
       {subjects.map((subject, index) => {
-        let gridItems: IDigibruhGridItem[] = loading
+        let gridItems: GridItem[] = loading
           ? null
           : subject.fields.map(({ name, description, coverImage }) => {
               return {
@@ -38,7 +38,7 @@ const SubjectsOverview: React.FunctionComponent = () => {
                 </p>
               </Col>
             </Row>
-            <DigibruhGrid items={gridItems} imagesExpected={true} />
+            <CardGrid items={gridItems} imagesExpected={true} />
           </section>
         );
       })}
