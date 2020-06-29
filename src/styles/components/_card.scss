@@ -25,6 +25,9 @@
 
 .card-body {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   @include media-breakpoint-up(sm) {
     padding: 2rem;

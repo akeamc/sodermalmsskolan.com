@@ -92,7 +92,7 @@ export const PostGridAuto: React.FunctionComponent<{
             <button
               onClick={loadMore}
               disabled={isLoadingMore}
-              className="btn btn-outline-gray-300 d-none d-md-inline btn btn-outline-primary"
+              className="btn btn-outline-gray-300 d-inline btn btn-outline-primary"
             >
               {isLoadingMore ? "Hämtar fler inlägg" : "Hämta fler inlägg"}
             </button>

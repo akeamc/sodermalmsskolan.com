@@ -3,7 +3,6 @@ import { Layout } from "../../components/basic/Layout";
 import Col from "react-bootstrap/Col";
 import { Header } from "../../components/basic/Header";
 import Container from "react-bootstrap/Container";
-import { useDigibruh } from "../../lib/digibruh/Digibruh";
 import SubjectsOverview from "../../components/digibruh/SubjectsOverview";
 
 const Page: React.FunctionComponent = () => {

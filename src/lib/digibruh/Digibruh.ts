@@ -1,5 +1,5 @@
-import { PostsOrPages, Tag } from "@tryghost/content-api";
-import { getPostsByTag, getPosts } from "../api/ghost/post";
+import { PostsOrPages, Tag, PostOrPage } from "@tryghost/content-api";
+import { getPostsByTag, getPosts, getPostBySlug } from "../api/ghost/post";
 import { Subject } from "./Subject";
 import { getTags } from "../api/ghost/tag";
 import useSWR from "swr";
@@ -55,6 +55,28 @@ export default class Digibruh {
 
   get subjects(): Subject[] {
     return this.tags.subjects();
+  }
+
+  getSubjectBySlug(slug: string): Subject | null {
+    return this.subjects.find((subject) => subject.slug == slug) || null;
+  }
+
+  getFieldBySlug(subjectSlug: string, fieldSlug: string): Field | null {
+    return (
+      this.fields.find(
+        (field) => field.subjectSlug == subjectSlug && field.slug == fieldSlug
+      ) || null
+    );
+  }
+
+  async fetchPostBySlug(slug: string): Promise<PostOrPage | null> {
+    const post = await getPostBySlug(slug);
+
+    if (!post.tags.find((tag) => tag.slug == Digibruh.tagPrefix)) {
+      return null;
+    }
+
+    return post;
   }
 
   static fetchAllPosts = async (): Promise<PostsOrPages> => {

@@ -1,5 +1,8 @@
 import { Tag, PostsOrPages } from "@tryghost/content-api";
 import { getPostsByTag } from "../api/ghost/post";
+import Digibruh from "./Digibruh";
+import { GridItem } from "../../components/basic/CardGrid";
+import useSWR from "swr";
 
 /**
  * Generic collection for use within Digibruh.
@@ -10,12 +13,16 @@ export abstract class DigibruhCollection {
   /**
    * URL of the collection to use on this website.
    */
-  abstract get url(): string;
+  get url(): string {
+    return `/digibruh/${this.tagSegments.join("/")}`;
+  }
 
   /**
    * Slug to use on this website.
    */
-  abstract get slug(): string;
+  get slug(): string {
+    return this.tagSegments[this.tagSegments.length - 1];
+  }
 
   /**
    * Generate a regular expression for finding child collection tags.
@@ -24,11 +31,24 @@ export abstract class DigibruhCollection {
     return new RegExp(`^${this.tag.slug}-${DigibruhCollection.tagWildcard}$`);
   }
 
+  get tagSegments() {
+    return this.tag.slug.split("-").slice(Digibruh.tagPrefix.split("-").length);
+  }
+
   /**
    * A regular expression matching all tags whose slug matches a `DigibruhCollection` of this type.
    */
   static regExp(slug: string = DigibruhCollection.tagWildcard): RegExp | null {
     return null;
+  }
+
+  toGridItem(): GridItem {
+    return {
+      title: this.name,
+      description: this.description,
+      url: this.url,
+      image: this.coverImage,
+    };
   }
 
   get name(): string {

@@ -7,14 +7,6 @@ import { Field } from "./Field";
  * A Digibruh subject.
  */
 export class Subject extends DigibruhCollection {
-  get slug() {
-    return this.tag.slug.substring(Digibruh.tagPrefix.length + 1);
-  }
-
-  get url() {
-    return "";
-  }
-
   /**
    * Returns a regular expression matching `<Digibruh.tagPrefix>-<Subject slug>`. Default is any subject (wildcard).
    */

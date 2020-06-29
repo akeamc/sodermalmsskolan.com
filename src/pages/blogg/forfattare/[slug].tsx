@@ -13,6 +13,8 @@ import { Avatar } from "../../../components/basic/Avatar";
 import { PostOrPage } from "@tryghost/content-api";
 import Digibruh from "../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
+import { CardGrid } from "../../../components/basic/CardGrid";
+import { Field } from "../../../lib/digibruh/Field";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -47,13 +49,11 @@ const Page: React.FunctionComponent = ({
     return <NotFound />;
   }
 
-  const {
-    data: digibruhArticles,
-  } = useSWR(`blog/author/${author.slug}/digibruh`, () =>
+  const digibruhSWR = useSWR(`blog/author/${author.slug}/digibruh`, () =>
     Digibruh.fetchPostsByAuthor(author.slug)
   );
 
-  const placeholder: PostOrPage[] = new Array(6).fill(null);
+  const digibruhPosts: PostOrPage[] = digibruhSWR.data || [];
 
   return (
     <Layout title={author?.name}>
@@ -102,16 +102,20 @@ const Page: React.FunctionComponent = ({
           />
         </Container>
       </section>
-      {/* <section className="py-8 py-md-11">
+      <section className="py-8 py-md-11">
         <Container>
           <Row className="row align-items-center mb-5">
             <Col xs={12} className="col-md">
               <h3 className="mb-0">Digibruh-artiklar</h3>
             </Col>
           </Row>
-          <FieldPostGrid posts={digibruhArticles || placeholder} />
+          <CardGrid
+            items={digibruhPosts.map(Field.postToGridItem)}
+            imagesExpected={true}
+            rowLimit={3}
+          />
         </Container>
-      </section> */}
+      </section>
     </Layout>
   );
 };
