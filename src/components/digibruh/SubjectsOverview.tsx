@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Skeleton from "react-loading-skeleton";
 import { useDigibruh } from "../../lib/digibruh/Digibruh";
-import { AutoLink } from "../basic/AutoLink";
 
 const SubjectsOverview: React.FunctionComponent = () => {
   const { data } = useDigibruh();
@@ -31,14 +30,14 @@ const SubjectsOverview: React.FunctionComponent = () => {
                   {loading ? <Skeleton /> : subject?.description}
                 </p>
               </Col>
-              <Col xs={12} md="auto">
+              {/* <Col xs={12} md="auto">
                 <AutoLink
                   href={subject?.url}
                   className="mt-4 mt-md-0 btn btn-outline-gray-300 btn btn-outline-primary btn-sm"
                 >
                   Visa allt
                 </AutoLink>
-              </Col>
+              </Col> */}
             </Row>
             <CardGrid items={gridItems} imagesExpected={true} />
           </section>
