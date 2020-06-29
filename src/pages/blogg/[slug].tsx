@@ -1,8 +1,8 @@
 import { getPostBySlug } from "../../lib/api/ghost/post";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../404";
-import { digibruhTag } from "../../lib/models/Digibruh";
 import ArticlePage from "../../components/blog/article/ArticlePage";
+import Digibruh from "../../lib/digibruh/Digibruh";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
     res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
 
-    if (post?.tags?.map((tag) => tag.slug).includes(digibruhTag)) {
+    if (post?.tags?.map((tag) => tag.slug).includes(Digibruh.tagPrefix)) {
       throw new Error("Cannot view Digibruh article here.");
     }
 

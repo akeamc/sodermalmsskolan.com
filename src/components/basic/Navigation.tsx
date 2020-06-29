@@ -34,7 +34,6 @@ const NavLinks: React.FunctionComponent = () => (
     <NavLink href="/blogg">Blogg</NavLink>
     <NavLink href="/meny">Meny</NavLink>
     <NavLink href="/digibruh">Digibruh</NavLink>
-    <NavLink href="/quizlet">Quizlet</NavLink>
     <NavLink href="/om">Om</NavLink>
   </>
 );

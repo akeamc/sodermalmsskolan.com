@@ -8,65 +8,41 @@ import Skeleton from "react-loading-skeleton";
 import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
 import api from "../../lib/api/ghost/credentials";
+import { CardGrid, GridItem } from "../basic/CardGrid";
 
 export function getPostUrl(slug: string | null): string {
   return `/blogg/${slug ? slug : ""}`;
 }
 
-export function lineClamp(lines: number): React.CSSProperties {
-  return {
-    display: "-webkit-box",
-    WebkitBoxOrient: "vertical",
-    WebkitLineClamp: lines,
-    overflow: "hidden",
-  };
-}
-
-class PostGridItem extends React.Component<{
-  post: PostOrPage | null;
-  imageExpected?: boolean;
-}> {
-  render() {
-    const { post, imageExpected = true } = this.props;
-    const excerptRows = 3;
-    const postUrl = getPostUrl(post?.slug);
-    const loading = !post;
-
-    return (
-      <Col xs={12} md={6} lg={4} className="d-flex">
-        <NarrowCard
-          meta={{
-            authors: (post?.authors || []).map(GenericUser.fromAuthor),
-            date: new Date(post?.published_at),
-          }}
-          image={post?.feature_image}
-          href={postUrl}
-          loading={loading}
-          imageExpected={imageExpected}
-        >
-          <h3>{loading ? <Skeleton /> : post?.title}</h3>
-          <p className="mb-0 text-muted" style={lineClamp(excerptRows)}>
-            {loading ? <Skeleton count={excerptRows} /> : post?.excerpt}
-          </p>
-        </NarrowCard>
-      </Col>
-    );
-  }
-}
-
 export const PostGrid: React.FunctionComponent<{
   posts: PostOrPage[];
   expectedNumberOfPosts?: number;
+  containerLess?: boolean;
 }> = (props) => {
-  const { posts, expectedNumberOfPosts = 3 } = props;
-  const placeholder: PostOrPage[] = new Array(expectedNumberOfPosts).fill(null);
+  const { posts, expectedNumberOfPosts = 3, containerLess = false } = props;
+  const items: GridItem[] = (posts || []).map(
+    ({ title, excerpt, slug, feature_image, published_at, authors }) => {
+      return {
+        title,
+        description: excerpt,
+        url: getPostUrl(slug),
+        image: feature_image,
+        meta: {
+          date: new Date(published_at),
+          authors: authors.map(GenericUser.fromAuthor),
+        },
+      };
+    }
+  );
 
   return (
-    <Row>
-      {(posts || placeholder).map((post, index) => {
-        return <PostGridItem post={post} key={index} />;
-      })}
-    </Row>
+    <CardGrid
+      items={items}
+      expectedNumberOfItems={expectedNumberOfPosts}
+      imagesExpected={true}
+      rowLimit={3}
+      containerLess={containerLess}
+    />
   );
 };
 
@@ -89,11 +65,15 @@ export const PostGridAuto: React.FunctionComponent<{
         )
       );
 
-      const placeholder = new Array(assembledParams.limit).fill(null);
+      let limit: number = parseInt(assembledParams.limit.toString()); // Convert ArrayOrValue<number> to number
 
-      return (data || placeholder).map((post, index) => (
-        <PostGridItem key={index} post={post} />
-      ));
+      return (
+        <PostGrid
+          posts={data}
+          expectedNumberOfPosts={limit}
+          containerLess={true}
+        ></PostGrid>
+      );
     },
     (SWR) => {
       return SWR.data.meta.pagination.next;
@@ -112,7 +92,7 @@ export const PostGridAuto: React.FunctionComponent<{
             <button
               onClick={loadMore}
               disabled={isLoadingMore}
-              className="btn btn-outline-gray-300 d-none d-md-inline btn btn-outline-primary"
+              className="btn btn-outline-gray-300 d-inline btn btn-outline-primary"
             >
               {isLoadingMore ? "Hämtar fler inlägg" : "Hämta fler inlägg"}
             </button>

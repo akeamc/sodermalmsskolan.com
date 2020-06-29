@@ -5,14 +5,16 @@ import { Header } from "../../../components/basic/Header";
 import Col from "react-bootstrap/Col";
 import { getAuthorBySlug, getAuthorUrl } from "../../../lib/api/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
-import useSWR from "swr";
-import { getPosts } from "../../../lib/api/ghost/post";
+// import useSWR from "swr";
+// import { getPosts } from "../../../lib/api/ghost/post";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Avatar } from "../../../components/basic/Avatar";
 import { PostOrPage } from "@tryghost/content-api";
-import { digibruhTag } from "../../../lib/models/Digibruh";
-import { FieldPostGrid } from "../../../components/digibruh/FieldPostGrid";
+import Digibruh from "../../../lib/digibruh/Digibruh";
+import useSWR from "swr";
+import { CardGrid } from "../../../components/basic/CardGrid";
+import { Field } from "../../../lib/digibruh/Field";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -47,14 +49,11 @@ const Page: React.FunctionComponent = ({
     return <NotFound />;
   }
 
-  const { data: digibruhArticles } = useSWR(
-    `blog/author/${author.slug}/posts`,
-    () => {
-      return getPosts("all", `authors.slug:${author.slug}+tag:${digibruhTag}`);
-    }
+  const digibruhSWR = useSWR(`blog/author/${author.slug}/digibruh`, () =>
+    Digibruh.fetchPostsByAuthor(author.slug)
   );
 
-  const placeholder: PostOrPage[] = new Array(6).fill(null);
+  const digibruhPosts: PostOrPage[] = digibruhSWR.data || [];
 
   return (
     <Layout title={author?.name}>
@@ -98,7 +97,7 @@ const Page: React.FunctionComponent = ({
           </Row>
           <PostGridAuto
             params={{
-              filter: `author:${author?.slug}+tag:-${digibruhTag}`,
+              filter: `author:${author?.slug}+tag:-${Digibruh.tagPrefix}`,
             }}
           />
         </Container>
@@ -110,7 +109,11 @@ const Page: React.FunctionComponent = ({
               <h3 className="mb-0">Digibruh-artiklar</h3>
             </Col>
           </Row>
-          <FieldPostGrid posts={digibruhArticles || placeholder} />
+          <CardGrid
+            items={digibruhPosts.map(Field.postToGridItem)}
+            imagesExpected={true}
+            rowLimit={3}
+          />
         </Container>
       </section>
     </Layout>
