@@ -2,62 +2,25 @@ import { Layout } from "../../../../components/basic/Layout";
 import { Header } from "../../../../components/basic/Header";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../../404";
 import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
 import Digibruh, { useDigibruh } from "../../../../lib/digibruh/Digibruh";
-import Skeleton from "react-loading-skeleton";
 import Row from "react-bootstrap/Row";
 import useSWR from "swr";
 import { PostOrPage } from "@tryghost/content-api";
+import {
+  DigibruhPage,
+  getInitialDigibruh,
+} from "../../../../lib/digibruh/utils/initialprops";
+import { GenericUser } from "../../../../lib/models/User";
 
-export const getServerSideProps: GetServerSideProps = async ({
-  res,
-  query,
-}) => {
-  try {
-    const digibruh = await Digibruh.initialize();
-    const subjectSlug = query.subject?.toString();
-    const fieldSlug = query.field?.toString();
-
-    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
-
-    if (digibruh.getFieldBySlug(subjectSlug, fieldSlug)) {
-      return {
-        props: {
-          subject: subjectSlug,
-          field: fieldSlug,
-          errorCode: null,
-        },
-      };
-    } else {
-      throw new Error("Field not found!");
-    }
-  } catch (error) {
-    const statusCode = 404;
-    res.statusCode = statusCode;
-    return {
-      props: {
-        subject: null,
-        field: null,
-        errorCode: statusCode,
-      },
-    };
-  }
-};
-
-const Page: React.FunctionComponent = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
+const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
     return <NotFound />;
   }
 
-  const { data: digibruh } = useDigibruh();
-  const loading = !digibruh;
-  const field = loading
-    ? null
-    : digibruh.getFieldBySlug(props.subject, props.field);
+  const { data: digibruh } = useDigibruh(new Digibruh(props.initialDigibruh));
+  const field = digibruh.getFieldBySlug(props.subject, props.field);
   const postSWR = useSWR(field?.url, () => {
     return field?.posts();
   });
@@ -65,12 +28,24 @@ const Page: React.FunctionComponent = (
   const posts: PostOrPage[] = postSWR.data || [];
 
   const items: GridItem[] = posts.map(
-    ({ title, excerpt, slug, feature_image }) => {
+    ({
+      title,
+      excerpt,
+      slug,
+      feature_image,
+      updated_at,
+      published_at,
+      authors,
+    }) => {
       return {
         title,
         description: excerpt,
         url: field.postUrl(slug),
         image: feature_image,
+        meta: {
+          date: new Date(updated_at || published_at),
+          authors: authors.map(GenericUser.fromAuthor),
+        },
       };
     }
   );
@@ -105,5 +80,7 @@ const Page: React.FunctionComponent = (
     </Layout>
   );
 };
+
+Page.getInitialProps = getInitialDigibruh;
 
 export default Page;

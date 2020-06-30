@@ -7,6 +7,13 @@ import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";
 
 /**
+ * A static variant of `Digibruh`, used mostly for SSR (because you cannot serialize classes with JSON).
+ */
+export interface DigibruhStatic {
+  tags: Tag[];
+}
+
+/**
  * A tag manager for Digibruh.
  */
 class DigibruhTagArray extends Array<Tag> {
@@ -88,11 +95,21 @@ export default class Digibruh {
   };
 
   static async initialize(): Promise<Digibruh> {
-    let digibruh = new Digibruh();
-    digibruh.tags = await DigibruhTagArray.fetch();
+    return new Digibruh({ tags: await DigibruhTagArray.fetch() });
+  }
 
-    return digibruh;
+  constructor(options: DigibruhStatic) {
+    this.tags = new DigibruhTagArray(...options.tags);
+  }
+
+  toStatic(): DigibruhStatic {
+    return {
+      tags: new Array(...this.tags),
+    };
   }
 }
 
-export const useDigibruh = () => useSWR("/digibruh", Digibruh.initialize);
+export const useDigibruh = (initialData?: Digibruh) =>
+  useSWR("/digibruh", Digibruh.initialize, {
+    initialData,
+  });
