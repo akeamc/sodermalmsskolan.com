@@ -34,6 +34,7 @@ export async function getInitialDigibruh(
 
   const notFound = () => {
     toBeReturned.errorCode = 404;
+    ctx.res ? (ctx.res.statusCode = toBeReturned.errorCode) : null;
     return toBeReturned;
   };
 

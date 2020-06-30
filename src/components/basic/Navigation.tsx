@@ -42,6 +42,7 @@ export class Navigation extends React.Component<
   {
     dark?: boolean;
     fixed?: boolean;
+    lift?: boolean;
   },
   {
     showMobileNav: boolean;
@@ -74,13 +75,13 @@ export class Navigation extends React.Component<
   };
 
   render() {
-    const { dark = false, fixed = false } = this.props;
+    const { dark = false, fixed = false, lift = false } = this.props;
 
     return (
       <div
         className={`navbar ${dark ? "navbar-dark" : "bg-white"} ${
-          fixed ? "fixed-top" : null
-        }`}
+          fixed ? "navbar-fixed" : null
+        } ${lift ? "navbar-lift" : null}`}
       >
         <Container>
           <Link href="/">

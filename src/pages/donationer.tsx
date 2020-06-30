@@ -2,7 +2,6 @@ import React from "react";
 import { Layout } from "../components/basic/Layout";
 import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
-import { AutoLink } from "../components/basic/AutoLink";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 

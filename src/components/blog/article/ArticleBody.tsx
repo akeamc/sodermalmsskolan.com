@@ -9,6 +9,8 @@ import useScrollSpy from "../../basic/ScrollSpy";
 import StickyBox from "react-sticky-box";
 import { Link } from "react-scroll";
 import { renderMathInText } from "../../../lib/utils/katex";
+import { ProgressiveImage } from "../../basic/ProgressiveImage";
+import SyntaxHighlighter from "react-syntax-highlighter";
 
 interface TableOfContentsEntry {
   ref: React.Ref<unknown>;
@@ -130,6 +132,33 @@ const ArticleBody: React.FunctionComponent<{
           />
         </div>
       );
+    }
+
+    if (node.name == "img") {
+      const { attribs } = node;
+      return <ProgressiveImage className={attribs.class} src={attribs.src} />;
+    }
+
+    if (node.name == "pre") {
+      const { children } = node;
+      if (children.length == 1 && children[0].name == "code") {
+        const child = children[0];
+
+        const language = child.attribs.class?.replace("language-", "") || null;
+
+        if (language) {
+          // Only use `SyntaxHighlighter` if a language is detected. Otherwise, fall back to the default of Ghost.
+          const code = child.children
+            .filter((child) => child.type == "text")
+            .map((child) => child.data);
+
+          return (
+            <SyntaxHighlighter language={language} useInlineStyles={false}>
+              {code}
+            </SyntaxHighlighter>
+          );
+        }
+      }
     }
 
     if (node.type == "text") {
