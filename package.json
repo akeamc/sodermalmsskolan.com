@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p 80"
+    "start": "next start -p 80",
+    "lint": "eslint **/*.ts **/*.tsx"
   },
   "keywords": [],
   "author": "",
@@ -49,7 +50,15 @@
     "@types/react": "^16.9.35",
     "@types/react-html-parser": "^2.0.1",
     "@types/tryghost__content-api": "^1.3.4",
+    "@typescript-eslint/eslint-plugin": "^3.5.0",
+    "@typescript-eslint/parser": "^3.5.0",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.2",
+    "eslint-plugin-react-hooks": "^4.0.5",
     "typescript": "^3.9.3"
   }
 }

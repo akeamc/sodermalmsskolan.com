@@ -5,8 +5,6 @@ import { Header } from "../../../components/basic/Header";
 import Col from "react-bootstrap/Col";
 import { getAuthorBySlug, getAuthorUrl } from "../../../lib/api/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
-// import useSWR from "swr";
-// import { getPosts } from "../../../lib/api/ghost/post";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Avatar } from "../../../components/basic/Avatar";
@@ -15,6 +13,7 @@ import Digibruh from "../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
 import { CardGrid } from "../../../components/basic/CardGrid";
 import { Field } from "../../../lib/digibruh/Field";
+import React from "react";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,

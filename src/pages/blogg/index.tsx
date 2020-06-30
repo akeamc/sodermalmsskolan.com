@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import { FeaturedPost } from "../../components/blog/Featured";
 import { PostGridAuto } from "../../components/blog/PostGrid";
+import { AdSection } from "../../components/basic/Ad";
 
 export default class Page extends React.Component {
   render() {
@@ -24,6 +25,7 @@ export default class Page extends React.Component {
             <FeaturedPost />
           </Container>
         </section>
+        <AdSection />
         <section>
           <Container>
             <Row className="row align-items-center mb-5">

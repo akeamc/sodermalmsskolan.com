@@ -13,6 +13,7 @@ import {
   getInitialDigibruh,
 } from "../../../../lib/digibruh/utils/initialprops";
 import { GenericUser } from "../../../../lib/models/User";
+import React from "react";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
