@@ -52,9 +52,10 @@ const Page: React.FunctionComponent = () => {
             </AutoLink>
             <AutoLink
               className="btn btn-primary-soft lift lift-lg"
-              href="/blogg"
+              href="/digibruh"
             >
-              Blogg
+              Digibruh
+              <Icon.BookOpen className="d-none d-md-inline ml-2" size={20} />
             </AutoLink>
           </div>
         </Col>
