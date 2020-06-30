@@ -2,7 +2,6 @@ import { Tag, PostsOrPages } from "@tryghost/content-api";
 import { getPostsByTag } from "../api/ghost/post";
 import Digibruh from "./Digibruh";
 import { GridItem } from "../../components/basic/CardGrid";
-import useSWR from "swr";
 
 /**
  * Generic collection for use within Digibruh.

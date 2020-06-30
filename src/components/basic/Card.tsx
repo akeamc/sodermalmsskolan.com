@@ -7,6 +7,7 @@ import { AuthorGroup } from "./Avatar";
 import { AutoLink } from "./AutoLink";
 import Skeleton from "react-loading-skeleton";
 import { GenericUser } from "../../lib/models/User";
+import { useProgressiveImage } from "../utils/progressive-image";
 
 interface CardMeta {
   authors?: GenericUser[];
@@ -22,61 +23,61 @@ interface CardOptions {
   imageExpected?: boolean;
 }
 
-export class NarrowCard extends React.Component<CardOptions> {
-  render() {
-    const {
-      children,
-      meta,
-      image,
-      href = "#",
-      loading = false,
-      imageExpected = false,
-    } = this.props;
+export const NarrowCard: React.FunctionComponent<CardOptions> = (props) => {
+  const {
+    children,
+    meta,
+    image,
+    href = "#",
+    loading = false,
+    imageExpected = false,
+  } = props;
 
-    return (
-      <Card className="shadow-light-lg lift lift-lg w-100 d-flex mb-6">
-        {image || (imageExpected && loading) ? (
-          <>
-            {loading ? (
-              <div className="card-img">
-                <Skeleton height="100%" width="100%" />
-              </div>
-            ) : (
-              <AutoLink
-                href={href}
-                className="card-img bg-cover"
-                style={{ backgroundImage: `url(${image})` }}
-                block
-              />
-            )}
-          </>
-        ) : null}
-        <AutoLink href={href} className="card-body" block>
-          {children}
-        </AutoLink>
-        {meta ? (
-          <div className="card-meta">
-            <hr className="card-meta-divider" />
-            {loading ? (
-              <Skeleton />
-            ) : (
-              <>
-                {meta.authors ? (
-                  <AuthorGroup className="mr-2" authors={meta.authors} />
-                ) : null}
-                <p className="h6 text-uppercase text-muted mb-0 ml-auto">
-                  <time dateTime={meta.date.toString()}>
-                    {moment(meta.date).locale("sv").format("D MMMM YYYY")}
-                  </time>
-                </p>
-              </>
-            )}
-          </div>
-        ) : null}
-      </Card>
-    );
-  }
-}
+  const imageLoaded = image ? useProgressiveImage(image) : false;
+
+  return (
+    <Card className="shadow-light-lg lift lift-lg w-100 d-flex mb-6">
+      {image || (imageExpected && loading) ? (
+        <>
+          {imageLoaded ? (
+            <AutoLink
+              href={href}
+              className="card-img bg-cover"
+              style={{ backgroundImage: `url(${image})` }}
+              block
+            />
+          ) : (
+            <AutoLink href={href} className="card-img" block>
+              <Skeleton height="100%" width="100%" />
+            </AutoLink>
+          )}
+        </>
+      ) : null}
+      <AutoLink href={href} className="card-body" block>
+        {children}
+      </AutoLink>
+      {meta ? (
+        <div className="card-meta">
+          <hr className="card-meta-divider" />
+          {loading ? (
+            <Skeleton />
+          ) : (
+            <>
+              {meta.authors ? (
+                <AuthorGroup className="mr-2" authors={meta.authors} />
+              ) : null}
+              <p className="h6 text-uppercase text-muted mb-0 ml-auto">
+                <time dateTime={meta.date.toString()}>
+                  {moment(meta.date).locale("sv").format("D MMMM YYYY")}
+                </time>
+              </p>
+            </>
+          )}
+        </div>
+      ) : null}
+    </Card>
+  );
+};
 
 export class WideCard extends React.Component<
   CardOptions & {
@@ -129,33 +130,40 @@ export class WideCard extends React.Component<
           ) : null}
 
           <Col xs={12} md={6} className="order-md-1">
-            <AutoLink href={href} className="card-body" block>
-              {children}
-            </AutoLink>
-            {meta ? (
-              <div className="card-meta">
-                <hr className="card-meta-divider" />
-                {loading ? (
-                  <Skeleton />
-                ) : (
-                  <>
-                    {meta.authors ? (
-                      <>
-                        <AuthorGroup className="mr-2" authors={meta.authors} />
-                        <h6 className="text-uppercase text-muted mr-2 mb-0">
-                          {meta.authors.map((author) => author.name).join(", ")}
-                        </h6>
-                      </>
-                    ) : null}
-                    <p className="h6 text-uppercase text-muted mb-0 ml-auto">
-                      <time dateTime={meta.date.toString()}>
-                        {moment(meta.date).locale("sv").format("D MMMM YYYY")}
-                      </time>
-                    </p>
-                  </>
-                )}
-              </div>
-            ) : null}
+            <div className="card-content">
+              <AutoLink href={href} className="card-body" block>
+                {children}
+              </AutoLink>
+              {meta ? (
+                <div className="card-meta">
+                  <hr className="card-meta-divider" />
+                  {loading ? (
+                    <Skeleton />
+                  ) : (
+                    <>
+                      {meta.authors ? (
+                        <>
+                          <AuthorGroup
+                            className="mr-2"
+                            authors={meta.authors}
+                          />
+                          <h6 className="text-uppercase text-muted mr-2 mb-0">
+                            {meta.authors
+                              .map((author) => author.name)
+                              .join(", ")}
+                          </h6>
+                        </>
+                      ) : null}
+                      <p className="h6 text-uppercase text-muted mb-0 ml-auto">
+                        <time dateTime={meta.date.toString()}>
+                          {moment(meta.date).locale("sv").format("D MMMM YYYY")}
+                        </time>
+                      </p>
+                    </>
+                  )}
+                </div>
+              ) : null}
+            </div>
           </Col>
         </Row>
       </Card>
