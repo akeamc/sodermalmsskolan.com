@@ -7,8 +7,8 @@ import { IDiscordAPIUser, User } from "./User";
 import { SnowflakeUtil } from "discord.js";
 
 export interface MessageQuery {
-  before?: Date;
-  after?: Date;
+  before?: number;
+  after?: number;
   limit?: number;
 }
 

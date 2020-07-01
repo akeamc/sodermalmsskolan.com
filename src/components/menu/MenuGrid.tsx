@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import Skeleton from "react-loading-skeleton";
 import { useMenus } from "../../lib/api/main/menu/Menu";
 import { Menu } from "../../lib/api/main/menu/Menu";
-import { useFoodPhotos } from "../../lib/api/main/photos/Photos";
 
 export class MenuGridItem extends React.Component<{
   menu: Menu | null;

@@ -5,7 +5,8 @@ import Col from "react-bootstrap/Col";
 import { Header } from "../components/basic/Header";
 import Container from "react-bootstrap/Container";
 import { AutoLink } from "../components/basic/AutoLink";
-import { MenuGrid } from "../components/basic/MenuGrid";
+import { MenuGrid } from "../components/menu/MenuGrid";
+import { FoodPhotos } from "../components/menu/FoodPhotos";
 
 export default class Page extends React.Component {
   render() {
@@ -43,6 +44,11 @@ export default class Page extends React.Component {
                 </small>
               </Col>
             </Row>
+          </Container>
+        </section>
+        <section className="py-8 py-md-11">
+          <Container>
+            <FoodPhotos />
           </Container>
         </section>
       </Layout>

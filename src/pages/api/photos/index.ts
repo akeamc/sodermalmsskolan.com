@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { fetchPhotos, FoodPhotosResponse } from "../../../lib/discord/photos";
 import validator from "validator";
+import { DISCORD_EPOCH } from "../../../lib/discord/constants/time";
 
 export default async (
   req: NextApiRequest,
@@ -12,17 +13,29 @@ export default async (
   const after = query.after ? query.after.toString() : null;
   const limit = (query.limit || 50).toString();
 
-  if (before && !validator.isInt(before)) {
-    return res.status(400).end("`before` must be an integer.");
-  }
+  const forbidden = (message: string) => {
+    return res.status(400).end(message);
+  };
 
-  if (after && !validator.isInt(after)) {
-    return res.status(400).end("`after` must be an integer.");
-  }
+  if (before && !validator.isInt(before, { min: DISCORD_EPOCH }))
+    return forbidden(
+      `\`before\` must be an integer not smaller  than ${DISCORD_EPOCH}.`
+    );
 
-  if (!validator.isInt(limit)) {
-    return res.status(400).end("`limit` must be an integer.");
-  }
+  if (after && !validator.isInt(after, { min: DISCORD_EPOCH }))
+    return forbidden(
+      `\`after\` must be an integer not smaller than ${DISCORD_EPOCH}.`
+    );
+
+  if (
+    !validator.isInt(limit, {
+      max: 100,
+      min: 1,
+    })
+  )
+    return forbidden(
+      "`limit` must be a positive integer less than or equal to 100."
+    );
 
   const photos = await fetchPhotos({
     before: before ? validator.toInt(before) : null,

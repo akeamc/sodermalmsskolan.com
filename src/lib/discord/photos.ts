@@ -1,13 +1,15 @@
 import { CollectionResponse } from "../api/main/Response";
 import { Message, MessageQuery } from "./structures/Message";
-import { time } from "console";
+import { MessageAttachment } from "discord.js";
 
 /**
  * An interface that holds information about a photo of food posted on Discord.
  */
 export interface FoodPhoto {
   url: string;
+  proxyUrl: string;
   timestamp: Date;
+  description: string;
 }
 
 export type FoodPhotosResponse = CollectionResponse<FoodPhoto, number>;
@@ -21,12 +23,9 @@ export async function fetchPhotos(
     throw new Error("DISCORD_PHOTOS_CHANNEL must be defined.");
   }
 
-  // const before = query.before ? SnowflakeUtil.generate(query.before) : null;
-  // const after = query.after ? SnowflakeUtil.generate(query.after) : null;
-
   const messages = await Message.fetchMany(DISCORD_PHOTOS_CHANNEL, {
-    before: query.before ? new Date(query.before) : null,
-    after: query.after ? new Date(query.after) : null,
+    before: query.before,
+    after: query.after,
     limit: query.limit,
   });
 
@@ -35,12 +34,14 @@ export async function fetchPhotos(
   let timestamps = messages.map((message) => message.createdAt.getTime());
 
   messages.forEach((message) => {
-    const { createdAt: timestamp } = message;
+    const { createdAt: timestamp, attachments, content } = message;
 
-    message.attachments.forEach((attachment) => {
+    attachments.forEach((attachment) => {
       photos.push({
         url: attachment.url,
+        proxyUrl: attachment.proxyUrl,
         timestamp,
+        description: content,
       });
     });
   });
@@ -49,8 +50,8 @@ export async function fetchPhotos(
     data: photos,
     meta: {
       total: photos.length,
-      previous: Math.min(...timestamps),
-      next: Math.max(...timestamps),
+      previous: Math.min(...timestamps) - 1,
+      next: Math.max(...timestamps) + 1,
     },
   };
 }
