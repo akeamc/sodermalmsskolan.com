@@ -31,7 +31,7 @@ export default class Page extends React.Component {
         </Header>
         <section className="py-8 py-md-11">
           <Container>
-            <MenuGrid menus={6} />
+            <MenuGrid numberOfMenus={6} />
             <Row>
               <Col xs={12}>
                 <small className="text-muted">

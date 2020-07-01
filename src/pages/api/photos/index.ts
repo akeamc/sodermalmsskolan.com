@@ -1,13 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {
-  getPhotos,
-  FoodPhotoResponse,
-} from "../../../lib/discord/photos";
+import { fetchPhotos, FoodPhotosResponse } from "../../../lib/discord/photos";
 import validator from "validator";
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse<FoodPhotoResponse>
+  res: NextApiResponse<FoodPhotosResponse>
 ) => {
   const { query } = req;
 
@@ -27,7 +24,7 @@ export default async (
     return res.status(400).end("`limit` must be an integer.");
   }
 
-  const photos = await getPhotos({
+  const photos = await fetchPhotos({
     before: before ? validator.toInt(before) : null,
     after: after ? validator.toInt(after) : null,
     limit: validator.toInt(limit),

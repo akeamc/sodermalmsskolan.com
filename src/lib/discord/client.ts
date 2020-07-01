@@ -1,18 +1,15 @@
-import Discord from "discord.js";
+import { RestClient } from "typed-rest-client/RestClient";
 
-export const initializeClient = (
-  options?: Discord.ClientOptions
-): Promise<Discord.Client> =>
-  new Promise((resolve) => {
-    const { DISCORD_TOKEN } = process.env;
+export const getClient = (): RestClient => {
+  const { DISCORD_TOKEN } = process.env;
 
-    if (!DISCORD_TOKEN) {
-      throw new Error("No DISCORD_TOKEN in environment variables.");
-    }
+  if (!DISCORD_TOKEN) {
+    throw new Error("No DISCORD_TOKEN in environment variables.");
+  }
 
-    const client = new Discord.Client(options);
-
-    client.login(DISCORD_TOKEN);
-
-    client.once("ready", () => resolve(client));
+  return new RestClient("discord-bot-api", "https://discord.com", [], {
+    headers: {
+      Authorization: `Bot ${DISCORD_TOKEN}`,
+    },
   });
+};

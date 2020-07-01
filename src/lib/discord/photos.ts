@@ -1,6 +1,5 @@
-import { initializeClient } from "./client";
-import Discord, { SnowflakeUtil } from "discord.js";
 import { CollectionResponse } from "../api/main/Response";
+import { Message, MessageQuery } from "./structures/Message";
 import { time } from "console";
 
 /**
@@ -11,64 +10,47 @@ export interface FoodPhoto {
   timestamp: Date;
 }
 
-export interface MessageQuery {
-  before?: number;
-  after?: number;
+export type FoodPhotosResponse = CollectionResponse<FoodPhoto, number>;
 
-  /**
-   * How many messages to fetch (maximum 100).
-   */
-  limit?: number;
-}
-
-export type FoodPhotoResponse = CollectionResponse<FoodPhoto, number>;
-
-export async function getPhotos(
+export async function fetchPhotos(
   query: MessageQuery = {}
-): Promise<FoodPhotoResponse> {
+): Promise<FoodPhotosResponse> {
   const { DISCORD_PHOTOS_CHANNEL } = process.env;
 
   if (!DISCORD_PHOTOS_CHANNEL) {
     throw new Error("DISCORD_PHOTOS_CHANNEL must be defined.");
   }
 
-  const client = await initializeClient();
-  const channel = await client.channels.fetch(DISCORD_PHOTOS_CHANNEL);
+  // const before = query.before ? SnowflakeUtil.generate(query.before) : null;
+  // const after = query.after ? SnowflakeUtil.generate(query.after) : null;
 
-  if (!(channel instanceof Discord.TextChannel)) {
-    throw new Error(`${DISCORD_PHOTOS_CHANNEL} is not a text channel!`);
-  } else {
-    const before = query.before ? SnowflakeUtil.generate(query.before) : null;
-    const after = query.after ? SnowflakeUtil.generate(query.after) : null;
+  const messages = await Message.fetchMany(DISCORD_PHOTOS_CHANNEL, {
+    before: query.before ? new Date(query.before) : null,
+    after: query.after ? new Date(query.after) : null,
+    limit: query.limit,
+  });
 
-    const messages = await channel.messages.fetch({
-      before,
-      after,
-      limit: query.limit,
-    });
+  let photos: FoodPhoto[] = [];
 
-    let photos: FoodPhoto[] = [];
+  let timestamps = messages.map((message) => message.createdAt.getTime());
 
-    let timestamps = messages.map((message) => message.createdTimestamp);
+  messages.forEach((message) => {
+    const { createdAt: timestamp } = message;
 
-    messages.forEach((message) => {
-      const { createdAt: timestamp } = message;
-
-      message.attachments.forEach((attachment) => {
-        photos.push({
-          url: attachment.url,
-          timestamp,
-        });
+    message.attachments.forEach((attachment) => {
+      photos.push({
+        url: attachment.url,
+        timestamp,
       });
     });
+  });
 
-    return {
-      data: photos,
-      meta: {
-        total: photos.length,
-        previous: Math.min(...timestamps),
-        next: Math.max(...timestamps),
-      },
-    };
-  }
+  return {
+    data: photos,
+    meta: {
+      total: photos.length,
+      previous: Math.min(...timestamps),
+      next: Math.max(...timestamps),
+    },
+  };
 }
