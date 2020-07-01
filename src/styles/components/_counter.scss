@@ -1,0 +1,11 @@
+.scrolling-counter {
+  overflow: hidden;
+  height: 1.1em;
+  display: inline-block;
+
+  .numbers {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s cubic-bezier(0.5, 0, 0.5, 1);
+  }
+}
