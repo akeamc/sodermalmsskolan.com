@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Controller, Scene } from "react-scrollmagic";
 import moment from "moment";
-import { useImageLoadingStatus } from "../basic/ProgressiveImage";
 
 export const FoodPhotos: React.FunctionComponent = () => {
   const { data: response } = useFoodPhotos({ limit: 100 });
@@ -14,9 +13,7 @@ export const FoodPhotos: React.FunctionComponent = () => {
   const pixelsPerImage = 200;
   const sceneDuration = photos.length * pixelsPerImage;
 
-  useEffect(() => {
-    
-  })
+  useEffect(() => {});
 
   for (const photo of photos) {
     let image = new Image();
@@ -28,9 +25,8 @@ export const FoodPhotos: React.FunctionComponent = () => {
       <Controller>
         <Scene duration={sceneDuration} triggerHook={0} pin>
           {(progress, event) => {
-            let { description, url, timestamp } = photos[
-              Math.floor(progress * (photos.length - 1))
-            ] || {};
+            let index = Math.floor(progress * (photos.length - 1));
+            let { description, url, timestamp } = photos[index] || {};
             const inView = event.state == "DURING";
 
             description = description ? `"${description}"` : "(Ingen titel)";
@@ -44,13 +40,24 @@ export const FoodPhotos: React.FunctionComponent = () => {
                   <div className="food-photos">
                     <div className={`photo-container`}>
                       <div className="photo-box">
+                        <div className="image-text image-number">
+                          <h6>
+                            {(index + 1)
+                              .toString()
+                              .padStart(
+                                photos.length.toString().length,
+                                "0"
+                              )}{" "}
+                            / {photos.length}
+                          </h6>
+                        </div>
                         <div className="image-container">
                           <figure className="image">
                             <img src={url} className="main" />
                             <img src={url} className="blur" />
                           </figure>
                         </div>
-                        <div className="image-description">
+                        <div className="image-text image-description">
                           <h6>
                             {moment(timestamp)
                               .locale("sv")

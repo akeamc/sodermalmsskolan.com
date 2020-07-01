@@ -79,10 +79,18 @@
           }
         }
 
-        .image-description {
+        .image-text {
           display: flex;
           justify-content: center;
-          margin-top: 1rem;
+
+          &.image-number {
+            margin-bottom: 1rem;
+            font-feature-settings: "tnum", "ss01", "zero";
+          }
+
+          &.image-description {
+            margin-top: 1rem;
+          }
 
           h6 {
             margin: 0 2rem;
