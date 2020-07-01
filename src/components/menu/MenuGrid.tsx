@@ -41,18 +41,17 @@ export class MenuGridItem extends React.Component<{
 }
 
 export const MenuGrid: React.FunctionComponent<{
-  menus: number;
-}> = (props) => {
-  const { menus } = props;
-  const { data, error } = useMenus({ limit: menus });
-  const fallbackArray: Menu[] = new Array(menus).fill(null);
+  numberOfMenus: number;
+}> = ({ numberOfMenus }) => {
+  const { data: menus } = useMenus({ limit: numberOfMenus });
+  const fallbackArray: Menu[] = new Array(numberOfMenus).fill(null);
 
   return (
     <Row>
-      {((data?.length > 0 ? data : [null]) || fallbackArray).map(
+      {((menus?.length > 0 ? menus : [null]) || fallbackArray).map(
         (menu: Menu, index) => (
           <Col xs={12} md={4} key={index}>
-            <MenuGridItem loading={!data} menu={menu} />
+            <MenuGridItem loading={!menus} menu={menu} />
           </Col>
         )
       )}

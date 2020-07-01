@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AutoLink } from "../components/basic/AutoLink";
-import { MenuGridItem } from "../components/basic/MenuGrid";
+import { MenuGridItem } from "../components/menu/MenuGrid";
 import WindowConfetti from "../components/events/Confetti";
 import moment from "moment";
 import { useMenus } from "../lib/api/main/menu/Menu";

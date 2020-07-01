@@ -3,8 +3,6 @@ import { defaultParams } from "../../lib/api/ghost/post";
 import useSWR, { useSWRPages } from "swr";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { NarrowCard } from "../basic/Card";
-import Skeleton from "react-loading-skeleton";
 import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
 import api from "../../lib/api/ghost/credentials";

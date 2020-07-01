@@ -8,9 +8,12 @@ export interface BasicResponse<T> {
 /**
  * A response used for arrays.
  */
-export interface CollectionResponse<T> extends BasicResponse<T[]> {
+export interface CollectionResponse<T, Pagination = number>
+  extends BasicResponse<T[]> {
   data: T[];
   meta: {
     total: number;
+    previous?: Pagination;
+    next?: Pagination;
   };
 }

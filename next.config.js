@@ -2,6 +2,7 @@
 const withSass = require("@zeit/next-sass");
 const withCSS = require("@zeit/next-css");
 const path = require("path");
+require("dotenv").config();
 
 module.exports = withCSS(
   withSass({
