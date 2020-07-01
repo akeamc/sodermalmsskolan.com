@@ -46,7 +46,7 @@ export const FoodPhotos: React.FunctionComponent = () => {
                 >
                   <div className="background" />
                   <div className="food-photos">
-                    <div className={`photo-container`}>
+                    <div className="photo-container">
                       <div className="photo-box">
                         <div className="image-text image-number">
                           <h6>
