@@ -68,6 +68,15 @@ $food-photos-border-radius: 15px;
             position: relative;
             display: flex;
             margin: 0 auto;
+            border-radius: $food-photos-border-radius;
+
+            &:hover {
+              img {
+                &.blur {
+                  transform: scale(1.2);
+                }
+              }
+            }
 
             img {
               border-radius: $food-photos-border-radius;
@@ -80,18 +89,21 @@ $food-photos-border-radius: 15px;
               &.main {
                 box-shadow: 0 1rem 2.5rem rgba(22, 28, 45, 0.1),
                   0 0.5rem 1rem -0.75rem rgba(22, 28, 45, 0.1);
+                z-index: 11;
               }
 
               &.blur {
                 position: absolute;
                 pointer-events: none;
                 top: 0;
-                right: 0;
-                bottom: 0;
                 left: 0;
+                width: 100;
+                height: 100%;
                 transform: scale(1.1);
                 opacity: 0.5;
                 filter: blur(50px);
+                transition: transform 0.1s;
+                z-index: 10;
               }
             }
           }

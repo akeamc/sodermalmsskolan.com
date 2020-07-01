@@ -7,6 +7,37 @@ import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 import { FoodPhoto } from "../../lib/discord/photos";
 
+export const ScrollingCounter: React.FunctionComponent<{
+  to: number;
+  current: number;
+  padding?: boolean;
+}> = ({ to, current, padding = false }) => {
+  let numbers = [];
+
+  for (let i = 0; i <= to; i++) {
+    numbers.push(
+      <span>
+        {i.toString().padStart(padding ? to.toString().length : 0, "0")}
+      </span>
+    );
+  }
+
+  let count = to + 1;
+
+  return (
+    <div className="scrolling-counter">
+      <div
+        className="numbers"
+        style={{
+          transform: `translateY(-${100 * (current / count)}%)`,
+        }}
+      >
+        {numbers}
+      </div>
+    </div>
+  );
+};
+
 export const FoodPhotos: React.FunctionComponent = () => {
   const { data: response } = useFoodPhotos({ limit: 100 });
   const loading = !response;
@@ -54,17 +85,21 @@ export const FoodPhotos: React.FunctionComponent = () => {
                               {loading ? (
                                 <Skeleton width="20px" />
                               ) : (
-                                (index + 1)
-                                  .toString()
-                                  .padStart(
-                                    photos.length.toString().length,
-                                    "0"
-                                  )
+                                <ScrollingCounter
+                                  to={photos.length}
+                                  current={index + 1}
+                                  padding
+                                />
+                                // (index + 1)
+                                //   .toString()
+                                //   .padStart(
+                                //     photos.length.toString().length,
+                                //     "0"
+                                //   )
                               )}
                             </span>
                             <span className="total">
-                              {" "}
-                              /{" "}
+                              {" / "}
                               {loading ? (
                                 <Skeleton width="20px" />
                               ) : (
@@ -77,10 +112,10 @@ export const FoodPhotos: React.FunctionComponent = () => {
                           {loading ? (
                             <div className="loading-placeholder" />
                           ) : (
-                            <figure className="image">
+                            <a className="image" href={url}>
                               <img src={url} className="main" />
                               <img src={url} className="blur" />
-                            </figure>
+                            </a>
                           )}
                         </div>
                         <div className="image-text image-description">
