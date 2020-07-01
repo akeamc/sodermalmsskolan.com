@@ -1,6 +1,18 @@
+$food-photos-border-radius: 15px;
+
 .food-photos-container {
   &.in-view {
     color: $white;
+
+    .food-photos {
+      .photo-container {
+        .image-number {
+          .total {
+            color: rgba($white, 0.5);
+          }
+        }
+      }
+    }
   }
 
   .background {
@@ -46,13 +58,20 @@
           display: flex;
           justify-content: center;
 
+          .loading-placeholder {
+            background-color: #eee;
+            height: 100%;
+            width: 100%;
+            border-radius: $food-photos-border-radius;
+          }
+
           .image {
             position: relative;
             display: flex;
             margin: 0;
 
             img {
-              border-radius: 15px;
+              border-radius: $food-photos-border-radius;
               object-fit: cover;
               display: block;
               flex: 0;
@@ -82,6 +101,7 @@
         .image-text {
           display: flex;
           justify-content: center;
+          transform: color 0.25s ease;
 
           &.image-number {
             margin-bottom: 1rem;
