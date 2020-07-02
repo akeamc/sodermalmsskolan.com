@@ -1,6 +1,5 @@
 import { CollectionResponse } from "../api/main/Response";
 import { Message, MessageQuery } from "./structures/Message";
-import { MessageAttachment } from "discord.js";
 
 /**
  * An interface that holds information about a photo of food posted on Discord.
@@ -10,6 +9,8 @@ export interface FoodPhoto {
   proxyUrl: string;
   timestamp: Date;
   description: string;
+  width: number;
+  height: number;
 }
 
 export type FoodPhotosResponse = CollectionResponse<FoodPhoto, number>;
@@ -37,11 +38,16 @@ export async function fetchPhotos(
     const { createdAt: timestamp, attachments, content } = message;
 
     attachments.forEach((attachment) => {
+      // Discord API documentation specifies all image attachments have `width` and `height` fields.
+      if (!attachment.width || !attachment.height) return;
+
       photos.push({
         url: attachment.url,
         proxyUrl: attachment.proxyUrl,
         timestamp,
         description: content,
+        width: attachment.width,
+        height: attachment.height,
       });
     });
   });

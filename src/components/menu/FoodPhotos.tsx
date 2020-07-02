@@ -65,7 +65,9 @@ export const FoodPhotos: React.FunctionComponent = () => {
 
             if (index >= photos.length) index = photos.length - 1;
 
-            let { description, url, timestamp } = photos[index] || {};
+            let { description, url, timestamp, width, height } =
+              photos[index] || {};
+
             const inView = event.state == "DURING";
 
             description = description ? `"${description}"` : "(Ingen titel)";

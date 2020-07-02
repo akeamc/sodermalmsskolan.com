@@ -112,11 +112,12 @@ $food-photos-border-radius: 15px;
         .image-text {
           display: flex;
           justify-content: center;
-          transform: color 0.25s ease;
+          transition: color 0.25s ease;
 
           &.image-number {
             margin-bottom: 1rem;
             font-feature-settings: "tnum", "ss01", "zero";
+            user-select: none;
           }
 
           &.image-description {
