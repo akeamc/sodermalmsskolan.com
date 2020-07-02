@@ -62,7 +62,7 @@ const Page: React.FunctionComponent = ({
         backgroundImage={author?.cover_image}
         style={author?.cover_image ? { minHeight: "50vh" } : null}
       />
-      <Section>
+      <Section hero>
         <Container>
           <Row className="justify-content-center">
             <Col
