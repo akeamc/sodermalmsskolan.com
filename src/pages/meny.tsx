@@ -35,7 +35,7 @@ export default class Page extends React.Component {
         <AdSection />
         <Section>
           <Container>
-            <MenuGrid numberOfMenus={6} />
+            <MenuGrid numberOfMenus={7} />
             <Row>
               <Col xs={12}>
                 <small className="text-muted">

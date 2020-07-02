@@ -47,9 +47,7 @@ export default class Page extends React.Component {
                   <AutoLink href="https://discord.gg/ubH4DKw">
                     vår Discordserver
                   </AutoLink>{" "}
-                  för smidiga inlägg. Vi har även tagit emot flera{" "}
-                  <AutoLink href="/donationer">donationer</AutoLink> från
-                  fantastiska personer.
+                  för smidiga inlägg.
                 </p>
               </Col>
             </Row>
