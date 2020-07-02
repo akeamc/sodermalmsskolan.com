@@ -23,11 +23,11 @@ export class Footer extends React.Component {
               <SocialIcons
                 profiles={[
                   {
-                    url: "https://www.instagram.com/sodermalmsskolan.c0m/",
+                    url: process.env.instagramProfile,
                     socialMedia: SocialMedia.Instagram,
                   },
                   {
-                    url: "https://discord.gg/4hEnTpd",
+                    url: process.env.discordInvite,
                     socialMedia: SocialMedia.Discord,
                   },
                 ]}

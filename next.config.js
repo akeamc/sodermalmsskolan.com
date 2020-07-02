@@ -24,6 +24,8 @@ module.exports = withCSS(
       apiUrl: "https://api.xn--sdermalmsskolan-8sb.com",
       adsenseClient: "ca-pub-1944185766034883",
       adsenseSlot: "5909725353",
+      discordInvite: "https://discord.gg/4hEnTpd",
+      instagramProfile: "https://www.instagram.com/sodermalmsskolan.c0m/",
     },
     webpack: (config, { isServer }) => {
       // Fixes npm packages that depend on `fs` module

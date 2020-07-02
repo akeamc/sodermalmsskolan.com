@@ -1,6 +1,8 @@
 $food-photos-border-radius: 15px;
 
 .food-photos-container {
+  align-items: center;
+
   &.in-view {
     color: $white;
 
@@ -13,6 +15,12 @@ $food-photos-border-radius: 15px;
         }
       }
     }
+  }
+
+  .food-photos-heading {
+    z-index: 100;
+    position: relative;
+    transition: color 0.25s ease;
   }
 
   .background {
@@ -39,7 +47,7 @@ $food-photos-border-radius: 15px;
     padding-top: 10vh;
     padding-bottom: 10vh;
     box-sizing: border-box;
-    z-index: 900;
+    z-index: 100;
 
     .photo-container {
       width: 100%;
