@@ -8,6 +8,7 @@ import { AutoLink } from "../components/basic/AutoLink";
 import { MenuGrid } from "../components/menu/MenuGrid";
 import { FoodPhotos } from "../components/menu/FoodPhotos";
 import { AdSection } from "../components/basic/Ad";
+import { Section } from "../components/basic/Section";
 
 export default class Page extends React.Component {
   render() {
@@ -32,7 +33,7 @@ export default class Page extends React.Component {
           </Col>
         </Header>
         <AdSection />
-        <section className="py-8 py-md-11">
+        <Section>
           <Container>
             <MenuGrid numberOfMenus={6} />
             <Row>
@@ -47,13 +48,13 @@ export default class Page extends React.Component {
               </Col>
             </Row>
           </Container>
-        </section>
+        </Section>
         <AdSection />
-        <section className="py-8 py-md-11">
+        <Section>
           <Container>
             <FoodPhotos />
           </Container>
-        </section>
+        </Section>
       </Layout>
     );
   }

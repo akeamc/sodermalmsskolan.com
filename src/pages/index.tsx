@@ -10,6 +10,7 @@ import { MenuGridItem } from "../components/menu/MenuGrid";
 import WindowConfetti from "../components/events/Confetti";
 import moment from "moment";
 import { useMenus } from "../lib/api/main/menu/Menu";
+import { Section } from "../components/basic/Section";
 
 const Page: React.FunctionComponent = () => {
   const { data } = useMenus({ limit: 1 });
@@ -60,7 +61,7 @@ const Page: React.FunctionComponent = () => {
           </div>
         </Col>
       </Header>
-      <section className="py-8 py-md-11">
+      <Section>
         <Container>
           <Row>
             <Col xs={12} md={4}>
@@ -78,7 +79,7 @@ const Page: React.FunctionComponent = () => {
             </Col>
           </Row>
         </Container>
-      </section>
+      </Section>
     </Layout>
   );
 };

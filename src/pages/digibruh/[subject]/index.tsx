@@ -11,6 +11,7 @@ import {
   getInitialDigibruh,
 } from "../../../lib/digibruh/utils/initialprops";
 import React from "react";
+import { Section } from "../../../components/basic/Section";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
@@ -33,7 +34,7 @@ const Page: DigibruhPage = (props) => {
         </Col>
       </Header>
       <Container>
-        <section className="pt-7 pt-md-10">
+        <Section>
           <Row className="mb-5">
             <Col xs={12}>
               <h3 className="mb-0">Områden</h3>
@@ -44,7 +45,7 @@ const Page: DigibruhPage = (props) => {
             imagesExpected={true}
             expectedNumberOfItems={3}
           />
-        </section>
+        </Section>
       </Container>
     </Layout>
   );

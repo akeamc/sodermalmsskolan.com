@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import { FeaturedPost } from "../../components/blog/Featured";
 import { PostGridAuto } from "../../components/blog/PostGrid";
 import { AdSection } from "../../components/basic/Ad";
+import { Section } from "../../components/basic/Section";
 
 export default class Page extends React.Component {
   render() {
@@ -20,13 +21,13 @@ export default class Page extends React.Component {
             </div>
           </Col>
         </Header>
-        <section className="pt-7 pt-md-10">
+        <Section>
           <Container>
             <FeaturedPost />
           </Container>
-        </section>
+        </Section>
         <AdSection />
-        <section>
+        <Section>
           <Container>
             <Row className="row align-items-center mb-5">
               <Col xs={12} className="col-md">
@@ -38,7 +39,7 @@ export default class Page extends React.Component {
             </Row>
             <PostGridAuto />
           </Container>
-        </section>
+        </Section>
       </Layout>
     );
   }

@@ -5,13 +5,14 @@ import { Header } from "../components/basic/Header";
 import { AutoLink } from "../components/basic/AutoLink";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { Section } from "../components/basic/Section";
 
 export default class Page extends React.Component {
   render() {
     return (
       <Layout title="Om">
         <Header />
-        <section className="py-8 py-md-11">
+        <Section hero>
           <Container>
             <Row className="align-items-center">
               <Col xs={12} md={6} lg={8} className="order-md-2">
@@ -53,7 +54,7 @@ export default class Page extends React.Component {
               </Col>
             </Row>
           </Container>
-        </section>
+        </Section>
       </Layout>
     );
   }

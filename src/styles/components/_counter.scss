@@ -9,3 +9,7 @@
     transition: transform 0.15s cubic-bezier(0.5, 0, 0.5, 1);
   }
 }
+
+.count-up {
+  font-feature-settings: "tnum", "ss01", "zero";
+}
