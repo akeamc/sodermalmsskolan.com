@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import AdSense from "react-adsense";
+import { Section } from "./Section";
 
 export const ResponsiveAd: React.FunctionComponent = () => {
   return (
@@ -18,7 +19,7 @@ export const ResponsiveAd: React.FunctionComponent = () => {
 
 export const AdSection: React.FunctionComponent = () => {
   return (
-    <section className="py-7 py-md-10">
+    <Section>
       <Container>
         <Row>
           <Col>
@@ -26,6 +27,6 @@ export const AdSection: React.FunctionComponent = () => {
           </Col>
         </Row>
       </Container>
-    </section>
+    </Section>
   );
 };

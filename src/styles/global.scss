@@ -5,17 +5,18 @@
 @import "./mixins";
 @import "./typography";
 
-@import "./components/button";
-@import "./components/header";
-@import "./components/card";
-@import "./components/navbar";
+@import "./components/article";
 @import "./components/avatar";
 @import "./components/badge";
-@import "./components/article";
+@import "./components/button";
+@import "./components/card";
 @import "./components/code";
-@import "./components/nprogress";
-@import "./components/menu";
 @import "./components/counter";
+@import "./components/header";
+@import "./components/layout";
+@import "./components/menu";
+@import "./components/navbar";
+@import "./components/nprogress";
 
 .shadow-light-lg {
   box-shadow: 0 1.5rem 4rem rgba(22, 28, 45, 0.05) !important;

@@ -8,6 +8,7 @@ import MetaSection from "./MetaSection";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { PostOrPage } from "@tryghost/content-api";
+import { Section } from "../../basic/Section";
 
 export default class ArticlePage extends React.Component<{
   post: PostOrPage;
@@ -35,7 +36,7 @@ export default class ArticlePage extends React.Component<{
           backgroundImage={post?.feature_image}
           style={post?.feature_image ? { minHeight: "50vh" } : null}
         />
-        <section className="pt-8 pt-md-11">
+        <Section>
           <Container>
             <Row className="justify-content-center">
               <Col xs={12} md={10} xl={8}>
@@ -48,9 +49,9 @@ export default class ArticlePage extends React.Component<{
               </Col>
             </Row>
           </Container>
-        </section>
+        </Section>
         <ArticleBody data={post} scrollSpy={digibruh} />
-        <section className="pt-6 pt-md-8 pb-8 pb-md-11">
+        <Section>
           <Container>
             <Row className="justify-content-center">
               <Col xs={12} md={10} lg={9} xl={8}>
@@ -58,7 +59,7 @@ export default class ArticlePage extends React.Component<{
               </Col>
             </Row>
           </Container>
-        </section>
+        </Section>
       </Layout>
     );
   }

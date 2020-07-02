@@ -8,7 +8,7 @@ import { AutoLink } from "./AutoLink";
 export class Footer extends React.Component {
   render() {
     return (
-      <footer className="py-8 py-md-11 bg-gray-200">
+      <footer>
         <div className="container">
           <div className="row">
             <div className="col-12 col-lg-4">
@@ -41,7 +41,7 @@ export class Footer extends React.Component {
             <FooterSection title="Organisationen">
               <FooterLink href="/blogg">Blogg</FooterLink>
               <FooterLink href="/om">Om oss</FooterLink>
-              <FooterLink href="/donationer">Donationer</FooterLink>
+              <FooterLink href="/investerare">Investerare</FooterLink>
             </FooterSection>
             <FooterSection title="Resurser">
               <FooterLink href="https://status.lynx.agency">

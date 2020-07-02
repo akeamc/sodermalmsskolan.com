@@ -1,0 +1,26 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+
+:root {
+  --section-spacing: 56px;
+
+  @include media-breakpoint-up(sm) {
+    --section-spacing: 80px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    --section-spacing: 120px;
+  }
+}
+
+section {
+  margin-bottom: var(--section-spacing);
+
+  &.section-hero {
+    margin-top: var(--section-spacing);
+  }
+}
+
+footer {
+  padding-top: 80px;
+  padding-bottom: 64px;
+}

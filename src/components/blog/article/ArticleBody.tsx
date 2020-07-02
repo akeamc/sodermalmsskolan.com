@@ -11,6 +11,7 @@ import { Link } from "react-scroll";
 import { renderMathInText } from "../../../lib/utils/katex";
 import { ProgressiveImage } from "../../basic/ProgressiveImage";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import { Section } from "../../basic/Section";
 
 interface TableOfContentsEntry {
   ref: React.Ref<unknown>;
@@ -182,7 +183,7 @@ const ArticleBody: React.FunctionComponent<{
   });
 
   return (
-    <section className="pt-6 pt-md-8">
+    <Section>
       <Container>
         <Row>
           <Col
@@ -219,7 +220,7 @@ const ArticleBody: React.FunctionComponent<{
           ) : null}
         </Row>
       </Container>
-    </section>
+    </Section>
   );
 };
 

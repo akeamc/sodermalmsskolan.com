@@ -14,6 +14,7 @@ import {
 } from "../../../../lib/digibruh/utils/initialprops";
 import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
+import { Section } from "../../../../components/basic/Section";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
@@ -27,6 +28,7 @@ const Page: DigibruhPage = (props) => {
   });
 
   const posts: PostOrPage[] = postSWR.data || [];
+  const loadingPosts = !postSWR.data;
 
   const items: GridItem[] = posts.map(
     ({
@@ -64,19 +66,19 @@ const Page: DigibruhPage = (props) => {
         </Col>
       </Header>
       <Container>
-        <section className="pt-7 pt-md-10">
+        <Section>
           <Row className="mb-5">
             <Col xs={12}>
               <h3 className="mb-0">Artiklar</h3>
             </Col>
           </Row>
           <CardGrid
-            items={items}
+            items={loadingPosts ? null : items}
             imagesExpected={true}
             expectedNumberOfItems={3}
             rowLimit={5}
           />
-        </section>
+        </Section>
       </Container>
     </Layout>
   );

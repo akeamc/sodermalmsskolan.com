@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Skeleton from "react-loading-skeleton";
 import { useDigibruh } from "../../lib/digibruh/Digibruh";
+import { Section } from "../basic/Section";
 
 const SubjectsOverview: React.FunctionComponent = () => {
   const { data } = useDigibruh();
@@ -20,7 +21,7 @@ const SubjectsOverview: React.FunctionComponent = () => {
           : subject.fields.map((field) => field.toGridItem());
 
         return (
-          <section className="pt-7" key={index}>
+          <Section key={index}>
             <Row className="align-items-center mb-5">
               <Col xs={12} className="col-md">
                 <h3 className="mb-0">
@@ -40,7 +41,7 @@ const SubjectsOverview: React.FunctionComponent = () => {
               </Col> */}
             </Row>
             <CardGrid items={gridItems} imagesExpected={true} />
-          </section>
+          </Section>
         );
       })}
     </>

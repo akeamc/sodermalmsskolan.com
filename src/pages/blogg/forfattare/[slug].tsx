@@ -14,6 +14,7 @@ import useSWR from "swr";
 import { CardGrid } from "../../../components/basic/CardGrid";
 import { Field } from "../../../lib/digibruh/Field";
 import React from "react";
+import { Section } from "../../../components/basic/Section";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -61,7 +62,7 @@ const Page: React.FunctionComponent = ({
         backgroundImage={author?.cover_image}
         style={author?.cover_image ? { minHeight: "50vh" } : null}
       />
-      <section className="py-8 py-md-11">
+      <Section>
         <Container>
           <Row className="justify-content-center">
             <Col
@@ -86,8 +87,8 @@ const Page: React.FunctionComponent = ({
             </Col>
           </Row>
         </Container>
-      </section>
-      <section>
+      </Section>
+      <Section>
         <Container>
           <Row className="row align-items-center mb-5">
             <Col xs={12} className="col-md">
@@ -100,8 +101,8 @@ const Page: React.FunctionComponent = ({
             }}
           />
         </Container>
-      </section>
-      <section className="py-8 py-md-11">
+      </Section>
+      <Section>
         <Container>
           <Row className="row align-items-center mb-5">
             <Col xs={12} className="col-md">
@@ -114,7 +115,7 @@ const Page: React.FunctionComponent = ({
             rowLimit={3}
           />
         </Container>
-      </section>
+      </Section>
     </Layout>
   );
 };
