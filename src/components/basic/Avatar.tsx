@@ -1,6 +1,8 @@
 import React from "react";
 import { AutoLink } from "./AutoLink";
 import { GenericUser } from "../../lib/models/User";
+import mediaproxy from "../../lib/utils/mediaproxy";
+import { Query, OutputFormat } from "mediaproxy-js/lib/Query";
 
 export class Avatar extends React.Component<{
   href?: string;
@@ -11,12 +13,14 @@ export class Avatar extends React.Component<{
   render() {
     const { href = "#", imageUrl, size, className } = this.props;
 
+    let url = mediaproxy.generateUrl(new Query({format: OutputFormat.Jpeg, source: imageUrl, width: 256}));
+
     return (
       <AutoLink
         href={href}
         className={`avatar ${size ? `avatar-${size}` : ""} ${className}`}
       >
-        <img src={imageUrl} className="avatar-img rounded-circle" />
+        <img src={url} className="avatar-img rounded-circle" />
       </AutoLink>
     );
   }

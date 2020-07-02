@@ -36,7 +36,7 @@ export default class ArticlePage extends React.Component<{
           backgroundImage={post?.feature_image}
           style={post?.feature_image ? { minHeight: "50vh" } : null}
         />
-        <Section>
+        <Section hero>
           <Container>
             <Row className="justify-content-center">
               <Col xs={12} md={10} xl={8}>

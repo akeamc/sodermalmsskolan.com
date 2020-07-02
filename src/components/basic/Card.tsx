@@ -100,7 +100,7 @@ export const WideCard: React.FunctionComponent<
             <AutoLink
               className="bg-cover card-img"
               href={href}
-              style={useProgressiveBackground(image)}
+              style={image ? useProgressiveBackground(image) : {}}
             />
           </Col>
         ) : null}
