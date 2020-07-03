@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "../components/basic/Layout";
 import { Header } from "../components/basic/Header";
 import * as Icon from "react-feather";
@@ -12,11 +12,30 @@ import moment from "moment";
 import { useMenus } from "../lib/api/main/menu/Menu";
 import { Section } from "../components/basic/Section";
 
+const SecondCountdown: React.FunctionComponent<{ end: Date }> = ({ end }) => {
+  const getSecondsLeft = () => moment(end).diff(moment(), "seconds");
+
+  let [secondsLeft, setSecondsLeft] = useState(getSecondsLeft());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSecondsLeft(getSecondsLeft());
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <span>
+      <span className="count-up">{secondsLeft}</span>{" "}
+      {Math.abs(secondsLeft) == 1 ? "sekund" : "sekunder"}
+    </span>
+  );
+};
+
 const Page: React.FunctionComponent = () => {
   const { data } = useMenus({ limit: 1 });
-  const daysLeft = Math.ceil(
-    moment(new Date(1597788000000)).diff(moment(), "days", true)
-  );
+  const bigDay = new Date(1597823400000);
+  const daysLeft = Math.ceil(moment(bigDay).diff(moment(), "days", true));
 
   return (
     <Layout>
@@ -39,8 +58,7 @@ const Page: React.FunctionComponent = () => {
             Glad sommar!
           </h1>
           <p className="lead text-muted text-center text-md-left mb-6 mb-lg-8">
-            Om {daysLeft} {Math.abs(daysLeft) == 1 ? "dag" : "dagar"} börjar
-            skolan.
+            Om <SecondCountdown end={bigDay} /> börjar skolan.
           </p>
 
           <div className="text-center text-md-left">
