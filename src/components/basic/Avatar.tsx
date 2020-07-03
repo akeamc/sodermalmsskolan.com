@@ -13,7 +13,9 @@ export class Avatar extends React.Component<{
   render() {
     const { href = "#", imageUrl, size, className } = this.props;
 
-    let url = mediaproxy.generateUrl(new Query({format: OutputFormat.Jpeg, source: imageUrl, width: 256}));
+    let url = mediaproxy.generateUrl(
+      new Query({ format: OutputFormat.Jpeg, source: imageUrl, width: 256 })
+    );
 
     return (
       <AutoLink
