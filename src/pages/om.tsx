@@ -36,18 +36,7 @@ export default class Page extends React.Component {
                   <AutoLink href="https://xn--sdermalmsskolan-8sb.com/blogg/problemet-med-skolmaten/">
                     en artikel om matproblemet
                   </AutoLink>{" "}
-                  som renoverats mycket sedan den publicerades. Dessa tidiga
-                  artiklar skrevs i{" "}
-                  <AutoLink href="https://sv.wikipedia.org/wiki/Markdown">
-                    MarkDown
-                  </AutoLink>{" "}
-                  och var jobbiga att lägga in. Nu använder vi{" "}
-                  <AutoLink href="https://ghost.org/">Ghost</AutoLink> för
-                  bloggen och{" "}
-                  <AutoLink href="https://discord.gg/ubH4DKw">
-                    vår Discordserver
-                  </AutoLink>{" "}
-                  för smidiga inlägg.
+                  som renoverats mycket sedan den publicerades.
                 </p>
               </Col>
             </Row>

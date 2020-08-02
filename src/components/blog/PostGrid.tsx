@@ -75,10 +75,10 @@ export const PostGridAuto: React.FunctionComponent<{
 
   return (
     <>
-        <PostGrid
-          posts={(data || []).flat()}
-          expectedNumberOfPosts={size * limit}
-        />
+      <PostGrid
+        posts={(data || []).flat()}
+        expectedNumberOfPosts={size * limit}
+      />
       <Row className="justify-content-center">
         <Col xs="auto">
           {isReachingEnd ? (
