@@ -60,14 +60,14 @@ export const CardGrid: React.FunctionComponent<{
   imagesExpected: boolean;
   expectedNumberOfItems?: number;
   rowLimit?: number | null;
-  containerLess?: boolean;
+  containerless?: boolean;
 }> = (props) => {
   const {
     items,
     imagesExpected = true,
     expectedNumberOfItems = 3,
     rowLimit = null,
-    containerLess = false,
+    containerless = false,
   } = props;
   const placeholder = new Array<GridItem>(expectedNumberOfItems).fill(null);
 
@@ -84,5 +84,5 @@ export const CardGrid: React.FunctionComponent<{
     );
   });
 
-  return containerLess ? <>{grid}</> : <Row>{grid}</Row>;
+  return containerless ? <>{grid}</> : <Row>{grid}</Row>;
 };

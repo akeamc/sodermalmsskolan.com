@@ -1,8 +1,8 @@
 import React from "react";
 import { AutoLink } from "./AutoLink";
 import { GenericUser } from "../../lib/models/User";
-import mediaproxy from "../../lib/utils/mediaproxy";
-import { Query, OutputFormat } from "mediaproxy-js/lib/Query";
+import pxcmprs from "../../lib/utils/pxcmprs";
+import { Format } from "pxcmprs";
 
 export class Avatar extends React.Component<{
   href?: string;
@@ -13,9 +13,11 @@ export class Avatar extends React.Component<{
   render() {
     const { href = "#", imageUrl, size, className } = this.props;
 
-    let url = mediaproxy.generateUrl(
-      new Query({ format: OutputFormat.Jpeg, source: imageUrl, width: 256 })
-    );
+    let url = pxcmprs.generateUrl({
+      format: Format.Jpeg,
+      source: imageUrl,
+      width: 256,
+    });
 
     return (
       <AutoLink
