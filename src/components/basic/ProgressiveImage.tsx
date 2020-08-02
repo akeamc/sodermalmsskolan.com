@@ -30,7 +30,7 @@ export const useProgressiveImage = (
   const wantedImageLoaded = useImageLoadingStatus(src);
 
   const preview = pxcmprs.generateUrl({
-    source: src,
+    source: src || "", // During pre-render, Next calls this function with no parameters for no apparent reason. Therefore, to prevent pxcmprs from throwing an error, an empty string is used as fallback.
     width: 10,
     format: Format.Jpeg,
   });

@@ -11,7 +11,7 @@ export class Avatar extends React.Component<{
   className?: string;
 }> {
   render() {
-    const { href = "#", imageUrl, size, className } = this.props;
+    const { href = "#", imageUrl = "", size, className } = this.props;
 
     let url = pxcmprs.generateUrl({
       format: Format.Jpeg,
