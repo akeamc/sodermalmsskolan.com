@@ -7,11 +7,15 @@ const Tnum = styled.span`
   font-feature-settings: "tnum", "ss01", "zero";
 `;
 
-export const MinecraftStatusBadge: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { data } = useMinecraftStatus();
+export const MinecraftStatusBadge: React.FunctionComponent<React.HTMLAttributes<
+  HTMLDivElement
+>> = (props) => {
+  const { data, isValidating } = useMinecraftStatus();
   const players = data?.players;
 
   const color = data?.online ? StatusColor.Success : StatusColor.Error;
+
+  console.log(isValidating);
 
   const text = data?.online ? (
     <>
@@ -25,6 +29,12 @@ export const MinecraftStatusBadge: React.FunctionComponent<React.HTMLAttributes<
   );
 
   return (
-    <StatusBadge label="Minecraft" value={text} color={color} {...props} />
+    <StatusBadge
+      label="Minecraft"
+      value={text}
+      color={color}
+      isValidating={isValidating}
+      {...props}
+    />
   );
 };
