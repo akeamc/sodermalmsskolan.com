@@ -54,7 +54,7 @@ export default createGlobalStyle`
     --shadow-hover: 0 30px 60px var(--shadow-color);
 
 
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
       --foreground: white;
       --background: black;
 
@@ -76,7 +76,7 @@ export default createGlobalStyle`
       --shadow-medium: 0 0 0 1px var(--shadow-color);
       --shadow-large: 0 0 0 1px var(--shadow-color);
       --shadow-hover: 0 0 0 1px var(--shadow-color);
-    }
+    } */
 
     @media (min-width: 576px) {
       --section-spacing: 48px;
