@@ -11,12 +11,14 @@ import { Row } from "../../grid/Row";
 enum FigureWidth {
   Normal,
   Wide,
-  Full
+  Full,
 }
 
-const Figure = styled.figure<{width: FigureWidth}>`
+const Figure = styled.figure<{ width: FigureWidth }>`
   margin: 0;
-  ${({width}) => width != FigureWidth.Normal && `
+  ${({ width }) =>
+    width != FigureWidth.Normal &&
+    `
     display: flex;
     justify-content: center;
     flex-flow: wrap;
@@ -32,17 +34,19 @@ const Figure = styled.figure<{width: FigureWidth}>`
     border-radius: 8px;
     box-shadow: var(--shadow-medium);
 
-    ${({width}) => {
-      if (width == FigureWidth.Wide) return `
+    ${({ width }) => {
+      if (width == FigureWidth.Wide)
+        return `
         max-width: 1040px;
 
         @media (min-width: 1040px) {
           border-radius: 8px;
           box-shadow: var(--shadow-medium);
         }
-      `
+      `;
 
-      if (width == FigureWidth.Full) return `
+      if (width == FigureWidth.Full)
+        return `
         box-shadow: none;
       `;
     }}
@@ -152,7 +156,7 @@ const classNameToFigureWidth = (classNames: string): FigureWidth => {
   }
 
   return FigureWidth.Normal;
-}
+};
 
 const ArticleBody: React.FunctionComponent<{
   data: PostOrPage | null;
@@ -197,9 +201,7 @@ const ArticleBody: React.FunctionComponent<{
     if (node.name == "blockquote") {
       return (
         <Blockquote key={index}>
-          <p>
-          {node.children.map(transform)}
-          </p>
+          <p>{node.children.map(transform)}</p>
         </Blockquote>
       );
     }
@@ -216,7 +218,11 @@ const ArticleBody: React.FunctionComponent<{
           const code = text(child).replace(/\n$/, "");
 
           return (
-            <SyntaxHighlighter language={language} useInlineStyles={false} key={index}>
+            <SyntaxHighlighter
+              language={language}
+              useInlineStyles={false}
+              key={index}
+            >
               {code}
             </SyntaxHighlighter>
           );

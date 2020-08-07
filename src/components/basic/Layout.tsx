@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { Footer } from "./Footer";
 import { initGA, logPageView } from "../../lib/utils/analytics";
+import GlobalStyles from "../../styles/global";
 
 export class Layout extends React.Component<{
   title?: string;
@@ -20,6 +21,7 @@ export class Layout extends React.Component<{
 
     return (
       <div>
+        <GlobalStyles />
         <Head>
           <title>
             {title ? title + " · södermalmsskolan.com" : "södermalmsskolan.com"}
