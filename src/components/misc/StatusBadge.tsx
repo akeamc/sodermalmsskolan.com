@@ -1,20 +1,21 @@
 import styled from "styled-components";
+import Skeleton from "react-loading-skeleton";
 
 const Container = styled.div`
   padding: 0 12px;
   border-radius: 5px;
-  border: 1px solid #eee;
+  border: 1px solid var(--accents-2);
   float: left;
   display: flex;
   align-items: center;
   height: 32px;
-  background-color: #fff;
+  background-color: var(--background);
 `;
 
 export enum StatusColor {
   Success = "#335eea",
   Error = "#df4759",
-  Waiting = "#ccc",
+  Waiting = "#eee",
 }
 
 export const StatusIndicator = styled.div<{ color: string }>`
@@ -46,7 +47,7 @@ export const StatusBadge: React.FunctionComponent<StatusBadgeProps> = ({
   ...props
 }) => {
   color = isValidating ? StatusColor.Waiting : color;
-  value = isValidating ? "Uppdaterar" : value;
+  value = isValidating ? <Skeleton width="48px" /> : value;
 
   return (
     <Container {...props}>

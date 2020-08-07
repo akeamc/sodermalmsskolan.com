@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { defaultParams } from "../../lib/api/ghost/post";
 import { useSWRInfinite } from "swr";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
 import api from "../../lib/api/ghost/credentials";
 import { CardGrid, GridItem } from "../basic/CardGrid";
+import { Row } from "../grid/Row";
+import { Col } from "../grid/Col";
+import VisibilitySensor from "react-visibility-sensor";
 
 export function getPostUrl(slug: string | null): string {
   return `/blogg/${slug ? slug : ""}`;
@@ -35,7 +36,7 @@ export const PostGrid: React.FunctionComponent<{
 
   return (
     <CardGrid
-      items={items}
+      items={items.length > 0 ? items : null}
       expectedNumberOfItems={expectedNumberOfPosts}
       imagesExpected={true}
       rowLimit={3}
@@ -49,7 +50,10 @@ export const PostGridAuto: React.FunctionComponent<{
 }> = (props) => {
   const { params = {} } = props;
   const limit = parseInt((params.limit || 10).toString());
+
   let [isReachingEnd, setIsReachingEnd] = useState(false);
+  let [scrolledToBottom, setScrolledToBottom] = useState(false);
+
   const { data, isValidating, size, setSize } = useSWRInfinite(
     (pageIndex, previousPageData) => {
       let pagination = previousPageData?.meta?.pagination;
@@ -73,29 +77,26 @@ export const PostGridAuto: React.FunctionComponent<{
     }
   );
 
+  if (scrolledToBottom && !isReachingEnd) {
+    setSize(size + 1);
+    setScrolledToBottom(false);
+  }
+
   return (
     <>
       <PostGrid
         posts={(data || []).flat()}
         expectedNumberOfPosts={size * limit}
       />
-      <Row className="justify-content-center">
-        <Col xs="auto">
-          {isReachingEnd ? (
-            <small className="text-muted">Inga fler inlägg!</small>
-          ) : (
-            <button
-              onClick={() => {
-                setSize(size + 1);
-              }}
-              disabled={isValidating}
-              className="btn btn-outline-gray-300 d-inline btn btn-outline-primary"
-            >
-              {isValidating ? "Hämtar fler inlägg" : "Hämta fler inlägg"}
-            </button>
-          )}
-        </Col>
-      </Row>
+      <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>
+        <Row>
+          <Col>
+            {isReachingEnd ? null : (
+              <PostGrid posts={null} expectedNumberOfPosts={limit} />
+            )}
+          </Col>
+        </Row>
+      </VisibilitySensor>
     </>
   );
 };

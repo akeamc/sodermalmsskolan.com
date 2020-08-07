@@ -6,7 +6,7 @@ export class Logo extends React.Component<{
   style?: React.CSSProperties;
 }> {
   render() {
-    const { color = "#111", className, style = {} } = this.props;
+    const { color = "currentColor", className, style = {} } = this.props;
 
     return (
       <svg

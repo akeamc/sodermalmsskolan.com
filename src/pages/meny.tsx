@@ -1,61 +1,91 @@
-import React from "react";
+import styled from "styled-components";
 import { Layout } from "../components/basic/Layout";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Header } from "../components/basic/Header";
-import Container from "react-bootstrap/Container";
-import { AutoLink } from "../components/basic/AutoLink";
+import { AutoLink } from "../components/basic/Link";
 import { MenuGrid } from "../components/menu/MenuGrid";
-import { FoodPhotos } from "../components/menu/FoodPhotos";
 import { AdSection } from "../components/basic/Ad";
-import { Section } from "../components/basic/Section";
+import { Section } from "../components/layout/Section";
+import { Hero } from "../components/layout/Hero";
+import { Row } from "../components/grid/Row";
+import { Col } from "../components/grid/Col";
+import { Navigation } from "../components/basic/Navigation";
+import { Image } from "../components/basic/Image";
+import { LeadText } from "../components/basic/Typography";
 
-export default class Page extends React.Component {
-  render() {
-    return (
-      <Layout title="Meny">
-        <Header>
-          <Col xs={12} md={5} className="order-md-2">
-            <img
-              src="https://cdn.discordapp.com/attachments/575993879837409290/666282862151991296/IMG_3695.JPG"
-              className="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0 rounded-lg"
-            />
-          </Col>
-          <Col xs={12} md={7} className="order-md-1">
-            <h1 className="display-3 text-center text-md-left mb-4">
-              Vi visar upp <span className="text-primary">Sodexo</span> för
-              världen.
-            </h1>
-            <p className="lead text-muted text-center text-md-left mb-6 mb-lg-8">
+const HeroContent = styled(Row)`
+  grid-auto-flow: dense;
+`;
+
+const TitleContainer = styled.div`
+  grid-column: span 12;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    grid-column: 1 / span 7;
+  }
+
+  @media (min-width: 992px) {
+    grid-column: 1 / span 5;
+  }
+`;
+
+const ImageContainer = styled.div`
+  grid-column: span 12;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: 576px) {
+    grid-column: 2 / span 10;
+  }
+
+  @media (min-width: 768px) {
+    grid-column: 8 / span 5;
+  }
+`;
+
+const Page: React.FunctionComponent = () => {
+  return (
+    <Layout title="Meny">
+      <Navigation />
+      <Hero>
+        <HeroContent>
+          <ImageContainer>
+            <Image src="https://cdn.discordapp.com/attachments/575993879837409290/666282862151991296/IMG_3695.JPG" />
+          </ImageContainer>
+          <TitleContainer>
+            <h1>Vi visar upp Sodexo för världen</h1>
+            <LeadText>
               I över ett år har vi fotat maten som Sodexo serverar och spridit
               bilderna på nätet. Vi kommer aldrig ge upp.
+            </LeadText>
+          </TitleContainer>
+        </HeroContent>
+      </Hero>
+      <AdSection />
+      <Section>
+        <Row>
+          <Col xs={12}>
+            <h2>Menyn</h2>
+          </Col>
+        </Row>
+        <MenuGrid numberOfMenus={7} />
+        <Row>
+          <Col xs={12}>
+            <p>
+              Källa:{" "}
+              <AutoLink href="https://skolmaten.se/sodermalmsskolan-gamla-maria/">
+                skolmaten.se
+              </AutoLink>
+              .
             </p>
           </Col>
-        </Header>
-        <AdSection />
-        <Section>
-          <Container>
-            <MenuGrid numberOfMenus={7} />
-            <Row>
-              <Col xs={12}>
-                <small className="text-muted">
-                  Visa hela menyn på{" "}
-                  <AutoLink href="https://skolmaten.se/sodermalmsskolan-gamla-maria/">
-                    skolmaten.se
-                  </AutoLink>
-                  .
-                </small>
-              </Col>
-            </Row>
-          </Container>
-        </Section>
-        <AdSection />
-        <Section>
-          <Container>
-            <FoodPhotos />
-          </Container>
-        </Section>
-      </Layout>
-    );
-  }
-}
+        </Row>
+      </Section>
+      <AdSection />
+    </Layout>
+  );
+};
+
+export default Page;

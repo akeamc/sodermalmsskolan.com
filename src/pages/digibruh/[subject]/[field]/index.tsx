@@ -1,11 +1,7 @@
 import { Layout } from "../../../../components/basic/Layout";
-import { Header } from "../../../../components/basic/Header";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 import NotFound from "../../../404";
 import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
 import Digibruh, { useDigibruh } from "../../../../lib/digibruh/Digibruh";
-import Row from "react-bootstrap/Row";
 import useSWR from "swr";
 import { PostOrPage } from "@tryghost/content-api";
 import {
@@ -14,7 +10,11 @@ import {
 } from "../../../../lib/digibruh/utils/initialprops";
 import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
-import { Section } from "../../../../components/basic/Section";
+import { Row } from "../../../../components/grid/Row";
+import { Col } from "../../../../components/grid/Col";
+import { Section } from "../../../../components/layout/Section";
+import { SplitHeader } from "../../../../components/layout/Header";
+import { GridTitleSection } from "../../../../components/basic/Typography";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
@@ -55,31 +55,24 @@ const Page: DigibruhPage = (props) => {
 
   return (
     <Layout title={field?.name}>
-      <Header fixedNav backgroundImage={field?.coverImage}>
-        <Col xs={12}>
-          <h1 className="display-3 text-center text-md-left mb-4">
-            {field?.name}
-          </h1>
-          <p className="lead text-white-80 text-center text-md-left mb-6 mb-lg-8">
-            {field?.description}
-          </p>
-        </Col>
-      </Header>
-      <Container>
-        <Section>
-          <Row className="mb-5">
-            <Col xs={12}>
-              <h3 className="mb-0">Artiklar</h3>
-            </Col>
-          </Row>
-          <CardGrid
-            items={loadingPosts ? null : items}
-            imagesExpected={true}
-            expectedNumberOfItems={3}
-            rowLimit={5}
-          />
-        </Section>
-      </Container>
+      <SplitHeader
+        title={field?.name}
+        lead={field?.description}
+        image={field?.coverImage}
+      />
+      <Section>
+        <Row>
+          <Col xs={12}>
+            <GridTitleSection title="Artiklar" />
+          </Col>
+        </Row>
+        <CardGrid
+          items={loadingPosts ? null : items}
+          imagesExpected={true}
+          expectedNumberOfItems={3}
+          rowLimit={5}
+        />
+      </Section>
     </Layout>
   );
 };

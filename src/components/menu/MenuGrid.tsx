@@ -1,10 +1,24 @@
+import styled from "styled-components";
 import React from "react";
 import moment from "moment";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Skeleton from "react-loading-skeleton";
 import { useMenus } from "../../lib/api/main/menu/Menu";
 import { Menu } from "../../lib/api/main/menu/Menu";
+import { Row } from "../grid/Row";
+import { Col } from "../grid/Col";
+import { firstLetterUpperCase } from "../../lib/utils/letters";
+
+const GridTitle = styled.h2`
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+
+const GridItem = styled.div`
+  li:last-child {
+    margin-bottom: 0;
+  }
+`;
 
 export class MenuGridItem extends React.Component<{
   menu: Menu | null;
@@ -16,26 +30,26 @@ export class MenuGridItem extends React.Component<{
 
     if (menu || loading) {
       return (
-        <>
-          {loading ? (
-            <Skeleton />
-          ) : (
-            <span className="badge badge-pill badge-primary-soft mb-2">
-              <span className="h6 text-uppercase">
-                {moment(menu.timestamp).locale("sv").format("dddd D MMMM")}
-              </span>
-            </span>
-          )}
+        <GridItem>
+          <GridTitle>
+            {loading ? (
+              <Skeleton />
+            ) : (
+              firstLetterUpperCase(
+                moment(menu?.timestamp).locale("sv").format("dddd D MMMM")
+              )
+            )}
+          </GridTitle>
 
-          {(menu?.dishes || fallbackValue).map((value, index) => (
-            <p key={index} className="text-muted">
-              {value}
-            </p>
-          ))}
-        </>
+          <ul>
+            {(menu?.dishes || fallbackValue).map((value, index) => (
+              <li key={index}>{value}</li>
+            ))}
+          </ul>
+        </GridItem>
       );
     } else {
-      return <p className="text-muted">Menyn är inte tillgänglig.</p>;
+      return <p>Menyn är inte tillgänglig.</p>;
     }
   }
 }
@@ -43,7 +57,7 @@ export class MenuGridItem extends React.Component<{
 export const MenuGrid: React.FunctionComponent<{
   numberOfMenus: number;
 }> = ({ numberOfMenus }) => {
-  const { data: menus } = useMenus({ limit: numberOfMenus });
+  const { data: menus } = useMenus({ limit: numberOfMenus, offset: -100 });
   const fallbackArray: Menu[] = new Array(numberOfMenus).fill(null);
 
   return (

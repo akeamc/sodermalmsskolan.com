@@ -15,8 +15,6 @@ export const MinecraftStatusBadge: React.FunctionComponent<React.HTMLAttributes<
 
   const color = data?.online ? StatusColor.Success : StatusColor.Error;
 
-  console.log(isValidating);
-
   const text = data?.online ? (
     <>
       <Tnum>

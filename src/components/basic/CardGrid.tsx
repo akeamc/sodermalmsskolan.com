@@ -1,9 +1,13 @@
+import styled from "styled-components";
 import React from "react";
 import { GenericUser } from "../../lib/models/User";
-import { NarrowCard } from "../basic/Card";
+import { Card, CardContent, CardHero, CardFooter } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Col } from "../grid/Col";
+import { Row } from "../grid/Row";
+import { LinkBlock } from "./Link";
+import moment from "moment";
+import { AuthorGroup } from "./Avatar";
 
 export function getLineClamp(lines: number): React.CSSProperties {
   return {
@@ -25,6 +29,18 @@ export interface GridItem {
   url: string;
 }
 
+const ItemLink = styled(LinkBlock)`
+  flex: 1;
+`;
+
+const GridItemCard = styled(Card)`
+  height: 100%;
+`;
+
+const Description = styled.p`
+  margin-bottom: 0;
+`;
+
 class CardGridItem extends React.Component<{
   item: GridItem | null;
   imageExpected: boolean;
@@ -36,24 +52,45 @@ class CardGridItem extends React.Component<{
     const excerptRows = 3;
 
     return (
-      <NarrowCard
-        meta={item?.meta}
-        image={item?.image}
-        href={item?.url}
-        loading={loading}
-        imageExpected={imageExpected}
-      >
-        <h3>{loading ? <Skeleton /> : item?.title}</h3>
-        <p
-          className="mb-0 text-muted"
-          style={lineClamp ? getLineClamp(lineClamp) : {}}
+      <ItemLink href={item?.url}>
+        <GridItemCard
+          meta={item?.meta}
+          image={item?.image}
+          href={item?.url}
+          loading={loading}
+          imageExpected={imageExpected}
         >
-          {loading ? <Skeleton count={excerptRows} /> : item.description}
-        </p>
-      </NarrowCard>
+          <CardHero backgroundImage={item?.image} />
+          <CardContent>
+            <h3>{loading ? <Skeleton /> : item?.title}</h3>
+            <Description style={lineClamp ? getLineClamp(lineClamp) : {}}>
+              {loading ? <Skeleton count={excerptRows} /> : item.description}
+            </Description>
+          </CardContent>
+          {item?.meta ? (
+            <CardFooter>
+              <p>
+                {moment(item?.meta.date).locale("sv").format("D MMMM YYYY")}
+              </p>
+              <AuthorGroup authors={item.meta.authors} />
+            </CardFooter>
+          ) : null}
+        </GridItemCard>
+      </ItemLink>
     );
   }
 }
+
+const ItemContainer = styled(Col)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const GridContainer = styled(Row)`
+  @media (min-width: 1200px) {
+    grid-gap: 32px;
+  }
+`;
 
 export const CardGrid: React.FunctionComponent<{
   items: GridItem[];
@@ -73,16 +110,16 @@ export const CardGrid: React.FunctionComponent<{
 
   let grid = (items || placeholder).map((item, index) => {
     return (
-      <Col xs={12} md={6} lg={4} key={index} className="d-flex">
+      <ItemContainer xs={12} md={6} lg={4} key={index}>
         <CardGridItem
           item={item}
           loading={!items}
           imageExpected={imagesExpected}
           lineClamp={rowLimit}
         />
-      </Col>
+      </ItemContainer>
     );
   });
 
-  return containerless ? <>{grid}</> : <Row>{grid}</Row>;
+  return containerless ? <>{grid}</> : <GridContainer>{grid}</GridContainer>;
 };

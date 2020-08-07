@@ -1,121 +1,116 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import styled from "styled-components";
+import { Row } from "../grid/Row";
 import { Logo } from "./Logo";
-import { colors } from "../../styles/variables";
-import Link from "next/link";
-import Container from "react-bootstrap/Container";
-import { AutoLink } from "./AutoLink";
-import * as Icon from "react-feather";
-import { useRouter } from "next/router";
+import { AutoLink } from "./Link";
+import { useScrollPosition } from "../../lib/hooks/scroll";
+import { TextColorModifier } from "./Typography";
 
-const NavLink: React.FunctionComponent<{
-  href: string;
-  children: string;
-}> = (props) => {
-  const { href, children } = props;
+const Background = styled.div<{ floating?: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease,
+    color 0.1s ease;
 
-  const router = useRouter();
+  ${({ floating }) =>
+    floating &&
+    `
+      background-color: var(--background);
+      box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+    `}
+
+  @media (min-width: 992px) {
+    ${({ floating }) =>
+      floating &&
+      `
+      background-color: var(--header-background);
+      backdrop-filter: saturate(180%) blur(5px);
+    `}
+  }
+`;
+
+const Wrapper = styled.div`
+  grid-column: span 12;
+`;
+
+const Placeholder = styled.div`
+  min-height: 80px;
+`;
+
+const DesktopNavigation = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+`;
+
+const DesktopNavigationLinks = styled.div`
+  text-align: center;
+`;
+
+const DesktopNavigationLink = styled(AutoLink)`
+  float: left;
+  margin: 0 10px;
+  padding: 10px;
+  color: var(--accents-5);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  transition: color 0.1s ease;
+
+  &:hover {
+    color: var(--foreground);
+  }
+`;
+
+const DesktopNavigationLogoLink = styled(DesktopNavigationLink)`
+  margin: 0;
+  padding: 0;
+`;
+
+const DesktopNavigationLogo = styled(Logo)`
+  height: 16px;
+  color: var(--foreground);
+`;
+
+export const Navigation: React.FunctionComponent<{
+  noPlaceholder?: boolean;
+  brightText?: boolean;
+}> = ({ noPlaceholder = false, brightText = false }) => {
+  const [floating, setFloating] = useState(false);
+  const containerRef = useRef();
+  const placeholder = !noPlaceholder;
+
+  useScrollPosition(({ current: { y } }) => {
+    setFloating(y > 0);
+  }, 100);
 
   return (
-    <li className="nav-item">
-      <AutoLink
-        href={href}
-        className={`nav-link ${
-          router.pathname == href ? "nav-link-active" : ""
-        }`}
-      >
-        {children}
-      </AutoLink>
-    </li>
+    <TextColorModifier bright={brightText && !floating}>
+      {placeholder && <Placeholder />}
+      <Background ref={containerRef} floating={floating}>
+        <Row>
+          <Wrapper>
+            <DesktopNavigation>
+              <DesktopNavigationLogoLink href="/">
+                <DesktopNavigationLogo />
+              </DesktopNavigationLogoLink>
+              <DesktopNavigationLinks>
+                <DesktopNavigationLink href="/meny">Meny</DesktopNavigationLink>
+                <DesktopNavigationLink href="/blogg">
+                  Blogg
+                </DesktopNavigationLink>
+                <DesktopNavigationLink href="/digibruh">
+                  Digibruh
+                </DesktopNavigationLink>
+              </DesktopNavigationLinks>
+            </DesktopNavigation>
+          </Wrapper>
+        </Row>
+      </Background>
+    </TextColorModifier>
   );
 };
-
-const NavLinks: React.FunctionComponent = () => (
-  <>
-    <NavLink href="/blogg">Blogg</NavLink>
-    <NavLink href="/meny">Meny</NavLink>
-    <NavLink href="/digibruh">Digibruh</NavLink>
-    <NavLink href="/om">Om</NavLink>
-  </>
-);
-
-export class Navigation extends React.Component<
-  {
-    dark?: boolean;
-    fixed?: boolean;
-    lift?: boolean;
-  },
-  {
-    showMobileNav: boolean;
-  }
-> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showMobileNav: false,
-    };
-  }
-
-  setMobileNavState(shown: boolean) {
-    this.setState({
-      showMobileNav: shown,
-    });
-  }
-
-  componentDidMount() {
-    window.addEventListener("scroll", this.hideMobileNav);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.hideMobileNav);
-  }
-
-  hideMobileNav = () => {
-    this.setMobileNavState(false);
-  };
-
-  render() {
-    const { dark = false, fixed = false, lift = false } = this.props;
-
-    return (
-      <div
-        className={`navbar ${dark ? "navbar-dark" : "bg-white"} ${
-          fixed ? "navbar-fixed" : null
-        } ${lift ? "navbar-lift" : null}`}
-      >
-        <Container>
-          <Link href="/">
-            <a className="brand-link">
-              <Logo color={dark ? "#fff" : colors.primary} className="logo" />
-            </a>
-          </Link>
-          <ul className="nav d-none d-md-flex">
-            <NavLinks />
-          </ul>
-          <button
-            className={`d-md-none navbar-toggler collapsed ${
-              this.state.showMobileNav ? "nav-shown" : ""
-            }`}
-            onClick={() => this.setMobileNavState(!this.state.showMobileNav)}
-          >
-            <Icon.Menu />
-          </button>
-          <div
-            className={`mobile-nav d-md-none ${
-              this.state.showMobileNav ? "shown" : ""
-            }`}
-          >
-            <ul className="text-right">
-              <NavLinks />
-            </ul>
-          </div>
-          <div
-            className={`mobile-nav-overlay d-md-none ${
-              this.state.showMobileNav ? "shown" : ""
-            }`}
-          />
-        </Container>
-      </div>
-    );
-  }
-}

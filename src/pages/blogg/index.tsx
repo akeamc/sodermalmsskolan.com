@@ -1,44 +1,38 @@
 import React from "react";
 import { Layout } from "../../components/basic/Layout";
-import Col from "react-bootstrap/Col";
-import { Header } from "../../components/basic/Header";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import { FeaturedPost } from "../../components/blog/Featured";
 import { PostGridAuto } from "../../components/blog/PostGrid";
 import { AdSection } from "../../components/basic/Ad";
-import { Section } from "../../components/basic/Section";
+import { Section } from "../../components/layout/Section";
+import { Col } from "../../components/grid/Col";
+import { Row } from "../../components/grid/Row";
+import { Hero } from "../../components/layout/Hero";
+import { Navigation } from "../../components/basic/Navigation";
+import { LeadText, GridTitleSection } from "../../components/basic/Typography";
 
 export default class Page extends React.Component {
   render() {
     return (
       <Layout title="Blogg">
-        <Header fixedNav>
-          <Col xs={12}>
-            <div className="py-8">
-              <h1 className="display-2 text-center mb-4">Vår blogg.</h1>
-              <p className="lead text-center mb-4">Skriven mest av Bo.</p>
-            </div>
-          </Col>
-        </Header>
-        <Section>
-          <Container>
-            <FeaturedPost />
-          </Container>
-        </Section>
+        <Navigation />
+        <Hero>
+          <Row>
+            <Col xs={12}>
+              <h1>Vår blogg</h1>
+              <LeadText>Skriven mest av Bo.</LeadText>
+            </Col>
+          </Row>
+        </Hero>
         <AdSection />
         <Section>
-          <Container>
-            <Row className="row align-items-center mb-5">
-              <Col xs={12} className="col-md">
-                <h3 className="mb-0">Senaste inläggen</h3>
-                <p className="mb-0 text-muted">
-                  Om skolmaten, våra digitala enheter och lite allt möjligt.
-                </p>
-              </Col>
-            </Row>
-            <PostGridAuto />
-          </Container>
+          <Row>
+            <Col xs={12}>
+              <GridTitleSection
+                title="Senaste inläggen"
+                description="Om skolmaten, våra digitala enheter och lite allt möjligt."
+              />
+            </Col>
+          </Row>
+          <PostGridAuto />
         </Section>
       </Layout>
     );
