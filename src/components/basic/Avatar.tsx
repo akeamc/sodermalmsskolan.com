@@ -3,7 +3,6 @@ import React from "react";
 import { LinkBlock } from "./Link";
 import { GenericUser } from "../../lib/models/User";
 import pxcmprs from "../../lib/utils/pxcmprs";
-import { Format } from "pxcmprs";
 
 interface AvatarProps {
   size?: number;
@@ -13,6 +12,13 @@ function avatarSizeToPx(size: number = 2): number {
   return size * 16;
 }
 
+export const useSmallAvatar = (source: string) => {
+  return pxcmprs.generateUrl({
+    width: 256,
+    source,
+  });
+};
+
 const AvatarImage = styled.img`
   width: 100%;
   height: 100%;
@@ -21,7 +27,7 @@ const AvatarImage = styled.img`
   display: block;
 `;
 
-const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
+export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   border-radius: 50%;
 
   ${({ size }) => {
@@ -42,15 +48,9 @@ export const Avatar: React.FunctionComponent<{
   imageUrl: string;
   size?: number;
 }> = ({ href = "#", imageUrl = "", size }) => {
-  const url = pxcmprs.generateUrl({
-    format: Format.Jpeg,
-    source: imageUrl,
-    width: 256,
-  });
-
   return (
     <AvatarWrapper href={href} size={size}>
-      <AvatarImage src={url} />
+      <AvatarImage src={useSmallAvatar(imageUrl)} />
     </AvatarWrapper>
   );
 };

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Row } from "../../grid/Row";
 import { LeadText, SmallBig, TextColorModifier } from "../../basic/Typography";
 import moment from "moment";
-import { Avatar } from "../../basic/Avatar";
+import { Avatar, AvatarWrapper, useSmallAvatar } from "../../basic/Avatar";
 import { LinkBlock } from "../../basic/Link";
 import { getAuthorUrl } from "../../../lib/api/ghost/author";
 
@@ -46,7 +46,7 @@ const Lead = styled(LeadText)``;
 
 const MetaRow = styled.div`
   margin-top: 40px;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
 `;
@@ -56,7 +56,6 @@ const MetaField = styled.div`
   flex-wrap: wrap;
   align-items: center;
   color: var(--accents-5);
-  flex-grow: 1;
 
   &:not(:last-child) {
     margin-right: 15px;
@@ -66,18 +65,28 @@ const MetaField = styled.div`
 `;
 
 const AuthorCard = styled(LinkBlock)`
-  display: inline-flex;
+  display: flex;
   flex-wrap: nowrap;
   align-items: center;
   white-space: nowrap;
+  margin-left: 2px;
 
   &:not(:last-child) {
     margin-right: 15px;
   }
 `;
 
+const AuthorImage = styled.div<{ src: string }>`
+  width: 18px;
+  height: 18px;
+  margin: -2px 8px -2px -2px;
+  background-size: cover;
+  background-position: center;
+  background-image: ${({ src }) => `url(${src})`};
+  border-radius: 50%;
+`;
+
 const AuthorName = styled.small`
-  margin-left: 8px;
   white-space: nowrap;
 `;
 
@@ -103,7 +112,9 @@ export const ArticleHero: React.FunctionComponent<{
                           key={index}
                           href={getAuthorUrl(author?.slug)}
                         >
-                          <Avatar imageUrl={author?.profile_image} size={1} />
+                          <AuthorImage
+                            src={useSmallAvatar(author?.profile_image)}
+                          />
                           <AuthorName>{author?.name}</AuthorName>
                         </AuthorCard>
                       ))}

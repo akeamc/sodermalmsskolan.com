@@ -9,7 +9,7 @@ import { Row } from "../components/grid/Row";
 import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/basic/Navigation";
 import { Image } from "../components/basic/Image";
-import { LeadText } from "../components/basic/Typography";
+import { LeadText, GridTitleSection } from "../components/basic/Typography";
 
 const HeroContent = styled(Row)`
   grid-auto-flow: dense;
@@ -67,7 +67,7 @@ const Page: React.FunctionComponent = () => {
       <Section>
         <Row>
           <Col xs={12}>
-            <h2>Menyn</h2>
+            <GridTitleSection title="Menyn" />
           </Col>
         </Row>
         <MenuGrid numberOfMenus={7} />

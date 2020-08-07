@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Skeleton from "react-loading-skeleton";
 import { PostOrPage } from "@tryghost/content-api";
 import ReactHtmlParser, { convertNodeToElement } from "react-html-parser";
 import React from "react";
@@ -9,9 +8,44 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { Section } from "../../layout/Section";
 import { Row } from "../../grid/Row";
 
-const Figure = styled.figure`
+enum FigureWidth {
+  Normal,
+  Wide,
+  Full
+}
+
+const Figure = styled.figure<{width: FigureWidth}>`
+  margin: 0;
+  ${({width}) => width != FigureWidth.Normal && `
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+
+    img {
+      width: 100vw;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  `}
+
   img {
     border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+
+    ${({width}) => {
+      if (width == FigureWidth.Wide) return `
+        max-width: 1040px;
+
+        @media (min-width: 1040px) {
+          border-radius: 8px;
+          box-shadow: var(--shadow-medium);
+        }
+      `
+
+      if (width == FigureWidth.Full) return `
+        box-shadow: none;
+      `;
+    }}
   }
 `;
 
@@ -66,7 +100,7 @@ const Blockquote = styled.blockquote`
   }
 `;
 
-const Body = styled.div`
+const RichText = styled.div`
   grid-column: span 12;
 
   @media (min-width: 576px) {
@@ -74,11 +108,11 @@ const Body = styled.div`
   }
 
   @media (min-width: 768px) {
-    grid-column: 2 / span 8;
+    grid-column: 3 / span 8;
   }
 
   @media (min-width: 1200px) {
-    grid-column: 3 / span 6;
+    grid-column: 4 / span 6;
   }
 
   h1,
@@ -107,6 +141,19 @@ const Body = styled.div`
   }
 `;
 
+const RichTextSection = styled(Section)`
+  overflow-x: hidden;
+`;
+
+const classNameToFigureWidth = (classNames: string): FigureWidth => {
+  for (let className of classNames.split(" ")) {
+    if (className == "kg-width-wide") return FigureWidth.Wide;
+    if (className == "kg-width-full") return FigureWidth.Full;
+  }
+
+  return FigureWidth.Normal;
+}
+
 const ArticleBody: React.FunctionComponent<{
   data: PostOrPage | null;
   loading?: boolean;
@@ -130,31 +177,28 @@ const ArticleBody: React.FunctionComponent<{
     }
 
     if (node.name == "figure") {
+      let width = classNameToFigureWidth(node.attribs.class);
+
       return (
-        <Figure>
-          {node.children.map((child) => {
-            return convertNodeToElement(child, index, transform);
-          })}
+        <Figure key={index} width={width}>
+          {node.children.map(transform)}
         </Figure>
       );
     }
 
     if (node.name == "figcaption") {
-      return <FigureCaption>{text(node)}</FigureCaption>;
+      return <FigureCaption key={index}>{text(node)}</FigureCaption>;
     }
 
     if (node.name == "img") {
-      const { attribs } = node;
-      return <ProgressiveImage src={attribs.src} />;
+      return <ProgressiveImage key={index} src={node.attribs.src} />;
     }
 
     if (node.name == "blockquote") {
       return (
-        <Blockquote>
+        <Blockquote key={index}>
           <p>
-            {node.children.map((child) => {
-              return convertNodeToElement(child, index, transform);
-            })}
+          {node.children.map(transform)}
           </p>
         </Blockquote>
       );
@@ -172,7 +216,7 @@ const ArticleBody: React.FunctionComponent<{
           const code = text(child).replace(/\n$/, "");
 
           return (
-            <SyntaxHighlighter language={language} useInlineStyles={false}>
+            <SyntaxHighlighter language={language} useInlineStyles={false} key={index}>
               {code}
             </SyntaxHighlighter>
           );
@@ -181,7 +225,7 @@ const ArticleBody: React.FunctionComponent<{
     }
 
     if (node.name == "hr") {
-      return <Divider />;
+      return <Divider key={index} />;
     }
 
     if (node.type == "text") {
@@ -199,11 +243,11 @@ const ArticleBody: React.FunctionComponent<{
   const parsedHtml = ReactHtmlParser(data?.html, { transform });
 
   return (
-    <Section>
+    <RichTextSection>
       <Row>
-        <Body>{parsedHtml}</Body>
+        <RichText>{parsedHtml}</RichText>
       </Row>
-    </Section>
+    </RichTextSection>
   );
 };
 

@@ -16,13 +16,9 @@ export default class NotFound extends React.Component {
         <Hero>
           <Row>
             <NormalContainer>
-            <h1>
-                Sidan hittades inte
-              </h1>
-              <LeadText>
-                Vi ber om ursäkt.
-              </LeadText>
-              </NormalContainer>
+              <h1>Sidan hittades inte</h1>
+              <LeadText>Vi ber om ursäkt.</LeadText>
+            </NormalContainer>
           </Row>
         </Hero>
       </Layout>
