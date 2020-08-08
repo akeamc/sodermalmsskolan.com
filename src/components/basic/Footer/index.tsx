@@ -10,7 +10,6 @@ const FooterContainer = styled.footer`
   background: var(--accents-1);
   padding: 48px 0;
   border-top: 1px solid var(--accents-2);
-  margin-top: var(--section-spacing);
 `;
 
 const FooterLogo = styled(Logo)`

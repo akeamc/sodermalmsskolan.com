@@ -1,27 +1,35 @@
-import React from "react";
 import { Layout } from "../components/basic/Layout";
-import * as Icon from "react-feather";
-import { AutoLink } from "../components/basic/Link";
-import { Hero } from "../components/layout/Hero";
 import { Navigation } from "../components/basic/Navigation";
-import { NormalWidth } from "../components/grid/Col";
-import { LeadText } from "../components/basic/Typography";
-import { Row } from "../components/grid/Row";
+import styled from "styled-components";
 
-export default class NotFound extends React.Component {
-  render() {
-    return (
-      <Layout title="Sidan hittades inte">
-        <Navigation />
-        <Hero>
-          <Row>
-            <NormalWidth>
-              <h1>Sidan hittades inte</h1>
-              <LeadText>Vi ber om ursäkt.</LeadText>
-            </NormalWidth>
-          </Row>
-        </Hero>
-      </Layout>
-    );
+const Main = styled.main`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--navigation-height));
+`;
+
+const TitleContainer = styled.div`
+  margin: var(--section-spacing) 0;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0.625rem;
   }
-}
+`;
+
+const Page: React.FunctionComponent = () => {
+  return (
+    <Layout title="Sidan hittades inte">
+      <Navigation />
+      <Main>
+        <TitleContainer>
+          <h1>404</h1>
+          <h4>Sidan hittades inte.</h4>
+        </TitleContainer>
+      </Main>
+    </Layout>
+  );
+};
+
+export default Page;

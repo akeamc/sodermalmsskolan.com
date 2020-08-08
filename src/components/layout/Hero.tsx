@@ -3,7 +3,7 @@ import { Section } from "./Section";
 import { TextColorModifier } from "../basic/Typography";
 
 export const Hero = styled(Section)`
-  margin-bottom: var(--section-spacing);
+  margin-top: var(--section-spacing);
 `;
 
 export const HeroBackground = styled(TextColorModifier)<{

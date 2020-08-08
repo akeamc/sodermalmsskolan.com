@@ -250,18 +250,33 @@ export default createGlobalStyle`
   }
 
   h2 {
+    --size-sm: 2.25rem;
+    --size-md: 2.25rem;
     --size-lg: 2.25rem;
     letter-spacing: -.05rem;
     font-weight: 700;
   }
 
   h3 {
+    --size-lsm: 1.5rem;
+    --size-md: 1.5rem;
     --size-lg: 1.5rem;
     letter-spacing: -.05rem;
     font-weight: 600;
   }
 
+  h4 {
+    --size-lg: 1.25rem;
+    --size-lg: 1.25rem;
+    --size-lg: 1.25rem;
+    letter-spacing: -.020625rem;
+    font-weight: 600;
+  }
+
+
   h5 {
+    --size-sm: 1.5rem;
+    --size-md: 1.5rem;
     --size-lg: 1.5rem;
     letter-spacing: -.05em;
   }

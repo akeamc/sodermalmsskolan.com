@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import React from "react";
 import { Layout } from "../components/basic/Layout";
 import { Section } from "../components/layout/Section";
