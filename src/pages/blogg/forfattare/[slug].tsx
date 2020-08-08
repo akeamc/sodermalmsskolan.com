@@ -64,7 +64,7 @@ const Page: React.FunctionComponent = ({
   const digibruhPosts: PostOrPage[] = digibruhSWR.data || [];
 
   return (
-    <Layout title={author?.name}>
+    <Layout metadata={{ title: author?.name, description: author?.bio }}>
       <HeaderWithBackground image={author?.cover_image}>
         <h1>{author?.name}</h1>
         <LeadText>{author?.bio}</LeadText>

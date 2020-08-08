@@ -13,7 +13,6 @@ import { TitleContainer } from "../components/grid/Title";
 const Page: React.FunctionComponent = () => {
   return (
     <Layout>
-      {/* <WindowConfetti /> */}
       <Navigation />
       <Hero>
         <Row>

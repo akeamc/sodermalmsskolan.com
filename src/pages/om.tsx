@@ -20,7 +20,7 @@ const TextBox = styled.div`
 export default class Page extends React.Component {
   render() {
     return (
-      <Layout title="Om">
+      <Layout metadata={{ title: "Om" }}>
         <Navigation />
         <Hero>
           <Row>

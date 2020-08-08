@@ -195,7 +195,10 @@ const ArticleBody: React.FunctionComponent<{
     }
 
     if (node.name == "img") {
-      return <ProgressiveImage key={index} src={node.attribs.src} />;
+      const { alt, src, loading = "lazy" } = node.attribs;
+      return (
+        <ProgressiveImage key={index} alt={alt} src={src} loading={loading} />
+      );
     }
 
     if (node.name == "blockquote") {

@@ -9,7 +9,12 @@ import { TitleContainer } from "../../components/grid/Title";
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout title="Digibruh">
+    <Layout
+      metadata={{
+        title: "Digibruh",
+        description: "Ett digitalt läromedel av elever, för elever.",
+      }}
+    >
       <Navigation />
       <Hero>
         <Row>

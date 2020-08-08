@@ -12,7 +12,7 @@ import { LeadText, GridTitleSection } from "../../components/basic/Typography";
 export default class Page extends React.Component {
   render() {
     return (
-      <Layout title="Blogg">
+      <Layout metadata={{ title: "Blogg" }}>
         <Navigation />
         <Hero>
           <Row>

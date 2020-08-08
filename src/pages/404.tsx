@@ -20,7 +20,7 @@ const TitleContainer = styled.div`
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout title="Sidan hittades inte">
+    <Layout metadata={{ title: "Sidan hittades inte" }}>
       <Navigation />
       <Main>
         <TitleContainer>

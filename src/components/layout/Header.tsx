@@ -9,6 +9,7 @@ const Background = styled.div<{ image: string }>`
   background-size: cover;
   background-position: center;
   background-image: ${({ image }) => `url(${image})`};
+  margin-bottom: var(--section-spacing);
 `;
 
 const Overlay = styled.div`

@@ -109,7 +109,7 @@ export const FooterLinks: React.FunctionComponent = () => {
           <ColumnTitle>{name}</ColumnTitle>
           <List>
             {items.map(({ name, href }, index) => (
-              <li>
+              <li key={index}>
                 <AutoLink key={index} href={href}>
                   {name}
                 </AutoLink>

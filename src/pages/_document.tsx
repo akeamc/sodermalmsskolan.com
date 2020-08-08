@@ -12,7 +12,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="sv">
         <Head>
           {" "}
           <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />

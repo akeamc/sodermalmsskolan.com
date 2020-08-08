@@ -51,7 +51,7 @@ const ImageContainer = styled.div`
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout title="Meny">
+    <Layout metadata={{ title: "Meny" }}>
       <Navigation />
       <Hero>
         <HeroContent>

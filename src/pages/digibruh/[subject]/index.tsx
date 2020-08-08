@@ -22,7 +22,9 @@ const Page: DigibruhPage = (props) => {
   const subject = digibruh.getSubjectBySlug(props.subject);
 
   return (
-    <Layout title={subject?.name}>
+    <Layout
+      metadata={{ title: subject?.name, description: subject?.description }}
+    >
       <DigibruhHero
         title={subject?.name}
         lead={subject?.description}

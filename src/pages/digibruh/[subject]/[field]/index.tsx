@@ -54,7 +54,7 @@ const Page: DigibruhPage = (props) => {
   );
 
   return (
-    <Layout title={field?.name}>
+    <Layout metadata={{ title: field?.name, description: field?.description }}>
       <DigibruhHero
         title={field?.name}
         lead={field?.description}

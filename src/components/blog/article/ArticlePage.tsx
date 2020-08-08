@@ -24,7 +24,14 @@ export default class ArticlePage extends React.Component<{
       : `Publicerad ${formattedDate}`;
 
     return (
-      <Layout title={post?.title}>
+      <Layout
+        metadata={{
+          title: post?.meta_title || post?.title,
+          description: post?.meta_description || post?.excerpt,
+          type: "article",
+          images: [post?.feature_image],
+        }}
+      >
         <ArticleHero post={post} dateText={dateText} />
         <ArticleBody data={post} />
       </Layout>
