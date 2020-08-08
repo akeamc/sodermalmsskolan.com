@@ -2,6 +2,59 @@ import styled from "styled-components";
 import { Row } from "../../grid/Row";
 import { AutoLink } from "../Link";
 import { UnstyledList } from "../List";
+import { Col } from "../../grid/Col";
+
+export interface Item {
+  name: string;
+  href: string;
+}
+
+export interface Category {
+  name: string;
+  items: Item[];
+}
+
+export const categories: Category[] = [
+  {
+    name: "Navigera",
+    items: [
+      {
+        name: "Start",
+        href: "/",
+      },
+      {
+        name: "Meny",
+        href: "/meny",
+      },
+      {
+        name: "Digibruh",
+        href: "/digibruh",
+      },
+    ],
+  },
+  {
+    name: "Organisationen",
+    items: [
+      {
+        name: "Blogg",
+        href: "/blogg",
+      },
+      {
+        name: "Om oss",
+        href: "/om",
+      },
+    ],
+  },
+  {
+    name: "Resurser",
+    items: [
+      {
+        name: "Serverstatus",
+        href: "https://status.lynx.agency",
+      },
+    ],
+  },
+];
 
 const LinkSection = styled(Row)`
   margin-top: 24px;
@@ -51,39 +104,20 @@ const ColumnTitle = styled.h3`
 export const FooterLinks: React.FunctionComponent = () => {
   return (
     <LinkSection>
-      <Column>
-        <ColumnTitle>Navigera</ColumnTitle>
-        <List>
-          <li>
-            <AutoLink href="/">Start</AutoLink>
-          </li>
-          <li>
-            <AutoLink href="/meny">Meny</AutoLink>
-          </li>
-          <li>
-            <AutoLink href="/digibruh">Digibruh</AutoLink>
-          </li>
-        </List>
-      </Column>
-      <Column>
-        <ColumnTitle>Organisationen</ColumnTitle>
-        <List>
-          <li>
-            <AutoLink href="/blogg">Blogg</AutoLink>
-          </li>
-          <li>
-            <AutoLink href="/om">Om oss</AutoLink>
-          </li>
-        </List>
-      </Column>
-      <Column>
-        <ColumnTitle>Resurser</ColumnTitle>
-        <List>
-          <li>
-            <AutoLink href="https://status.lynx.agency">Serverstatus</AutoLink>
-          </li>
-        </List>
-      </Column>
+      {categories.map(({ name, items }, index) => (
+        <Column key={index}>
+          <ColumnTitle>{name}</ColumnTitle>
+          <List>
+            {items.map(({ name, href }, index) => (
+              <li>
+                <AutoLink key={index} href={href}>
+                  {name}
+                </AutoLink>
+              </li>
+            ))}
+          </List>
+        </Column>
+      ))}
     </LinkSection>
   );
 };

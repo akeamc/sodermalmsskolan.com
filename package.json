@@ -29,6 +29,7 @@
     "react-html-parser": "^2.0.2",
     "react-loading-skeleton": "^2.1.1",
     "react-responsive-embed": "^2.1.0",
+    "react-scrolllock": "^5.0.1",
     "react-syntax-highlighter": "^13.2.1",
     "react-visibility-sensor": "^5.1.1",
     "rss-parser": "^3.9.0",

@@ -5,8 +5,11 @@ import { Logo } from "./Logo";
 import { AutoLink } from "./Link";
 import { useScrollPosition } from "../../lib/hooks/scroll";
 import { TextColorModifier } from "./Typography";
+import ScrollLock from "react-scrolllock";
+import { UnstyledList } from "./List";
+import { categories } from "./Footer/Links";
 
-const Background = styled.div<{ floating?: boolean }>`
+const Background = styled.div<{ floating?: boolean; mobileNavOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -30,6 +33,14 @@ const Background = styled.div<{ floating?: boolean }>`
       backdrop-filter: saturate(180%) blur(5px);
     `}
   }
+
+  @media (max-width: 991px) {
+    ${({ mobileNavOpen }) =>
+      mobileNavOpen &&
+      `
+      box-shadow: var(--navigation-shadow);
+    `}
+  }
 `;
 
 const Wrapper = styled.div`
@@ -40,18 +51,23 @@ const Placeholder = styled.div`
   min-height: var(--navigation-height);
 `;
 
-const DesktopNavigation = styled.nav`
+const Bar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: var(--navigation-height);
 `;
 
-const DesktopNavigationLinks = styled.div`
+const DesktopLinks = styled.div`
   text-align: center;
+  display: none;
+
+  @media (min-width: 992px) {
+    display: block;
+  }
 `;
 
-const DesktopNavigationLink = styled(AutoLink)`
+const DesktopLink = styled(AutoLink)`
   float: left;
   margin: 0 10px;
   padding: 10px;
@@ -66,7 +82,7 @@ const DesktopNavigationLink = styled(AutoLink)`
   }
 `;
 
-const DesktopNavigationLogoLink = styled(DesktopNavigationLink)`
+const LogoLink = styled(DesktopLink)`
   margin: 0;
   padding: 0;
 `;
@@ -76,11 +92,122 @@ const DesktopNavigationLogo = styled(Logo)`
   color: var(--foreground);
 `;
 
+const MobileNavigation = styled.div<{ open: boolean }>`
+  background-color: var(--background);
+  position: fixed;
+  top: var(--navigation-height);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  overflow-y: auto;
+  padding: 24px;
+
+  ${({ open }) =>
+    open &&
+    `
+    display: block;
+  `}
+
+  @media (min-width: 992px) {
+    display: none;
+  }
+`;
+
+const MobileListTitle = styled.h4`
+  font-size: 1.25rem;
+  letter-spacing: -0.020625rem;
+  font-weight: 600;
+  margin: 1.5em 0;
+`;
+
+const MobileList = styled(UnstyledList)`
+  &:first-child {
+    ${MobileListTitle} {
+      margin-top: 0;
+    }
+  }
+`;
+
+const MobileAnchor = styled(AutoLink)`
+  li {
+    border-bottom: 1px solid var(--accents-2);
+    height: 48px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--foreground);
+    user-select: none;
+  }
+`;
+
+const MobileLink: React.FunctionComponent<{
+  children: string;
+  href: string;
+}> = ({ children, href }) => (
+  <MobileAnchor href={href}>
+    <li>{children}</li>
+  </MobileAnchor>
+);
+
+const MobileNavigationToggle = styled.button`
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  height: 40px;
+  width: 24px;
+  cursor: pointer;
+
+  @media (min-width: 992px) {
+    display: none;
+  }
+`;
+
+const Bars = styled.div<{ open: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 10px;
+  width: 24px;
+
+  &::before,
+  &::after {
+    width: 24px;
+    height: 1px;
+    background-color: var(--foreground);
+    content: "";
+    transition: transform 0.1s ease-in-out;
+  }
+
+  &::before {
+    transform: translateY(-4px);
+  }
+
+  &::after {
+    transform: translateY(4px);
+  }
+
+  ${({ open }) =>
+    open &&
+    `
+    &::before {
+      transform: translateY(1px) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(0) rotate(-45deg);
+    }
+  `}
+`;
+
 export const Navigation: React.FunctionComponent<{
   noPlaceholder?: boolean;
   brightText?: boolean;
 }> = ({ noPlaceholder = false, brightText = false }) => {
   const [floating, setFloating] = useState(false);
+  const [open, setOpen] = useState(false);
   const containerRef = useRef();
   const placeholder = !noPlaceholder;
 
@@ -88,29 +215,48 @@ export const Navigation: React.FunctionComponent<{
     setFloating(y > 0);
   }, 100);
 
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
+
   return (
-    <TextColorModifier bright={brightText && !floating}>
-      {placeholder && <Placeholder />}
-      <Background ref={containerRef} floating={floating}>
-        <Row>
-          <Wrapper>
-            <DesktopNavigation>
-              <DesktopNavigationLogoLink href="/">
-                <DesktopNavigationLogo />
-              </DesktopNavigationLogoLink>
-              <DesktopNavigationLinks>
-                <DesktopNavigationLink href="/meny">Meny</DesktopNavigationLink>
-                <DesktopNavigationLink href="/blogg">
-                  Blogg
-                </DesktopNavigationLink>
-                <DesktopNavigationLink href="/digibruh">
-                  Digibruh
-                </DesktopNavigationLink>
-              </DesktopNavigationLinks>
-            </DesktopNavigation>
-          </Wrapper>
-        </Row>
-      </Background>
-    </TextColorModifier>
+    <>
+      <TextColorModifier bright={brightText && !floating}>
+        {placeholder && <Placeholder />}
+        <Background ref={containerRef} floating={floating} mobileNavOpen={open}>
+          <Row>
+            <Wrapper>
+              <Bar>
+                <LogoLink href="/">
+                  <DesktopNavigationLogo />
+                </LogoLink>
+                <DesktopLinks>
+                  <DesktopLink href="/meny">Meny</DesktopLink>
+                  <DesktopLink href="/blogg">Blogg</DesktopLink>
+                  <DesktopLink href="/digibruh">Digibruh</DesktopLink>
+                </DesktopLinks>
+                <MobileNavigationToggle onClick={toggleOpen}>
+                  <Bars open={open} />
+                </MobileNavigationToggle>
+              </Bar>
+            </Wrapper>
+          </Row>
+        </Background>
+      </TextColorModifier>
+      <ScrollLock isActive={open}>
+        <MobileNavigation open={open}>
+          {categories.map(({ name, items }, index) => (
+            <MobileList key={index}>
+              <MobileListTitle>{name}</MobileListTitle>
+              {items.map(({ name, href }, index) => (
+                <MobileLink key={index} href={href}>
+                  {name}
+                </MobileLink>
+              ))}
+            </MobileList>
+          ))}
+        </MobileNavigation>
+      </ScrollLock>
+    </>
   );
 };
