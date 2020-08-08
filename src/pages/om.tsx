@@ -4,7 +4,7 @@ import { AutoLink } from "../components/basic/Link";
 import { Navigation } from "../components/basic/Navigation";
 import { Row } from "../components/grid/Row";
 import { Hero } from "../components/layout/Hero";
-import { NormalContainer } from "../components/grid/Col";
+import { NormalWidth } from "../components/grid/Col";
 import { Image } from "../components/basic/Image";
 import { Section } from "../components/layout/Section";
 import styled from "styled-components";
@@ -24,14 +24,14 @@ export default class Page extends React.Component {
         <Navigation />
         <Hero>
           <Row>
-            <NormalContainer>
+            <NormalWidth>
               <Image src="https://blogg.södermalmsskolan.com/content/images/size/w2000/2020/06/51B4F6D2-3A27-4358-9D00-BC57E8C01774.jpeg" />
-            </NormalContainer>
+            </NormalWidth>
           </Row>
         </Hero>
         <Section>
           <Row>
-            <NormalContainer>
+            <NormalWidth>
               <TextBox>
                 <h1>Bakgrund</h1>
                 <p>
@@ -50,7 +50,7 @@ export default class Page extends React.Component {
                   som renoverats mycket sedan den publicerades.
                 </p>
               </TextBox>
-            </NormalContainer>
+            </NormalWidth>
           </Row>
         </Section>
       </Layout>

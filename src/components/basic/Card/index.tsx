@@ -4,7 +4,10 @@ import { AuthorGroup } from "../Avatar";
 import { LinkBlock } from "../Link";
 import Skeleton from "react-loading-skeleton";
 import { GenericUser } from "../../../lib/models/User";
-import { useProgressiveBackground } from "../ProgressiveImage";
+import {
+  useProgressiveBackground,
+  useProgressiveImage,
+} from "../ProgressiveImage";
 
 interface CardMeta {
   authors?: GenericUser[];
@@ -31,7 +34,8 @@ export const CardHero = styled.div<{ backgroundImage?: string }>`
   background-size: cover;
   background-position: center;
   background-image: ${(props) =>
-    props.backgroundImage ? `url("${props.backgroundImage}")` : null};
+    props.backgroundImage &&
+    `url("${useProgressiveImage(props.backgroundImage).src}")`};
 `;
 
 export const CardContent = styled.div`

@@ -1,59 +1,51 @@
-import { Row } from "../grid/Row";
-import { LeadText } from "../basic/Typography";
-import { Navigation } from "../basic/Navigation";
 import styled from "styled-components";
+import { TextColorModifier } from "../basic/Typography";
+import { Navigation } from "../basic/Navigation";
+import { Hero } from "./Hero";
+import { Row } from "../grid/Row";
+import { ResponsiveHalf } from "../grid/Col";
 
-export interface HeaderProps {
-  title: string;
-  lead: string;
-  image: string;
-}
-
-export const TextPane = styled.div`
-  margin: calc(2 * var(--section-spacing)) 0;
-  grid-column: span 12;
-
-  @media (min-width: 768px) {
-    grid-column: 7 / span 5;
-  }
-`;
-
-export const ImagePane = styled.div<{ image: string }>`
+const Background = styled.div<{ image: string }>`
   background-size: cover;
   background-position: center;
   background-image: ${({ image }) => `url(${image})`};
-  grid-column: span 12;
-
-  @media (min-width: 768px) {
-    grid-column: 1 / span 5;
-  }
 `;
 
-export const Title = styled.h1`
-  margin-bottom: 2rem;
+const Overlay = styled.div`
+  backdrop-filter: brightness(30%);
 `;
 
-export const Lead = styled(LeadText)`
-  margin: 0;
+const Container = styled(TextColorModifier)<{ minHeight?: string }>`
+  ${({ minHeight }) =>
+    minHeight &&
+    `
+    min-height: ${minHeight};
+  `}
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: var(--navigation-height);
 `;
 
-export const SplitHeader: React.FunctionComponent<HeaderProps> = ({
-  title,
-  lead,
-  image,
-}) => {
+export const HeaderWithBackground: React.FunctionComponent<{
+  children: any;
+  image: string;
+  minHeight?: string;
+}> = ({ children, image, minHeight }) => {
   return (
     <>
-      <Navigation />
-      <div>
-        <Row>
-          <ImagePane image={image} />
-          <TextPane>
-            <Title>{title}</Title>
-            <Lead>{lead}</Lead>
-          </TextPane>
-        </Row>
-      </div>
+      <Navigation noPlaceholder brightText />
+      <Background image={image}>
+        <Overlay>
+          <Container bright minHeight={minHeight}>
+            <Hero>
+              <Row>
+                <ResponsiveHalf>{children}</ResponsiveHalf>
+              </Row>
+            </Hero>
+          </Container>
+        </Overlay>
+      </Background>
     </>
   );
 };

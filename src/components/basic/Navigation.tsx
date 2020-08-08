@@ -19,14 +19,14 @@ const Background = styled.div<{ floating?: boolean }>`
     floating &&
     `
       background-color: var(--background);
-      box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+      box-shadow: var(--navigation-shadow);
     `}
 
   @media (min-width: 992px) {
     ${({ floating }) =>
       floating &&
       `
-      background-color: var(--header-background);
+      background-color: var(--navigation-background);
       backdrop-filter: saturate(180%) blur(5px);
     `}
   }
@@ -37,14 +37,14 @@ const Wrapper = styled.div`
 `;
 
 const Placeholder = styled.div`
-  min-height: 80px;
+  min-height: var(--navigation-height);
 `;
 
 const DesktopNavigation = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 80px;
+  min-height: var(--navigation-height);
 `;
 
 const DesktopNavigationLinks = styled.div`

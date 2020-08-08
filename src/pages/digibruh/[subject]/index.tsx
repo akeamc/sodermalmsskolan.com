@@ -10,8 +10,8 @@ import React from "react";
 import { Row } from "../../../components/grid/Row";
 import { Section } from "../../../components/layout/Section";
 import { Col } from "../../../components/grid/Col";
-import { SplitHeader } from "../../../components/layout/Header";
 import { GridTitleSection } from "../../../components/basic/Typography";
+import { DigibruhHero } from "../../../components/digibruh/Hero";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
@@ -23,7 +23,7 @@ const Page: DigibruhPage = (props) => {
 
   return (
     <Layout title={subject?.name}>
-      <SplitHeader
+      <DigibruhHero
         title={subject?.name}
         lead={subject?.description}
         image={subject?.coverImage}

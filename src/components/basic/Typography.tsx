@@ -26,6 +26,17 @@ export const TextColorModifier = styled.div<{ bright?: boolean }>`
   `}
 `;
 
+export const GradientText = styled.span<{
+  startColor: string;
+  endColor: string;
+}>`
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: ${({ startColor, endColor }) =>
+    `linear-gradient(90deg, ${startColor}, ${endColor});`};
+`;
+
 export const GridTitleContainer = styled.div`
   margin-bottom: 24px;
 `;

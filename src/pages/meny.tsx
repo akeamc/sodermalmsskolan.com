@@ -9,7 +9,11 @@ import { Row } from "../components/grid/Row";
 import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/basic/Navigation";
 import { Image } from "../components/basic/Image";
-import { LeadText, GridTitleSection } from "../components/basic/Typography";
+import {
+  LeadText,
+  GridTitleSection,
+  GradientText,
+} from "../components/basic/Typography";
 
 const HeroContent = styled(Row)`
   grid-auto-flow: dense;
@@ -55,7 +59,13 @@ const Page: React.FunctionComponent = () => {
             <Image src="https://cdn.discordapp.com/attachments/575993879837409290/666282862151991296/IMG_3695.JPG" />
           </ImageContainer>
           <TitleContainer>
-            <h1>Vi visar upp Sodexo för världen</h1>
+            <h1>
+              Vi visar upp{" "}
+              <GradientText startColor="var(--color)" endColor="#00DFD8">
+                Sodexo
+              </GradientText>{" "}
+              för världen
+            </h1>
             <LeadText>
               I över ett år har vi fotat maten som Sodexo serverar och spridit
               bilderna på nätet. Vi kommer aldrig ge upp.

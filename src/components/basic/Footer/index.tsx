@@ -8,7 +8,7 @@ import { FooterLinks } from "./Links";
 
 const FooterContainer = styled.footer`
   background: var(--accents-1);
-  padding: 24px 0;
+  padding: 48px 0;
   border-top: 1px solid var(--accents-2);
   margin-top: var(--section-spacing);
 `;

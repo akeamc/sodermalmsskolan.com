@@ -5,6 +5,7 @@ export default createGlobalStyle`
     font-family: var(--font-sans);
     background: var(--background);
     color: var(--foreground);
+    transition: color 0.1s ease, background-color 0.1s ease;
   }
 
   @supports (font-variation-settings: normal) {
@@ -25,6 +26,7 @@ export default createGlobalStyle`
     --page-gutter: 24px;
     --max-page-width: 1260px;
     --section-spacing: 24px;
+    --grid-gap: 24px;
 
     /* Colors */
     --foreground: black;
@@ -44,7 +46,9 @@ export default createGlobalStyle`
 
     --code-background: rgba(27, 31, 35, 0.05);
 
-    --header-background: rgba(255, 255, 255, 0.8);
+    --navigation-background: rgba(255, 255, 255, 0.8);
+    --navigation-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+    --navigation-height: 80px;
 
     --shadow-color: var(--accents-2);
     --shadow-smallest: 0px 4px 8px var(--shadow-color);
@@ -53,7 +57,7 @@ export default createGlobalStyle`
     --shadow-large: 0 30px 60px var(--shadow-color);
     --shadow-hover: 0 30px 60px var(--shadow-color);
 
-
+    /* Bo tycker att dark mode är fult. */
     /* @media (prefers-color-scheme: dark) {
       --foreground: white;
       --background: black;
@@ -67,7 +71,8 @@ export default createGlobalStyle`
       --accents-2: #333;
       --accents-1: #111;
 
-      --header-background: rgba(0, 0, 0, 0.8);
+      --navigation-background: rgba(0, 0, 0, 0.8);
+      --navigation-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
 
       --shadow-color: rgba(255, 255, 255, 0.1);
 
@@ -212,6 +217,18 @@ export default createGlobalStyle`
     margin: 0;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-size: var(--size-sm);
+
+    @media (min-width: 768px) {
+      font-size: var(--size-md);
+    }
+
+    @media (min-width: 992px) {
+      font-size: var(--size-lg);
+    }
+  }
+
   small {
     font-size: 14px;
   }
@@ -224,26 +241,28 @@ export default createGlobalStyle`
   }
 
   h1 {
-    font-size: 4rem;
-    font-weight: 700;
+    --size-sm: 2.5rem;
+    --size-md: 3rem;
+    --size-lg: 4rem;
+    font-weight: 600;
     letter-spacing: -.1rem;
     line-height: 1;
   }
 
   h2 {
-    font-size: 2.25rem;
+    --size-lg: 2.25rem;
     letter-spacing: -.05rem;
     font-weight: 700;
   }
 
   h3 {
-    font-size: 1.5rem;
+    --size-lg: 1.5rem;
     letter-spacing: -.05rem;
     font-weight: 600;
   }
 
   h5 {
-    font-size: 1.5rem;
+    --size-lg: 1.5rem;
     letter-spacing: -.05em;
   }
 

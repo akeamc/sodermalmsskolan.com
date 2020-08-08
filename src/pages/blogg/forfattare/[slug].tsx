@@ -13,9 +13,12 @@ import React from "react";
 import { Section } from "../../../components/layout/Section";
 import { Row } from "../../../components/grid/Row";
 import { Col } from "../../../components/grid/Col";
-import { GridTitleSection } from "../../../components/basic/Typography";
-import { SplitHeader } from "../../../components/layout/Header";
+import {
+  GridTitleSection,
+  LeadText,
+} from "../../../components/basic/Typography";
 import styled from "styled-components";
+import { HeaderWithBackground } from "../../../components/layout/Header";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -62,11 +65,10 @@ const Page: React.FunctionComponent = ({
 
   return (
     <Layout title={author?.name}>
-      <SplitHeader
-        title={author?.name}
-        lead={author?.bio}
-        image={author?.cover_image}
-      />
+      <HeaderWithBackground image={author?.cover_image}>
+        <h1>{author?.name}</h1>
+        <LeadText>{author?.bio}</LeadText>
+      </HeaderWithBackground>
       <Section>
         <Row>
           <Col xs={12}>

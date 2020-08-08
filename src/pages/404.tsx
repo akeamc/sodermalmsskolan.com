@@ -4,7 +4,7 @@ import * as Icon from "react-feather";
 import { AutoLink } from "../components/basic/Link";
 import { Hero } from "../components/layout/Hero";
 import { Navigation } from "../components/basic/Navigation";
-import { NormalContainer } from "../components/grid/Col";
+import { NormalWidth } from "../components/grid/Col";
 import { LeadText } from "../components/basic/Typography";
 import { Row } from "../components/grid/Row";
 
@@ -15,10 +15,10 @@ export default class NotFound extends React.Component {
         <Navigation />
         <Hero>
           <Row>
-            <NormalContainer>
+            <NormalWidth>
               <h1>Sidan hittades inte</h1>
               <LeadText>Vi ber om ursäkt.</LeadText>
-            </NormalContainer>
+            </NormalWidth>
           </Row>
         </Hero>
       </Layout>

@@ -13,8 +13,8 @@ import React from "react";
 import { Row } from "../../../../components/grid/Row";
 import { Col } from "../../../../components/grid/Col";
 import { Section } from "../../../../components/layout/Section";
-import { SplitHeader } from "../../../../components/layout/Header";
 import { GridTitleSection } from "../../../../components/basic/Typography";
+import { DigibruhHero } from "../../../../components/digibruh/Hero";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
@@ -55,7 +55,7 @@ const Page: DigibruhPage = (props) => {
 
   return (
     <Layout title={field?.name}>
-      <SplitHeader
+      <DigibruhHero
         title={field?.name}
         lead={field?.description}
         image={field?.coverImage}

@@ -29,9 +29,8 @@ export const Col = styled.div<{
   }
 `;
 
-export const TitleContainer = styled.div`
+export const NormalWidth = styled.div`
   grid-column: span 12;
-  text-align: center;
 
   @media (min-width: 768px) {
     grid-column: 2 / span 10;
@@ -42,14 +41,14 @@ export const TitleContainer = styled.div`
   }
 `;
 
-export const NormalContainer = styled.div`
+export const ResponsiveHalf = styled.div`
   grid-column: span 12;
 
   @media (min-width: 768px) {
-    grid-column: 2 / span 10;
+    grid-column: span 9;
   }
 
   @media (min-width: 1200px) {
-    grid-column: 3 / span 8;
+    grid-column: span 6;
   }
 `;
