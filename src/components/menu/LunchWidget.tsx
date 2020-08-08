@@ -32,20 +32,19 @@ const Footer = styled(CardFooter)`
 `;
 
 export const LunchWidget: React.FunctionComponent = () => {
-  const { data, isValidating } = useMenus({ limit: 1 });
+  const { data, isValidating } = useMenus({ limit: 90 });
 
   const menu = data ? data[0] : null;
 
   const date =
-    menu || isValidating ? (
-      menu?.timestamp ? (
-        firstLetterUpperCase(
-          moment(menu?.timestamp).locale("sv").format("dddd D MMMM")
-        )
-      ) : (
-        <Skeleton width={100} />
+    (menu || isValidating) &&
+    (menu?.timestamp ? (
+      firstLetterUpperCase(
+        moment(menu?.timestamp).locale("sv").format("dddd D MMMM")
       )
-    ) : null;
+    ) : (
+      <Skeleton width={100} />
+    ));
 
   return (
     <Widget>

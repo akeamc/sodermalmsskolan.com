@@ -1,13 +1,6 @@
 import styled from "styled-components";
-import moment from "moment";
-import { AuthorGroup } from "../Avatar";
-import { LinkBlock } from "../Link";
-import Skeleton from "react-loading-skeleton";
 import { GenericUser } from "../../../lib/models/User";
-import {
-  useProgressiveBackground,
-  useProgressiveImage,
-} from "../ProgressiveImage";
+import { useProgressiveImage } from "../ProgressiveImage";
 
 interface CardMeta {
   authors?: GenericUser[];
@@ -55,55 +48,7 @@ export const CardFooter = styled.div`
 
   p {
     margin: 0;
+    font-size: 14px;
+    color: var(--accents-6);
   }
 `;
-
-interface CardOptions {
-  children: JSX.Element | JSX.Element[];
-  meta?: CardMeta;
-  image?: string;
-  href: string;
-  loading?: boolean;
-  imageExpected?: boolean;
-}
-
-export const NarrowCard: React.FunctionComponent<CardOptions> = ({
-  children,
-  meta,
-  image,
-  href = "#",
-  loading = false,
-  imageExpected = false,
-}) => {
-  return (
-    <Card className="shadow-light-lg lift lift-lg w-100 d-flex mb-6">
-      {image || (imageExpected && loading) ? (
-        <LinkBlock
-          className="bg-cover card-img"
-          href={href}
-          style={useProgressiveBackground(image)}
-        />
-      ) : null}
-      <LinkBlock href={href} className="card-body" block>
-        {children}
-      </LinkBlock>
-      {meta ? (
-        <div className="card-meta">
-          <hr className="card-meta-divider" />
-          {loading ? (
-            <Skeleton />
-          ) : (
-            <>
-              {meta.authors ? <AuthorGroup authors={meta.authors} /> : null}
-              <p className="h6 text-uppercase text-muted mb-0 ml-auto">
-                <time dateTime={meta.date.toString()}>
-                  {moment(meta.date).locale("sv").format("D MMMM YYYY")}
-                </time>
-              </p>
-            </>
-          )}
-        </div>
-      ) : null}
-    </Card>
-  );
-};

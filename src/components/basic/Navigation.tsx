@@ -9,7 +9,11 @@ import ScrollLock from "react-scrolllock";
 import { UnstyledList } from "./List";
 import { categories } from "./Footer/Links";
 
-const Background = styled.div<{ floating?: boolean; mobileNavOpen: boolean }>`
+const Background = styled.div<{
+  floating?: boolean;
+  mobileNavOpen: boolean;
+  transparent?: boolean;
+}>`
   position: fixed;
   top: 0;
   left: 0;
@@ -17,6 +21,13 @@ const Background = styled.div<{ floating?: boolean; mobileNavOpen: boolean }>`
   z-index: 1000;
   transition: background-color 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease,
     color 0.1s ease;
+  background-color: var(--background);
+
+  ${({ transparent }) =>
+    transparent &&
+    `
+  background-color: transparent;
+`}
 
   ${({ floating }) =>
     floating &&
@@ -206,7 +217,8 @@ const Bars = styled.div<{ open: boolean }>`
 export const Navigation: React.FunctionComponent<{
   noPlaceholder?: boolean;
   brightText?: boolean;
-}> = ({ noPlaceholder = false, brightText = false }) => {
+  transparent?: boolean;
+}> = ({ noPlaceholder = false, brightText = false, transparent = false }) => {
   const [floating, setFloating] = useState(false);
   const [open, setOpen] = useState(false);
   const containerRef = useRef();
@@ -224,7 +236,12 @@ export const Navigation: React.FunctionComponent<{
     <>
       <TextColorModifier bright={brightText && !floating}>
         {placeholder && <Placeholder />}
-        <Background ref={containerRef} floating={floating} mobileNavOpen={open}>
+        <Background
+          ref={containerRef}
+          floating={floating}
+          mobileNavOpen={open}
+          transparent={transparent}
+        >
           <Row>
             <Wrapper>
               <Bar>

@@ -59,7 +59,10 @@ export const ArticleHero: React.FunctionComponent<{
   dateText: string;
 }> = ({ post, dateText }) => {
   return (
-    <HeaderWithBackground image={post?.feature_image} minHeight="80vh">
+    <HeaderWithBackground
+      image={post?.feature_image}
+      minHeight="calc(80vh - var(--navigation-height))"
+    >
       <h1>{post?.title}</h1>
       {post?.custom_excerpt && <Lead>{post?.custom_excerpt}</Lead>}
       <MetaRow>

@@ -25,7 +25,7 @@ export default createGlobalStyle`
 
     --page-gutter: 24px;
     --max-page-width: 1260px;
-    --section-spacing: 24px;
+    --section-spacing: 48px;
     --grid-gap: 24px;
 
     /* Colors */
@@ -84,7 +84,7 @@ export default createGlobalStyle`
     } */
 
     @media (min-width: 576px) {
-      --section-spacing: 48px;
+      
     }
 
     @media (min-width: 768px) {
@@ -258,7 +258,7 @@ export default createGlobalStyle`
   }
 
   h3 {
-    --size-lsm: 1.5rem;
+    --size-sm: 1.5rem;
     --size-md: 1.5rem;
     --size-lg: 1.5rem;
     letter-spacing: -.05rem;

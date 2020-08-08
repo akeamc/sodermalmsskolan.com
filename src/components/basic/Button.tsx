@@ -42,7 +42,7 @@ export const Button = styled(AutoLink)<{
   `}
 `;
 
-export const ButtonRow = styled.div<{ center: boolean }>`
+export const ButtonRow = styled.div<{ center?: boolean }>`
   display: inline-flex;
   flex-wrap: wrap;
   margin: -12px;

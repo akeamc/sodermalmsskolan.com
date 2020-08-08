@@ -57,7 +57,7 @@ export class MenuGridItem extends React.Component<{
 export const MenuGrid: React.FunctionComponent<{
   numberOfMenus: number;
 }> = ({ numberOfMenus }) => {
-  const { data: menus } = useMenus({ limit: numberOfMenus });
+  const { data: menus } = useMenus({ limit: 90 });
   const fallbackArray: Menu[] = new Array(numberOfMenus).fill(null);
 
   return (

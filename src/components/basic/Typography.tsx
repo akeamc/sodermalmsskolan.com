@@ -42,7 +42,9 @@ export const GridTitleContainer = styled.div`
 `;
 
 export const GridTitle = styled.h2`
-  font-size: 1.5rem;
+  --size-sm: 2rem;
+  --size-md: 2rem;
+  --size-lg: 2rem;
   font-weight: 600;
 `;
 

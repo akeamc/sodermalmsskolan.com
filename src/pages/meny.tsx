@@ -14,19 +14,28 @@ import {
   GridTitleSection,
   GradientText,
 } from "../components/basic/Typography";
+import { TitleContainer } from "../components/layout/Hero/Title";
 
 const HeroContent = styled(Row)`
   grid-auto-flow: dense;
 `;
 
-const TitleContainer = styled.div`
+const TitlePane = styled.div`
   grid-column: span 12;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
+  ${TitleContainer} {
+    text-align: center;
+  }
+
   @media (min-width: 768px) {
     grid-column: 1 / span 7;
+
+    ${TitleContainer} {
+      text-align: inherit;
+    }
   }
 
   @media (min-width: 992px) {
@@ -34,11 +43,16 @@ const TitleContainer = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
+const ImagePane = styled.div`
   grid-column: span 12;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: calc(var(--section-spacing) / 2);
+
+  img {
+    box-shadow: var(--shadow-medium);
+  }
 
   @media (min-width: 576px) {
     grid-column: 2 / span 10;
@@ -46,31 +60,40 @@ const ImageContainer = styled.div`
 
   @media (min-width: 768px) {
     grid-column: 8 / span 5;
+    margin-bottom: 0;
   }
 `;
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout metadata={{ title: "Meny" }}>
+    <Layout
+      metadata={{
+        title: "Meny",
+        description:
+          "I över ett år har vi fotat maten som Sodexo serverar och spridit bilderna på nätet. Vi kommer aldrig ge upp.",
+      }}
+    >
       <Navigation />
       <Hero>
         <HeroContent>
-          <ImageContainer>
+          <ImagePane>
             <Image src="https://cdn.discordapp.com/attachments/575993879837409290/666282862151991296/IMG_3695.JPG" />
-          </ImageContainer>
-          <TitleContainer>
-            <h1>
-              Vi visar upp{" "}
-              <GradientText startColor="var(--color)" endColor="#00DFD8">
-                Sodexo
-              </GradientText>{" "}
-              för världen
-            </h1>
-            <LeadText>
-              I över ett år har vi fotat maten som Sodexo serverar och spridit
-              bilderna på nätet. Vi kommer aldrig ge upp.
-            </LeadText>
-          </TitleContainer>
+          </ImagePane>
+          <TitlePane>
+            <TitleContainer>
+              <h1>
+                Vi visar upp{" "}
+                <GradientText startColor="var(--color)" endColor="#00DFD8">
+                  Sodexo
+                </GradientText>{" "}
+                för världen
+              </h1>
+              <LeadText>
+                I över ett år har vi fotat maten som Sodexo serverar och delat
+                bilderna online. Vi kommer aldrig att ge upp.
+              </LeadText>
+            </TitleContainer>
+          </TitlePane>
         </HeroContent>
       </Hero>
       <AdSection />

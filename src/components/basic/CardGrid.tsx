@@ -49,7 +49,7 @@ class CardGridItem extends React.Component<{
 }> {
   render() {
     const { item, imageExpected, loading, lineClamp } = this.props;
-    const excerptRows = 3;
+    const descriptionRows = 3;
 
     return (
       <ItemLink href={item?.url}>
@@ -64,7 +64,11 @@ class CardGridItem extends React.Component<{
           <CardContent>
             <h3>{loading ? <Skeleton /> : item?.title}</h3>
             <Description style={lineClamp ? getLineClamp(lineClamp) : {}}>
-              {loading ? <Skeleton count={excerptRows} /> : item.description}
+              {loading ? (
+                <Skeleton count={descriptionRows} />
+              ) : (
+                item.description
+              )}
             </Description>
           </CardContent>
           {item?.meta ? (

@@ -5,23 +5,16 @@ import { AdSection } from "../../components/basic/Ad";
 import { Section } from "../../components/layout/Section";
 import { Col } from "../../components/grid/Col";
 import { Row } from "../../components/grid/Row";
-import { Hero } from "../../components/layout/Hero";
 import { Navigation } from "../../components/basic/Navigation";
-import { LeadText, GridTitleSection } from "../../components/basic/Typography";
+import { GridTitleSection } from "../../components/basic/Typography";
+import { HeroWithTitle } from "../../components/layout/Hero/Title";
 
 export default class Page extends React.Component {
   render() {
     return (
       <Layout metadata={{ title: "Blogg" }}>
         <Navigation />
-        <Hero>
-          <Row>
-            <Col xs={12}>
-              <h1>Vår blogg</h1>
-              <LeadText>Skriven mest av Bo.</LeadText>
-            </Col>
-          </Row>
-        </Hero>
+        <HeroWithTitle title="Vår blogg" lead="Skriven mest av Bo." />
         <AdSection />
         <Section>
           <Row>

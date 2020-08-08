@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Section } from "./Section";
-import { TextColorModifier } from "../basic/Typography";
+import { Section } from "../Section";
+import { TextColorModifier } from "../../basic/Typography";
 
 export const Hero = styled(Section)`
   margin-top: var(--section-spacing);

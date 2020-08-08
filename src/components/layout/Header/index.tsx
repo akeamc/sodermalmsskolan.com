@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { TextColorModifier } from "../basic/Typography";
-import { Navigation } from "../basic/Navigation";
-import { Hero } from "./Hero";
-import { Row } from "../grid/Row";
-import { ResponsiveHalf } from "../grid/Col";
+import { TextColorModifier } from "../../basic/Typography";
+import { Navigation } from "../../basic/Navigation";
+import { Hero } from "../Hero";
+import { Row } from "../../grid/Row";
+import { ResponsiveHalf } from "../../grid/Col";
 
 const Background = styled.div<{ image: string }>`
   background-size: cover;
@@ -35,7 +35,7 @@ export const HeaderWithBackground: React.FunctionComponent<{
 }> = ({ children, image, minHeight }) => {
   return (
     <>
-      <Navigation noPlaceholder brightText />
+      <Navigation noPlaceholder brightText transparent />
       <Background image={image}>
         <Overlay>
           <Container bright minHeight={minHeight}>
