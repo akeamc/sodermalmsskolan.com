@@ -23,7 +23,11 @@ const Page: DigibruhPage = (props) => {
 
   return (
     <Layout
-      metadata={{ title: subject?.name, description: subject?.description }}
+      metadata={{
+        title: subject?.name,
+        description: subject?.description,
+        images: [subject?.coverImage],
+      }}
     >
       <DigibruhHero
         title={subject?.name}

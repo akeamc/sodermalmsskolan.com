@@ -18,7 +18,9 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
     title,
     description = "Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services.",
     type = "website",
-    images = [],
+    images = [
+      "https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg",
+    ],
   } = metadata;
 
   let titleFragments = ["södermalmsskolan.com"];
