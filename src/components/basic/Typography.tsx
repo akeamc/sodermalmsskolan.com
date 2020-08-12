@@ -41,15 +41,19 @@ export const GridTitleContainer = styled.div`
   margin-bottom: 24px;
 `;
 
-export const GridTitle = styled.h2`
+export const GridTitle = styled.h3`
   --size-sm: 2rem;
   --size-md: 2rem;
   --size-lg: 2rem;
   font-weight: 600;
+  margin: 0;
+  margin-bottom: 16px;
 `;
 
 export const GridDescription = styled.p`
   margin: 0;
+  line-height: 1.6;
+  font-size: 0.875rem;
 `;
 
 export const GridTitleSection: React.FunctionComponent<{

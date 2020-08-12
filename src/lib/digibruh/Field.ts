@@ -35,7 +35,7 @@ export class Field extends DigibruhCollection {
       title,
       description: excerpt,
       image: feature_image,
-      url: new Field(fieldTag).postUrl(slug),
+      href: new Field(fieldTag).postUrl(slug),
       meta: {
         authors: authors.map(GenericUser.fromAuthor),
         date: new Date(updated_at || published_at),

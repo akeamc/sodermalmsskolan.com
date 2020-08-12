@@ -232,6 +232,10 @@ export default createGlobalStyle`
   small {
     font-size: 14px;
   }
+  
+  strong {
+    color: var(--foreground);
+  }
 
   p {
     color: var(--accents-5);
@@ -279,6 +283,15 @@ export default createGlobalStyle`
     --size-md: 1.5rem;
     --size-lg: 1.5rem;
     letter-spacing: -.05em;
+    font-weight: 600;
+  }
+
+  h6 {
+    --size-sm: 1rem;
+    --size-md: 1rem;
+    --size-lg: 1rem;
+    letter-spacing: -.05em;
+    font-weight: 600;
   }
 
   img {

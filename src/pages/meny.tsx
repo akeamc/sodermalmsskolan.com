@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Layout } from "../components/basic/Layout";
 import { AutoLink } from "../components/basic/Link";
-import { MenuGrid } from "../components/menu/MenuGrid";
+import { MenuList } from "../components/menu/MenuList";
 import { AdSection } from "../components/basic/Ad";
 import { Section } from "../components/layout/Section";
 import { Hero } from "../components/layout/Hero";
@@ -100,20 +100,23 @@ const Page: React.FunctionComponent = () => {
       <Section>
         <Row>
           <Col xs={12}>
-            <GridTitleSection title="Menyn" />
+            <GridTitleSection
+              title="Menyn"
+              description={
+                <>
+                  Källa:{" "}
+                  <AutoLink href="https://skolmaten.se/sodermalmsskolan-gamla-maria/">
+                    skolmaten.se
+                  </AutoLink>
+                  .
+                </>
+              }
+            />
           </Col>
         </Row>
-        <MenuGrid numberOfMenus={7} />
+        <MenuList numberOfMenus={7} />
         <Row>
-          <Col xs={12}>
-            <p>
-              Källa:{" "}
-              <AutoLink href="https://skolmaten.se/sodermalmsskolan-gamla-maria/">
-                skolmaten.se
-              </AutoLink>
-              .
-            </p>
-          </Col>
+          <Col xs={12}></Col>
         </Row>
       </Section>
       <AdSection />
