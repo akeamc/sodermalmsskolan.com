@@ -43,7 +43,7 @@ const Page: DigibruhPage = (props) => {
       return {
         title,
         description: excerpt,
-        url: field.postUrl(slug),
+        href: field.postUrl(slug),
         image: feature_image,
         meta: {
           date: new Date(updated_at || published_at),
