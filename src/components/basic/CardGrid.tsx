@@ -26,7 +26,7 @@ export interface GridItem {
     authors: GenericUser[];
     date: Date;
   };
-  href?: string;
+  href: string;
 }
 
 const ItemLink = styled(LinkBlock)`
@@ -51,34 +51,36 @@ class CardGridItem extends React.Component<{
     const { item, imageExpected, loading, lineClamp } = this.props;
     const descriptionRows = 3;
 
-    const gridItem = (
-      <GridItemCard
-        meta={item?.meta}
-        image={item?.image}
-        href={item?.href || ""}
-        loading={loading}
-        imageExpected={imageExpected}
-      >
-        <CardHero backgroundImage={item?.image} />
-        <CardContent>
-          <h3>{loading ? <Skeleton /> : item?.title}</h3>
-          <Description style={lineClamp ? getLineClamp(lineClamp) : {}}>
-            {loading ? <Skeleton count={descriptionRows} /> : item.description}
-          </Description>
-        </CardContent>
-        {item?.meta ? (
-          <CardFooter>
-            <p>{moment(item?.meta.date).locale("sv").format("D MMMM YYYY")}</p>
-            <AuthorGroup authors={item.meta.authors} />
-          </CardFooter>
-        ) : null}
-      </GridItemCard>
-    );
-
-    return item?.href ? (
-      <ItemLink href={item?.href}>{gridItem}</ItemLink>
-    ) : (
-      gridItem
+    return (
+      <ItemLink href={item?.href}>
+        <GridItemCard
+          meta={item?.meta}
+          image={item?.image}
+          href={item?.href}
+          loading={loading}
+          imageExpected={imageExpected}
+        >
+          <CardHero backgroundImage={item?.image} />
+          <CardContent>
+            <h3>{loading ? <Skeleton /> : item?.title}</h3>
+            <Description style={lineClamp ? getLineClamp(lineClamp) : {}}>
+              {loading ? (
+                <Skeleton count={descriptionRows} />
+              ) : (
+                item.description
+              )}
+            </Description>
+          </CardContent>
+          {item?.meta ? (
+            <CardFooter>
+              <p>
+                {moment(item?.meta.date).locale("sv").format("D MMMM YYYY")}
+              </p>
+              <AuthorGroup authors={item.meta.authors} />
+            </CardFooter>
+          ) : null}
+        </GridItemCard>
+      </ItemLink>
     );
   }
 }

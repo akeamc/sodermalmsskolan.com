@@ -24,7 +24,7 @@ export const PostGrid: React.FunctionComponent<{
       return {
         title,
         description: excerpt,
-        url: getPostUrl(slug),
+        href: getPostUrl(slug),
         image: feature_image,
         meta: {
           date: new Date(published_at),
