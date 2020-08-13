@@ -21,12 +21,14 @@ const MenuListItem: React.FunctionComponent<{ menu: Menu }> = ({ menu }) => {
     <Skeleton />
   );
 
+  const dishes = menu?.dishes || new Array(2).fill(<Skeleton />);
+
   return (
     <div>
       <ItemTitle>{date}</ItemTitle>
       <ul>
-        {menu?.dishes.map((dish) => (
-          <li>{dish}</li>
+        {dishes.map((dish, index) => (
+          <li key={index}>{dish}</li>
         ))}
       </ul>
     </div>
@@ -45,14 +47,17 @@ export const MenuList: React.FunctionComponent<{
   const { data, isValidating } = useMenus({ limit: 90 });
   const fallbackArray: Menu[] = new Array(numberOfMenus).fill(null);
   const menus = data?.length > 0 ? data : fallbackArray;
+  const isEmpty = !isValidating && !data;
 
   return (
     <Row>
       <Col xs={12} md={9} lg={8}>
         <Grid>
-          {menus.map((menu) => (
-            <MenuListItem menu={menu} />
-          ))}
+          {isEmpty ? (
+            <p>Menyn är inte tillgänglig.</p>
+          ) : (
+            menus.map((menu, index) => <MenuListItem key={index} menu={menu} />)
+          )}
         </Grid>
       </Col>
     </Row>

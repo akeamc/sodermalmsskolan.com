@@ -15,6 +15,7 @@ import {
   GradientText,
 } from "../components/basic/Typography";
 import { TitleContainer } from "../components/layout/Hero/Title";
+import React from "react";
 
 const HeroContent = styled(Row)`
   grid-auto-flow: dense;
@@ -115,9 +116,6 @@ const Page: React.FunctionComponent = () => {
           </Col>
         </Row>
         <MenuList numberOfMenus={7} />
-        <Row>
-          <Col xs={12}></Col>
-        </Row>
       </Section>
       <AdSection />
     </Layout>
