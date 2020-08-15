@@ -71,7 +71,7 @@ export const GridTitleSection: React.FunctionComponent<{
 export const SmallBig = styled.h6`
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.5em;
   font-weight: 700;
   color: var(--foreground);

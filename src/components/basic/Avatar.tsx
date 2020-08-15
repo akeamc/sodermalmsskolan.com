@@ -8,8 +8,8 @@ interface AvatarProps {
   size?: number;
 }
 
-function avatarSizeToPx(size: number = 2): number {
-  return size * 16;
+function avatarSizeToEm(size: number = 2): number {
+  return size;
 }
 
 export const useSmallAvatar = (source: string) => {
@@ -31,11 +31,11 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   border-radius: 50%;
 
   ${({ size }) => {
-    let width = avatarSizeToPx(size);
+    let width = avatarSizeToEm(size);
 
     return `
-      width: ${width}px;
-      height: ${width}px;
+      width: ${width}rem;
+      height: ${width}rem;
     `;
   }}
 
@@ -59,10 +59,10 @@ const AvatarGroup = styled.div<AvatarProps>`
   display: inline-flex;
   position: relative;
   flex-direction: row-reverse;
-  padding-left: ${({ size }) => avatarSizeToPx(size) / 2}px;
+  padding-left: ${({ size }) => avatarSizeToEm(size) / 2}rem;
 
   ${AvatarWrapper} {
-    margin-left: ${({ size }) => avatarSizeToPx(size) / -2}px;
+    margin-left: ${({ size }) => avatarSizeToEm(size) / -2}rem;
     border: 2px solid var(--background);
     box-sizing: content-box;
 

@@ -16,6 +16,7 @@ import {
 } from "../components/basic/Typography";
 import { TitleContainer } from "../components/layout/Hero/Title";
 import React from "react";
+import * as breakpoints from "../styles/breakpoints";
 
 const HeroContent = styled(Row)`
   grid-auto-flow: dense;
@@ -31,7 +32,7 @@ const TitlePane = styled.div`
     text-align: center;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.medium}) {
     grid-column: 1 / span 7;
 
     ${TitleContainer} {
@@ -39,7 +40,7 @@ const TitlePane = styled.div`
     }
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: ${breakpoints.large}) {
     grid-column: 1 / span 5;
   }
 `;
@@ -55,11 +56,11 @@ const ImagePane = styled.div`
     box-shadow: var(--shadow-medium);
   }
 
-  @media (min-width: 576px) {
+  @media (min-width: ${breakpoints.small}) {
     grid-column: 2 / span 10;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.medium}) {
     grid-column: 8 / span 5;
     margin-bottom: 0;
   }

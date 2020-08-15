@@ -48,7 +48,7 @@ export const CardFooter = styled.div`
 
   p {
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: var(--accents-6);
   }
 `;

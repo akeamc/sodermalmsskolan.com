@@ -3,6 +3,7 @@ import { SocialIcon, SocialMedia, SocialProfile } from "../SocialIcons";
 import { MinecraftStatusBadge } from "../../minecraft/StatusBadge";
 import styled from "styled-components";
 import { UnstyledList } from "../List";
+import * as breakpoints from "../../../styles/breakpoints";
 
 const BottomSection = styled.div`
   grid-column: span 12;
@@ -10,7 +11,7 @@ const BottomSection = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 24px;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.medium}) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +22,7 @@ const BottomSection = styled.div`
 const Attribution = styled.p`
   margin: 0;
   color: var(--accents-5);
-  font-size: 14px;
+  font-size: 0.875rem;
 `;
 
 const FooterSocialProfile = styled.li`

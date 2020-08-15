@@ -8,6 +8,7 @@ import { Row } from "../grid/Row";
 import { LinkBlock } from "./Link";
 import moment from "moment";
 import { AuthorGroup } from "./Avatar";
+import * as breakpoints from "../../styles/breakpoints";
 
 export function getLineClamp(lines: number): React.CSSProperties {
   return {
@@ -91,7 +92,7 @@ const ItemContainer = styled(Col)`
 `;
 
 const GridContainer = styled(Row)`
-  @media (min-width: 1200px) {
+  @media (min-width: ${breakpoints.extraLarge}) {
     grid-gap: 32px;
   }
 `;

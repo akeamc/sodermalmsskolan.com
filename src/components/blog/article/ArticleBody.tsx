@@ -7,6 +7,7 @@ import { ProgressiveImage } from "../../basic/ProgressiveImage";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { Section } from "../../layout/Section";
 import { Row } from "../../grid/Row";
+import * as breakpoints from "../../../styles/breakpoints";
 
 enum FigureWidth {
   Normal,
@@ -54,7 +55,7 @@ const Figure = styled.figure<{ width: FigureWidth }>`
 `;
 
 const FigureCaption = styled.figcaption`
-  font-size: 14px;
+  font-size: 0.875rem;
   text-align: center;
   margin-top: 1em;
   color: var(--accents-5);
@@ -96,7 +97,7 @@ const Blockquote = styled.blockquote`
   padding: 0 0 0 1em;
   margin-left: 0;
   color: var(--foreground);
-  font-size: 18px;
+  font-size: 1.125rem;
   overflow: hidden;
 
   p {
@@ -107,15 +108,15 @@ const Blockquote = styled.blockquote`
 const RichText = styled.div`
   grid-column: span 12;
 
-  @media (min-width: 576px) {
+  @media (min-width: ${breakpoints.small}) {
     grid-column: 2 / span 10;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.medium}) {
     grid-column: 3 / span 8;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: ${breakpoints.extraLarge}) {
     grid-column: 4 / span 6;
   }
 

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import * as breakpoints from "./breakpoints";
 
 export default createGlobalStyle`
   html {
@@ -23,10 +24,10 @@ export default createGlobalStyle`
     --font-system: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
     --font-monospace: "Source Code Pro", monospace;
 
-    --page-gutter: 24px;
-    --max-page-width: 1260px;
-    --section-spacing: 48px;
-    --grid-gap: 24px;
+    --page-gutter: 1.5rem;
+    --max-page-width: 78rem;
+    --section-spacing: 3rem;
+    --grid-gap: 1.5rem;
 
     /* Colors */
     --foreground: black;
@@ -83,16 +84,16 @@ export default createGlobalStyle`
       --shadow-hover: 0 0 0 1px var(--shadow-color);
     } */
 
-    @media (min-width: 576px) {
+    @media (min-width: ${breakpoints.small}) {
       
     }
 
-    @media (min-width: 768px) {
-      --page-gutter: 40px;
+    @media (min-width: ${breakpoints.medium}) {
+      --page-gutter: 2.5rem;
     }
 
-    @media (min-width: 992px) {
-      --section-spacing: 120px;
+    @media (min-width: ${breakpoints.large}) {
+      --section-spacing: 7.5rem;
     }
   }
 
@@ -220,11 +221,11 @@ export default createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     font-size: var(--size-sm);
 
-    @media (min-width: 768px) {
+    @media (min-width: ${breakpoints.medium}) {
       font-size: var(--size-md);
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: ${breakpoints.large}) {
       font-size: var(--size-lg);
     }
   }

@@ -3,6 +3,7 @@ import { Hero } from ".";
 import { Row } from "../../grid/Row";
 import { NormalWidth } from "../../grid/Col";
 import { LeadText } from "../../basic/Typography";
+import * as breakpoints from "../../../styles/breakpoints";
 
 /**
  * A title container used on the top of pages. Recommended to be used with `h1` and `LeadText`.
@@ -20,7 +21,7 @@ export const TitleContainer = styled.div<{ center?: boolean }>`
     --size-sm: 2.5rem;
     margin-bottom: 24px;
 
-    @media (min-width: 768px) {
+    @media (min-width: ${breakpoints.medium}) {
       margin-bottom: 56px;
     }
   }
@@ -28,7 +29,7 @@ export const TitleContainer = styled.div<{ center?: boolean }>`
   ${LeadText} {
     margin: 24px 0;
 
-    @media (min-width: 768px) {
+    @media (min-width: ${breakpoints.medium}) {
       margin: 48px 0;
     }
 

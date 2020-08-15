@@ -8,6 +8,7 @@ import { TextColorModifier } from "./Typography";
 import ScrollLock from "react-scrolllock";
 import { UnstyledList } from "./List";
 import { categories } from "./Footer/Links";
+import * as breakpoints from "../../styles/breakpoints";
 
 const Background = styled.div<{
   floating?: boolean;
@@ -36,7 +37,7 @@ const Background = styled.div<{
       box-shadow: var(--navigation-shadow);
     `}
 
-  @media (min-width: 992px) {
+  @media (min-width: ${breakpoints.large}) {
     ${({ floating }) =>
       floating &&
       `
@@ -73,7 +74,7 @@ const DesktopLinks = styled.div`
   text-align: center;
   display: none;
 
-  @media (min-width: 992px) {
+  @media (min-width: ${breakpoints.large}) {
     display: block;
   }
 `;
@@ -85,7 +86,7 @@ const DesktopLink = styled(AutoLink)`
   color: var(--accents-5);
   text-decoration: none;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 0.875rem;
   transition: color 0.1s ease;
 
   &:hover {
@@ -121,7 +122,7 @@ const MobileNavigation = styled.div<{ open: boolean }>`
     display: block;
   `}
 
-  @media (min-width: 992px) {
+  @media (min-width: ${breakpoints.large}) {
     display: none;
   }
 `;
@@ -171,7 +172,7 @@ const MobileNavigationToggle = styled.button`
   width: 24px;
   cursor: pointer;
 
-  @media (min-width: 992px) {
+  @media (min-width: ${breakpoints.large}) {
     display: none;
   }
 `;

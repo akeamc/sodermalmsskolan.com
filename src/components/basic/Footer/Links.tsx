@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Row } from "../../grid/Row";
 import { AutoLink } from "../Link";
 import { UnstyledList } from "../List";
-import { Col } from "../../grid/Col";
+import * as breakpoints from "../../../styles/breakpoints";
 
 export interface Item {
   name: string;
@@ -64,11 +64,11 @@ const LinkSection = styled(Row)`
 const Column = styled.div`
   grid-column: span 6;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.medium}) {
     grid-column: span 4;
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: ${breakpoints.large}) {
     grid-column: span 3;
   }
 `;
