@@ -54,13 +54,7 @@ class CardGridItem extends React.Component<{
 
     return (
       <ItemLink href={item?.href}>
-        <GridItemCard
-          meta={item?.meta}
-          image={item?.image}
-          href={item?.href}
-          loading={loading}
-          imageExpected={imageExpected}
-        >
+        <GridItemCard>
           <CardHero backgroundImage={item?.image} />
           <CardContent>
             <h3>{loading ? <Skeleton /> : item?.title}</h3>
