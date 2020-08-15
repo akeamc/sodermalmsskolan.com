@@ -34,7 +34,7 @@ const SecondCountdown: React.FunctionComponent<{ end: Date }> = ({ end }) => {
 
 const Page: React.FunctionComponent = () => {
   const { data } = useMenus({ limit: 1 });
-  const bigDay = new Date(1597823400000);
+  const bigDay = new Date(1597824900000);
   const daysLeft = Math.ceil(moment(bigDay).diff(moment(), "days", true));
 
   return (
