@@ -1,143 +1,213 @@
-import Skeleton from "react-loading-skeleton";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import styled from "styled-components";
 import { PostOrPage } from "@tryghost/content-api";
 import ReactHtmlParser, { convertNodeToElement } from "react-html-parser";
 import React from "react";
-import useScrollSpy from "../../basic/ScrollSpy";
-import StickyBox from "react-sticky-box";
-import { Link } from "react-scroll";
 import { renderMathInText } from "../../../lib/utils/katex";
 import { ProgressiveImage } from "../../basic/ProgressiveImage";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { Section } from "../../basic/Section";
+import { Section } from "../../layout/Section";
+import { Row } from "../../grid/Row";
+import * as breakpoints from "../../../styles/breakpoints";
 
-interface TableOfContentsEntry {
-  ref: React.Ref<unknown>;
-  title: string;
-  id: string;
-  level: number;
+enum FigureWidth {
+  Normal,
+  Wide,
+  Full,
 }
 
-type TableOfContents = TableOfContentsEntry[];
+const Figure = styled.figure<{ width: FigureWidth }>`
+  margin: 0;
+  ${({ width }) =>
+    width != FigureWidth.Normal &&
+    `
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
 
-interface DeepTableOfContentsEntry extends TableOfContentsEntry {
-  flatIndex: number;
-  children: DeepTableOfContentsEntry[];
-}
+    img {
+      width: 100vw;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  `}
 
-function inflateTableOfContents(
-  table: TableOfContentsEntry[]
-): DeepTableOfContentsEntry[] {
-  let output: DeepTableOfContentsEntry[] = [];
+  img {
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
 
-  table
-    .map((entry, index) => {
-      let deepEntry: DeepTableOfContentsEntry = {
-        flatIndex: index,
-        children: [],
-        ...entry,
-      };
-      return deepEntry;
-    })
-    .forEach((current) => {
-      let previous = output[output.length - 1];
+    ${({ width }) => {
+      if (width == FigureWidth.Wide)
+        return `
+        max-width: 1040px;
 
-      if (previous && previous.level < current.level) {
-        previous.children.push(current);
-      } else {
-        output.push(current);
-      }
-    });
+        @media (min-width: 1040px) {
+          border-radius: 8px;
+          box-shadow: var(--shadow-medium);
+        }
+      `;
 
-  return output;
-}
+      if (width == FigureWidth.Full)
+        return `
+        box-shadow: none;
+      `;
+    }}
+  }
+`;
 
-const TableOfContentsList: React.FunctionComponent<{
-  table: TableOfContents;
-  activeIndex: number;
-  endIndex?: number;
-}> = (props) => {
-  const { table, activeIndex, endIndex } = props;
+const FigureCaption = styled.figcaption`
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 1em;
+  color: var(--accents-5);
+`;
 
-  const deepTableOfContents = inflateTableOfContents(table);
+const Embed = styled.div`
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
 
-  return (
-    <ul className="table-of-contents">
-      {deepTableOfContents.map((entry, index, table) => {
-        let next = table[index + 1];
-        let isActive =
-          activeIndex >= entry.flatIndex &&
-          activeIndex < (next?.flatIndex || endIndex + 1 || Infinity);
-        return (
-          <li className={isActive ? "active" : ""} key={index}>
-            <Link
-              smooth={true}
-              duration={500}
-              to={entry.id}
-              href={`#${entry.id}`}
-            >
-              {entry.title}
-            </Link>
-            {entry.children ? (
-              <TableOfContentsList
-                table={entry.children}
-                activeIndex={activeIndex}
-                endIndex={entry.flatIndex + entry.children.length}
-              />
-            ) : null}
-          </li>
-        );
-      })}
-    </ul>
-  );
+  &::before {
+    padding-top: 56.25%;
+    display: block;
+    content: "";
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+`;
+
+const Divider = styled.div`
+  margin: var(--section-spacing) 0;
+  height: 1px;
+  background-color: var(--accents-2);
+  width: 100%;
+`;
+
+const Blockquote = styled.blockquote`
+  border-left: 2px solid var(--accents-2);
+  padding: 0 0 0 1em;
+  margin-left: 0;
+  color: var(--foreground);
+  font-size: 1.125rem;
+  overflow: hidden;
+
+  p {
+    color: var(--foreground);
+  }
+`;
+
+const RichText = styled.div`
+  grid-column: span 12;
+
+  @media (min-width: ${breakpoints.small}) {
+    grid-column: 2 / span 10;
+  }
+
+  @media (min-width: ${breakpoints.medium}) {
+    grid-column: 3 / span 8;
+  }
+
+  @media (min-width: ${breakpoints.extraLarge}) {
+    grid-column: 4 / span 6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 2em;
+  }
+
+  p,
+  ul,
+  ol {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    line-height: 2;
+  }
+
+  > ${Embed}, > ${Figure}, > ${Blockquote}, > img {
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+`;
+
+const RichTextSection = styled(Section)`
+  overflow-x: hidden;
+`;
+
+const classNameToFigureWidth = (classNames: string): FigureWidth => {
+  for (let className of classNames.split(" ")) {
+    if (className == "kg-width-wide") return FigureWidth.Wide;
+    if (className == "kg-width-full") return FigureWidth.Full;
+  }
+
+  return FigureWidth.Normal;
 };
 
 const ArticleBody: React.FunctionComponent<{
   data: PostOrPage | null;
   loading?: boolean;
-  scrollSpy?: boolean;
 }> = (props) => {
-  const { data, loading = false, scrollSpy = false } = props;
+  const { data, loading = false } = props;
 
-  const headingRegex = /^h[0-6]$/;
-
-  let tableOfContents: TableOfContents = [];
+  const text = (node) => {
+    return node.children
+      .filter((child) => child.type == "text")
+      .map((child) => child.data)
+      .join("");
+  };
 
   function transform(node, index) {
-    if (headingRegex.test(node.name)) {
-      const element = convertNodeToElement(node, index, transform);
-      const ref = React.createRef();
-
-      tableOfContents.push({
-        ref,
-        title: element.props.children,
-        id: element.props.id,
-        level: parseInt(node.name.replace(/^\D+/g, "")),
-      });
-
-      /**
-       * Use node.name in order to match the <h1>, <h2>, <h3> ... tags.
-       */
-      return <node.name {...element.props} ref={ref} key={index} />;
-    }
-
     if (node.name == "iframe") {
       return (
-        <div className="embed-responsive embed-responsive-16by9">
-          <iframe
-            className="embed-responsive-item"
-            src={node.attribs?.src}
-            allowFullScreen
-          />
-        </div>
+        <Embed>
+          <iframe src={node.attribs?.src} allowFullScreen />
+        </Embed>
       );
     }
 
+    if (node.name == "figure") {
+      let width = classNameToFigureWidth(node.attribs.class);
+
+      return (
+        <Figure key={index} width={width}>
+          {node.children.map(transform)}
+        </Figure>
+      );
+    }
+
+    if (node.name == "figcaption") {
+      return <FigureCaption key={index}>{text(node)}</FigureCaption>;
+    }
+
     if (node.name == "img") {
-      const { attribs } = node;
-      return <ProgressiveImage className={attribs.class} src={attribs.src} />;
+      const { alt, src, loading = "lazy" } = node.attribs;
+      return (
+        <ProgressiveImage key={index} alt={alt} src={src} loading={loading} />
+      );
+    }
+
+    if (node.name == "blockquote") {
+      return (
+        <Blockquote key={index}>
+          <p>{node.children.map(transform)}</p>
+        </Blockquote>
+      );
     }
 
     if (node.name == "pre") {
@@ -149,17 +219,23 @@ const ArticleBody: React.FunctionComponent<{
 
         if (language) {
           // Only use `SyntaxHighlighter` if a language is detected. Otherwise, fall back to the default of Ghost.
-          const code = child.children
-            .filter((child) => child.type == "text")
-            .map((child) => child.data);
+          const code = text(child).replace(/\n$/, "");
 
           return (
-            <SyntaxHighlighter language={language} useInlineStyles={false}>
+            <SyntaxHighlighter
+              language={language}
+              useInlineStyles={false}
+              key={index}
+            >
               {code}
             </SyntaxHighlighter>
           );
         }
       }
+    }
+
+    if (node.name == "hr") {
+      return <Divider key={index} />;
     }
 
     if (node.type == "text") {
@@ -176,51 +252,12 @@ const ArticleBody: React.FunctionComponent<{
 
   const parsedHtml = ReactHtmlParser(data?.html, { transform });
 
-  const activeSection = useScrollSpy({
-    sectionElementRefs: tableOfContents.map((entry) => entry.ref),
-    offsetPx: -96,
-    throttleMs: 50,
-  });
-
   return (
-    <Section>
-      <Container>
-        <Row>
-          <Col
-            xs={12}
-            md={{
-              span: 10,
-              offset: scrollSpy ? 0 : 1,
-            }}
-            xl={{
-              span: 8,
-              offset: 2,
-            }}
-          >
-            {loading ? (
-              <div className="article-body">
-                <h1>{<Skeleton />}</h1>
-                <p>{<Skeleton count={5} />}</p>
-              </div>
-            ) : (
-              <div className="article-body">{parsedHtml}</div>
-            )}
-          </Col>
-          {scrollSpy ? (
-            <Col xs={12} md={2} className="d-none d-md-block">
-              <StickyBox offsetTop={96} offsetBottom={16}>
-                <aside>
-                  <TableOfContentsList
-                    table={tableOfContents}
-                    activeIndex={activeSection}
-                  />
-                </aside>
-              </StickyBox>
-            </Col>
-          ) : null}
-        </Row>
-      </Container>
-    </Section>
+    <RichTextSection>
+      <Row>
+        <RichText>{parsedHtml}</RichText>
+      </Row>
+    </RichTextSection>
   );
 };
 

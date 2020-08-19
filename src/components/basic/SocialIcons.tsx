@@ -1,48 +1,14 @@
 import * as Icon from "react-feather";
 import React from "react";
-import styles from "./SocialIcons.module.scss";
 
 export enum SocialMedia {
   Instagram,
   Discord,
 }
 
-interface SocialProfile {
+export interface SocialProfile {
   socialMedia: SocialMedia;
   url: string;
-}
-
-interface IconsOptions {
-  profiles: SocialProfile[];
-}
-
-export class SocialIcons extends React.Component<IconsOptions> {
-  render() {
-    const { profiles } = this.props;
-
-    return (
-      <ul
-        className={`list-unstyled list-inline ${styles["list-social"]} mb-6 mb-md-0`}
-      >
-        {profiles.map((profile, index) => {
-          return (
-            <li
-              className={`list-inline-item ${styles.socialListItem} mr-3`}
-              key={index}
-            >
-              <a href={profile.url} className="text-decoration-none">
-                <SocialIcon
-                  socialMedia={profile.socialMedia}
-                  size={20}
-                  color={"currentColor"}
-                />
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    );
-  }
 }
 
 interface IconOptions {
@@ -53,7 +19,7 @@ interface IconOptions {
 
 export class SocialIcon extends React.Component<IconOptions> {
   render() {
-    const { socialMedia, color = "#111", size = 24 } = this.props;
+    const { socialMedia, color = "currentColor", size = 24 } = this.props;
 
     switch (socialMedia) {
       case SocialMedia.Instagram:

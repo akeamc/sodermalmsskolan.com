@@ -1,9 +1,8 @@
 import React from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
 import AdSense from "react-adsense";
-import { Section } from "./Section";
+import { Section } from "../layout/Section";
+import { Row } from "../grid/Row";
+import { Col } from "../grid/Col";
 
 export const ResponsiveAd: React.FunctionComponent = () => {
   return (
@@ -20,13 +19,11 @@ export const ResponsiveAd: React.FunctionComponent = () => {
 export const AdSection: React.FunctionComponent = () => {
   return (
     <Section>
-      <Container>
-        <Row>
-          <Col>
-            <ResponsiveAd />
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col>
+          <ResponsiveAd />
+        </Col>
+      </Row>
     </Section>
   );
 };

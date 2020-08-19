@@ -1,17 +1,17 @@
 import { Layout } from "../../../components/basic/Layout";
-import { Header } from "../../../components/basic/Header";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 import NotFound from "../../404";
 import { CardGrid } from "../../../components/basic/CardGrid";
 import Digibruh, { useDigibruh } from "../../../lib/digibruh/Digibruh";
-import Row from "react-bootstrap/Row";
 import {
   DigibruhPage,
   getInitialDigibruh,
 } from "../../../lib/digibruh/utils/initialprops";
 import React from "react";
-import { Section } from "../../../components/basic/Section";
+import { Row } from "../../../components/grid/Row";
+import { Section } from "../../../components/layout/Section";
+import { Col } from "../../../components/grid/Col";
+import { GridTitleSection } from "../../../components/basic/Typography";
+import { DigibruhHero } from "../../../components/digibruh/Hero";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
@@ -22,31 +22,30 @@ const Page: DigibruhPage = (props) => {
   const subject = digibruh.getSubjectBySlug(props.subject);
 
   return (
-    <Layout title={subject?.name}>
-      <Header fixedNav backgroundImage={subject?.coverImage}>
-        <Col xs={12}>
-          <h1 className="display-3 text-center text-md-left mb-4">
-            {subject?.name}
-          </h1>
-          <p className="lead text-white-80 text-center text-md-left mb-6 mb-lg-8">
-            {subject?.description}
-          </p>
-        </Col>
-      </Header>
-      <Container>
-        <Section>
-          <Row className="mb-5">
-            <Col xs={12}>
-              <h3 className="mb-0">Områden</h3>
-            </Col>
-          </Row>
-          <CardGrid
-            items={(subject?.fields || []).map((field) => field.toGridItem())}
-            imagesExpected={true}
-            expectedNumberOfItems={3}
-          />
-        </Section>
-      </Container>
+    <Layout
+      metadata={{
+        title: subject?.name,
+        description: subject?.description,
+        images: [subject?.coverImage],
+      }}
+    >
+      <DigibruhHero
+        title={subject?.name}
+        lead={subject?.description}
+        image={subject?.coverImage}
+      />
+      <Section>
+        <Row>
+          <Col xs={12}>
+            <GridTitleSection title="Områden" />
+          </Col>
+        </Row>
+        <CardGrid
+          items={(subject?.fields || []).map((field) => field.toGridItem())}
+          imagesExpected={true}
+          expectedNumberOfItems={3}
+        />
+      </Section>
     </Layout>
   );
 };

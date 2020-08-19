@@ -45,7 +45,7 @@ export abstract class DigibruhCollection {
     return {
       title: this.name,
       description: this.description,
-      url: this.url,
+      href: this.url,
       image: this.coverImage,
     };
   }
