@@ -47,14 +47,15 @@ export const PostGrid: React.FunctionComponent<{
 
 export const PostGridAuto: React.FunctionComponent<{
   params?: Params;
+  skip?: number;
 }> = (props) => {
-  const { params = {} } = props;
+  const { params = {}, skip = 0 } = props;
   const limit = parseInt((params.limit || 10).toString());
 
   let [isReachingEnd, setIsReachingEnd] = useState(false);
   let [scrolledToBottom, setScrolledToBottom] = useState(false);
 
-  const { data, isValidating, size, setSize } = useSWRInfinite(
+  const { data, size, setSize } = useSWRInfinite(
     (pageIndex, previousPageData) => {
       let pagination = previousPageData?.meta?.pagination;
 
@@ -85,7 +86,7 @@ export const PostGridAuto: React.FunctionComponent<{
   return (
     <>
       <PostGrid
-        posts={(data || []).flat()}
+        posts={(data || []).flat().slice(skip)}
         expectedNumberOfPosts={size * limit}
       />
       <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>

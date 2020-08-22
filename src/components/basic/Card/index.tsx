@@ -1,11 +1,5 @@
 import styled from "styled-components";
-import { GenericUser } from "../../../lib/models/User";
 import { useProgressiveImage } from "../ProgressiveImage";
-
-interface CardMeta {
-  authors?: GenericUser[];
-  date: Date;
-}
 
 export const Card = styled.div`
   background-color: var(--background);

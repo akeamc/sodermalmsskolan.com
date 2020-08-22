@@ -259,7 +259,7 @@ export default createGlobalStyle`
     --size-md: 2.25rem;
     --size-lg: 2.25rem;
     letter-spacing: -.05rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   h3 {
