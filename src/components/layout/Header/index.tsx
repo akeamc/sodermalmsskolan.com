@@ -6,10 +6,10 @@ import { Row } from "../../grid/Row";
 import { ResponsiveHalf } from "../../grid/Col";
 
 const Background = styled.div<{ image: string }>`
-  background-size: cover;
-  background-position: center;
   background: ${({ image }) =>
     `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)), url(${image})`};
+  background-size: cover;
+  background-position: center;
   margin-bottom: var(--section-spacing);
 `;
 
