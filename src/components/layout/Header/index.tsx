@@ -8,12 +8,9 @@ import { ResponsiveHalf } from "../../grid/Col";
 const Background = styled.div<{ image: string }>`
   background-size: cover;
   background-position: center;
-  background-image: ${({ image }) => `url(${image})`};
+  background: ${({ image }) =>
+    `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)), url(${image})`};
   margin-bottom: var(--section-spacing);
-`;
-
-const Overlay = styled.div`
-  backdrop-filter: brightness(30%);
 `;
 
 const Container = styled(TextColorModifier)<{ minHeight?: string }>`
@@ -37,15 +34,13 @@ export const HeaderWithBackground: React.FunctionComponent<{
     <>
       <Navigation noPlaceholder brightText transparent />
       <Background image={image}>
-        <Overlay>
-          <Container bright minHeight={minHeight}>
-            <Hero>
-              <Row>
-                <ResponsiveHalf>{children}</ResponsiveHalf>
-              </Row>
-            </Hero>
-          </Container>
-        </Overlay>
+        <Container bright minHeight={minHeight}>
+          <Hero>
+            <Row>
+              <ResponsiveHalf>{children}</ResponsiveHalf>
+            </Row>
+          </Hero>
+        </Container>
       </Background>
     </>
   );
