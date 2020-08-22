@@ -5,6 +5,7 @@ import { useSmallAvatar } from "../../basic/Avatar";
 import { LinkBlock } from "../../basic/Link";
 import { getAuthorUrl } from "../../../lib/api/ghost/author";
 import { HeaderWithBackground } from "../../layout/Header";
+import React from "react";
 
 const Lead = styled(LeadText)``;
 

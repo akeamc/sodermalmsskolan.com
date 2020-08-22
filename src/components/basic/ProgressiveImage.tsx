@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import pxcmprs from "../../lib/utils/pxcmprs";
 import { Format } from "pxcmprs";
+import React from "react";
 
 /**
  * Loads an image in the background and returns `true` when the image has finished loading.

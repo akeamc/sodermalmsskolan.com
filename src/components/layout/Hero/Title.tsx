@@ -4,6 +4,7 @@ import { Row } from "../../grid/Row";
 import { NormalWidth } from "../../grid/Col";
 import { LeadText } from "../../basic/Typography";
 import * as breakpoints from "../../../styles/breakpoints";
+import React from "react";
 
 /**
  * A title container used on the top of pages. Recommended to be used with `h1` and `LeadText`.

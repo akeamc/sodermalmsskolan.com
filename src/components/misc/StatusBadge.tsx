@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
+import React from "react";
 
 const Container = styled.div`
   padding: 0 12px;

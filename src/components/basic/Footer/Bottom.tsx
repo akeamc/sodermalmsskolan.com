@@ -4,6 +4,7 @@ import { MinecraftStatusBadge } from "../../minecraft/StatusBadge";
 import styled from "styled-components";
 import { UnstyledList } from "../List";
 import * as breakpoints from "../../../styles/breakpoints";
+import React from "react";
 
 const BottomSection = styled.div`
   grid-column: span 12;
