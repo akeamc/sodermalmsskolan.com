@@ -17,8 +17,9 @@ export default class ArticlePage extends React.Component<{
       return <NotFound />;
     }
 
+    console.log(post?.published_at);
     const date = digibruh ? post?.updated_at : post?.published_at;
-    const formattedDate = moment(date).locale("sv").format("d MMMM YYYY");
+    const formattedDate = moment(date).locale("sv").format("D MMMM YYYY");
     const dateText = digibruh
       ? `Redigerad ${formattedDate}`
       : `Publicerad ${formattedDate}`;
