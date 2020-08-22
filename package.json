@@ -32,7 +32,6 @@
     "react-scrolllock": "^5.0.1",
     "react-syntax-highlighter": "^13.2.1",
     "react-visibility-sensor": "^5.1.1",
-    "rss-parser": "^3.9.0",
     "styled-components": "^5.1.1",
     "swr": "^0.3.0",
     "typed-rest-client": "^1.7.3",

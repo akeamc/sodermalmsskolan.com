@@ -102,21 +102,10 @@ const Page: React.FunctionComponent = () => {
       <Section>
         <Row>
           <Col xs={12}>
-            <GridTitleSection
-              title="Menyn"
-              description={
-                <>
-                  Källa:{" "}
-                  <AutoLink href="https://skolmaten.se/sodermalmsskolan-gamla-maria/">
-                    skolmaten.se
-                  </AutoLink>
-                  .
-                </>
-              }
-            />
+            <GridTitleSection title="Menyn" />
           </Col>
         </Row>
-        <MenuList numberOfMenus={7} />
+        <MenuList numberOfMenus={30} />
       </Section>
       <AdSection />
     </Layout>

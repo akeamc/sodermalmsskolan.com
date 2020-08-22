@@ -2,8 +2,8 @@ import styled from "styled-components";
 import React from "react";
 import moment from "moment";
 import Skeleton from "react-loading-skeleton";
-import { useMenus } from "../../lib/api/main/menu/Menu";
-import { Menu } from "../../lib/api/main/menu/Menu";
+import { useMenus } from "../../lib/api/main/food/Menu";
+import { Menu } from "../../lib/api/main/food/Menu";
 import { Row } from "../grid/Row";
 import { Col } from "../grid/Col";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
@@ -13,15 +13,14 @@ const ItemTitle = styled.h6`
 `;
 
 const MenuListItem: React.FunctionComponent<{ menu: Menu }> = ({ menu }) => {
-  const date = menu?.timestamp ? (
-    firstLetterUpperCase(
-      moment(menu?.timestamp).locale("sv").format("dddd D MMMM")
-    )
+  const date = menu?.date ? (
+    firstLetterUpperCase(moment(menu?.date).locale("sv").format("dddd D MMMM"))
   ) : (
     <Skeleton />
   );
 
-  const dishes = menu?.dishes || new Array(2).fill(<Skeleton />);
+  const dishes =
+    menu?.dishes?.map((dish) => dish.title) || new Array(2).fill(<Skeleton />);
 
   return (
     <div>
@@ -44,7 +43,7 @@ const Grid = styled.div`
 export const MenuList: React.FunctionComponent<{
   numberOfMenus: number;
 }> = ({ numberOfMenus }) => {
-  const { data, isValidating } = useMenus({ limit: 90 });
+  const { data, isValidating } = useMenus({ limit: numberOfMenus });
   const fallbackArray: Menu[] = new Array(numberOfMenus).fill(null);
   const menus = data?.length > 0 ? data : fallbackArray;
   const isEmpty = !isValidating && !data;
