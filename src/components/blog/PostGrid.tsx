@@ -5,8 +5,6 @@ import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
 import api from "../../lib/api/ghost/credentials";
 import { CardGrid, GridItem } from "../basic/CardGrid";
-import { Row } from "../grid/Row";
-import { Col } from "../grid/Col";
 import VisibilitySensor from "react-visibility-sensor";
 
 export function getPostUrl(slug: string | null): string {
@@ -90,13 +88,9 @@ export const PostGridAuto: React.FunctionComponent<{
         expectedNumberOfPosts={size * limit}
       />
       <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>
-        <Row>
-          <Col>
-            {isReachingEnd ? null : (
-              <PostGrid posts={null} expectedNumberOfPosts={limit} />
-            )}
-          </Col>
-        </Row>
+        {!isReachingEnd && (
+          <PostGrid posts={null} expectedNumberOfPosts={limit} />
+        )}
       </VisibilitySensor>
     </>
   );
