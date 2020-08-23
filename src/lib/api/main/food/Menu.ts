@@ -31,8 +31,8 @@ export interface MenuQuery {
  *
  */
 export function useMenus({ limit = 10, offset = 0 }: MenuQuery) {
-  return useSWR(`/api/food/menus`, async (url: string) => {
-    const res = await fetchJSON<MenuResponse>(url);
+  return useSWR(`/api/food/menus?limit=${limit}&offset=${offset}`, async () => {
+    const res = await fetchJSON<MenuResponse>("/api/food/menus");
 
     const menus = res.data.sort(({ date: a }, { date: b }) => {
       if (a < b) {
