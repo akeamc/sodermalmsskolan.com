@@ -39,8 +39,6 @@ export const LunchWidget: React.FunctionComponent = () => {
 
   const dishes = menu?.dishes?.map((dish) => dish.title);
 
-  console.log(menu);
-
   const date =
     (menu || isValidating) &&
     (menu?.date ? (

@@ -4,6 +4,7 @@ import { Navigation } from "../../basic/Navigation";
 import { Hero } from "../Hero";
 import { Row } from "../../grid/Row";
 import { ResponsiveHalf } from "../../grid/Col";
+import React from "react";
 
 const Background = styled.div<{ image: string }>`
   background: ${({ image }) =>

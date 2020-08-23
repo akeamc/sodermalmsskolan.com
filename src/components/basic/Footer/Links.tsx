@@ -3,6 +3,7 @@ import { Row } from "../../grid/Row";
 import { AutoLink } from "../Link";
 import { UnstyledList } from "../List";
 import * as breakpoints from "../../../styles/breakpoints";
+import React from "react";
 
 export interface Item {
   name: string;

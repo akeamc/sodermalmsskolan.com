@@ -7,6 +7,7 @@ import { Menu } from "../../lib/api/main/food/Menu";
 import { Row } from "../grid/Row";
 import { Col } from "../grid/Col";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
+import * as breakpoints from "../../styles/breakpoints";
 
 const ItemTitle = styled.h6`
   margin-bottom: 1rem;
@@ -36,8 +37,16 @@ const MenuListItem: React.FunctionComponent<{ menu: Menu }> = ({ menu }) => {
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   grid-gap: var(--grid-gap);
+
+  @media (min-width: ${breakpoints.small}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: ${breakpoints.large}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export const MenuList: React.FunctionComponent<{

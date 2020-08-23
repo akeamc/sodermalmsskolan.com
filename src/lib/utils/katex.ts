@@ -1,3 +1,4 @@
+/*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
 import katex from "katex";
 
 interface Delimeter {

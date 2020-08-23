@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from "react";
 
 export const LeadText = styled.h2`
   font-size: 1.25rem;

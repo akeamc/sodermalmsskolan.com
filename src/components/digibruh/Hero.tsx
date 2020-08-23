@@ -1,5 +1,6 @@
 import { LeadText } from "../basic/Typography";
 import { HeaderWithBackground } from "../layout/Header";
+import React from "react";
 
 export interface HeroProps {
   title: string;

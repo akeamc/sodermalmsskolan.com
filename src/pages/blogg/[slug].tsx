@@ -3,6 +3,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../404";
 import ArticlePage from "../../components/blog/article/ArticlePage";
 import Digibruh from "../../lib/digibruh/Digibruh";
+import React from "react";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
