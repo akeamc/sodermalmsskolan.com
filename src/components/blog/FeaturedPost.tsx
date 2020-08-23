@@ -4,7 +4,7 @@ import { Card, CardContent } from "../basic/Card";
 import { getPosts } from "../../lib/api/ghost/post";
 import useSWR from "swr";
 import { useProgressiveImage } from "../basic/ProgressiveImage";
-import { TextColorModifier, LeadText } from "../basic/Typography";
+import { TextColorModifier } from "../basic/Typography";
 import { LinkBlock } from "../basic/Link";
 import { getPostUrl } from "./PostGrid";
 import { getLineClamp } from "../basic/CardGrid";
@@ -46,21 +46,23 @@ const FeaturedPost: React.FunctionComponent = () => {
   const post = data ? data[0] : null;
   const loading = isValidating && !data;
   const excerptLineLimit = 5;
+  const { src: imageSrc } = useProgressiveImage(post?.feature_image);
 
   return (
     <CardWrapper href={getPostUrl(post?.slug)}>
-      <BigCard image={post?.feature_image}>
+      <BigCard image={imageSrc}>
         <BigCardContent>
           <TextColorModifier bright>
             <h2>{loading ? <Skeleton count={3} /> : post?.title}</h2>
-            <LeadText style={getLineClamp(excerptLineLimit)}>
+            <p style={getLineClamp(excerptLineLimit)}>
               {loading ? <Skeleton count={excerptLineLimit} /> : post?.excerpt}
-            </LeadText>
+            </p>
             <PostMeta
               post={post}
               dateText={moment(post?.published_at)
                 .locale("sv")
                 .format("D MMMM YYYY")}
+              skeleton={loading}
             />
           </TextColorModifier>
         </BigCardContent>

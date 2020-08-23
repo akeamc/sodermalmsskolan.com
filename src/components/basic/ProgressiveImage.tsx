@@ -26,12 +26,12 @@ export const useImageLoadingStatus = (src: string): boolean => {
  * @param src
  */
 export const useProgressiveImage = (
-  src: string
+  src: string = ""
 ): { loading: boolean; src: string; previewLoading: boolean } => {
   const wantedImageLoaded = useImageLoadingStatus(src);
 
   const preview = pxcmprs.generateUrl({
-    source: src || "", // During pre-render, Next calls this function with no parameters for no apparent reason. Therefore, to prevent pxcmprs from throwing an error, an empty string is used as fallback.
+    source: src, // During pre-render, Next calls this function with no parameters for no apparent reason. Therefore, to prevent pxcmprs from throwing an error, an empty string is used as fallback.
     width: 10,
     format: Format.Jpeg,
   });
@@ -39,7 +39,7 @@ export const useProgressiveImage = (
   const previewLoaded = useImageLoadingStatus(preview);
 
   return {
-    src: wantedImageLoaded ? src : previewLoaded ? preview : null,
+    src: wantedImageLoaded ? src : preview,
     loading: !wantedImageLoaded,
     previewLoading: !previewLoaded,
   };

@@ -1,21 +1,24 @@
 import styled from "styled-components";
 import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
-import AuthorCard from "./AuthorCard";
+import AuthorCard, { AuthorCardRow } from "./AuthorCard";
 import * as breakpoints from "../../../styles/breakpoints";
+import Skeleton from "react-loading-skeleton";
 
 const MetaRow = styled.div`
   margin-top: 2.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-bottom: -0.875rem;
 `;
 
-const MetaField = styled.div`
+export const MetaField = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   color: var(--accents-5);
+  margin-bottom: 0.875rem;
 
   &:not(:last-child) {
     margin-right: 15px;
@@ -30,15 +33,14 @@ const MetaField = styled.div`
 const PostMeta: React.FunctionComponent<{
   post: PostOrPage;
   dateText: string;
-}> = ({ post, dateText }) => (
+  skeleton?: boolean;
+}> = ({ post, dateText, skeleton = false }) => (
   <MetaRow>
     <MetaField>
-      {(post?.authors || []).map((author, index) => (
-        <AuthorCard key={index} author={author} />
-      ))}
+      <AuthorCardRow authors={post?.authors} skeleton={skeleton} />
     </MetaField>
     <MetaField>
-      <small>{dateText}</small>
+      <small>{skeleton ? <Skeleton width={100} /> : dateText}</small>
     </MetaField>
   </MetaRow>
 );

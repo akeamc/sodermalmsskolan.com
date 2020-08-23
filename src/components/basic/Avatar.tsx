@@ -12,7 +12,7 @@ function avatarSizeToEm(size: number = 2): number {
   return size;
 }
 
-export const useSmallAvatar = (source: string) => {
+export const useSmallAvatar = (source: string = "") => {
   return pxcmprs.generateUrl({
     width: 256,
     source,
