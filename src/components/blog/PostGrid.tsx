@@ -88,9 +88,10 @@ export const PostGridAuto: React.FunctionComponent<{
         expectedNumberOfPosts={size * limit}
       />
       <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>
-        {!isReachingEnd && (
-          <PostGrid posts={null} expectedNumberOfPosts={limit} />
-        )}
+        <PostGrid
+          posts={null}
+          expectedNumberOfPosts={isReachingEnd ? 0 : limit}
+        />
       </VisibilitySensor>
     </>
   );
