@@ -220,6 +220,7 @@ export default createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     font-size: var(--size-sm);
+    word-wrap: break-word;
 
     @media (min-width: ${breakpoints.medium}) {
       font-size: var(--size-md);
@@ -255,8 +256,8 @@ export default createGlobalStyle`
   }
 
   h2 {
-    --size-sm: 2.25rem;
-    --size-md: 2.25rem;
+    --size-sm: 1.75rem;
+    --size-md: 2rem;
     --size-lg: 2.25rem;
     letter-spacing: -.05rem;
     font-weight: 600;

@@ -26,12 +26,15 @@ const BigCard = styled(Card)<{ image: string }>`
 `;
 
 const BigCardContent = styled(CardContent)`
-  padding: 3rem;
+  padding: 2rem 1rem;
   max-width: 400px;
 
+  @media (min-width: ${breakpoints.small}) {
+    padding: 4rem 2rem;
+  }
+
   @media (min-width: ${breakpoints.medium}) {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding: 6rem 3rem;
   }
 `;
 
