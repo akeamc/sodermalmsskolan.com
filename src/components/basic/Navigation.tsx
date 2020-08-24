@@ -10,6 +10,8 @@ import { UnstyledList } from "./List";
 import { categories } from "./Footer/Links";
 import * as breakpoints from "../../styles/breakpoints";
 import { useRouter } from "next/router";
+import { useAuth } from "../../providers/Auth";
+import { Avatar } from "./Avatar";
 
 const Background = styled.div<{
   floating?: boolean;
@@ -255,6 +257,8 @@ export const Navigation: React.FunctionComponent<{
     setOpen(!open);
   };
 
+  const { isAuthenticated, user } = useAuth();
+
   return (
     <>
       <TextColorModifier bright={brightText && !floating}>
@@ -275,6 +279,19 @@ export const Navigation: React.FunctionComponent<{
                   <DesktopLink href="/meny">Meny</DesktopLink>
                   <DesktopLink href="/blogg">Blogg</DesktopLink>
                   <DesktopLink href="/digibruh">Digibruh</DesktopLink>
+                </DesktopLinks>
+                <DesktopLinks>
+                  {isAuthenticated ? (
+                    <Avatar
+                      imageUrl={user?.avatarURL}
+                      useProxy={false}
+                      href="/konto"
+                    />
+                  ) : (
+                    <DesktopLink key="b" href="/api/auth/login">
+                      Logga in
+                    </DesktopLink>
+                  )}
                 </DesktopLinks>
                 <MobileNavigationToggle onClick={toggleOpen}>
                   <Bars open={open} />

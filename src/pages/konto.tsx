@@ -1,0 +1,31 @@
+import React from "react";
+import { Layout } from "../components/basic/Layout";
+import { Navigation } from "../components/basic/Navigation";
+import { HeroWithTitle } from "../components/layout/Hero/Title";
+import { ButtonRow, Button } from "../components/basic/Button";
+import withAuth from "../hocs/withAuth";
+import { useAuth } from "../providers/Auth";
+
+const Page: React.FunctionComponent = () => {
+  const { user } = useAuth();
+
+  return (
+    <Layout
+      metadata={{
+        title: "Konto",
+      }}
+    >
+      <Navigation />
+      <HeroWithTitle
+        title={user?.username ? `Hej ${user?.username}!` : "Konto"}
+        lead={`Inloggad som ${user?.displayName}.`}
+      >
+        <ButtonRow center>
+          <Button href="/api/auth/logout">Logga ut</Button>
+        </ButtonRow>
+      </HeroWithTitle>
+    </Layout>
+  );
+};
+
+export default withAuth(Page);

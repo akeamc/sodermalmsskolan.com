@@ -47,10 +47,11 @@ export const Avatar: React.FunctionComponent<{
   href?: string;
   imageUrl: string;
   size?: number;
-}> = ({ href = "#", imageUrl = "", size }) => {
+  useProxy?: boolean;
+}> = ({ href = "#", imageUrl = "", size, useProxy = true }) => {
   return (
     <AvatarWrapper href={href} size={size}>
-      <AvatarImage src={useSmallAvatar(imageUrl)} />
+      <AvatarImage src={useProxy ? useSmallAvatar(imageUrl) : imageUrl} />
     </AvatarWrapper>
   );
 };
