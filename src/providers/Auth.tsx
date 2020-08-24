@@ -1,5 +1,6 @@
 import React, { ReactNode, ReactElement } from "react";
-import { User } from "../lib/discord/structures/User";
+import { User, IDiscordAPIUser } from "../lib/discord/structures/User";
+import ky from "ky-universal";
 
 type AuthContext = {
   isAuthenticated: boolean;
@@ -27,23 +28,26 @@ export const AuthProvider = ({
 
   React.useEffect(() => {
     const initializeAuth = async (): Promise<void> => {
-      const response = await fetch("/api/auth/status");
-
-      const validResponse = response.status === 200;
+      let ok = false;
 
       try {
-        if (validResponse) {
-          const userData: any = await response.json();
-          setUser(new User(userData));
-        }
+        const userData = await ky
+          .get("/api/auth/status")
+          .json<IDiscordAPIUser>();
+
+        setUser(new User(userData));
+
+        ok = true;
+      } catch (error) {
+        ok = false;
       } finally {
-        setAuthenticated(validResponse);
+        setAuthenticated(ok);
         setLoading(false);
       }
     };
 
     initializeAuth();
-  });
+  }, []);
 
   return (
     <AuthContext.Provider
