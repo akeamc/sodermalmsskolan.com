@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { fetchJSON, queryString } from "../fetch";
 import { FoodPhotosResponse } from "../../../discord/photos";
-import { MessageQuery } from "../../../discord/structures/Message";
+import { MessageQuery } from "../../../discord/structures/shared/Message";
 
 /**
  *

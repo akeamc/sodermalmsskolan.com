@@ -63,7 +63,21 @@ export class User {
     return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.png`;
   }
 
-  public get displayName() {
-    return `${this.username}#${this.discriminator}`;
+  public serialize(): IDiscordAPIUser {
+    return {
+      id: this.id,
+      username: this.username,
+      discriminator: this.discriminator,
+      avatar: this.avatar,
+      bot: this.bot,
+      system: this.system,
+      mfa_enabled: this.mfa,
+      locale: this.locale,
+      verified: this.verified,
+      email: this.email,
+      flags: this.flags,
+      premium_type: this.premiumType,
+      public_flags: this.publicFlags,
+    };
   }
 }

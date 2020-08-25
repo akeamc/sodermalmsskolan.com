@@ -281,11 +281,12 @@ export const Navigation: React.FunctionComponent<{
                   <DesktopLink href="/meny">Meny</DesktopLink>
                   <DesktopLink href="/blogg">Blogg</DesktopLink>
                   <DesktopLink href="/digibruh">Digibruh</DesktopLink>
+                  <DesktopLink href="/skola">Skola</DesktopLink>
                 </DesktopLinks>
                 <DesktopLinks>
                   {isAuthenticated ? (
                     <Avatar
-                      imageUrl={user?.avatarURL}
+                      imageUrl={user?.discord?.avatarURL}
                       useProxy={false}
                       href="/konto"
                     />

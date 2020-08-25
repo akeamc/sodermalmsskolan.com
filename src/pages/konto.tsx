@@ -17,8 +17,8 @@ const Page: React.FunctionComponent = () => {
     >
       <Navigation />
       <HeroWithTitle
-        title={user?.username ? `Hej ${user?.username}!` : "Konto"}
-        lead={`Inloggad som ${user?.displayName}.`}
+        title={`Hej ${user?.displayName}!`}
+        lead={`Inloggad som ${user?.discord?.username}.`}
       >
         <ButtonRow center>
           <Button href="/api/auth/logout">Logga ut</Button>

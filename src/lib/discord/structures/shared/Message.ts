@@ -1,10 +1,8 @@
-import { getClient } from "../client";
 import {
   IDiscordAPIMessageAttachment,
   MessageAttachment,
 } from "./MessageAttachment";
 import { IDiscordAPIUser, User } from "./User";
-import { SnowflakeUtil } from "discord.js";
 
 export interface MessageQuery {
   before?: number;
@@ -60,31 +58,5 @@ export class Message {
 
     this.createdAt = new Date(timestamp);
     this.editedAt = edited_timestamp ? new Date(edited_timestamp) : null;
-  }
-
-  static async fetchMany(
-    channel: string,
-    query: MessageQuery = {}
-  ): Promise<Message[]> {
-    const client = await getClient();
-
-    let params: { limit: number; before?: string; after?: string } = {
-      limit: query.limit || 50,
-    };
-
-    if (query.before) params.before = SnowflakeUtil.generate(query.before);
-
-    if (query.after) params.after = SnowflakeUtil.generate(query.after);
-
-    const { result } = await client.get<IDiscordAPIMessage[]>(
-      `/api/channels/${channel}/messages`,
-      {
-        queryParameters: {
-          params,
-        },
-      }
-    );
-
-    return result.map((data) => new Message(data));
   }
 }

@@ -1,5 +1,6 @@
 import { CollectionResponse } from "../api/main/Response";
-import { Message, MessageQuery } from "./structures/Message";
+import { ServerMessage } from "./structures/server/Message";
+import { MessageQuery } from "./structures/shared/Message";
 
 /**
  * An interface that holds information about a photo of food posted on Discord.
@@ -24,7 +25,7 @@ export async function fetchPhotos(
     throw new Error("DISCORD_PHOTOS_CHANNEL must be defined.");
   }
 
-  const messages = await Message.fetchMany(DISCORD_PHOTOS_CHANNEL, {
+  const messages = await ServerMessage.fetchMany(DISCORD_PHOTOS_CHANNEL, {
     before: query.before,
     after: query.after,
     limit: query.limit,

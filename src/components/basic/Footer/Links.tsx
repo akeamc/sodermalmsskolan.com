@@ -17,7 +17,7 @@ export interface Category {
 }
 
 export const useLinks = () => {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user: user } = useAuth();
 
   return [
     {
@@ -34,6 +34,10 @@ export const useLinks = () => {
         {
           name: "Digibruh",
           href: "/digibruh",
+        },
+        {
+          name: "Skola",
+          href: "/skola",
         },
       ],
     },

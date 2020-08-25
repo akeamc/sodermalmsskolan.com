@@ -1,11 +1,11 @@
 import React, { ReactNode, ReactElement } from "react";
-import { User, IDiscordAPIUser } from "../lib/discord/structures/User";
 import ky from "ky-universal";
+import { AuthUser, IAuthUser } from "../lib/auth/structures/shared/AuthUser";
 
 type AuthContext = {
   isAuthenticated: boolean;
   isLoading: boolean;
-  user: User | null;
+  user: AuthUser | null;
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -24,18 +24,16 @@ export const AuthProvider = ({
 }): ReactElement => {
   const [isAuthenticated, setAuthenticated] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
-  const [user, setUser] = React.useState<User>(null);
+  const [user, setUser] = React.useState<AuthUser>(null);
 
   React.useEffect(() => {
     const initializeAuth = async (): Promise<void> => {
       let ok = false;
 
       try {
-        const userData = await ky
-          .get("/api/auth/status")
-          .json<IDiscordAPIUser>();
+        const data = await ky.get("/api/auth/status").json<IAuthUser>();
 
-        setUser(new User(userData));
+        setUser(AuthUser.parse(data));
 
         ok = true;
       } catch (error) {

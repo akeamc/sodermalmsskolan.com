@@ -1,6 +1,5 @@
 import { OAUTH2_OPTIONS } from "./options";
 import got from "got";
-import { IDiscordAPIUser } from "../discord/structures/User";
 
 interface TokenResponse {
   access_token: string;
@@ -23,18 +22,6 @@ export const fetchToken = async (code: string) => {
       },
     })
     .json<TokenResponse>();
-
-  return response;
-};
-
-export const getUserInformation = async (token: string) => {
-  const response = await got
-    .get("https://discord.com/api/users/@me", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .json<IDiscordAPIUser>();
 
   return response;
 };

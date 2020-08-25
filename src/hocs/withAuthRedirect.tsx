@@ -3,6 +3,9 @@ import { NextPage } from "next";
 import React, { ReactElement } from "react";
 import { useAuth } from "../providers/Auth";
 import { FullPageSpinner } from "../components/basic/Spinner";
+import { FullPageWrapper } from "../components/layout/Container";
+import { AutoLink } from "../components/basic/Link";
+import { DISCORD_INVITE } from "../components/basic/Footer/Bottom";
 
 function isBrowser(): boolean {
   return typeof window !== "undefined";
@@ -34,15 +37,31 @@ export default function withAuthRedirect<CP = {}, IP = CP>({
   const WithAuthRedirectWrapper: NextPage<CP, IP> = (props) => {
     const router = useRouter();
 
-    const { isLoading, isAuthenticated } = useAuth();
+    const { isLoading, isAuthenticated, user } = useAuth();
+
+    console.log(user);
 
     if (isLoading) {
       return <LoadingComponent />;
     }
+
     if (isBrowser() && expectedAuth !== isAuthenticated) {
       router.push(location);
       return <></>;
     }
+
+    if (isBrowser() && expectedAuth !== user?.isMember) {
+      return (
+        <FullPageWrapper>
+          <p>
+            Du måste{" "}
+            <AutoLink href={DISCORD_INVITE}>gå med i Discordservern</AutoLink>{" "}
+            först.
+          </p>
+        </FullPageWrapper>
+      );
+    }
+
     return <WrappedComponent {...props} />;
   };
 
