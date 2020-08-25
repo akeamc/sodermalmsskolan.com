@@ -2,13 +2,10 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 import React, { ReactElement } from "react";
 import { useAuth } from "../providers/Auth";
+import { FullPageSpinner } from "../components/basic/Spinner";
 
 function isBrowser(): boolean {
   return typeof window !== "undefined";
-}
-
-function DefaultLoadingFallback(): ReactElement {
-  return <p>Laddar ...</p>;
 }
 
 /**
@@ -25,7 +22,7 @@ function DefaultLoadingFallback(): ReactElement {
  */
 export default function withAuthRedirect<CP = {}, IP = CP>({
   WrappedComponent,
-  LoadingComponent = DefaultLoadingFallback,
+  LoadingComponent = FullPageSpinner,
   expectedAuth,
   location,
 }: {
