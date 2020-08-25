@@ -7,7 +7,7 @@ import { useScrollPosition } from "../../lib/hooks/scroll";
 import { TextColorModifier } from "./Typography";
 import ScrollLock from "react-scrolllock";
 import { UnstyledList } from "./List";
-import { categories } from "./Footer/Links";
+import { useLinks } from "./Footer/Links";
 import * as breakpoints from "../../styles/breakpoints";
 import { useRouter } from "next/router";
 import { useAuth } from "../../providers/Auth";
@@ -258,6 +258,8 @@ export const Navigation: React.FunctionComponent<{
   };
 
   const { isAuthenticated, user } = useAuth();
+
+  const categories = useLinks();
 
   return (
     <>
