@@ -3,10 +3,26 @@ import {
   MessageAttachment,
 } from "./MessageAttachment";
 import { IDiscordAPIUser, User } from "./User";
+import { Member, IDiscordAPIMember } from "./Member";
+import { IDiscordAPIMessageReaction } from "./MessageReaction";
 
+/**
+ * Options for fetching messages.
+ */
 export interface MessageQuery {
-  before?: number;
-  after?: number;
+  /**
+   * Discord `Snowflake`. Returns messages sent before the specified snowflake timestamp.
+   */
+  before?: string;
+
+  /**
+   * Discord `Snowflake`. Returns messages sent after the specified snowflake timestamp.
+   */
+  after?: string;
+
+  /**
+   * The limit of how many messages to fetch. According to Discord's API, it must be an integer larger than 0 and at most 100.
+   */
   limit?: number;
 }
 
@@ -15,48 +31,74 @@ export interface IDiscordAPIMessage {
   channel_id: string;
   guild_id?: string;
   author: IDiscordAPIUser;
-  // member
+  member?: IDiscordAPIMember;
   content: string;
-  timestamp: string;
-  edited_timestamp?: string;
+  timestamp: Date;
+  edited_timestamp?: Date;
   tts: boolean;
   attachments: IDiscordAPIMessageAttachment[];
   pinned: boolean;
+  reactions?: IDiscordAPIMessageReaction[];
 }
 
 export class Message {
-  public content: string;
-  public author?: User;
-  public pinned: boolean;
-  public tts: boolean;
-  public attachments: Map<string, MessageAttachment>;
-  public createdAt: Date;
-  public editedAt?: Date;
+  id: string;
+  channel: string;
+  guild?: string;
+  author: User;
+  member?: Member;
+  content: string;
+  pinned: boolean;
+  tts: boolean;
+  attachments: MessageAttachment[];
+  createdAt: Date;
+  editedAt?: Date;
+  reactions?: IDiscordAPIMessageReaction[];
 
   constructor({
     id,
     channel_id,
     guild_id,
     author,
+    member,
     content,
     timestamp,
     edited_timestamp,
     tts,
     attachments,
     pinned,
+    reactions,
   }: IDiscordAPIMessage) {
+    this.id = id;
+    this.channel = channel_id;
+    this.guild = guild_id;
     this.content = content;
-    this.author = author ? new User(author) : null;
+    this.author = new User(author);
+    this.member = member ? new Member(member) : null;
     this.pinned = pinned;
     this.tts = tts;
+    this.attachments = attachments.map(
+      (attachment) => new MessageAttachment(attachment)
+    );
+    this.createdAt = timestamp;
+    this.editedAt = edited_timestamp;
+    this.reactions = reactions;
+  }
 
-    this.attachments = new Map<string, MessageAttachment>();
-
-    for (const attachment of attachments) {
-      this.attachments.set(attachment.id, new MessageAttachment(attachment));
-    }
-
-    this.createdAt = new Date(timestamp);
-    this.editedAt = edited_timestamp ? new Date(edited_timestamp) : null;
+  public serialize(): IDiscordAPIMessage {
+    return {
+      id: this.id,
+      channel_id: this.channel,
+      guild_id: this.guild,
+      content: this.content,
+      author: this.author.serialize(),
+      member: this.member?.serialize(),
+      pinned: this.pinned,
+      tts: this.tts,
+      attachments: this.attachments.map((attachment) => attachment.serialize()),
+      timestamp: this.createdAt,
+      edited_timestamp: this.editedAt,
+      reactions: this.reactions,
+    };
   }
 }

@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { fetchToken } from "../../../lib/auth/flow";
-import { COOKIE_NAME } from "../../../lib/auth/options";
 import { getAuthCookie } from "../../../lib/auth/cookie";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -22,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     // return res.redirect("/");
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     res.statusCode = 403;
     res.send("big oof");

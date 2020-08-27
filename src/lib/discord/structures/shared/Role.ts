@@ -4,7 +4,7 @@ export interface IDiscordAPIRole {
   color: number;
   hoist: boolean;
   position: number;
-  permissions_new: string;
+  permissions: number;
   managed: boolean;
   mentionable: boolean;
 }
@@ -15,7 +15,7 @@ export class Role {
   color: number;
   hoist: boolean;
   position: number;
-  permissions: string;
+  permissionBits: number;
   managed: boolean;
   mentionable: boolean;
 
@@ -25,7 +25,7 @@ export class Role {
     color,
     hoist,
     position,
-    permissions_new,
+    permissions,
     managed,
     mentionable,
   }: IDiscordAPIRole) {
@@ -34,7 +34,7 @@ export class Role {
     this.color = color;
     this.hoist = hoist;
     this.position = position;
-    this.permissions = permissions_new;
+    this.permissionBits = permissions;
     this.managed = managed;
     this.mentionable = mentionable;
   }
@@ -46,7 +46,7 @@ export class Role {
       color: this.color,
       hoist: this.hoist,
       position: this.position,
-      permissions_new: this.permissions,
+      permissions: this.permissionBits,
       managed: this.managed,
       mentionable: this.mentionable,
     };

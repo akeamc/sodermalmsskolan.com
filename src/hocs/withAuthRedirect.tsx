@@ -39,8 +39,6 @@ export default function withAuthRedirect<CP = {}, IP = CP>({
 
     const { isLoading, isAuthenticated, user } = useAuth();
 
-    console.log(user);
-
     if (isLoading) {
       return <LoadingComponent />;
     }

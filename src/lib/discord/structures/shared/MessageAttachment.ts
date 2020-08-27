@@ -34,4 +34,16 @@ export class MessageAttachment {
     this.width = width;
     this.height = height;
   }
+
+  public serialize(): IDiscordAPIMessageAttachment {
+    return {
+      id: this.id,
+      filename: this.filename,
+      size: this.size,
+      url: this.url,
+      proxy_url: this.proxyUrl,
+      width: this.width,
+      height: this.height,
+    };
+  }
 }
