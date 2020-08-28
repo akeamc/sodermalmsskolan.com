@@ -30,35 +30,38 @@ export const ScheduleViewer: React.FunctionComponent<{
   const gridRowMinimum = minimum - 2; // Account for titles.
 
   return (
-    <Table>
-      {schedule.days.map((_, index) => (
-        <DayTitle key={index}>
-          {moment()
-            .locale("sv")
-            .day(index + 1)
-            .format("dddd")}
-        </DayTitle>
-      ))}
+    <div>
+      <h1>{schedule.group}</h1>
+      <Table>
+        {schedule.days.map((_, index) => (
+          <DayTitle key={index}>
+            {moment()
+              .locale("sv")
+              .day(index + 1)
+              .format("dddd")}
+          </DayTitle>
+        ))}
 
-      {schedule.days.map((day, index) => {
-        const gridColumn = index + 1;
+        {schedule.days.map((day, index) => {
+          const gridColumn = index + 1;
 
-        return day.map((period, index) => {
-          const [start, end] = period.bounds;
+          return day.map((period, index) => {
+            const [start, end] = period.bounds;
 
-          const gridRowStart = start - gridRowMinimum;
-          const gridRowEnd = end - gridRowMinimum;
+            const gridRowStart = start - gridRowMinimum;
+            const gridRowEnd = end - gridRowMinimum;
 
-          return (
-            <PeriodWrapper
-              style={{ gridColumn, gridRowStart, gridRowEnd }}
-              key={index}
-            >
-              <period.Component />
-            </PeriodWrapper>
-          );
-        });
-      })}
-    </Table>
+            return (
+              <PeriodWrapper
+                style={{ gridColumn, gridRowStart, gridRowEnd }}
+                key={index}
+              >
+                <period.Component />
+              </PeriodWrapper>
+            );
+          });
+        })}
+      </Table>
+    </div>
   );
 };

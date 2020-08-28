@@ -3,6 +3,7 @@ import { Period } from ".";
 import React from "react";
 import { Subject, Subjects } from "../Subject";
 import styled from "styled-components";
+import { PeriodComponent } from "./PeriodComponent";
 
 export class GroupedPeriod extends SinglePeriod {
   public group: string;
@@ -16,6 +17,16 @@ export class GroupedPeriod extends SinglePeriod {
     super([start, end], subject, room);
     this.group = group;
   }
+
+  public Component: React.FunctionComponent = () => (
+    <PeriodComponent
+      start={this.hourMinuteStart}
+      end={this.hourMinuteEnd}
+      room={this.room}
+      title={`${this.subject.symbol} ${this.group}`}
+      color={this.subject.color}
+    />
+  );
 }
 
 const PeriodGroupWrapper = styled.div`

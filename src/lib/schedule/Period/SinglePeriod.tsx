@@ -1,23 +1,7 @@
 import { Period } from ".";
 import { Subject } from "../Subject";
+import { PeriodComponent } from "./PeriodComponent";
 import React from "react";
-import styled from "styled-components";
-
-const PeriodContainer = styled.div<{ color: string }>`
-  padding: 1rem;
-  box-sizing: border-box;
-  border-bottom: 2px solid ${({ color }) => color};
-  /* The "color" property is a hex code. */
-  ${({ color }) => `
-    background-color: ${color}1f;
-  `}
-`;
-
-const PeriodHeading = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
 
 export class SinglePeriod implements Period {
   /**
@@ -82,17 +66,13 @@ export class SinglePeriod implements Period {
     return [this.start, this.end];
   }
 
-  public Component: React.FunctionComponent = () => {
-    return (
-      <PeriodContainer color={this.subject.color}>
-        <PeriodHeading>
-          <small>
-            {this.hourMinuteStart}–{this.hourMinuteEnd}
-          </small>
-          <small>{this.room}</small>
-        </PeriodHeading>
-        <p>{this.subject.symbol}</p>
-      </PeriodContainer>
-    );
-  };
+  public Component: React.FunctionComponent = () => (
+    <PeriodComponent
+      start={this.hourMinuteStart}
+      end={this.hourMinuteEnd}
+      room={this.room}
+      title={this.subject.symbol}
+      color={this.subject.color}
+    />
+  );
 }

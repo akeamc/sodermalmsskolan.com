@@ -18,7 +18,7 @@ export const Subjects: { [key: string]: Subject } = {
   Mathematics: new Subject("Matematik", "#0070f3"),
   Swedish: new Subject("Svenska", "#ffeb3b"),
   English: new Subject("Engelska", "#f44336"),
-  SocialStudies: new Subject("Samhällskunskap", "#2b2b2c"),
+  SocialStudies: new Subject("Samhällskunskap", "#212121"),
   Physics: new Subject("Fysik", "#4caf50"),
   Chemistry: new Subject("Kemi", "#4caf50"),
   Biology: new Subject("Biologi", "#4caf50"),
@@ -31,5 +31,5 @@ export const Subjects: { [key: string]: Subject } = {
   German: new Subject("Tyska", "#ff9800"),
   French: new Subject("Franska", "#ff9800"),
   Spanish: new Subject("Spanska", "#ff9800"),
-  Random: new Subject("Mentorstid", "#212121"),
+  Random: new Subject("Mentorstid", "#212121", "MT"),
 };
