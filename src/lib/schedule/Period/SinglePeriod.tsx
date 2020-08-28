@@ -1,6 +1,23 @@
 import { Period } from ".";
 import { Subject } from "../Subject";
 import React from "react";
+import styled from "styled-components";
+
+const PeriodContainer = styled.div<{ color: string }>`
+  padding: 1rem;
+  box-sizing: border-box;
+  border-bottom: 2px solid ${({ color }) => color};
+  /* The "color" property is a hex code. */
+  ${({ color }) => `
+    background-color: ${color}1f;
+  `}
+`;
+
+const PeriodHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
 
 export class SinglePeriod implements Period {
   /**
@@ -23,8 +40,8 @@ export class SinglePeriod implements Period {
   }
 
   private humanTimestamp(timestamp: number): [number, number] {
-    const minutes = Math.floor(timestamp % 60);
-    const hours = Math.floor(timestamp / 60);
+    const minutes = Math.floor(timestamp % 12) * 5;
+    const hours = Math.floor(timestamp / 12);
 
     return [hours, minutes];
   }
@@ -61,12 +78,21 @@ export class SinglePeriod implements Period {
     return this.hourMinuteTimestamp(this.end);
   }
 
+  public get bounds(): [number, number] {
+    return [this.start, this.end];
+  }
+
   public Component: React.FunctionComponent = () => {
     return (
-      <div style={{ color: this.subject.color }}>
-        {this.hourMinuteStart} - {this.hourMinuteEnd} {this.subject.name}{" "}
-        {this.room} ({this.duration} min)
-      </div>
+      <PeriodContainer color={this.subject.color}>
+        <PeriodHeading>
+          <small>
+            {this.hourMinuteStart}–{this.hourMinuteEnd}
+          </small>
+          <small>{this.room}</small>
+        </PeriodHeading>
+        <p>{this.subject.symbol}</p>
+      </PeriodContainer>
     );
   };
 }

@@ -1,79 +1,35 @@
-export interface Subject {
-  name: string;
-  color: string;
+export class Subject {
+  public name: string;
+  public color: string;
+  private _symbol?: string;
+
+  constructor(name: string, color: string, symbol?: string) {
+    this.name = name;
+    this.color = color;
+    this._symbol = symbol;
+  }
+
+  public get symbol() {
+    return this._symbol || this.name.substring(0, 2).toUpperCase();
+  }
 }
 
 export const Subjects: { [key: string]: Subject } = {
-  Mathematics: {
-    name: "Matematik",
-    color: "blue",
-  },
-  Swedish: {
-    name: "Svenska",
-    color: "yellow",
-  },
-  English: {
-    name: "Engelska",
-    color: "red",
-  },
-  History: {
-    name: "Historia",
-    color: "black",
-  },
-  SocialStudies: {
-    name: "Samhällskunskap",
-    color: "black",
-  },
-  Physics: {
-    name: "Fysik",
-    color: "lime",
-  },
-  Chemistry: {
-    name: "Kemi",
-    color: "lime",
-  },
-  Biology: {
-    name: "Biologi",
-    color: "lime",
-  },
-  Music: {
-    name: "Musik",
-    color: "magenta",
-  },
-  Gastronomy: {
-    name: "Hem- och konsumentkunskap",
-    color: "magenta",
-  },
-  Engineering: {
-    name: "Teknik",
-    color: "green",
-  },
-  HardCrafts: {
-    name: "Trä- och metallslöjd",
-    color: "magenta",
-  },
-  SoftCrafts: {
-    name: "Textilslöjd",
-    color: "magenta",
-  },
-  Sports: {
-    name: "Idrott",
-    color: "magenta",
-  },
-  German: {
-    name: "Tyska",
-    color: "orange",
-  },
-  French: {
-    name: "Franska",
-    color: "orange",
-  },
-  Spanish: {
-    name: "Spanska",
-    color: "orange",
-  },
-  Random: {
-    name: "Mentorstid",
-    color: "gray",
-  },
+  Mathematics: new Subject("Matematik", "#0070f3"),
+  Swedish: new Subject("Svenska", "#ffeb3b"),
+  English: new Subject("Engelska", "#f44336"),
+  SocialStudies: new Subject("Samhällskunskap", "#2b2b2c"),
+  Physics: new Subject("Fysik", "#4caf50"),
+  Chemistry: new Subject("Kemi", "#4caf50"),
+  Biology: new Subject("Biologi", "#4caf50"),
+  Music: new Subject("Musik", "#673ab7"),
+  Gastronomy: new Subject("Hem- och konsumentkunskap", "#009688", "HKK"),
+  Engineering: new Subject("Teknik", "#4caf50"),
+  HardCrafts: new Subject("Trä- och metallslöjd", "#009688", "TM"),
+  SoftCrafts: new Subject("Textilslöjd", "#009688", "TX"),
+  Sports: new Subject("Idrott", "#009688", "IDH"),
+  German: new Subject("Tyska", "#ff9800"),
+  French: new Subject("Franska", "#ff9800"),
+  Spanish: new Subject("Spanska", "#ff9800"),
+  Random: new Subject("Mentorstid", "#212121"),
 };

@@ -2,6 +2,7 @@ import { SinglePeriod } from "./SinglePeriod";
 import { Period } from ".";
 import React from "react";
 import { Subject, Subjects } from "../Subject";
+import styled from "styled-components";
 
 export class GroupedPeriod extends SinglePeriod {
   public group: string;
@@ -17,6 +18,20 @@ export class GroupedPeriod extends SinglePeriod {
   }
 }
 
+const PeriodGroupWrapper = styled.div`
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-auto-flow: column;
+`;
+
+const PeriodContainer = styled.div`
+  display: flex;
+
+  > * {
+    flex: 1;
+  }
+`;
+
 /**
  * A group of parallel periods for different teaching groups.
  */
@@ -28,18 +43,44 @@ export class PeriodGroup implements Period {
   }
 
   public Component: React.FunctionComponent = () => {
+    const [groupStart, groupEnd] = this.bounds;
+
     return (
-      <ul>
+      <PeriodGroupWrapper>
         {this.periods.map((period, index) => {
+          const gridRowStart = period.start + 1 - groupStart;
+          const gridRowEnd = period.end + 1 - groupStart;
+
           return (
-            <li key={index}>
+            <PeriodContainer
+              key={index}
+              style={{
+                gridRowStart,
+                gridRowEnd,
+              }}
+            >
               <period.Component />
-            </li>
+            </PeriodContainer>
           );
         })}
-      </ul>
+      </PeriodGroupWrapper>
     );
   };
+
+  public get bounds(): [number, number] {
+    return this.periods.reduce(
+      ([minimum, maximum], period) => {
+        return [Math.min(minimum, period.start), Math.max(maximum, period.end)];
+      },
+      [60 * 24, 0]
+    );
+  }
+
+  public get duration() {
+    const [start, end] = this.bounds;
+
+    return end - start;
+  }
 }
 
 type PracticalSubject = [[number, number], string];

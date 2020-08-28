@@ -9,121 +9,130 @@ import {
 
 type Day = Period[];
 
-export interface Schedule {
-  group: string;
-  days: Day[];
+export class Schedule {
+  public group: string;
+  public days: Day[];
+
+  constructor(group: string, days: Day[]) {
+    this.group = group;
+    this.days = days;
+  }
+
+  public get bounds(): [number, number] {
+    return this.days.reduce(
+      ([minimum, maximum], day) => {
+        for (const period of day) {
+          const { bounds } = period;
+
+          minimum = Math.min(minimum, bounds[0]);
+          maximum = Math.max(maximum, bounds[1]);
+        }
+
+        return [minimum, maximum];
+      },
+      [60 * 24, 0]
+    );
+  }
+
+  public get maximumDuration(): number {
+    const [start, end] = this.bounds;
+
+    return end - start;
+  }
 }
 
 export const Schedules: Schedule[] = [
-  {
-    group: "O92",
-    days: [
-      [
-        new SinglePeriod([510, 565], Subjects.Physics, "A415"),
-        new SinglePeriod([575, 635], Subjects.English, "A307"),
-        new SinglePeriod([665, 745], Subjects.Mathematics, "A307"),
-        new SinglePeriod([795, 870], Subjects.SocialStudies, "A309"),
-      ],
-      [
-        new SinglePeriod([490, 540], Subjects.Sports, "B501"),
-        new SinglePeriod([605, 670], Subjects.SocialStudies, "A309"),
-        new PeriodGroup([
-          new GroupedPeriod(
-            [685, 745],
-            Subjects.Swedish,
-            "Tidelius",
-            "EV drama"
-          ),
-          new GroupedPeriod(
-            [685, 745],
-            Subjects.English,
-            "A307",
-            "EV engelska"
-          ),
-          new GroupedPeriod(
-            [685, 745],
-            Subjects.English,
-            "A309",
-            "EV engelska"
-          ),
-          new GroupedPeriod(
-            [685, 745],
-            Subjects.Mathematics,
-            "A112",
-            "EV matematik"
-          ),
-        ]),
-        new SinglePeriod([790, 840], Subjects.Physics, "A311"),
-        new PeriodGroup([
-          new GroupedPeriod([865, 940], Subjects.Swedish, "A308", "ASVEN"),
-          new GroupedPeriod([865, 940], Subjects.French, "A221", "M2FR"),
-          new GroupedPeriod([865, 940], Subjects.Spanish, "A110", "M2SP"),
-          new GroupedPeriod([865, 940], Subjects.Spanish, "A220", "M2SP"),
-          new GroupedPeriod([865, 940], Subjects.German, "A310", "M2TY"),
-        ]),
-      ],
-      [
-        new SinglePeriod([510, 560], Subjects.English, "A307"),
-        practicalSubjects({
-          chemistry: [[580, 660], "O9IER"],
-          hardCrafts: [[580, 660], "O9JZH"],
-          softCrafts: [[580, 660], "O9LWA"],
-          music: [[570, 655], "O9DKA"],
-          gastronomy: [[570, 670], "O9MBE"],
-        }),
-        new SinglePeriod([680, 745], Subjects.Mathematics, "A307"),
-        new SinglePeriod([790, 860], Subjects.Swedish, "A308"),
-        new PeriodGroup([
-          new GroupedPeriod([865, 940], Subjects.Swedish, "A308", "ASVEN"),
-          new GroupedPeriod([865, 940], Subjects.French, "A221", "M2FR"),
-          new GroupedPeriod([865, 940], Subjects.Spanish, "A110", "M2SP"),
-          new GroupedPeriod([865, 940], Subjects.Spanish, "A220", "M2SP"),
-          new GroupedPeriod([865, 940], Subjects.German, "A309", "M2TY"),
-        ]),
-      ],
-      [
-        practicalSubjects({
-          chemistry: [[490, 570], "O9DKA"],
-          hardCrafts: [[490, 570], "O9IER"],
-          softCrafts: [[490, 570], "O9JZH"],
-          music: [[490, 575], "O9MBE"],
-          gastronomy: [[490, 580], "O9LWA"],
-        }),
-        practicalSubjects({
-          chemistry: [[600, 680], "O9MBE"],
-          hardCrafts: [[600, 680], "O9DKA"],
-          softCrafts: [[600, 680], "O9IER"],
-          music: [[590, 680], "O9LWA"],
-          gastronomy: [[595, 680], "O9JZH"],
-        }),
-        new SinglePeriod([685, 750], Subjects.Swedish, "A308"),
-        new SinglePeriod([785, 835], Subjects.Mathematics, "A308"),
-        new SinglePeriod([860, 960], Subjects.Sports, "Forsgrenska"),
-      ],
-      [
-        new PeriodGroup([
-          new GroupedPeriod([570, 620], Subjects.Random, "A309", "O9DKA"),
-          new GroupedPeriod([570, 620], Subjects.Random, "A402", "O9IER"),
-          new GroupedPeriod([570, 620], Subjects.Random, "A415", "O9JZH"),
-          new GroupedPeriod([570, 620], Subjects.Random, "A307", "O9LWA"),
-          new GroupedPeriod([570, 620], Subjects.Random, "A308", "O9MBE"),
-        ]),
-        practicalSubjects({
-          chemistry: [[640, 720], "O9LWA"],
-          hardCrafts: [[655, 735], "O9MBE"],
-          softCrafts: [[655, 735], "O9DKA"],
-          music: [[640, 725], "O9JZH"],
-          gastronomy: [[640, 730], "O9IER"],
-        }),
-        practicalSubjects({
-          chemistry: [[780, 860], "O9JZH"],
-          hardCrafts: [[780, 860], "O9LWA"],
-          softCrafts: [[780, 860], "O9MBE"],
-          music: [[780, 865], "O9IER"],
-          gastronomy: [[780, 870], "O9DKA"],
-        }),
-        new SinglePeriod([880, 930], Subjects.SocialStudies, "A309"),
-      ],
+  new Schedule("O92", [
+    [
+      new SinglePeriod([102, 113], Subjects.Physics, "A415"),
+      new SinglePeriod([115, 127], Subjects.English, "A307"),
+      new SinglePeriod([133, 149], Subjects.Mathematics, "A307"),
+      new SinglePeriod([159, 174], Subjects.SocialStudies, "A309"),
     ],
-  },
+    [
+      new SinglePeriod([98, 108], Subjects.Sports, "B501"),
+      new SinglePeriod([121, 134], Subjects.SocialStudies, "A309"),
+      new PeriodGroup([
+        new GroupedPeriod([137, 149], Subjects.Swedish, "Tidelius", "EV drama"),
+        new GroupedPeriod([137, 149], Subjects.English, "A307", "EV engelska"),
+        new GroupedPeriod([137, 149], Subjects.English, "A309", "EV engelska"),
+        new GroupedPeriod(
+          [137, 149],
+          Subjects.Mathematics,
+          "A112",
+          "EV matematik"
+        ),
+      ]),
+      new SinglePeriod([158, 168], Subjects.Physics, "A311"),
+      new PeriodGroup([
+        new GroupedPeriod([173, 188], Subjects.Swedish, "A308", "ASVEN"),
+        new GroupedPeriod([173, 188], Subjects.French, "A221", "M2FR"),
+        new GroupedPeriod([173, 188], Subjects.Spanish, "A110", "M2SP"),
+        new GroupedPeriod([173, 188], Subjects.Spanish, "A220", "M2SP"),
+        new GroupedPeriod([173, 188], Subjects.German, "A310", "M2TY"),
+      ]),
+    ],
+    [
+      new SinglePeriod([102, 112], Subjects.English, "A307"),
+      practicalSubjects({
+        chemistry: [[116, 132], "O9IER"],
+        hardCrafts: [[116, 132], "O9JZH"],
+        softCrafts: [[116, 132], "O9LWA"],
+        music: [[114, 131], "O9DKA"],
+        gastronomy: [[114, 134], "O9MBE"],
+      }),
+      new SinglePeriod([136, 149], Subjects.Mathematics, "A307"),
+      new SinglePeriod([158, 172], Subjects.Swedish, "A308"),
+      new PeriodGroup([
+        new GroupedPeriod([173, 188], Subjects.Swedish, "A308", "ASVEN"),
+        new GroupedPeriod([173, 188], Subjects.French, "A221", "M2FR"),
+        new GroupedPeriod([173, 188], Subjects.Spanish, "A110", "M2SP"),
+        new GroupedPeriod([173, 188], Subjects.Spanish, "A220", "M2SP"),
+        new GroupedPeriod([173, 188], Subjects.German, "A309", "M2TY"),
+      ]),
+    ],
+    [
+      practicalSubjects({
+        chemistry: [[98, 114], "O9DKA"],
+        hardCrafts: [[98, 114], "O9IER"],
+        softCrafts: [[98, 114], "O9JZH"],
+        music: [[98, 115], "O9MBE"],
+        gastronomy: [[98, 116], "O9LWA"],
+      }),
+      practicalSubjects({
+        chemistry: [[120, 136], "O9MBE"],
+        hardCrafts: [[120, 136], "O9DKA"],
+        softCrafts: [[120, 136], "O9IER"],
+        music: [[118, 136], "O9LWA"],
+        gastronomy: [[119, 136], "O9JZH"],
+      }),
+      new SinglePeriod([137, 150], Subjects.Swedish, "A308"),
+      new SinglePeriod([157, 167], Subjects.Mathematics, "A308"),
+      new SinglePeriod([172, 192], Subjects.Sports, "Forsgrenska"),
+    ],
+    [
+      new PeriodGroup([
+        new GroupedPeriod([114, 124], Subjects.Random, "A309", "O9DKA"),
+        new GroupedPeriod([114, 124], Subjects.Random, "A402", "O9IER"),
+        new GroupedPeriod([114, 124], Subjects.Random, "A415", "O9JZH"),
+        new GroupedPeriod([114, 124], Subjects.Random, "A307", "O9LWA"),
+        new GroupedPeriod([114, 124], Subjects.Random, "A308", "O9MBE"),
+      ]),
+      practicalSubjects({
+        chemistry: [[128, 144], "O9LWA"],
+        hardCrafts: [[131, 147], "O9MBE"],
+        softCrafts: [[131, 147], "O9DKA"],
+        music: [[128, 145], "O9JZH"],
+        gastronomy: [[128, 146], "O9IER"],
+      }),
+      practicalSubjects({
+        chemistry: [[156, 172], "O9JZH"],
+        hardCrafts: [[156, 172], "O9LWA"],
+        softCrafts: [[156, 172], "O9MBE"],
+        music: [[156, 173], "O9IER"],
+        gastronomy: [[156, 174], "O9DKA"],
+      }),
+      new SinglePeriod([176, 186], Subjects.SocialStudies, "A309"),
+    ],
+  ]),
 ];
