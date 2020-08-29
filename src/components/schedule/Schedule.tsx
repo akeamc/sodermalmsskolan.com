@@ -29,9 +29,12 @@ export const ScheduleViewer: React.FunctionComponent<{
 
   const gridRowMinimum = minimum - 2; // Account for titles.
 
+  const next = schedule.nextPeriod();
+
   return (
     <div>
       <h1>{schedule.group}</h1>
+      <p>Nästa lektion: {next?.summary}</p>
       <Table>
         {schedule.days.map((_, index) => (
           <DayTitle key={index}>

@@ -87,6 +87,10 @@ export class PeriodGroup implements Period {
     );
   }
 
+  public get summary(): string {
+    return this.periods.map((period) => period.summary).join(", ");
+  }
+
   public get duration() {
     const [start, end] = this.bounds;
 

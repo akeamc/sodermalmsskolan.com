@@ -6,8 +6,7 @@ import {
   GroupedPeriod,
   practicalSubjects,
 } from "./Period";
-
-type Day = Period[];
+import { Day } from "./Day";
 
 export class Schedule {
   public group: string;
@@ -16,7 +15,7 @@ export class Schedule {
   constructor(group: string, days: Day[], base?: Schedule) {
     this.group = group;
     this.days = days.map((day, index) => {
-      return day.concat(base?.days[index] || []);
+      return new Day(...day, ...(base?.days[index] || []));
     });
   }
 
@@ -41,11 +40,32 @@ export class Schedule {
 
     return end - start;
   }
+
+  private dayIndex(timestamp: Date = new Date()): number {
+    return (timestamp.getDay() + 6) % 7;
+  }
+
+  public nextDays(timestamp: Date = new Date()): Day[] {
+    const index = this.dayIndex(timestamp);
+
+    return this.days.slice(index).concat(this.days.slice(0, index));
+  }
+
+  public nextPeriod(timestamp: Date = new Date()): Period | null {
+    const followingDays = this.nextDays(timestamp);
+    const index = this.dayIndex(timestamp);
+
+    const time = this.days[index]
+      ? (timestamp.getHours() * 60 + timestamp.getMinutes()) / 5
+      : 0;
+
+    return followingDays[0].nextPeriod(time);
+  }
 }
 
 const CommonSchedule = new Schedule("Ovalen", [
-  [],
-  [
+  new Day(),
+  new Day(
     new PeriodGroup([
       new GroupedPeriod([137, 149], Subjects.Swedish, "Tidelius", "EV drama"),
       new GroupedPeriod([137, 149], Subjects.English, "A307", "EV engelska"),
@@ -63,9 +83,9 @@ const CommonSchedule = new Schedule("Ovalen", [
       new GroupedPeriod([173, 188], Subjects.Spanish, "A110", "M2SP"),
       new GroupedPeriod([173, 188], Subjects.Spanish, "A220", "M2SP"),
       new GroupedPeriod([173, 188], Subjects.German, "A310", "M2TY"),
-    ]),
-  ],
-  [
+    ])
+  ),
+  new Day(
     practicalSubjects({
       chemistry: [[116, 132], "O9IER"],
       hardCrafts: [[116, 132], "O9JZH"],
@@ -79,9 +99,9 @@ const CommonSchedule = new Schedule("Ovalen", [
       new GroupedPeriod([173, 188], Subjects.Spanish, "A110", "M2SP"),
       new GroupedPeriod([173, 188], Subjects.Spanish, "A220", "M2SP"),
       new GroupedPeriod([173, 188], Subjects.German, "A309", "M2TY"),
-    ]),
-  ],
-  [
+    ])
+  ),
+  new Day(
     practicalSubjects({
       chemistry: [[98, 114], "O9DKA"],
       hardCrafts: [[98, 114], "O9IER"],
@@ -96,9 +116,9 @@ const CommonSchedule = new Schedule("Ovalen", [
       music: [[118, 136], "O9LWA"],
       gastronomy: [[119, 136], "O9JZH"],
     }),
-    new SinglePeriod([172, 192], Subjects.Sports, "Forsgrenska"),
-  ],
-  [
+    new SinglePeriod([172, 192], Subjects.Sports, "Forsgrenska")
+  ),
+  new Day(
     new PeriodGroup([
       new GroupedPeriod([114, 124], Subjects.Random, "A309", "O9DKA"),
       new GroupedPeriod([114, 124], Subjects.Random, "A402", "O9IER"),
@@ -119,89 +139,89 @@ const CommonSchedule = new Schedule("Ovalen", [
       softCrafts: [[156, 172], "O9MBE"],
       music: [[156, 173], "O9IER"],
       gastronomy: [[156, 174], "O9DKA"],
-    }),
-  ],
+    })
+  ),
 ]);
 
 export const Schedules: Schedule[] = [
   new Schedule(
     "O91",
     [
-      [
+      new Day(
         new SinglePeriod([101, 115], Subjects.Mathematics, "A307"),
         new SinglePeriod([117, 132], Subjects.SocialStudies, "A309"),
         new SinglePeriod([135, 149], Subjects.Swedish, "A308"),
-        new SinglePeriod([159, 170], Subjects.Physics, "A415"),
-      ],
-      [
+        new SinglePeriod([159, 170], Subjects.Physics, "A415")
+      ),
+      new Day(
         new SinglePeriod([108, 118], Subjects.Sports, "B501"),
         new SinglePeriod([123, 135], Subjects.English, "A307"),
-        new SinglePeriod([158, 171], Subjects.SocialStudies, "A309"),
-      ],
-      [
+        new SinglePeriod([158, 171], Subjects.SocialStudies, "A309")
+      ),
+      new Day(
         new SinglePeriod([99, 112], Subjects.Mathematics, "A307"),
         new SinglePeriod([136, 149], Subjects.Swedish, "A308"),
-        new SinglePeriod([159, 169], Subjects.SocialStudies, "A309"),
-      ],
-      [
+        new SinglePeriod([159, 169], Subjects.SocialStudies, "A309")
+      ),
+      new Day(
         new SinglePeriod([138, 148], Subjects.Physics, "A415"),
-        new SinglePeriod([157, 167], Subjects.English, "A307"),
-      ],
-      [new SinglePeriod([177, 189], Subjects.Mathematics, "A307")],
+        new SinglePeriod([157, 167], Subjects.English, "A307")
+      ),
+      new Day(new SinglePeriod([177, 189], Subjects.Mathematics, "A307")),
     ],
     CommonSchedule
   ),
   new Schedule(
     "O92",
     [
-      [
+      new Day(
         new SinglePeriod([102, 113], Subjects.Physics, "A415"),
         new SinglePeriod([115, 127], Subjects.English, "A307"),
         new SinglePeriod([133, 149], Subjects.Mathematics, "A307"),
-        new SinglePeriod([159, 174], Subjects.SocialStudies, "A309"),
-      ],
-      [
+        new SinglePeriod([159, 174], Subjects.SocialStudies, "A309")
+      ),
+      new Day(
         new SinglePeriod([98, 108], Subjects.Sports, "B501"),
         new SinglePeriod([121, 134], Subjects.SocialStudies, "A309"),
-        new SinglePeriod([158, 168], Subjects.Physics, "A311"),
-      ],
-      [
+        new SinglePeriod([158, 168], Subjects.Physics, "A311")
+      ),
+      new Day(
         new SinglePeriod([102, 112], Subjects.English, "A307"),
         new SinglePeriod([136, 149], Subjects.Mathematics, "A307"),
-        new SinglePeriod([158, 172], Subjects.Swedish, "A308"),
-      ],
-      [
+        new SinglePeriod([158, 172], Subjects.Swedish, "A308")
+      ),
+      new Day(
         new SinglePeriod([137, 150], Subjects.Swedish, "A308"),
-        new SinglePeriod([157, 167], Subjects.Mathematics, "A308"),
-      ],
-      [new SinglePeriod([176, 186], Subjects.SocialStudies, "A309")],
+        new SinglePeriod([157, 167], Subjects.Mathematics, "A308")
+      ),
+      new Day(new SinglePeriod([176, 186], Subjects.SocialStudies, "A309")),
     ],
     CommonSchedule
   ),
   new Schedule(
     "O93",
     [
-      [
+      new Day(
         new SinglePeriod([101, 113], Subjects.English, "A307"),
         new SinglePeriod([117, 132], Subjects.Mathematics, "A307"),
         new SinglePeriod([134, 149], Subjects.SocialStudies, "A309"),
-        new SinglePeriod([159, 173], Subjects.Swedish, "A308"),
-      ],
-      [
+        new SinglePeriod([159, 173], Subjects.Swedish, "A308")
+      ),
+      new Day(
         new SinglePeriod([101, 114], Subjects.Mathematics, "A307"),
         new SinglePeriod([118, 128], Subjects.Sports, "B501"),
-        new SinglePeriod([158, 171], Subjects.Swedish, "A308"),
-      ],
-      [
+        new SinglePeriod([158, 171], Subjects.Swedish, "A308")
+      ),
+      new Day(
         new SinglePeriod([100, 111], Subjects.Physics, "A311"),
         new SinglePeriod([136, 149], Subjects.SocialStudies, "A309"),
-        new SinglePeriod([159, 169], Subjects.English, "A307"),
-      ],
-      [
+        new SinglePeriod([159, 169], Subjects.English, "A307")
+      ),
+      new Day(
         new SinglePeriod([138, 149], Subjects.Mathematics, "A307"),
-        new SinglePeriod([157, 167], Subjects.SocialStudies, "A309"),
-      ],
-      [new SinglePeriod([179, 189], Subjects.Physics, "A311")],
+        new SinglePeriod([157, 167], Subjects.SocialStudies, "A309")
+      ),
+      new Day(new SinglePeriod([179, 189], Subjects.Physics, "A311")),
     ],
     CommonSchedule
   ),
