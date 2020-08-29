@@ -31,8 +31,7 @@ export class GroupedPeriod extends SinglePeriod {
 
 const PeriodGroupWrapper = styled.div`
   display: grid;
-  grid-auto-rows: 1fr;
-  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
 `;
 
 const PeriodContainer = styled.div`
@@ -54,20 +53,20 @@ export class PeriodGroup implements Period {
   }
 
   public Component: React.FunctionComponent = () => {
-    const [groupStart, groupEnd] = this.bounds;
+    const [groupStart] = this.bounds;
 
     return (
       <PeriodGroupWrapper>
         {this.periods.map((period, index) => {
-          const gridRowStart = period.start + 1 - groupStart;
-          const gridRowEnd = period.end + 1 - groupStart;
+          const gridColumnStart = period.start + 1 - groupStart;
+          const gridColumnEnd = period.end + 1 - groupStart;
 
           return (
             <PeriodContainer
               key={index}
               style={{
-                gridRowStart,
-                gridRowEnd,
+                gridColumnStart,
+                gridColumnEnd,
               }}
             >
               <period.Component />

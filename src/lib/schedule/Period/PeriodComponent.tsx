@@ -14,16 +14,9 @@ const PeriodContainer = styled.div<{ color: string }>`
   `}
 `;
 
-const Row = styled.div`
+const PeriodText = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-const Header = styled(Row)``;
-
-const Footer = styled(Row)`
-  flex-direction: row-reverse;
 `;
 
 const Detail = styled.small``;
@@ -37,14 +30,10 @@ export const PeriodComponent: React.FunctionComponent<{
 }> = ({ start, end, room, title, color }) => {
   return (
     <PeriodContainer color={color}>
-      <Header>
-        <Detail>{start}</Detail>
+      <PeriodText>
+        <Detail>{title}</Detail>
         <Detail>{room}</Detail>
-      </Header>
-      <p>{title}</p>
-      <Footer>
-        <Detail>{end}</Detail>
-      </Footer>
+      </PeriodText>
     </PeriodContainer>
   );
 };

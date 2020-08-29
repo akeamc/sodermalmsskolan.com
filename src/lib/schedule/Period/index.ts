@@ -11,5 +11,5 @@ export abstract class Period {
   public abstract summary: string;
 }
 
-export * from "./GroupPeriod";
+export * from "./PeriodGroup";
 export * from "./SinglePeriod";

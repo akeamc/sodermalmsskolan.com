@@ -23,7 +23,7 @@ export const Subjects: { [key: string]: Subject } = {
   Chemistry: new Subject("Kemi", "#4caf50"),
   Biology: new Subject("Biologi", "#4caf50"),
   Music: new Subject("Musik", "#673ab7"),
-  Gastronomy: new Subject("Hem- och konsumentkunskap", "#009688", "HKK"),
+  Gastronomy: new Subject("Hem- och konsumentkunskap", "#E91E63", "HKK"),
   Engineering: new Subject("Teknik", "#4caf50"),
   HardCrafts: new Subject("Trä- och metallslöjd", "#009688", "TM"),
   SoftCrafts: new Subject("Textilslöjd", "#009688", "TX"),
