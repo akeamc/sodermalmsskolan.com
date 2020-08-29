@@ -26,10 +26,8 @@ const StripedBackground = styled.div<{ columns: number; days: number }>`
 `;
 
 const PeriodWrapper = styled.div`
-  display: flex;
-
   > * {
-    flex: 1;
+    width: 100%;
   }
 `;
 

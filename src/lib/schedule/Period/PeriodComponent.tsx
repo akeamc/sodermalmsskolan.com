@@ -4,7 +4,7 @@ import React from "react";
 const PeriodContainer = styled.div<{ color: string }>`
   padding: 1rem;
   box-sizing: border-box;
-  border-bottom: 2px solid ${({ color }) => color};
+  border-left: 2px solid ${({ color }) => color};
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -35,10 +35,8 @@ const PeriodGroupWrapper = styled.div`
 `;
 
 const PeriodContainer = styled.div`
-  display: flex;
-
   > * {
-    flex: 1;
+    width: 100%;
   }
 `;
 
