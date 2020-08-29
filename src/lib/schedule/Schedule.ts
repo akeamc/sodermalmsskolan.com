@@ -125,6 +125,33 @@ const CommonSchedule = new Schedule("Ovalen", [
 
 export const Schedules: Schedule[] = [
   new Schedule(
+    "O91",
+    [
+      [
+        new SinglePeriod([101, 115], Subjects.Mathematics, "A307"),
+        new SinglePeriod([117, 132], Subjects.SocialStudies, "A309"),
+        new SinglePeriod([135, 149], Subjects.Swedish, "A308"),
+        new SinglePeriod([159, 170], Subjects.Physics, "A415"),
+      ],
+      [
+        new SinglePeriod([108, 118], Subjects.Sports, "B501"),
+        new SinglePeriod([123, 135], Subjects.English, "A307"),
+        new SinglePeriod([158, 171], Subjects.SocialStudies, "A309"),
+      ],
+      [
+        new SinglePeriod([99, 112], Subjects.Mathematics, "A307"),
+        new SinglePeriod([136, 149], Subjects.Swedish, "A308"),
+        new SinglePeriod([159, 169], Subjects.SocialStudies, "A309"),
+      ],
+      [
+        new SinglePeriod([138, 148], Subjects.Physics, "A415"),
+        new SinglePeriod([157, 167], Subjects.English, "A307"),
+      ],
+      [new SinglePeriod([177, 189], Subjects.Mathematics, "A307")],
+    ],
+    CommonSchedule
+  ),
+  new Schedule(
     "O92",
     [
       [
