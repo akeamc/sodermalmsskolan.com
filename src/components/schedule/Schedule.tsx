@@ -58,19 +58,11 @@ const DayTitleContainer = styled.div`
 
 const DayTitle = styled.div``;
 
-const TimeAxisLabel = styled.div<{ priority: boolean }>`
+const TimeAxisLabel = styled.div`
   grid-row: 1;
   grid-column-end: span 6;
   padding: 1rem 0;
   font-feature-settings: "tnum", "ss01";
-
-  ${({ priority }) =>
-    !priority &&
-    `
-    @media (max-width: ${breakpoints.extraLarge}) {
-      display: none;
-    }
-  `}
 `;
 
 export const ScheduleViewer: React.FunctionComponent<{
@@ -116,7 +108,6 @@ export const ScheduleViewer: React.FunctionComponent<{
                       gridColumnStart: index + 2,
                     }}
                     key={index}
-                    priority={minutes % 60 === 0}
                   >
                     {hours.toString().padStart(2, "0")}:
                     {minutes.toString().padStart(2, "0")}
