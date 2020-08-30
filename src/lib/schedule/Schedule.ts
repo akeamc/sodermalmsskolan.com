@@ -70,12 +70,7 @@ const CommonSchedule = new Schedule("Ovalen", [
       new GroupedPeriod([137, 149], Subjects.Swedish, "Tidelius", "EVDR"),
       new GroupedPeriod([137, 149], Subjects.English, "A307", "EVEN"),
       new GroupedPeriod([137, 149], Subjects.English, "A309", "EVEN"),
-      new GroupedPeriod(
-        [137, 149],
-        Subjects.Mathematics,
-        "A112",
-        "EVMA"
-      ),
+      new GroupedPeriod([137, 149], Subjects.Mathematics, "A112", "EVMA"),
     ]),
     new PeriodGroup([
       new GroupedPeriod([173, 188], Subjects.Swedish, "A308", "ASVEN"),

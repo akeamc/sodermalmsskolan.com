@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 const PeriodContainer = styled.div<{ color: string }>`
-  padding: 1.25rem 1rem;
+  padding: 0.75rem 1rem;
   box-sizing: border-box;
   border-left: 2px solid ${({ color }) => color};
   display: flex;
@@ -14,12 +14,17 @@ const PeriodContainer = styled.div<{ color: string }>`
   `}
 `;
 
-const PeriodText = styled.div`
+const PeriodRow = styled.div`
   display: flex;
   justify-content: space-between;
+  &:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
 `;
 
-const Detail = styled.small``;
+const Detail = styled.small<{ gray?: boolean }>`
+  ${({ gray }) => gray && `opacity: 0.575`}
+`;
 
 export const PeriodComponent: React.FunctionComponent<{
   start: string;
@@ -30,11 +35,14 @@ export const PeriodComponent: React.FunctionComponent<{
 }> = ({ start, end, room, title, color }) => {
   return (
     <PeriodContainer color={color}>
-      <PeriodText>
-        <Detail>{start}</Detail>
+      <PeriodRow>
         <Detail>{title}</Detail>
         <Detail>{room}</Detail>
-      </PeriodText>
+      </PeriodRow>
+      <PeriodRow>
+        <Detail gray>{start}</Detail>
+        <Detail gray>{end}</Detail>
+      </PeriodRow>
     </PeriodContainer>
   );
 };

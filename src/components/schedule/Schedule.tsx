@@ -3,11 +3,16 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
+import * as breakpoints from "../../styles/breakpoints";
 
 const Table = styled.div`
-  display: grid;
+  display: none;
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
+
+  @media (min-width: ${breakpoints.large}) {
+    display: grid;
+  }
 `;
 
 const VerticalStripe = styled.div<{
@@ -47,11 +52,19 @@ const DayTitle = styled.div`
   align-items: center;
 `;
 
-const TimeAxisLabel = styled.div`
+const TimeAxisLabel = styled.div<{ priority: boolean }>`
   grid-row: 1;
   grid-column-end: span 6;
   padding: 1rem 0;
   font-feature-settings: "tnum", "ss01";
+
+  ${({ priority }) =>
+    !priority &&
+    `
+    @media (max-width: ${breakpoints.extraLarge}) {
+      display: none;
+    }
+  `}
 `;
 
 export const ScheduleViewer: React.FunctionComponent<{
@@ -92,6 +105,7 @@ export const ScheduleViewer: React.FunctionComponent<{
                     gridColumnStart: index + 2,
                   }}
                   key={index}
+                  priority={minutes % 60 === 0}
                 >
                   {hours.toString().padStart(2, "0")}:
                   {minutes.toString().padStart(2, "0")}
