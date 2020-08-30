@@ -22,9 +22,9 @@ const Page: React.FunctionComponent = () => {
         }
       >
         <ButtonRow center>
-          <Button href="/digibruh">Digibruh</Button>
-          <Button secondary href="/blogg">
-            Blogg
+          <Button href="/meny">Visa menyn</Button>
+          <Button secondary href="/digibruh">
+            Öppna Digibruh
           </Button>
         </ButtonRow>
       </HeroWithTitle>

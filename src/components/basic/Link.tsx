@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 export interface AutoLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  href: string;
+  href?: string;
 }
 
 export const AutoLink: React.FunctionComponent<AutoLinkProps> = ({

@@ -67,23 +67,25 @@ export const FooterSocial: React.FunctionComponent<{
   );
 };
 
+export const DISCORD_INVITE = "https://discord.gg/4hEnTpd";
+
+export const socialProfiles: SocialProfile[] = [
+  {
+    socialMedia: SocialMedia.Discord,
+    url: DISCORD_INVITE,
+  },
+  {
+    socialMedia: SocialMedia.Instagram,
+    url: "https://www.instagram.com/sodermalmsskolan.c0m/",
+  },
+];
+
 export const FooterBottom: React.FunctionComponent = () => {
   return (
     <Row>
       <BottomSection>
         <Attribution>Designed by Lynx in Norrland.</Attribution>
-        <FooterSocial
-          profiles={[
-            {
-              socialMedia: SocialMedia.Discord,
-              url: "https://discord.gg/4hEnTpd",
-            },
-            {
-              socialMedia: SocialMedia.Instagram,
-              url: "https://www.instagram.com/sodermalmsskolan.c0m/",
-            },
-          ]}
-        />
+        <FooterSocial profiles={socialProfiles} />
         <div>
           <MinecraftStatusBadge />
         </div>

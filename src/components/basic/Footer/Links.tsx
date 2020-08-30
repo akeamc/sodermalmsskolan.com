@@ -4,6 +4,7 @@ import { AutoLink } from "../Link";
 import { UnstyledList } from "../List";
 import * as breakpoints from "../../../styles/breakpoints";
 import React from "react";
+import { useAuth } from "../../../providers/Auth";
 
 export interface Item {
   name: string;
@@ -15,47 +16,75 @@ export interface Category {
   items: Item[];
 }
 
-export const categories: Category[] = [
-  {
-    name: "Navigera",
-    items: [
-      {
-        name: "Start",
-        href: "/",
-      },
-      {
-        name: "Meny",
-        href: "/meny",
-      },
-      {
-        name: "Digibruh",
-        href: "/digibruh",
-      },
-    ],
-  },
-  {
-    name: "Organisationen",
-    items: [
-      {
-        name: "Blogg",
-        href: "/blogg",
-      },
-      {
-        name: "Om oss",
-        href: "/om",
-      },
-    ],
-  },
-  {
-    name: "Resurser",
-    items: [
-      {
-        name: "Serverstatus",
-        href: "https://status.lynx.agency",
-      },
-    ],
-  },
-];
+export const useLinks = () => {
+  const { isAuthenticated, user: user } = useAuth();
+
+  return [
+    {
+      name: "Navigera",
+      items: [
+        {
+          name: "Start",
+          href: "/",
+        },
+        {
+          name: "Meny",
+          href: "/meny",
+        },
+        {
+          name: "Digibruh",
+          href: "/digibruh",
+        },
+        {
+          name: "Schema",
+          href: "/schema",
+        },
+      ],
+    },
+    {
+      name: "Organisationen",
+      items: [
+        {
+          name: "Blogg",
+          href: "/blogg",
+        },
+        {
+          name: "Om oss",
+          href: "/om",
+        },
+      ],
+    },
+    {
+      name: "Konto",
+      items: isAuthenticated
+        ? [
+            {
+              name: "Logga ut",
+              href: "/api/auth/logout",
+            },
+            {
+              name: "Konto",
+              href: "/konto",
+            },
+          ]
+        : [
+            {
+              name: "Logga in",
+              href: "/api/auth/login",
+            },
+          ],
+    },
+    {
+      name: "Resurser",
+      items: [
+        {
+          name: "Serverstatus",
+          href: "https://status.lynx.agency",
+        },
+      ],
+    },
+  ];
+};
 
 const LinkSection = styled(Row)`
   margin-top: 24px;
@@ -103,6 +132,8 @@ const ColumnTitle = styled.h3`
 `;
 
 export const FooterLinks: React.FunctionComponent = () => {
+  const categories = useLinks();
+
   return (
     <LinkSection>
       {categories.map(({ name, items }, index) => (

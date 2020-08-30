@@ -42,7 +42,7 @@ export const TitleContainer = styled.div<{ center?: boolean }>`
 
 export const HeroWithTitle: React.FunctionComponent<{
   title: string | JSX.Element;
-  lead: string | JSX.Element;
+  lead?: string | JSX.Element;
   children?: JSX.Element | JSX.Element[];
 }> = ({ title, lead, children }) => (
   <Hero>
@@ -50,7 +50,7 @@ export const HeroWithTitle: React.FunctionComponent<{
       <NormalWidth>
         <TitleContainer center>
           <h1>{title}</h1>
-          <LeadText>{lead}</LeadText>
+          {lead && <LeadText>{lead}</LeadText>}
           {children}
         </TitleContainer>
       </NormalWidth>

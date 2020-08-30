@@ -7,9 +7,11 @@ import { useScrollPosition } from "../../lib/hooks/scroll";
 import { TextColorModifier } from "./Typography";
 import ScrollLock from "react-scrolllock";
 import { UnstyledList } from "./List";
-import { categories } from "./Footer/Links";
+import { useLinks } from "./Footer/Links";
 import * as breakpoints from "../../styles/breakpoints";
 import { useRouter } from "next/router";
+import { useAuth } from "../../providers/Auth";
+import { Avatar } from "./Avatar";
 
 const Background = styled.div<{
   floating?: boolean;
@@ -137,6 +139,7 @@ const MobileNavigation = styled.div<{ open: boolean }>`
   overflow-y: auto;
   padding: 24px;
   z-index: 1000;
+  -webkit-overflow-scrolling: touch;
 
   ${({ open }) =>
     open &&
@@ -255,6 +258,10 @@ export const Navigation: React.FunctionComponent<{
     setOpen(!open);
   };
 
+  const { isAuthenticated, user } = useAuth();
+
+  const categories = useLinks();
+
   return (
     <>
       <TextColorModifier bright={brightText && !floating}>
@@ -275,6 +282,20 @@ export const Navigation: React.FunctionComponent<{
                   <DesktopLink href="/meny">Meny</DesktopLink>
                   <DesktopLink href="/blogg">Blogg</DesktopLink>
                   <DesktopLink href="/digibruh">Digibruh</DesktopLink>
+                  <DesktopLink href="/schema">Schema</DesktopLink>
+                </DesktopLinks>
+                <DesktopLinks>
+                  {isAuthenticated ? (
+                    <Avatar
+                      imageUrl={user?.discord?.avatarURL}
+                      useProxy={false}
+                      href="/konto"
+                    />
+                  ) : (
+                    <DesktopLink key="b" href="/api/auth/login">
+                      Logga in
+                    </DesktopLink>
+                  )}
                 </DesktopLinks>
                 <MobileNavigationToggle onClick={toggleOpen}>
                   <Bars open={open} />

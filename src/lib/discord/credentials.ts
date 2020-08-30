@@ -1,0 +1,8 @@
+export const {
+  DISCORD_TOKEN,
+  DISCORD_GUILD,
+  DISCORD_FOOD_CHANNEL,
+} = process.env;
+export const DISCORD_PUBLIC_CHANNELS = [DISCORD_FOOD_CHANNEL];
+
+export const AUTHORIZATION_HEADER = `Bot ${DISCORD_TOKEN}`;
