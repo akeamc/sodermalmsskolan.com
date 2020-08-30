@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { transparentize } from "polished";
 
 const PeriodContainer = styled.div<{ color: string }>`
   padding: 0.75rem 1rem;
@@ -8,9 +9,12 @@ const PeriodContainer = styled.div<{ color: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* The "color" property is a hex code. */
   ${({ color }) => `
-    background-color: ${color}1f;
+    background-color: ${transparentize(0.9, color)};
+
+    @media (prefers-color-scheme: dark) {
+      background-color: ${transparentize(0.75, color)};
+    }
   `}
 `;
 
