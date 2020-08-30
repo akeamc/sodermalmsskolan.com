@@ -20,11 +20,10 @@ const ArtworkWrapper = styled.div`
 const PhotoContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 0 -1rem;
 `;
 
 const Photo = styled.img`
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: var(--shadow-large);
   max-width: 24rem;
   margin: 0 1rem;
