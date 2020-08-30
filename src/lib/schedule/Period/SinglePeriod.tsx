@@ -67,7 +67,7 @@ export class SinglePeriod implements Period {
   }
 
   public get summary(): string {
-    return `${this.subject.name}`;
+    return `${this.subject.name} ${this.hourMinuteStart}`;
   }
 
   public Component: React.FunctionComponent = () => (

@@ -5,6 +5,8 @@ import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import * as breakpoints from "../../styles/breakpoints";
 import { TimeIndicator } from "./Indicator";
+import { GridTitleSection } from "../basic/Typography";
+import { useTime } from "../../lib/hooks/time";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -83,9 +85,14 @@ export const ScheduleViewer: React.FunctionComponent<{
 
   const numberOfColumns = scheduleEnd - scheduleStart;
 
+  const now = useTime(10000);
+
   return (
     <div>
-      <h1>{schedule.group}</h1>
+      <GridTitleSection
+        title={schedule.group}
+        description={`Nästa lektion: ${schedule.nextPeriod(now).summary}.`}
+      />
       <TableWrapper>
         <Table>
           <TimeIndicator schedule={schedule} />
