@@ -10,7 +10,6 @@ import { useTime } from "../../lib/hooks/time";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
-  background: linear-gradient(to left, transparent 150px, white);
   -webkit-overflow-scrolling: touch;
 `;
 
