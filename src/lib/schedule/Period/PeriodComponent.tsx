@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 const PeriodContainer = styled.div<{ color: string }>`
-  padding: 1rem;
+  padding: 1.25rem 1rem;
   box-sizing: border-box;
   border-left: 2px solid ${({ color }) => color};
   display: flex;
