@@ -4,6 +4,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import * as breakpoints from "../../styles/breakpoints";
+import { TimeIndicator } from "./Indicator";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -82,14 +83,13 @@ export const ScheduleViewer: React.FunctionComponent<{
 
   const numberOfColumns = scheduleEnd - scheduleStart;
 
-  const next = schedule.nextPeriod();
-
   return (
     <div>
       <h1>{schedule.group}</h1>
-      {/* <p>Nästa lektion: {next?.summary}</p> */}
       <TableWrapper>
         <Table>
+          <TimeIndicator schedule={schedule} />
+
           {Array.from({ length: numberOfColumns }, (_, index) => {
             const time = scheduleStart + index;
             const minutes = 5 * (time % 12);
@@ -158,23 +158,6 @@ export const ScheduleViewer: React.FunctionComponent<{
                 })}
               </>
             );
-            // const gridColumn = index + 1;
-
-            // return day.map((period, index) => {
-            //   const [start, end] = period.bounds;
-
-            //   const gridRowStart = start - gridRowMinimum;
-            //   const gridRowEnd = end - gridRowMinimum;
-
-            //   return (
-            //     <PeriodWrapper
-            //       style={{ gridColumn, gridRowStart, gridRowEnd }}
-            //       key={index}
-            //     >
-            //       <period.Component />
-            //     </PeriodWrapper>
-            //   );
-            // });
           })}
         </Table>
       </TableWrapper>

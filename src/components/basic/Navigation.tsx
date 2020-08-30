@@ -282,7 +282,7 @@ export const Navigation: React.FunctionComponent<{
                   <DesktopLink href="/meny">Meny</DesktopLink>
                   <DesktopLink href="/blogg">Blogg</DesktopLink>
                   <DesktopLink href="/digibruh">Digibruh</DesktopLink>
-                  <DesktopLink href="/skola">Skola</DesktopLink>
+                  <DesktopLink href="/schema">Schema</DesktopLink>
                 </DesktopLinks>
                 <DesktopLinks>
                   {isAuthenticated ? (

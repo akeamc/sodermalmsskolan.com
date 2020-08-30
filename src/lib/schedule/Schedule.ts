@@ -41,23 +41,29 @@ export class Schedule {
     return end - start;
   }
 
-  private dayIndex(timestamp: Date = new Date()): number {
+  public static dateToDayIndex(timestamp: Date = new Date()): number {
     return (timestamp.getDay() + 6) % 7;
   }
 
+  public nextDayIndex(currentDayIndex: number): number {
+    return this.days[currentDayIndex] ? currentDayIndex : 0;
+  }
+
   public nextDays(timestamp: Date = new Date()): Day[] {
-    const index = this.dayIndex(timestamp);
+    const index = Schedule.dateToDayIndex(timestamp);
 
     return this.days.slice(index).concat(this.days.slice(0, index));
   }
 
+  public static dateToscheduleTime(timestamp: Date = new Date()): number {
+    return (timestamp.getHours() * 60 + timestamp.getMinutes()) / 5;
+  }
+
   public nextPeriod(timestamp: Date = new Date()): Period | null {
     const followingDays = this.nextDays(timestamp);
-    const index = this.dayIndex(timestamp);
+    const index = Schedule.dateToDayIndex(timestamp);
 
-    const time = this.days[index]
-      ? (timestamp.getHours() * 60 + timestamp.getMinutes()) / 5
-      : 0;
+    const time = this.days[index] ? Schedule.dateToscheduleTime(timestamp) : 0;
 
     return followingDays[0].nextPeriod(time);
   }

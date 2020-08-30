@@ -36,8 +36,8 @@ export const useLinks = () => {
           href: "/digibruh",
         },
         {
-          name: "Skola",
-          href: "/skola",
+          name: "Schema",
+          href: "/schema",
         },
       ],
     },
