@@ -135,7 +135,7 @@ export const ScheduleViewer: React.FunctionComponent<{
 
                 <HorizontalStripe
                   row={gridRow}
-                  columnEnd={numberOfColumns + 1}
+                  columnEnd={numberOfColumns + 2}
                 />
 
                 {day.map((period, index) => {
