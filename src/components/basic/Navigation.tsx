@@ -258,7 +258,7 @@ export const Navigation: React.FunctionComponent<{
     setOpen(!open);
   };
 
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, isLoading } = useAuth();
 
   const categories = useLinks();
 
@@ -285,16 +285,16 @@ export const Navigation: React.FunctionComponent<{
                   <DesktopLink href="/schema">Schema</DesktopLink>
                 </DesktopLinks>
                 <DesktopLinks>
-                  {isAuthenticated ? (
+                  {isLoading ? (
+                    <Avatar placeholder />
+                  ) : isAuthenticated ? (
                     <Avatar
                       imageUrl={user?.discord?.avatarURL}
                       useProxy={false}
                       href="/konto"
                     />
                   ) : (
-                    <DesktopLink key="b" href="/api/auth/login">
-                      Logga in
-                    </DesktopLink>
+                    <DesktopLink href="/api/auth/login">Logga in</DesktopLink>
                   )}
                 </DesktopLinks>
                 <MobileNavigationToggle onClick={toggleOpen}>

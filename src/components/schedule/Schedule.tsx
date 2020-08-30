@@ -61,7 +61,7 @@ const DayTitle = styled.div``;
 const TimeAxisLabel = styled.div`
   grid-row: 1;
   grid-column-end: span 6;
-  padding: 1rem 0;
+  padding: 1rem 0.5rem;
   font-feature-settings: "tnum", "ss01";
 `;
 

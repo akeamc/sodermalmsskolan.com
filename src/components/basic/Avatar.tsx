@@ -6,6 +6,7 @@ import pxcmprs from "../../lib/utils/pxcmprs";
 
 interface AvatarProps {
   size?: number;
+  isPlaceholder?: boolean;
 }
 
 function avatarSizeToEm(size: number = 2): number {
@@ -29,6 +30,7 @@ const AvatarImage = styled.img`
 
 export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   border-radius: 50%;
+  box-sizing: border-box;
 
   ${({ size }) => {
     let width = avatarSizeToEm(size);
@@ -41,17 +43,29 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
 
   background: var(--background);
   display: inline-block;
+
+  ${({ isPlaceholder: placeholder }) =>
+    placeholder && `border: 1px solid var(--accents-2)`};
 `;
 
 export const Avatar: React.FunctionComponent<{
   href?: string;
-  imageUrl: string;
+  imageUrl?: string;
   size?: number;
   useProxy?: boolean;
-}> = ({ href = "#", imageUrl = "", size, useProxy = true }) => {
+  placeholder?: boolean;
+}> = ({
+  href = "#",
+  imageUrl = "",
+  size,
+  useProxy = true,
+  placeholder = false,
+}) => {
   return (
-    <AvatarWrapper href={href} size={size}>
-      <AvatarImage src={useProxy ? useSmallAvatar(imageUrl) : imageUrl} />
+    <AvatarWrapper isPlaceholder={placeholder} href={href} size={size}>
+      {!placeholder && (
+        <AvatarImage src={useProxy ? useSmallAvatar(imageUrl) : imageUrl} />
+      )}
     </AvatarWrapper>
   );
 };
