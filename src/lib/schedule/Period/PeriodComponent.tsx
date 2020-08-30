@@ -22,9 +22,7 @@ const PeriodRow = styled.div`
   }
 `;
 
-const Detail = styled.small<{ gray?: boolean }>`
-  ${({ gray }) => gray && `opacity: 0.575`}
-`;
+const Detail = styled.small``;
 
 export const PeriodComponent: React.FunctionComponent<{
   start: string;
@@ -40,8 +38,8 @@ export const PeriodComponent: React.FunctionComponent<{
         <Detail>{room}</Detail>
       </PeriodRow>
       <PeriodRow>
-        <Detail gray>{start}</Detail>
-        <Detail gray>{end}</Detail>
+        <Detail>{start}</Detail>
+        <Detail>{end}</Detail>
       </PeriodRow>
     </PeriodContainer>
   );
