@@ -1,14 +1,28 @@
 import React from "react";
 import { Schedules } from "../../lib/schedule/Schedule";
 import { ScheduleViewer } from "../../components/schedule/Schedule";
+import { Layout } from "../../components/basic/Layout";
+import { Navigation } from "../../components/basic/Navigation";
+import { Section } from "../../components/layout/Section";
+import { Row } from "../../components/grid/Row";
+import { Col } from "../../components/grid/Col";
 
 const Page: React.FunctionComponent = () => {
   return (
-    <main>
+    <Layout metadata={{ title: "Schema" }}>
+      <Navigation />
       {Schedules.map((schedule, index) => {
-        return <ScheduleViewer schedule={schedule} key={index} />;
+        return (
+          <Section key={index}>
+            <Row>
+              <Col>
+                <ScheduleViewer schedule={schedule} />
+              </Col>
+            </Row>
+          </Section>
+        );
       })}
-    </main>
+    </Layout>
   );
 };
 

@@ -139,6 +139,7 @@ const MobileNavigation = styled.div<{ open: boolean }>`
   overflow-y: auto;
   padding: 24px;
   z-index: 1000;
+  -webkit-overflow-scrolling: touch;
 
   ${({ open }) =>
     open &&
