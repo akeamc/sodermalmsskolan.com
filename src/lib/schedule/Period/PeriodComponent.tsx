@@ -31,6 +31,7 @@ export const PeriodComponent: React.FunctionComponent<{
   return (
     <PeriodContainer color={color}>
       <PeriodText>
+        <Detail>{start}</Detail>
         <Detail>{title}</Detail>
         <Detail>{room}</Detail>
       </PeriodText>
