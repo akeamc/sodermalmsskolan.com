@@ -283,6 +283,7 @@ export const Navigation: React.FunctionComponent<{
                   <DesktopLink href="/blogg">Blogg</DesktopLink>
                   <DesktopLink href="/digibruh">Digibruh</DesktopLink>
                   <DesktopLink href="/schema">Schema</DesktopLink>
+                  <DesktopLink href="/galleri">Galleri</DesktopLink>
                 </DesktopLinks>
                 <DesktopLinks>
                   {isLoading ? (

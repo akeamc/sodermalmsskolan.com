@@ -39,6 +39,10 @@ export const useLinks = () => {
           name: "Schema",
           href: "/schema",
         },
+        {
+          name: "Galleri",
+          href: "/galleri",
+        },
       ],
     },
     {
