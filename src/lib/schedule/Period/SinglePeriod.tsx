@@ -70,6 +70,10 @@ export class SinglePeriod implements Period {
     return `${this.subject.name} ${this.hourMinuteStart}`;
   }
 
+  public get groups(): null {
+    return null;
+  }
+
   public Component: React.FunctionComponent = () => (
     <PeriodComponent
       start={this.hourMinuteStart}

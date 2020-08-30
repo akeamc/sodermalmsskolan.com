@@ -9,6 +9,10 @@ export abstract class Period {
   public abstract duration: number;
 
   public abstract summary: string;
+
+  public abstract groups: string[] | null;
+
+  public abstract groupGroup?: string;
 }
 
 export * from "./PeriodGroup";
