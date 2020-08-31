@@ -58,7 +58,7 @@ export class Schedule {
   }
 
   public static dateToscheduleTime(timestamp: Date = new Date()): number {
-    return (timestamp.getHours() * 60 + timestamp.getMinutes()) / 5;
+    return (timestamp.getHours() * 60 + timestamp.getMinutes() + timestamp.getSeconds() / 60) / 5 ;
   }
 
   public nextPeriod(timestamp: Date = new Date()): Period | null {
