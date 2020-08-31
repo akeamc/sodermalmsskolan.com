@@ -55,12 +55,22 @@ export class PeriodGroup implements Period {
     this.groupGroup = groupGroup;
   }
 
-  public Component: React.FunctionComponent = () => {
+  public Component: React.FunctionComponent<{ filterGroups?: string[] }> = ({
+    filterGroups,
+  }) => {
     const [groupStart] = this.bounds;
+
+    const periods = this.periods.reduce((periods, period) => {
+      if (!filterGroups || filterGroups?.includes(period.group)) {
+        periods.push(period);
+      }
+
+      return periods;
+    }, []);
 
     return (
       <PeriodGroupWrapper>
-        {this.periods.map((period, index) => {
+        {periods.map((period, index) => {
           const gridColumnStart = period.start + 1 - groupStart;
           const gridColumnEnd = period.end + 1 - groupStart;
 
@@ -100,7 +110,13 @@ export class PeriodGroup implements Period {
   }
 
   public get groups(): string[] {
-    return this.periods.map((period) => period.group);
+    return Array.from(
+      this.periods
+        .reduce((groups, period) => {
+          return groups.add(period.group);
+        }, new Set<string>())
+        .values()
+    );
   }
 }
 
@@ -162,8 +178,8 @@ export const languages = (time: [number, number]) =>
     [
       new GroupedPeriod(time, Subjects.Swedish, "A308", "ASVEN"),
       new GroupedPeriod(time, Subjects.French, "A221", "M2FR"),
-      new GroupedPeriod(time, Subjects.Spanish, "A110", "M2SP"),
-      new GroupedPeriod(time, Subjects.Spanish, "A220", "M2SP"),
+      new GroupedPeriod(time, Subjects.Spanish, "A110", "M2SP AAV"),
+      new GroupedPeriod(time, Subjects.Spanish, "A220", "M2SP CTH"),
       new GroupedPeriod(time, Subjects.German, "A309", "M2TY"),
     ],
     "Språkval"

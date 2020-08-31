@@ -3,10 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
-import * as breakpoints from "../../styles/breakpoints";
 import { TimeIndicator } from "./Indicator";
 import { GridTitleSection } from "../basic/Typography";
 import { useTime } from "../../lib/hooks/time";
+import Select from "react-select";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -80,7 +80,8 @@ const ScheduleDetail: React.FunctionComponent<{ schedule: Schedule }> = ({
 
 export const ScheduleViewer: React.FunctionComponent<{
   schedule: Schedule;
-}> = ({ schedule }) => {
+  groups?: string[];
+}> = ({ schedule, groups }) => {
   const [scheduleStart, scheduleEnd] = schedule.bounds;
 
   const columnOffset = 2;
@@ -156,7 +157,7 @@ export const ScheduleViewer: React.FunctionComponent<{
                       key={index}
                       style={{ gridRow, gridColumnStart, gridColumnEnd }}
                     >
-                      <period.Component />
+                      <period.Component filterGroups={groups} />
                     </PeriodWrapper>
                   );
                 })}
