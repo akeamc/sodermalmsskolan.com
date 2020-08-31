@@ -67,7 +67,7 @@ export class SinglePeriod implements Period {
   }
 
   public get summary(): string {
-    return `${this.subject.name} ${this.hourMinuteStart}`;
+    return `${this.subject.name} ${this.hourMinuteStart} i ${this.room}`;
   }
 
   public get groups(): null {
