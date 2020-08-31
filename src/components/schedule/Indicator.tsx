@@ -28,12 +28,12 @@ const StyledTimeIndicator = styled.div<{
 export const TimeIndicator: React.FunctionComponent<{ schedule: Schedule }> = ({
   schedule,
 }) => {
-  const now = useTime(10000);
+  const now = useTime(1000);
 
   const [scheduleStart, scheduleEnd] = schedule.bounds;
 
   const numberOfColumns = scheduleEnd - scheduleStart;
-  const currentTime = Math.floor(Schedule.dateToscheduleTime(now));
+  const currentTime = Schedule.dateToscheduleTime(now);
   const currentDay = Schedule.dateToDayIndex(now);
   const closestDay = schedule.nextDayIndex(currentDay);
 
