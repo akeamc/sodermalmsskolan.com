@@ -1,5 +1,7 @@
 export abstract class Period {
-  public abstract Component: React.FunctionComponent;
+  public abstract Component: React.FunctionComponent<{
+    filterGroups?: string[];
+  }>;
 
   public abstract bounds: [number, number];
 

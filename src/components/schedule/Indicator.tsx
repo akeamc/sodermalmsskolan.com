@@ -16,7 +16,7 @@ const StyledTimeIndicator = styled.div<{
 
   &::after {
     content: "";
-    z-index: 1;
+    z-index: 0;
     width: ${({ progress }) => `${progress * 100}%`};
     height: 100%;
     background-color: var(--accents-2);
