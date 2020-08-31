@@ -52,22 +52,29 @@ export class Schedule {
   }
 
   public nextDays(timestamp: Date = new Date()): Day[] {
-    const index = Schedule.dateToDayIndex(timestamp);
+    const index = Schedule.dateToDayIndex(timestamp) + 1;
 
     return this.days.slice(index).concat(this.days.slice(0, index));
   }
 
   public static dateToscheduleTime(timestamp: Date = new Date()): number {
-    return (timestamp.getHours() * 60 + timestamp.getMinutes() + timestamp.getSeconds() / 60) / 5 ;
+    return (
+      (timestamp.getHours() * 60 +
+        timestamp.getMinutes() +
+        timestamp.getSeconds() / 60) /
+      5
+    );
   }
 
   public nextPeriod(timestamp: Date = new Date()): Period | null {
     const followingDays = this.nextDays(timestamp);
     const index = Schedule.dateToDayIndex(timestamp);
+    const currentTime = Schedule.dateToscheduleTime(timestamp);
 
-    const time = this.days[index] ? Schedule.dateToscheduleTime(timestamp) : 0;
-
-    return followingDays[0].nextPeriod(time);
+    return (
+      this.days[index]?.nextPeriod(currentTime) ||
+      followingDays[0].nextPeriod(0)
+    );
   }
 
   public get selectableGroups(): Map<string, string[]> {
