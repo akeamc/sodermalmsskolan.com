@@ -52,13 +52,18 @@ export class Schedule {
   }
 
   public nextDays(timestamp: Date = new Date()): Day[] {
-    const index = Schedule.dateToDayIndex(timestamp);
+    const index = Schedule.dateToDayIndex(timestamp) + 1;
 
-    return this.days.slice(index + 1).concat(this.days.slice(0, index + 1));
+    return this.days.slice(index).concat(this.days.slice(0, index));
   }
 
   public static dateToscheduleTime(timestamp: Date = new Date()): number {
-    return (timestamp.getHours() * 60 + timestamp.getMinutes() + timestamp.getSeconds() / 60) / 5 ;
+    return (
+      (timestamp.getHours() * 60 +
+        timestamp.getMinutes() +
+        timestamp.getSeconds() / 60) /
+      5
+    );
   }
 
   public nextPeriod(timestamp: Date = new Date()): Period | null {
@@ -66,7 +71,10 @@ export class Schedule {
     const index = Schedule.dateToDayIndex(timestamp);
     const currentTime = Schedule.dateToscheduleTime(timestamp);
 
-    return this.days[index]?.nextPeriod(currentTime) || followingDays[0].nextPeriod(0);
+    return (
+      this.days[index]?.nextPeriod(currentTime) ||
+      followingDays[0].nextPeriod(0)
+    );
   }
 
   public get selectableGroups(): Map<string, string[]> {
