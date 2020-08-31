@@ -12,12 +12,13 @@ const useScheduleGroupFilter = createPersistedState("schedule-groups");
 
 const FilterOptions = styled.div`
   display: flex;
-  margin: -1rem;
+  margin: -0.5rem;
+  flex-wrap: wrap;
 `;
 
 const FilterOption = styled.div`
   flex: 0 0 12rem;
-  margin: 1rem;
+  margin: 0.5rem;
 `;
 
 const stringToSelectOption = (value: string) => {
