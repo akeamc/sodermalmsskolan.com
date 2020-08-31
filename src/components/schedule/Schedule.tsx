@@ -68,7 +68,7 @@ const TimeAxisLabel = styled.div`
 const ScheduleDetail: React.FunctionComponent<{ schedule: Schedule }> = ({
   schedule,
 }) => {
-  const now = useTime(10000);
+  const now = useTime(1000);
 
   return (
     <GridTitleSection

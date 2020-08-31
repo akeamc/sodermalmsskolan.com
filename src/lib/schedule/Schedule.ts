@@ -54,7 +54,7 @@ export class Schedule {
   public nextDays(timestamp: Date = new Date()): Day[] {
     const index = Schedule.dateToDayIndex(timestamp);
 
-    return this.days.slice(index).concat(this.days.slice(0, index));
+    return this.days.slice(index + 1).concat(this.days.slice(0, index + 1));
   }
 
   public static dateToscheduleTime(timestamp: Date = new Date()): number {
@@ -64,10 +64,9 @@ export class Schedule {
   public nextPeriod(timestamp: Date = new Date()): Period | null {
     const followingDays = this.nextDays(timestamp);
     const index = Schedule.dateToDayIndex(timestamp);
+    const currentTime = Schedule.dateToscheduleTime(timestamp);
 
-    const time = this.days[index] ? Schedule.dateToscheduleTime(timestamp) : 0;
-
-    return followingDays[0].nextPeriod(time);
+    return this.days[index]?.nextPeriod(currentTime) || followingDays[0].nextPeriod(0);
   }
 
   public get selectableGroups(): Map<string, string[]> {
