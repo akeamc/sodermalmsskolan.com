@@ -65,6 +65,19 @@ const TimeAxisLabel = styled.div`
   font-feature-settings: "tnum", "ss01";
 `;
 
+const ScheduleDetail: React.FunctionComponent<{ schedule: Schedule }> = ({
+  schedule,
+}) => {
+  const now = useTime(10000);
+
+  return (
+    <GridTitleSection
+      title={schedule.group}
+      description={`Nästa lektion: ${schedule.nextPeriod(now).summary}.`}
+    />
+  );
+};
+
 export const ScheduleViewer: React.FunctionComponent<{
   schedule: Schedule;
 }> = ({ schedule }) => {
@@ -76,18 +89,12 @@ export const ScheduleViewer: React.FunctionComponent<{
 
   const numberOfColumns = scheduleEnd - scheduleStart;
 
-  const now = useTime(10000);
-
   return (
     <div>
-      <GridTitleSection
-        title={schedule.group}
-        description={`Nästa lektion: ${schedule.nextPeriod(now).summary}.`}
-      />
+      <ScheduleDetail schedule={schedule} />
       <TableWrapper>
         <Table>
           <TimeIndicator schedule={schedule} />
-
           {Array.from({ length: numberOfColumns }, (_, index) => {
             const time = scheduleStart + index;
             const minutes = 5 * (time % 12);

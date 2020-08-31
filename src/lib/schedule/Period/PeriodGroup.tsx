@@ -44,10 +44,15 @@ const PeriodContainer = styled.div`
  * A group of parallel periods for different teaching groups.
  */
 export class PeriodGroup implements Period {
+  /**
+   * The name of the group of groups.
+   */
+  groupGroup: string;
   periods: GroupedPeriod[];
 
-  constructor(periods: GroupedPeriod[]) {
+  constructor(periods: GroupedPeriod[], groupGroup: string) {
     this.periods = periods;
+    this.groupGroup = groupGroup;
   }
 
   public Component: React.FunctionComponent = () => {
@@ -93,6 +98,10 @@ export class PeriodGroup implements Period {
 
     return end - start;
   }
+
+  public get groups(): string[] {
+    return this.periods.map((period) => period.group);
+  }
 }
 
 type PracticalSubject = [[number, number], string];
@@ -110,25 +119,52 @@ export const practicalSubjects = ({
   music: PracticalSubject;
   gastronomy: PracticalSubject;
 }) =>
-  new PeriodGroup([
-    new GroupedPeriod(chemistry[0], Subjects.Chemistry, "A415", chemistry[1]),
-    new GroupedPeriod(
-      hardCrafts[0],
-      Subjects.HardCrafts,
-      "B903",
-      hardCrafts[1]
-    ),
-    new GroupedPeriod(
-      softCrafts[0],
-      Subjects.SoftCrafts,
-      "A306",
-      softCrafts[1]
-    ),
-    new GroupedPeriod(music[0], Subjects.Music, "A109", music[1]),
-    new GroupedPeriod(
-      gastronomy[0],
-      Subjects.Gastronomy,
-      "A407",
-      gastronomy[1]
-    ),
-  ]);
+  new PeriodGroup(
+    [
+      new GroupedPeriod(chemistry[0], Subjects.Chemistry, "A415", chemistry[1]),
+      new GroupedPeriod(
+        hardCrafts[0],
+        Subjects.HardCrafts,
+        "B903",
+        hardCrafts[1]
+      ),
+      new GroupedPeriod(
+        softCrafts[0],
+        Subjects.SoftCrafts,
+        "A306",
+        softCrafts[1]
+      ),
+      new GroupedPeriod(music[0], Subjects.Music, "A109", music[1]),
+      new GroupedPeriod(
+        gastronomy[0],
+        Subjects.Gastronomy,
+        "A407",
+        gastronomy[1]
+      ),
+    ],
+    "Mentorsgrupp"
+  );
+
+export const randomTime = (time: [number, number]) =>
+  new PeriodGroup(
+    [
+      new GroupedPeriod(time, Subjects.Random, "A309", "O9DKA"),
+      new GroupedPeriod(time, Subjects.Random, "A402", "O9IER"),
+      new GroupedPeriod(time, Subjects.Random, "A415", "O9JZH"),
+      new GroupedPeriod(time, Subjects.Random, "A307", "O9LWA"),
+      new GroupedPeriod(time, Subjects.Random, "A308", "O9MBE"),
+    ],
+    "Mentorsgrupp"
+  );
+
+export const languages = (time: [number, number]) =>
+  new PeriodGroup(
+    [
+      new GroupedPeriod(time, Subjects.Swedish, "A308", "ASVEN"),
+      new GroupedPeriod(time, Subjects.French, "A221", "M2FR"),
+      new GroupedPeriod(time, Subjects.Spanish, "A110", "M2SP"),
+      new GroupedPeriod(time, Subjects.Spanish, "A220", "M2SP"),
+      new GroupedPeriod(time, Subjects.German, "A309", "M2TY"),
+    ],
+    "Språkval"
+  );

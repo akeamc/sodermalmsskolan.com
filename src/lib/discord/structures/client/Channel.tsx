@@ -7,6 +7,13 @@ import { NormalWidth } from "../../../../components/grid/Col";
 import { useSWRInfinite } from "swr";
 import ky from "ky-universal";
 import { IDiscordAPIMessage } from "../shared/Message";
+import styled from "styled-components";
+
+const MessageWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: var(--grid-gap);
+`;
 
 export class ClientChannel extends Channel {
   public static useChannel(id: string) {
@@ -17,12 +24,12 @@ export class ClientChannel extends Channel {
     });
   }
 
-  public useMessages(pageSize: number = 50) {
+  public static useMessagesInChannel(channel: string, pageSize: number = 50) {
     return useSWRInfinite(
       (pageIndex, previousPageData) => {
         if (previousPageData && previousPageData?.length <= 0) return null;
 
-        const base = `/api/discord/channels/${this.id}/messages?limit=${pageSize}`;
+        const base = `/api/discord/channels/${channel}/messages?limit=${pageSize}`;
 
         if (pageIndex === 0) return base;
 
@@ -40,15 +47,21 @@ export class ClientChannel extends Channel {
     );
   }
 
+  public useMessages(pageSize: number = 50) {
+    return ClientChannel.useMessagesInChannel(this.id, pageSize);
+  }
+
   public MessageGrid: React.FunctionComponent = () => {
     const { data: messages } = this.useMessages();
 
     return (
       <Row>
         <NormalWidth>
-          {messages?.flat()?.map((message, index) => (
-            <message.Component key={index} />
-          ))}
+          <MessageWrapper>
+            {messages?.flat()?.map((message, index) => (
+              <message.Component key={index} />
+            ))}
+          </MessageWrapper>
         </NormalWidth>
       </Row>
     );

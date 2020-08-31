@@ -5,6 +5,8 @@ import {
   Period,
   GroupedPeriod,
   practicalSubjects,
+  randomTime,
+  languages,
 } from "./Period";
 import { Day } from "./Day";
 
@@ -67,24 +69,33 @@ export class Schedule {
 
     return followingDays[0].nextPeriod(time);
   }
+
+  public get selectableGroups(): Map<string, string[]> {
+    return this.days.reduce((groupGroups, day) => {
+      for (const period of day) {
+        if (period.groupGroup) {
+          groupGroups.set(period.groupGroup, period.groups);
+        }
+      }
+
+      return groupGroups;
+    }, new Map<string, string[]>());
+  }
 }
 
 const CommonSchedule = new Schedule("Ovalen", [
   new Day(),
   new Day(
-    new PeriodGroup([
-      new GroupedPeriod([137, 149], Subjects.Swedish, "Tidelius", "EVDR"),
-      new GroupedPeriod([137, 149], Subjects.English, "A307", "EVEN"),
-      new GroupedPeriod([137, 149], Subjects.English, "A309", "EVEN"),
-      new GroupedPeriod([137, 149], Subjects.Mathematics, "A112", "EVMA"),
-    ]),
-    new PeriodGroup([
-      new GroupedPeriod([173, 188], Subjects.Swedish, "A308", "ASVEN"),
-      new GroupedPeriod([173, 188], Subjects.French, "A221", "M2FR"),
-      new GroupedPeriod([173, 188], Subjects.Spanish, "A110", "M2SP"),
-      new GroupedPeriod([173, 188], Subjects.Spanish, "A220", "M2SP"),
-      new GroupedPeriod([173, 188], Subjects.German, "A310", "M2TY"),
-    ])
+    new PeriodGroup(
+      [
+        new GroupedPeriod([137, 149], Subjects.Swedish, "Tidelius", "EVDR"),
+        new GroupedPeriod([137, 149], Subjects.English, "A307", "EVEN"),
+        new GroupedPeriod([137, 149], Subjects.English, "A309", "EVEN"),
+        new GroupedPeriod([137, 149], Subjects.Mathematics, "A112", "EVMA"),
+      ],
+      "Elevens val"
+    ),
+    languages([173, 188])
   ),
   new Day(
     practicalSubjects({
@@ -94,13 +105,7 @@ const CommonSchedule = new Schedule("Ovalen", [
       music: [[114, 131], "O9DKA"],
       gastronomy: [[114, 134], "O9MBE"],
     }),
-    new PeriodGroup([
-      new GroupedPeriod([173, 188], Subjects.Swedish, "A308", "ASVEN"),
-      new GroupedPeriod([173, 188], Subjects.French, "A221", "M2FR"),
-      new GroupedPeriod([173, 188], Subjects.Spanish, "A110", "M2SP"),
-      new GroupedPeriod([173, 188], Subjects.Spanish, "A220", "M2SP"),
-      new GroupedPeriod([173, 188], Subjects.German, "A309", "M2TY"),
-    ])
+    languages([173, 188])
   ),
   new Day(
     practicalSubjects({
@@ -120,13 +125,7 @@ const CommonSchedule = new Schedule("Ovalen", [
     new SinglePeriod([172, 192], Subjects.Sports, "Forsgrenska")
   ),
   new Day(
-    new PeriodGroup([
-      new GroupedPeriod([114, 124], Subjects.Random, "A309", "O9DKA"),
-      new GroupedPeriod([114, 124], Subjects.Random, "A402", "O9IER"),
-      new GroupedPeriod([114, 124], Subjects.Random, "A415", "O9JZH"),
-      new GroupedPeriod([114, 124], Subjects.Random, "A307", "O9LWA"),
-      new GroupedPeriod([114, 124], Subjects.Random, "A308", "O9MBE"),
-    ]),
+    randomTime([114, 124]),
     practicalSubjects({
       chemistry: [[128, 144], "O9LWA"],
       hardCrafts: [[131, 147], "O9MBE"],
