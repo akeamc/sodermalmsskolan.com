@@ -8,10 +8,10 @@ import styled from "styled-components";
 import createPersistedState from "use-persisted-state";
 import { Select } from "../form/Select";
 const useScheduleClassState = createPersistedState("schedule-class");
+const useScheduleGroupFilter = createPersistedState("schedule-groups");
 
 const FilterOptions = styled.div`
   display: flex;
-  width: 100%;
   margin: -1rem;
 `;
 
@@ -38,6 +38,28 @@ export const ScheduleMultiView: React.FunctionComponent<{
     classes[0]
   );
 
+  const schedule = schedules.find(
+    (schedule) => schedule.group === selectedClass
+  );
+
+  if (!schedule) {
+    setSelectedClass(classes[0]);
+  }
+
+  const [selectedGroups, setSelectedGroups] = useScheduleGroupFilter<{
+    [key: string]: string;
+  }>(
+    Array.from(schedule.selectableGroups).reduce((obj, [category, groups]) => {
+      obj[category] = groups[0];
+
+      return obj;
+    }, {})
+  );
+
+  const selectableGroups = Array.from(schedule.selectableGroups);
+
+  const groups: any = Object.values(selectedGroups).flat();
+
   return (
     <>
       <Section>
@@ -54,25 +76,41 @@ export const ScheduleMultiView: React.FunctionComponent<{
                   }}
                 />
               </FilterOption>
+              {selectableGroups.map(([category, groups], index) => {
+                return (
+                  <FilterOption key={index}>
+                    <Select
+                      options={groups.map(stringToSelectOption)}
+                      defaultValue={stringToSelectOption(
+                        selectedGroups[category]
+                      )}
+                      placeholder={category}
+                      onChange={({
+                        value,
+                      }: {
+                        value: string;
+                        label: string;
+                      }) => {
+                        let obj = { ...selectedGroups };
+                        obj[category] = value;
+
+                        setSelectedGroups(obj);
+                      }}
+                    />
+                  </FilterOption>
+                );
+              })}
             </FilterOptions>
           </Col>
         </Row>
       </Section>
-      {schedules.reduce((schedules, schedule, index) => {
-        if (schedule.group === selectedClass) {
-          schedules.push(
-            <Section key={index}>
-              <Row>
-                <Col>
-                  <ScheduleViewer schedule={schedule} />
-                </Col>
-              </Row>
-            </Section>
-          );
-        }
-
-        return schedules;
-      }, [])}
+      <Section>
+        <Row>
+          <Col>
+            <ScheduleViewer schedule={schedule} groups={groups} />
+          </Col>
+        </Row>
+      </Section>
     </>
   );
 };
