@@ -96,8 +96,8 @@ export const CommonSchedule = new Schedule("Ovalen", [
     new PeriodGroup(
       [
         new GroupedPeriod([137, 149], Subjects.Swedish, "Tidelius", "Drama"),
-        new GroupedPeriod([137, 149], Subjects.English, "A307", "EN LWA"),
-        new GroupedPeriod([137, 149], Subjects.English, "A309", "EN SDO"),
+        new GroupedPeriod([137, 149], Subjects.English, "A307", "EV LWA"),
+        new GroupedPeriod([137, 149], Subjects.English, "A309", "EV SDO"),
         new GroupedPeriod([137, 149], Subjects.Mathematics, "A112", "EV MA"),
       ],
       "Elevens val"
