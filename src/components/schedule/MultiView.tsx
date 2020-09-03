@@ -17,8 +17,9 @@ const FilterOptions = styled.div`
 `;
 
 const FilterOption = styled.div`
-  flex: 0 0 12rem;
+  flex: 1 0 12rem;
   margin: 0.5rem;
+  max-width: 20rem;
 `;
 
 const stringToSelectOption = (value: string) => {
