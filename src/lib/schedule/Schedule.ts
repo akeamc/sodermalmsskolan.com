@@ -80,8 +80,8 @@ export class Schedule {
   public get selectableGroups(): Map<string, string[]> {
     return this.days.reduce((groupGroups, day) => {
       for (const period of day) {
-        if (period.groupGroup) {
-          groupGroups.set(period.groupGroup, period.groups);
+        if (period.groupCategory) {
+          groupGroups.set(period.groupCategory, period.groups);
         }
       }
 

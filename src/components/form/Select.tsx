@@ -8,7 +8,6 @@ export const Select: React.FunctionComponent<Props> = (props) => {
         ...theme,
         colors: {
           ...theme.colors,
-          text: "var(--foreground)",
           neutral0: "var(--background)",
           neutral20: "var(--accents-2)",
           neutral30: "var(--accents-5)",
@@ -18,12 +17,22 @@ export const Select: React.FunctionComponent<Props> = (props) => {
         },
       })}
       styles={{
-        menu: (provided) => {
-          return {
-            ...provided,
-            boxShadow: "var(--shadow-small)",
-          };
-        },
+        menu: (provided) => ({
+          ...provided,
+          boxShadow: "var(--shadow-small)",
+        }),
+        option: (provided, state) => ({
+          ...provided,
+          color: state.isSelected ? "white" : "var(--foreground)",
+        }),
+        control: (provided) => ({
+          ...provided,
+          color: "var(--foreground)",
+        }),
+        singleValue: (provided) => ({
+          ...provided,
+          color: "var(--foreground)",
+        }),
       }}
       {...props}
     />

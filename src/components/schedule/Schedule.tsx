@@ -6,7 +6,6 @@ import { firstLetterUpperCase } from "../../lib/utils/letters";
 import { TimeIndicator } from "./Indicator";
 import { GridTitleSection } from "../basic/Typography";
 import { useTime } from "../../lib/hooks/time";
-import Select from "react-select";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -42,7 +41,15 @@ const HorizontalStripe = styled.div<{
   border-top: 1px solid var(--accents-2);
 `;
 
-const PeriodWrapper = styled.div`
+const PeriodWrapper = styled.div<{
+  row: number;
+  columnStart: number;
+  columnEnd: number;
+}>`
+  grid-row: ${({ row }) => row};
+  grid-column-start: ${({ columnStart }) => columnStart};
+  grid-column-end: ${({ columnEnd }) => columnEnd};
+
   > * {
     width: 100%;
   }
@@ -65,22 +72,26 @@ const TimeAxisLabel = styled.div`
   font-feature-settings: "tnum", "ss01";
 `;
 
-const ScheduleDetail: React.FunctionComponent<{ schedule: Schedule }> = ({
-  schedule,
-}) => {
+const ScheduleDetail: React.FunctionComponent<{
+  schedule: Schedule;
+  groups: { [key: string]: string };
+}> = ({ schedule, groups }) => {
   const now = useTime(1000);
+
+  const nextPeriod = schedule.nextPeriod(now);
+  const group = groups[nextPeriod.groupCategory] || null;
 
   return (
     <GridTitleSection
       title={schedule.group}
-      description={`Nästa lektion: ${schedule.nextPeriod(now).summary}.`}
+      description={`Nästa lektion: ${nextPeriod.summary(group)}.`}
     />
   );
 };
 
 export const ScheduleViewer: React.FunctionComponent<{
   schedule: Schedule;
-  groups?: string[];
+  groups?: { [key: string]: string };
 }> = ({ schedule, groups }) => {
   const [scheduleStart, scheduleEnd] = schedule.bounds;
 
@@ -91,11 +102,10 @@ export const ScheduleViewer: React.FunctionComponent<{
   const numberOfColumns = scheduleEnd - scheduleStart;
 
   return (
-    <div>
-      <ScheduleDetail schedule={schedule} />
+    <React.Fragment>
+      <ScheduleDetail schedule={schedule} groups={groups} />
       <TableWrapper>
         <Table>
-          <TimeIndicator schedule={schedule} />
           {Array.from({ length: numberOfColumns }, (_, index) => {
             const time = scheduleStart + index;
             const minutes = 5 * (time % 12);
@@ -104,7 +114,7 @@ export const ScheduleViewer: React.FunctionComponent<{
             const showLabel = minutes % 30 === 0;
 
             return (
-              <>
+              <React.Fragment key={index}>
                 <VerticalStripe
                   column={index + 2}
                   rowEnd={schedule.days.length + 2}
@@ -121,7 +131,7 @@ export const ScheduleViewer: React.FunctionComponent<{
                     {minutes.toString().padStart(2, "0")}
                   </TimeAxisLabel>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
 
@@ -129,7 +139,9 @@ export const ScheduleViewer: React.FunctionComponent<{
             const gridRow = index + 2;
 
             return (
-              <>
+              <React.Fragment key={index}>
+                <TimeIndicator schedule={schedule} day={index} />
+
                 <DayTitleContainer style={{ gridRow }}>
                   <DayTitle>
                     {firstLetterUpperCase(
@@ -155,17 +167,19 @@ export const ScheduleViewer: React.FunctionComponent<{
                   return (
                     <PeriodWrapper
                       key={index}
-                      style={{ gridRow, gridColumnStart, gridColumnEnd }}
+                      row={gridRow}
+                      columnStart={gridColumnStart}
+                      columnEnd={gridColumnEnd}
                     >
-                      <period.Component filterGroups={groups} />
+                      <period.Component group={groups[period.groupCategory]} />
                     </PeriodWrapper>
                   );
                 })}
-              </>
+              </React.Fragment>
             );
           })}
         </Table>
       </TableWrapper>
-    </div>
+    </React.Fragment>
   );
 };

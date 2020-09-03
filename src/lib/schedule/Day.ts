@@ -1,5 +1,4 @@
 import { Period } from "./Period";
-import { group } from "console";
 
 export class Day extends Array<Period> {
   /**

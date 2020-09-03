@@ -47,45 +47,34 @@ export class PeriodGroup implements Period {
   /**
    * The name of the group of groups.
    */
-  groupGroup: string;
+  groupCategory: string;
   periods: GroupedPeriod[];
 
   constructor(periods: GroupedPeriod[], groupGroup: string) {
     this.periods = periods;
-    this.groupGroup = groupGroup;
+    this.groupCategory = groupGroup;
   }
 
-  public Component: React.FunctionComponent<{ filterGroups?: string[] }> = ({
-    filterGroups,
+  public Component: React.FunctionComponent<{ group: string }> = ({
+    group,
   }) => {
     const [groupStart] = this.bounds;
 
-    const periods = this.periods.reduce((periods, period) => {
-      if (!filterGroups || filterGroups?.includes(period.group)) {
-        periods.push(period);
-      }
+    const period = this.periods.find((period) => period.group === group);
 
-      return periods;
-    }, []);
+    const gridColumnStart = period.start + 1 - groupStart;
+    const gridColumnEnd = period.end + 1 - groupStart;
 
     return (
       <PeriodGroupWrapper>
-        {periods.map((period, index) => {
-          const gridColumnStart = period.start + 1 - groupStart;
-          const gridColumnEnd = period.end + 1 - groupStart;
-
-          return (
-            <PeriodContainer
-              key={index}
-              style={{
-                gridColumnStart,
-                gridColumnEnd,
-              }}
-            >
-              <period.Component />
-            </PeriodContainer>
-          );
-        })}
+        <PeriodContainer
+          style={{
+            gridColumnStart,
+            gridColumnEnd,
+          }}
+        >
+          <period.Component />
+        </PeriodContainer>
       </PeriodGroupWrapper>
     );
   };
@@ -99,8 +88,8 @@ export class PeriodGroup implements Period {
     );
   }
 
-  public get summary(): string {
-    return this.periods.map((period) => period.summary).join(", ");
+  public summary(group: string): string {
+    return this.periods.find((period) => period.group === group)?.summary();
   }
 
   public get duration() {

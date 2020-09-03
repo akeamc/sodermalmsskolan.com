@@ -25,9 +25,10 @@ const StyledTimeIndicator = styled.div<{
   }
 `;
 
-export const TimeIndicator: React.FunctionComponent<{ schedule: Schedule }> = ({
-  schedule,
-}) => {
+export const TimeIndicator: React.FunctionComponent<{
+  schedule: Schedule;
+  day: number;
+}> = ({ schedule, day }) => {
   const now = useTime(1000);
 
   const [scheduleStart, scheduleEnd] = schedule.bounds;
@@ -35,23 +36,21 @@ export const TimeIndicator: React.FunctionComponent<{ schedule: Schedule }> = ({
   const numberOfColumns = scheduleEnd - scheduleStart;
   const currentTime = Schedule.dateToscheduleTime(now);
   const currentDay = Schedule.dateToDayIndex(now);
-  const closestDay = schedule.nextDayIndex(currentDay);
+
+  let progress = currentDay > day ? 1 : 0;
+
+  if (day === currentDay) {
+    progress = Math.min(
+      Math.max((currentTime - scheduleStart) / schedule.maximumDuration, 0),
+      1
+    );
+  }
 
   return (
     <StyledTimeIndicator
       columnEnd={numberOfColumns + 2}
-      row={closestDay + 2}
-      progress={
-        currentDay === closestDay
-          ? Math.min(
-              Math.max(
-                (currentTime - scheduleStart) / schedule.maximumDuration,
-                0
-              ),
-              1
-            )
-          : 0
-      }
+      row={day + 2}
+      progress={progress}
     />
   );
 };

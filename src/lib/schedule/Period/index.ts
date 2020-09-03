@@ -1,6 +1,6 @@
 export abstract class Period {
   public abstract Component: React.FunctionComponent<{
-    filterGroups?: string[];
+    group?: string;
   }>;
 
   public abstract bounds: [number, number];
@@ -10,11 +10,11 @@ export abstract class Period {
    */
   public abstract duration: number;
 
-  public abstract summary: string;
+  public abstract summary: (group?: string) => string;
 
   public abstract groups: string[] | null;
 
-  public abstract groupGroup?: string;
+  public abstract groupCategory?: string;
 }
 
 export * from "./PeriodGroup";
