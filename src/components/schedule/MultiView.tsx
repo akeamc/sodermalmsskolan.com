@@ -1,5 +1,5 @@
 import { Schedule, CommonSchedule } from "../../lib/schedule/Schedule";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Section } from "../layout/Section";
 import { Row } from "../grid/Row";
 import { Col } from "../grid/Col";
@@ -39,27 +39,42 @@ export const ScheduleMultiView: React.FunctionComponent<{
     classes[0]
   );
 
-  const schedule = schedules.find(
-    (schedule) => schedule.group === selectedClass
-  );
+  const [schedule, setSchedule] = useState(schedules[0]);
 
-  if (!schedule) {
-    setSelectedClass(classes[0]);
-  }
+  useEffect(() => {
+    const selectedSchedule = schedules.find(
+      (schedule) => schedule.group === selectedClass
+    );
+
+    if (selectedSchedule) {
+      setSchedule(selectedSchedule);
+    } else {
+      setSelectedClass(classes[0]);
+    }
+  });
+
+  const defaultSelectedGroups = () => {
+    return Array.from(schedule.selectableGroups).reduce(
+      (obj, [category, groups]) => {
+        obj[category] = groups[0];
+
+        return obj;
+      },
+      {}
+    );
+  };
 
   const [selectedGroups, setSelectedGroups] = useScheduleGroupFilter<{
     [key: string]: string;
-  }>(
-    Array.from(schedule.selectableGroups).reduce((obj, [category, groups]) => {
-      obj[category] = groups[0];
-
-      return obj;
-    }, {})
-  );
+  }>(defaultSelectedGroups());
 
   const selectableGroups = Array.from(schedule.selectableGroups);
 
-  const groups: any = Object.values(selectedGroups).flat();
+  selectableGroups.forEach(([category, groups]) => {
+    if (!groups.includes(selectedGroups[category])) {
+      return setSelectedGroups(defaultSelectedGroups());
+    }
+  });
 
   return (
     <>
@@ -71,7 +86,7 @@ export const ScheduleMultiView: React.FunctionComponent<{
                 <Select
                   options={classOptions}
                   placeholder="Undervisningsgrupp"
-                  defaultValue={stringToSelectOption(selectedClass)}
+                  value={stringToSelectOption(selectedClass)}
                   onChange={({ value }: { value: string; label: string }) => {
                     setSelectedClass(value);
                   }}
@@ -82,9 +97,7 @@ export const ScheduleMultiView: React.FunctionComponent<{
                   <FilterOption key={index}>
                     <Select
                       options={groups.map(stringToSelectOption)}
-                      defaultValue={stringToSelectOption(
-                        selectedGroups[category]
-                      )}
+                      value={stringToSelectOption(selectedGroups[category])}
                       placeholder={category}
                       onChange={({
                         value,
@@ -108,7 +121,7 @@ export const ScheduleMultiView: React.FunctionComponent<{
       <Section>
         <Row>
           <Col>
-            <ScheduleViewer schedule={schedule} groups={groups} />
+            <ScheduleViewer schedule={schedule} groups={selectedGroups} />
           </Col>
         </Row>
       </Section>
