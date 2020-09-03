@@ -127,7 +127,7 @@ export const CommonSchedule = new Schedule("Ovalen", [
       hardCrafts: [[120, 136], "O9DKA"],
       softCrafts: [[120, 136], "O9IER"],
       music: [[118, 136], "O9LWA"],
-      gastronomy: [[119, 136], "O9JZH"],
+      gastronomy: [[118, 136], "O9JZH"],
     }),
     new SinglePeriod([172, 192], Subjects.Sports, "Forsgrenska")
   ),
