@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useTime } from "../../lib/hooks/time";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Schedule } from "../../lib/schedule/Schedule";
 
 const StyledTimeIndicator = styled.div<{
@@ -31,20 +31,27 @@ export const TimeIndicator: React.FunctionComponent<{
 }> = ({ schedule, day }) => {
   const now = useTime(1000);
 
+  const [progress, setProgress] = useState<number>(0);
+
   const [scheduleStart, scheduleEnd] = schedule.bounds;
 
   const numberOfColumns = scheduleEnd - scheduleStart;
-  const currentTime = Schedule.dateToscheduleTime(now);
-  const currentDay = Schedule.dateToDayIndex(now);
 
-  let progress = currentDay > day ? 1 : 0;
+  useEffect(() => {
+    const currentTime = Schedule.dateToscheduleTime(now);
+    const currentDay = Schedule.dateToDayIndex(now);
 
-  if (day === currentDay) {
-    progress = Math.min(
-      Math.max((currentTime - scheduleStart) / schedule.maximumDuration, 0),
-      1
-    );
-  }
+    setProgress(currentDay > day ? 1 : 0);
+
+    if (day === currentDay) {
+      setProgress(
+        Math.min(
+          Math.max((currentTime - scheduleStart) / schedule.maximumDuration, 0),
+          1
+        )
+      );
+    }
+  });
 
   return (
     <StyledTimeIndicator
