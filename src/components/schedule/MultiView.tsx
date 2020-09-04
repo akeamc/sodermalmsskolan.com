@@ -7,6 +7,7 @@ import { ScheduleViewer } from "./Schedule";
 import styled from "styled-components";
 import createPersistedState from "use-persisted-state";
 import { Select } from "../form/Select";
+import { GroupFilter } from "../../lib/schedule/Filter";
 const useScheduleClassState = createPersistedState("schedule-class");
 const useScheduleGroupFilter = createPersistedState("schedule-groups");
 
@@ -65,9 +66,9 @@ export const ScheduleMultiView: React.FunctionComponent<{
     );
   };
 
-  const [selectedGroups, setSelectedGroups] = useScheduleGroupFilter<{
-    [key: string]: string;
-  }>(defaultSelectedGroups());
+  const [selectedGroups, setSelectedGroups] = useScheduleGroupFilter<
+    GroupFilter
+  >(defaultSelectedGroups());
 
   const selectableGroups = Array.from(schedule.selectableGroups);
 

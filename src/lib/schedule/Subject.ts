@@ -14,7 +14,7 @@ export class Subject {
   }
 }
 
-export const Subjects: { [key: string]: Subject } = {
+export const Subjects: { [subjectName: string]: Subject } = {
   Mathematics: new Subject("Matematik", "#0070f3"),
   Swedish: new Subject("Svenska", "#ffeb3b"),
   English: new Subject("Engelska", "#f44336"),
