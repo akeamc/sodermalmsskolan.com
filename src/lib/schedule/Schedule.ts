@@ -228,7 +228,7 @@ export const Schedules: Schedule[] = [
         new SinglePeriod([138, 149], Subjects.Mathematics, "A307"),
         new SinglePeriod([157, 167], Subjects.SocialStudies, "A309")
       ),
-      new Day(new SinglePeriod([179, 189], Subjects.Physics, "A311")),
+      new Day(new SinglePeriod([176, 186], Subjects.Physics, "A311")),
     ],
     CommonSchedule
   ),
