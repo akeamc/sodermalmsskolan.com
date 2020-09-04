@@ -5,12 +5,12 @@ import React from "react";
 
 export class SinglePeriod implements Period {
   /**
-   * When the period starts. Equal to the number of minutes since midnight.
+   * When the period starts. Equal to the number of minutes since midnight divided by five.
    */
   start: number;
 
   /**
-   * When the period ends. Equal to the number of minutes since midnight.
+   * When the period ends. Equal to the number of minutes since midnight divided by five.
    */
   end: number;
   subject: Subject;
@@ -66,12 +66,16 @@ export class SinglePeriod implements Period {
     return [this.start, this.end];
   }
 
-  public summary(): string {
+  public get summary(): string {
     return `${this.subject.name} ${this.hourMinuteStart} i ${this.room}`;
   }
 
   public get groups(): null {
     return null;
+  }
+
+  public getPeriodByGroup() {
+    return this;
   }
 
   public Component: React.FunctionComponent = () => (

@@ -55,26 +55,27 @@ export class PeriodGroup implements Period {
     this.groupCategory = groupGroup;
   }
 
-  public Component: React.FunctionComponent<{ group: string }> = ({
-    group,
-  }) => {
+  public Component: React.FunctionComponent = () => {
     const [groupStart] = this.bounds;
-
-    const period = this.periods.find((period) => period.group === group);
-
-    const gridColumnStart = period.start + 1 - groupStart;
-    const gridColumnEnd = period.end + 1 - groupStart;
 
     return (
       <PeriodGroupWrapper>
-        <PeriodContainer
-          style={{
-            gridColumnStart,
-            gridColumnEnd,
-          }}
-        >
-          <period.Component />
-        </PeriodContainer>
+        {this.periods.map((period, index) => {
+          const gridColumnStart = period.start + 1 - groupStart;
+          const gridColumnEnd = period.end + 1 - groupStart;
+
+          return (
+            <PeriodContainer
+              key={index}
+              style={{
+                gridColumnStart,
+                gridColumnEnd,
+              }}
+            >
+              <period.Component />
+            </PeriodContainer>
+          );
+        })}
       </PeriodGroupWrapper>
     );
   };
@@ -88,8 +89,8 @@ export class PeriodGroup implements Period {
     );
   }
 
-  public summary(group: string): string {
-    return this.periods.find((period) => period.group === group)?.summary();
+  public get summary(): string {
+    return this.periods.map((period) => period.summary).join(", ");
   }
 
   public get duration() {
@@ -105,6 +106,12 @@ export class PeriodGroup implements Period {
           return groups.add(period.group);
         }, new Set<string>())
         .values()
+    );
+  }
+
+  public getPeriodByGroup(group: string): SinglePeriod {
+    return (
+      this.periods.find((period) => period.group === group) || this.periods[0]
     );
   }
 }

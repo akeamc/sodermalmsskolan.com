@@ -6,6 +6,7 @@ import { firstLetterUpperCase } from "../../lib/utils/letters";
 import { TimeIndicator } from "./Indicator";
 import { GridTitleSection } from "../basic/Typography";
 import { useTime } from "../../lib/hooks/time";
+import { GroupFilter } from "../../lib/schedule/Filter";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -74,24 +75,23 @@ const TimeAxisLabel = styled.div`
 
 const ScheduleDetail: React.FunctionComponent<{
   schedule: Schedule;
-  groups: { [key: string]: string };
+  groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
   const now = useTime(1000);
-
-  const nextPeriod = schedule.nextPeriod(now);
-  const group = groups[nextPeriod.groupCategory] || null;
 
   return (
     <GridTitleSection
       title={schedule.group}
-      description={`Nästa lektion: ${nextPeriod.summary(group)}.`}
+      description={`Nästa lektion: ${
+        schedule.nextPeriod(now, groups).summary
+      }.`}
     />
   );
 };
 
 export const ScheduleViewer: React.FunctionComponent<{
   schedule: Schedule;
-  groups?: { [key: string]: string };
+  groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
   const [scheduleStart, scheduleEnd] = schedule.bounds;
 
@@ -138,6 +138,8 @@ export const ScheduleViewer: React.FunctionComponent<{
           {schedule.days.map((day, index) => {
             const gridRow = index + 2;
 
+            const periods = day.filterPeriods(groups);
+
             return (
               <React.Fragment key={index}>
                 <TimeIndicator schedule={schedule} day={index} />
@@ -158,7 +160,7 @@ export const ScheduleViewer: React.FunctionComponent<{
                   columnEnd={numberOfColumns + 2}
                 />
 
-                {day.map((period, index) => {
+                {periods.map((period, index) => {
                   const [start, end] = period.bounds;
 
                   const gridColumnStart = start - gridColumnMinimum;
@@ -171,7 +173,7 @@ export const ScheduleViewer: React.FunctionComponent<{
                       columnStart={gridColumnStart}
                       columnEnd={gridColumnEnd}
                     >
-                      <period.Component group={groups[period.groupCategory]} />
+                      <period.Component />
                     </PeriodWrapper>
                   );
                 })}

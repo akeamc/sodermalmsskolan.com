@@ -9,6 +9,7 @@ import {
   languages,
 } from "./Period";
 import { Day } from "./Day";
+import { GroupFilter } from "./Filter";
 
 export class Schedule {
   public group: string;
@@ -66,14 +67,17 @@ export class Schedule {
     );
   }
 
-  public nextPeriod(timestamp: Date = new Date()): Period | null {
+  public nextPeriod(
+    timestamp: Date = new Date(),
+    groups?: GroupFilter
+  ): Period | null {
     const followingDays = this.nextDays(timestamp);
     const index = Schedule.dateToDayIndex(timestamp);
     const currentTime = Schedule.dateToscheduleTime(timestamp);
 
     return (
-      this.days[index]?.nextPeriod(currentTime) ||
-      followingDays[0].nextPeriod(0)
+      this.days[index]?.nextPeriod(currentTime, groups) ||
+      followingDays[0].nextPeriod(0, groups)
     );
   }
 
@@ -114,7 +118,7 @@ export const CommonSchedule = new Schedule("Ovalen", [
     }),
     languages([173, 188])
   ),
-  new Day(
+  new Day<Period>(
     practicalSubjects({
       chemistry: [[98, 114], "O9DKA"],
       hardCrafts: [[98, 114], "O9IER"],

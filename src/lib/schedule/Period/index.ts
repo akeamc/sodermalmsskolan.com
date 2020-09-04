@@ -1,7 +1,7 @@
+import { SinglePeriod } from "./SinglePeriod";
+
 export abstract class Period {
-  public abstract Component: React.FunctionComponent<{
-    group?: string;
-  }>;
+  public abstract Component: React.FunctionComponent;
 
   public abstract bounds: [number, number];
 
@@ -10,11 +10,13 @@ export abstract class Period {
    */
   public abstract duration: number;
 
-  public abstract summary: (group?: string) => string;
+  public abstract summary: string;
 
   public abstract groups: string[] | null;
 
   public abstract groupCategory?: string;
+
+  public abstract getPeriodByGroup(group: string): SinglePeriod;
 }
 
 export * from "./PeriodGroup";
