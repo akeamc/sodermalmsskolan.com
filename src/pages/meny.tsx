@@ -79,7 +79,7 @@ const Page: React.FunctionComponent = () => {
       <Hero>
         <HeroContent>
           <ImagePane>
-            <Image src="https://cdn.discordapp.com/attachments/575993879837409290/666282862151991296/IMG_3695.JPG" />
+            <Image src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg" />
           </ImagePane>
           <TitlePane>
             <TitleContainer>
