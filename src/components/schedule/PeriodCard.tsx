@@ -26,6 +26,8 @@ const Waves = styled.div<{ color: string }>`
   height: 12rem;
   width: 100%;
   position: relative;
+  overflow: hidden;
+  border-radius: 0 0 8px 8px;
 
   &::after {
     position: absolute;
@@ -54,10 +56,11 @@ export const PeriodCard: React.FunctionComponent<{
     <Card hoverable={false}>
       <CardContent>
         <SubjectName>
-          {groupName} – {period.subject.name}
+          Nästa lektion för {groupName}: {period.subject.name}
         </SubjectName>
         <p>
-          {period.hourMinuteStart}–{period.hourMinuteEnd} i {period.room}.
+          {period.subject.name} {period.hourMinuteStart}–{period.hourMinuteEnd}{" "}
+          i {period.room} ({period.duration * 5} minuter).
         </p>
       </CardContent>
       <Waves color={period.subject.color} />
