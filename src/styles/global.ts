@@ -7,6 +7,7 @@ export default createGlobalStyle`
     background: var(--background);
     color: var(--foreground);
     transition: color 0.1s ease, background-color 0.1s ease;
+    font-feature-settings: "calt", "case";
   }
 
   @supports (font-variation-settings: normal) {

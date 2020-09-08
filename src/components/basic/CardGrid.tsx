@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import React from "react";
 import { GenericUser } from "../../lib/models/User";
-import { Card, CardContent, CardHero, CardFooter } from "../basic/Card";
+import {
+  Card,
+  CardContent,
+  CardHero,
+  CardFooter,
+  CardTitle,
+} from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
 import { Col } from "../grid/Col";
 import { Row } from "../grid/Row";
@@ -57,7 +63,7 @@ class CardGridItem extends React.Component<{
         <GridItemCard>
           <CardHero backgroundImage={item?.image} />
           <CardContent>
-            <h3>{loading ? <Skeleton /> : item?.title}</h3>
+            <CardTitle>{loading ? <Skeleton /> : item?.title}</CardTitle>
             <Description style={lineClamp ? getLineClamp(lineClamp) : {}}>
               {loading ? (
                 <Skeleton count={descriptionRows} />

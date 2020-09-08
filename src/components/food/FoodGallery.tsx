@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import VisibilitySensor from "react-visibility-sensor";
+import { Spinner } from "../basic/Spinner";
+import { ProgressiveImage } from "../basic/ProgressiveImage";
+import { LinkBlock } from "../basic/Link";
 
 const GalleryWrapper = styled.div`
   display: grid;
@@ -22,11 +25,16 @@ const PhotoContainer = styled.div`
   justify-content: center;
 `;
 
-const Photo = styled.img`
-  border-radius: 8px;
-  box-shadow: var(--shadow-large);
+const PhotoWrapper = styled.div`
   max-width: 24rem;
   margin: 0 1rem;
+`;
+
+const Photo = styled(ProgressiveImage)`
+  border-radius: 8px;
+  box-shadow: var(--shadow-large);
+  width: 100%;
+  object-fit: cover;
 `;
 
 const CaptionWrapper = styled.div`
@@ -34,8 +42,9 @@ const CaptionWrapper = styled.div`
   margin-top: 1rem;
 `;
 
-const LoadingText = styled.div`
-  text-align: center;
+const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const FoodGallery: React.FunctionComponent = () => {
@@ -58,7 +67,11 @@ export const FoodGallery: React.FunctionComponent = () => {
             <PhotoContainer>
               {message.attachments.map((attachment, index) => {
                 return (
-                  <Photo src={attachment.url} key={index} loading="lazy" />
+                  <PhotoWrapper key={index}>
+                    <LinkBlock href={attachment.url}>
+                      <Photo src={attachment.url} loading="lazy" />
+                    </LinkBlock>
+                  </PhotoWrapper>
                 );
               })}
             </PhotoContainer>
@@ -74,9 +87,9 @@ export const FoodGallery: React.FunctionComponent = () => {
         );
       })}
       <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>
-        <LoadingText>
-          <small>Du kan se alla bilder på vår Discordserver!</small>
-        </LoadingText>
+        <LoadingWrapper>
+          <Spinner />
+        </LoadingWrapper>
       </VisibilitySensor>
     </GalleryWrapper>
   );

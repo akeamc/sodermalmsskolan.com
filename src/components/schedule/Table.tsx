@@ -89,7 +89,7 @@ const ScheduleDetail: React.FunctionComponent<{
   );
 };
 
-export const ScheduleViewer: React.FunctionComponent<{
+export const ScheduleTable: React.FunctionComponent<{
   schedule: Schedule;
   groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
