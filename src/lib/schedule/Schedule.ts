@@ -162,7 +162,7 @@ export const Schedules: Schedule[] = [
         new SinglePeriod([101, 115], Subjects.Mathematics, "A307"),
         new SinglePeriod([117, 132], Subjects.SocialStudies, "A309"),
         new SinglePeriod([135, 149], Subjects.Swedish, "A308"),
-        new SinglePeriod([159, 170], Subjects.Physics, "A415")
+        new SinglePeriod([159, 170], Subjects.Chemistry, "A415")
       ),
       new Day(
         new SinglePeriod([108, 118], Subjects.Sports, "B501"),
@@ -175,7 +175,7 @@ export const Schedules: Schedule[] = [
         new SinglePeriod([159, 169], Subjects.SocialStudies, "A309")
       ),
       new Day(
-        new SinglePeriod([138, 148], Subjects.Physics, "A415"),
+        new SinglePeriod([138, 148], Subjects.Chemistry, "A415"),
         new SinglePeriod([157, 167], Subjects.English, "A307")
       ),
       new Day(new SinglePeriod([177, 189], Subjects.Mathematics, "A307")),
@@ -186,7 +186,7 @@ export const Schedules: Schedule[] = [
     "O92",
     [
       new Day(
-        new SinglePeriod([102, 113], Subjects.Physics, "A415"),
+        new SinglePeriod([102, 113], Subjects.Chemistry, "A415"),
         new SinglePeriod([115, 127], Subjects.English, "A307"),
         new SinglePeriod([133, 149], Subjects.Mathematics, "A307"),
         new SinglePeriod([159, 174], Subjects.SocialStudies, "A309")
@@ -194,7 +194,7 @@ export const Schedules: Schedule[] = [
       new Day(
         new SinglePeriod([98, 108], Subjects.Sports, "B501"),
         new SinglePeriod([121, 134], Subjects.SocialStudies, "A309"),
-        new SinglePeriod([158, 168], Subjects.Physics, "A311")
+        new SinglePeriod([158, 168], Subjects.Chemistry, "A311")
       ),
       new Day(
         new SinglePeriod([102, 112], Subjects.English, "A307"),
@@ -224,7 +224,7 @@ export const Schedules: Schedule[] = [
         new SinglePeriod([158, 171], Subjects.Swedish, "A308")
       ),
       new Day(
-        new SinglePeriod([100, 111], Subjects.Physics, "A311"),
+        new SinglePeriod([100, 111], Subjects.Chemistry, "A311"),
         new SinglePeriod([136, 149], Subjects.SocialStudies, "A309"),
         new SinglePeriod([159, 169], Subjects.English, "A307")
       ),
@@ -232,7 +232,7 @@ export const Schedules: Schedule[] = [
         new SinglePeriod([138, 149], Subjects.Mathematics, "A307"),
         new SinglePeriod([157, 167], Subjects.SocialStudies, "A309")
       ),
-      new Day(new SinglePeriod([176, 186], Subjects.Physics, "A311")),
+      new Day(new SinglePeriod([176, 186], Subjects.Chemistry, "A311")),
     ],
     CommonSchedule
   ),
