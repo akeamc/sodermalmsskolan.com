@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useProgressiveImage } from "../ProgressiveImage";
 
-export const Card = styled.div`
+export const Card = styled.div<{ hoverable?: boolean }>`
   background-color: var(--background);
   box-shadow: var(--shadow-small);
   border-radius: 8px;
@@ -11,12 +11,12 @@ export const Card = styled.div`
   overflow: hidden;
 
   &:hover {
-    box-shadow: var(--shadow-hover);
+    ${({ hoverable = true }) => hoverable && `box-shadow: var(--shadow-hover);`}
   }
 `;
 
 export const CardHero = styled.div<{ backgroundImage?: string }>`
-  min-height: 240px;
+  min-height: 15rem;
   background: var(--accents-2);
   background-size: cover;
   background-position: center;
@@ -25,8 +25,10 @@ export const CardHero = styled.div<{ backgroundImage?: string }>`
     `url("${useProgressiveImage(props.backgroundImage).src}")`};
 `;
 
+export const CardPadding = "1.5rem";
+
 export const CardContent = styled.div`
-  padding: 24px;
+  padding: ${CardPadding};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +36,7 @@ export const CardContent = styled.div`
 `;
 
 export const CardFooter = styled.div`
-  padding: 12px 24px;
+  padding: calc(${CardPadding} / 2) ${CardPadding};
   border-top: 1px solid var(--accents-2);
   display: flex;
   justify-content: space-between;
@@ -46,3 +48,5 @@ export const CardFooter = styled.div`
     color: var(--accents-6);
   }
 `;
+
+export const CardTitle = styled.h3``;

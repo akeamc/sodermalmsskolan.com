@@ -1,13 +1,15 @@
-import { Schedule, CommonSchedule } from "../../lib/schedule/Schedule";
+import { Schedule } from "../../lib/schedule/Schedule";
 import React, { useState, useEffect } from "react";
 import { Section } from "../layout/Section";
 import { Row } from "../grid/Row";
 import { Col } from "../grid/Col";
-import { ScheduleViewer } from "./Schedule";
+import { ScheduleTable } from "./Table";
 import styled from "styled-components";
 import createPersistedState from "use-persisted-state";
 import { Select } from "../form/Select";
 import { GroupFilter } from "../../lib/schedule/Filter";
+import { useTime } from "../../lib/hooks/time";
+import { PeriodCard } from "./PeriodCard";
 const useScheduleClassState = createPersistedState("schedule-class");
 const useScheduleGroupFilter = createPersistedState("schedule-groups");
 
@@ -30,7 +32,26 @@ const stringToSelectOption = (value: string) => {
   };
 };
 
-export const ScheduleMultiView: React.FunctionComponent<{
+const PeriodCards: React.FunctionComponent<{
+  schedule: Schedule;
+  groups: GroupFilter;
+  groupName: string;
+}> = ({ schedule, groups, groupName }) => {
+  const now = useTime(1000);
+
+  const nextPeriodGroup = schedule.nextPeriod(now, groups);
+  const nextPeriod = nextPeriodGroup.getPeriodByGroup(
+    groups[nextPeriodGroup.groupCategory]
+  );
+
+  return (
+    <>
+      <PeriodCard period={nextPeriod} groupName={groupName} />
+    </>
+  );
+};
+
+export const ScheduleView: React.FunctionComponent<{
   schedules: Schedule[];
 }> = ({ schedules }) => {
   const classes = schedules.map((schedule) => schedule.group);
@@ -83,6 +104,17 @@ export const ScheduleMultiView: React.FunctionComponent<{
       <Section>
         <Row>
           <Col>
+            <PeriodCards
+              schedule={schedule}
+              groups={selectedGroups}
+              groupName={selectedClass}
+            />
+          </Col>
+        </Row>
+      </Section>
+      <Section>
+        <Row>
+          <Col>
             <FilterOptions>
               <FilterOption>
                 <Select
@@ -123,7 +155,7 @@ export const ScheduleMultiView: React.FunctionComponent<{
       <Section>
         <Row>
           <Col>
-            <ScheduleViewer schedule={schedule} groups={selectedGroups} />
+            <ScheduleTable schedule={schedule} groups={selectedGroups} />
           </Col>
         </Row>
       </Section>

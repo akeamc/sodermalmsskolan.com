@@ -1,10 +1,9 @@
 import React from "react";
 import { Schedules } from "../../lib/schedule/Schedule";
-import { ScheduleViewer } from "../../components/schedule/Schedule";
 import { Layout } from "../../components/basic/Layout";
 import { Navigation } from "../../components/basic/Navigation";
 import { HeroWithTitle } from "../../components/layout/Hero/Title";
-import { ScheduleMultiView } from "../../components/schedule/MultiView";
+import { ScheduleView } from "../../components/schedule/ScheduleView";
 import { AdSection } from "../../components/basic/Ad";
 
 const Page: React.FunctionComponent = () => {
@@ -13,7 +12,7 @@ const Page: React.FunctionComponent = () => {
       <Navigation />
       <HeroWithTitle title="Schema" />
       <AdSection />
-      <ScheduleMultiView schedules={Schedules} />
+      <ScheduleView schedules={Schedules} />
     </Layout>
   );
 };
