@@ -56,11 +56,11 @@ export const PeriodCard: React.FunctionComponent<{
     <Card hoverable={false}>
       <CardContent>
         <SubjectName>
-          Nästa lektion för {groupName}: {period.subject.name}
+          Nästa lektion: {period.subject.name}
         </SubjectName>
         <p>
           {period.subject.name} {period.hourMinuteStart}–{period.hourMinuteEnd}{" "}
-          i {period.room} ({period.duration * 5} minuter).
+          i {period.room} ({period.duration * 5} minuter lång).
         </p>
       </CardContent>
       <Waves color={period.subject.color} />
