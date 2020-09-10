@@ -10,8 +10,8 @@ import { Select } from "../form/Select";
 import { GroupFilter } from "../../lib/schedule/Filter";
 import { useTime } from "../../lib/hooks/time";
 import { PeriodCard } from "./PeriodCard";
+import { usePersistedState } from "../../lib/hooks/persistedstate";
 const useScheduleClassState = createPersistedState("schedule-class");
-const useScheduleGroupFilter = createPersistedState("schedule-groups");
 
 const FilterOptions = styled.div`
   display: flex;
@@ -76,22 +76,20 @@ export const ScheduleView: React.FunctionComponent<{
     }
   });
 
-  const defaultSelectedGroups = () => {
-    return Array.from(schedule.selectableGroups).reduce(
-      (obj, [category, groups]) => {
-        obj[category] = groups[0];
+  const selectableGroups = Array.from(schedule.selectableGroups);
 
-        return obj;
-      },
-      {}
-    );
+  const defaultSelectedGroups = () => {
+    return selectableGroups.reduce((obj, [category, groups]) => {
+      obj[category] = groups[0];
+
+      return obj;
+    }, {});
   };
 
-  const [selectedGroups, setSelectedGroups] = useScheduleGroupFilter<
-    GroupFilter
-  >(defaultSelectedGroups());
-
-  const selectableGroups = Array.from(schedule.selectableGroups);
+  const [selectedGroups, setSelectedGroups] = usePersistedState<GroupFilter>(
+    "schedule-groups",
+    defaultSelectedGroups()
+  );
 
   selectableGroups.forEach(([category, groups]) => {
     if (!groups.includes(selectedGroups[category])) {
