@@ -3,6 +3,8 @@ import React from "react";
 import { SinglePeriod } from "../../lib/schedule/Period";
 import styled, { keyframes } from "styled-components";
 import { transparentize } from "polished";
+import { useTime } from "../../lib/hooks/time";
+import moment from "moment";
 
 const SubjectName = styled.h2``;
 
@@ -51,16 +53,18 @@ const Waves = styled.div<{ color: string }>`
 export const PeriodCard: React.FunctionComponent<{
   period: SinglePeriod;
   groupName: string;
-}> = ({ period, groupName }) => {
+}> = ({ period }) => {
+  const now = useTime(1000);
+
+  const timeLeft = period.start.nextAbsolute(now).from(now);
+
   return (
     <Card hoverable={false}>
       <CardContent>
-        <SubjectName>
-          Nästa lektion: {period.subject.name}
-        </SubjectName>
+        <SubjectName>Nästa lektion: {period.subject.name}</SubjectName>
         <p>
-          {period.subject.name} {period.hourMinuteStart}–{period.hourMinuteEnd}{" "}
-          i {period.room} ({period.duration * 5} minuter lång).
+          {period.subject.name} {period.start.format()}–{period.end.format()} i{" "}
+          {period.room} ({timeLeft}).
         </p>
       </CardContent>
       <Waves color={period.subject.color} />

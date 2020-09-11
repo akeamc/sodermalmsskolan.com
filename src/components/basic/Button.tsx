@@ -3,14 +3,14 @@ import { AutoLink } from "./Link";
 
 export const Button = styled(AutoLink)<{
   secondary?: boolean;
-  colored?: boolean;
-  small?: boolean;
+  $colored?: boolean;
+  $small?: boolean;
 }>`
-  --button-background: ${({ colored }) =>
-    colored ? `var(--color)` : `var(--foreground)`};
+  --button-background: ${({ $colored }) =>
+    $colored ? `var(--color)` : `var(--foreground)`};
   --button-foreground: var(--background);
-  --button-border: ${({ colored }) =>
-    colored ? `var(--color)` : `var(--foreground)`};
+  --button-border: ${({ $colored }) =>
+    $colored ? `var(--color)` : `var(--foreground)`};
   display: inline-block;
   box-sizing: border-box;
   background-color: var(--button-background);
@@ -18,14 +18,14 @@ export const Button = styled(AutoLink)<{
   padding: 0 36px;
   border: 1px solid var(--button-border);
   border-radius: 5px;
-  line-height: ${({ small }) => (small ? 40 : 48)}px;
+  line-height: ${({ $small }) => ($small ? 40 : 48)}px;
   transition: background-color 0.2s ease, color 0.2s ease,
     border-color 0.2s ease;
 
   &:hover {
     --button-background: var(--background);
-    --button-foreground: ${({ colored }) =>
-      colored ? `var(--color)` : `var(--foreground)`};
+    --button-foreground: ${({ $colored }) =>
+      $colored ? `var(--color)` : `var(--foreground)`};
     color: var(--button-foreground);
   }
 
