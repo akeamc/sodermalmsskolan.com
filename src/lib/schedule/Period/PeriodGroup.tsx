@@ -1,5 +1,5 @@
 import { SinglePeriod } from "./SinglePeriod";
-import { Period } from ".";
+import { Period, PeriodBoundary } from ".";
 import React from "react";
 import { Subject, Subjects } from "../Subject";
 import styled from "styled-components";
@@ -10,18 +10,19 @@ export class GroupedPeriod extends SinglePeriod {
 
   constructor(
     [start, end]: [number, number],
+    day: number,
     subject: Subject,
     room: string,
     group: string
   ) {
-    super([start, end], subject, room);
+    super([start, end], day, subject, room);
     this.group = group;
   }
 
   public Component: React.FunctionComponent = () => (
     <PeriodComponent
-      start={this.hourMinuteStart}
-      end={this.hourMinuteEnd}
+      start={this.start.format()}
+      end={this.end.format()}
       room={this.room}
       title={`${this.subject.symbol} ${this.group}`}
       color={this.subject.color}
@@ -61,8 +62,8 @@ export class PeriodGroup implements Period {
     return (
       <PeriodGroupWrapper>
         {this.periods.map((period, index) => {
-          const gridColumnStart = period.start + 1 - groupStart;
-          const gridColumnEnd = period.end + 1 - groupStart;
+          const gridColumnStart = period.start.scheduleTime + 1 - groupStart;
+          const gridColumnEnd = period.end.scheduleTime + 1 - groupStart;
 
           return (
             <PeriodContainer
@@ -83,7 +84,10 @@ export class PeriodGroup implements Period {
   public get bounds(): [number, number] {
     return this.periods.reduce(
       ([minimum, maximum], period) => {
-        return [Math.min(minimum, period.start), Math.max(maximum, period.end)];
+        return [
+          Math.min(minimum, period.start.scheduleTime),
+          Math.max(maximum, period.end.scheduleTime),
+        ];
       },
       [60 * 24, 0]
     );
@@ -91,6 +95,18 @@ export class PeriodGroup implements Period {
 
   public get summary(): string {
     return this.periods.map((period) => period.summary).join(", ");
+  }
+
+  public get day(): number {
+    return this.periods[0].day;
+  }
+
+  public get start() {
+    return new PeriodBoundary(this.day, this.bounds[0]);
+  }
+
+  public get end() {
+    return new PeriodBoundary(this.day, this.bounds[1]);
   }
 
   public get duration() {
@@ -118,37 +134,49 @@ export class PeriodGroup implements Period {
 
 type PracticalSubject = [[number, number], string];
 
-export const practicalSubjects = ({
-  chemistry,
-  hardCrafts,
-  softCrafts,
-  music,
-  gastronomy,
-}: {
-  chemistry: PracticalSubject;
-  hardCrafts: PracticalSubject;
-  softCrafts: PracticalSubject;
-  music: PracticalSubject;
-  gastronomy: PracticalSubject;
-}) =>
+export const practicalSubjects = (
+  day: number,
+  {
+    chemistry,
+    hardCrafts,
+    softCrafts,
+    music,
+    gastronomy,
+  }: {
+    chemistry: PracticalSubject;
+    hardCrafts: PracticalSubject;
+    softCrafts: PracticalSubject;
+    music: PracticalSubject;
+    gastronomy: PracticalSubject;
+  }
+) =>
   new PeriodGroup(
     [
-      new GroupedPeriod(chemistry[0], Subjects.Chemistry, "A415", chemistry[1]),
+      new GroupedPeriod(
+        chemistry[0],
+        day,
+        Subjects.Chemistry,
+        "A415",
+        chemistry[1]
+      ),
       new GroupedPeriod(
         hardCrafts[0],
+        day,
         Subjects.HardCrafts,
         "B903",
         hardCrafts[1]
       ),
       new GroupedPeriod(
         softCrafts[0],
+        day,
         Subjects.SoftCrafts,
         "A306",
         softCrafts[1]
       ),
-      new GroupedPeriod(music[0], Subjects.Music, "A109", music[1]),
+      new GroupedPeriod(music[0], day, Subjects.Music, "A109", music[1]),
       new GroupedPeriod(
         gastronomy[0],
+        day,
         Subjects.Gastronomy,
         "A407",
         gastronomy[1]
@@ -157,26 +185,26 @@ export const practicalSubjects = ({
     "Mentorsgrupp"
   );
 
-export const randomTime = (time: [number, number]) =>
+export const randomTime = (time: [number, number], day: number) =>
   new PeriodGroup(
     [
-      new GroupedPeriod(time, Subjects.Random, "A309", "O9DKA"),
-      new GroupedPeriod(time, Subjects.Random, "A402", "O9IER"),
-      new GroupedPeriod(time, Subjects.Random, "A415", "O9JZH"),
-      new GroupedPeriod(time, Subjects.Random, "A307", "O9LWA"),
-      new GroupedPeriod(time, Subjects.Random, "A308", "O9MBE"),
+      new GroupedPeriod(time, day, Subjects.Random, "A309", "O9DKA"),
+      new GroupedPeriod(time, day, Subjects.Random, "A402", "O9IER"),
+      new GroupedPeriod(time, day, Subjects.Random, "A415", "O9JZH"),
+      new GroupedPeriod(time, day, Subjects.Random, "A307", "O9LWA"),
+      new GroupedPeriod(time, day, Subjects.Random, "A308", "O9MBE"),
     ],
     "Mentorsgrupp"
   );
 
-export const languages = (time: [number, number]) =>
+export const languages = (time: [number, number], day: number) =>
   new PeriodGroup(
     [
-      new GroupedPeriod(time, Subjects.Swedish, "A308", "ASVEN"),
-      new GroupedPeriod(time, Subjects.French, "A221", "M2FR"),
-      new GroupedPeriod(time, Subjects.Spanish, "A110", "M2SP AAV"),
-      new GroupedPeriod(time, Subjects.Spanish, "A220", "M2SP CTH"),
-      new GroupedPeriod(time, Subjects.German, "A309", "M2TY"),
+      new GroupedPeriod(time, day, Subjects.Swedish, "A308", "ASVEN"),
+      new GroupedPeriod(time, day, Subjects.French, "A221", "M2FR"),
+      new GroupedPeriod(time, day, Subjects.Spanish, "A110", "M2SP AAV"),
+      new GroupedPeriod(time, day, Subjects.Spanish, "A220", "M2SP CTH"),
+      new GroupedPeriod(time, day, Subjects.German, "A309", "M2TY"),
     ],
     "Språkval"
   );

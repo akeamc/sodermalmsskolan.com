@@ -39,7 +39,7 @@ const PeriodCards: React.FunctionComponent<{
 }> = ({ schedule, groups, groupName }) => {
   const now = useTime(1000);
 
-  const nextPeriodGroup = schedule.nextPeriod(now, groups);
+  const nextPeriodGroup = schedule.periods.filterByGroups(groups).next(now);
   const nextPeriod = nextPeriodGroup.getPeriodByGroup(
     groups[nextPeriodGroup.groupCategory]
   );

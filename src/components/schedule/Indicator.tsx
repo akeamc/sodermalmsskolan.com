@@ -38,7 +38,7 @@ export const TimeIndicator: React.FunctionComponent<{
   const numberOfColumns = scheduleEnd - scheduleStart;
 
   useEffect(() => {
-    const currentTime = Schedule.dateToscheduleTime(now);
+    const currentTime = Schedule.dateToScheduleTime(now);
     const currentDay = Schedule.dateToDayIndex(now);
 
     setProgress(currentDay > day ? 1 : 0);

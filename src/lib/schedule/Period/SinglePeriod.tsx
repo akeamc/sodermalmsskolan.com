@@ -1,73 +1,41 @@
-import { Period } from ".";
+import { Period, PeriodBoundary } from ".";
 import { Subject } from "../Subject";
 import { PeriodComponent } from "./PeriodComponent";
 import React from "react";
 
 export class SinglePeriod implements Period {
-  /**
-   * When the period starts. Equal to the number of minutes since midnight divided by five.
-   */
-  start: number;
+  public readonly start: PeriodBoundary;
+  public readonly end: PeriodBoundary;
+  public readonly subject: Subject;
+  public readonly room: string;
+  public readonly day: number;
 
-  /**
-   * When the period ends. Equal to the number of minutes since midnight divided by five.
-   */
-  end: number;
-  subject: Subject;
-  room: string;
-
-  constructor([start, end]: [number, number], subject: Subject, room: string) {
-    this.start = start;
-    this.end = end;
+  constructor(
+    [start, end]: [number, number],
+    day: number,
+    subject: Subject,
+    room: string
+  ) {
+    this.start = new PeriodBoundary(day, start);
+    this.end = new PeriodBoundary(day, end);
+    this.day = day;
     this.subject = subject;
     this.room = room;
   }
 
-  private humanTimestamp(timestamp: number): [number, number] {
-    const minutes = Math.floor(timestamp % 12) * 5;
-    const hours = Math.floor(timestamp / 12);
-
-    return [hours, minutes];
-  }
-
-  private hourMinuteTimestamp(
-    timestamp: number,
-    delimeter: string = ":"
-  ): string {
-    return this.humanTimestamp(timestamp)
-      .map((digits) => digits.toString().padStart(2, "0"))
-      .join(delimeter);
-  }
-
   /**
-   * The duration of this period in minutes.
+   * The duration of this period as a number of five-minute blocks.
    */
   public get duration(): number {
-    return Math.abs(this.end - this.start);
-  }
-
-  public get humanStart() {
-    return this.humanTimestamp(this.start);
-  }
-
-  public get hourMinuteStart() {
-    return this.hourMinuteTimestamp(this.start);
-  }
-
-  public get humanEnd() {
-    return this.humanTimestamp(this.end);
-  }
-
-  public get hourMinuteEnd() {
-    return this.hourMinuteTimestamp(this.end);
+    return Math.abs(this.end.scheduleTime - this.start.scheduleTime);
   }
 
   public get bounds(): [number, number] {
-    return [this.start, this.end];
+    return [this.start.scheduleTime, this.end.scheduleTime];
   }
 
   public get summary(): string {
-    return `${this.subject.name} ${this.hourMinuteStart} i ${this.room}`;
+    return `${this.subject.name} ${this.start.format()} i ${this.room}`;
   }
 
   public get groups(): null {
@@ -80,8 +48,8 @@ export class SinglePeriod implements Period {
 
   public Component: React.FunctionComponent = () => (
     <PeriodComponent
-      start={this.hourMinuteStart}
-      end={this.hourMinuteEnd}
+      start={this.start.format()}
+      end={this.end.format()}
       room={this.room}
       title={this.subject.symbol}
       color={this.subject.color}

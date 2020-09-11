@@ -78,13 +78,14 @@ const ScheduleDetail: React.FunctionComponent<{
   groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
   const now = useTime(1000);
+  const nextPeriod = schedule.periods.filterByGroups(groups).next(now);
 
   return (
     <GridTitleSection
       title={schedule.group}
       description={`Nästa lektion: ${
-        schedule.nextPeriod(now, groups).summary
-      }.`}
+        nextPeriod?.summary
+      } (${nextPeriod.start.nextAbsolute(now).from(now)}).`}
     />
   );
 };
@@ -117,7 +118,7 @@ export const ScheduleTable: React.FunctionComponent<{
               <React.Fragment key={index}>
                 <VerticalStripe
                   column={index + 2}
-                  rowEnd={schedule.days.length + 2}
+                  rowEnd={schedule.days + 2}
                   highlighted={showLabel}
                 />
                 {showLabel && (
@@ -135,15 +136,12 @@ export const ScheduleTable: React.FunctionComponent<{
             );
           })}
 
-          {schedule.days.map((day, index) => {
+          {Array.from({ length: schedule.days }, (_, index) => {
             const gridRow = index + 2;
-
-            const periods = day.filterPeriods(groups);
 
             return (
               <React.Fragment key={index}>
                 <TimeIndicator schedule={schedule} day={index} />
-
                 <DayTitleContainer style={{ gridRow }}>
                   <DayTitle>
                     {firstLetterUpperCase(
@@ -154,30 +152,31 @@ export const ScheduleTable: React.FunctionComponent<{
                     )}
                   </DayTitle>
                 </DayTitleContainer>
-
                 <HorizontalStripe
                   row={gridRow}
                   columnEnd={numberOfColumns + 2}
                 />
-
-                {periods.map((period, index) => {
-                  const [start, end] = period.bounds;
-
-                  const gridColumnStart = start - gridColumnMinimum;
-                  const gridColumnEnd = end - gridColumnMinimum;
-
-                  return (
-                    <PeriodWrapper
-                      key={index}
-                      row={gridRow}
-                      columnStart={gridColumnStart}
-                      columnEnd={gridColumnEnd}
-                    >
-                      <period.Component />
-                    </PeriodWrapper>
-                  );
-                })}
               </React.Fragment>
+            );
+          })}
+
+          {schedule.periods.filterByGroups(groups).map((period, index) => {
+            const gridRow = period.day + 2;
+
+            const [start, end] = period.bounds;
+
+            const gridColumnStart = start - gridColumnMinimum;
+            const gridColumnEnd = end - gridColumnMinimum;
+
+            return (
+              <PeriodWrapper
+                key={index}
+                row={gridRow}
+                columnStart={gridColumnStart}
+                columnEnd={gridColumnEnd}
+              >
+                <period.Component />
+              </PeriodWrapper>
             );
           })}
         </Table>
