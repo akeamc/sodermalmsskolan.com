@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Layout } from "../components/basic/Layout";
-import { AutoLink } from "../components/basic/Link";
+import { Link } from "../components/basic/Link";
 import { MenuList } from "../components/menu/MenuList";
 import { AdSection } from "../components/basic/Ad";
 import { Section } from "../components/layout/Section";

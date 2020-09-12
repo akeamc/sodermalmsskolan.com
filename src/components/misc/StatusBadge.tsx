@@ -34,8 +34,8 @@ const BadgeValue = styled.small<{ color: string }>`
 `;
 
 export interface StatusBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  label: JSX.Element | string;
-  value: JSX.Element | string;
+  label: React.ReactNode;
+  value: React.ReactNode;
   color: string;
   isValidating?: boolean;
 }

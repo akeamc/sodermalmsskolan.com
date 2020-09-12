@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { AutoLink } from "./Link";
+import { Link } from "./Link";
 
-export const Button = styled(AutoLink)<{
+export const Button = styled(Link)<{
   secondary?: boolean;
   $colored?: boolean;
   $small?: boolean;

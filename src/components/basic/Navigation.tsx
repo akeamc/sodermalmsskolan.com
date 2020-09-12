@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { Row } from "../grid/Row";
 import { Logo } from "./Logo";
-import { AutoLink, AutoLinkProps } from "./Link";
+import { Link, AutoLinkProps } from "./Link";
 import { useScrollPosition } from "../../lib/hooks/scroll";
 import { TextColorModifier } from "./Typography";
 import ScrollLock from "react-scrolllock";
@@ -82,7 +82,7 @@ const DesktopLinks = styled.div`
   }
 `;
 
-const DesktopLinkAnchor = styled(AutoLink)<{ active?: boolean }>`
+const DesktopLinkAnchor = styled(Link)<{ active?: boolean }>`
   float: left;
   margin: 0 10px;
   padding: 10px;
@@ -167,7 +167,7 @@ const MobileList = styled(UnstyledList)`
   }
 `;
 
-const MobileAnchor = styled(AutoLink)`
+const MobileAnchor = styled(Link)`
   li {
     border-bottom: 1px solid var(--accents-2);
     height: 48px;

@@ -26,8 +26,8 @@ export function getLineClamp(lines: number): React.CSSProperties {
 }
 
 export interface GridItem {
-  title: string | JSX.Element;
-  description: string | JSX.Element;
+  title: React.ReactNode;
+  description: React.ReactNode;
   image?: string;
   meta?: {
     authors: GenericUser[];

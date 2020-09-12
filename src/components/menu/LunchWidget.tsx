@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useMenus } from "../../lib/api/main/food/Menu";
 import { Card, CardContent, CardFooter } from "../basic/Card";
-import { AutoLink } from "../basic/Link";
+import { Link } from "../basic/Link";
 import { Button } from "../basic/Button";
 import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
