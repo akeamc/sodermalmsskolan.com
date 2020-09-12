@@ -18,9 +18,8 @@ const CardWrapper = styled(LinkBlock)`
 `;
 
 const BigCard = styled(Card)<{ image: string }>`
-  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("${({
-    image,
-  }) => useProgressiveImage(image).src}");
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    url("${({ image }) => useProgressiveImage(image).src}");
   background-size: cover;
   background-position: center;
 `;

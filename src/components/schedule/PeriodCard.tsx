@@ -37,15 +37,15 @@ const Waves = styled.div<{ color: string }>`
     left: 0;
     right: -256px;
     height: 64px;
-    background-image: url('data:image/svg+xml;utf8,${({ color }) =>
-      waveSvg(transparentize(0.9, color))}');
+    background-image: url("data:image/svg+xml;utf8,${({ color }) =>
+      waveSvg(transparentize(0.9, color))}");
     background-repeat: repeat-x;
     content: "";
     animation: ${waveAnimation} 5s infinite linear;
 
     @media (prefers-color-scheme: dark) {
-      background-image: url('data:image/svg+xml;utf8,${({ color }) =>
-        waveSvg(transparentize(0.75, color))}');
+      background-image: url("data:image/svg+xml;utf8,${({ color }) =>
+        waveSvg(transparentize(0.75, color))}");
     }
   }
 `;

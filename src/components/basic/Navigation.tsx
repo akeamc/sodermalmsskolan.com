@@ -82,7 +82,7 @@ const DesktopLinks = styled.div`
   }
 `;
 
-const DesktopLinkAnchor = styled(Link)<{ active?: boolean }>`
+const DesktopLinkAnchor = styled(Link)<{ $active?: boolean }>`
   float: left;
   margin: 0 10px;
   padding: 10px;
@@ -96,8 +96,8 @@ const DesktopLinkAnchor = styled(Link)<{ active?: boolean }>`
     color: var(--foreground);
   }
 
-  ${({ active }) =>
-    active &&
+  ${({ $active }) =>
+    $active &&
     `
     color: var(--foreground);
   `}
@@ -112,7 +112,7 @@ const DesktopLink: React.FunctionComponent<AutoLinkProps> = ({
   const isActive = router.pathname == href;
 
   return (
-    <DesktopLinkAnchor href={href} active={isActive} {...rest}>
+    <DesktopLinkAnchor href={href} $active={isActive} {...rest}>
       {children}
     </DesktopLinkAnchor>
   );

@@ -6,7 +6,7 @@ import pxcmprs from "../../lib/utils/pxcmprs";
 
 interface AvatarProps {
   size?: number;
-  isPlaceholder?: boolean;
+  $placeholder?: boolean;
 }
 
 function avatarSizeToEm(size: number = 2): number {
@@ -44,8 +44,7 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   background: var(--background);
   display: inline-block;
 
-  ${({ isPlaceholder: placeholder }) =>
-    placeholder && `border: 1px solid var(--accents-2)`};
+  ${({ $placeholder }) => $placeholder && `border: 1px solid var(--accents-2)`};
 `;
 
 export const Avatar: React.FunctionComponent<{
@@ -62,7 +61,7 @@ export const Avatar: React.FunctionComponent<{
   placeholder = false,
 }) => {
   return (
-    <AvatarWrapper isPlaceholder={placeholder} href={href} size={size}>
+    <AvatarWrapper $placeholder={placeholder} href={href} size={size}>
       {!placeholder && (
         <AvatarImage src={useProxy ? useSmallAvatar(imageUrl) : imageUrl} />
       )}

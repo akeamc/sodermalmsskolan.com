@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "./Link";
 
 export const Button = styled(Link)<{
-  secondary?: boolean;
+  $secondary?: boolean;
   $colored?: boolean;
   $small?: boolean;
 }>`
@@ -29,8 +29,8 @@ export const Button = styled(Link)<{
     color: var(--button-foreground);
   }
 
-  ${({ secondary }) =>
-    secondary &&
+  ${({ $secondary }) =>
+    $secondary &&
     `
     background-color: var(--background);
     color: var(--foreground);
