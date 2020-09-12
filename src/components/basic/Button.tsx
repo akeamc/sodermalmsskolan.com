@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { AutoLink } from "./Link";
+import { Link } from "./Link";
 
-export const Button = styled(AutoLink)<{
-  secondary?: boolean;
+export const Button = styled(Link)<{
+  $secondary?: boolean;
   $colored?: boolean;
   $small?: boolean;
 }>`
@@ -29,8 +29,8 @@ export const Button = styled(AutoLink)<{
     color: var(--button-foreground);
   }
 
-  ${({ secondary }) =>
-    secondary &&
+  ${({ $secondary }) =>
+    $secondary &&
     `
     background-color: var(--background);
     color: var(--foreground);

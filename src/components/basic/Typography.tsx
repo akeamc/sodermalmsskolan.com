@@ -58,8 +58,8 @@ export const GridDescription = styled.p`
 `;
 
 export const GridTitleSection: React.FunctionComponent<{
-  title: string | JSX.Element;
-  description?: string | JSX.Element;
+  title: React.ReactNode;
+  description?: React.ReactNode;
 }> = ({ title, description }) => {
   return (
     <GridTitleContainer>

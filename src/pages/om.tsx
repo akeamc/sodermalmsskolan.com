@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
-import { AutoLink } from "../components/basic/Link";
+import { Link } from "../components/basic/Link";
 import { Navigation } from "../components/basic/Navigation";
 import { Row } from "../components/grid/Row";
 import { Hero } from "../components/layout/Hero";
@@ -46,9 +46,9 @@ const Page: React.FunctionComponent = () => {
               <p>
                 Det tog dock inte lång tid innan vi började med en blogg. Först
                 ut var en artikel om oss, kallad Om oss, och{" "}
-                <AutoLink href="/blogg/problemet-med-skolmaten">
+                <Link href="/blogg/problemet-med-skolmaten">
                   en artikel om matproblemet
-                </AutoLink>{" "}
+                </Link>{" "}
                 som renoverats mycket sedan den publicerades.
               </p>
             </TextBox>

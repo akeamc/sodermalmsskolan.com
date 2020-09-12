@@ -5,8 +5,8 @@ import { GenericUser } from "../../lib/models/User";
 import pxcmprs from "../../lib/utils/pxcmprs";
 
 interface AvatarProps {
-  size?: number;
-  isPlaceholder?: boolean;
+  $size?: number;
+  $placeholder?: boolean;
 }
 
 function avatarSizeToEm(size: number = 2): number {
@@ -32,8 +32,8 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   border-radius: 50%;
   box-sizing: border-box;
 
-  ${({ size }) => {
-    let width = avatarSizeToEm(size);
+  ${({ $size }) => {
+    let width = avatarSizeToEm($size);
 
     return `
       width: ${width}rem;
@@ -44,8 +44,7 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   background: var(--background);
   display: inline-block;
 
-  ${({ isPlaceholder: placeholder }) =>
-    placeholder && `border: 1px solid var(--accents-2)`};
+  ${({ $placeholder }) => $placeholder && `border: 1px solid var(--accents-2)`};
 `;
 
 export const Avatar: React.FunctionComponent<{
@@ -62,7 +61,7 @@ export const Avatar: React.FunctionComponent<{
   placeholder = false,
 }) => {
   return (
-    <AvatarWrapper isPlaceholder={placeholder} href={href} size={size}>
+    <AvatarWrapper $placeholder={placeholder} href={href} $size={size}>
       {!placeholder && (
         <AvatarImage src={useProxy ? useSmallAvatar(imageUrl) : imageUrl} />
       )}
@@ -74,10 +73,10 @@ const AvatarGroup = styled.div<AvatarProps>`
   display: inline-flex;
   position: relative;
   flex-direction: row-reverse;
-  padding-left: ${({ size }) => avatarSizeToEm(size) / 2}rem;
+  padding-left: ${({ $size: size }) => avatarSizeToEm(size) / 2}rem;
 
   ${AvatarWrapper} {
-    margin-left: ${({ size }) => avatarSizeToEm(size) / -2}rem;
+    margin-left: ${({ $size: size }) => avatarSizeToEm(size) / -2}rem;
     border: 2px solid var(--background);
     box-sizing: content-box;
 

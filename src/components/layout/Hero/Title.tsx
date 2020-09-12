@@ -41,9 +41,9 @@ export const TitleContainer = styled.div<{ center?: boolean }>`
 `;
 
 export const HeroWithTitle: React.FunctionComponent<{
-  title: string | JSX.Element;
-  lead?: string | JSX.Element;
-  children?: JSX.Element | JSX.Element[];
+  title: React.ReactNode;
+  lead?: React.ReactNode;
+  children?: React.ReactNode;
 }> = ({ title, lead, children }) => (
   <Hero>
     <Row>

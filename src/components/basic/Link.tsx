@@ -1,30 +1,24 @@
 import styled from "styled-components";
-import Link from "next/link";
+import NextLink from "next/link";
 import React from "react";
 
 export interface AutoLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   href?: string;
 }
 
-export const AutoLink: React.FunctionComponent<AutoLinkProps> = ({
+export const Link: React.FunctionComponent<AutoLinkProps> = ({
   href = "",
   children,
   ...props
 }) => {
-  const isExternal = href.indexOf("//") > -1;
-
-  return isExternal ? (
-    <a href={href} {...props}>
-      {children}
-    </a>
-  ) : (
-    <Link href={href}>
+  return (
+    <NextLink href={href}>
       <a {...props}>{children}</a>
-    </Link>
+    </NextLink>
   );
 };
 
-export const LinkBlock = styled(AutoLink)`
+export const LinkBlock = styled(Link)`
   text-decoration: none;
   color: inherit;
   display: block;

@@ -4,7 +4,7 @@ import React, { ReactElement } from "react";
 import { useAuth } from "../providers/Auth";
 import { FullPageSpinner } from "../components/basic/Spinner";
 import { FullPageWrapper } from "../components/layout/Container";
-import { AutoLink } from "../components/basic/Link";
+import { Link } from "../components/basic/Link";
 import { DISCORD_INVITE } from "../components/basic/Footer/Bottom";
 
 function isBrowser(): boolean {
@@ -52,8 +52,7 @@ export default function withAuthRedirect<CP = {}, IP = CP>({
       return (
         <FullPageWrapper>
           <p>
-            Du måste{" "}
-            <AutoLink href={DISCORD_INVITE}>gå med i Discordservern</AutoLink>{" "}
+            Du måste <Link href={DISCORD_INVITE}>gå med i Discordservern</Link>{" "}
             först.
           </p>
         </FullPageWrapper>

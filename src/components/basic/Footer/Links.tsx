@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { Row } from "../../grid/Row";
-import { AutoLink } from "../Link";
+import { Link } from "../Link";
 import { UnstyledList } from "../List";
 import * as breakpoints from "../../../styles/breakpoints";
 import React from "react";
 import { useAuth } from "../../../providers/Auth";
+import { ArrowUpRight } from "react-feather";
 
 export interface Item {
   name: string;
@@ -115,16 +116,6 @@ const List = styled(UnstyledList)`
   li {
     margin: 12px 0;
   }
-
-  a {
-    font-size: 0.875rem;
-    font-weight: 400;
-    color: var(--accents-5);
-
-    &:hover {
-      color: var(--foreground);
-    }
-  }
 `;
 
 const ColumnTitle = styled.h3`
@@ -135,6 +126,40 @@ const ColumnTitle = styled.h3`
   letter-spacing: 0;
 `;
 
+const LinkArrow = styled(ArrowUpRight)`
+  height: 1.25em;
+  width: 1.25em;
+  vertical-align: text-top;
+`;
+
+const StyledFooterLink = styled(Link)`
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--accents-5);
+
+  &:hover {
+    color: var(--foreground);
+
+    ${LinkArrow} {
+      transform: translate(25%, -25%);
+    }
+  }
+
+  ${LinkArrow} {
+    transition: transform 0.1s ease;
+  }
+`;
+
+const FooterLink: React.FunctionComponent<Item> = ({ href, name }) => {
+  const isExternal = href.indexOf("//") > -1;
+
+  return (
+    <StyledFooterLink href={href}>
+      {name} {isExternal && <LinkArrow />}
+    </StyledFooterLink>
+  );
+};
+
 export const FooterLinks: React.FunctionComponent = () => {
   const categories = useLinks();
 
@@ -144,11 +169,9 @@ export const FooterLinks: React.FunctionComponent = () => {
         <Column key={index}>
           <ColumnTitle>{name}</ColumnTitle>
           <List>
-            {items.map(({ name, href }, index) => (
+            {items.map((item, index) => (
               <li key={index}>
-                <AutoLink key={index} href={href}>
-                  {name}
-                </AutoLink>
+                <FooterLink {...item} />
               </li>
             ))}
           </List>

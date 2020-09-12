@@ -50,7 +50,7 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
 };
 
 export class Layout extends React.Component<{
-  children: JSX.Element | JSX.Element[] | (JSX.Element | JSX.Element[])[];
+  children: React.ReactNode;
   metadata?: SiteMetadata;
 }> {
   componentDidMount() {
