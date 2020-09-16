@@ -1,14 +1,28 @@
-import cookie from "cookie";
+import cookie, { CookieSerializeOptions } from "cookie";
 import { COOKIE_NAME, JWT_SECRET } from "./options";
 import jwt from "jsonwebtoken";
 
-export const getAuthCookie = (accessToken: string, maxAge: number): string => {
+const DEFAULT_COOKIE_OPTIONS: CookieSerializeOptions = {
+  sameSite: "lax",
+  path: "/",
+  httpOnly: true,
+};
+
+export const generateAuthCookie = (
+  accessToken: string,
+  maxAge: number
+): string => {
   const webToken = jwt.sign(accessToken, JWT_SECRET);
 
   return cookie.serialize(COOKIE_NAME, webToken, {
-    sameSite: "lax",
-    path: "/",
-    httpOnly: true,
+    ...DEFAULT_COOKIE_OPTIONS,
     maxAge,
+  });
+};
+
+export const destroyAuthCookie = (): string => {
+  return cookie.serialize(COOKIE_NAME, "", {
+    ...DEFAULT_COOKIE_OPTIONS,
+    maxAge: 0,
   });
 };

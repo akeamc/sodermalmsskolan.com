@@ -6,6 +6,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import { Spinner } from "../basic/Spinner";
 import { ProgressiveImage } from "../basic/ProgressiveImage";
 import { LinkBlock } from "../basic/Link";
+import { Emoji } from "../basic/Emoji";
 
 const GalleryWrapper = styled.div`
   display: grid;
@@ -80,7 +81,10 @@ export const FoodGallery: React.FunctionComponent = () => {
                 {moment(message.createdAt)
                   .locale("sv")
                   .format("HH:mm D MMMM YYYY")}{" "}
-                · <i>{message.content}</i>
+                ·{" "}
+                <i>
+                  <Emoji>{message.content}</Emoji>
+                </i>
               </small>
             </CaptionWrapper>
           </ArtworkWrapper>

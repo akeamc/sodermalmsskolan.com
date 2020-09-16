@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { COOKIE_NAME, JWT_SECRET } from "./options";
 import jwt from "jsonwebtoken";
+import { destroyAuthCookie } from "./cookie";
 
 /**
  * Assert that the request contains a valid authentication token.
@@ -28,7 +29,9 @@ const withAuth = (
       }
     }
 
-    return res.status(403).send("invalid or missing access token");
+    res.status(403).setHeader("Set-Cookie", destroyAuthCookie());
+
+    return res.send("invalid or missing access token");
   };
 };
 

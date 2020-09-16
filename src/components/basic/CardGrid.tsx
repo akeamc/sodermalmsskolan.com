@@ -15,6 +15,7 @@ import { LinkBlock } from "./Link";
 import moment from "moment";
 import { AuthorGroup } from "./Avatar";
 import * as breakpoints from "../../styles/breakpoints";
+import { Emoji } from "./Emoji";
 
 export function getLineClamp(lines: number): React.CSSProperties {
   return {
@@ -68,7 +69,7 @@ class CardGridItem extends React.Component<{
               {loading ? (
                 <Skeleton count={descriptionRows} />
               ) : (
-                item.description
+                <Emoji>{item?.description}</Emoji>
               )}
             </Description>
           </CardContent>
