@@ -29,6 +29,7 @@ const LinkableHeading = styled.div`
       --anchor-offset: calc(var(--navigation-height) + 1rem);
       height: var(--anchor-offset);
       margin-top: calc(var(--anchor-offset) * -1);
+      pointer-events: none;
     }
 
     &:hover {
