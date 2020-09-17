@@ -8,12 +8,39 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { Section } from "../../layout/Section";
 import { Row } from "../../grid/Row";
 import * as breakpoints from "../../../styles/breakpoints";
+import { Link as LinkIcon } from "react-feather";
 
 enum FigureWidth {
   Normal,
   Wide,
   Full,
 }
+
+const LinkableHeading = styled.div`
+  position: relative;
+
+  a {
+    color: inherit;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom-color: var(--foreground);
+
+      & ~ svg {
+        visibility: visible;
+      }
+    }
+  }
+
+  svg {
+    height: 0.75em;
+    width: 0.75em;
+    color: var(--accents-4);
+    margin-left: 0.25em;
+    visibility: hidden;
+    vertical-align: -0.05em;
+  }
+`;
 
 const Figure = styled.figure<{ width: FigureWidth }>`
   margin: 0;
@@ -140,6 +167,10 @@ const RichText = styled.div`
     line-height: 2;
   }
 
+  em {
+    color: var(--foreground);
+  }
+
   > ${Embed}, > ${Figure}, > ${Blockquote}, > img {
     margin-top: 48px;
     margin-bottom: 48px;
@@ -236,6 +267,21 @@ const ArticleBody: React.FunctionComponent<{
 
     if (node.name == "hr") {
       return <Divider key={index} />;
+    }
+
+    if (/^h[1-6]$/i.test(node.name)) {
+      const { id } = node.attribs;
+
+      return (
+        <node.name id={id}>
+          <LinkableHeading>
+            <a href={"#" + id} id={id}>
+              {node.children.map(transform)}
+            </a>
+            <LinkIcon />
+          </LinkableHeading>
+        </node.name>
+      );
     }
 
     if (node.type == "text") {

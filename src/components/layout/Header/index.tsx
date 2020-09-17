@@ -4,7 +4,8 @@ import { Navigation } from "../../basic/Navigation";
 import { Hero } from "../Hero";
 import { Row } from "../../grid/Row";
 import { ResponsiveHalf } from "../../grid/Col";
-import React from "react";
+import React, { useRef, useState } from "react";
+import { useScrollPosition } from "../../../lib/hooks/scroll";
 
 const Background = styled.div<{ image: string }>`
   background: ${({ image }) =>
@@ -24,21 +25,43 @@ const Container = styled(TextColorModifier)<{ minHeight?: string }>`
   flex-direction: column;
   justify-content: flex-end;
   padding-top: var(--navigation-height);
+  overflow: hidden;
 `;
 
 export const HeaderWithBackground: React.FunctionComponent<{
   children: any;
   image: string;
   minHeight?: string;
-}> = ({ children, image, minHeight }) => {
+  fadeDuration?: number;
+}> = ({ children, image, minHeight, fadeDuration = 400 }) => {
+  const [opacity, setOpacity] = useState<number>(1);
+  const [transform, setTransform] = useState<number>(0);
+
+  const ref = useRef<HTMLDivElement>();
+
+  useScrollPosition(
+    ({ current: { y } }) => {
+      setTransform(y / 4);
+      setOpacity(Math.max((fadeDuration - y) / fadeDuration, 0));
+    },
+    { element: ref, throttle: 10 }
+  );
+
   return (
     <>
       <Navigation noPlaceholder brightText transparent />
       <Background image={image}>
-        <Container bright minHeight={minHeight}>
-          <Hero>
+        <Container bright minHeight={minHeight} ref={ref}>
+          <Hero
+            style={{
+              opacity,
+              transform: `translateY(${transform}px)`,
+            }}
+          >
             <Row>
-              <ResponsiveHalf>{children}</ResponsiveHalf>
+              <ResponsiveHalf>
+                <div>{children}</div>
+              </ResponsiveHalf>
             </Row>
           </Hero>
         </Container>
