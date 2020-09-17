@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { fetchToken } from "../../../lib/auth/flow";
-import { getAuthCookie } from "../../../lib/auth/cookie";
+import { generateAuthCookie } from "../../../lib/auth/cookie";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const code = req.query.code.toString();
@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.setHeader(
       "Set-Cookie",
-      getAuthCookie(oauthToken.access_token, oauthToken.expires_in)
+      generateAuthCookie(oauthToken.access_token, oauthToken.expires_in)
     );
 
     return res.redirect("/konto");

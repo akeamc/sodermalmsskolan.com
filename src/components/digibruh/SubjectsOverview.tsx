@@ -7,6 +7,8 @@ import { Section } from "../layout/Section";
 import { Row } from "../grid/Row";
 import { Col } from "../grid/Col";
 import { GridTitleSection } from "../basic/Typography";
+import Link from "next/link";
+import { Emoji } from "../basic/Emoji";
 
 const SubjectsOverview: React.FunctionComponent = () => {
   const { data } = useDigibruh();
@@ -26,8 +28,22 @@ const SubjectsOverview: React.FunctionComponent = () => {
             <Row>
               <Col xs={12}>
                 <GridTitleSection
-                  title={loading ? <Skeleton /> : subject?.name}
-                  description={loading ? <Skeleton /> : subject?.description}
+                  title={
+                    loading ? (
+                      <Skeleton />
+                    ) : (
+                      <Link href={subject.url}>
+                        <a style={{ color: "inherit" }}>{subject?.name}</a>
+                      </Link>
+                    )
+                  }
+                  description={
+                    loading ? (
+                      <Skeleton />
+                    ) : (
+                      <Emoji>{subject?.description}</Emoji>
+                    )
+                  }
                 />
               </Col>
             </Row>
