@@ -252,7 +252,7 @@ export const Navigation: React.FunctionComponent<{
 
   useScrollPosition(({ current: { y } }) => {
     setFloating(y > 0);
-  }, 100);
+  });
 
   const toggleOpen = () => {
     setOpen(!open);

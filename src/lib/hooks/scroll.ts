@@ -1,20 +1,45 @@
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 
 const isBrowser = typeof window !== `undefined`;
 
-function getScrollPosition() {
-  if (!isBrowser) return { x: 0, y: 0 };
+interface ScrollPosition {
+  /**
+   * The number of pixels between the left of the element and the viewport left. Thus, a negative number indicates that it has not yet been scrolled to.
+   */
+  x: number;
 
-  return { x: window.scrollX, y: window.scrollY };
+  /**
+   * The number of pixels between the top of the element and the viewport top. Thus, a negative number indicates that it has not yet been scrolled to.
+   */
+  y: number;
 }
 
-export function useScrollPosition(effect, wait) {
+function getScrollPosition(
+  element?: React.MutableRefObject<HTMLElement>
+): ScrollPosition {
+  if (!isBrowser) return { x: 0, y: 0 };
+
+  const target: HTMLElement = element?.current || document.body;
+  const position = target.getBoundingClientRect();
+
+  return { x: -position.x, y: -position.y };
+}
+
+interface ScrollHookOptions {
+  throttle?: number;
+  element?: React.MutableRefObject<HTMLElement>;
+}
+
+export function useScrollPosition(
+  effect: (data: { previous: ScrollPosition; current: ScrollPosition }) => void,
+  { throttle = 100, element }: ScrollHookOptions = {}
+) {
   const position = useRef(getScrollPosition());
 
   let throttleTimeout = null;
 
   const callback = () => {
-    const current = getScrollPosition();
+    const current = getScrollPosition(element);
     effect({ previous: position.current, current });
     position.current = current;
     throttleTimeout = null;
@@ -22,9 +47,9 @@ export function useScrollPosition(effect, wait) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (wait) {
+      if (throttle) {
         if (throttleTimeout === null) {
-          throttleTimeout = setTimeout(callback, wait);
+          throttleTimeout = setTimeout(callback, throttle);
         }
       } else {
         callback();
