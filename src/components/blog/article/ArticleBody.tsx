@@ -23,15 +23,6 @@ const LinkableHeading = styled.div`
     color: inherit;
     border-bottom: 1px solid transparent;
 
-    &::before {
-      content: "";
-      display: block;
-      --anchor-offset: calc(var(--navigation-height) + 1rem);
-      height: var(--anchor-offset);
-      margin-top: calc(var(--anchor-offset) * -1);
-      pointer-events: none;
-    }
-
     &:hover {
       border-bottom-color: var(--foreground);
 

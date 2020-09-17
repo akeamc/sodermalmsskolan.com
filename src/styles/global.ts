@@ -8,6 +8,8 @@ export default createGlobalStyle`
     color: var(--foreground);
     transition: color 0.1s ease, background-color 0.1s ease;
     font-feature-settings: "calt", "case";
+
+    scroll-padding-top: calc(var(--navigation-height) + 1rem);
   }
 
   @supports (font-variation-settings: normal) {
