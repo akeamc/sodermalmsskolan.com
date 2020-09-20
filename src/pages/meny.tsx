@@ -7,7 +7,7 @@ import { Section } from "../components/layout/Section";
 import { Hero } from "../components/layout/Hero";
 import { Row } from "../components/grid/Row";
 import { Col } from "../components/grid/Col";
-import { Navigation } from "../components/basic/Navigation";
+import { Navigation } from "../components/layout/Navigation";
 import { Image } from "../components/basic/Image";
 import {
   LeadText,

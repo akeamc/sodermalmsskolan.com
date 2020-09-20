@@ -17,7 +17,7 @@ export interface Category {
   items: Item[];
 }
 
-export const useLinks = () => {
+export const useLinks = (): Category[] => {
   const { isAuthenticated, user: user } = useAuth();
 
   return [

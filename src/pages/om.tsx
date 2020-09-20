@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../components/basic/Layout";
 import { Link } from "../components/basic/Link";
-import { Navigation } from "../components/basic/Navigation";
+import { Navigation } from "../components/layout/Navigation";
 import { Row } from "../components/grid/Row";
 import { Hero } from "../components/layout/Hero";
 import { NormalWidth } from "../components/grid/Col";

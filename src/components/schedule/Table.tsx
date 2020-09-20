@@ -5,7 +5,7 @@ import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import { TimeIndicator } from "./Indicator";
 import { GridTitleSection } from "../basic/Typography";
-import { useTime } from "../../lib/hooks/time";
+import { useTime } from "../../hooks/time";
 import { GroupFilter } from "../../lib/schedule/Filter";
 
 const TableWrapper = styled.div`

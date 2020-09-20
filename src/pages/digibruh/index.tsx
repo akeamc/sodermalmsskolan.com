@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../../components/basic/Layout";
 import SubjectsOverview from "../../components/digibruh/SubjectsOverview";
-import { Navigation } from "../../components/basic/Navigation";
+import { Navigation } from "../../components/layout/Navigation";
 import { HeroWithTitle } from "../../components/layout/Hero/Title";
 
 const Page: React.FunctionComponent = () => {

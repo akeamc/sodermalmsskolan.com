@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { TextColorModifier } from "../../basic/Typography";
-import { Navigation } from "../../basic/Navigation";
+import { Navigation } from "../Navigation";
 import { Hero } from "../Hero";
 import { Row } from "../../grid/Row";
 import { ResponsiveHalf } from "../../grid/Col";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 
 const Background = styled(motion.div)<{ image: string }>`
@@ -17,7 +17,7 @@ const Background = styled(motion.div)<{ image: string }>`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
 `;
 
 const Container = styled(TextColorModifier)<{ minHeight?: string }>`
@@ -33,6 +33,7 @@ const Container = styled(TextColorModifier)<{ minHeight?: string }>`
   margin-bottom: var(--section-spacing);
   overflow: hidden;
   position: relative;
+  background-color: #000;
 `;
 
 export const HeaderWithBackground: React.FunctionComponent<{
@@ -43,6 +44,7 @@ export const HeaderWithBackground: React.FunctionComponent<{
 }> = ({ children, image, minHeight }) => {
   const { scrollY } = useViewportScroll();
   const ref = useRef<HTMLDivElement>();
+  const [navFloating, setNavFloating] = useState<boolean>(false);
 
   const opacity = useTransform(
     scrollY,
@@ -54,11 +56,19 @@ export const HeaderWithBackground: React.FunctionComponent<{
     (value) => 1 + value / (ref?.current?.offsetHeight * 2)
   );
 
+  useEffect(
+    () =>
+      scrollY.onChange((latest) =>
+        setNavFloating(latest > ref?.current?.offsetHeight - 64)
+      ),
+    []
+  );
+
   return (
     <>
-      <Navigation noPlaceholder brightText transparent />
+      <Navigation brightText floating={navFloating} />
       <Container bright minHeight={minHeight} ref={ref}>
-        <motion.div style={{ opacity, y }}>
+        <motion.div style={{ opacity, y, zIndex: 1 }}>
           <Hero>
             <Row>
               <ResponsiveHalf>

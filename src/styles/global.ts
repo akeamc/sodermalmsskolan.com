@@ -50,9 +50,9 @@ export default createGlobalStyle`
 
     --code-background: rgba(27, 31, 35, 0.05);
 
-    --navigation-background: rgba(255, 255, 255, 0.8);
+    --navigation-background: rgba(255, 255, 255, 1);
     --navigation-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
-    --navigation-height: 80px;
+    --navigation-height: 4rem;
 
     --shadow-color: var(--accents-2);
     --shadow-smallest: 0px 4px 8px var(--shadow-color);
@@ -75,7 +75,7 @@ export default createGlobalStyle`
       --accents-2: #333;
       --accents-1: #111;
 
-      --navigation-background: rgba(0, 0, 0, 0.8);
+      --navigation-background: rgba(0, 0, 0, 1);
       --navigation-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
 
       --shadow-color: rgba(255, 255, 255, 0.1);
