@@ -4,10 +4,10 @@ import { Navigation } from "../../basic/Navigation";
 import { Hero } from "../Hero";
 import { Row } from "../../grid/Row";
 import { ResponsiveHalf } from "../../grid/Col";
-import React, { useRef, useState } from "react";
-import { useScrollPosition } from "../../../lib/hooks/scroll";
+import React, { useRef } from "react";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 
-const Background = styled.div<{ image: string }>`
+const Background = styled(motion.div)<{ image: string }>`
   background: ${({ image }) =>
     `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)), url(${image})`};
   background-size: cover;
@@ -33,37 +33,34 @@ export const HeaderWithBackground: React.FunctionComponent<{
   image: string;
   minHeight?: string;
   fadeDuration?: number;
-}> = ({ children, image, minHeight, fadeDuration = 400 }) => {
-  const [opacity, setOpacity] = useState<number>(1);
-  const [transform, setTransform] = useState<number>(0);
-
+}> = ({ children, image, minHeight }) => {
+  const { scrollY } = useViewportScroll();
   const ref = useRef<HTMLDivElement>();
 
-  useScrollPosition(
-    ({ current: { y } }) => {
-      setTransform(y / 4);
-      setOpacity(Math.max((fadeDuration - y) / fadeDuration, 0));
-    },
-    { element: ref, throttle: 10 }
+  const opacity = useTransform(
+    scrollY,
+    (value) => 1 - Math.min(value / ref?.current?.offsetHeight, 1)
+  );
+  const y = useTransform(scrollY, (value) => value * 0.5);
+  const backgroundSize = useTransform(
+    scrollY,
+    (value) => `${(1 + value / (ref?.current?.offsetHeight * 2)) * 100}%`
   );
 
   return (
     <>
       <Navigation noPlaceholder brightText transparent />
-      <Background image={image}>
+      <Background image={image} style={{ backgroundSize }}>
         <Container bright minHeight={minHeight} ref={ref}>
-          <Hero
-            style={{
-              opacity,
-              transform: `translateY(${transform}px)`,
-            }}
-          >
-            <Row>
-              <ResponsiveHalf>
-                <div>{children}</div>
-              </ResponsiveHalf>
-            </Row>
-          </Hero>
+          <motion.div style={{ opacity, y }}>
+            <Hero>
+              <Row>
+                <ResponsiveHalf>
+                  <div>{children}</div>
+                </ResponsiveHalf>
+              </Row>
+            </Hero>
+          </motion.div>
         </Container>
       </Background>
     </>

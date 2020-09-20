@@ -7,11 +7,11 @@ export const Card = styled.div<{ hoverable?: boolean }>`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
   overflow: hidden;
 
   &:hover {
-    ${({ hoverable = true }) => hoverable && `box-shadow: var(--shadow-hover);`}
+    ${({ hoverable = true }) => hoverable && `transform: translateY(-4px)`}
   }
 `;
 

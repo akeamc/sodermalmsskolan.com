@@ -114,13 +114,13 @@ const List = styled(UnstyledList)`
   padding: 0;
 
   li {
-    margin: 12px 0;
+    margin: 8px 0;
   }
 `;
 
 const ColumnTitle = styled.h3`
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--foreground);
   margin: 16px 0;
   letter-spacing: 0;
@@ -134,14 +134,14 @@ const LinkArrow = styled(ArrowUpRight)`
 
 const StyledFooterLink = styled(Link)`
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--accents-5);
 
   &:hover {
     color: var(--foreground);
 
     ${LinkArrow} {
-      transform: translate(25%, -25%);
+      transform: translate(10%, -10%);
     }
   }
 
