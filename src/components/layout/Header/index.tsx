@@ -12,7 +12,12 @@ const Background = styled(motion.div)<{ image: string }>`
     `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)), url(${image})`};
   background-size: cover;
   background-position: center;
-  margin-bottom: var(--section-spacing);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
 `;
 
 const Container = styled(TextColorModifier)<{ minHeight?: string }>`
@@ -25,7 +30,9 @@ const Container = styled(TextColorModifier)<{ minHeight?: string }>`
   flex-direction: column;
   justify-content: flex-end;
   padding-top: var(--navigation-height);
+  margin-bottom: var(--section-spacing);
   overflow: hidden;
+  position: relative;
 `;
 
 export const HeaderWithBackground: React.FunctionComponent<{
@@ -42,27 +49,26 @@ export const HeaderWithBackground: React.FunctionComponent<{
     (value) => 1 - Math.min(value / ref?.current?.offsetHeight, 1)
   );
   const y = useTransform(scrollY, (value) => value * 0.5);
-  const backgroundSize = useTransform(
+  const backgroundScale = useTransform(
     scrollY,
-    (value) => `${(1 + value / (ref?.current?.offsetHeight * 2)) * 100}%`
+    (value) => 1 + value / (ref?.current?.offsetHeight * 2)
   );
 
   return (
     <>
       <Navigation noPlaceholder brightText transparent />
-      <Background image={image} style={{ backgroundSize }}>
-        <Container bright minHeight={minHeight} ref={ref}>
-          <motion.div style={{ opacity, y }}>
-            <Hero>
-              <Row>
-                <ResponsiveHalf>
-                  <div>{children}</div>
-                </ResponsiveHalf>
-              </Row>
-            </Hero>
-          </motion.div>
-        </Container>
-      </Background>
+      <Container bright minHeight={minHeight} ref={ref}>
+        <motion.div style={{ opacity, y }}>
+          <Hero>
+            <Row>
+              <ResponsiveHalf>
+                <div>{children}</div>
+              </ResponsiveHalf>
+            </Row>
+          </Hero>
+        </motion.div>
+        <Background image={image} style={{ scale: backgroundScale }} />
+      </Container>
     </>
   );
 };
