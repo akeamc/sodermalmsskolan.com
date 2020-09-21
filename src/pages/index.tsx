@@ -1,8 +1,8 @@
 import React from "react";
-import { Layout } from "../components/basic/Layout";
+import { Layout } from "../components/layout/Layout";
 import { Section } from "../components/layout/Section";
 import { Row } from "../components/grid/Row";
-import { Navigation } from "../components/basic/Navigation";
+import { Navigation } from "../components/layout/Navigation";
 import { NormalWidth } from "../components/grid/Col";
 import { ButtonRow, Button } from "../components/basic/Button";
 import { LunchWidget } from "../components/menu/LunchWidget";
@@ -11,7 +11,7 @@ import { HeroWithTitle } from "../components/layout/Hero/Title";
 const Page: React.FunctionComponent = () => {
   return (
     <Layout>
-      <Navigation />
+      <Navigation autoFloat />
       <HeroWithTitle
         title="Vi visar vad Quality of Life Services egentligen betyder"
         lead={

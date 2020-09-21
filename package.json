@@ -17,6 +17,7 @@
     "cookie": "^0.4.1",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
+    "framer-motion": "^2.6.15",
     "got": "^11.5.2",
     "jsonwebtoken": "^8.5.1",
     "katex": "^0.12.0",

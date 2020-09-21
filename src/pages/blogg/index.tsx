@@ -1,8 +1,8 @@
 import React from "react";
-import { Layout } from "../../components/basic/Layout";
+import { Layout } from "../../components/layout/Layout";
 import { PostGridAuto } from "../../components/blog/PostGrid";
 import { Section } from "../../components/layout/Section";
-import { Navigation } from "../../components/basic/Navigation";
+import { Navigation } from "../../components/layout/Navigation";
 import FeaturedPost from "../../components/blog/FeaturedPost";
 import { Row } from "../../components/grid/Row";
 import { Hero } from "../../components/layout/Hero";

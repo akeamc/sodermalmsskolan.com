@@ -3,7 +3,7 @@ import React from "react";
 import { SinglePeriod } from "../../lib/schedule/Period";
 import styled, { keyframes } from "styled-components";
 import { transparentize } from "polished";
-import { useTime } from "../../lib/hooks/time";
+import { useTime } from "../../hooks/time";
 
 const waveAnimation = keyframes`
   0% {

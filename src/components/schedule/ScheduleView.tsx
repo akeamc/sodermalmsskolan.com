@@ -8,9 +8,9 @@ import styled from "styled-components";
 import createPersistedState from "use-persisted-state";
 import { Select } from "../form/Select";
 import { GroupFilter } from "../../lib/schedule/Filter";
-import { useTime } from "../../lib/hooks/time";
+import { useTime } from "../../hooks/time";
 import { PeriodCard } from "./PeriodCard";
-import { usePersistedState } from "../../lib/hooks/persistedstate";
+import { usePersistedState } from "../../hooks/persistedstate";
 const useScheduleClassState = createPersistedState("schedule-class");
 
 const FilterOptions = styled.div`

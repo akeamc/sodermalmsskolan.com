@@ -1,18 +1,23 @@
 import styled from "styled-components";
 import { TextColorModifier } from "../../basic/Typography";
-import { Navigation } from "../../basic/Navigation";
+import { Navigation } from "../Navigation";
 import { Hero } from "../Hero";
 import { Row } from "../../grid/Row";
 import { ResponsiveHalf } from "../../grid/Col";
-import React, { useRef, useState } from "react";
-import { useScrollPosition } from "../../../lib/hooks/scroll";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 
-const Background = styled.div<{ image: string }>`
+const Background = styled(motion.div)<{ image: string }>`
   background: ${({ image }) =>
     `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)), url(${image})`};
   background-size: cover;
   background-position: center;
-  margin-bottom: var(--section-spacing);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
 `;
 
 const Container = styled(TextColorModifier)<{ minHeight?: string }>`
@@ -25,7 +30,10 @@ const Container = styled(TextColorModifier)<{ minHeight?: string }>`
   flex-direction: column;
   justify-content: flex-end;
   padding-top: var(--navigation-height);
+  margin-bottom: var(--section-spacing);
   overflow: hidden;
+  position: relative;
+  background-color: #000;
 `;
 
 export const HeaderWithBackground: React.FunctionComponent<{
@@ -33,39 +41,44 @@ export const HeaderWithBackground: React.FunctionComponent<{
   image: string;
   minHeight?: string;
   fadeDuration?: number;
-}> = ({ children, image, minHeight, fadeDuration = 400 }) => {
-  const [opacity, setOpacity] = useState<number>(1);
-  const [transform, setTransform] = useState<number>(0);
-
+}> = ({ children, image, minHeight }) => {
+  const { scrollY } = useViewportScroll();
   const ref = useRef<HTMLDivElement>();
+  const [navFloating, setNavFloating] = useState<boolean>(false);
 
-  useScrollPosition(
-    ({ current: { y } }) => {
-      setTransform(y / 4);
-      setOpacity(Math.max((fadeDuration - y) / fadeDuration, 0));
-    },
-    { element: ref, throttle: 10 }
+  const opacity = useTransform(
+    scrollY,
+    (value) => 1 - Math.min(value / ref?.current?.offsetHeight, 1)
+  );
+  const y = useTransform(scrollY, (value) => value * 0.5);
+  const backgroundScale = useTransform(
+    scrollY,
+    (value) => 1 + value / (ref?.current?.offsetHeight * 2)
+  );
+
+  useEffect(
+    () =>
+      scrollY.onChange((latest) =>
+        setNavFloating(latest > ref?.current?.offsetHeight - 64)
+      ),
+    []
   );
 
   return (
     <>
-      <Navigation noPlaceholder brightText transparent />
-      <Background image={image}>
-        <Container bright minHeight={minHeight} ref={ref}>
-          <Hero
-            style={{
-              opacity,
-              transform: `translateY(${transform}px)`,
-            }}
-          >
+      <Navigation brightText floating={navFloating} padding={false} />
+      <Container bright minHeight={minHeight} ref={ref}>
+        <motion.div style={{ opacity, y, zIndex: 1 }}>
+          <Hero>
             <Row>
               <ResponsiveHalf>
                 <div>{children}</div>
               </ResponsiveHalf>
             </Row>
           </Hero>
-        </Container>
-      </Background>
+        </motion.div>
+        <Background image={image} style={{ scale: backgroundScale }} />
+      </Container>
     </>
   );
 };

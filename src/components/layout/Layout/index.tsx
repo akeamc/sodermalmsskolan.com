@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import { Footer } from "./Footer";
-import { initGA, logPageView } from "../../lib/utils/analytics";
+import { Footer } from "../Footer";
+import { initGA, logPageView } from "../../../lib/utils/analytics";
 import { useRouter } from "next/router";
 
 export interface SiteMetadata {
@@ -29,7 +29,7 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
 
   const router = useRouter();
 
-  const canonical = `https://södermalmsskolan.com/${router.asPath}`;
+  const canonical = new URL(router.asPath, "https://södermalmsskolan.com").href;
 
   return (
     <Head>

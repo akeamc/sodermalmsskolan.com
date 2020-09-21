@@ -1,6 +1,6 @@
 import React from "react";
-import { Layout } from "../../components/basic/Layout";
-import { Navigation } from "../../components/basic/Navigation";
+import { Layout } from "../../components/layout/Layout";
+import { Navigation } from "../../components/layout/Navigation";
 import { HeroWithTitle } from "../../components/layout/Hero/Title";
 import { FoodGallery } from "../../components/food/FoodGallery";
 import { Section } from "../../components/layout/Section";

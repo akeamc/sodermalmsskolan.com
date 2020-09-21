@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useTime } from "../../lib/hooks/time";
+import { useTime } from "../../hooks/time";
 import React, { useState, useEffect } from "react";
 import { Schedule } from "../../lib/schedule/Schedule";
 

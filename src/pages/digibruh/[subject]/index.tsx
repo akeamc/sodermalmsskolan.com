@@ -1,4 +1,4 @@
-import { Layout } from "../../../components/basic/Layout";
+import { Layout } from "../../../components/layout/Layout";
 import NotFound from "../../404";
 import { CardGrid } from "../../../components/basic/CardGrid";
 import Digibruh, { useDigibruh } from "../../../lib/digibruh/Digibruh";
