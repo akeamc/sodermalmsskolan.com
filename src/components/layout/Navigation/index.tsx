@@ -1,21 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Row } from "../../grid/Row";
-import { Logo } from "../../basic/Logo";
-import { Link, AutoLinkProps } from "../../basic/Link";
-import { TextColorModifier } from "../../basic/Typography";
-import ScrollLock from "react-scrolllock";
-import { UnstyledList } from "../../basic/List";
-import { useLinks } from "../../basic/Footer/Links";
-import * as breakpoints from "../../../styles/breakpoints";
-import { useRouter } from "next/router";
-import { useAuth } from "../../../providers/Auth";
-import { Avatar } from "../../basic/Avatar";
-import { motion, useViewportScroll } from "framer-motion";
+import { brightTextStyles } from "../../basic/Typography";
+import { motion, useCycle, useViewportScroll } from "framer-motion";
 import { NavLogo } from "./Logo";
 import { DesktopNav } from "./Desktop";
+import { MobileNav } from "./Mobile";
+import * as breakpoints from "../../../styles/breakpoints";
+import { Toggle } from "./Toggle";
 
-const Wrapper = styled(motion.div)<{ floating: boolean }>`
+const Wrapper = styled(motion.div)<{
+  floating: boolean;
+  mobileNavOpen: boolean;
+  brightText: boolean;
+}>`
   height: var(--navigation-height);
   width: 100%;
   position: fixed;
@@ -27,7 +25,26 @@ const Wrapper = styled(motion.div)<{ floating: boolean }>`
     floating &&
     `box-shadow: var(--navigation-shadow);
     background: var(--navigation-background);`};
+
+  @media (max-width: ${breakpoints.large}) {
+    ${({ mobileNavOpen }) =>
+      mobileNavOpen &&
+      `box-shadow: var(--navigation-shadow);
+    background: var(--navigation-background);`};
+
+    ${({ mobileNavOpen, brightText }) =>
+      !mobileNavOpen && brightText && brightTextStyles}
+  }
+
+  @media (min-width: ${breakpoints.large}) {
+    ${({ brightText }) => brightText && brightTextStyles}
+  }
+
   z-index: 1000;
+`;
+
+const Padding = styled.div`
+  height: var(--navigation-height);
 `;
 
 const NavigationRow = styled.div`
@@ -46,26 +63,37 @@ export const Navigation: React.FunctionComponent<{
    * Automatically float whenever the user scrolls.
    */
   autoFloat?: boolean;
-}> = ({ floating = true, brightText, autoFloat }) => {
-  const { isAuthenticated, user, isLoading } = useAuth();
+
+  padding?: boolean;
+}> = ({
+  floating = true,
+  brightText = false,
+  autoFloat = false,
+  padding = true,
+}) => {
   const { scrollY } = useViewportScroll();
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const [isOpen, toggleOpen] = useCycle(false, true);
 
   useEffect(() => scrollY.onChange((latest) => setScrolled(latest > 0)), []);
 
-  const categories = useLinks();
-
   return (
-    <Wrapper floating={autoFloat ? scrolled : floating}>
-      <TextColorModifier bright={brightText && !floating}>
+    <>
+      {padding && <Padding />}
+      <Wrapper
+        floating={autoFloat ? scrolled : floating}
+        mobileNavOpen={isOpen}
+        brightText={brightText && !floating}
+      >
         <Row>
           <NavigationRow>
             <NavLogo />
             <DesktopNav />
-            <p>authentication</p>
+            <Toggle toggle={() => toggleOpen()} isOpen={isOpen} />
           </NavigationRow>
         </Row>
-      </TextColorModifier>
-    </Wrapper>
+      </Wrapper>
+      <MobileNav isOpen={isOpen} />
+    </>
   );
 };

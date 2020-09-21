@@ -10,21 +10,19 @@ export const LeadText = styled.h2`
   margin-top: 24px;
 `;
 
+export const brightTextStyles = `--foreground: white;
+color: var(--foreground);
+--accents-1: rgba(255, 255, 255, 0.95);
+--accents-2: rgba(255, 255, 255, 0.9);
+--accents-3: rgba(255, 255, 255, 0.85);
+--accents-4: rgba(255, 255, 255, 0.8);
+--accents-5: rgba(255, 255, 255, 0.75);
+--accents-6: rgba(255, 255, 255, 0.7);
+--accents-7: rgba(255, 255, 255, 0.65);
+--accents-8: rgba(255, 255, 255, 0.6);`;
+
 export const TextColorModifier = styled.div<{ bright?: boolean }>`
-  ${({ bright }) =>
-    bright &&
-    `
-    --foreground: white;
-    color: var(--foreground);
-    --accents-1: rgba(255, 255, 255, 0.95);
-    --accents-2: rgba(255, 255, 255, 0.9);
-    --accents-3: rgba(255, 255, 255, 0.85);
-    --accents-4: rgba(255, 255, 255, 0.8);
-    --accents-5: rgba(255, 255, 255, 0.75);
-    --accents-6: rgba(255, 255, 255, 0.7);
-    --accents-7: rgba(255, 255, 255, 0.65);
-    --accents-8: rgba(255, 255, 255, 0.6);
-  `}
+  ${({ bright }) => bright && brightTextStyles}
 `;
 
 export const GradientText = styled.span<{

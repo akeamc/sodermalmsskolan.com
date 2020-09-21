@@ -8,6 +8,7 @@ export const Logo: React.FunctionComponent<React.SVGProps<SVGSVGElement>> = (
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 118.04926 8.1178722"
+      fill="currentColor"
       {...props}
     >
       <g
@@ -51,6 +52,7 @@ export const SmallLogo: React.FunctionComponent<React.SVGProps<
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 237.86041 270.93334"
       version="1.1"
+      fill="currentColor"
       {...props}
     >
       <g>

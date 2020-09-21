@@ -1,4 +1,4 @@
-import { Layout } from "../components/basic/Layout";
+import { Layout } from "../components/layout/Layout";
 import { Navigation } from "../components/layout/Navigation";
 import styled from "styled-components";
 import React from "react";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../components/basic/Layout";
+import { Layout } from "../components/layout/Layout";
 import { Section } from "../components/layout/Section";
 import { Row } from "../components/grid/Row";
 import { Navigation } from "../components/layout/Navigation";

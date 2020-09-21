@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Layout } from "../components/basic/Layout";
+import { Layout } from "../components/layout/Layout";
 import { Link } from "../components/basic/Link";
 import { MenuList } from "../components/menu/MenuList";
 import { AdSection } from "../components/basic/Ad";
@@ -72,7 +72,10 @@ const Page: React.FunctionComponent = () => {
       metadata={{
         title: "Meny",
         description:
-          "I över ett år har vi fotat maten som Sodexo serverar och spridit bilderna på nätet. Vi kommer aldrig ge upp.",
+          "I över ett år har vi fotograferat maten som Sodexo serverar och spridit bilderna på nätet. Vi kommer aldrig ge upp.",
+        images: [
+          "https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg",
+        ],
       }}
     >
       <Navigation />
@@ -91,8 +94,8 @@ const Page: React.FunctionComponent = () => {
                 för världen
               </h1>
               <LeadText>
-                I över ett år har vi fotat maten som Sodexo serverar och delat
-                bilderna online. Vi kommer aldrig att ge upp.
+                I över ett år har vi fotograferat maten som Sodexo serverar och
+                delat bilderna online. Vi kommer aldrig att ge upp.
               </LeadText>
             </TitleContainer>
           </TitlePane>

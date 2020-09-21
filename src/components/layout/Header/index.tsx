@@ -66,7 +66,7 @@ export const HeaderWithBackground: React.FunctionComponent<{
 
   return (
     <>
-      <Navigation brightText floating={navFloating} />
+      <Navigation brightText floating={navFloating} padding={false} />
       <Container bright minHeight={minHeight} ref={ref}>
         <motion.div style={{ opacity, y, zIndex: 1 }}>
           <Hero>

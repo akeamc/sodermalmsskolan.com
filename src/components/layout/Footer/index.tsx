@@ -1,5 +1,5 @@
 import React from "react";
-import { Logo } from "../Logo";
+import { Logo } from "../../basic/Logo";
 import styled from "styled-components";
 import { Row } from "../../grid/Row";
 import { Col } from "../../grid/Col";

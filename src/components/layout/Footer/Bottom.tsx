@@ -1,8 +1,12 @@
 import { Row } from "../../grid/Row";
-import { SocialIcon, SocialMedia, SocialProfile } from "../SocialIcons";
+import {
+  SocialIcon,
+  SocialMedia,
+  SocialProfile,
+} from "../../basic/SocialIcons";
 import { MinecraftStatusBadge } from "../../minecraft/StatusBadge";
 import styled from "styled-components";
-import { UnstyledList } from "../List";
+import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";
 import React from "react";
 

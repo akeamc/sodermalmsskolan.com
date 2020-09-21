@@ -1,6 +1,6 @@
 import NotFound from "../../../pages/404";
 import ArticleBody from "./ArticleBody";
-import { Layout } from "../../basic/Layout";
+import { Layout } from "../../layout/Layout";
 import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
 import { ArticleHero } from "./Hero";

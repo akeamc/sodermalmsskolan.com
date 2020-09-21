@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Row } from "../../grid/Row";
-import { Link } from "../Link";
-import { UnstyledList } from "../List";
+import { Link } from "../../basic/Link";
+import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";
 import React from "react";
 import { useAuth } from "../../../providers/Auth";

@@ -9,6 +9,7 @@ const Container = styled.a`
   display: flex;
   align-items: center;
   color: inherit;
+  transition: fill 0.2s;
 `;
 
 const Big = styled(Logo)`

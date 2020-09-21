@@ -1,6 +1,6 @@
 import React from "react";
 import { Schedules } from "../../lib/schedule/Schedule";
-import { Layout } from "../../components/basic/Layout";
+import { Layout } from "../../components/layout/Layout";
 import { Navigation } from "../../components/layout/Navigation";
 import { HeroWithTitle } from "../../components/layout/Hero/Title";
 import { ScheduleView } from "../../components/schedule/ScheduleView";

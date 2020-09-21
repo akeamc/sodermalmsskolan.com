@@ -5,7 +5,7 @@ import { useAuth } from "../providers/Auth";
 import { FullPageSpinner } from "../components/basic/Spinner";
 import { FullPageWrapper } from "../components/layout/Container";
 import { Link } from "../components/basic/Link";
-import { DISCORD_INVITE } from "../components/basic/Footer/Bottom";
+import { DISCORD_INVITE } from "../components/layout/Footer/Bottom";
 
 function isBrowser(): boolean {
   return typeof window !== "undefined";
