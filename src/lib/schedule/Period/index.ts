@@ -52,7 +52,7 @@ export class PeriodBoundary {
    * @param timestamp
    */
   public nextAbsolute(timestamp: Date = new Date()): Moment {
-    let absoluteTimestamp = moment(timestamp).locale("sv").set({
+    let absoluteTimestamp = moment(timestamp).set({
       hour: this.hour,
       minute: this.minute,
       second: 0,

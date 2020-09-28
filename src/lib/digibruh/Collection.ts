@@ -1,5 +1,5 @@
 import { Tag, PostsOrPages } from "@tryghost/content-api";
-import { getPostsByTag } from "../api/ghost/post";
+import { getPostsByTag } from "../ghost/post";
 import Digibruh from "./Digibruh";
 import { GridItem } from "../../components/basic/CardGrid";
 

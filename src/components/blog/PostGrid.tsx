@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { defaultParams } from "../../lib/api/ghost/post";
+import { defaultParams } from "../../lib/ghost/post";
 import { useSWRInfinite } from "swr";
 import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
-import api from "../../lib/api/ghost/credentials";
+import api from "../../lib/ghost/credentials";
 import { CardGrid, GridItem } from "../basic/CardGrid";
 import VisibilitySensor from "react-visibility-sensor";
 

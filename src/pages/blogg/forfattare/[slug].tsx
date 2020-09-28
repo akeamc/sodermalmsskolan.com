@@ -1,7 +1,7 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../404";
 import { Layout } from "../../../components/layout/Layout";
-import { getAuthorBySlug } from "../../../lib/api/ghost/author";
+import { getAuthorBySlug } from "../../../lib/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
 import { Avatar } from "../../../components/basic/Avatar";
 import { PostOrPage } from "@tryghost/content-api";

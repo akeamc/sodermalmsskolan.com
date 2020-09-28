@@ -9,10 +9,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import withAuth from "../../../auth/withAuth";
 import { HTTPError } from "got";
 import { Permissions } from "discord.js";
-import { ServerRole } from "./Role";
-import { PermissionOverwriteType } from "../shared/PermissionOverwrite";
-import { ServerMember } from "./Member";
-import { ServerUser } from "./User";
 
 export interface RolePermissions {
   position: number;

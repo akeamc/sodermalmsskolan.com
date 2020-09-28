@@ -7,6 +7,7 @@ import { TimeIndicator } from "./Indicator";
 import { GridTitleSection } from "../basic/Typography";
 import { useTime } from "../../hooks/time";
 import { GroupFilter } from "../../lib/schedule/Filter";
+import { useLocale } from "../../hooks/locale";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -94,6 +95,8 @@ export const ScheduleTable: React.FunctionComponent<{
   schedule: Schedule;
   groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
+  const { locale } = useLocale();
+
   const [scheduleStart, scheduleEnd] = schedule.bounds;
 
   const columnOffset = 2;
@@ -146,7 +149,7 @@ export const ScheduleTable: React.FunctionComponent<{
                   <DayTitle>
                     {firstLetterUpperCase(
                       moment()
-                        .locale("sv")
+                        .locale(locale)
                         .day(index + 1)
                         .format("ddd")
                     )}

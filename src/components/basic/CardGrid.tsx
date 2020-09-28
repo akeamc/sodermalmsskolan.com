@@ -16,6 +16,7 @@ import moment from "moment";
 import { AuthorGroup } from "./Avatar";
 import * as breakpoints from "../../styles/breakpoints";
 import { Emoji } from "./Emoji";
+import { useLocale } from "../../hooks/locale";
 
 export function getLineClamp(lines: number): React.CSSProperties {
   return {
@@ -56,8 +57,9 @@ class CardGridItem extends React.Component<{
   lineClamp: number | null;
 }> {
   render() {
-    const { item, imageExpected, loading, lineClamp } = this.props;
+    const { item, loading, lineClamp } = this.props;
     const descriptionRows = 3;
+    const { locale } = useLocale();
 
     return (
       <ItemLink href={item?.href}>
@@ -76,7 +78,7 @@ class CardGridItem extends React.Component<{
           {item?.meta ? (
             <CardFooter>
               <p>
-                {moment(item?.meta.date).locale("sv").format("D MMMM YYYY")}
+                {moment(item?.meta.date).locale(locale).format("D MMMM YYYY")}
               </p>
               <AuthorGroup authors={item.meta.authors} />
             </CardFooter>

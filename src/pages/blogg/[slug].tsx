@@ -1,4 +1,4 @@
-import { getPostBySlug } from "../../lib/api/ghost/post";
+import { getPostBySlug } from "../../lib/ghost/post";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../404";
 import ArticlePage from "../../components/blog/article/ArticlePage";

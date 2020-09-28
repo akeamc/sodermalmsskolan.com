@@ -7,6 +7,7 @@ import { Spinner } from "../basic/Spinner";
 import { ProgressiveImage } from "../basic/ProgressiveImage";
 import { LinkBlock } from "../basic/Link";
 import { Emoji } from "../basic/Emoji";
+import { useLocale } from "../../hooks/locale";
 
 const GalleryWrapper = styled.div`
   display: grid;
@@ -53,6 +54,8 @@ export const FoodGallery: React.FunctionComponent = () => {
     process.env.discordFoodChannel
   );
 
+  const { locale } = useLocale();
+
   const [scrolledToBottom, setScrolledToBottom] = useState(false);
 
   if (scrolledToBottom) {
@@ -79,7 +82,7 @@ export const FoodGallery: React.FunctionComponent = () => {
             <CaptionWrapper>
               <small>
                 {moment(message.createdAt)
-                  .locale("sv")
+                  .locale(locale)
                   .format("HH:mm D MMMM YYYY")}{" "}
                 ·{" "}
                 <i>

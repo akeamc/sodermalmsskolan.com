@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { LinkBlock } from "../../basic/Link";
 import { Author } from "@tryghost/content-api";
 import React from "react";
-import { getAuthorUrl } from "../../../lib/api/ghost/author";
+import { getAuthorUrl } from "../../../lib/ghost/author";
 import { useSmallAvatar } from "../../basic/Avatar";
 import Skeleton from "react-loading-skeleton";
 import { MetaField } from "./PostMeta";

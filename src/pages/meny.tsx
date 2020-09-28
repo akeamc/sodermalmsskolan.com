@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Layout } from "../components/layout/Layout";
 import { Link } from "../components/basic/Link";
-import { MenuList } from "../components/menu/MenuList";
+import { MenuList } from "../components/food/MenuList";
 import { AdSection } from "../components/basic/Ad";
 import { Section } from "../components/layout/Section";
 import { Hero } from "../components/layout/Hero";
@@ -108,7 +108,7 @@ const Page: React.FunctionComponent = () => {
             <GridTitleSection title="Menyn" />
           </Col>
         </Row>
-        <MenuList numberOfMenus={30} />
+        <MenuList limit={30} />
       </Section>
       <AdSection />
     </Layout>

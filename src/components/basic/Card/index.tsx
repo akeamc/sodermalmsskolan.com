@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useProgressiveImage } from "../ProgressiveImage";
 
-export const Card = styled.div<{ hoverable?: boolean }>`
+export const Card = styled(motion.div)<{ hoverable?: boolean }>`
   background-color: var(--background);
   box-shadow: var(--shadow-small);
   border-radius: 8px;
