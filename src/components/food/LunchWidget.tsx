@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { useMenus } from "../../lib/api/main/food/Menu";
 import { Card, CardContent, CardFooter } from "../basic/Card";
-import { Link } from "../basic/Link";
 import { Button } from "../basic/Button";
 import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
+import { ClientMenu } from "../../lib/food/structures/client/Menu";
+import { useLocale } from "../../hooks/locale";
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -19,7 +19,7 @@ const WidgetList = styled.ul`
   }
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   margin: 24px 0;
 `;
 
@@ -33,17 +33,19 @@ const Footer = styled(CardFooter)`
 `;
 
 export const LunchWidget: React.FunctionComponent = () => {
-  const { data, isValidating } = useMenus({ limit: 1 });
+  const { data, isValidating } = ClientMenu.use({ limit: 1 });
 
   const menu = data ? data[0] : null;
 
   const dishes = menu?.dishes?.map((dish) => dish.title);
 
+  const { locale } = useLocale();
+
   const date =
     (menu || isValidating) &&
     (menu?.date ? (
       firstLetterUpperCase(
-        moment(menu?.date).locale("sv").format("dddd D MMMM")
+        moment(menu?.date).locale(locale).format("dddd D MMMM")
       )
     ) : (
       <Skeleton width={100} />

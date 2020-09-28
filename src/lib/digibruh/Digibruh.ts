@@ -1,7 +1,7 @@
 import { PostsOrPages, Tag, PostOrPage } from "@tryghost/content-api";
-import { getPostsByTag, getPosts, getPostBySlug } from "../api/ghost/post";
+import { getPostsByTag, getPosts, getPostBySlug } from "../ghost/post";
 import { Subject } from "./Subject";
-import { getTags } from "../api/ghost/tag";
+import { getTags } from "../ghost/tag";
 import useSWR from "swr";
 import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";

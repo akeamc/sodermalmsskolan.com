@@ -6,7 +6,7 @@ import {
   FilterParam,
 } from "@tryghost/content-api";
 import { Params } from "next/dist/next-server/server/router";
-import Digibruh from "../../digibruh/Digibruh";
+import Digibruh from "../digibruh/Digibruh";
 
 export const defaultParams = (): Params => {
   return {

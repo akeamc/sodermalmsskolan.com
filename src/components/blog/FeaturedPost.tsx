@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Card, CardContent } from "../basic/Card";
-import { getPosts } from "../../lib/api/ghost/post";
+import { getPosts } from "../../lib/ghost/post";
 import useSWR from "swr";
 import { useProgressiveImage } from "../basic/ProgressiveImage";
 import { TextColorModifier } from "../basic/Typography";
@@ -11,9 +11,10 @@ import moment from "moment";
 import PostMeta from "./meta/PostMeta";
 import * as breakpoints from "../../styles/breakpoints";
 import Skeleton from "react-loading-skeleton";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import { useLocale } from "../../hooks/locale";
 
 const CardWrapper = styled.a`
   grid-column: span 12;
@@ -72,6 +73,8 @@ const FeaturedPost: React.FunctionComponent = () => {
   const { ref, inView } = useInView();
   const show = inView && post;
 
+  const { locale } = useLocale();
+
   return (
     <Link href={getPostUrl(post?.slug)} passHref>
       <CardWrapper ref={ref}>
@@ -104,7 +107,7 @@ const FeaturedPost: React.FunctionComponent = () => {
                 <PostMeta
                   post={post}
                   dateText={moment(post?.published_at)
-                    .locale("sv")
+                    .locale(locale)
                     .format("D MMMM YYYY")}
                   skeleton={loading}
                 />

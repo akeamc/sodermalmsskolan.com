@@ -1,5 +1,5 @@
 import { Author } from "@tryghost/content-api";
-import { getAuthorUrl } from "../api/ghost/author";
+import { getAuthorUrl } from "../ghost/author";
 
 export interface IGenericUser {
   name: string;

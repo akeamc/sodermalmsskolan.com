@@ -1,9 +1,3 @@
-export async function fetchJSON<T>(url: string): Promise<T> {
-  const res = await fetch(url);
-  const json: T = await res.json();
-  return json;
-}
-
 export interface IQueryParams {
   [name: string]: string | number;
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import { useMinecraftStatus } from "../../lib/api/main/minecraft/status";
 import styled from "styled-components";
+import { useMinecraftStatus } from "../../lib/status/structures/client/Service";
 import { StatusColor, StatusBadge } from "../misc/StatusBadge";
 
 const Tnum = styled.span`
@@ -10,12 +10,13 @@ const Tnum = styled.span`
 export const MinecraftStatusBadge: React.FunctionComponent<React.HTMLAttributes<
   HTMLDivElement
 >> = (props) => {
-  const { data, isValidating } = useMinecraftStatus();
-  const players = data?.players;
+  const { data: status, isValidating } = useMinecraftStatus();
 
-  const color = data?.online ? StatusColor.Success : StatusColor.Error;
+  const players = status?.data?.players;
 
-  const text = data?.online ? (
+  const color = status?.online ? StatusColor.Success : StatusColor.Error;
+
+  const text = status?.online ? (
     <>
       <Tnum>
         {players?.online}/{players?.max}
