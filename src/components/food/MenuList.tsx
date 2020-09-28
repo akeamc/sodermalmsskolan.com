@@ -23,7 +23,7 @@ const DishEmissions: React.FunctionComponent<{ id: string }> = ({ id }) => {
   return (
     <span>
       ({data?.co2e.toLocaleString(locale) || <Skeleton width={32} />} kg CO₂e
-      per kg)
+      per portion)
     </span>
   );
 };
