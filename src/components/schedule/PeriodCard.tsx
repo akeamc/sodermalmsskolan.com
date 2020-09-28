@@ -4,6 +4,7 @@ import { SinglePeriod } from "../../lib/schedule/Period";
 import styled, { keyframes } from "styled-components";
 import { transparentize } from "polished";
 import { useTime } from "../../hooks/time";
+import { useLocale } from "../../hooks/locale";
 
 const waveAnimation = keyframes`
   0% {
@@ -71,8 +72,9 @@ export const PeriodCard: React.FunctionComponent<{
   groupName: string;
 }> = ({ period }) => {
   const now = useTime(1000);
+  const { locale } = useLocale();
 
-  const timeLeft = period.start.nextAbsolute(now).from(now);
+  const timeLeft = period.start.nextAbsolute(now).locale(locale).from(now);
 
   return (
     <Card hoverable={false}>

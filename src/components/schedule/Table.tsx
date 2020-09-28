@@ -79,6 +79,7 @@ const ScheduleDetail: React.FunctionComponent<{
   groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
   const now = useTime(1000);
+  const { locale } = useLocale();
   const nextPeriod = schedule.periods.filterByGroups(groups).next(now);
 
   return (
@@ -86,7 +87,7 @@ const ScheduleDetail: React.FunctionComponent<{
       title={schedule.group}
       description={`Nästa lektion: ${
         nextPeriod?.summary
-      } (${nextPeriod.start.nextAbsolute(now).from(now)}).`}
+      } (${nextPeriod.start.nextAbsolute(now).locale(locale).from(now)}).`}
     />
   );
 };
