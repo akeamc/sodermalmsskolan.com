@@ -5,6 +5,7 @@ import {
 import { IDiscordAPIUser, User } from "./User";
 import { Member, IDiscordAPIMember } from "./Member";
 import { IDiscordAPIMessageReaction } from "./MessageReaction";
+import { Serializable } from "../../../common/Serializable";
 
 /**
  * Options for fetching messages.
@@ -41,7 +42,7 @@ export interface IDiscordAPIMessage {
   reactions?: IDiscordAPIMessageReaction[];
 }
 
-export class Message {
+export class Message implements Serializable<IDiscordAPIMessage> {
   id: string;
   channel: string;
   guild?: string;

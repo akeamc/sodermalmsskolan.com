@@ -95,6 +95,7 @@ export default createGlobalStyle`
 
     @media (min-width: ${breakpoints.large}) {
       --section-spacing: 7.5rem;
+      --grid-gap: 2rem;
     }
   }
 
@@ -255,7 +256,7 @@ export default createGlobalStyle`
     --size-sm: 2.5rem;
     --size-md: 3rem;
     --size-lg: 4rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -.1rem;
     line-height: 1;
   }

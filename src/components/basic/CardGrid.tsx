@@ -96,7 +96,7 @@ const ItemContainer = styled(Col)`
 
 const GridContainer = styled(Row)`
   @media (min-width: ${breakpoints.extraLarge}) {
-    grid-gap: 32px;
+    grid-gap: 2rem;
   }
 `;
 

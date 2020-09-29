@@ -43,8 +43,8 @@ export const GridTitleContainer = styled.div`
 export const GridTitle = styled.h3`
   --size-sm: 2rem;
   --size-md: 2rem;
-  --size-lg: 2rem;
-  font-weight: 600;
+  --size-lg: 2.5rem;
+  font-weight: 700;
   margin: 0;
   margin-bottom: 16px;
 `;

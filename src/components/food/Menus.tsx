@@ -1,19 +1,23 @@
 import styled from "styled-components";
-import React from "react";
-import moment from "moment";
+import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Row } from "../grid/Row";
 import { Col } from "../grid/Col";
-import { firstLetterUpperCase } from "../../lib/utils/letters";
 import * as breakpoints from "../../styles/breakpoints";
-import { Menu } from "../../lib/food/structures/shared/Menu";
 import { ClientMenu } from "../../lib/food/structures/client/Menu";
 import { Dish } from "../../lib/food/structures/shared/Dish";
 import { ClientDish } from "../../lib/food/structures/client/Dish";
 import { useLocale } from "../../hooks/locale";
+import { Card, CardContent, CardTitle } from "../basic/Card";
+import { AnimateSharedLayout } from "framer-motion";
 
-const ItemTitle = styled.h6`
-  margin-bottom: 1rem;
+const DishList = styled.ul`
+  margin-top: 1rem;
+  margin-bottom: 0;
+
+  li:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const DishEmissions: React.FunctionComponent<{ id: string }> = ({ id }) => {
@@ -31,30 +35,34 @@ const DishEmissions: React.FunctionComponent<{ id: string }> = ({ id }) => {
 const DishItem: React.FunctionComponent<{ dish: Dish }> = ({ dish }) => {
   return (
     <li>
-      {dish.title} <DishEmissions id={dish?.id} />
+      {dish ? (
+        <>
+          {dish?.title} <DishEmissions id={dish?.id} />
+        </>
+      ) : (
+        <Skeleton count={2} />
+      )}
     </li>
   );
 };
 
-const MenuListItem: React.FunctionComponent<{ menu: Menu }> = ({ menu }) => {
-  const { locale } = useLocale();
-  const date = menu?.date ? (
-    firstLetterUpperCase(
-      moment(menu?.date).locale(locale).format("dddd D MMMM")
-    )
-  ) : (
-    <Skeleton />
-  );
+const MenuCard: React.FunctionComponent<{
+  menu: ClientMenu;
+  onClick?: () => void;
+}> = ({ menu, onClick }) => {
+  const fallback = new Array(2).fill(null);
 
   return (
-    <div>
-      <ItemTitle>{date}</ItemTitle>
-      <ul>
-        {menu?.dishes?.map((dish, index) => (
-          <DishItem key={index} dish={dish} />
-        ))}
-      </ul>
-    </div>
+    <Card layoutId={menu?.id} onClick={onClick} $hoverable={false}>
+      <CardContent>
+        <CardTitle>{menu?.title || <Skeleton />}</CardTitle>
+        <DishList>
+          {(menu?.dishes || fallback).map((dish, index) => (
+            <DishItem key={index} dish={dish} />
+          ))}
+        </DishList>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -75,20 +83,25 @@ const Grid = styled.div`
 export const MenuList: React.FunctionComponent<{
   limit: number;
 }> = ({ limit }) => {
-  const { data, isValidating } = ClientMenu.use({ limit });
-  const fallbackArray: Menu[] = new Array(limit).fill(null);
+  const { data } = ClientMenu.use({ limit });
+  const fallbackArray: ClientMenu[] = new Array(limit).fill(null);
   const menus = data?.length > 0 ? data : fallbackArray;
-  const isEmpty = !isValidating && !data;
+
+  const [selectedId, setSelectedId] = useState<string>(null);
 
   return (
     <Row>
-      <Col xs={12} md={9} lg={8}>
+      <Col>
         <Grid>
-          {isEmpty ? (
-            <p>Menyn är inte tillgänglig.</p>
-          ) : (
-            menus.map((menu, index) => <MenuListItem key={index} menu={menu} />)
-          )}
+          <AnimateSharedLayout type="crossfade">
+            {menus.map((menu, index) => (
+              <MenuCard
+                key={index}
+                menu={menu}
+                onClick={() => setSelectedId(menu?.id)}
+              />
+            ))}
+          </AnimateSharedLayout>
         </Grid>
       </Col>
     </Row>

@@ -1,3 +1,4 @@
+import { Serializable } from "../../../common/Serializable";
 import { IDiscordAPIUser, User } from "./User";
 
 export interface IDiscordAPIMember {
@@ -10,7 +11,7 @@ export interface IDiscordAPIMember {
   mute: boolean;
 }
 
-export class Member {
+export class Member implements Serializable<IDiscordAPIMember> {
   user: User;
   nickname?: string;
   roles: string[];

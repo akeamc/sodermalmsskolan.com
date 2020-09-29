@@ -1,6 +1,7 @@
 import { IDiscordAPIUser } from "./User";
 import { User } from "./User";
 import { IDiscordAPIPermissionOverwrite } from "./PermissionOverwrite";
+import { Serializable } from "../../../common/Serializable";
 
 export enum ChannelType {
   GuildText = 0,
@@ -33,7 +34,7 @@ export interface IDiscordAPIChannel {
   last_pin_timestamp?: Date;
 }
 
-export class Channel {
+export class Channel implements Serializable<IDiscordAPIChannel> {
   id: string;
   type: ChannelType;
   guild: string;

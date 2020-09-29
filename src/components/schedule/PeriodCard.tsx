@@ -77,7 +77,7 @@ export const PeriodCard: React.FunctionComponent<{
   const timeLeft = period.start.nextAbsolute(now).locale(locale).from(now);
 
   return (
-    <Card hoverable={false}>
+    <Card $hoverable={false}>
       <CardContent>
         <h2>Nästa lektion: {period.subject.name}</h2>
         <p>
