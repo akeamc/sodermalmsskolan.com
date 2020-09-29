@@ -25,17 +25,6 @@ export const TextColorModifier = styled.div<{ bright?: boolean }>`
   ${({ bright }) => bright && brightTextStyles}
 `;
 
-export const GradientText = styled.span<{
-  startColor: string;
-  endColor: string;
-}>`
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: ${({ startColor, endColor }) =>
-    `linear-gradient(90deg, ${startColor}, ${endColor});`};
-`;
-
 export const GridTitleContainer = styled.div`
   margin-bottom: 24px;
 `;
@@ -66,12 +55,3 @@ export const GridTitleSection: React.FunctionComponent<{
     </GridTitleContainer>
   );
 };
-
-export const SmallBig = styled.h6`
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem;
-  line-height: 1.5em;
-  font-weight: 700;
-  color: var(--foreground);
-`;

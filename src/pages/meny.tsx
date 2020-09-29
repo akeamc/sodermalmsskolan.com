@@ -9,11 +9,7 @@ import { Base } from "../components/grid/Row";
 import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/layout/Navigation";
 import { Image } from "../components/basic/Image";
-import {
-  LeadText,
-  GridTitleSection,
-  GradientText,
-} from "../components/basic/Typography";
+import { LeadText, GridTitleSection } from "../components/basic/Typography";
 import { TitleContainer } from "../components/layout/Hero/Title";
 import React from "react";
 import * as breakpoints from "../styles/breakpoints";
@@ -86,13 +82,7 @@ const Page: React.FunctionComponent = () => {
           </ImagePane>
           <TitlePane>
             <TitleContainer>
-              <h1>
-                Vi visar upp{" "}
-                <GradientText startColor="var(--color)" endColor="#00DFD8">
-                  Sodexo
-                </GradientText>{" "}
-                för världen
-              </h1>
+              <h1>Vi visar upp Sodexo för världen</h1>
               <LeadText>
                 I över ett år har vi fotograferat maten som Sodexo serverar och
                 delat bilderna online. Vi kommer aldrig att ge upp.
