@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Row } from "../../grid/Row";
+import { Base } from "../../grid/Row";
 import { Link } from "../../basic/Link";
 import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";
@@ -91,7 +91,7 @@ export const useLinks = (): Category[] => {
   ];
 };
 
-const LinkSection = styled(Row)`
+const LinkSection = styled(Base)`
   margin-top: 24px;
   margin-bottom: 48px;
 `;

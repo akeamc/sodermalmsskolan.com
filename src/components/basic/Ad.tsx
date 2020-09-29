@@ -1,7 +1,7 @@
 import React from "react";
 import AdSense from "react-adsense";
 import { Section } from "../layout/Section";
-import { Row } from "../grid/Row";
+import { Base } from "../grid/Row";
 import { Col } from "../grid/Col";
 
 export const ResponsiveAd: React.FunctionComponent = () => {
@@ -19,11 +19,11 @@ export const ResponsiveAd: React.FunctionComponent = () => {
 export const AdSection: React.FunctionComponent = () => {
   return (
     <Section>
-      <Row>
+      <Base>
         <Col>
           <ResponsiveAd />
         </Col>
-      </Row>
+      </Base>
     </Section>
   );
 };

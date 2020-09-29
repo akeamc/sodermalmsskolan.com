@@ -5,7 +5,7 @@ import { MenuList } from "../components/food/Menus";
 import { AdSection } from "../components/basic/Ad";
 import { Section } from "../components/layout/Section";
 import { Hero } from "../components/layout/Hero";
-import { Row } from "../components/grid/Row";
+import { Base } from "../components/grid/Row";
 import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/layout/Navigation";
 import { Image } from "../components/basic/Image";
@@ -18,7 +18,7 @@ import { TitleContainer } from "../components/layout/Hero/Title";
 import React from "react";
 import * as breakpoints from "../styles/breakpoints";
 
-const HeroContent = styled(Row)`
+const HeroContent = styled(Base)`
   grid-auto-flow: dense;
 `;
 
@@ -103,11 +103,11 @@ const Page: React.FunctionComponent = () => {
       </Hero>
       <AdSection />
       <Section>
-        <Row>
+        <Base>
           <Col xs={12}>
             <GridTitleSection title="Menyn" />
           </Col>
-        </Row>
+        </Base>
         <MenuList limit={30} />
       </Section>
       <AdSection />

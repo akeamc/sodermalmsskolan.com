@@ -10,7 +10,7 @@ import {
 } from "../../../../lib/digibruh/utils/initialprops";
 import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
-import { Row } from "../../../../components/grid/Row";
+import { Base } from "../../../../components/grid/Row";
 import { Col } from "../../../../components/grid/Col";
 import { Section } from "../../../../components/layout/Section";
 import { GridTitleSection } from "../../../../components/basic/Typography";
@@ -67,11 +67,11 @@ const Page: DigibruhPage = (props) => {
         image={field?.coverImage}
       />
       <Section>
-        <Row>
+        <Base>
           <Col xs={12}>
             <GridTitleSection title="Artiklar" />
           </Col>
-        </Row>
+        </Base>
         <CardGrid
           items={loadingPosts ? null : items}
           imagesExpected={true}

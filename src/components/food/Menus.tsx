@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import { Row } from "../grid/Row";
+import { Base } from "../grid/Row";
 import { Col } from "../grid/Col";
 import * as breakpoints from "../../styles/breakpoints";
 import { ClientMenu } from "../../lib/food/structures/client/Menu";
@@ -90,7 +90,7 @@ export const MenuList: React.FunctionComponent<{
   const [selectedId, setSelectedId] = useState<string>(null);
 
   return (
-    <Row>
+    <Base>
       <Col>
         <Grid>
           <AnimateSharedLayout type="crossfade">
@@ -104,6 +104,6 @@ export const MenuList: React.FunctionComponent<{
           </AnimateSharedLayout>
         </Grid>
       </Col>
-    </Row>
+    </Base>
   );
 };

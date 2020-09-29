@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Row } from "../../grid/Row";
+import { Base } from "../../grid/Row";
 import { brightTextStyles } from "../../basic/Typography";
 import { motion, useCycle, useViewportScroll } from "framer-motion";
 import { NavLogo } from "./Logo";
@@ -85,13 +85,13 @@ export const Navigation: React.FunctionComponent<{
         mobileNavOpen={isOpen}
         brightText={brightText && !floating}
       >
-        <Row>
+        <Base>
           <NavigationRow>
             <NavLogo />
             <DesktopNav />
             <Toggle toggle={() => toggleOpen()} isOpen={isOpen} />
           </NavigationRow>
-        </Row>
+        </Base>
       </Wrapper>
       <MobileNav isOpen={isOpen} />
     </>

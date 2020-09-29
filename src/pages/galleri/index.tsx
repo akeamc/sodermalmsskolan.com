@@ -4,7 +4,7 @@ import { Navigation } from "../../components/layout/Navigation";
 import { HeroWithTitle } from "../../components/layout/Hero/Title";
 import { FoodGallery } from "../../components/food/FoodGallery";
 import { Section } from "../../components/layout/Section";
-import { Row } from "../../components/grid/Row";
+import { Base } from "../../components/grid/Row";
 import { NormalWidth } from "../../components/grid/Col";
 
 const Page: React.FunctionComponent = () => {
@@ -24,11 +24,11 @@ const Page: React.FunctionComponent = () => {
       <Navigation />
       <HeroWithTitle title="Galleri" />
       <Section>
-        <Row>
+        <Base>
           <NormalWidth>
             <FoodGallery />
           </NormalWidth>
-        </Row>
+        </Base>
       </Section>
     </Layout>
   );

@@ -11,7 +11,7 @@ import { CardGrid } from "../../../components/basic/CardGrid";
 import { Field } from "../../../lib/digibruh/Field";
 import React from "react";
 import { Section } from "../../../components/layout/Section";
-import { Row } from "../../../components/grid/Row";
+import { Base } from "../../../components/grid/Row";
 import { Col } from "../../../components/grid/Col";
 import {
   GridTitleSection,
@@ -70,11 +70,11 @@ const Page: React.FunctionComponent = ({
         <LeadText>{author?.bio}</LeadText>
       </HeaderWithBackground>
       <Section>
-        <Row>
+        <Base>
           <Col xs={12}>
             <GridTitleSection title="Blogginlägg" />
           </Col>
-        </Row>
+        </Base>
         <PostGridAuto
           params={{
             filter: `author:${author?.slug}+tag:-${Digibruh.tagPrefix}`,
@@ -82,11 +82,11 @@ const Page: React.FunctionComponent = ({
         />
       </Section>
       <Section>
-        <Row>
+        <Base>
           <Col xs={12}>
             <GridTitleSection title="Digibruh-artiklar" />
           </Col>
-        </Row>
+        </Base>
         <CardGrid
           items={digibruhPosts.map(Field.postToGridItem)}
           imagesExpected={true}

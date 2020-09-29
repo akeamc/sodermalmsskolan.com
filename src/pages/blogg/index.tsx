@@ -4,7 +4,7 @@ import { PostGridAuto } from "../../components/blog/PostGrid";
 import { Section } from "../../components/layout/Section";
 import { Navigation } from "../../components/layout/Navigation";
 import FeaturedPost from "../../components/blog/FeaturedPost";
-import { Row } from "../../components/grid/Row";
+import { Base } from "../../components/grid/Row";
 import { Hero } from "../../components/layout/Hero";
 
 export default class Page extends React.Component {
@@ -13,9 +13,9 @@ export default class Page extends React.Component {
       <Layout metadata={{ title: "Blogg" }}>
         <Navigation />
         <Hero>
-          <Row>
+          <Base>
             <FeaturedPost />
-          </Row>
+          </Base>
         </Hero>
         <Section>
           <PostGridAuto skip={1} />

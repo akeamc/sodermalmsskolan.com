@@ -1,7 +1,7 @@
 import { Schedule } from "../../lib/schedule/Schedule";
 import React, { useState, useEffect } from "react";
 import { Section } from "../layout/Section";
-import { Row } from "../grid/Row";
+import { Base } from "../grid/Row";
 import { Col } from "../grid/Col";
 import { ScheduleTable } from "./Table";
 import styled from "styled-components";
@@ -100,7 +100,7 @@ export const ScheduleView: React.FunctionComponent<{
   return (
     <>
       <Section>
-        <Row>
+        <Base>
           <Col>
             <PeriodCards
               schedule={schedule}
@@ -108,10 +108,10 @@ export const ScheduleView: React.FunctionComponent<{
               groupName={selectedClass}
             />
           </Col>
-        </Row>
+        </Base>
       </Section>
       <Section>
-        <Row>
+        <Base>
           <Col>
             <FilterOptions>
               <FilterOption>
@@ -148,14 +148,14 @@ export const ScheduleView: React.FunctionComponent<{
               })}
             </FilterOptions>
           </Col>
-        </Row>
+        </Base>
       </Section>
       <Section>
-        <Row>
+        <Base>
           <Col>
             <ScheduleTable schedule={schedule} groups={selectedGroups} />
           </Col>
-        </Row>
+        </Base>
       </Section>
     </>
   );

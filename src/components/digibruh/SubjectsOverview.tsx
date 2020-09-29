@@ -4,7 +4,7 @@ import { GridItem, CardGrid } from "../basic/CardGrid";
 import Skeleton from "react-loading-skeleton";
 import { useDigibruh } from "../../lib/digibruh/Digibruh";
 import { Section } from "../layout/Section";
-import { Row } from "../grid/Row";
+import { Base } from "../grid/Row";
 import { Col } from "../grid/Col";
 import { GridTitleSection } from "../basic/Typography";
 import Link from "next/link";
@@ -25,7 +25,7 @@ const SubjectsOverview: React.FunctionComponent = () => {
 
         return (
           <Section key={index}>
-            <Row>
+            <Base>
               <Col xs={12}>
                 <GridTitleSection
                   title={
@@ -46,7 +46,7 @@ const SubjectsOverview: React.FunctionComponent = () => {
                   }
                 />
               </Col>
-            </Row>
+            </Base>
             <CardGrid items={gridItems} imagesExpected={true} />
           </Section>
         );

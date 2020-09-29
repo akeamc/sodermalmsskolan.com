@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "../components/layout/Layout";
 import { Link } from "../components/basic/Link";
 import { Navigation } from "../components/layout/Navigation";
-import { Row } from "../components/grid/Row";
+import { Base } from "../components/grid/Row";
 import { Hero } from "../components/layout/Hero";
 import { NormalWidth } from "../components/grid/Col";
 import { Image } from "../components/basic/Image";
@@ -25,14 +25,14 @@ const Page: React.FunctionComponent = () => {
     <Layout metadata={{ title: "Om", images: [image] }}>
       <Navigation />
       <Hero>
-        <Row>
+        <Base>
           <NormalWidth>
             <Image src={image} />
           </NormalWidth>
-        </Row>
+        </Base>
       </Hero>
       <Section>
-        <Row>
+        <Base>
           <NormalWidth>
             <TextBox>
               <h1>Bakgrund</h1>
@@ -53,7 +53,7 @@ const Page: React.FunctionComponent = () => {
               </p>
             </TextBox>
           </NormalWidth>
-        </Row>
+        </Base>
       </Section>
     </Layout>
   );

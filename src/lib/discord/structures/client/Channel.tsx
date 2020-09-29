@@ -1,6 +1,6 @@
 import { Channel, IDiscordAPIChannel } from "../shared/Channel";
 import { ClientMessage } from "./Message";
-import { Row } from "../../../../components/grid/Row";
+import { Base } from "../../../../components/grid/Row";
 import React from "react";
 import useSWR from "swr";
 import { NormalWidth } from "../../../../components/grid/Col";
@@ -55,7 +55,7 @@ export class ClientChannel extends Channel {
     const { data: messages } = this.useMessages();
 
     return (
-      <Row>
+      <Base>
         <NormalWidth>
           <MessageWrapper>
             {messages?.flat()?.map((message, index) => (
@@ -63,7 +63,7 @@ export class ClientChannel extends Channel {
             ))}
           </MessageWrapper>
         </NormalWidth>
-      </Row>
+      </Base>
     );
   };
 }
