@@ -5,7 +5,7 @@ import { useProgressiveImage } from "../ProgressiveImage";
 export const Card = styled(motion.div)<{ $hoverable?: boolean }>`
   background-color: var(--background);
   box-shadow: var(--shadow-small);
-  border-radius: 15px;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
