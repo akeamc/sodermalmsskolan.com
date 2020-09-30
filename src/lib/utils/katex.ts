@@ -175,6 +175,7 @@ export const renderMathInText = function (text: string) {
           })
         );
       } catch (e) {
+        console.warn(e);
         continue;
       }
     }
