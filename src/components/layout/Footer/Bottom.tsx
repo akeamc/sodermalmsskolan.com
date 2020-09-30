@@ -1,4 +1,4 @@
-import { Row } from "../../grid/Row";
+import { Base } from "../../grid/Row";
 import {
   SocialIcon,
   SocialMedia,
@@ -86,7 +86,7 @@ export const socialProfiles: SocialProfile[] = [
 
 export const FooterBottom: React.FunctionComponent = () => {
   return (
-    <Row>
+    <Base>
       <BottomSection>
         <Attribution>Designed by Lynx in Norrland.</Attribution>
         <FooterSocial profiles={socialProfiles} />
@@ -94,6 +94,6 @@ export const FooterBottom: React.FunctionComponent = () => {
           <MinecraftStatusBadge />
         </div>
       </BottomSection>
-    </Row>
+    </Base>
   );
 };

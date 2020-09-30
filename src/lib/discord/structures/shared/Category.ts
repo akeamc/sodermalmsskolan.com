@@ -1,3 +1,4 @@
+import { Serializable } from "../../../common/Serializable";
 import { IDiscordAPIChannel, Channel, ChannelType } from "./Channel";
 
 export interface ICategory {
@@ -6,7 +7,7 @@ export interface ICategory {
   channels: IDiscordAPIChannel[];
 }
 
-export class Category {
+export class Category implements Serializable<ICategory> {
   constructor(
     public name: string,
     public id: string,

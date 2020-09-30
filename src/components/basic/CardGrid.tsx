@@ -10,11 +10,10 @@ import {
 } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
 import { Col } from "../grid/Col";
-import { Row } from "../grid/Row";
+import { Base } from "../grid/Row";
 import { LinkBlock } from "./Link";
 import moment from "moment";
 import { AuthorGroup } from "./Avatar";
-import * as breakpoints from "../../styles/breakpoints";
 import { Emoji } from "./Emoji";
 import { useLocale } from "../../hooks/locale";
 
@@ -94,12 +93,6 @@ const ItemContainer = styled(Col)`
   flex-direction: column;
 `;
 
-const GridContainer = styled(Row)`
-  @media (min-width: ${breakpoints.extraLarge}) {
-    grid-gap: 32px;
-  }
-`;
-
 export const CardGrid: React.FunctionComponent<{
   items: GridItem[];
   imagesExpected: boolean;
@@ -129,5 +122,5 @@ export const CardGrid: React.FunctionComponent<{
     );
   });
 
-  return containerless ? <>{grid}</> : <GridContainer>{grid}</GridContainer>;
+  return containerless ? <>{grid}</> : <Base>{grid}</Base>;
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Row = styled.div`
+export const Base = styled.div`
   display: grid;
   grid-gap: var(--grid-gap);
   grid-template-columns: repeat(12, 1fr);

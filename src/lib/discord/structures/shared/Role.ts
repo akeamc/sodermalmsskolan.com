@@ -1,3 +1,5 @@
+import { Serializable } from "../../../common/Serializable";
+
 export interface IDiscordAPIRole {
   id: string;
   name: string;
@@ -9,7 +11,7 @@ export interface IDiscordAPIRole {
   mentionable: boolean;
 }
 
-export class Role {
+export class Role implements Serializable<IDiscordAPIRole> {
   id: string;
   name: string;
   color: number;

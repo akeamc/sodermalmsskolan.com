@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Hero } from ".";
-import { Row } from "../../grid/Row";
+import { Base } from "../../grid/Row";
 import { NormalWidth } from "../../grid/Col";
 import { LeadText } from "../../basic/Typography";
 import * as breakpoints from "../../../styles/breakpoints";
@@ -46,7 +46,7 @@ export const HeroWithTitle: React.FunctionComponent<{
   children?: React.ReactNode;
 }> = ({ title, lead, children }) => (
   <Hero>
-    <Row>
+    <Base>
       <NormalWidth>
         <TitleContainer center>
           <h1>{title}</h1>
@@ -54,6 +54,6 @@ export const HeroWithTitle: React.FunctionComponent<{
           {children}
         </TitleContainer>
       </NormalWidth>
-    </Row>
+    </Base>
   </Hero>
 );

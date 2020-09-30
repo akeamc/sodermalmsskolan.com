@@ -2,17 +2,17 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useProgressiveImage } from "../ProgressiveImage";
 
-export const Card = styled(motion.div)<{ hoverable?: boolean }>`
+export const Card = styled(motion.div)<{ $hoverable?: boolean }>`
   background-color: var(--background);
   box-shadow: var(--shadow-small);
-  border-radius: 8px;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
   overflow: hidden;
 
   &:hover {
-    ${({ hoverable = true }) => hoverable && `transform: translateY(-4px)`}
+    ${({ $hoverable = true }) => $hoverable && `transform: translateY(-4px)`}
   }
 `;
 

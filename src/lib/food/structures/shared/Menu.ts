@@ -20,6 +20,10 @@ export class Menu {
       date: this.date.toISOString(),
     };
   }
+
+  public get id(): string {
+    return this.date.getTime().toString();
+  }
 }
 
 export interface MenuQuery {

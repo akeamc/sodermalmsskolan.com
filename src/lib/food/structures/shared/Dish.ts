@@ -1,10 +1,12 @@
+import { Serializable } from "../../../common/Serializable";
+
 export interface IDish {
   title: string;
   id: string;
   co2e?: number;
 }
 
-export class Dish {
+export class Dish implements Serializable<IDish> {
   title: string;
   id: string;
   co2e?: number;

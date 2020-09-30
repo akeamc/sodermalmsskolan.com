@@ -1,7 +1,7 @@
 import React from "react";
 import { Logo } from "../../basic/Logo";
 import styled from "styled-components";
-import { Row } from "../../grid/Row";
+import { Base } from "../../grid/Row";
 import { Col } from "../../grid/Col";
 import { FooterBottom } from "./Bottom";
 import { FooterLinks } from "./Links";
@@ -16,7 +16,7 @@ const FooterLogo = styled(Logo)`
   height: 16px;
 `;
 
-const LogoRow = styled(Row)`
+const LogoRow = styled(Base)`
   margin-top: 24px;
   margin-bottom: 24px;
 `;

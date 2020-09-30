@@ -6,7 +6,7 @@ import { renderMathInText } from "../../../lib/utils/katex";
 import { ProgressiveImage } from "../../basic/ProgressiveImage";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { Section } from "../../layout/Section";
-import { Row } from "../../grid/Row";
+import { Base } from "../../grid/Row";
 import * as breakpoints from "../../../styles/breakpoints";
 import { Link as LinkIcon } from "react-feather";
 
@@ -300,9 +300,9 @@ const ArticleBody: React.FunctionComponent<{
 
   return (
     <RichTextSection>
-      <Row>
+      <Base>
         <RichText>{parsedHtml}</RichText>
-      </Row>
+      </Base>
     </RichTextSection>
   );
 };

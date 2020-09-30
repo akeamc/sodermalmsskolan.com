@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { TextColorModifier } from "../../basic/Typography";
 import { Navigation } from "../Navigation";
 import { Hero } from "../Hero";
-import { Row } from "../../grid/Row";
+import { Base } from "../../grid/Row";
 import { ResponsiveHalf } from "../../grid/Col";
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
@@ -70,11 +70,11 @@ export const HeaderWithBackground: React.FunctionComponent<{
       <Container bright minHeight={minHeight} ref={ref}>
         <motion.div style={{ opacity, y, zIndex: 1 }}>
           <Hero>
-            <Row>
+            <Base>
               <ResponsiveHalf>
                 <div>{children}</div>
               </ResponsiveHalf>
-            </Row>
+            </Base>
           </Hero>
         </motion.div>
         <Background image={image} style={{ scale: backgroundScale }} />

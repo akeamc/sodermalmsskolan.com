@@ -1,3 +1,5 @@
+import { Serializable } from "../../../common/Serializable";
+
 export interface IDiscordAPIUser {
   id: string;
   username: string;
@@ -14,7 +16,7 @@ export interface IDiscordAPIUser {
   public_flags?: number;
 }
 
-export class User {
+export class User implements Serializable<IDiscordAPIUser> {
   id: string;
   username: string;
   discriminator: string;

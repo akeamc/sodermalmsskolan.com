@@ -7,7 +7,7 @@ import {
   getInitialDigibruh,
 } from "../../../lib/digibruh/utils/initialprops";
 import React from "react";
-import { Row } from "../../../components/grid/Row";
+import { Base } from "../../../components/grid/Row";
 import { Section } from "../../../components/layout/Section";
 import { Col } from "../../../components/grid/Col";
 import { GridTitleSection } from "../../../components/basic/Typography";
@@ -35,11 +35,11 @@ const Page: DigibruhPage = (props) => {
         image={subject?.coverImage}
       />
       <Section>
-        <Row>
+        <Base>
           <Col xs={12}>
             <GridTitleSection title="Områden" />
           </Col>
-        </Row>
+        </Base>
         <CardGrid
           items={(subject?.fields || []).map((field) => field.toGridItem())}
           imagesExpected={true}

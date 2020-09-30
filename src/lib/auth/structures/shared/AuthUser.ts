@@ -4,6 +4,7 @@ import {
   Member,
 } from "../../../discord/structures/shared/Member";
 import { Role, IDiscordAPIRole } from "../../../discord/structures/shared/Role";
+import { Serializable } from "../../../common/Serializable";
 
 export interface IAuthUser {
   discord: IDiscordAPIUser;
@@ -11,7 +12,7 @@ export interface IAuthUser {
   roles: IDiscordAPIRole[];
 }
 
-export class AuthUser {
+export class AuthUser implements Serializable<IAuthUser> {
   discord: User;
   member: Member | null;
   roles: Role[];

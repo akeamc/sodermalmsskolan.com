@@ -3,6 +3,8 @@ import { IMenu, Menu, MenuQuery } from "../shared/Menu";
 import ky from "ky-universal";
 import moment from "moment";
 import { ClientDish } from "./Dish";
+import { useLocale } from "../../../../hooks/locale";
+import { firstLetterUpperCase } from "../../../utils/letters";
 
 export class ClientMenu extends Menu {
   dishes: ClientDish[];
@@ -13,7 +15,7 @@ export class ClientMenu extends Menu {
     this.dishes = dishes.map((dish) => new ClientDish(dish));
   }
 
-  public static async fetchAll(): Promise<Menu[]> {
+  public static async fetchAll(): Promise<ClientMenu[]> {
     const res = await ky.get("/api/food/menus").json<IMenu[]>();
 
     const menus = res
@@ -37,6 +39,14 @@ export class ClientMenu extends Menu {
 
         return menus.slice(startIndex, startIndex + limit);
       }
+    );
+  }
+
+  public get title(): string {
+    const { locale } = useLocale();
+
+    return firstLetterUpperCase(
+      moment(this?.date).locale(locale).format("dddd D MMMM")
     );
   }
 }

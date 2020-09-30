@@ -1,3 +1,5 @@
+import { Serializable } from "../../../common/Serializable";
+
 export interface IDiscordAPIMessageAttachment {
   id: string;
   filename: string;
@@ -8,7 +10,8 @@ export interface IDiscordAPIMessageAttachment {
   width?: number;
 }
 
-export class MessageAttachment {
+export class MessageAttachment
+  implements Serializable<IDiscordAPIMessageAttachment> {
   id: string;
   filename: string;
   size: number;
