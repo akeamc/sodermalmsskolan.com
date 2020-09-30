@@ -9,6 +9,7 @@ import { Section } from "../../layout/Section";
 import { Base } from "../../grid/Row";
 import * as breakpoints from "../../../styles/breakpoints";
 import { Link as LinkIcon } from "react-feather";
+import { Table } from "../../basic/Table";
 
 enum FigureWidth {
   Normal,
@@ -269,11 +270,19 @@ const ArticleBody: React.FunctionComponent<{
       return <Divider key={index} />;
     }
 
+    if (node.name == "table") {
+      return (
+        <Figure width={FigureWidth.Normal} key={index}>
+          <Table>{node.children.map(transform)}</Table>
+        </Figure>
+      );
+    }
+
     if (/^h[1-6]$/i.test(node.name)) {
       const { id } = node.attribs;
 
       return (
-        <node.name id={id}>
+        <node.name id={id} key={index}>
           <LinkableHeading>
             <a href={"#" + id} id={id}>
               {node.children.map(transform)}
@@ -286,6 +295,7 @@ const ArticleBody: React.FunctionComponent<{
 
     if (node.type == "text") {
       let katexParsed = renderMathInText(node.data);
+
       if (katexParsed != null) {
         return (
           <span key={index} dangerouslySetInnerHTML={{ __html: katexParsed }} />
