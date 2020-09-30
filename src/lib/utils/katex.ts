@@ -1,5 +1,6 @@
 /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
 import katex from "katex";
+import "katex/dist/contrib/mhchem";
 
 interface Delimeter {
   left: string;
@@ -146,7 +147,7 @@ export const renderMathInText = function (text: string) {
   const options = {
     delimeters: [
       { left: "$$", right: "$$", display: true },
-      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false },
     ],
   };
 
