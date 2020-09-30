@@ -295,6 +295,7 @@ const ArticleBody: React.FunctionComponent<{
 
     if (node.type == "text") {
       let katexParsed = renderMathInText(node.data);
+
       if (katexParsed != null) {
         return (
           <span key={index} dangerouslySetInnerHTML={{ __html: katexParsed }} />

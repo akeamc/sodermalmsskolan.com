@@ -1,6 +1,6 @@
 /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
 import katex from "katex";
-import "katex/dist/contrib/mhchem";
+import "katex/dist/contrib/mhchem.js";
 
 interface Delimeter {
   left: string;
