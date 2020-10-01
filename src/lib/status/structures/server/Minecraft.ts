@@ -2,17 +2,36 @@ import { IMinecraftStatus } from "../shared/Minecraft";
 import { Client, PacketWriter, State } from "mcproto";
 import { ServerService } from "./Service";
 import { IServiceStatus } from "../shared/Service";
+import Query from "mcquery";
 
-/**
- * Get the status of a Minecraft server.
- * @param host
- * @param port
- */
-export async function getServerStatus(
-  host: string,
-  port: number = 25565
-): Promise<[boolean, IMinecraftStatus]> {
-  try {
+export interface IMinecraftServer {
+  host: string;
+  port: number;
+}
+
+export class ServerMinecraftService extends ServerService<
+  IMinecraftServer,
+  IMinecraftStatus
+> {
+  private async getPlayerNames(): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      const query = new Query(this.data.host, this.data.port);
+
+      query.connect().then(() => {
+        query.full_stat((error, response) => {
+          if (error) {
+            return reject(error);
+          }
+
+          return resolve(response.player_);
+        });
+      });
+    });
+  }
+
+  private async _getStatus(): Promise<IMinecraftStatus> {
+    const { host, port } = this.data;
+
     const client = await Client.connect(host, port);
 
     client.send(
@@ -31,48 +50,22 @@ export async function getServerStatus(
 
     client.end();
 
-    return [
-      true,
-      {
-        players: {
-          max: data.players.max,
-          online: data.players.online,
-        },
-        version: data.version.name,
-        motd: data.description.text,
-        favicon: data.favicon,
+    return {
+      players: {
+        max: data.players.max,
+        online: data.players.online,
+        names: await this.getPlayerNames(),
       },
-    ];
-  } catch (error) {
-    return [
-      false,
-      {
-        players: {
-          max: 0,
-          online: 0,
-        },
-        version: null,
-        motd: null,
-        favicon: null,
-      },
-    ];
+      version: data.version.name,
+      motd: data.description.text,
+      favicon: data.favicon,
+    };
   }
-}
 
-export interface IMinecraftServer {
-  host: string;
-  port?: number;
-}
-
-export class ServerMinecraftService extends ServerService<
-  IMinecraftServer,
-  IMinecraftStatus
-> {
   public async getStatus() {
-    const [online, data] = await getServerStatus(
-      this.data.host,
-      this.data.port
-    );
+    const data: IMinecraftStatus = await this._getStatus().catch(() => null);
+
+    const online = !!data;
 
     return {
       id: this.id,

@@ -12,6 +12,7 @@ export default async (
     id: "minecraft",
     data: {
       host: "minecraft.xn--sdermalmsskolan-8sb.com",
+      port: 25565,
     },
   });
 
