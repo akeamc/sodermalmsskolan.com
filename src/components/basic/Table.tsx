@@ -28,6 +28,10 @@ const StyledTable = styled.table`
   th {
     padding: 0.75rem;
     text-align: left;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--accents-2);
+    }
   }
 
   th {
