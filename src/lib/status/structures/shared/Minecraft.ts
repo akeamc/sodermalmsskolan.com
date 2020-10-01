@@ -1,4 +1,4 @@
-export interface IMinecraftPlayerData {
+export interface IMinecraftPlayers {
   /**
    * Number of players online.
    */
@@ -8,20 +8,15 @@ export interface IMinecraftPlayerData {
    * Player capacity.
    */
   max: number;
+
+  /**
+   * Array of the names of the currently active players.
+   */
+  names: string[];
 }
 
 export interface IMinecraftStatus {
-  players?: {
-    /**
-     * Number of players online.
-     */
-    online: number;
-
-    /**
-     * Player capacity.
-     */
-    max: number;
-  };
+  players: IMinecraftPlayers;
 
   /**
    * Version of the server, e.g. `1.16.1`.
@@ -32,6 +27,7 @@ export interface IMinecraftStatus {
    * Message of the day.
    */
   motd: string;
+
   /**
    * Base64-encoded PNG of the server icon.
    */
