@@ -53,7 +53,7 @@ export const HeaderWithBackground: React.FunctionComponent<{
   const y = useTransform(scrollY, (value) => value * 0.5);
   const backgroundScale = useTransform(
     scrollY,
-    (value) => 1 + value / (ref?.current?.offsetHeight * 2)
+    (value) => 1 + Math.max(0, value / (ref?.current?.offsetHeight * 2))
   );
 
   useEffect(
