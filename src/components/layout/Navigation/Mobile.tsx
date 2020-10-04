@@ -26,15 +26,17 @@ const Wrapper = styled(motion.div)`
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
   height: 100%;
-  pointer-events: initial;
+  pointer-events: all;
   box-sizing: border-box;
+  max-width: 300px;
+  margin-left: auto;
 `;
 
-const ListTitle = styled.h4`
+const ListTitle = styled(motion.h4)`
   font-size: 1.25rem;
   letter-spacing: -0.020625rem;
   font-weight: 600;
-  margin: 1.5em 0;
+  margin: 1.5em 0 0.5em;
 `;
 
 const List = styled(UnstyledList)`
@@ -61,37 +63,82 @@ const Menu = styled.div`
   min-height: 100%;
 `;
 
-export const MobileNav: React.FunctionComponent<{ isOpen: boolean }> = ({
-  isOpen,
-}) => {
+const Overlay = styled(motion.div)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const listItemVariants = {
+  open: (delay) => ({
+    y: 0,
+    opacity: 1,
+    transition: { delay, ease: "easeOut", duration: 0.2 },
+  }),
+  closed: {
+    y: "50%",
+    opacity: 0,
+    transition: { ease: "easeInOut", duration: 0.2 },
+  },
+};
+
+export const MobileNav: React.FunctionComponent<{
+  isOpen: boolean;
+  onClose: () => void;
+}> = ({ isOpen, onClose }) => {
   const categories = useLinks();
+
+  const wrapperAnimationDuration = 0.3;
 
   return (
     <Container animate={isOpen ? "open" : "closed"} initial={false}>
+      <Overlay
+        variants={{
+          open: { opacity: 1, pointerEvents: "all" },
+          closed: { opacity: 0, pointerEvents: "none" },
+        }}
+        transition={{ ease: "easeInOut", duration: wrapperAnimationDuration }}
+        onClick={onClose}
+      />
       <Wrapper
         variants={{
           open: {
-            y: 0,
+            x: 0,
           },
           closed: {
-            y: "100%",
+            x: "100%",
           },
         }}
-        transition={{ ease: "easeInOut" }}
+        transition={{ ease: "easeOut", duration: wrapperAnimationDuration }}
       >
         <Menu>
-          {categories.map((category, index) => (
-            <List key={index}>
-              <ListTitle>{category.name}</ListTitle>
-              {category.items.map((item, index) => (
-                <Link href={item.href} key={index}>
-                  <Anchor>
-                    <li>{item.name}</li>
-                  </Anchor>
-                </Link>
-              ))}
-            </List>
-          ))}
+          {categories.map((category, categoryIndex) => {
+            const initialDelay = 0.2;
+
+            return (
+              <List key={categoryIndex}>
+                <ListTitle variants={listItemVariants} custom={initialDelay}>
+                  {category.name}
+                </ListTitle>
+                {category.items.map((item, itemIndex) => {
+                  const delay = itemIndex * 0.05 + initialDelay;
+
+                  return (
+                    <Link href={item.href} key={itemIndex}>
+                      <Anchor>
+                        <motion.li variants={listItemVariants} custom={delay}>
+                          {item.name}
+                        </motion.li>
+                      </Anchor>
+                    </Link>
+                  );
+                })}
+              </List>
+            );
+          })}
         </Menu>
       </Wrapper>
     </Container>

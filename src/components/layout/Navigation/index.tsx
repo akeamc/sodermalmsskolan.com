@@ -93,7 +93,7 @@ export const Navigation: React.FunctionComponent<{
           </NavigationRow>
         </Base>
       </Wrapper>
-      <MobileNav isOpen={isOpen} />
+      <MobileNav isOpen={isOpen} onClose={() => toggleOpen()} />
     </>
   );
 };
