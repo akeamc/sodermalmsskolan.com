@@ -133,6 +133,10 @@ const Blockquote = styled.blockquote`
   }
 `;
 
+const Equation = styled.span`
+  color: var(--foreground);
+`;
+
 const RichText = styled.div`
   grid-column: span 12;
 
@@ -298,7 +302,10 @@ const ArticleBody: React.FunctionComponent<{
 
       if (katexParsed != null) {
         return (
-          <span key={index} dangerouslySetInnerHTML={{ __html: katexParsed }} />
+          <Equation
+            key={index}
+            dangerouslySetInnerHTML={{ __html: katexParsed }}
+          />
         );
       }
     }
