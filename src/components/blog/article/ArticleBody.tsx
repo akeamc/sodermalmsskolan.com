@@ -133,10 +133,6 @@ const Blockquote = styled.blockquote`
   }
 `;
 
-const Equation = styled.span`
-  color: var(--foreground);
-`;
-
 const RichText = styled.div`
   grid-column: span 12;
 
@@ -179,6 +175,10 @@ const RichText = styled.div`
   > ${Embed}, > ${Figure}, > ${Blockquote}, > img {
     margin-top: 48px;
     margin-bottom: 48px;
+  }
+
+  .katex {
+    color: var(--foreground);
   }
 `;
 
@@ -302,10 +302,7 @@ const ArticleBody: React.FunctionComponent<{
 
       if (katexParsed != null) {
         return (
-          <Equation
-            key={index}
-            dangerouslySetInnerHTML={{ __html: katexParsed }}
-          />
+          <span key={index} dangerouslySetInnerHTML={{ __html: katexParsed }} />
         );
       }
     }
