@@ -2,16 +2,16 @@ import React from "react";
 import { Subject } from "../../lib/digibruh/Subject";
 import { GridItem, CardGrid } from "../basic/CardGrid";
 import Skeleton from "react-loading-skeleton";
-import { useDigibruh } from "../../lib/digibruh/Digibruh";
 import { Section } from "../layout/Section";
 import { Base } from "../grid/Row";
 import { Col } from "../grid/Col";
 import { GridTitleSection } from "../basic/Typography";
 import Link from "next/link";
 import { Emoji } from "../basic/Emoji";
+import Digibruh from "../../lib/digibruh/Digibruh";
 
 const SubjectsOverview: React.FunctionComponent = () => {
-  const { data } = useDigibruh();
+  const { data } = Digibruh.use();
 
   const subjects: Subject[] = data?.subjects || new Array(3).fill(null);
   const loading = !data;

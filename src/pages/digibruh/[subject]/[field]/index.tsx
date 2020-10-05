@@ -1,7 +1,7 @@
 import { Layout } from "../../../../components/layout/Layout";
 import NotFound from "../../../404";
 import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
-import Digibruh, { useDigibruh } from "../../../../lib/digibruh/Digibruh";
+import Digibruh from "../../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
 import { PostOrPage } from "@tryghost/content-api";
 import {
@@ -21,7 +21,7 @@ const Page: DigibruhPage = (props) => {
     return <NotFound />;
   }
 
-  const { data: digibruh } = useDigibruh(new Digibruh(props.initialDigibruh));
+  const { data: digibruh } = Digibruh.use(new Digibruh(props.initialDigibruh));
   const field = digibruh.getFieldBySlug(props.subject, props.field);
   const postSWR = useSWR(field?.url, () => {
     return field?.posts();
