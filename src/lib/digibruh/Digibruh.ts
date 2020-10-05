@@ -17,7 +17,7 @@ export interface DigibruhStatic {
 /**
  * A tag manager for Digibruh.
  */
-class DigibruhTagArray extends Array<Tag> {
+export class DigibruhTagArray extends Array<Tag> {
   /**
    * Fetch all `Tag`s whose slug has a prefix matching `Digibruh.tagPrefix`.
    */

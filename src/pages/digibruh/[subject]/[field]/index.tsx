@@ -10,11 +10,12 @@ import {
 } from "../../../../lib/digibruh/utils/initialprops";
 import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
-import { Base } from "../../../../components/grid/Row";
+import { Base } from "../../../../components/grid/Base";
 import { Col } from "../../../../components/grid/Col";
 import { Section } from "../../../../components/layout/Section";
 import { GridTitleSection } from "../../../../components/basic/Typography";
 import { DigibruhHero } from "../../../../components/digibruh/Hero";
+import { StudySetGrid } from "../../../../components/quizlet/Grid";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
@@ -68,7 +69,7 @@ const Page: DigibruhPage = (props) => {
       />
       <Section>
         <Base>
-          <Col xs={12}>
+          <Col>
             <GridTitleSection title="Artiklar" />
           </Col>
         </Base>
@@ -78,6 +79,14 @@ const Page: DigibruhPage = (props) => {
           expectedNumberOfItems={3}
           rowLimit={5}
         />
+      </Section>
+      <Section>
+        <Base>
+          <Col>
+            <GridTitleSection title="Quizlet" />
+          </Col>
+        </Base>
+        <StudySetGrid />
       </Section>
     </Layout>
   );

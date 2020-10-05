@@ -7,7 +7,7 @@ import {
   getInitialDigibruh,
 } from "../../../lib/digibruh/utils/initialprops";
 import React from "react";
-import { Base } from "../../../components/grid/Row";
+import { Base } from "../../../components/grid/Base";
 import { Section } from "../../../components/layout/Section";
 import { Col } from "../../../components/grid/Col";
 import { GridTitleSection } from "../../../components/basic/Typography";

@@ -3,7 +3,7 @@ import { Subject } from "../../lib/digibruh/Subject";
 import { GridItem, CardGrid } from "../basic/CardGrid";
 import Skeleton from "react-loading-skeleton";
 import { Section } from "../layout/Section";
-import { Base } from "../grid/Row";
+import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
 import { GridTitleSection } from "../basic/Typography";
 import Link from "next/link";

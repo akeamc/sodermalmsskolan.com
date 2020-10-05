@@ -1,7 +1,7 @@
 import { Schedule } from "../../lib/schedule/Schedule";
 import React, { useState, useEffect } from "react";
 import { Section } from "../layout/Section";
-import { Base } from "../grid/Row";
+import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
 import { ScheduleTable } from "./Table";
 import styled from "styled-components";

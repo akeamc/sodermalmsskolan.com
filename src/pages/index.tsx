@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../components/layout/Layout";
 import { Section } from "../components/layout/Section";
-import { Base } from "../components/grid/Row";
+import { Base } from "../components/grid/Base";
 import { Navigation } from "../components/layout/Navigation";
 import { NormalWidth } from "../components/grid/Col";
 import { ButtonRow, Button } from "../components/basic/Button";

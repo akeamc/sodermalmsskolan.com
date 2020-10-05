@@ -1,7 +1,7 @@
 import React from "react";
 import { Logo } from "../../basic/Logo";
 import styled from "styled-components";
-import { Base } from "../../grid/Row";
+import { Base } from "../../grid/Base";
 import { Col } from "../../grid/Col";
 import { FooterBottom } from "./Bottom";
 import { FooterLinks } from "./Links";

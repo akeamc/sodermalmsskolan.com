@@ -11,7 +11,7 @@ import { CardGrid } from "../../../components/basic/CardGrid";
 import { Field } from "../../../lib/digibruh/Field";
 import React from "react";
 import { Section } from "../../../components/layout/Section";
-import { Base } from "../../../components/grid/Row";
+import { Base } from "../../../components/grid/Base";
 import { Col } from "../../../components/grid/Col";
 import {
   GridTitleSection,

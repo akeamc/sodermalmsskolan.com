@@ -1,4 +1,4 @@
-import { Base } from "../../grid/Row";
+import { Base } from "../../grid/Base";
 import {
   SocialIcon,
   SocialMedia,
