@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ServerStudySet } from "../../../lib/quizlet/structures/server/StudySet";
-import { StudySetStatic } from "../../../lib/quizlet/structures/shared/StudySet";
+import { ServerStudySet } from "../../../../lib/quizlet/structures/server/StudySet";
+import { StudySetStatic } from "../../../../lib/quizlet/structures/shared/StudySet";
 
 export default async (
   _: NextApiRequest,

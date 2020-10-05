@@ -1,5 +1,12 @@
 import { Serializable } from "../../../common/Serializable";
 
+export interface StudySetDetails {
+  title: string;
+  description: string;
+  terms: number;
+  author: string;
+}
+
 export interface StudySetDigibruh {
   subjects: string[];
 
@@ -12,18 +19,18 @@ export interface StudySetDigibruh {
 export interface StudySetStatic {
   digibruh: StudySetDigibruh;
   id: string;
+  details: StudySetDetails | null;
 }
 
 export class StudySet implements Serializable<StudySetStatic> {
-  public readonly digibruh: StudySetDigibruh;
-  public readonly termCount: number;
-  public readonly id: string;
-  public readonly title: string;
-  public readonly description: string;
+  public digibruh: StudySetDigibruh;
+  public id: string;
+  public details: StudySetDetails | null;
 
-  constructor({ digibruh, id }: StudySetStatic) {
+  constructor({ digibruh, id, details }: StudySetStatic) {
     this.digibruh = digibruh;
     this.id = id;
+    this.details = details || null;
   }
 
   public get url() {
@@ -51,6 +58,7 @@ export class StudySet implements Serializable<StudySetStatic> {
     return {
       digibruh: this.digibruh,
       id: this.id,
+      details: null,
     };
   }
 }

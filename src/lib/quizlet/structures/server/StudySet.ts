@@ -2,6 +2,16 @@ import Digibruh, { DigibruhTagArray } from "../../../digibruh/Digibruh";
 import { StudySet } from "../shared/StudySet";
 import { parse } from "node-html-parser";
 import url from "url";
+import { API_ENDPOINT } from "../../../food/constants";
+import got from "got";
+
+export interface PotatoStudySetDetails {
+  id: string;
+  title: string;
+  description: string;
+  term_count: number;
+  author: string;
+}
 
 export class ServerStudySet extends StudySet {
   public static async fetchAll(): Promise<ServerStudySet[]> {
@@ -38,9 +48,10 @@ export class ServerStudySet extends StudySet {
         return accumulator.concat(
           ids.map(
             (id) =>
-              new StudySet({
+              new ServerStudySet({
                 digibruh,
                 id,
+                details: null,
               })
           )
         );
@@ -49,5 +60,18 @@ export class ServerStudySet extends StudySet {
     );
 
     return studySets;
+  }
+
+  public async fetchDetails() {
+    const res = await got
+      .get(`${API_ENDPOINT}/quizlet/${this.id}`)
+      .json<PotatoStudySetDetails>();
+
+    this.details = {
+      title: res.title,
+      description: res.description,
+      terms: res.term_count,
+      author: res.author,
+    };
   }
 }

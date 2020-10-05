@@ -15,7 +15,6 @@ import Digibruh from "../../lib/digibruh/Digibruh";
 export const StudySet: React.FunctionComponent<{
   studySet: ClientStudySet | null;
 }> = ({ studySet }) => {
-
   const { data: digibruh } = Digibruh.use();
 
   const title = studySet ? "Quizlet" : <Skeleton />;
