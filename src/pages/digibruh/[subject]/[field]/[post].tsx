@@ -1,4 +1,4 @@
-import Digibruh, { useDigibruh } from "../../../../lib/digibruh/Digibruh";
+import Digibruh from "../../../../lib/digibruh/Digibruh";
 import NotFound from "../../../404";
 import ArticlePage from "../../../../components/blog/article/ArticlePage";
 import useSWR from "swr";
@@ -13,7 +13,7 @@ const Page: DigibruhPage = (props) => {
     return <NotFound />;
   }
 
-  const { data: digibruh } = useDigibruh(new Digibruh(props.initialDigibruh));
+  const { data: digibruh } = Digibruh.use(new Digibruh(props.initialDigibruh));
   const { data: post } = useSWR(
     `/digibruh/posts/${props.post?.slug}`,
     () => digibruh.fetchPostBySlug(props.post?.slug),

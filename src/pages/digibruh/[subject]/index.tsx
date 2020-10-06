@@ -1,13 +1,13 @@
 import { Layout } from "../../../components/layout/Layout";
 import NotFound from "../../404";
 import { CardGrid } from "../../../components/basic/CardGrid";
-import Digibruh, { useDigibruh } from "../../../lib/digibruh/Digibruh";
+import Digibruh from "../../../lib/digibruh/Digibruh";
 import {
   DigibruhPage,
   getInitialDigibruh,
 } from "../../../lib/digibruh/utils/initialprops";
 import React from "react";
-import { Base } from "../../../components/grid/Row";
+import { Base } from "../../../components/grid/Base";
 import { Section } from "../../../components/layout/Section";
 import { Col } from "../../../components/grid/Col";
 import { GridTitleSection } from "../../../components/basic/Typography";
@@ -18,7 +18,7 @@ const Page: DigibruhPage = (props) => {
     return <NotFound />;
   }
 
-  const { data: digibruh } = useDigibruh(new Digibruh(props.initialDigibruh));
+  const { data: digibruh } = Digibruh.use(new Digibruh(props.initialDigibruh));
   const subject = digibruh.getSubjectBySlug(props.subject);
 
   return (

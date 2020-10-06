@@ -1,7 +1,7 @@
 import React from "react";
 import AdSense from "react-adsense";
 import { Section } from "../layout/Section";
-import { Base } from "../grid/Row";
+import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
 
 export const ResponsiveAd: React.FunctionComponent = () => {

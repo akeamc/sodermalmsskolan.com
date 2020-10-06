@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "../components/layout/Layout";
 import { Link } from "../components/basic/Link";
 import { Navigation } from "../components/layout/Navigation";
-import { Base } from "../components/grid/Row";
+import { Base } from "../components/grid/Base";
 import { Hero } from "../components/layout/Hero";
 import { NormalWidth } from "../components/grid/Col";
 import { Image } from "../components/basic/Image";

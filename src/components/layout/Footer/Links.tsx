@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base } from "../../grid/Row";
+import { Base } from "../../grid/Base";
 import { Link } from "../../basic/Link";
 import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";

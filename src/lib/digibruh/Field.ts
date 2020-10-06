@@ -2,9 +2,7 @@ import { DigibruhCollection } from "./Collection";
 import { Tag, PostOrPage } from "@tryghost/content-api";
 import Digibruh from "./Digibruh";
 import { GridItem } from "../../components/basic/CardGrid";
-import { getPostUrl } from "../../components/blog/PostGrid";
 import { GenericUser } from "../models/User";
-import { Subject } from "./Subject";
 
 export class Field extends DigibruhCollection {
   static get subCollectionRegExp() {

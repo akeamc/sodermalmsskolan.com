@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Hero } from ".";
-import { Base } from "../../grid/Row";
+import { Base } from "../../grid/Base";
 import { NormalWidth } from "../../grid/Col";
 import { LeadText } from "../../basic/Typography";
 import * as breakpoints from "../../../styles/breakpoints";

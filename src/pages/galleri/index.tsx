@@ -4,7 +4,7 @@ import { Navigation } from "../../components/layout/Navigation";
 import { HeroWithTitle } from "../../components/layout/Hero/Title";
 import { FoodGallery } from "../../components/food/FoodGallery";
 import { Section } from "../../components/layout/Section";
-import { Base } from "../../components/grid/Row";
+import { Base } from "../../components/grid/Base";
 import { NormalWidth } from "../../components/grid/Col";
 
 const Page: React.FunctionComponent = () => {

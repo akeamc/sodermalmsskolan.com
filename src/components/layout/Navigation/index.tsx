@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Base } from "../../grid/Row";
+import { Base } from "../../grid/Base";
 import { brightTextStyles } from "../../basic/Typography";
 import { motion, useCycle, useViewportScroll } from "framer-motion";
 import { NavLogo } from "./Logo";

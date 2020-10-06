@@ -7,11 +7,12 @@ import {
   CardHero,
   CardFooter,
   CardTitle,
+  CardLink,
+  CardDescription,
 } from "../basic/Card";
 import Skeleton from "react-loading-skeleton";
 import { Col } from "../grid/Col";
-import { Base } from "../grid/Row";
-import { LinkBlock } from "./Link";
+import { Base } from "../grid/Base";
 import moment from "moment";
 import { AuthorGroup } from "./Avatar";
 import { Emoji } from "./Emoji";
@@ -37,18 +38,6 @@ export interface GridItem {
   href: string;
 }
 
-const ItemLink = styled(LinkBlock)`
-  flex: 1;
-`;
-
-const GridItemCard = styled(Card)`
-  height: 100%;
-`;
-
-const Description = styled.p`
-  margin-bottom: 0;
-`;
-
 class CardGridItem extends React.Component<{
   item: GridItem | null;
   imageExpected: boolean;
@@ -61,18 +50,18 @@ class CardGridItem extends React.Component<{
     const { locale } = useLocale();
 
     return (
-      <ItemLink href={item?.href}>
-        <GridItemCard>
+      <CardLink href={item?.href}>
+        <Card>
           <CardHero backgroundImage={item?.image} />
           <CardContent>
             <CardTitle>{loading ? <Skeleton /> : item?.title}</CardTitle>
-            <Description style={lineClamp ? getLineClamp(lineClamp) : {}}>
+            <CardDescription style={lineClamp ? getLineClamp(lineClamp) : {}}>
               {loading ? (
                 <Skeleton count={descriptionRows} />
               ) : (
                 <Emoji>{item?.description}</Emoji>
               )}
-            </Description>
+            </CardDescription>
           </CardContent>
           {item?.meta ? (
             <CardFooter>
@@ -82,8 +71,8 @@ class CardGridItem extends React.Component<{
               <AuthorGroup authors={item.meta.authors} />
             </CardFooter>
           ) : null}
-        </GridItemCard>
-      </ItemLink>
+        </Card>
+      </CardLink>
     );
   }
 }

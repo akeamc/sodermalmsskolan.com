@@ -5,6 +5,7 @@ import { getTags } from "../ghost/tag";
 import useSWR from "swr";
 import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";
+import { Serializable } from "../common/Serializable";
 
 /**
  * A static variant of `Digibruh`, used mostly for SSR (because you cannot serialize classes with JSON).
@@ -16,7 +17,7 @@ export interface DigibruhStatic {
 /**
  * A tag manager for Digibruh.
  */
-class DigibruhTagArray extends Array<Tag> {
+export class DigibruhTagArray extends Array<Tag> {
   /**
    * Fetch all `Tag`s whose slug has a prefix matching `Digibruh.tagPrefix`.
    */
@@ -48,7 +49,7 @@ class DigibruhTagArray extends Array<Tag> {
   }
 }
 
-export default class Digibruh {
+export default class Digibruh implements Serializable<DigibruhStatic> {
   /**
    * Global tag prefix used on the Ghost backend to differentiate Digibruh posts from non-Digibruh posts.
    */
@@ -102,14 +103,15 @@ export default class Digibruh {
     this.tags = new DigibruhTagArray(...options.tags);
   }
 
-  toStatic(): DigibruhStatic {
+  serialize(): DigibruhStatic {
     return {
       tags: new Array(...this.tags),
     };
   }
-}
 
-export const useDigibruh = (initialData?: Digibruh) =>
-  useSWR("/digibruh", Digibruh.initialize, {
-    initialData,
-  });
+  public static use(initialData?: Digibruh) {
+    return useSWR("/digibruh", Digibruh.initialize, {
+      initialData,
+    });
+  }
+}

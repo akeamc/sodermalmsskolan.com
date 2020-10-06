@@ -16,6 +16,17 @@ export const Card = styled(motion.div)<{ $hoverable?: boolean }>`
   }
 `;
 
+export const CardLink = styled.a`
+  display: flex;
+  color: inherit;
+  height: 100%;
+
+  ${Card} {
+    height: 100%;
+    flex: 1;
+  }
+`;
+
 export const CardHero = styled.div<{ backgroundImage?: string }>`
   min-height: 15rem;
   background: var(--accents-2);
@@ -51,3 +62,7 @@ export const CardFooter = styled.div`
 `;
 
 export const CardTitle = styled.h3``;
+
+export const CardDescription = styled.p`
+  margin-bottom: 0;
+`;

@@ -1,6 +1,6 @@
 import { Channel, IDiscordAPIChannel } from "../shared/Channel";
 import { ClientMessage } from "./Message";
-import { Base } from "../../../../components/grid/Row";
+import { Base } from "../../../../components/grid/Base";
 import React from "react";
 import useSWR from "swr";
 import { NormalWidth } from "../../../../components/grid/Col";

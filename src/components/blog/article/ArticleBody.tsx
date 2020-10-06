@@ -6,7 +6,7 @@ import { renderMathInText } from "../../../lib/utils/katex";
 import { ProgressiveImage } from "../../basic/ProgressiveImage";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { Section } from "../../layout/Section";
-import { Base } from "../../grid/Row";
+import { Base } from "../../grid/Base";
 import * as breakpoints from "../../../styles/breakpoints";
 import { Link as LinkIcon } from "react-feather";
 import { Table } from "../../basic/Table";

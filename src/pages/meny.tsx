@@ -5,7 +5,7 @@ import { MenuList } from "../components/food/Menus";
 import { AdSection } from "../components/basic/Ad";
 import { Section } from "../components/layout/Section";
 import { Hero } from "../components/layout/Hero";
-import { Base } from "../components/grid/Row";
+import { Base } from "../components/grid/Base";
 import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/layout/Navigation";
 import { Image } from "../components/basic/Image";

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import { Base } from "../grid/Row";
+import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
 import * as breakpoints from "../../styles/breakpoints";
 import { ClientMenu } from "../../lib/food/structures/client/Menu";

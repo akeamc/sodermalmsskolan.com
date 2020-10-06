@@ -1,7 +1,7 @@
 import { Layout } from "../../../../components/layout/Layout";
 import NotFound from "../../../404";
 import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
-import Digibruh, { useDigibruh } from "../../../../lib/digibruh/Digibruh";
+import Digibruh from "../../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
 import { PostOrPage } from "@tryghost/content-api";
 import {
@@ -10,18 +10,19 @@ import {
 } from "../../../../lib/digibruh/utils/initialprops";
 import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
-import { Base } from "../../../../components/grid/Row";
+import { Base } from "../../../../components/grid/Base";
 import { Col } from "../../../../components/grid/Col";
 import { Section } from "../../../../components/layout/Section";
 import { GridTitleSection } from "../../../../components/basic/Typography";
 import { DigibruhHero } from "../../../../components/digibruh/Hero";
+import { StudySetGrid } from "../../../../components/quizlet/Grid";
 
 const Page: DigibruhPage = (props) => {
   if (props.errorCode) {
     return <NotFound />;
   }
 
-  const { data: digibruh } = useDigibruh(new Digibruh(props.initialDigibruh));
+  const { data: digibruh } = Digibruh.use(new Digibruh(props.initialDigibruh));
   const field = digibruh.getFieldBySlug(props.subject, props.field);
   const postSWR = useSWR(field?.url, () => {
     return field?.posts();
@@ -68,7 +69,7 @@ const Page: DigibruhPage = (props) => {
       />
       <Section>
         <Base>
-          <Col xs={12}>
+          <Col>
             <GridTitleSection title="Artiklar" />
           </Col>
         </Base>
@@ -78,6 +79,14 @@ const Page: DigibruhPage = (props) => {
           expectedNumberOfItems={3}
           rowLimit={5}
         />
+      </Section>
+      <Section>
+        <Base>
+          <Col>
+            <GridTitleSection title="Quizlet" />
+          </Col>
+        </Base>
+        <StudySetGrid field={props.field} />
       </Section>
     </Layout>
   );
