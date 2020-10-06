@@ -86,7 +86,7 @@ const Page: DigibruhPage = (props) => {
             <GridTitleSection title="Quizlet" />
           </Col>
         </Base>
-        <StudySetGrid />
+        <StudySetGrid field={props.field} />
       </Section>
     </Layout>
   );

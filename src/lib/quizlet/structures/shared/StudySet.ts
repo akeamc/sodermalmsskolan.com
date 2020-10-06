@@ -58,7 +58,7 @@ export class StudySet implements Serializable<StudySetStatic> {
     return {
       digibruh: this.digibruh,
       id: this.id,
-      details: null,
+      details: this.details,
     };
   }
 }

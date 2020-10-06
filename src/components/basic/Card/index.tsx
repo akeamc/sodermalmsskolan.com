@@ -19,6 +19,7 @@ export const Card = styled(motion.div)<{ $hoverable?: boolean }>`
 export const CardLink = styled.a`
   display: flex;
   color: inherit;
+  height: 100%;
 
   ${Card} {
     height: 100%;

@@ -17,18 +17,31 @@ export const StudySet: React.FunctionComponent<{
 }> = ({ studySet }) => {
   const { data: digibruh } = Digibruh.use();
 
-  const title = studySet ? "Quizlet" : <Skeleton />;
+  const { data } = ClientStudySet.use(studySet?.id);
+
+  const title = data?.details?.title || <Skeleton count={2} />;
 
   const subject = digibruh?.getSubjectBySlug(studySet?.digibruh?.subjects[0]);
+  const field = digibruh?.getFieldBySlug(
+    subject?.slug,
+    studySet?.digibruh.fields[0]
+  );
+
+  const description = (
+    <>
+      {field?.name || <Skeleton width="50%" />} ·{" "}
+      {data?.details?.terms || <Skeleton width={16} />} termer
+    </>
+  );
 
   return (
     <Col xs={12} sm={6} md={4}>
-      <Link href={studySet?.url || ""} passHref>
+      <Link href={data?.url || ""} passHref>
         <CardLink>
           <Card>
             <CardContent>
               <CardTitle>{title || <Skeleton />}</CardTitle>
-              <CardDescription>{subject?.name || <Skeleton />}</CardDescription>
+              <CardDescription>{description}</CardDescription>
             </CardContent>
           </Card>
         </CardLink>

@@ -8,13 +8,14 @@ export const StudySetGrid: React.FunctionComponent<{ field?: string }> = ({
 }) => {
   const { data } = ClientStudySet.useAll();
 
-  const sets = data;
-
-  const items: ClientStudySet[] = sets || new Array(3).fill(null);
+  let studySets: ClientStudySet[] =
+    data?.filter(
+      (studySet) => !field || studySet.digibruh.fields.includes(field)
+    ) || new Array(3).fill(null);
 
   return (
     <Base>
-      {items.map((studySet, index) => (
+      {studySets.map((studySet, index) => (
         <StudySet studySet={studySet} key={index} />
       ))}
     </Base>
