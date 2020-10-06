@@ -52,7 +52,7 @@ export const LunchWidget: React.FunctionComponent = () => {
     ));
 
   return (
-    <Widget>
+    <Widget $hoverable={false}>
       <CardContent>
         <div>
           <Title>Maten</Title>
