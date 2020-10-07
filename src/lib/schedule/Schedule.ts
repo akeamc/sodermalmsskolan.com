@@ -103,7 +103,7 @@ export const CommonSchedule = new Schedule("Ovalen", [
     hardCrafts: [[116, 132], "O9JZH"],
     softCrafts: [[116, 132], "O9LWA"],
     music: [[114, 131], "O9DKA"],
-    gastronomy: [[114, 134], "O9MBE"],
+    gastronomy: [[116, 133], "O9MBE"],
   }),
   languages([173, 188], 2),
   practicalSubjects(3, {
