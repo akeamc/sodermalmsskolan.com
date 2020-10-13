@@ -69,7 +69,7 @@ export const LunchWidget: React.FunctionComponent = () => {
               "Menyn är inte tillgänglig."
             )}
           </Text>
-          <Button href="/meny" $colored $small>
+          <Button href="/meny" colored small>
             Meny
           </Button>
         </div>

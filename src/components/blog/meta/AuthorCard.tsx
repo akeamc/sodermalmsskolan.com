@@ -5,7 +5,6 @@ import React from "react";
 import { getAuthorUrl } from "../../../lib/ghost/author";
 import { useSmallAvatar } from "../../basic/Avatar";
 import Skeleton from "react-loading-skeleton";
-import { MetaField } from "./PostMeta";
 
 const AuthorCardContainer = styled(LinkBlock)`
   display: flex;

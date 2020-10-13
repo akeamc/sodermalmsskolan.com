@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { Link } from "./Link";
+import React from "react";
+import Link from "next/link";
+import { transparentize } from "polished";
 
-export const Button = styled(Link)<{
+export const StyledButton = styled.a<{
   $secondary?: boolean;
   $colored?: boolean;
   $small?: boolean;
@@ -41,6 +43,35 @@ export const Button = styled(Link)<{
     }
   `}
 `;
+
+export interface ButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
+  secondary?: boolean;
+  colored?: boolean;
+  small?: boolean;
+  href: string;
+}
+
+export const Button: React.FunctionComponent<ButtonProps> = ({
+  secondary,
+  colored,
+  small,
+  href,
+  children,
+  ...rest
+}) => {
+  return (
+    <Link href={href} passHref>
+      <StyledButton
+        $secondary={secondary}
+        $colored={colored}
+        $small={small}
+        {...rest}
+      >
+        {children}
+      </StyledButton>
+    </Link>
+  );
+};
 
 export const ButtonRow = styled.div<{ center?: boolean }>`
   display: inline-flex;
