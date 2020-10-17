@@ -1,6 +1,8 @@
 import createPersistedState from "use-persisted-state";
 import { useState, useEffect } from "react";
 
+type StateSetter<T> = (value: T) => void;
+
 /**
  * A persistent `useState`, compatible with SSR.
  * @param key
@@ -9,7 +11,7 @@ import { useState, useEffect } from "react";
 export function usePersistedState<T>(
   key: string,
   initialValue: T
-): [T, unknown] {
+): [T, StateSetter<T>] {
   const usePeristed = createPersistedState(key);
 
   const [persistedState, setPersistedState] = usePeristed<T>(initialValue);
