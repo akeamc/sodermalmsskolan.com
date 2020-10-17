@@ -143,7 +143,7 @@ const splitWithDelimiters = function (text, delimiters: Delimeters) {
  * NOTE: Don't forget to include the KaTeX CSS stylesheet.
  *
  */
-export const renderMathInText = function (text: string) {
+export const renderMathInText = function (text: string): string {
   const options = {
     delimeters: [
       { left: "$$", right: "$$", display: true },
@@ -160,13 +160,13 @@ export const renderMathInText = function (text: string) {
     return null;
   }
 
-  let output = [];
+  const output = [];
 
   for (let i = 0; i < data.length; i++) {
     if (data[i].type === SplitFragmentType.Text) {
       output.push(data[i].data);
     } else {
-      let math = data[i].data;
+      const math = data[i].data;
       try {
         output.push(
           katex.renderToString(math, {

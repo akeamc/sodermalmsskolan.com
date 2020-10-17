@@ -9,7 +9,7 @@ export class Subject {
     this._symbol = symbol;
   }
 
-  public get symbol() {
+  public get symbol(): string {
     return this._symbol || this.name.substring(0, 2).toUpperCase();
   }
 }

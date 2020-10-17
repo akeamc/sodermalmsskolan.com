@@ -1,13 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler } from "next";
 import {
   IMinecraftServiceStatus,
   ServerMinecraftService,
 } from "../../../lib/status/structures/server/Minecraft";
 
-export default async (
-  _: NextApiRequest,
-  res: NextApiResponse<IMinecraftServiceStatus>
-) => {
+const handler: NextApiHandler<IMinecraftServiceStatus> = async (_, res) => {
   const service = new ServerMinecraftService({
     id: "minecraft",
     data: {
@@ -20,3 +17,5 @@ export default async (
 
   res.json(status);
 };
+
+export default handler;

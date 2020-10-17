@@ -8,7 +8,7 @@ export const StudySetGrid: React.FunctionComponent<{ field?: string }> = ({
 }) => {
   const { data } = ClientStudySet.useAll();
 
-  let studySets: ClientStudySet[] =
+  const studySets: ClientStudySet[] =
     data?.filter(
       (studySet) => !field || studySet.digibruh.fields.includes(field)
     ) || new Array(3).fill(null);

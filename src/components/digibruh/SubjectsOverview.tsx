@@ -19,7 +19,7 @@ const SubjectsOverview: React.FunctionComponent = () => {
   return (
     <>
       {subjects.map((subject, index) => {
-        let gridItems: GridItem[] = loading
+        const gridItems: GridItem[] = loading
           ? null
           : subject.fields.map((field) => field.toGridItem());
 

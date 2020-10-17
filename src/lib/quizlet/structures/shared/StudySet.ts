@@ -33,15 +33,15 @@ export class StudySet implements Serializable<StudySetStatic> {
     this.details = details || null;
   }
 
-  public get url() {
+  public get url(): string {
     return `https://quizlet.com/${this.id}`;
   }
 
-  public static get idRegExp() {
+  public static get idRegExp(): RegExp {
     return /[0-9]{9}/;
   }
 
-  public static get pathRegExp() {
+  public static get pathRegExp(): RegExp {
     return new RegExp(
       /^\//.source + this.idRegExp.source + /\/([a-z0-9-]+\/)?$/.source
     );

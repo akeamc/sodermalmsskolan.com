@@ -11,7 +11,7 @@ export interface DigibruhPageProps {
   post?: PostOrPage;
 }
 
-interface Context extends NextPageContext {}
+type Context = NextPageContext;
 
 export type DigibruhPage = NextPage<DigibruhPageProps>;
 
@@ -27,7 +27,7 @@ export async function getInitialDigibruh(
   const field = query?.field?.toString() || null;
   const post = query?.post?.toString() || null;
 
-  let toBeReturned: DigibruhPageProps = {
+  const toBeReturned: DigibruhPageProps = {
     initialDigibruh: digibruh,
     errorCode: null,
   };

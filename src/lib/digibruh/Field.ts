@@ -5,7 +5,7 @@ import { GridItem } from "../../components/basic/CardGrid";
 import { GenericUser } from "../models/User";
 
 export class Field extends DigibruhCollection {
-  static get subCollectionRegExp() {
+  static get subCollectionRegExp(): null {
     return null;
   }
 
@@ -44,7 +44,7 @@ export class Field extends DigibruhCollection {
   /**
    * Returns a regular expression matching `<Digibruh.tagPrefix>-<Subject slug>-<Any field>`. Default is any subject (wildcard).
    */
-  static regExp(slug = DigibruhCollection.tagWildcard) {
+  static regExp(slug = DigibruhCollection.tagWildcard): RegExp {
     return new RegExp(
       `^${Digibruh.tagPrefix}-${slug}-${DigibruhCollection.tagWildcard}$`
     );

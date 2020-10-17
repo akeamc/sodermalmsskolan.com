@@ -2,7 +2,6 @@ import { Role, IDiscordAPIRole } from "../shared/Role";
 import got from "got";
 import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
 import { Permissions } from "discord.js";
-import { ServerUser } from "./User";
 import { ServerMember } from "./Member";
 
 export class ServerRole extends Role {
@@ -18,7 +17,7 @@ export class ServerRole extends Role {
     return data.map((role) => new ServerRole(role));
   }
 
-  public get permissions() {
+  public get permissions(): Permissions {
     return new Permissions(this.permissionBits);
   }
 

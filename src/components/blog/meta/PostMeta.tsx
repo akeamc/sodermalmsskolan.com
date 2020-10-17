@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
-import AuthorCard, { AuthorCardRow } from "./AuthorCard";
+import { AuthorCardRow } from "./AuthorCard";
 import * as breakpoints from "../../../styles/breakpoints";
 import Skeleton from "react-loading-skeleton";
 

@@ -7,20 +7,20 @@ import FeaturedPost from "../../components/blog/FeaturedPost";
 import { Base } from "../../components/grid/Base";
 import { Hero } from "../../components/layout/Hero";
 
-export default class Page extends React.Component {
-  render() {
-    return (
-      <Layout metadata={{ title: "Blogg" }}>
-        <Navigation />
-        <Hero>
-          <Base>
-            <FeaturedPost />
-          </Base>
-        </Hero>
-        <Section>
-          <PostGridAuto skip={1} />
-        </Section>
-      </Layout>
-    );
-  }
-}
+const Page: React.FunctionComponent = () => {
+  return (
+    <Layout metadata={{ title: "Blogg" }}>
+      <Navigation />
+      <Hero>
+        <Base>
+          <FeaturedPost />
+        </Base>
+      </Hero>
+      <Section>
+        <PostGridAuto skip={1} />
+      </Section>
+    </Layout>
+  );
+};
+
+export default Page;

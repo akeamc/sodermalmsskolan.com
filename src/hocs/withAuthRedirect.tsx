@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { NextPage } from "next";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useAuth } from "../providers/Auth";
 import { FullPageSpinner } from "../components/basic/Spinner";
 import { FullPageWrapper } from "../components/layout/Container";
@@ -23,7 +23,10 @@ function isBrowser(): boolean {
  * the component to be rendered.
  * @param location The location to redirect to.
  */
-export default function withAuthRedirect<CP = {}, IP = CP>({
+export default function withAuthRedirect<
+  CP = Record<string, unknown>,
+  IP = CP
+>({
   WrappedComponent,
   LoadingComponent = FullPageSpinner,
   expectedAuth,

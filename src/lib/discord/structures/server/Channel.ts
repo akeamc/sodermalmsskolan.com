@@ -5,7 +5,7 @@ import {
   AUTHORIZATION_HEADER,
   DISCORD_PUBLIC_CHANNELS,
 } from "../../credentials";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import withAuth from "../../../auth/withAuth";
 import { HTTPError } from "got";
 import { Permissions } from "discord.js";
@@ -14,6 +14,12 @@ export interface RolePermissions {
   position: number;
   permissions: Permissions;
 }
+
+export type ServerChannelHandler<T = unknown> = (
+  req: NextApiRequest,
+  res: NextApiResponse<T>,
+  channel: ServerChannel
+) => void | Promise<void>;
 
 export class ServerChannel extends Channel {
   public static async fetch(id: string): Promise<ServerChannel> {
@@ -45,13 +51,9 @@ export class ServerChannel extends Channel {
    * @param handler
    */
   public static wrapHandler = (
-    handler: (
-      req: NextApiRequest,
-      res: NextApiResponse,
-      channel: ServerChannel
-    ) => void
-  ) => {
-    return async (req: NextApiRequest, res: NextApiResponse) => {
+    handler: ServerChannelHandler
+  ): NextApiHandler => {
+    return async (req, res) => {
       const id = req.query.channel?.toString();
 
       let channel: ServerChannel;

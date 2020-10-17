@@ -50,12 +50,12 @@ export const PostGridAuto: React.FunctionComponent<{
   const { params = {}, skip = 0 } = props;
   const limit = parseInt((params.limit || 10).toString());
 
-  let [isReachingEnd, setIsReachingEnd] = useState(false);
-  let [scrolledToBottom, setScrolledToBottom] = useState(false);
+  const [isReachingEnd, setIsReachingEnd] = useState(false);
+  const [scrolledToBottom, setScrolledToBottom] = useState(false);
 
   const { data, size, setSize } = useSWRInfinite(
-    (pageIndex, previousPageData) => {
-      let pagination = previousPageData?.meta?.pagination;
+    (_, previousPageData) => {
+      const pagination = previousPageData?.meta?.pagination;
 
       if (pagination) {
         setIsReachingEnd(pagination.next == null);

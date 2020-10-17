@@ -14,18 +14,18 @@ export class PeriodBoundary {
   /**
    * Equal to the number of minutes since midnight divided by five.
    */
-  public get scheduleTime() {
+  public get scheduleTime(): number {
     return this.time;
   }
 
   /**
    * Equal to the number of minutes since **monday midnight** divided by five.
    */
-  public get weekTime() {
+  public get weekTime(): number {
     return Schedule.scheduleTimeToWeekTime(this.day, this.time);
   }
 
-  public get isoWeekday() {
+  public get isoWeekday(): number {
     return this.day + 1;
   }
 
@@ -52,7 +52,7 @@ export class PeriodBoundary {
    * @param timestamp
    */
   public nextAbsolute(timestamp: Date = new Date()): Moment {
-    let absoluteTimestamp = moment(timestamp).set({
+    const absoluteTimestamp = moment(timestamp).set({
       hour: this.hour,
       minute: this.minute,
       second: 0,
