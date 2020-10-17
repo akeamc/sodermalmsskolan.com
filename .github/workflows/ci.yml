@@ -6,17 +6,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x, v14.x]
-
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "v14.x"
 
       - name: Cache Node.js modules
         uses: actions/cache@v2
