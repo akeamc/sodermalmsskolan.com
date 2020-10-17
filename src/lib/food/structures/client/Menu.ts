@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { responseInterface } from "swr";
 import { IMenu, Menu, MenuQuery } from "../shared/Menu";
 import ky from "ky-universal";
 import moment from "moment";
@@ -25,7 +25,10 @@ export class ClientMenu extends Menu {
     return menus;
   }
 
-  public static use({ limit = 10, offset = 0 }: MenuQuery) {
+  public static use({
+    limit = 10,
+    offset = 0,
+  }: MenuQuery): responseInterface<ClientMenu[], unknown> {
     return useSWR(
       `/api/food/menus?limit=${limit}&offset=${offset}`,
       async () => {

@@ -1,11 +1,13 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { ServerChannel } from "../../../../../lib/discord/structures/server/Channel";
+import {
+  ServerChannel,
+  ServerChannelHandler,
+} from "../../../../../lib/discord/structures/server/Channel";
 import { IDiscordAPIChannel } from "../../../../../lib/discord/structures/shared/Channel";
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<IDiscordAPIChannel>,
-  channel: ServerChannel
+const handler: ServerChannelHandler<IDiscordAPIChannel> = async (
+  _,
+  res,
+  channel
 ) => {
   return res.json(channel.serialize());
 };

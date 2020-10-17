@@ -6,7 +6,10 @@ import { useState, useEffect } from "react";
  * @param key
  * @param initialValue
  */
-export function usePersistedState<T>(key: string, initialValue: T): [T, any] {
+export function usePersistedState<T>(
+  key: string,
+  initialValue: T
+): [T, unknown] {
   const usePeristed = createPersistedState(key);
 
   const [persistedState, setPersistedState] = usePeristed<T>(initialValue);

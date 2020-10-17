@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import Link from "next/link";
-import { transparentize } from "polished";
 
 export const StyledButton = styled.a<{
   $secondary?: boolean;

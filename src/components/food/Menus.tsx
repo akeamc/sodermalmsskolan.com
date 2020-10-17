@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React from "react";
 import Skeleton from "react-loading-skeleton";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
@@ -87,19 +87,13 @@ export const MenuList: React.FunctionComponent<{
   const fallbackArray: ClientMenu[] = new Array(limit).fill(null);
   const menus = data?.length > 0 ? data : fallbackArray;
 
-  const [selectedId, setSelectedId] = useState<string>(null);
-
   return (
     <Base>
       <Col>
         <Grid>
           <AnimateSharedLayout type="crossfade">
             {menus.map((menu, index) => (
-              <MenuCard
-                key={index}
-                menu={menu}
-                onClick={() => setSelectedId(menu?.id)}
-              />
+              <MenuCard key={index} menu={menu} />
             ))}
           </AnimateSharedLayout>
         </Grid>

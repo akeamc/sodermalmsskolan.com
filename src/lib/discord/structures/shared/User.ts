@@ -61,7 +61,7 @@ export class User implements Serializable<IDiscordAPIUser> {
     this.publicFlags = public_flags;
   }
 
-  public get avatarURL() {
+  public get avatarURL(): string {
     return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.png`;
   }
 

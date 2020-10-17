@@ -1,12 +1,13 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler } from "next";
 import { fetchToken } from "../../../lib/auth/flow";
 import { generateAuthCookie } from "../../../lib/auth/cookie";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler: NextApiHandler<void | string> = async (req, res) => {
   const code = req.query.code.toString();
 
   if (!code) {
-    return res.redirect("/");
+    res.redirect("/");
+    return;
   }
 
   try {
@@ -17,13 +18,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       generateAuthCookie(oauthToken.access_token, oauthToken.expires_in)
     );
 
-    return res.redirect("/konto");
+    res.redirect("/konto");
 
     // return res.redirect("/");
   } catch (error) {
     console.error(error);
 
     res.statusCode = 403;
-    res.send("big oof");
+    return res.send("big oof");
   }
 };
+
+export default handler;

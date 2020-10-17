@@ -2,7 +2,7 @@ import { PostsOrPages, Tag, PostOrPage } from "@tryghost/content-api";
 import { getPostsByTag, getPosts, getPostBySlug } from "../ghost/post";
 import { Subject } from "./Subject";
 import { getTags } from "../ghost/tag";
-import useSWR from "swr";
+import useSWR, { responseInterface } from "swr";
 import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";
 import { Serializable } from "../common/Serializable";
@@ -24,7 +24,7 @@ export class DigibruhTagArray extends Array<Tag> {
   static async fetch(): Promise<DigibruhTagArray> {
     const tags = await getTags();
 
-    let array = new DigibruhTagArray();
+    const array = new DigibruhTagArray();
 
     tags.forEach((tag) => {
       array.push(tag);
@@ -41,7 +41,7 @@ export class DigibruhTagArray extends Array<Tag> {
 
   subjects(): Subject[] {
     return this.filter((tag) => Subject.regExp().test(tag.slug)).map((tag) => {
-      let subject = new Subject(tag, []); // Create a subject with no fields now, they will be added when we know the slug of the subject.
+      const subject = new Subject(tag, []); // Create a subject with no fields now, they will be added when we know the slug of the subject.
 
       subject.fields = this.fields(subject.slug);
       return subject;
@@ -109,7 +109,9 @@ export default class Digibruh implements Serializable<DigibruhStatic> {
     };
   }
 
-  public static use(initialData?: Digibruh) {
+  public static use(
+    initialData?: Digibruh
+  ): responseInterface<Digibruh, unknown> {
     return useSWR("/digibruh", Digibruh.initialize, {
       initialData,
     });

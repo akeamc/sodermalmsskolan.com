@@ -137,7 +137,7 @@ export const ScheduleView: React.FunctionComponent<{
                         value: string;
                         label: string;
                       }) => {
-                        let obj = { ...selectedGroups };
+                        const obj = { ...selectedGroups };
                         obj[category] = value;
 
                         setSelectedGroups(obj);

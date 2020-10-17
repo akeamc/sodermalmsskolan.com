@@ -1,15 +1,21 @@
 import { Message, IDiscordAPIMessage, MessageQuery } from "../shared/Message";
 import got from "got/dist/source";
 import { AUTHORIZATION_HEADER } from "../../credentials";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import validator from "validator";
+
+export type MessageQueryHandler<T = unknown> = (
+  req: NextApiRequest,
+  res: NextApiResponse<T>,
+  query: MessageQuery
+) => void | Promise<void>;
 
 export class ServerMessage extends Message {
   static async fetchMany(
     channel: string,
     query: MessageQuery = {}
   ): Promise<Message[]> {
-    let params: { limit: number; before?: string; after?: string } = {
+    const params: { limit: number; before?: string; after?: string } = {
       limit: query.limit || 50,
       before: query.before,
       after: query.after,
@@ -28,13 +34,9 @@ export class ServerMessage extends Message {
   }
 
   public static wrapQueryHandler = (
-    handler: (
-      req: NextApiRequest,
-      res: NextApiResponse,
-      query: MessageQuery
-    ) => void
-  ) => {
-    return async (req: NextApiRequest, res: NextApiResponse) => {
+    handler: MessageQueryHandler
+  ): NextApiHandler => {
+    return async (req, res) => {
       const { query } = req;
 
       const before = query.before?.toString();

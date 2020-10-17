@@ -1,5 +1,5 @@
 import ky from "ky-universal";
-import useSWR from "swr";
+import useSWR, { responseInterface } from "swr";
 import { IMinecraftStatus } from "../shared/Minecraft";
 import { IServiceStatus } from "../shared/Service";
 
@@ -10,7 +10,7 @@ export class ClientService<T> {
     this.id = id;
   }
 
-  public get url() {
+  public get url(): string {
     return `/api/status/${this.id}`;
   }
 
@@ -20,13 +20,18 @@ export class ClientService<T> {
     return status;
   }
 
-  public static useStatus<T>(id: string) {
+  public static useStatus<T>(
+    id: string
+  ): responseInterface<IServiceStatus<T>, unknown> {
     const service = new ClientService<T>(id);
 
     return useSWR(service.url, () => service.getStatus());
   }
 }
 
-export const useMinecraftStatus = () => {
+export const useMinecraftStatus = (): responseInterface<
+  IServiceStatus<IMinecraftStatus>,
+  unknown
+> => {
   return ClientService.useStatus<IMinecraftStatus>("minecraft");
 };

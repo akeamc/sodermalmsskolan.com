@@ -31,7 +31,7 @@ export class AuthUser implements Serializable<IAuthUser> {
     this.roles = roles;
   }
 
-  public static parse({ discord, member, roles }: IAuthUser) {
+  public static parse({ discord, member, roles }: IAuthUser): AuthUser {
     return new AuthUser({
       discord: new User(discord),
       member: member ? new Member(member) : null,

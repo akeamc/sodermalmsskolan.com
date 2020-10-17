@@ -9,7 +9,7 @@ interface TokenResponse {
   scope: string;
 }
 
-export const fetchToken = async (code: string) => {
+export const fetchToken = async (code: string): Promise<TokenResponse> => {
   const response = await got
     .post("https://discord.com/api/oauth2/token", {
       form: {

@@ -187,7 +187,7 @@ const RichTextSection = styled(Section)`
 `;
 
 const classNameToFigureWidth = (classNames: string): FigureWidth => {
-  for (let className of classNames.split(" ")) {
+  for (const className of classNames.split(" ")) {
     if (className == "kg-width-wide") return FigureWidth.Wide;
     if (className == "kg-width-full") return FigureWidth.Full;
   }
@@ -199,7 +199,7 @@ const ArticleBody: React.FunctionComponent<{
   data: PostOrPage | null;
   loading?: boolean;
 }> = (props) => {
-  const { data, loading = false } = props;
+  const { data } = props;
 
   const text = (node) => {
     return node.children
@@ -218,7 +218,7 @@ const ArticleBody: React.FunctionComponent<{
     }
 
     if (node.name == "figure") {
-      let width = classNameToFigureWidth(node.attribs.class);
+      const width = classNameToFigureWidth(node.attribs.class);
 
       return (
         <Figure key={index} width={width}>
@@ -298,7 +298,7 @@ const ArticleBody: React.FunctionComponent<{
     }
 
     if (node.type == "text") {
-      let katexParsed = renderMathInText(node.data);
+      const katexParsed = renderMathInText(node.data);
 
       if (katexParsed != null) {
         return (

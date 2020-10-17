@@ -2,7 +2,7 @@ import { Channel, IDiscordAPIChannel } from "../shared/Channel";
 import { ClientMessage } from "./Message";
 import { Base } from "../../../../components/grid/Base";
 import React from "react";
-import useSWR from "swr";
+import useSWR, { responseInterface, SWRInfiniteResponseInterface } from "swr";
 import { NormalWidth } from "../../../../components/grid/Col";
 import { useSWRInfinite } from "swr";
 import ky from "ky-universal";
@@ -16,7 +16,9 @@ const MessageWrapper = styled.div`
 `;
 
 export class ClientChannel extends Channel {
-  public static useChannel(id: string) {
+  public static useChannel(
+    id: string
+  ): responseInterface<ClientChannel, unknown> {
     return useSWR(`/api/discord/channels/${id}`, async (url: string) => {
       const data = await ky.get(url).json<IDiscordAPIChannel>();
 
@@ -24,7 +26,10 @@ export class ClientChannel extends Channel {
     });
   }
 
-  public static useMessagesInChannel(channel: string, pageSize: number = 50) {
+  public static useMessagesInChannel(
+    channel: string,
+    pageSize = 50
+  ): SWRInfiniteResponseInterface<ClientMessage[], unknown> {
     return useSWRInfinite(
       (pageIndex, previousPageData) => {
         if (previousPageData && previousPageData?.length <= 0) return null;
@@ -47,7 +52,9 @@ export class ClientChannel extends Channel {
     );
   }
 
-  public useMessages(pageSize: number = 50) {
+  public useMessages(
+    pageSize = 50
+  ): SWRInfiniteResponseInterface<ClientMessage[], unknown> {
     return ClientChannel.useMessagesInChannel(this.id, pageSize);
   }
 

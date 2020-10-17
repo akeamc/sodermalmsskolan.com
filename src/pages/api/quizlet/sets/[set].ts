@@ -1,11 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler } from "next";
 import { ServerStudySet } from "../../../../lib/quizlet/structures/server/StudySet";
 import { StudySetStatic } from "../../../../lib/quizlet/structures/shared/StudySet";
 
-export default async (
-  req: NextApiRequest,
-  res: NextApiResponse<StudySetStatic>
-) => {
+const handler: NextApiHandler<StudySetStatic> = async (req, res) => {
   const id = req.query.set?.toString();
 
   const sets = await ServerStudySet.fetchAll();
@@ -22,3 +19,5 @@ export default async (
 
   return res.json(set.serialize());
 };
+
+export default handler;
