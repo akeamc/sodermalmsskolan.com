@@ -1,9 +1,8 @@
 import { Layout } from "../components/layout/Layout";
 import { Navigation } from "../components/layout/Navigation";
-import styled from "styled-components";
 import React from "react";
 import { HeroWithTitle } from "../components/layout/Hero/Title";
-import { Game } from "../components/misc/Game";
+import { Game } from "../components/game/Game";
 
 const Page: React.FunctionComponent = () => {
   return (

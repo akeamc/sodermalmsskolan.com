@@ -1,12 +1,14 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, MutableRefObject } from "react";
 
 export type CanvasRenderFunction = (
   context: CanvasRenderingContext2D,
   frameCount: number
 ) => void;
 
-const useCanvas = (draw: CanvasRenderFunction) => {
-  const canvasRef = useRef(null);
+const useCanvas = (
+  draw: CanvasRenderFunction
+): MutableRefObject<HTMLCanvasElement> => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
