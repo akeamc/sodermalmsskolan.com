@@ -1,25 +1,42 @@
 import { useEffect, useState } from "react";
 
-const useKey = (key: string): boolean => {
-  const [pressed, setPressed] = useState(false);
-  const match = (event: KeyboardEvent) => key == event.key;
+export type KeyboardEventHandler = (event: KeyboardEvent) => void;
 
-  const onDown = (event: KeyboardEvent) => {
-    if (match(event)) setPressed(true);
+export const useKeyEvents = (
+  matchKey: (string) => boolean,
+  handleDown: KeyboardEventHandler = () => null,
+  handleUp: KeyboardEventHandler = () => null
+): void => {
+  const onDown: KeyboardEventHandler = (event) => {
+    if (matchKey(event.key)) {
+      handleDown(event);
+    }
   };
 
-  const onUp = (event: KeyboardEvent) => {
-    if (match(event)) setPressed(false);
+  const onUp: KeyboardEventHandler = (event) => {
+    if (matchKey(event.key)) {
+      handleUp(event);
+    }
   };
 
-  useEffect(() => {
+  return useEffect(() => {
     window.addEventListener("keydown", onDown);
     window.addEventListener("keyup", onUp);
     return () => {
       window.removeEventListener("keydown", onDown);
       window.removeEventListener("keyup", onUp);
     };
-  }, [key]);
+  }, [matchKey]);
+};
+
+const useKey = (key: string): boolean => {
+  const [pressed, setPressed] = useState(false);
+
+  useKeyEvents(
+    (code) => code === key,
+    () => setPressed(true),
+    () => setPressed(false)
+  );
 
   return pressed;
 };

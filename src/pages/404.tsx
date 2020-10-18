@@ -9,7 +9,7 @@ const Page: React.FunctionComponent = () => {
     <Layout metadata={{ title: "Sidan hittades inte" }}>
       <Navigation />
       <HeroWithTitle title="Sidan hittades inte" />
-      <Game />
+      <Game start={[0, 0]} />
     </Layout>
   );
 };

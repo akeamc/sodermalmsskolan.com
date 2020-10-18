@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { CanvasRenderFunction } from "../../hooks/canvas";
+import { useKeyEvents } from "../../hooks/key";
 import Canvas from "../basic/Canvas";
-import useGameInput from "./input";
 
 export type Vec2D<T = number> = [T, T];
 
@@ -17,6 +17,13 @@ export enum Cell {
   BottomWall = 1 << 2,
 }
 
+export interface Walls {
+  top: boolean;
+  right: boolean;
+  bottom: boolean;
+  left: boolean;
+}
+
 export const defaultCell: Cell = Cell.RightWall | Cell.BottomWall;
 
 export type Grid = Cell[][];
@@ -30,10 +37,15 @@ const createGrid = ([width, height]: Vec2D): Grid => {
 
 export const Game: React.FunctionComponent<GameProps> = ({
   mazeDimensions = [24, 16],
-  start = [0, 0],
   cellSize = 24,
+  ...props
 }) => {
   const [mazeWidth, mazeHeight] = mazeDimensions;
+
+  const start: Vec2D = props.start || [
+    Math.floor(Math.random() * mazeWidth),
+    Math.floor(Math.random() * mazeHeight),
+  ];
 
   const [canvasWidth, canvasHeight] = mazeDimensions.map(
     (value) => value * cellSize
@@ -42,9 +54,29 @@ export const Game: React.FunctionComponent<GameProps> = ({
   const gridRef = useRef<Grid>(createGrid(mazeDimensions));
   const stackRef = useRef<Vec2D[]>([start]);
   const playerPosRef = useRef<Vec2D>(start);
+  const playerPosDeltaRef = useRef<Vec2D>([0, 0]);
 
   function isVisited([x, y]: Vec2D): boolean {
     return (gridRef.current[x][y] & Cell.Visited) === Cell.Visited;
+  }
+
+  function hasRightWall(cell: Cell): boolean {
+    return (cell & Cell.RightWall) === Cell.RightWall;
+  }
+
+  function hasBottomWall(cell: Cell): boolean {
+    return (cell & Cell.BottomWall) === Cell.BottomWall;
+  }
+
+  function getWalls([x, y]: Vec2D): Walls {
+    const cell = gridRef.current[x][y];
+
+    return {
+      right: x === mazeWidth - 1 || hasRightWall(cell),
+      bottom: y === mazeHeight - 1 || hasBottomWall(cell),
+      left: x === 0 || hasRightWall(gridRef.current[x - 1][y]),
+      top: y === 0 || hasBottomWall(gridRef.current[x][y - 1]),
+    };
   }
 
   function removeWalls(a: Vec2D, b: Vec2D) {
@@ -71,29 +103,49 @@ export const Game: React.FunctionComponent<GameProps> = ({
     const neighbors = [];
 
     // Left neighbor
-    if (x !== 0 && !isVisited([x - 1, y])) {
-      neighbors.push([x - 1, y]);
-    }
+    if (x !== 0 && !isVisited([x - 1, y])) neighbors.push([x - 1, y]);
 
     // Top neighbor
-    if (y !== 0 && !isVisited([x, y - 1])) {
-      neighbors.push([x, y - 1]);
-    }
+    if (y !== 0 && !isVisited([x, y - 1])) neighbors.push([x, y - 1]);
 
     // Right neighbor
-    if (x !== mazeWidth - 1 && !isVisited([x + 1, y])) {
+    if (x !== mazeWidth - 1 && !isVisited([x + 1, y]))
       neighbors.push([x + 1, y]);
-    }
 
     // Bottom neighbor
-    if (y !== mazeHeight - 1 && !isVisited([x, y + 1])) {
+    if (y !== mazeHeight - 1 && !isVisited([x, y + 1]))
       neighbors.push([x, y + 1]);
-    }
 
     return neighbors[Math.floor(Math.random() * neighbors.length)];
   }
 
-  const input = useGameInput();
+  useKeyEvents(
+    (key) => key === "ArrowRight" || key === "d",
+    () => {
+      playerPosDeltaRef.current[0]++;
+    }
+  );
+
+  useKeyEvents(
+    (key) => key === "ArrowLeft" || key === "a",
+    () => {
+      playerPosDeltaRef.current[0]--;
+    }
+  );
+
+  useKeyEvents(
+    (key) => key === "ArrowUp" || key === "w",
+    () => {
+      playerPosDeltaRef.current[1]--;
+    }
+  );
+
+  useKeyEvents(
+    (key) => key === "ArrowDown" || key === "s",
+    () => {
+      playerPosDeltaRef.current[1]++;
+    }
+  );
 
   const draw: CanvasRenderFunction = (ctx, _) => {
     const current = stackRef.current[stackRef.current.length - 1];
@@ -120,36 +172,32 @@ export const Game: React.FunctionComponent<GameProps> = ({
 
     const [playerPosX, playerPosY] = playerPosRef.current;
 
-    // The player should not be able to move until the maze has been built.
     if (mazeBuilt) {
-      let dx = 0;
-      let dy = 0;
+      let [deltaX, deltaY] = playerPosDeltaRef.current;
 
-      const { directions } = input;
+      if (deltaX !== 0 || deltaY !== 0) {
+        const walls = getWalls(playerPosRef.current);
 
-      if (directions.left) dx--;
+        if ((deltaX > 0 && walls.right) || (deltaX < 0 && walls.left))
+          deltaX = 0;
 
-      if (directions.right) dx++;
+        if ((deltaY > 0 && walls.bottom) || (deltaY < 0 && walls.top))
+          deltaY = 0;
 
-      if (directions.up) dy--;
+        const newX = playerPosX + deltaX;
+        const newY = playerPosY + deltaY;
 
-      if (directions.down) dy++;
+        if (newX >= 0 && newX <= mazeWidth - 1) {
+          playerPosRef.current[0] = newX;
+        }
 
-      const newX = playerPosX + dx;
-      const newY = playerPosY + dy;
-
-      const newPos: Vec2D = [playerPosX, playerPosY];
-
-      if (newX >= 0 && newX <= mazeWidth - 1) {
-        newPos[0] = newX;
+        if (newY >= 0 && newY <= mazeHeight - 1) {
+          playerPosRef.current[1] = newY;
+        }
       }
-
-      if (newY >= 0 && newY <= mazeHeight - 1) {
-        newPos[1] = newY;
-      }
-
-      playerPosRef.current = newPos;
     }
+
+    playerPosDeltaRef.current = [0, 0];
 
     for (let x = 0; x < mazeWidth; x++) {
       for (let y = 0; y < mazeHeight; y++) {
@@ -161,14 +209,17 @@ export const Game: React.FunctionComponent<GameProps> = ({
           ctx.fillStyle = "#eaeaea";
         }
 
-        const w =
-          (cell & Cell.RightWall) === Cell.RightWall ? cellSize - 1 : cellSize;
-        const h =
-          (cell & Cell.BottomWall) === Cell.BottomWall
-            ? cellSize - 1
-            : cellSize;
+        const cellX = x * cellSize;
+        const cellY = y * cellSize;
 
-        ctx.fillRect(x * cellSize, y * cellSize, w, h);
+        let w = cellSize;
+        let h = cellSize;
+
+        if (hasRightWall(cell)) w--;
+
+        if (hasBottomWall(cell)) h--;
+
+        ctx.fillRect(cellX, cellY, w, h);
       }
     }
 
