@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { CanvasRenderFunction } from "../../hooks/canvas";
 import { useKeyEvents } from "../../hooks/key";
 import Canvas from "../basic/Canvas";
