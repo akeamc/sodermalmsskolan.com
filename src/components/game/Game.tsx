@@ -9,6 +9,7 @@ export interface GameProps {
   mazeDimensions?: Vec2D;
   start?: Vec2D;
   cellSize?: number;
+  objectiveCount?: number;
 }
 
 export enum Cell {
@@ -38,6 +39,7 @@ const createGrid = ([width, height]: Vec2D): Grid => {
 export const Game: React.FunctionComponent<GameProps> = ({
   mazeDimensions = [24, 16],
   cellSize = 24,
+  objectiveCount = 10,
   ...props
 }) => {
   const [mazeWidth, mazeHeight] = mazeDimensions;
@@ -55,6 +57,7 @@ export const Game: React.FunctionComponent<GameProps> = ({
   const stackRef = useRef<Vec2D[]>([start]);
   const playerPosRef = useRef<Vec2D>(start);
   const playerPosDeltaRef = useRef<Vec2D>([0, 0]);
+  const scoreRef = useRef<number>(0);
 
   function isVisited([x, y]: Vec2D): boolean {
     return (gridRef.current[x][y] & Cell.Visited) === Cell.Visited;
@@ -99,25 +102,48 @@ export const Game: React.FunctionComponent<GameProps> = ({
     }
   }
 
-  function randomNeighbor([x, y]: Vec2D): Vec2D | null {
+  function getNeighbors([x, y]: Vec2D): Vec2D[] {
     const neighbors = [];
 
     // Left neighbor
-    if (x !== 0 && !isVisited([x - 1, y])) neighbors.push([x - 1, y]);
+    if (x !== 0) neighbors.push([x - 1, y]);
 
     // Top neighbor
-    if (y !== 0 && !isVisited([x, y - 1])) neighbors.push([x, y - 1]);
+    if (y !== 0) neighbors.push([x, y - 1]);
 
     // Right neighbor
-    if (x !== mazeWidth - 1 && !isVisited([x + 1, y]))
-      neighbors.push([x + 1, y]);
+    if (x !== mazeWidth - 1) neighbors.push([x + 1, y]);
 
     // Bottom neighbor
-    if (y !== mazeHeight - 1 && !isVisited([x, y + 1]))
-      neighbors.push([x, y + 1]);
+    if (y !== mazeHeight - 1) neighbors.push([x, y + 1]);
 
-    return neighbors[Math.floor(Math.random() * neighbors.length)];
+    return neighbors;
   }
+
+  function randomNeighbor(coordinates: Vec2D): Vec2D | null {
+    const unvisitedNeighbors = getNeighbors(coordinates).filter(
+      (neighbor) => !isVisited(neighbor)
+    );
+
+    return unvisitedNeighbors[
+      Math.floor(Math.random() * unvisitedNeighbors.length)
+    ];
+  }
+
+  function generateObjectiveCoordinates(): Vec2D {
+    return [
+      Math.floor(Math.random() * mazeWidth),
+      Math.floor(Math.random() * mazeHeight),
+    ];
+  }
+
+  function generateObjectives(): Vec2D[] {
+    return Array.from({ length: objectiveCount }).map(() =>
+      generateObjectiveCoordinates()
+    );
+  }
+
+  const objectivesRef = useRef<Vec2D[]>(generateObjectives());
 
   useKeyEvents(
     (key) => key === "ArrowRight" || key === "d",
@@ -147,7 +173,7 @@ export const Game: React.FunctionComponent<GameProps> = ({
     }
   );
 
-  const draw: CanvasRenderFunction = (ctx, _) => {
+  const draw: CanvasRenderFunction = (ctx, frameCount) => {
     const current = stackRef.current[stackRef.current.length - 1];
 
     const [currentX, currentY] = current || [];
@@ -199,6 +225,18 @@ export const Game: React.FunctionComponent<GameProps> = ({
 
     playerPosDeltaRef.current = [0, 0];
 
+    if (mazeBuilt) {
+      objectivesRef.current = objectivesRef.current.map(([x, y]) => {
+        // Generate new coordinates if the player touches an objective.
+        if (x === playerPosX && y === playerPosY) {
+          scoreRef.current++;
+          return generateObjectiveCoordinates();
+        } else {
+          return [x, y];
+        }
+      });
+    }
+
     for (let x = 0; x < mazeWidth; x++) {
       for (let y = 0; y < mazeHeight; y++) {
         const cell = gridRef.current[x][y];
@@ -233,6 +271,29 @@ export const Game: React.FunctionComponent<GameProps> = ({
     circle.arc(highlightX, highlightY, cellSize * 0.25, 0, 2 * Math.PI);
 
     ctx.fill(circle);
+
+    if (mazeBuilt) {
+      ctx.fillStyle = "#000000";
+
+      for (let i = 0; i < objectivesRef.current.length; i++) {
+        const [x, y] = objectivesRef.current[i];
+
+        const yOffset = Math.round(2 * Math.sin(frameCount / 30 + i * 10));
+
+        ctx.fillRect(
+          x * cellSize + cellSize * 0.375,
+          y * cellSize + cellSize * 0.375 + yOffset,
+          cellSize * 0.25,
+          cellSize * 0.25
+        );
+      }
+
+      ctx.globalAlpha = 0.2;
+
+      ctx.font = "64px Inter";
+      ctx.fillText(`${scoreRef.current}p`, 16, 72);
+      ctx.globalAlpha = 1;
+    }
   };
 
   return <Canvas draw={draw} width={canvasWidth} height={canvasHeight} />;
