@@ -83,6 +83,10 @@ export const useLinks = (): Category[] => {
       name: "Resurser",
       items: [
         {
+          name: "Veckobrev",
+          href: "/veckobrev",
+        },
+        {
           name: "Serverstatus",
           href: "https://status.lynx.agency",
         },

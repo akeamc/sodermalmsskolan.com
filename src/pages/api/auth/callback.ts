@@ -1,9 +1,10 @@
 import { NextApiHandler } from "next";
 import { fetchToken } from "../../../lib/auth/flow";
 import { generateAuthCookie } from "../../../lib/auth/cookie";
+import { AuthorizationState } from "../../../lib/auth/structures/shared/OAuth2";
 
 const handler: NextApiHandler<void | string> = async (req, res) => {
-  const code = req.query.code.toString();
+  const code = req.query.code?.toString();
 
   if (!code) {
     res.redirect("/");
@@ -18,9 +19,15 @@ const handler: NextApiHandler<void | string> = async (req, res) => {
       generateAuthCookie(oauthToken.access_token, oauthToken.expires_in)
     );
 
-    res.redirect("/konto");
+    const serializedState = req.query.state?.toString();
 
-    // return res.redirect("/");
+    if (!serializedState) {
+      throw new Error("`state` query parameter is missing");
+    }
+
+    const state = AuthorizationState.parse(serializedState);
+
+    res.redirect(state.redirect);
   } catch (error) {
     console.error(error);
 

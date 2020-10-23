@@ -21,6 +21,7 @@ module.exports = {
     adsenseClient: "ca-pub-1944185766034883",
     adsenseSlot: "5909725353",
     discordFoodChannel: process.env.DISCORD_FOOD_CHANNEL,
+    discordNewsChannel: process.env.DISCORD_NEWS_CHANNEL,
   },
   webpack: (config, { isServer }) => {
     // Fixes npm packages that depend on `fs` module
