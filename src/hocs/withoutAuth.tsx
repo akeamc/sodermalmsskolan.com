@@ -7,11 +7,11 @@ import withAuthRedirect from "./withAuthRedirect";
  */
 export default function withoutAuth<P>(
   WrappedComponent: NextPage<P>,
-  location = "/konto"
+  redirectBack = true
 ): NextPage<P> {
   return withAuthRedirect({
     WrappedComponent,
-    location,
+    redirectBack,
     expectedAuth: false,
   });
 }
