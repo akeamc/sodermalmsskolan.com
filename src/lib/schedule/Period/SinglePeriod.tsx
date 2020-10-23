@@ -42,7 +42,7 @@ export class SinglePeriod implements Period {
     return null;
   }
 
-  public getPeriodByGroup() {
+  public getPeriodByGroup(): SinglePeriod {
     return this;
   }
 

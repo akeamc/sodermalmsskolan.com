@@ -46,7 +46,7 @@ export class ServerMinecraftService extends ServerService<
 
     const response = await client.nextPacket(0x0);
 
-    let data = response.readJSON();
+    const data = response.readJSON();
 
     client.end();
 
@@ -62,7 +62,7 @@ export class ServerMinecraftService extends ServerService<
     };
   }
 
-  public async getStatus() {
+  public async getStatus(): Promise<IServiceStatus<IMinecraftStatus>> {
     const data: IMinecraftStatus = await this._getStatus().catch(() => null);
 
     const online = !!data;

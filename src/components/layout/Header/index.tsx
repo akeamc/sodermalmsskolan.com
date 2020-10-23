@@ -37,7 +37,7 @@ const Container = styled(TextColorModifier)<{ minHeight?: string }>`
 `;
 
 export const HeaderWithBackground: React.FunctionComponent<{
-  children: any;
+  children: React.ReactNode;
   image: string;
   minHeight?: string;
   fadeDuration?: number;

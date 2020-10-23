@@ -1,12 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler } from "next";
 import { fetchToken } from "../../../lib/auth/flow";
 import { generateAuthCookie } from "../../../lib/auth/cookie";
+import { AuthorizationState } from "../../../lib/auth/structures/shared/OAuth2";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const code = req.query.code.toString();
+const handler: NextApiHandler<void | string> = async (req, res) => {
+  const code = req.query.code?.toString();
 
   if (!code) {
-    return res.redirect("/");
+    res.redirect("/");
+    return;
   }
 
   try {
@@ -17,13 +19,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       generateAuthCookie(oauthToken.access_token, oauthToken.expires_in)
     );
 
-    return res.redirect("/konto");
+    const serializedState = req.query.state?.toString();
 
-    // return res.redirect("/");
+    if (!serializedState) {
+      throw new Error("`state` query parameter is missing");
+    }
+
+    const state = AuthorizationState.parse(serializedState);
+
+    res.redirect(state.redirect);
   } catch (error) {
     console.error(error);
 
     res.statusCode = 403;
-    res.send("big oof");
+    return res.send("big oof");
   }
 };
+
+export default handler;

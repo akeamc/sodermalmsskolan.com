@@ -3,7 +3,6 @@ import NotFound from "../../404";
 import { Layout } from "../../../components/layout/Layout";
 import { getAuthorBySlug } from "../../../lib/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
-import { Avatar } from "../../../components/basic/Avatar";
 import { PostOrPage } from "@tryghost/content-api";
 import Digibruh from "../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
@@ -17,7 +16,6 @@ import {
   GridTitleSection,
   LeadText,
 } from "../../../components/basic/Typography";
-import styled from "styled-components";
 import { HeaderWithBackground } from "../../../components/layout/Header";
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -44,10 +42,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 };
-
-const HeaderAvatar = styled(Avatar)`
-  margin-bottom: 24px;
-`;
 
 const Page: React.FunctionComponent = ({
   author,

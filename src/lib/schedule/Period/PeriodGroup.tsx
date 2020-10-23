@@ -101,15 +101,15 @@ export class PeriodGroup implements Period {
     return this.periods[0].day;
   }
 
-  public get start() {
+  public get start(): PeriodBoundary {
     return new PeriodBoundary(this.day, this.bounds[0]);
   }
 
-  public get end() {
+  public get end(): PeriodBoundary {
     return new PeriodBoundary(this.day, this.bounds[1]);
   }
 
-  public get duration() {
+  public get duration(): number {
     const [start, end] = this.bounds;
 
     return end - start;
@@ -149,7 +149,7 @@ export const practicalSubjects = (
     music: PracticalSubject;
     gastronomy: PracticalSubject;
   }
-) =>
+): PeriodGroup =>
   new PeriodGroup(
     [
       new GroupedPeriod(
@@ -185,7 +185,7 @@ export const practicalSubjects = (
     "Mentorsgrupp"
   );
 
-export const randomTime = (time: [number, number], day: number) =>
+export const randomTime = (time: [number, number], day: number): PeriodGroup =>
   new PeriodGroup(
     [
       new GroupedPeriod(time, day, Subjects.Random, "A309", "O9DKA"),
@@ -197,7 +197,7 @@ export const randomTime = (time: [number, number], day: number) =>
     "Mentorsgrupp"
   );
 
-export const languages = (time: [number, number], day: number) =>
+export const languages = (time: [number, number], day: number): PeriodGroup =>
   new PeriodGroup(
     [
       new GroupedPeriod(time, day, Subjects.Swedish, "A308", "ASVEN"),

@@ -26,7 +26,7 @@ export const useImageLoadingStatus = (src: string): boolean => {
  * @param src
  */
 export const useProgressiveImage = (
-  src: string = ""
+  src = ""
 ): { loading: boolean; src: string; previewLoading: boolean } => {
   const wantedImageLoaded = useImageLoadingStatus(src);
 
@@ -56,14 +56,9 @@ export const useProgressiveBackground = (
   };
 };
 
-/**
- * Naming this interface `ProgressivePhotoProps` was very tempting.
- */
-interface ProgressiveImageProps {}
-
-export const ProgressiveImage: React.FunctionComponent<
-  ProgressiveImageProps & React.ImgHTMLAttributes<HTMLImageElement>
-> = ({ src: wantedSrc, ...props }) => {
+export const ProgressiveImage: React.FunctionComponent<React.ImgHTMLAttributes<
+  HTMLImageElement
+>> = ({ src: wantedSrc, ...props }) => {
   const { src } = useProgressiveImage(wantedSrc);
 
   return <img {...props} src={src} />;

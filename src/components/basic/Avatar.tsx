@@ -9,11 +9,11 @@ interface AvatarProps {
   $placeholder?: boolean;
 }
 
-function avatarSizeToEm(size: number = 2): number {
+function avatarSizeToEm(size = 2): number {
   return size;
 }
 
-export const useSmallAvatar = (source: string = "") => {
+export const useSmallAvatar = (source = ""): string => {
   return pxcmprs.generateUrl({
     width: 256,
     source,
@@ -33,7 +33,7 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   box-sizing: border-box;
 
   ${({ $size }) => {
-    let width = avatarSizeToEm($size);
+    const width = avatarSizeToEm($size);
 
     return `
       width: ${width}rem;
@@ -94,26 +94,22 @@ const AvatarGroupContainer = styled.div`
   margin-bottom: -4px;
 `;
 
-export class AuthorGroup extends React.Component<{
+export const AuthorGroup: React.FunctionComponent<{
   authors: GenericUser[];
   size?: number;
-}> {
-  render() {
-    const { authors, size } = this.props;
-
-    return (
-      <AvatarGroupContainer>
-        <AvatarGroup>
-          {authors.reverse().map((author, index) => (
-            <Avatar
-              key={index}
-              href={author.url}
-              imageUrl={author.avatarUrl}
-              size={size}
-            />
-          ))}
-        </AvatarGroup>
-      </AvatarGroupContainer>
-    );
-  }
-}
+}> = ({ authors, size }) => {
+  return (
+    <AvatarGroupContainer>
+      <AvatarGroup>
+        {authors.reverse().map((author, index) => (
+          <Avatar
+            key={index}
+            href={author.url}
+            imageUrl={author.avatarUrl}
+            size={size}
+          />
+        ))}
+      </AvatarGroup>
+    </AvatarGroupContainer>
+  );
+};

@@ -5,7 +5,7 @@ export interface IQueryParams {
 export function queryString(query: IQueryParams): string {
   return Object.keys(query)
     .map((parameter, index) => {
-      let prefix = index == 0 ? "?" : "&";
+      const prefix = index == 0 ? "?" : "&";
 
       return `${prefix}${parameter}=${query[parameter]}`;
     })

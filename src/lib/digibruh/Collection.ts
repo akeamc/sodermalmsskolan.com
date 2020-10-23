@@ -30,14 +30,14 @@ export abstract class DigibruhCollection {
     return new RegExp(`^${this.tag.slug}-${DigibruhCollection.tagWildcard}$`);
   }
 
-  get tagSegments() {
+  get tagSegments(): string[] {
     return this.tag.slug.split("-").slice(Digibruh.tagPrefix.split("-").length);
   }
 
   /**
    * A regular expression matching all tags whose slug matches a `DigibruhCollection` of this type.
    */
-  static regExp(slug: string = DigibruhCollection.tagWildcard): RegExp | null {
+  static regExp(_: string = DigibruhCollection.tagWildcard): RegExp | null {
     return null;
   }
 
@@ -51,7 +51,7 @@ export abstract class DigibruhCollection {
   }
 
   get name(): string {
-    let tagName = this.tag.name || "";
+    const tagName = this.tag.name || "";
     return tagName.substring(tagName.indexOf("#") + 1);
   }
 

@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import { NextPage } from "next";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useAuth } from "../providers/Auth";
 import { FullPageSpinner } from "../components/basic/Spinner";
 import { FullPageWrapper } from "../components/layout/Container";
 import { Link } from "../components/basic/Link";
 import { DISCORD_INVITE } from "../components/layout/Footer/Bottom";
+import queryString from "query-string";
 
 function isBrowser(): boolean {
   return typeof window !== "undefined";
@@ -21,18 +22,21 @@ function isBrowser(): boolean {
  * the auth state is loading.
  * @param expectedAuth Whether the user should be authenticated for
  * the component to be rendered.
- * @param location The location to redirect to.
+ * @param redirectBack Whether to redirect the user back to the page when the user authenticates or not.
  */
-export default function withAuthRedirect<CP = {}, IP = CP>({
+export default function withAuthRedirect<
+  CP = Record<string, unknown>,
+  IP = CP
+>({
   WrappedComponent,
   LoadingComponent = FullPageSpinner,
   expectedAuth,
-  location,
+  redirectBack,
 }: {
   WrappedComponent: NextPage<CP, IP>;
   LoadingComponent?: NextPage;
   expectedAuth: boolean;
-  location: string;
+  redirectBack: boolean;
 }): NextPage<CP, IP> {
   const WithAuthRedirectWrapper: NextPage<CP, IP> = (props) => {
     const router = useRouter();
@@ -44,7 +48,16 @@ export default function withAuthRedirect<CP = {}, IP = CP>({
     }
 
     if (isBrowser() && expectedAuth !== isAuthenticated) {
-      router.push(location);
+      router.push(
+        queryString.stringifyUrl({
+          url: "/api/auth/login",
+          query: redirectBack
+            ? {
+                redirect: router.pathname,
+              }
+            : {},
+        })
+      );
       return <></>;
     }
 

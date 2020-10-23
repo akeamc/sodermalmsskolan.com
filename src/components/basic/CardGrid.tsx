@@ -98,7 +98,7 @@ export const CardGrid: React.FunctionComponent<{
   } = props;
   const placeholder = new Array<GridItem>(expectedNumberOfItems).fill(null);
 
-  let grid = (items || placeholder).map((item, index) => {
+  const grid = (items || placeholder).map((item, index) => {
     return (
       <ItemContainer xs={12} md={6} lg={4} key={index}>
         <CardGridItem

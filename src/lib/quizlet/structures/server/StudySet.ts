@@ -62,7 +62,7 @@ export class ServerStudySet extends StudySet {
     return studySets;
   }
 
-  public async fetchDetails() {
+  public async fetchDetails(): Promise<void> {
     const res = await got
       .get(`${API_ENDPOINT}/quizlet/${this.id}`)
       .json<PotatoStudySetDetails>();

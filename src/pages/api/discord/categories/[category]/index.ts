@@ -1,12 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { ServerCategory } from "../../../../../lib/discord/structures/server/Category";
+import {
+  ServerCategory,
+  ServerCategoryHandler,
+} from "../../../../../lib/discord/structures/server/Category";
 import { ICategory } from "../../../../../lib/discord/structures/shared/Category";
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<ICategory>,
-  category: ServerCategory
-) => {
+const handler: ServerCategoryHandler<ICategory> = async (_, res, category) => {
   return res.json(category.serialize());
 };
 

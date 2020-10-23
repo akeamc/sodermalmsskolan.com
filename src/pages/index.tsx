@@ -23,7 +23,7 @@ const Page: React.FunctionComponent = () => {
       >
         <ButtonRow center>
           <Button href="/meny">Visa menyn</Button>
-          <Button $secondary href="/digibruh">
+          <Button secondary href="/digibruh">
             Öppna Digibruh
           </Button>
         </ButtonRow>

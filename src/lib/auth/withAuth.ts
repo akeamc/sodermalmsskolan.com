@@ -1,20 +1,20 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { COOKIE_NAME, JWT_SECRET } from "./options";
 import jwt from "jsonwebtoken";
 import { destroyAuthCookie } from "./cookie";
+
+export type AuthenticatedApiHandler<T = unknown> = (
+  req: NextApiRequest,
+  res: NextApiResponse<T>,
+  accessToken: string
+) => void | Promise<void>;
 
 /**
  * Assert that the request contains a valid authentication token.
  * @param handler
  */
-const withAuth = (
-  handler: (
-    req: NextApiRequest,
-    res: NextApiResponse,
-    accessToken: string
-  ) => void
-) => {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
+const withAuth = (handler: AuthenticatedApiHandler): NextApiHandler => {
+  return async (req, res) => {
     const webToken = req.cookies[COOKIE_NAME];
 
     if (webToken) {

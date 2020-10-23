@@ -6,9 +6,16 @@ import {
 } from "../../../../../lib/discord/structures/shared/Message";
 import { ServerMessage } from "../../../../../lib/discord/structures/server/Message";
 
-const handler = async (
-  _: NextApiRequest,
-  res: NextApiResponse<IDiscordAPIMessage[]>,
+export type ChannelMessagesHandler<T = unknown> = (
+  req: NextApiRequest,
+  res: NextApiResponse<T>,
+  channel: ServerChannel,
+  query: MessageQuery
+) => void | Promise<void>;
+
+const handler: ChannelMessagesHandler<IDiscordAPIMessage[]> = async (
+  _,
+  res,
   channel: ServerChannel,
   query: MessageQuery
 ) => {

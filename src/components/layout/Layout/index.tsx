@@ -23,7 +23,7 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
     ],
   } = metadata;
 
-  let titleFragments = ["södermalmsskolan.com"];
+  const titleFragments = ["södermalmsskolan.com"];
   title && titleFragments.unshift(title);
   const metaTitle = titleFragments.join(" · ");
 
@@ -53,7 +53,7 @@ export class Layout extends React.Component<{
   children: React.ReactNode;
   metadata?: SiteMetadata;
 }> {
-  componentDidMount() {
+  componentDidMount(): void {
     if (!window["GA_INITIALIZED"]) {
       initGA();
       window["GA_INITIALIZED"] = true;
@@ -61,7 +61,7 @@ export class Layout extends React.Component<{
     logPageView();
   }
 
-  render() {
+  render(): JSX.Element {
     const { children, metadata = {} } = this.props;
 
     return (
