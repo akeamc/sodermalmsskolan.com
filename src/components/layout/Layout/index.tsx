@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import { Footer } from "../Footer";
-import { initGA, logPageView } from "../../../lib/utils/analytics";
 import { useRouter } from "next/router";
+import { GA_TRACKING_ID } from "../../../lib/analytics/id";
 
 export interface SiteMetadata {
   title?: string;
@@ -45,68 +45,70 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
       {images.map((image, index) => (
         <meta key={index} property="og:image" content={image} />
       ))}
+
+      {/* Global site tag (gtag.js) - Google Analytics */}
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_TRACKING_ID}');`,
+        }}
+      />
     </Head>
   );
 };
 
-export class Layout extends React.Component<{
+export const Layout: React.FunctionComponent<{
   children: React.ReactNode;
   metadata?: SiteMetadata;
-}> {
-  componentDidMount(): void {
-    if (!window["GA_INITIALIZED"]) {
-      initGA();
-      window["GA_INITIALIZED"] = true;
-    }
-    logPageView();
-  }
+}> = ({ children, metadata = {} }) => {
+  return (
+    <div>
+      <SiteMetadata metadata={metadata} />
 
-  render(): JSX.Element {
-    const { children, metadata = {} } = this.props;
+      <Head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
 
-    return (
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+          integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+          crossOrigin="anonymous"
+        />
+        <script
+          async
+          src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        />
+      </Head>
       <div>
-        <SiteMetadata metadata={metadata} />
-
-        <Head>
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/site.webmanifest" />
-          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
-
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
-            integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
-            crossOrigin="anonymous"
-          />
-          <script
-            async
-            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          />
-        </Head>
-        <div>
-          {children}
-          <Footer />
-        </div>
+        {children}
+        <Footer />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
