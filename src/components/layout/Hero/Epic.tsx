@@ -15,7 +15,7 @@ const EpicHeroPane = styled.div`
     grid-column-end: span 10;
   }
 
-  @media (min-width: ${breakpoints.medium}) {
+  @media (min-width: ${breakpoints.large}) {
     grid-column-end: span 5;
   }
 

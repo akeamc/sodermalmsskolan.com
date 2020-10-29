@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import Link from "next/link";
+import * as breakpoints from "../../styles/breakpoints";
 
 export const StyledButton = styled.a<{
   $secondary?: boolean;
@@ -76,6 +77,11 @@ export const ButtonRow = styled.div<{ center?: boolean }>`
   display: inline-flex;
   flex-wrap: wrap;
   margin: -12px;
+  justify-content: center;
+
+  @media (min-width: ${breakpoints.large}) {
+    justify-content: normal;
+  }
 
   ${({ center }) =>
     center &&
