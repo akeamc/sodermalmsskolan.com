@@ -3,7 +3,7 @@ import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
 import { AuthorCardRow } from "./AuthorCard";
 import * as breakpoints from "../../../styles/breakpoints";
-import Skeleton from "react-loading-skeleton";
+import { Skeleton } from "../../basic/Skeleton";
 
 const MetaRow = styled.div`
   margin-top: 2.5rem;
@@ -17,7 +17,7 @@ export const MetaField = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  color: var(--accents-5);
+  color: ${({ theme }) => theme.colors.muted};
   margin-bottom: 0.875rem;
 
   &:not(:last-child) {
@@ -25,7 +25,7 @@ export const MetaField = styled.div`
     padding-right: 15px;
 
     @media (min-width: ${breakpoints.large}) {
-      border-right: 1px solid var(--accents-2);
+      border-right: 1px solid ${({ theme }) => theme.colors.border};
     }
   }
 `;
@@ -40,7 +40,7 @@ const PostMeta: React.FunctionComponent<{
       <AuthorCardRow authors={post?.authors} skeleton={skeleton} />
     </MetaField>
     <MetaField>
-      <small>{skeleton ? <Skeleton width={100} /> : dateText}</small>
+      <small>{skeleton ? <Skeleton width="100px" /> : dateText}</small>
     </MetaField>
   </MetaRow>
 );

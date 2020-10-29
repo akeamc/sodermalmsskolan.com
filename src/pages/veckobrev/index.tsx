@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { Anchor } from "../../components/basic/Typography";
 import { Base } from "../../components/grid/Base";
 import { NormalWidth } from "../../components/grid/Col";
-import { HeroWithTitle } from "../../components/layout/Hero/Title";
+import { SimpleHero } from "../../components/layout/Hero/Simple";
 import { Layout } from "../../components/layout/Layout";
 import { Navigation } from "../../components/layout/Navigation";
 import { Section } from "../../components/layout/Section";
@@ -18,8 +19,8 @@ const News: React.FunctionComponent = () => {
     <ul>
       {data?.flat().map((message, index) => (
         <li key={index}>
-          <Link href={message.attachments[0].url}>
-            <a>{message.content}</a>
+          <Link href={message.attachments[0].url} passHref>
+            <Anchor>{message.content}</Anchor>
           </Link>
         </li>
       ))}
@@ -36,7 +37,7 @@ const Page: React.FunctionComponent = () => {
       }}
     >
       <Navigation />
-      <HeroWithTitle title="Veckobrev" />
+      <SimpleHero title="Veckobrev" />
       <Section>
         <Base>
           <NormalWidth>

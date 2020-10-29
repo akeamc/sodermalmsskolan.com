@@ -7,9 +7,9 @@ import { FooterBottom } from "./Bottom";
 import { FooterLinks } from "./Links";
 
 const FooterContainer = styled.footer`
-  background: var(--accents-1);
+  background: ${({ theme }) => theme.colors.slightlyHighlighted};
   padding: 48px 0;
-  border-top: 1px solid var(--accents-2);
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const FooterLogo = styled(Logo)`

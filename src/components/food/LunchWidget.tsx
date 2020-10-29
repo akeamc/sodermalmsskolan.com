@@ -3,10 +3,11 @@ import { Card, CardContent, CardFooter } from "../basic/Card";
 import { Button } from "../basic/Button";
 import moment from "moment";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
-import Skeleton from "react-loading-skeleton";
 import React from "react";
 import { ClientMenu } from "../../lib/food/structures/client/Menu";
 import { useLocale } from "../../hooks/locale";
+import { Skeleton } from "../basic/Skeleton";
+import { Muted } from "../basic/Typography";
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -24,7 +25,7 @@ const Text = styled.div`
 `;
 
 const Widget = styled(Card)`
-  box-shadow: var(--shadow-large);
+  box-shadow: ${({ theme }) => theme.shadows.large};
 `;
 
 const Footer = styled(CardFooter)`
@@ -48,7 +49,7 @@ export const LunchWidget: React.FunctionComponent = () => {
         moment(menu?.date).locale(locale).format("dddd D MMMM")
       )
     ) : (
-      <Skeleton width={100} />
+      <Skeleton width="100px" />
     ));
 
   return (
@@ -75,7 +76,7 @@ export const LunchWidget: React.FunctionComponent = () => {
         </div>
       </CardContent>
       <Footer>
-        <p>{date}</p>
+        <Muted>{date}</Muted>
       </Footer>
     </Widget>
   );

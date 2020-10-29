@@ -41,10 +41,11 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
     `;
   }}
 
-  background: var(--background);
+  background: ${({ theme }) => theme.colors.background};
   display: inline-block;
 
-  ${({ $placeholder }) => $placeholder && `border: 1px solid var(--accents-2)`};
+  ${({ $placeholder, theme }) =>
+    $placeholder && `border: 1px solid ${theme.colors.border}`};
 `;
 
 export const Avatar: React.FunctionComponent<{
@@ -77,7 +78,7 @@ const AvatarGroup = styled.div<AvatarProps>`
 
   ${AvatarWrapper} {
     margin-left: ${({ $size: size }) => avatarSizeToEm(size) / -2}rem;
-    border: 2px solid var(--background);
+    border: 2px solid ${({ theme }) => theme.colors.background};
     box-sizing: content-box;
 
     &:hover {

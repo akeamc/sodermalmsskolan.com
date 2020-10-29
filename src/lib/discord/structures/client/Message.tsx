@@ -3,6 +3,7 @@ import React from "react";
 import { Card, CardContent } from "../../../../components/basic/Card";
 import styled from "styled-components";
 import * as breakpoints from "../../../../styles/breakpoints";
+import { Muted } from "../../../../components/basic/Typography";
 
 const MessagePhotos = styled.div`
   display: grid;
@@ -31,7 +32,7 @@ export class ClientMessage extends Message {
               return <img src={attachment.url} key={index} />;
             })}
           </MessagePhotos>
-          <p>{this.content}</p>
+          <Muted>{this.content}</Muted>
         </CardContent>
       </Card>
     );

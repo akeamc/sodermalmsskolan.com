@@ -9,8 +9,8 @@ import {
   CardDescription,
 } from "../basic/Card";
 import Link from "next/link";
-import Skeleton from "react-loading-skeleton";
 import Digibruh from "../../lib/digibruh/Digibruh";
+import { Skeleton } from "../basic/Skeleton";
 
 export const StudySet: React.FunctionComponent<{
   studySet: ClientStudySet | null;
@@ -30,7 +30,7 @@ export const StudySet: React.FunctionComponent<{
   const description = (
     <>
       {field?.name || <Skeleton width="50%" />} ·{" "}
-      {data?.details?.terms || <Skeleton width={16} />} termer
+      {data?.details?.terms || <Skeleton width="16px" />} termer
     </>
   );
 

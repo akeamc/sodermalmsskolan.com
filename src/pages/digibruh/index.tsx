@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "../../components/layout/Layout";
 import SubjectsOverview from "../../components/digibruh/SubjectsOverview";
 import { Navigation } from "../../components/layout/Navigation";
-import { HeroWithTitle } from "../../components/layout/Hero/Title";
+import { SimpleHero } from "../../components/layout/Hero/Simple";
 
 const Page: React.FunctionComponent = () => {
   return (
@@ -13,7 +13,7 @@ const Page: React.FunctionComponent = () => {
       }}
     >
       <Navigation />
-      <HeroWithTitle
+      <SimpleHero
         title="Digibruh"
         lead="Ett digitalt läromedel av elever, för elever."
       />

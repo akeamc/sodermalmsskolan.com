@@ -45,20 +45,6 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
       {images.map((image, index) => (
         <meta key={index} property="og:image" content={image} />
       ))}
-
-      {/* Global site tag (gtag.js) - Google Analytics */}
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-      />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_TRACKING_ID}');`,
-        }}
-      />
     </Head>
   );
 };
@@ -100,9 +86,24 @@ export const Layout: React.FunctionComponent<{
           integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
           crossOrigin="anonymous"
         />
+
         <script
           async
           src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        />
+
+        {/* Global site tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}');`,
+          }}
         />
       </Head>
       <div>

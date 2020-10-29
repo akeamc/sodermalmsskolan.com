@@ -1,7 +1,5 @@
 import createPersistedState from "use-persisted-state";
-import { useState, useEffect } from "react";
-
-type StateSetter<T> = (value: T) => void;
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 /**
  * A persistent `useState`, compatible with SSR.
@@ -11,15 +9,15 @@ type StateSetter<T> = (value: T) => void;
 export function usePersistedState<T>(
   key: string,
   initialValue: T
-): [T, StateSetter<T>] {
+): [T, Dispatch<SetStateAction<T>>] {
   const usePeristed = createPersistedState(key);
 
   const [persistedState, setPersistedState] = usePeristed<T>(initialValue);
-  const [localState, setLocalState] = useState<T>(initialValue);
+  const [temporaryState, setTemporaryState] = useState<T>(initialValue);
 
   useEffect(() => {
-    setLocalState(persistedState);
+    setTemporaryState(persistedState);
   });
 
-  return [localState, setPersistedState];
+  return [temporaryState, setPersistedState];
 }

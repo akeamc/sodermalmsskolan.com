@@ -2,25 +2,25 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledTable = styled.table`
-  border: 1px solid var(--accents-2);
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-spacing: 0;
   border-radius: 8px;
   overflow: hidden;
 
   tr:not(:last-child) td,
   thead th {
-    border-bottom: 1px solid var(--accents-2);
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   }
 
   tbody tr {
     transition: background-color 0.2s;
 
     &:nth-child(odd) {
-      background: var(--accents-1);
+      background: ${({ theme }) => theme.colors.slightlyHighlighted};
     }
 
     &:hover {
-      background: var(--accents-2);
+      background: ${({ theme }) => theme.colors.border};
     }
   }
 
@@ -30,7 +30,7 @@ const StyledTable = styled.table`
     text-align: left;
 
     &:not(:last-child) {
-      border-right: 1px solid var(--accents-2);
+      border-right: 1px solid ${({ theme }) => theme.colors.border};
     }
   }
 

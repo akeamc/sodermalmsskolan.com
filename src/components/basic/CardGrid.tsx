@@ -10,13 +10,14 @@ import {
   CardLink,
   CardDescription,
 } from "../basic/Card";
-import Skeleton from "react-loading-skeleton";
 import { Col } from "../grid/Col";
 import { Base } from "../grid/Base";
 import moment from "moment";
 import { AuthorGroup } from "./Avatar";
 import { Emoji } from "./Emoji";
 import { useLocale } from "../../hooks/locale";
+import { Skeleton } from "./Skeleton";
+import { Muted } from "./Typography";
 
 export function getLineClamp(lines: number): React.CSSProperties {
   return {
@@ -65,9 +66,9 @@ class CardGridItem extends React.Component<{
           </CardContent>
           {item?.meta ? (
             <CardFooter>
-              <p>
+              <Muted>
                 {moment(item?.meta.date).locale(locale).format("D MMMM YYYY")}
-              </p>
+              </Muted>
               <AuthorGroup authors={item.meta.authors} />
             </CardFooter>
           ) : null}

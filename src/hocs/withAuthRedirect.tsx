@@ -7,6 +7,7 @@ import { FullPageWrapper } from "../components/layout/Container";
 import { Link } from "../components/basic/Link";
 import { DISCORD_INVITE } from "../components/layout/Footer/Bottom";
 import queryString from "query-string";
+import { Muted } from "../components/basic/Typography";
 
 function isBrowser(): boolean {
   return typeof window !== "undefined";
@@ -64,10 +65,10 @@ export default function withAuthRedirect<
     if (isBrowser() && expectedAuth !== user?.isMember) {
       return (
         <FullPageWrapper>
-          <p>
+          <Muted>
             Du måste <Link href={DISCORD_INVITE}>gå med i Discordservern</Link>{" "}
             först.
-          </p>
+          </Muted>
         </FullPageWrapper>
       );
     }

@@ -1,22 +1,23 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider, useTheme } from "styled-components";
 import { Card, CardContent } from "../basic/Card";
 import { getPosts } from "../../lib/ghost/post";
 import useSWR from "swr";
 import { useProgressiveImage } from "../basic/ProgressiveImage";
-import { TextColorModifier } from "../basic/Typography";
 import { getPostUrl } from "./PostGrid";
 import { getLineClamp } from "../basic/CardGrid";
 import moment from "moment";
 import PostMeta from "./meta/PostMeta";
 import * as breakpoints from "../../styles/breakpoints";
-import Skeleton from "react-loading-skeleton";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import { useLocale } from "../../hooks/locale";
+import { transparentLightPalette } from "../../styles/themes";
+import { Skeleton } from "../basic/Skeleton";
+import { Anchor, Muted } from "../basic/Typography";
 
-const CardWrapper = styled.a`
+const CardWrapper = styled(Anchor)`
   grid-column: span 12;
   display: block;
 `;
@@ -75,35 +76,37 @@ const FeaturedPost: React.FunctionComponent = () => {
 
   const { locale } = useLocale();
 
+  const theme = useTheme();
+
   return (
-    <Link href={getPostUrl(post?.slug)} passHref>
-      <CardWrapper ref={ref}>
-        <motion.div
-          variants={{
-            show: {
-              opacity: 1,
-              y: 0,
-            },
-            hide: {
-              opacity: 0,
-              y: 32,
-            },
-          }}
-          animate={show ? "show" : "hide"}
-          initial={false}
-        >
-          <BigCard>
-            <Background image={imageSrc} />
-            <BigCardContent>
-              <TextColorModifier bright>
+    <ThemeProvider theme={{ ...theme, colors: transparentLightPalette }}>
+      <Link href={getPostUrl(post?.slug)} passHref>
+        <CardWrapper ref={ref}>
+          <motion.div
+            variants={{
+              show: {
+                opacity: 1,
+                y: 0,
+              },
+              hide: {
+                opacity: 0,
+                y: 32,
+              },
+            }}
+            animate={show ? "show" : "hide"}
+            initial={false}
+          >
+            <BigCard>
+              <Background image={imageSrc} />
+              <BigCardContent>
                 <h2>{loading ? <Skeleton count={3} /> : post?.title}</h2>
-                <p style={getLineClamp(excerptLineLimit)}>
+                <Muted style={getLineClamp(excerptLineLimit)}>
                   {loading ? (
                     <Skeleton count={excerptLineLimit} />
                   ) : (
                     post?.excerpt
                   )}
-                </p>
+                </Muted>
                 <PostMeta
                   post={post}
                   dateText={moment(post?.published_at)
@@ -111,12 +114,12 @@ const FeaturedPost: React.FunctionComponent = () => {
                     .format("D MMMM YYYY")}
                   skeleton={loading}
                 />
-              </TextColorModifier>
-            </BigCardContent>
-          </BigCard>
-        </motion.div>
-      </CardWrapper>
-    </Link>
+              </BigCardContent>
+            </BigCard>
+          </motion.div>
+        </CardWrapper>
+      </Link>
+    </ThemeProvider>
   );
 };
 

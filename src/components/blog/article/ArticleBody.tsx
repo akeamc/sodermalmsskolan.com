@@ -10,6 +10,7 @@ import { Base } from "../../grid/Base";
 import * as breakpoints from "../../../styles/breakpoints";
 import { Link as LinkIcon } from "react-feather";
 import { Table } from "../../basic/Table";
+import { Anchor } from "../../basic/Typography";
 
 enum FigureWidth {
   Normal,
@@ -25,7 +26,7 @@ const LinkableHeading = styled.div`
     border-bottom: 1px solid transparent;
 
     &:hover {
-      border-bottom-color: var(--foreground);
+      border-bottom-color: ${({ theme }) => theme.colors.foreground};
 
       & ~ svg {
         visibility: visible;
@@ -36,7 +37,7 @@ const LinkableHeading = styled.div`
   svg {
     height: 0.75em;
     width: 0.75em;
-    color: var(--accents-4);
+    color: ${({ theme }) => theme.colors.muted};
     margin-left: 0.25em;
     visibility: hidden;
     vertical-align: -0.05em;
@@ -61,16 +62,16 @@ const Figure = styled.figure<{ width: FigureWidth }>`
 
   img {
     border-radius: 8px;
-    box-shadow: var(--shadow-medium);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
 
-    ${({ width }) => {
+    ${({ width, theme }) => {
       if (width == FigureWidth.Wide)
         return `
         max-width: 1040px;
 
         @media (min-width: 1040px) {
           border-radius: 8px;
-          box-shadow: var(--shadow-medium);
+          box-shadow: ${theme.shadows.medium};
         }
       `;
 
@@ -86,7 +87,7 @@ const FigureCaption = styled.figcaption`
   font-size: 0.875rem;
   text-align: center;
   margin-top: 1em;
-  color: var(--accents-5);
+  color: ${({ theme }) => theme.colors.muted};
 `;
 
 const Embed = styled.div`
@@ -116,20 +117,20 @@ const Embed = styled.div`
 const Divider = styled.div`
   margin: var(--section-spacing) 0;
   height: 1px;
-  background-color: var(--accents-2);
+  background-color: ${({ theme }) => theme.colors.border};
   width: 100%;
 `;
 
 const Blockquote = styled.blockquote`
-  border-left: 2px solid var(--accents-2);
+  border-left: 2px solid ${({ theme }) => theme.colors.border};
   padding: 0 0 0 1em;
   margin-left: 0;
-  color: var(--foreground);
+  color: ${({ theme }) => theme.colors.foreground};
   font-size: 1.125rem;
   overflow: hidden;
 
   p {
-    color: var(--foreground);
+    color: ${({ theme }) => theme.colors.foreground};
   }
 `;
 
@@ -169,7 +170,7 @@ const RichText = styled.div`
   }
 
   em {
-    color: var(--foreground);
+    color: ${({ theme }) => theme.colors.foreground};
   }
 
   > ${Embed}, > ${Figure}, > ${Blockquote}, > img {
@@ -178,7 +179,7 @@ const RichText = styled.div`
   }
 
   .katex {
-    color: var(--foreground);
+    color: ${({ theme }) => theme.colors.foreground};
   }
 `;
 
@@ -288,9 +289,9 @@ const ArticleBody: React.FunctionComponent<{
       return (
         <node.name id={id} key={index}>
           <LinkableHeading>
-            <a href={"#" + id} id={id}>
+            <Anchor href={"#" + id} id={id}>
               {node.children.map(transform)}
-            </a>
+            </Anchor>
             <LinkIcon />
           </LinkableHeading>
         </node.name>

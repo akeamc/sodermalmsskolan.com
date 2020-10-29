@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React from "react";
-import Skeleton from "react-loading-skeleton";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
 import * as breakpoints from "../../styles/breakpoints";
@@ -10,6 +9,7 @@ import { ClientDish } from "../../lib/food/structures/client/Dish";
 import { useLocale } from "../../hooks/locale";
 import { Card, CardContent, CardTitle } from "../basic/Card";
 import { AnimateSharedLayout } from "framer-motion";
+import { Skeleton } from "../basic/Skeleton";
 
 const DishList = styled.ul`
   margin-top: 1rem;
@@ -26,7 +26,7 @@ const DishEmissions: React.FunctionComponent<{ id: string }> = ({ id }) => {
 
   return (
     <span>
-      ({data?.co2e.toLocaleString(locale) || <Skeleton width={32} />} kg CO₂e
+      ({data?.co2e.toLocaleString(locale) || <Skeleton width="32px" />} kg CO₂e
       per portion)
     </span>
   );

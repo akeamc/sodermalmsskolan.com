@@ -6,28 +6,31 @@ import { Navigation } from "../components/layout/Navigation";
 import { NormalWidth } from "../components/grid/Col";
 import { ButtonRow, Button } from "../components/basic/Button";
 import { LunchWidget } from "../components/food/LunchWidget";
-import { HeroWithTitle } from "../components/layout/Hero/Title";
+import { EpicHero } from "../components/layout/Hero/Epic";
+import { LeadText } from "../components/basic/Typography";
+import { HeroTitle } from "../components/layout/Hero";
 
 const Page: React.FunctionComponent = () => {
   return (
     <Layout>
       <Navigation autoFloat />
-      <HeroWithTitle
-        title="Vi visar vad Quality of Life Services egentligen betyder"
-        lead={
+      <EpicHero
+        left={
           <>
-            Sedan maj 2019 har vi fotat skolmaten och visat den egentliga
-            innebörden av Sodexos slogan <i>Quality of Life Services</i>.
+            <HeroTitle>Snille och smak</HeroTitle>
+            <LeadText>
+              Sedan maj 2019 har vi fotat skolmaten och visat den egentliga
+              innebörden av Sodexos slogan <i>Quality of Life Services</i>.
+            </LeadText>
+            <ButtonRow>
+              <Button href="/meny">Visa menyn</Button>
+              <Button secondary href="/digibruh">
+                Öppna Digibruh
+              </Button>
+            </ButtonRow>
           </>
         }
-      >
-        <ButtonRow center>
-          <Button href="/meny">Visa menyn</Button>
-          <Button secondary href="/digibruh">
-            Öppna Digibruh
-          </Button>
-        </ButtonRow>
-      </HeroWithTitle>
+      />
       <Section>
         <Base>
           <NormalWidth>
