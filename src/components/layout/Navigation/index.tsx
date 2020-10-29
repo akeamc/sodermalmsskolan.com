@@ -71,7 +71,7 @@ export const Navigation: React.FunctionComponent<{
 
   const theme = useTheme();
   const wrapperTheme =
-    brightText && !floating
+    brightText && !floating && !isOpen
       ? { ...theme, colors: transparentLightPalette }
       : theme;
 
