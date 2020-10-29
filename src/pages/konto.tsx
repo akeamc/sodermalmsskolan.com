@@ -5,6 +5,7 @@ import { SimpleHero } from "../components/layout/Hero/Simple";
 import { ButtonRow, Button } from "../components/basic/Button";
 import withAuth from "../hocs/withAuth";
 import { useAuth } from "../providers/Auth";
+import { LogOut } from "react-feather";
 
 const Page: React.FunctionComponent = () => {
   const { user } = useAuth();
@@ -21,7 +22,9 @@ const Page: React.FunctionComponent = () => {
         lead={`Inloggad som ${user?.discord?.username}.`}
       >
         <ButtonRow center>
-          <Button href="/api/auth/logout">Logga ut</Button>
+          <Button href="/api/auth/logout" icon={<LogOut />}>
+            Logga ut
+          </Button>
         </ButtonRow>
       </SimpleHero>
     </Layout>

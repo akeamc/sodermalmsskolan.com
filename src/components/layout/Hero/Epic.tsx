@@ -3,7 +3,7 @@ import React from "react";
 import { Base } from "../../grid/Base";
 import styled from "styled-components";
 import * as breakpoints from "../../../styles/breakpoints";
-import { ButtonRow } from "../../basic/Button";
+import { LeadText } from "../../basic/Typography";
 
 const EpicHeroPane = styled.div`
   grid-column-end: span 12;
@@ -30,8 +30,8 @@ const EpicHeroPane = styled.div`
     --size-xl: 6rem;
   }
 
-  ${ButtonRow} {
-    margin-top: 1rem;
+  ${LeadText} {
+    margin-bottom: 2rem;
   }
 `;
 
