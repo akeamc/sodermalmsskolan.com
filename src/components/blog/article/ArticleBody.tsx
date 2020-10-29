@@ -11,6 +11,7 @@ import * as breakpoints from "../../../styles/breakpoints";
 import { Link as LinkIcon } from "react-feather";
 import { Table } from "../../basic/Table";
 import { Anchor } from "../../basic/Typography";
+import Link from "next/link";
 
 enum FigureWidth {
   Normal,
@@ -212,7 +213,7 @@ const ArticleBody: React.FunctionComponent<{
   function transform(node, index) {
     if (node.name == "iframe") {
       return (
-        <Embed>
+        <Embed key={index}>
           <iframe src={node.attribs?.src} allowFullScreen />
         </Embed>
       );
@@ -234,8 +235,19 @@ const ArticleBody: React.FunctionComponent<{
 
     if (node.name == "img") {
       const { alt, src, loading = "lazy" } = node.attribs;
+
       return (
         <ProgressiveImage key={index} alt={alt} src={src} loading={loading} />
+      );
+    }
+
+    if (node.name == "a") {
+      const { href } = node.attribs;
+
+      return (
+        <Link key={index} href={href} passHref>
+          <Anchor>{node.children.map(transform)}</Anchor>
+        </Link>
       );
     }
 
