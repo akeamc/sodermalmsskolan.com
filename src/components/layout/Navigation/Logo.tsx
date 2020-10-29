@@ -14,7 +14,7 @@ const Container = styled.a`
 
 const Big = styled(Logo)`
   height: 1rem;
-  fill: currentColor;
+  fill: ${({ theme }) => theme.colors.foreground};
   display: none;
 
   @media (min-width: ${breakpoints.medium}) {
@@ -24,7 +24,7 @@ const Big = styled(Logo)`
 
 const Small = styled(SmallLogo)`
   height: 2rem;
-  fill: currentColor;
+  fill: ${({ theme }) => theme.colors.foreground};
 
   @media (min-width: ${breakpoints.medium}) {
     display: none;

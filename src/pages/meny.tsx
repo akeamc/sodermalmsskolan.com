@@ -3,7 +3,7 @@ import { Layout } from "../components/layout/Layout";
 import { MenuList } from "../components/food/Menus";
 import { AdSection } from "../components/basic/Ad";
 import { Section } from "../components/layout/Section";
-import { Hero } from "../components/layout/Hero";
+import { Hero, HeroTitle } from "../components/layout/Hero";
 import { Base } from "../components/grid/Base";
 import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/layout/Navigation";
@@ -81,7 +81,7 @@ const Page: React.FunctionComponent = () => {
           </ImagePane>
           <TitlePane>
             <TitleContainer>
-              <h1>Vi visar upp Sodexo för världen</h1>
+              <HeroTitle>Vi visar upp Sodexo för världen</HeroTitle>
               <LeadText>
                 I över ett år har vi fotograferat maten som Sodexo serverar och
                 delat bilderna online. Vi kommer aldrig att ge upp.

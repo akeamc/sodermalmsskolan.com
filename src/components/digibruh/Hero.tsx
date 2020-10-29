@@ -2,6 +2,7 @@ import { LeadText } from "../basic/Typography";
 import { HeaderWithBackground } from "../layout/Header";
 import React from "react";
 import { Emoji } from "../basic/Emoji";
+import { HeroTitle } from "../layout/Hero";
 
 export interface HeroProps {
   title: string;
@@ -16,7 +17,7 @@ export const DigibruhHero: React.FunctionComponent<HeroProps> = ({
 }) => {
   return (
     <HeaderWithBackground image={image}>
-      <h1>{title}</h1>
+      <HeroTitle>{title}</HeroTitle>
       <LeadText>
         <Emoji>{lead}</Emoji>
       </LeadText>

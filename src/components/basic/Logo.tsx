@@ -1,14 +1,17 @@
 import React from "react";
+import { useTheme } from "styled-components";
 
 export const Logo: React.FunctionComponent<React.SVGProps<SVGSVGElement>> = (
   props
 ) => {
+  const theme = useTheme();
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 118.04926 8.1178722"
-      fill="currentColor"
+      fill={theme.colors.foreground}
       {...props}
     >
       <g
@@ -47,12 +50,14 @@ export const Logo: React.FunctionComponent<React.SVGProps<SVGSVGElement>> = (
 export const SmallLogo: React.FunctionComponent<React.SVGProps<
   SVGSVGElement
 >> = (props) => {
+  const theme = useTheme();
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 237.86041 270.93334"
       version="1.1"
-      fill="currentColor"
+      fill={theme.colors.foreground}
       {...props}
     >
       <g>

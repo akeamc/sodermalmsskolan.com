@@ -8,6 +8,7 @@ import { ButtonRow, Button } from "../components/basic/Button";
 import { LunchWidget } from "../components/food/LunchWidget";
 import { EpicHero } from "../components/layout/Hero/Epic";
 import { LeadText } from "../components/basic/Typography";
+import { HeroTitle } from "../components/layout/Hero";
 
 const Page: React.FunctionComponent = () => {
   return (
@@ -16,7 +17,7 @@ const Page: React.FunctionComponent = () => {
       <EpicHero
         left={
           <>
-            <h1>Snille och smak</h1>
+            <HeroTitle>Snille och smak</HeroTitle>
             <LeadText>
               Sedan maj 2019 har vi fotat skolmaten och visat den egentliga
               innebörden av Sodexos slogan <i>Quality of Life Services</i>.

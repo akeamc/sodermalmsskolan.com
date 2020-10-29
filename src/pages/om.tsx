@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "../components/layout/Layout";
 import { Navigation } from "../components/layout/Navigation";
 import { Base } from "../components/grid/Base";
-import { Hero } from "../components/layout/Hero";
+import { Hero, HeroTitle } from "../components/layout/Hero";
 import { NormalWidth } from "../components/grid/Col";
 import { Image } from "../components/basic/Image";
 import { Section } from "../components/layout/Section";
@@ -36,7 +36,7 @@ const Page: React.FunctionComponent = () => {
         <Base>
           <NormalWidth>
             <TextBox>
-              <h1>Bakgrund</h1>
+              <HeroTitle>Bakgrund</HeroTitle>
               <Muted>
                 Södermalmsskolan.com grundades i maj 2019 av Bo Strömberg och
                 Åke Amcoff. Än idag är det nästan bara de som lägger tid på

@@ -17,6 +17,7 @@ import {
   LeadText,
 } from "../../../components/basic/Typography";
 import { HeaderWithBackground } from "../../../components/layout/Header";
+import { HeroTitle } from "../../../components/layout/Hero";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -60,7 +61,7 @@ const Page: React.FunctionComponent = ({
   return (
     <Layout metadata={{ title: author?.name, description: author?.bio }}>
       <HeaderWithBackground image={author?.cover_image}>
-        <h1>{author?.name}</h1>
+        <HeroTitle>{author?.name}</HeroTitle>
         <LeadText>{author?.bio}</LeadText>
       </HeaderWithBackground>
       <Section>

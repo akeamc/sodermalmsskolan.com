@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Hero } from ".";
+import { Hero, HeroTitle } from ".";
 import { Base } from "../../grid/Base";
 import { NormalWidth } from "../../grid/Col";
 import { LeadText } from "../../basic/Typography";
@@ -50,7 +50,7 @@ export const SimpleHero: React.FunctionComponent<{
     <Base>
       <NormalWidth>
         <TitleContainer center>
-          <h1>{title}</h1>
+          <HeroTitle>{title}</HeroTitle>
           {lead && <LeadText>{lead}</LeadText>}
           {children}
         </TitleContainer>

@@ -4,6 +4,7 @@ import { LeadText } from "../../basic/Typography";
 import { HeaderWithBackground } from "../../layout/Header";
 import React from "react";
 import PostMeta from "../meta/PostMeta";
+import { HeroTitle } from "../../layout/Hero";
 
 const Lead = styled(LeadText)``;
 
@@ -16,7 +17,7 @@ export const ArticleHero: React.FunctionComponent<{
       image={post?.feature_image}
       minHeight="calc(80vh - var(--navigation-height))"
     >
-      <h1>{post?.title}</h1>
+      <HeroTitle>{post?.title}</HeroTitle>
       {post?.custom_excerpt && <Lead>{post?.custom_excerpt}</Lead>}
       <PostMeta post={post} dateText={dateText} />
     </HeaderWithBackground>
