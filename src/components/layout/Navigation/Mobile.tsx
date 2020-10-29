@@ -21,7 +21,7 @@ const Container = styled(motion.div)`
 `;
 
 const Wrapper = styled(motion.div)`
-  background-color: var(--background);
+  background-color: ${({ theme }) => theme.colors.background};
   padding: 24px;
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
@@ -49,12 +49,12 @@ const List = styled(UnstyledList)`
 
 const Anchor = styled(motion.a)`
   li {
-    border-bottom: 1px solid var(--accents-2);
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
     height: 48px;
     display: flex;
     align-items: center;
     font-size: 1rem;
-    color: var(--foreground);
+    color: ${({ theme }) => theme.colors.foreground};
     user-select: none;
   }
 `;

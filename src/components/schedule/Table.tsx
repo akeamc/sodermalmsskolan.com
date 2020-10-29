@@ -28,8 +28,8 @@ const VerticalStripe = styled.div<{
   grid-row-end: ${({ rowEnd }) => rowEnd};
   grid-column-start: ${({ column }) => column};
   grid-column-end: span 1;
-  border-left: ${({ highlighted }) =>
-    highlighted ? `1px solid var(--accents-2)` : `1px dotted var(--accents-2)`};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-style: ${({ highlighted }) => (highlighted ? "solid" : "dotted")};
   min-width: 1rem;
 `;
 
@@ -40,7 +40,7 @@ const HorizontalStripe = styled.div<{
   grid-row: ${({ row }) => row};
   grid-column-start: 2;
   grid-column-end: ${({ columnEnd }) => columnEnd};
-  border-top: 1px solid var(--accents-2);
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const PeriodWrapper = styled.div<{
@@ -58,7 +58,7 @@ const PeriodWrapper = styled.div<{
 `;
 
 const DayTitleContainer = styled.div`
-  border-top: 1px solid var(--accents-2);
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   padding: 1rem;
   display: flex;
   justify-content: center;

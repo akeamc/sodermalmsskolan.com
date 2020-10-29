@@ -48,7 +48,7 @@ const ImagePane = styled.div`
   margin-bottom: calc(var(--section-spacing) / 2);
 
   img {
-    box-shadow: var(--shadow-medium);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
   }
 
   @media (min-width: ${breakpoints.small}) {

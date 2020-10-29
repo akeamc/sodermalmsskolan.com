@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider, useTheme } from "styled-components";
 import { Base } from "../../grid/Base";
-import { brightTextStyles } from "../../basic/Typography";
 import { motion, useCycle, useViewportScroll } from "framer-motion";
 import { NavLogo } from "./Logo";
 import { DesktopNav } from "./Desktop";
 import { MobileNav } from "./Mobile";
 import * as breakpoints from "../../../styles/breakpoints";
 import { Toggle } from "./Toggle";
+import { transparentLightPalette } from "../../../styles/themes";
 
 const Wrapper = styled(motion.div)<{
   floating: boolean;
   mobileNavOpen: boolean;
-  brightText: boolean;
 }>`
   height: var(--navigation-height);
   width: 100%;
@@ -21,23 +20,16 @@ const Wrapper = styled(motion.div)<{
   left: 0;
   background: transparent;
   transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-  ${({ floating }) =>
+  ${({ floating, theme }) =>
     floating &&
-    `box-shadow: var(--navigation-shadow);
-    background: var(--navigation-background);`};
+    `box-shadow: ${theme.shadows.navigation};
+    background: ${theme.colors.background};`};
 
   @media (max-width: ${breakpoints.large}) {
-    ${({ mobileNavOpen }) =>
+    ${({ mobileNavOpen, theme }) =>
       mobileNavOpen &&
-      `box-shadow: var(--navigation-shadow);
-    background: var(--navigation-background);`};
-
-    ${({ mobileNavOpen, brightText }) =>
-      !mobileNavOpen && brightText && brightTextStyles}
-  }
-
-  @media (min-width: ${breakpoints.large}) {
-    ${({ brightText }) => brightText && brightTextStyles}
+      `box-shadow: ${theme.shadows.navigation};
+    background: ${theme.colors.background};`};
   }
 
   z-index: 1000;
@@ -77,22 +69,29 @@ export const Navigation: React.FunctionComponent<{
 
   useEffect(() => scrollY.onChange((latest) => setScrolled(latest > 0)), []);
 
+  const theme = useTheme();
+  const wrapperTheme =
+    brightText && !floating
+      ? { ...theme, colors: transparentLightPalette }
+      : theme;
+
   return (
     <>
       {padding && <Padding />}
-      <Wrapper
-        floating={autoFloat ? scrolled : floating}
-        mobileNavOpen={isOpen}
-        brightText={brightText && !floating}
-      >
-        <Base>
-          <NavigationRow>
-            <NavLogo />
-            <DesktopNav />
-            <Toggle toggle={() => toggleOpen()} isOpen={isOpen} />
-          </NavigationRow>
-        </Base>
-      </Wrapper>
+      <ThemeProvider theme={wrapperTheme}>
+        <Wrapper
+          floating={autoFloat ? scrolled : floating}
+          mobileNavOpen={isOpen}
+        >
+          <Base>
+            <NavigationRow>
+              <NavLogo />
+              <DesktopNav />
+              <Toggle toggle={() => toggleOpen()} isOpen={isOpen} />
+            </NavigationRow>
+          </Base>
+        </Wrapper>
+      </ThemeProvider>
       <MobileNav isOpen={isOpen} onClose={() => toggleOpen()} />
     </>
   );

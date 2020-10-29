@@ -34,7 +34,7 @@ const PhotoWrapper = styled.div`
 
 const Photo = styled(ProgressiveImage)`
   border-radius: 8px;
-  box-shadow: var(--shadow-large);
+  box-shadow: ${({ theme }) => theme.shadows.large};
   width: 100%;
   object-fit: cover;
 `;

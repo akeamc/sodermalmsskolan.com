@@ -21,7 +21,7 @@ const ListItem = styled.li<{ $active: boolean }>`
   float: left;
 
   a {
-    color: var(--accents-3);
+    color: ${({ theme }) => theme.colors.muted};
     font-weight: 500;
     transition: color 0.2s;
     float: left;
@@ -30,10 +30,10 @@ const ListItem = styled.li<{ $active: boolean }>`
     font-size: 0.875rem;
 
     &:hover {
-      color: var(--foreground);
+      color: ${({ theme }) => theme.colors.foreground};
     }
 
-    ${({ $active }) => $active && `color: var(--foreground)`}
+    ${({ $active, theme }) => $active && `color: ${theme.colors.foreground}`}
   }
 `;
 

@@ -4,8 +4,8 @@ import * as breakpoints from "./breakpoints";
 export default createGlobalStyle`
   html {
     font-family: var(--font-sans);
-    background: var(--background);
-    color: var(--foreground);
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.foreground};
     transition: color 0.1s ease, background-color 0.1s ease;
     font-feature-settings: "calt", "case";
 
@@ -31,59 +31,8 @@ export default createGlobalStyle`
     --max-page-width: 78rem;
     --section-spacing: 3rem;
     --grid-gap: 1.5rem;
-
-    /* Colors */
-    --foreground: black;
-    --background: white;
-    --accents-1: #fafafa;
-    --accents-2: #eaeaea;
-    --accents-3: #999;
-    --accents-4: #888;
-    --accents-5: #666;
-    --accents-6: #444;
-    --accents-7: #333;
-    --accents-8: #111;
-
-    --color-success: #0070f3;
-
-    --color: var(--color-success);
-
-    --code-background: rgba(27, 31, 35, 0.05);
-
-    --navigation-background: var(--background);
-    --navigation-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+    
     --navigation-height: 4rem;
-
-    --shadow-color: var(--accents-2);
-    --shadow-smallest: 0px 4px 8px var(--shadow-color);
-    --shadow-small: 0 5px 10px var(--shadow-color);
-    --shadow-medium: 0 8px 30px var(--shadow-color);
-    --shadow-large: 0 30px 60px var(--shadow-color);
-    --shadow-hover: 0 30px 60px var(--shadow-color);
-
-    @media (prefers-color-scheme: dark) {
-      --foreground: white;
-      --background: black;
-
-      --accents-8: #fafafa;
-      --accents-7: #eaeaea;
-      --accents-6: #999;
-      --accents-5: #888;
-      --accents-4: #666;
-      --accents-3: #444;
-      --accents-2: #333;
-      --accents-1: #111;
-
-      --navigation-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
-
-      --shadow-color: rgba(255, 255, 255, 0.1);
-
-      --shadow-smallest: 0 0 0 1px var(--shadow-color);
-      --shadow-small: 0 0 0 1px var(--shadow-color);
-      --shadow-medium: 0 0 0 1px var(--shadow-color);
-      --shadow-large: 0 0 0 1px var(--shadow-color);
-      --shadow-hover: 0 0 0 1px var(--shadow-color);
-    }
 
     @media (min-width: ${breakpoints.small}) {
       
@@ -110,7 +59,7 @@ export default createGlobalStyle`
     color: inherit;
     white-space: nowrap;
     border-radius: 6px;
-    background-color: var(--code-background);
+    background-color: ${({ theme }) => theme.colors.code};
   }
 
   pre {
@@ -118,7 +67,7 @@ export default createGlobalStyle`
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: var(--code-background);
+    background-color: ${({ theme }) => theme.colors.code};
     border-radius: 8px;
 
     code {
@@ -246,11 +195,11 @@ export default createGlobalStyle`
   }
   
   strong {
-    color: var(--foreground);
+    color: ${({ theme }) => theme.colors.foreground};
   }
 
   p {
-    color: var(--accents-5);
+    color: ${({ theme }) => theme.colors.muted};
     line-height: 1.6;
     letter-spacing: -.02em;
     margin: 1em 0;
@@ -317,13 +266,8 @@ export default createGlobalStyle`
   }
 
   a {
-    color: var(--color);
     text-decoration: none;
     transition: color 0.2s ease;
-
-    &:hover {
-      color: var(--foreground);
-    }
   }
 
   ul, ol {
@@ -331,7 +275,7 @@ export default createGlobalStyle`
 
     li {
       margin-bottom: 10px;
-      color: var(--foreground);
+      color: ${({ theme }) => theme.colors.foreground};
     }
   }
 
@@ -343,7 +287,7 @@ export default createGlobalStyle`
     li::before {
       content: "–";
       display: inline-block;
-      color: var(--accents-4);
+      color: ${({ theme }) => theme.colors.border};
       position: absolute;
       margin-left: -15px;
     }

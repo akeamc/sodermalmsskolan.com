@@ -9,6 +9,8 @@ import styled from "styled-components";
 import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";
 import React from "react";
+import { ThemeToggle } from "../../theme/ThemeToggle";
+import { Muted } from "../../basic/Typography";
 
 const BottomSection = styled.div`
   grid-column: span 12;
@@ -24,9 +26,8 @@ const BottomSection = styled.div`
   }
 `;
 
-const Attribution = styled.p`
+const Attribution = styled(Muted)`
   margin: 0;
-  color: var(--accents-5);
   font-size: 0.875rem;
 `;
 
@@ -34,7 +35,7 @@ const FooterSocialProfile = styled.li`
   &:not(:last-child) {
     margin-right: 15px;
     padding-right: 15px;
-    border-right: 1px solid var(--accents-2);
+    border-right: 1px solid ${({ theme }) => theme.colors.border};
   }
 
   float: left;
@@ -43,7 +44,7 @@ const FooterSocialProfile = styled.li`
 const SocialLink = styled.a`
   display: block;
   text-decoration: none;
-  color: var(--accents-5);
+  color: ${({ theme }) => theme.colors.muted};
   transition: color 0.2s ease;
 
   svg {
@@ -51,7 +52,7 @@ const SocialLink = styled.a`
   }
 
   &:hover {
-    color: var(--foreground);
+    color: ${({ theme }) => theme.colors.foreground};
   }
 `;
 
@@ -92,6 +93,9 @@ export const FooterBottom: React.FunctionComponent = () => {
         <FooterSocial profiles={socialProfiles} />
         <div>
           <MinecraftStatusBadge />
+        </div>
+        <div>
+          <ThemeToggle />
         </div>
       </BottomSection>
     </Base>

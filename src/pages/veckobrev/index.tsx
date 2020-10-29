@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { Anchor } from "../../components/basic/Typography";
 import { Base } from "../../components/grid/Base";
 import { NormalWidth } from "../../components/grid/Col";
 import { SimpleHero } from "../../components/layout/Hero/Simple";
@@ -18,8 +19,8 @@ const News: React.FunctionComponent = () => {
     <ul>
       {data?.flat().map((message, index) => (
         <li key={index}>
-          <Link href={message.attachments[0].url}>
-            <a>{message.content}</a>
+          <Link href={message.attachments[0].url} passHref>
+            <Anchor>{message.content}</Anchor>
           </Link>
         </li>
       ))}

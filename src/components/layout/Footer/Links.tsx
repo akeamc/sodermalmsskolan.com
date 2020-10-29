@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Base } from "../../grid/Base";
-import { Link } from "../../basic/Link";
 import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";
 import React from "react";
 import { useAuth } from "../../../providers/Auth";
 import { ArrowUpRight } from "react-feather";
+import Link from "next/link";
 
 export interface Item {
   name: string;
@@ -125,7 +125,7 @@ const List = styled(UnstyledList)`
 const ColumnTitle = styled.h3`
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--foreground);
+  color: ${({ theme }) => theme.colors.foreground};
   margin: 16px 0;
   letter-spacing: 0;
 `;
@@ -136,13 +136,13 @@ const LinkArrow = styled(ArrowUpRight)`
   vertical-align: text-top;
 `;
 
-const StyledFooterLink = styled(Link)`
+const StyledFooterLink = styled.a`
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--accents-5);
+  color: ${({ theme }) => theme.colors.muted};
 
   &:hover {
-    color: var(--foreground);
+    color: ${({ theme }) => theme.colors.foreground};
 
     ${LinkArrow} {
       transform: translate(10%, -10%);
@@ -158,9 +158,11 @@ const FooterLink: React.FunctionComponent<Item> = ({ href, name }) => {
   const isExternal = href.indexOf("//") > -1;
 
   return (
-    <StyledFooterLink href={href}>
-      {name} {isExternal && <LinkArrow />}
-    </StyledFooterLink>
+    <Link href={href} passHref>
+      <StyledFooterLink>
+        {name} {isExternal && <LinkArrow />}
+      </StyledFooterLink>
+    </Link>
   );
 };
 

@@ -1,7 +1,7 @@
 import createPersistedState from "use-persisted-state";
 import { useState, useEffect } from "react";
 
-type StateSetter<T> = (value: T) => void;
+export type StateSetter<T> = (value: T) => void;
 
 /**
  * A persistent `useState`, compatible with SSR.

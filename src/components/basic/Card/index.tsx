@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useProgressiveImage } from "../ProgressiveImage";
+import { Muted } from "../Typography";
 
 export const Card = styled(motion.div)<{ $hoverable?: boolean }>`
-  background-color: var(--background);
-  box-shadow: var(--shadow-small);
+  background-color: ${({ theme }) => theme.colors.background};
+  box-shadow: ${({ theme }) => theme.shadows.small};
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -29,7 +30,7 @@ export const CardLink = styled.a`
 
 export const CardHero = styled.div<{ backgroundImage?: string }>`
   min-height: 15rem;
-  background: var(--accents-2);
+  background: ${({ theme }) => theme.colors.border};
   background-size: cover;
   background-position: center;
   background-image: ${(props) =>
@@ -49,7 +50,7 @@ export const CardContent = styled.div`
 
 export const CardFooter = styled.div`
   padding: calc(${CardPadding} / 2) ${CardPadding};
-  border-top: 1px solid var(--accents-2);
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,12 +58,12 @@ export const CardFooter = styled.div`
   p {
     margin: 0;
     font-size: 0.875rem;
-    color: var(--accents-6);
+    color: ${({ theme }) => theme.colors.muted};
   }
 `;
 
 export const CardTitle = styled.h3``;
 
-export const CardDescription = styled.p`
+export const CardDescription = styled(Muted)`
   margin-bottom: 0;
 `;

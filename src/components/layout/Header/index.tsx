@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { TextColorModifier } from "../../basic/Typography";
+import styled, { ThemeProvider, useTheme } from "styled-components";
 import { Navigation } from "../Navigation";
 import { Hero } from "../Hero";
 import { Base } from "../../grid/Base";
 import { ResponsiveHalf } from "../../grid/Col";
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { transparentLightPalette } from "../../../styles/themes";
 
 const Background = styled(motion.div)<{ image: string }>`
   background: ${({ image }) =>
@@ -20,7 +20,7 @@ const Background = styled(motion.div)<{ image: string }>`
   z-index: 0;
 `;
 
-const Container = styled(TextColorModifier)<{ minHeight?: string }>`
+const Container = styled.div<{ minHeight?: string }>`
   ${({ minHeight }) =>
     minHeight &&
     `
@@ -64,21 +64,25 @@ export const HeaderWithBackground: React.FunctionComponent<{
     []
   );
 
+  const theme = useTheme();
+
   return (
     <>
       <Navigation brightText floating={navFloating} padding={false} />
-      <Container bright minHeight={minHeight} ref={ref}>
-        <motion.div style={{ opacity, y, zIndex: 1 }}>
-          <Hero>
-            <Base>
-              <ResponsiveHalf>
-                <div>{children}</div>
-              </ResponsiveHalf>
-            </Base>
-          </Hero>
-        </motion.div>
-        <Background image={image} style={{ scale: backgroundScale }} />
-      </Container>
+      <ThemeProvider theme={{ ...theme, colors: transparentLightPalette }}>
+        <Container minHeight={minHeight} ref={ref}>
+          <motion.div style={{ opacity, y, zIndex: 1 }}>
+            <Hero>
+              <Base>
+                <ResponsiveHalf>
+                  <div>{children}</div>
+                </ResponsiveHalf>
+              </Base>
+            </Hero>
+          </motion.div>
+          <Background image={image} style={{ scale: backgroundScale }} />
+        </Container>
+      </ThemeProvider>
     </>
   );
 };

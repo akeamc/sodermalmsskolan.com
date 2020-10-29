@@ -4,7 +4,7 @@ import { Author } from "@tryghost/content-api";
 import React from "react";
 import { getAuthorUrl } from "../../../lib/ghost/author";
 import { useSmallAvatar } from "../../basic/Avatar";
-import Skeleton from "react-loading-skeleton";
+import { Skeleton } from "../../basic/Skeleton";
 
 const AuthorCardContainer = styled(LinkBlock)`
   display: flex;
@@ -22,7 +22,7 @@ const AuthorImage = styled.div<{ src: string }>`
   width: 18px;
   height: 18px;
   margin: -2px 8px -2px -2px;
-  background-color: #eee;
+  background-color: ${({ theme }) => theme.colors.border};
   background-size: cover;
   background-position: center;
   background-image: ${({ src }) => `url(${src})`};
@@ -44,7 +44,7 @@ const AuthorCard: React.FunctionComponent<{
     <AuthorCardContainer href={href}>
       <AuthorImage src={imageSrc} />
       <AuthorName>
-        {skeleton ? <Skeleton width={100} /> : author?.name}
+        {skeleton ? <Skeleton width="100px" /> : author?.name}
       </AuthorName>
     </AuthorCardContainer>
   );

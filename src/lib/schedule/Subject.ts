@@ -31,5 +31,5 @@ export const Subjects: { [subjectName: string]: Subject } = {
   German: new Subject("Tyska", "#ff9800"),
   French: new Subject("Franska", "#ff9800"),
   Spanish: new Subject("Spanska", "#ff9800"),
-  Random: new Subject("Mentorstid", "#212121", "MT"),
+  Random: new Subject("Mentorstid", "#607d8b", "MT"),
 };

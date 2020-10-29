@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import * as breakpoints from "../../../styles/breakpoints";
 import React from "react";
 import { motion } from "framer-motion";
@@ -20,15 +20,19 @@ const Button = styled.button`
   }
 `;
 
-const Path = (props) => (
-  <motion.path
-    fill="transparent"
-    strokeWidth="1"
-    stroke="var(--foreground)"
-    strokeLinecap="round"
-    {...props}
-  />
-);
+const Path = (props) => {
+  const theme = useTheme();
+
+  return (
+    <motion.path
+      fill="transparent"
+      strokeWidth="1"
+      stroke={theme.colors.foreground}
+      strokeLinecap="round"
+      {...props}
+    />
+  );
+};
 
 export const Toggle: React.FunctionComponent<{
   toggle: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

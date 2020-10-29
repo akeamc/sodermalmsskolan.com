@@ -19,7 +19,7 @@ const StyledTimeIndicator = styled.div<{
     z-index: 0;
     width: ${({ progress }) => `${progress * 100}%`};
     height: 100%;
-    background-color: var(--accents-2);
+    background-color: ${({ theme }) => theme.colors.border};
     opacity: 0.75;
     pointer-events: none;
   }

@@ -5,6 +5,7 @@ import styled, { keyframes } from "styled-components";
 import { transparentize } from "polished";
 import { useTime } from "../../hooks/time";
 import { useLocale } from "../../hooks/locale";
+import { Muted } from "../basic/Typography";
 
 const waveAnimation = keyframes`
   0% {
@@ -80,10 +81,10 @@ export const PeriodCard: React.FunctionComponent<{
     <Card $hoverable={false}>
       <CardContent>
         <h2>Nästa lektion: {period.subject.name}</h2>
-        <p>
+        <Muted>
           {period.subject.name} {period.start.format()}–{period.end.format()} i{" "}
           {period.room} ({timeLeft}).
-        </p>
+        </Muted>
       </CardContent>
       <Waves color={period.subject.color} />
     </Card>

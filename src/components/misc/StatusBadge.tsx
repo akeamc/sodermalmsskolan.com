@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import Skeleton from "react-loading-skeleton";
 import React from "react";
+import { Skeleton } from "../basic/Skeleton";
 
 const Container = styled.div`
   padding: 0 12px;
   border-radius: 5px;
-  border: 1px solid var(--accents-2);
+  border: 1px solid ${({ theme }) => theme.colors.border};
   float: left;
   display: flex;
   align-items: center;
   height: 32px;
-  background-color: var(--background);
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export enum StatusColor {
