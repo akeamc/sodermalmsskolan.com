@@ -33,6 +33,7 @@ export const GridTitle = styled.h3`
   --size-sm: 2rem;
   --size-md: 2rem;
   --size-lg: 2.5rem;
+  --size-xl: 2.5rem;
   font-weight: 700;
   margin: 0;
   margin-bottom: 16px;

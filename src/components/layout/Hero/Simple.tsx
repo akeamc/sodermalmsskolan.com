@@ -17,9 +17,10 @@ export const TitleContainer = styled.div<{ center?: boolean }>`
   `}
 
   h1 {
-    --size-lg: 4.5rem;
-    --size-md: 4rem;
     --size-sm: 2.5rem;
+    --size-md: 4rem;
+    --size-lg: 4.5rem;
+    --size-xl: 4.5rem;
     margin-bottom: 24px;
 
     @media (min-width: ${breakpoints.medium}) {
@@ -40,7 +41,7 @@ export const TitleContainer = styled.div<{ center?: boolean }>`
   }
 `;
 
-export const HeroWithTitle: React.FunctionComponent<{
+export const SimpleHero: React.FunctionComponent<{
   title: React.ReactNode;
   lead?: React.ReactNode;
   children?: React.ReactNode;

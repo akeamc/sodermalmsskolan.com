@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../../components/layout/Layout";
 import { Navigation } from "../../components/layout/Navigation";
-import { HeroWithTitle } from "../../components/layout/Hero/Title";
+import { SimpleHero } from "../../components/layout/Hero/Simple";
 import { FoodGallery } from "../../components/food/FoodGallery";
 import { Section } from "../../components/layout/Section";
 import { Base } from "../../components/grid/Base";
@@ -22,7 +22,7 @@ const Page: React.FunctionComponent = () => {
       }}
     >
       <Navigation />
-      <HeroWithTitle title="Galleri" />
+      <SimpleHero title="Galleri" />
       <Section>
         <Base>
           <NormalWidth>

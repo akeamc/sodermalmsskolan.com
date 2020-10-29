@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Base } from "../../components/grid/Base";
 import { NormalWidth } from "../../components/grid/Col";
-import { HeroWithTitle } from "../../components/layout/Hero/Title";
+import { SimpleHero } from "../../components/layout/Hero/Simple";
 import { Layout } from "../../components/layout/Layout";
 import { Navigation } from "../../components/layout/Navigation";
 import { Section } from "../../components/layout/Section";
@@ -36,7 +36,7 @@ const Page: React.FunctionComponent = () => {
       }}
     >
       <Navigation />
-      <HeroWithTitle title="Veckobrev" />
+      <SimpleHero title="Veckobrev" />
       <Section>
         <Base>
           <NormalWidth>

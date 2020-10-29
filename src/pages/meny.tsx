@@ -9,7 +9,7 @@ import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/layout/Navigation";
 import { Image } from "../components/basic/Image";
 import { LeadText, GridTitleSection } from "../components/basic/Typography";
-import { TitleContainer } from "../components/layout/Hero/Title";
+import { TitleContainer } from "../components/layout/Hero/Simple";
 import React from "react";
 import * as breakpoints from "../styles/breakpoints";
 

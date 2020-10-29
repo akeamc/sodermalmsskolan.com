@@ -235,6 +235,10 @@ export default createGlobalStyle`
     @media (min-width: ${breakpoints.large}) {
       font-size: var(--size-lg);
     }
+
+    @media (min-width: ${breakpoints.extraLarge}) {
+      font-size: var(--size-xl);
+    }
   }
 
   small {
@@ -256,6 +260,7 @@ export default createGlobalStyle`
     --size-sm: 2.5rem;
     --size-md: 3rem;
     --size-lg: 4rem;
+    --size-xl: 4rem;
     font-weight: 700;
     letter-spacing: -.1rem;
     line-height: 1;
@@ -265,6 +270,7 @@ export default createGlobalStyle`
     --size-sm: 1.75rem;
     --size-md: 2rem;
     --size-lg: 2.25rem;
+    --size-xl: 2.25rem;
     letter-spacing: -.05rem;
     font-weight: 600;
   }
@@ -273,6 +279,7 @@ export default createGlobalStyle`
     --size-sm: 1.5rem;
     --size-md: 1.5rem;
     --size-lg: 1.5rem;
+    --size-xl: 1.5rem;
     letter-spacing: -.05rem;
     font-weight: 600;
   }
@@ -281,6 +288,7 @@ export default createGlobalStyle`
     --size-lg: 1.25rem;
     --size-lg: 1.25rem;
     --size-lg: 1.25rem;
+    --size-xl: 1.25rem;
     letter-spacing: -.020625rem;
     font-weight: 600;
   }
@@ -290,6 +298,7 @@ export default createGlobalStyle`
     --size-sm: 1.5rem;
     --size-md: 1.5rem;
     --size-lg: 1.5rem;
+    --size-xl: 1.5rem;
     letter-spacing: -.05em;
     font-weight: 600;
   }
@@ -298,6 +307,7 @@ export default createGlobalStyle`
     --size-sm: 1rem;
     --size-md: 1rem;
     --size-lg: 1rem;
+    --size-xl: 1rem;
     letter-spacing: -.05em;
     font-weight: 600;
   }
