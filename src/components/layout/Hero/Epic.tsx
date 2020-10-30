@@ -10,6 +10,7 @@ const EpicHeroPane = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 
   @media (min-width: ${breakpoints.small}) {
     grid-column-end: span 10;
@@ -17,6 +18,7 @@ const EpicHeroPane = styled.div`
 
   @media (min-width: ${breakpoints.large}) {
     grid-column-end: span 5;
+    text-align: initial;
   }
 
   h1 {
@@ -43,7 +45,19 @@ const LeftPane = styled(EpicHeroPane)`
   }
 `;
 
-const RightPane = styled(EpicHeroPane)``;
+const RightPane = styled(EpicHeroPane)`
+  grid-column-start: 1;
+  margin-top: var(--grid-gap);
+
+  @media (min-width: ${breakpoints.small}) {
+    grid-column-start: 2;
+  }
+
+  @media (min-width: ${breakpoints.large}) {
+    margin-top: 0;
+    grid-column-start: 7;
+  }
+`;
 
 export const EpicHero: React.FunctionComponent<{
   left?: React.ReactNode;
