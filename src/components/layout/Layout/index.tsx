@@ -28,7 +28,7 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
   if (title) {
     titleFragments.unshift(title);
   }
-  
+
   const metaTitle = titleFragments.join(" · ");
 
   const router = useRouter();
