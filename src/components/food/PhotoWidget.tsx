@@ -21,8 +21,8 @@ const Grid = styled.div<{ $width: number; $height: number }>`
   }
 
   *:first-child {
-    grid-row: 1/1;
-    grid-column: 1/1;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
   }
 `;
 
@@ -35,7 +35,13 @@ const Cell = styled.a<{
   background-position: center;
   border-radius: 4px;
   filter: grayscale(100%);
-  opacity: ${({ theme }) => (theme.dark ? 0.5 : 1)};
+  opacity: 0.5;
+  transition: opacity 0.1s ease, filter 0.1s ease;
+
+  &:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
 `;
 
 const Photo: React.FunctionComponent<{
@@ -59,10 +65,10 @@ const Photo: React.FunctionComponent<{
   }
 };
 
-export const PhotoWidget: React.FunctionComponent = () => {
-  const width = 8;
-  const height = 8;
-
+export const PhotoWidget: React.FunctionComponent<{
+  width?: number;
+  height?: number;
+}> = ({ width = 8, height = 8 }) => {
   const { data } = ClientChannel.useMessagesInChannel(
     process.env.discordFoodChannel,
     width * height
