@@ -8,6 +8,7 @@ import { ClientMenu } from "../../lib/food/structures/client/Menu";
 import { useLocale } from "../../hooks/locale";
 import { Skeleton } from "../basic/Skeleton";
 import { Muted } from "../basic/Typography";
+import { ArrowRight } from "react-feather";
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -70,7 +71,7 @@ export const LunchWidget: React.FunctionComponent = () => {
               "Menyn är inte tillgänglig."
             )}
           </Text>
-          <Button href="/meny" colored small>
+          <Button href="/meny" icon={<ArrowRight />}>
             Meny
           </Button>
         </div>

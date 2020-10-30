@@ -33,11 +33,8 @@ const WavePattern = styled.pattern<{ $color: string }>`
   height: 64px;
 
   path {
-    fill: ${({ $color }) => transparentize(0.9, $color)};
-
-    @media (prefers-color-scheme: dark) {
-      fill: ${({ $color }) => transparentize(0.75, $color)};
-    }
+    fill: ${({ $color, theme }) =>
+      transparentize(theme.dark ? 0.75 : 0.9, $color)};
   }
 `;
 

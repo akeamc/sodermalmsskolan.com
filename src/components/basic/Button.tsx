@@ -2,72 +2,97 @@ import styled from "styled-components";
 import React from "react";
 import Link from "next/link";
 import * as breakpoints from "../../styles/breakpoints";
+import { lighten, transparentize } from "polished";
+
+const ButtonIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-top: -4px;
+  margin-left: 1em;
+  transition: transform 0.2s ease-in-out;
+
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+`;
 
 export const StyledButton = styled.a<{
   $secondary?: boolean;
-  $colored?: boolean;
-  $small?: boolean;
+  $background?: string;
+  $foreground?: string;
+  $height: number;
 }>`
-  --button-background: ${({ $colored, theme }) =>
-    $colored ? theme.colors.primary : theme.colors.foreground};
-  --button-foreground: ${({ theme }) => theme.colors.background};
-  --button-border: ${({ $colored, theme }) =>
-    $colored ? theme.colors.primary : theme.colors.foreground};
   display: inline-block;
   box-sizing: border-box;
-  background-color: var(--button-background);
-  color: var(--button-foreground);
-  padding: 0 36px;
-  border: 1px solid var(--button-border);
-  border-radius: 5px;
-  line-height: ${({ $small }) => ($small ? 40 : 48)}px;
-  transition: background-color 0.2s ease, color 0.2s ease,
-    border-color 0.2s ease;
+  background-color: ${({ theme, $background }) =>
+    $background || theme.colors.primary};
+  color: ${({ theme, $foreground }) => $foreground || theme.colors.background};
+  padding: 0 ${({ $height }) => `${$height / 2}rem`};
+  border-radius: ${({ $height }) => `${$height / 2}rem`};
+  line-height: ${({ $height }) => `${$height}rem`};
+  transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    --button-background: ${({ theme }) => theme.colors.background};
-    --button-foreground: ${({ $colored, theme }) =>
-      $colored ? theme.colors.primary : theme.colors.foreground};
-    color: var(--button-foreground);
+    background-color: ${({ theme, $background }) =>
+      lighten(0.1, $background || theme.colors.primary)};
+
+    ${ButtonIcon} {
+      transform: translateX(4px);
+    }
   }
 
-  ${({ $secondary, theme }) =>
+  ${({ $secondary, theme, $foreground, $background }) =>
     $secondary &&
     `
-    background-color: ${theme.colors.background};
-    color: ${theme.colors.foreground};
-    border-color: ${theme.colors.border};
+    background-color: ${transparentize(
+      theme.dark ? 0.75 : 0.9,
+      $background || theme.colors.primary
+    )};;
+    color: ${$foreground || theme.colors.foreground};
 
     &:hover {
-      border-color: ${theme.colors.foreground};
+      background-color: ${transparentize(
+        theme.dark ? 0.5 : 0.75,
+        $background || theme.colors.primary
+      )};
     }
   `}
 `;
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
   secondary?: boolean;
-  colored?: boolean;
-  small?: boolean;
+  large?: boolean;
   href: string;
+  foreground?: string;
+  background?: string;
+  icon?: React.ReactNode;
 }
 
 export const Button: React.FunctionComponent<ButtonProps> = ({
   secondary,
-  colored,
-  small,
+  large,
   href,
   children,
+  foreground,
+  background,
+  icon,
   ...rest
 }) => {
+  const height = large ? 3.5 : 3;
+
   return (
     <Link href={href} passHref>
       <StyledButton
         $secondary={secondary}
-        $colored={colored}
-        $small={small}
+        $height={height}
+        $foreground={foreground}
+        $background={background}
         {...rest}
       >
         {children}
+        {icon && <ButtonIcon>{icon}</ButtonIcon>}
       </StyledButton>
     </Link>
   );

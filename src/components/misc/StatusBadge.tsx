@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import React from "react";
 import { Skeleton } from "../basic/Skeleton";
 
@@ -12,12 +12,6 @@ const Container = styled.div`
   height: 32px;
   background-color: ${({ theme }) => theme.colors.background};
 `;
-
-export enum StatusColor {
-  Success = "#335eea",
-  Error = "#df4759",
-  Waiting = "#eee",
-}
 
 export const StatusIndicator = styled.div<{ color: string }>`
   width: 10px;
@@ -47,7 +41,9 @@ export const StatusBadge: React.FunctionComponent<StatusBadgeProps> = ({
   isValidating = false,
   ...props
 }) => {
-  color = isValidating ? StatusColor.Waiting : color;
+  const { colors } = useTheme();
+
+  color = isValidating ? colors.skeleton.base : color;
   value = isValidating ? <Skeleton width="48px" /> : value;
 
   return (

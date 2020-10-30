@@ -15,6 +15,8 @@ export interface ColorPalette {
   code: string;
   muted: string;
   skeleton: SkeletonColors;
+  success: string;
+  error: string;
 }
 
 export interface Shadows {
@@ -28,8 +30,18 @@ declare module "styled-components" {
   export interface DefaultTheme {
     colors: ColorPalette;
     shadows: Shadows;
+    dark: boolean;
   }
 }
+
+const defaultShadows = (color: string, navigationColor: string): Shadows => {
+  return {
+    navigation: `inset 0 -1px 0 0 ${navigationColor}`,
+    small: `0 5px 10px ${color}`,
+    medium: `0 8px 30px ${color}`,
+    large: `0 30px 60px ${color}`,
+  };
+};
 
 export const light: DefaultTheme = {
   colors: {
@@ -45,13 +57,11 @@ export const light: DefaultTheme = {
       base: "#eaeaea",
       highlight: "#fafafa",
     },
+    success: "#335eea",
+    error: "#df4759",
   },
-  shadows: {
-    navigation: "inset 0 -1px 0 0 rgba(0, 0, 0, 0.1)",
-    small: "0 5px 10px #eaeaea",
-    medium: "0 8px 30px #eaeaea",
-    large: "0 30px 60px #eaeaea",
-  },
+  shadows: defaultShadows("#eaeaea", "rgba(0, 0, 0, 0.1)"),
+  dark: false,
 };
 
 export const dark: DefaultTheme = {
@@ -61,7 +71,7 @@ export const dark: DefaultTheme = {
     background: "#111111",
     foreground: "#ffffff",
     border: "#333333",
-    shadow: "#333",
+    shadow: "#333333",
     muted: "#888888",
     slightlyHighlighted: "#222222",
     skeleton: {
@@ -69,13 +79,11 @@ export const dark: DefaultTheme = {
       highlight: "#444444",
     },
   },
-  shadows: {
-    ...light.shadows,
-    navigation: "inset 0 -1px 0 0 rgba(255, 255, 255, 0.1)",
-    small: "0 5px 10px rgba(255, 255, 255, 0.1)",
-    medium: "0 8px 30px rgba(255, 255, 255, 0.1)",
-    large: "0 30px 60px rgba(255, 255, 255, 0.1)",
-  },
+  shadows: defaultShadows(
+    "rgba(255, 255, 255, 0.1)",
+    "rgba(255, 255, 255, 0.1)"
+  ),
+  dark: true,
 };
 
 export const transparentLightPalette: ColorPalette = {

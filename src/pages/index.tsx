@@ -9,6 +9,7 @@ import { LunchWidget } from "../components/food/LunchWidget";
 import { EpicHero } from "../components/layout/Hero/Epic";
 import { LeadText } from "../components/basic/Typography";
 import { HeroTitle } from "../components/layout/Hero";
+import { ArrowRight, BookOpen } from "react-feather";
 
 const Page: React.FunctionComponent = () => {
   return (
@@ -23,8 +24,10 @@ const Page: React.FunctionComponent = () => {
               innebörden av Sodexos slogan <i>Quality of Life Services</i>.
             </LeadText>
             <ButtonRow>
-              <Button href="/meny">Visa menyn</Button>
-              <Button secondary href="/digibruh">
+              <Button large href="/meny" icon={<ArrowRight />}>
+                Visa menyn
+              </Button>
+              <Button large secondary href="/digibruh" icon={<BookOpen />}>
                 Öppna Digibruh
               </Button>
             </ButtonRow>

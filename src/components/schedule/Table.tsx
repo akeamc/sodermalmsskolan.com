@@ -28,8 +28,8 @@ const VerticalStripe = styled.div<{
   grid-row-end: ${({ rowEnd }) => rowEnd};
   grid-column-start: ${({ column }) => column};
   grid-column-end: span 1;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-style: ${({ highlighted }) => (highlighted ? "solid" : "dotted")};
+  border-left: ${({ theme, highlighted }) =>
+    `1px ${highlighted ? "solid" : "dotted"} ${theme.colors.border}`};
   min-width: 1rem;
 `;
 

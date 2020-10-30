@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useMinecraftStatus } from "../../lib/status/structures/client/Service";
-import { StatusColor, StatusBadge } from "../misc/StatusBadge";
+import { StatusBadge } from "../misc/StatusBadge";
 
 const Tnum = styled.span`
   font-feature-settings: "tnum", "ss01", "zero";
@@ -12,9 +12,11 @@ export const MinecraftStatusBadge: React.FunctionComponent<React.HTMLAttributes<
 >> = (props) => {
   const { data: status, isValidating } = useMinecraftStatus();
 
+  const { colors } = useTheme();
+
   const players = status?.data?.players;
 
-  const color = status?.online ? StatusColor.Success : StatusColor.Error;
+  const color = status?.online ? colors.success : colors.error;
 
   const text = status?.online ? (
     <>
