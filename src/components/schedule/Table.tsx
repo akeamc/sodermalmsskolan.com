@@ -1,7 +1,7 @@
 import { Schedule } from "../../lib/schedule/Schedule";
 import React from "react";
 import styled from "styled-components";
-import moment from "moment";
+import dayjs from "dayjs";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import { TimeIndicator } from "./Indicator";
 import { GridTitleSection } from "../basic/Typography";
@@ -149,7 +149,7 @@ export const ScheduleTable: React.FunctionComponent<{
                 <DayTitleContainer style={{ gridRow }}>
                   <DayTitle>
                     {firstLetterUpperCase(
-                      moment()
+                      dayjs()
                         .locale(locale)
                         .day(index + 1)
                         .format("ddd")

@@ -10,6 +10,7 @@ import { EpicHero } from "../components/layout/Hero/Epic";
 import { LeadText } from "../components/basic/Typography";
 import { HeroTitle } from "../components/layout/Hero";
 import { ArrowRight, BookOpen } from "react-feather";
+import { PhotoWidget } from "../components/food/PhotoWidget";
 
 const Page: React.FunctionComponent = () => {
   return (
@@ -33,6 +34,7 @@ const Page: React.FunctionComponent = () => {
             </ButtonRow>
           </>
         }
+        right={<PhotoWidget />}
       />
       <Section>
         <Base>
