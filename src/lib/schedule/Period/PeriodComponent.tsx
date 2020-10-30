@@ -9,12 +9,8 @@ const PeriodContainer = styled.div<{ color: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${({ color }) => `
-    background-color: ${transparentize(0.9, color)};
-
-    @media (prefers-color-scheme: dark) {
-      background-color: ${transparentize(0.75, color)};
-    }
+  ${({ color, theme }) => `
+    background-color: ${transparentize(theme.dark ? 0.75 : 0.9, color)};
   `}
 `;
 

@@ -20,51 +20,63 @@ const ButtonIcon = styled.span`
 
 export const StyledButton = styled.a<{
   $secondary?: boolean;
+  $background?: string;
+  $foreground?: string;
   $height: number;
 }>`
   display: inline-block;
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme, $background }) =>
+    $background || theme.colors.primary};
+  color: ${({ theme, $foreground }) => $foreground || theme.colors.background};
   padding: 0 ${({ $height }) => `${$height / 2}rem`};
   border-radius: ${({ $height }) => `${$height / 2}rem`};
   line-height: ${({ $height }) => `${$height}rem`};
   transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background-color: ${({ theme }) => lighten(0.1, theme.colors.primary)};
+    background-color: ${({ theme, $background }) =>
+      lighten(0.1, $background || theme.colors.primary)};
 
     ${ButtonIcon} {
       transform: translateX(4px);
     }
   }
 
-  ${({ $secondary, theme }) =>
+  ${({ $secondary, theme, $foreground, $background }) =>
     $secondary &&
     `
-    background-color: ${transparentize(0.9, theme.colors.primary)};;
-    color: ${theme.colors.foreground};
+    background-color: ${transparentize(
+      theme.dark ? 0.75 : 0.9,
+      $background || theme.colors.primary
+    )};;
+    color: ${$foreground || theme.colors.foreground};
 
     &:hover {
-      background-color: ${transparentize(0.75, theme.colors.primary)};
+      background-color: ${transparentize(
+        theme.dark ? 0.5 : 0.75,
+        $background || theme.colors.primary
+      )};
     }
   `}
 `;
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
   secondary?: boolean;
-  colored?: boolean;
   large?: boolean;
   href: string;
+  foreground?: string;
+  background?: string;
   icon?: React.ReactNode;
 }
 
 export const Button: React.FunctionComponent<ButtonProps> = ({
   secondary,
-  colored,
   large,
   href,
   children,
+  foreground,
+  background,
   icon,
   ...rest
 }) => {
@@ -72,7 +84,13 @@ export const Button: React.FunctionComponent<ButtonProps> = ({
 
   return (
     <Link href={href} passHref>
-      <StyledButton $secondary={secondary} $height={height} {...rest}>
+      <StyledButton
+        $secondary={secondary}
+        $height={height}
+        $foreground={foreground}
+        $background={background}
+        {...rest}
+      >
         {children}
         {icon && <ButtonIcon>{icon}</ButtonIcon>}
       </StyledButton>
