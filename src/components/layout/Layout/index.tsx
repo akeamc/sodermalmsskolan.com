@@ -24,7 +24,11 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
   } = metadata;
 
   const titleFragments = ["södermalmsskolan.com"];
-  title && titleFragments.unshift(title);
+
+  if (title) {
+    titleFragments.unshift(title);
+  }
+  
   const metaTitle = titleFragments.join(" · ");
 
   const router = useRouter();
