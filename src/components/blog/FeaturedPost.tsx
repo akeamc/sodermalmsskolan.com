@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { useProgressiveImage } from "../basic/ProgressiveImage";
 import { getPostUrl } from "./PostGrid";
 import { getLineClamp } from "../basic/CardGrid";
-import moment from "moment";
+import dayjs from "dayjs";
 import PostMeta from "./meta/PostMeta";
 import * as breakpoints from "../../styles/breakpoints";
 import { motion } from "framer-motion";
@@ -109,7 +109,7 @@ const FeaturedPost: React.FunctionComponent = () => {
                 </Muted>
                 <PostMeta
                   post={post}
-                  dateText={moment(post?.published_at)
+                  dateText={dayjs(post?.published_at)
                     .locale(locale)
                     .format("D MMMM YYYY")}
                   skeleton={loading}

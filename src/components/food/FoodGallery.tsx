@@ -1,7 +1,7 @@
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 import React, { useState } from "react";
 import styled from "styled-components";
-import moment from "moment";
+import dayjs from "dayjs";
 import VisibilitySensor from "react-visibility-sensor";
 import { Spinner } from "../basic/Spinner";
 import { ProgressiveImage } from "../basic/ProgressiveImage";
@@ -81,7 +81,7 @@ export const FoodGallery: React.FunctionComponent = () => {
             </PhotoContainer>
             <CaptionWrapper>
               <small>
-                {moment(message.createdAt)
+                {dayjs(message.createdAt)
                   .locale(locale)
                   .format("HH:mm D MMMM YYYY")}{" "}
                 ·{" "}

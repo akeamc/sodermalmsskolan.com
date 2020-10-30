@@ -12,12 +12,12 @@ import {
 } from "../basic/Card";
 import { Col } from "../grid/Col";
 import { Base } from "../grid/Base";
-import moment from "moment";
 import { AuthorGroup } from "./Avatar";
 import { Emoji } from "./Emoji";
 import { useLocale } from "../../hooks/locale";
 import { Skeleton } from "./Skeleton";
 import { Muted } from "./Typography";
+import dayjs from "dayjs";
 
 export function getLineClamp(lines: number): React.CSSProperties {
   return {
@@ -67,7 +67,7 @@ class CardGridItem extends React.Component<{
           {item?.meta ? (
             <CardFooter>
               <Muted>
-                {moment(item?.meta.date).locale(locale).format("D MMMM YYYY")}
+                {dayjs(item?.meta.date).locale(locale).format("D MMMM YYYY")}
               </Muted>
               <AuthorGroup authors={item.meta.authors} />
             </CardFooter>

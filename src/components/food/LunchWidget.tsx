@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Card, CardContent, CardFooter } from "../basic/Card";
 import { Button } from "../basic/Button";
-import moment from "moment";
+import dayjs from "dayjs";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import React from "react";
 import { ClientMenu } from "../../lib/food/structures/client/Menu";
@@ -47,7 +47,7 @@ export const LunchWidget: React.FunctionComponent = () => {
     (menu || isValidating) &&
     (menu?.date ? (
       firstLetterUpperCase(
-        moment(menu?.date).locale(locale).format("dddd D MMMM")
+        dayjs(menu?.date).locale(locale).format("dddd D MMMM")
       )
     ) : (
       <Skeleton width="100px" />

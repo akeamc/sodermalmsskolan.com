@@ -6,6 +6,10 @@ import { transparentize } from "polished";
 import { useTime } from "../../hooks/time";
 import { useLocale } from "../../hooks/locale";
 import { Muted } from "../basic/Typography";
+import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
+
+dayjs.extend(relativeTime);
 
 const waveAnimation = keyframes`
   0% {

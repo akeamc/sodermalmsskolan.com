@@ -1,6 +1,6 @@
 import { SinglePeriod } from "./SinglePeriod";
 import { Schedule } from "../Schedule";
-import moment, { Moment } from "moment";
+import dayjs, { Dayjs } from "dayjs";
 
 export class PeriodBoundary {
   private day: number;
@@ -51,13 +51,12 @@ export class PeriodBoundary {
    * Get the next absolute timestamp when this period will occur from a timestamp.
    * @param timestamp
    */
-  public nextAbsolute(timestamp: Date = new Date()): Moment {
-    const absoluteTimestamp = moment(timestamp).set({
-      hour: this.hour,
-      minute: this.minute,
-      second: 0,
-      millisecond: 0,
-    });
+  public nextAbsolute(timestamp: Date = new Date()): Dayjs {
+    const absoluteTimestamp = dayjs(timestamp)
+      .set("hour", this.hour)
+      .set("minute", this.minute)
+      .set("second", 0)
+      .set("millisecond", 0);
 
     if (absoluteTimestamp.day() <= this.isoWeekday) {
       return absoluteTimestamp.day(this.isoWeekday);

@@ -1,3 +1,5 @@
+import "dayjs/locale/sv";
+
 export interface Localization {
   locale: string;
 }

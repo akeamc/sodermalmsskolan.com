@@ -15,6 +15,7 @@
   "dependencies": {
     "@tryghost/content-api": "^1.4.1",
     "cookie": "^0.4.1",
+    "dayjs": "^1.9.4",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "framer-motion": "^2.6.15",
@@ -25,7 +26,6 @@
     "ky-universal": "^0.8.1",
     "mcproto": "^0.8.1",
     "mcquery": "^1.0.2",
-    "moment": "^2.27.0",
     "next": "^9.5.1",
     "node-html-parser": "^1.2.21",
     "nookies": "^2.4.0",

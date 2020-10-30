@@ -1,10 +1,13 @@
 import useSWR, { responseInterface } from "swr";
 import { IMenu, Menu, MenuQuery } from "../shared/Menu";
 import ky from "ky-universal";
-import moment from "moment";
+import dayjs from "dayjs";
 import { ClientDish } from "./Dish";
 import { useLocale } from "../../../../hooks/locale";
 import { firstLetterUpperCase } from "../../../utils/letters";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+
+dayjs.extend(isSameOrBefore);
 
 export class ClientMenu extends Menu {
   dishes: ClientDish[];
@@ -34,7 +37,7 @@ export class ClientMenu extends Menu {
       async () => {
         const menus = await ClientMenu.fetchAll();
 
-        const now = moment(new Date());
+        const now = dayjs(new Date());
         const next = menus.findIndex((menu) =>
           now.isSameOrBefore(menu.date, "date")
         );
@@ -49,7 +52,7 @@ export class ClientMenu extends Menu {
     const { locale } = useLocale();
 
     return firstLetterUpperCase(
-      moment(this?.date).locale(locale).format("dddd D MMMM")
+      dayjs(this?.date).locale(locale).format("dddd D MMMM")
     );
   }
 }
