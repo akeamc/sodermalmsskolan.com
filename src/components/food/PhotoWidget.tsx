@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
 import pxcmprs from "../../lib/utils/pxcmprs";
@@ -75,7 +76,7 @@ export const PhotoWidget: React.FunctionComponent<{
   height?: number;
 }> = ({ width = 8, height = 8 }) => {
   const { data } = ClientChannel.useMessagesInChannel(
-    process.env.discordFoodChannel,
+    DISCORD_CHANNELS.photos.id,
     width * height
   );
 

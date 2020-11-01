@@ -8,11 +8,12 @@ import { Layout } from "../../components/layout/Layout";
 import { Navigation } from "../../components/layout/Navigation";
 import { Section } from "../../components/layout/Section";
 import withAuth from "../../hocs/withAuth";
+import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 
 const News: React.FunctionComponent = () => {
   const { data } = ClientChannel.useMessagesInChannel(
-    process.env.discordNewsChannel
+    DISCORD_CHANNELS.news.id
   );
 
   return (

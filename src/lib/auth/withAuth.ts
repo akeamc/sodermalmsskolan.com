@@ -1,5 +1,5 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import { COOKIE_NAME, JWT_SECRET } from "./options";
+import { COOKIE_NAME, JWT_SECRET } from "./constants";
 import jwt from "jsonwebtoken";
 import { destroyAuthCookie } from "./cookie";
 

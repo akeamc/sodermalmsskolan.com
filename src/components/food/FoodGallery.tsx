@@ -8,6 +8,7 @@ import { ProgressiveImage } from "../basic/ProgressiveImage";
 import { LinkBlock } from "../basic/Link";
 import { Emoji } from "../basic/Emoji";
 import { useLocale } from "../../hooks/locale";
+import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 
 const GalleryWrapper = styled.div`
   display: grid;
@@ -51,7 +52,7 @@ const LoadingWrapper = styled.div`
 
 export const FoodGallery: React.FunctionComponent = () => {
   const { data: messages, size, setSize } = ClientChannel.useMessagesInChannel(
-    process.env.discordFoodChannel
+    DISCORD_CHANNELS.photos.id
   );
 
   const { locale } = useLocale();
