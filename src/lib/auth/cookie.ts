@@ -1,5 +1,5 @@
 import cookie, { CookieSerializeOptions } from "cookie";
-import { COOKIE_NAME, JWT_SECRET } from "./options";
+import { COOKIE_NAME, JWT_SECRET } from "./constants";
 import jwt from "jsonwebtoken";
 
 const DEFAULT_COOKIE_OPTIONS: CookieSerializeOptions = {

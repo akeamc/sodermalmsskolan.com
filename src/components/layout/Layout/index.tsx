@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { Footer } from "../Footer";
 import { useRouter } from "next/router";
-import { GA_TRACKING_ID } from "../../../lib/analytics/id";
+import { GA_TRACKING_ID } from "../../../lib/google/analytics";
 
 export interface SiteMetadata {
   title?: string;

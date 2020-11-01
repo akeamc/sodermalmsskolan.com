@@ -3,12 +3,12 @@ import got from "got";
 import {
   DISCORD_GUILD,
   AUTHORIZATION_HEADER,
-  DISCORD_PUBLIC_CHANNELS,
 } from "../../credentials";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import withAuth from "../../../auth/withAuth";
 import { HTTPError } from "got";
 import { Permissions } from "discord.js";
+import { getChannelDetails } from "../../constants";
 
 export interface RolePermissions {
   position: number;
@@ -68,12 +68,14 @@ export class ServerChannel extends Channel {
         }
       }
 
-      if (DISCORD_PUBLIC_CHANNELS.includes(channel.id)) {
-        return await handler(req, res, channel);
-      } else {
+      const details = getChannelDetails(channel.id);
+
+      if (!details || details?.authenticated) {
         return await withAuth(async (req, res) => {
           return await handler(req, res, channel);
         })(req, res);
+      } else {
+        return await handler(req, res, channel);
       }
     };
   };

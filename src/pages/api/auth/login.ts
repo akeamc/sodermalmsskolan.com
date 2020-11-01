@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import queryString from "query-string";
-import { OAUTH2_OPTIONS } from "../../../lib/auth/options";
+import { OAUTH2 } from "../../../lib/auth/constants";
 import {
   AuthorizationQueryString,
   AuthorizationState,
@@ -12,10 +12,10 @@ const handler: NextApiHandler<void> = async (req, res) => {
   });
 
   const query: AuthorizationQueryString = {
-    client_id: OAUTH2_OPTIONS.id,
-    redirect_uri: OAUTH2_OPTIONS.callback,
+    client_id: OAUTH2.id,
+    redirect_uri: OAUTH2.callback,
     response_type: "code",
-    scope: OAUTH2_OPTIONS.scope,
+    scope: OAUTH2.scope,
     state: state.stringify(),
   };
 

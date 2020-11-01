@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../providers/Auth";
 import { FullPageSpinner } from "../components/basic/Spinner";
 import { FullPageWrapper } from "../components/layout/Container";
@@ -8,10 +8,6 @@ import { Link } from "../components/basic/Link";
 import { DISCORD_INVITE } from "../components/layout/Footer/Bottom";
 import queryString from "query-string";
 import { Muted } from "../components/basic/Typography";
-
-function isBrowser(): boolean {
-  return typeof window !== "undefined";
-}
 
 /**
  * Support client-side conditional redirecting based on the user's
@@ -42,35 +38,44 @@ export default function withAuthRedirect<
   const WithAuthRedirectWrapper: NextPage<CP, IP> = (props) => {
     const router = useRouter();
 
+    const [hasMounted, setHasMounted] = useState(false);
+
     const { isLoading, isAuthenticated, user } = useAuth();
+
+    useEffect(() => {
+      setHasMounted(true);
+    }, []);
 
     if (isLoading) {
       return <LoadingComponent />;
     }
 
-    if (isBrowser() && expectedAuth !== isAuthenticated) {
-      router.push(
-        queryString.stringifyUrl({
-          url: "/api/auth/login",
-          query: redirectBack
-            ? {
-                redirect: router.pathname,
-              }
-            : {},
-        })
-      );
-      return <></>;
-    }
+    if (hasMounted) {
+      if (expectedAuth !== isAuthenticated) {
+        router.push(
+          queryString.stringifyUrl({
+            url: "/api/auth/login",
+            query: redirectBack
+              ? {
+                  redirect: router.pathname,
+                }
+              : {},
+          })
+        );
 
-    if (isBrowser() && expectedAuth !== user?.isMember) {
-      return (
-        <FullPageWrapper>
-          <Muted>
-            Du måste <Link href={DISCORD_INVITE}>gå med i Discordservern</Link>{" "}
-            först.
-          </Muted>
-        </FullPageWrapper>
-      );
+        return null;
+      }
+
+      if (expectedAuth !== user?.isMember) {
+        return (
+          <FullPageWrapper>
+            <Muted>
+              Du måste{" "}
+              <Link href={DISCORD_INVITE}>gå med i Discordservern</Link> först.
+            </Muted>
+          </FullPageWrapper>
+        );
+      }
     }
 
     return <WrappedComponent {...props} />;

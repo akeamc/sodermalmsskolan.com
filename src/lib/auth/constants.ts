@@ -1,4 +1,4 @@
-export const OAUTH2_OPTIONS = {
+export const OAUTH2 = {
   id: process.env.OAUTH_ID,
   secret: process.env.OAUTH_SECRET,
   callback: process.env.OAUTH_CALLBACK_URL,
@@ -7,4 +7,4 @@ export const OAUTH2_OPTIONS = {
 
 export const COOKIE_NAME = "authentication";
 
-export const { JWT_SECRET } = process.env;
+export const {JWT_SECRET} = process.env;

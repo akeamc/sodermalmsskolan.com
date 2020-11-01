@@ -1,16 +1,22 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
 import pxcmprs from "../../lib/utils/pxcmprs";
+import * as breakpoints from "../../styles/breakpoints";
 
 const Grid = styled.div<{ $width: number; $height: number }>`
   display: grid;
   grid-template-columns: repeat(${({ $height }) => $height}, 1fr);
   grid-template-rows: repeat(${({ $width }) => $width}, 1fr);
   width: 100%;
-  grid-gap: 0.25rem;
+  grid-gap: 3px;
+
+  @media (min-width: ${breakpoints.small}) {
+    grid-gap: 4px;
+  }
 
   &::before {
     content: "";
@@ -70,7 +76,7 @@ export const PhotoWidget: React.FunctionComponent<{
   height?: number;
 }> = ({ width = 8, height = 8 }) => {
   const { data } = ClientChannel.useMessagesInChannel(
-    process.env.discordFoodChannel,
+    DISCORD_CHANNELS.photos.id,
     width * height
   );
 

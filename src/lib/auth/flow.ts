@@ -1,4 +1,4 @@
-import { OAUTH2_OPTIONS } from "./options";
+import { OAUTH2 } from "./constants";
 import got from "got";
 
 interface TokenResponse {
@@ -13,12 +13,12 @@ export const fetchToken = async (code: string): Promise<TokenResponse> => {
   const response = await got
     .post("https://discord.com/api/oauth2/token", {
       form: {
-        client_id: OAUTH2_OPTIONS.id,
-        client_secret: OAUTH2_OPTIONS.secret,
+        client_id: OAUTH2.id,
+        client_secret: OAUTH2.secret,
         grant_type: "authorization_code",
         code,
-        redirect_uri: OAUTH2_OPTIONS.callback,
-        scope: OAUTH2_OPTIONS.scope,
+        redirect_uri: OAUTH2.callback,
+        scope: OAUTH2.scope,
       },
     })
     .json<TokenResponse>();
