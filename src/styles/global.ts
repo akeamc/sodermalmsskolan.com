@@ -287,7 +287,7 @@ export default createGlobalStyle`
     li::before {
       content: "–";
       display: inline-block;
-      color: ${({ theme }) => theme.colors.border};
+      color: ${({ theme }) => theme.colors.muted};
       position: absolute;
       margin-left: -15px;
     }
