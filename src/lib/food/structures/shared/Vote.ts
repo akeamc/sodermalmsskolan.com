@@ -1,29 +1,33 @@
-export interface RatingStatic {
+export interface VoteStatic {
   author: string;
   dish: string;
   timestamp: string;
-  rating: number;
+  positive: boolean;
 }
 
-export class Rating {
+export class Vote {
   author: string;
   dish: string;
   timestamp: Date;
-  rating: number;
+  positive: boolean;
 
-  constructor({ author, dish, timestamp, rating }: RatingStatic) {
+  constructor({ author, dish, timestamp, positive }: VoteStatic) {
     this.author = author;
     this.dish = dish;
     this.timestamp = new Date(timestamp);
-    this.rating = rating;
+    this.positive = positive;
   }
 
-  public serialize(): RatingStatic {
+  public serialize(): VoteStatic {
     return {
       author: this.author,
       dish: this.dish,
       timestamp: this.timestamp.toISOString(),
-      rating: this.rating,
+      positive: this.positive,
     };
+  }
+
+  public get value(): number {
+    return this.positive ? 1 : -1;
   }
 }
