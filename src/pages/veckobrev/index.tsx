@@ -12,9 +12,7 @@ import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 
 const News: React.FunctionComponent = () => {
-  const { data } = ClientChannel.useMessagesInChannel(
-    DISCORD_CHANNELS.news.id
-  );
+  const { data } = ClientChannel.useMessagesInChannel(DISCORD_CHANNELS.news.id);
 
   return (
     <ul>

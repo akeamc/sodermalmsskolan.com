@@ -7,4 +7,4 @@ export const OAUTH2 = {
 
 export const COOKIE_NAME = "authentication";
 
-export const {JWT_SECRET} = process.env;
+export const { JWT_SECRET } = process.env;
