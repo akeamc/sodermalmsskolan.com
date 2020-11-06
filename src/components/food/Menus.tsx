@@ -80,11 +80,11 @@ const VoteButtonRow = styled(motion.div)`
 
 const VoteButton = styled(IconButton)``;
 
-const DishVoteRow: React.FunctionComponent<{ id: string; show?: boolean }> = ({
-  show = true,
-  id,
-}) => {
-  const { data, mutate } = ClientDish.use(id);
+const DishVoteRow: React.FunctionComponent<{
+  dish: string;
+  show?: boolean;
+}> = ({ show = true, dish }) => {
+  const { data, mutate } = ClientVote.useByDish(dish);
   const { user } = useAuth();
   const theme = useTheme();
 
@@ -97,19 +97,17 @@ const DishVoteRow: React.FunctionComponent<{ id: string; show?: boolean }> = ({
     },
   };
 
-  const userVote = data?.votes?.find(
-    (vote) => vote.author === user?.discord.id
-  );
+  const userVote = data?.find((vote) => vote.author === user?.discord.id);
 
   const votedPositive = userVote && userVote?.positive;
   const votedNegative = userVote && !userVote?.positive;
 
   const setVote = async (positive: boolean) => {
-    await ClientVote.sendVote(id, positive);
+    await ClientVote.sendVote(dish, positive);
   };
 
   const deleteVote = async () => {
-    await ClientVote.deleteVote(id);
+    await ClientVote.deleteVote(dish);
   };
 
   const handleClick = (positive: boolean) => {
@@ -163,9 +161,12 @@ const DishVoteResults: React.FunctionComponent<{
   id: string;
   detailed?: boolean;
 }> = ({ id, detailed = false }) => {
-  const { data } = ClientDish.use(id);
+  const { data: votes } = ClientVote.useByDish(id);
 
-  const loading = !data;
+  const positiveShare =
+    (votes?.filter((vote) => vote.positive)?.length || 0) /
+    Math.max(votes?.length, 1);
+  const loading = !votes;
 
   return (
     <>
@@ -179,7 +180,7 @@ const DishVoteResults: React.FunctionComponent<{
           },
         }}
         $loading={loading}
-        $positive={data?.positiveShare}
+        $positive={positiveShare}
         animate={detailed ? "detailed" : "small"}
         initial
       >
@@ -197,13 +198,12 @@ const DishVoteResults: React.FunctionComponent<{
             "Läser in ..."
           ) : (
             <>
-              {Math.round(data?.positiveShare * 100)}% (
-              {data?.votes?.length || 0})
+              {Math.round(positiveShare * 100)}% ({votes?.length || 0})
             </>
           )}
         </RatingNumber>
       </DishVoteBar>
-      <DishVoteRow id={id} show={detailed} />
+      <DishVoteRow dish={id} show={detailed} />
     </>
   );
 };
