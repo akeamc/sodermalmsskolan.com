@@ -87,7 +87,7 @@ export class ServerVote extends Vote {
     dish: string;
     author: string;
   }): Promise<FirebaseFirestore.WriteResult> {
-    return ServerVote.firestoreDocument(dish).set({
+    return ServerVote.firestoreDocument(dish).update({
       upvotes: FieldValue.arrayRemove(author),
       downvotes: FieldValue.arrayRemove(author),
     });
