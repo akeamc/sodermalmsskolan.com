@@ -2,20 +2,20 @@ export interface VoteStatic {
   author: string;
   dish: string;
   timestamp: string;
-  positive: boolean;
+  up: boolean;
 }
 
 export class Vote {
   author: string;
   dish: string;
   timestamp: Date;
-  positive: boolean;
+  up: boolean;
 
-  constructor({ author, dish, timestamp, positive }: VoteStatic) {
+  constructor({ author, dish, timestamp, up }: VoteStatic) {
     this.author = author;
     this.dish = dish;
     this.timestamp = new Date(timestamp);
-    this.positive = positive;
+    this.up = up;
   }
 
   public serialize(): VoteStatic {
@@ -23,11 +23,11 @@ export class Vote {
       author: this.author,
       dish: this.dish,
       timestamp: this.timestamp.toISOString(),
-      positive: this.positive,
+      up: this.up,
     };
   }
 
-  public get value(): number {
-    return this.positive ? 1 : -1;
+  public get down(): boolean {
+    return !this.up;
   }
 }

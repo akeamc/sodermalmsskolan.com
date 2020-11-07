@@ -6,11 +6,11 @@ import { Vote, VoteStatic } from "../shared/Vote";
 export class ClientVote extends Vote {
   public static async sendVote(
     dish: string,
-    positive: boolean
+    up: boolean
   ): Promise<ResponsePromise> {
     return ky.post(`/api/food/dishes/${dish}/votes`, {
       json: {
-        positive,
+        up,
       },
     });
   }

@@ -1,18 +1,14 @@
+import admin from "firebase-admin";
 import { Vote } from "../shared/Vote";
 import { ServerDish } from "./Dish";
 
-export class ServerVote extends Vote {
-  public static firestoreCollection(
-    dish: string
-  ): FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData> {
-    return ServerDish.firestoreDocument(dish).collection("votes");
-  }
+const FieldValue = admin.firestore.FieldValue;
 
+export class ServerVote extends Vote {
   public static firestoreDocument(
-    dish: string,
-    author: string
+    dish: string
   ): FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> {
-    return ServerVote.firestoreCollection(dish).doc(author);
+    return ServerDish.firestoreDocument(dish);
   }
 
   /**
@@ -20,24 +16,40 @@ export class ServerVote extends Vote {
    * @param document
    */
   public static fromFirestoreDocument(
-    document: FirebaseFirestore.QueryDocumentSnapshot<
-      FirebaseFirestore.DocumentData
-    >
-  ): ServerVote {
+    document: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>
+  ): ServerVote[] {
+    if (!document.exists) {
+      return [];
+    }
+
     const data = document.data();
 
-    return new ServerVote({
-      author: document.ref.id,
-      dish: document.ref.parent.parent.id,
-      positive: data.positive,
+    const base = {
+      dish: document.id,
       timestamp: document.updateTime.toDate().toISOString(),
-    });
+    };
+
+    return [
+      ...data?.upvotes?.map(
+        (author) => new ServerVote({ ...base, author, up: true })
+      ),
+      ...data?.downvotes?.map(
+        (author) => new ServerVote({ ...base, author, up: false })
+      ),
+    ];
+
+    // return new ServerVote({
+    //   author: document.ref.id,
+    //   dish: document.ref.parent.parent.id,
+    //   positive: data.positive,
+    //   timestamp: document.updateTime.toDate().toISOString(),
+    // });
   }
 
   public static async fetchByDish(dish: string): Promise<ServerVote[]> {
-    const snapshot = await ServerVote.firestoreCollection(dish).get();
+    const document = await ServerVote.firestoreDocument(dish).get();
 
-    return snapshot.docs.map(ServerVote.fromFirestoreDocument);
+    return ServerVote.fromFirestoreDocument(document);
   }
 
   /**
@@ -46,15 +58,26 @@ export class ServerVote extends Vote {
   public static async create({
     dish,
     author,
-    positive,
+    up,
   }: {
     dish: string;
     author: string;
-    positive: boolean;
+    up: boolean;
   }): Promise<FirebaseFirestore.WriteResult> {
-    return ServerVote.firestoreCollection(dish).doc(author).set({
-      positive,
-    });
+    const upvotes = up
+      ? FieldValue.arrayUnion(author)
+      : FieldValue.arrayRemove(author);
+    const downvotes = up
+      ? FieldValue.arrayRemove(author)
+      : FieldValue.arrayUnion(author);
+
+    return ServerVote.firestoreDocument(dish).set(
+      {
+        upvotes,
+        downvotes,
+      },
+      { merge: true }
+    );
   }
 
   public static async delete({
@@ -64,6 +87,9 @@ export class ServerVote extends Vote {
     dish: string;
     author: string;
   }): Promise<FirebaseFirestore.WriteResult> {
-    return ServerVote.firestoreCollection(dish).doc(author).delete();
+    return ServerVote.firestoreDocument(dish).set({
+      upvotes: FieldValue.arrayRemove(author),
+      downvotes: FieldValue.arrayRemove(author),
+    });
   }
 }
