@@ -49,7 +49,7 @@ const VoteNumber = styled(motion.span)`
 const VoteButtonRow = styled(motion.div)`
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
 `;
 
 const VoteButton = styled(IconButton)`
@@ -115,7 +115,7 @@ const DishVoteRow: React.FunctionComponent<{
         },
       }}
       animate={show ? "show" : "hide"}
-      initial
+      initial={false}
     >
       {isAuthenticated ? (
         <>
