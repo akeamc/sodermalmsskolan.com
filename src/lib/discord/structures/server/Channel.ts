@@ -1,9 +1,6 @@
 import { Channel, IDiscordAPIChannel } from "../shared/Channel";
 import got from "got";
-import {
-  DISCORD_GUILD,
-  AUTHORIZATION_HEADER,
-} from "../../credentials";
+import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import withAuth from "../../../auth/withAuth";
 import { HTTPError } from "got";

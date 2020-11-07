@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import * as breakpoints from "../../styles/breakpoints";
 import { lighten, transparentize } from "polished";
+import { motion } from "framer-motion";
 
 const ButtonIcon = styled.span`
   display: inline-flex;
@@ -15,6 +16,29 @@ const ButtonIcon = styled.span`
   svg {
     height: 1.5rem;
     width: 1.5rem;
+  }
+`;
+
+export const IconButton = styled(motion.a)<{ $disabled?: boolean }>`
+  background-color: transparent;
+  color: ${({ theme, $disabled }) =>
+    $disabled ? theme.colors.border : theme.colors.primary};
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+  transition: all 0.1s ease;
+
+  &:hover {
+    background-color: ${({ theme, $disabled }) =>
+      !$disabled &&
+      transparentize(theme.dark ? 0.75 : 0.9, theme.colors.primary)};
+  }
+
+  svg {
+    height: 1.5em;
+    width: 1.5em;
+    display: block;
   }
 `;
 
@@ -49,7 +73,7 @@ export const StyledButton = styled.a<{
     background-color: ${transparentize(
       theme.dark ? 0.75 : 0.9,
       $background || theme.colors.primary
-    )};;
+    )};
     color: ${$foreground || theme.colors.foreground};
 
     &:hover {

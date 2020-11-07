@@ -6,6 +6,7 @@ import { useAuth } from "../../../providers/Auth";
 import { Avatar } from "../../basic/Avatar";
 import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";
+import { loginLink } from "../../../lib/auth/href";
 
 const List = styled(UnstyledList)`
   margin: 0;
@@ -74,7 +75,7 @@ export const DesktopNav: React.FunctionComponent = () => {
             href="/konto"
           />
         ) : (
-          <Item href="/api/auth/login">Logga in</Item>
+          <Item href={loginLink()}>Logga in</Item>
         )}
       </List>
     </>
