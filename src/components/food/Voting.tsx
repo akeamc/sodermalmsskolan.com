@@ -174,7 +174,7 @@ export const DishVotes: React.FunctionComponent<{
         $loading={loading}
         $positive={positiveShare}
         animate={detailed ? "detailed" : "small"}
-        initial
+        initial={false}
       >
         <VoteNumber
           variants={{
