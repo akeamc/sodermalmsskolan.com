@@ -30,8 +30,10 @@ export class ClientVote extends Vote {
   public static useByDish(
     dish: string
   ): responseInterface<ClientVote[], unknown> {
-    return useSWR(`/api/food/dishes/${dish}/votes`, () =>
-      ClientVote.fetchByDish(dish)
+    return useSWR(
+      `/api/food/dishes/${dish}/votes`,
+      () => ClientVote.fetchByDish(dish),
+      { revalidateOnFocus: false }
     );
   }
 }

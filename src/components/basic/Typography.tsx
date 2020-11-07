@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { motion } from "framer-motion";
 
 export const LeadText = styled.h2`
   font-size: 1.25rem;
@@ -24,7 +25,7 @@ export const GridTitle = styled.h3`
   margin-bottom: 16px;
 `;
 
-export const Muted = styled.p`
+export const Muted = styled(motion.p)`
   color: ${({ theme }) => theme.colors.muted};
 `;
 

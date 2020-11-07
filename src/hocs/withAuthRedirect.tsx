@@ -6,8 +6,8 @@ import { FullPageSpinner } from "../components/basic/Spinner";
 import { FullPageWrapper } from "../components/layout/Container";
 import { Link } from "../components/basic/Link";
 import { DISCORD_INVITE } from "../components/layout/Footer/Bottom";
-import queryString from "query-string";
 import { Muted } from "../components/basic/Typography";
+import { loginLink } from "../lib/auth/href";
 
 /**
  * Support client-side conditional redirecting based on the user's
@@ -52,16 +52,7 @@ export default function withAuthRedirect<
 
     if (hasMounted) {
       if (expectedAuth !== isAuthenticated) {
-        router.push(
-          queryString.stringifyUrl({
-            url: "/api/auth/login",
-            query: redirectBack
-              ? {
-                  redirect: router.pathname,
-                }
-              : {},
-          })
-        );
+        router.push(loginLink(redirectBack ? router.pathname : undefined));
 
         return null;
       }

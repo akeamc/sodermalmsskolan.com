@@ -1,4 +1,4 @@
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import React, { useState } from "react";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
@@ -8,12 +8,11 @@ import { Dish } from "../../lib/food/structures/shared/Dish";
 import { ClientDish } from "../../lib/food/structures/client/Dish";
 import { useLocale } from "../../hooks/locale";
 import { Card, CardContent, CardTitle } from "../basic/Card";
-import { motion, Variants } from "framer-motion";
 import { Skeleton } from "../basic/Skeleton";
 import { IconButton } from "../basic/Button";
-import { ArrowDown, ThumbsDown, ThumbsUp } from "react-feather";
-import { useAuth } from "../../providers/Auth";
-import { ClientVote } from "../../lib/food/structures/client/Vote";
+import { ArrowDown } from "react-feather";
+import { DishVotes } from "./Voting";
+import { motion } from "framer-motion";
 
 const DishList = styled.ul`
   margin-top: 1rem;
@@ -36,178 +35,6 @@ const DishEmissions: React.FunctionComponent<{ id: string }> = ({ id }) => {
   );
 };
 
-const DishVoteBar = styled(motion.div)<{
-  $loading: boolean;
-  $positive: number;
-}>`
-  width: 100%;
-  background-color: ${({ $loading, theme }) =>
-    $loading ? theme.colors.skeleton.base : theme.colors.border};
-  position: relative;
-  margin-top: 0.5rem;
-  transition: background-color 0.1s ease;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 1rem;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: ${({ $positive, $loading }) => `${$loading ? 0 : $positive * 100}%`};
-    background-color: ${({ theme }) => theme.colors.success};
-    transition: width 0.2s ease-in-out;
-  }
-`;
-
-const RatingNumber = styled(motion.span)`
-  z-index: 1;
-  user-select: none;
-  font-size: 0.875rem;
-  line-height: 2rem;
-  padding: 0 0.5rem;
-  display: inline-block;
-`;
-
-const VoteButtonRow = styled(motion.div)`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-`;
-
-const VoteButton = styled(IconButton)``;
-
-const DishVoteRow: React.FunctionComponent<{
-  dish: string;
-  show?: boolean;
-}> = ({ show = true, dish }) => {
-  const { data, mutate } = ClientVote.useByDish(dish);
-  const { user } = useAuth();
-  const theme = useTheme();
-
-  const voteButtonVariants: Variants = {
-    show: {
-      scale: 1,
-    },
-    hide: {
-      scale: 0,
-    },
-  };
-
-  const userVote = data?.find((vote) => vote.author === user?.discord.id);
-
-  const votedPositive = userVote && userVote?.positive;
-  const votedNegative = userVote && !userVote?.positive;
-
-  const setVote = async (positive: boolean) => {
-    await ClientVote.sendVote(dish, positive);
-  };
-
-  const deleteVote = async () => {
-    await ClientVote.deleteVote(dish);
-  };
-
-  const handleClick = (positive: boolean) => {
-    mutate(null, false);
-
-    if ((votedPositive && positive) || (votedNegative && !positive)) {
-      return deleteVote().then(() => {
-        mutate(null, true);
-      });
-    }
-
-    return setVote(positive).then(() => {
-      mutate(null, true);
-    });
-  };
-
-  return (
-    <VoteButtonRow
-      variants={{
-        show: {
-          height: "auto",
-        },
-        hide: {
-          height: 0,
-        },
-      }}
-      animate={show ? "show" : "hide"}
-      initial
-    >
-      <VoteButton variants={voteButtonVariants}>
-        <ThumbsUp
-          fill={votedPositive ? theme.colors.primary : "transparent"}
-          onClick={() => {
-            handleClick(true);
-          }}
-        />
-      </VoteButton>
-      <VoteButton variants={voteButtonVariants}>
-        <ThumbsDown
-          fill={votedNegative ? theme.colors.primary : "transparent"}
-          onClick={() => {
-            handleClick(false);
-          }}
-        />
-      </VoteButton>
-    </VoteButtonRow>
-  );
-};
-
-const DishVoteResults: React.FunctionComponent<{
-  id: string;
-  detailed?: boolean;
-}> = ({ id, detailed = false }) => {
-  const { data: votes } = ClientVote.useByDish(id);
-
-  const positiveShare =
-    (votes?.filter((vote) => vote.positive)?.length || 0) /
-    Math.max(votes?.length, 1);
-  const loading = !votes;
-
-  return (
-    <>
-      <DishVoteBar
-        variants={{
-          detailed: {
-            height: "2rem",
-          },
-          small: {
-            height: "2px",
-          },
-        }}
-        $loading={loading}
-        $positive={positiveShare}
-        animate={detailed ? "detailed" : "small"}
-        initial
-      >
-        <RatingNumber
-          variants={{
-            detailed: {
-              opacity: 1,
-            },
-            small: {
-              opacity: 0,
-            },
-          }}
-        >
-          {loading ? (
-            "Läser in ..."
-          ) : (
-            <>
-              {Math.round(positiveShare * 100)}% ({votes?.length || 0})
-            </>
-          )}
-        </RatingNumber>
-      </DishVoteBar>
-      <DishVoteRow dish={id} show={detailed} />
-    </>
-  );
-};
-
 const DishItem: React.FunctionComponent<{ dish: Dish; detailed?: boolean }> = ({
   dish,
   detailed = false,
@@ -223,7 +50,7 @@ const DishItem: React.FunctionComponent<{ dish: Dish; detailed?: boolean }> = ({
           {dish?.title} <DishEmissions id={dish?.id} />
         </>
       )}
-      <DishVoteResults id={dish?.id} detailed={detailed} />
+      <DishVotes id={dish?.id} detailed={detailed} />
     </motion.li>
   );
 };

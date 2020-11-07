@@ -19,17 +19,19 @@ const ButtonIcon = styled.span`
   }
 `;
 
-export const IconButton = styled(motion.a)`
+export const IconButton = styled(motion.a)<{ $disabled?: boolean }>`
   background-color: transparent;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme, $disabled }) =>
+    $disabled ? theme.colors.border : theme.colors.primary};
   display: inline-block;
   padding: 0.5rem;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   transition: all 0.1s ease;
 
   &:hover {
-    background-color: ${({ theme }) =>
+    background-color: ${({ theme, $disabled }) =>
+      !$disabled &&
       transparentize(theme.dark ? 0.75 : 0.9, theme.colors.primary)};
   }
 

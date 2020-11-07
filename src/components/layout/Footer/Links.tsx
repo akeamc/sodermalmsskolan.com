@@ -6,6 +6,7 @@ import React from "react";
 import { useAuth } from "../../../providers/Auth";
 import { ArrowUpRight } from "react-feather";
 import Link from "next/link";
+import { loginLink } from "../../../lib/auth/href";
 
 export interface Item {
   name: string;
@@ -75,7 +76,7 @@ export const useLinks = (): Category[] => {
         : [
             {
               name: "Logga in",
-              href: "/api/auth/login",
+              href: loginLink(),
             },
           ],
     },
