@@ -13,6 +13,8 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   dish
 ) => {
   if (req.method === "GET") {
+    res.setHeader("Cache-Control", "s-maxage=3600");
+
     const votes = await ServerVote.fetchByDish(dish?.id);
 
     return res.json(votes.map((rating) => rating.serialize()));

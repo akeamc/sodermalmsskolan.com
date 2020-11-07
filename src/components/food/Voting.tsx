@@ -118,14 +118,14 @@ const DishVoteRow: React.FunctionComponent<{
     mutate(null, false);
 
     function voteCallback() {
-      mutate(null, true);
+      mutate(() => ClientVote.fetchByDish(dish, true), false);
     }
 
     if ((votedUp && up) || (votedDown && !up)) {
-      return deleteVote().then(voteCallback);
+      return deleteVote().then(() => voteCallback());
     }
 
-    return setVote(up).then(voteCallback);
+    return setVote(up).then(() => voteCallback());
   };
 
   return (
