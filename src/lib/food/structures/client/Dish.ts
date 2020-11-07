@@ -16,10 +16,14 @@ export class ClientDish extends Dish {
   }
 
   public static useAll(): responseInterface<ClientDish[], unknown> {
-    return useSWR(`/api/food/dishes`, ClientDish.fetchAll);
+    return useSWR(`/api/food/dishes`, ClientDish.fetchAll, {
+      revalidateOnFocus: false,
+    });
   }
 
   public static use(id: string): responseInterface<ClientDish, unknown> {
-    return useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id));
+    return useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id), {
+      revalidateOnFocus: false,
+    });
   }
 }
