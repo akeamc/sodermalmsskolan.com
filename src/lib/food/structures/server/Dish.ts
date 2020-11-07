@@ -1,7 +1,6 @@
 import got, { HTTPError } from "got";
 import { API_ENDPOINT } from "../../constants";
 import { Dish, IDish } from "../shared/Dish";
-import { ServerVote } from "./Vote";
 import admin from "../../../firebase/admin";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
@@ -39,11 +38,8 @@ export class ServerDish extends Dish {
   public static async fetch(id: string): Promise<ServerDish> {
     const res = await got.get(`${API_ENDPOINT}/dishes/${id}`).json<IDish>();
 
-    const votes = await ServerVote.fetchByDish(id);
-
     return new ServerDish({
       ...res,
-      votes: votes.map((vote) => vote.serialize()),
     });
   }
 

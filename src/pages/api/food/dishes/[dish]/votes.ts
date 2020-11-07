@@ -13,21 +13,23 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   dish
 ) => {
   if (req.method === "GET") {
-    return res.json(dish.votes?.map((rating) => rating.serialize()));
+    const votes = await ServerVote.fetchByDish(dish?.id);
+
+    return res.json(votes.map((rating) => rating.serialize()));
   }
 
   if (req.method === "POST") {
     return await withAuth(async (req, res, token) => {
-      const positive = !!req.body?.positive;
+      const up = !!req.body?.up;
       const user = await ServerUser.fromAccessToken(token);
 
       await ServerVote.create({
         dish: dish.id,
         author: user.id,
-        positive,
+        up: up,
       });
 
-      return res.send(`vote accepted (positive: ${positive})`);
+      return res.send(`vote accepted (${up ? "up" : "down"})`);
     })(req, res);
   }
 
