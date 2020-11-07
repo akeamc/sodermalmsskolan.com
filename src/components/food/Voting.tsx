@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import styled, { keyframes, useTheme } from "styled-components";
 import { motion, Variants } from "framer-motion";
 import { useAuth } from "../../providers/Auth";
 import { ClientVote } from "../../lib/food/structures/client/Vote";
@@ -10,13 +10,29 @@ import { Anchor } from "../basic/Typography";
 import { loginLink } from "../../lib/auth/href";
 import { useRouter } from "next/router";
 
+const barAnimation = keyframes`
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -1rem 0;
+  }
+`;
+
 const DishVoteBar = styled(motion.div)<{
   $loading: boolean;
   $positive: number;
 }>`
   width: 100%;
-  background-color: ${({ $loading, theme }) =>
-    $loading ? theme.colors.skeleton.base : theme.colors.border};
+  background-image: ${({ theme }) => `repeating-linear-gradient(
+    90deg,
+    ${theme.colors.skeleton.base},
+    ${theme.colors.skeleton.base} 0.5rem,
+    ${theme.colors.skeleton.highlight} 0.5rem,
+    ${theme.colors.skeleton.highlight} 1rem
+  )`};
+  background-size: 1rem 100%;
   position: relative;
   margin-top: 0.5rem;
   transition: background-color 0.1s ease;
@@ -24,6 +40,14 @@ const DishVoteBar = styled(motion.div)<{
   display: flex;
   justify-content: space-between;
   border-radius: 1rem;
+  animation: ${barAnimation} 1s linear infinite;
+
+  ${({ $loading, theme }) =>
+    !$loading &&
+    `
+    animation: none;
+    background: ${theme.colors.border};
+  `};
 
   &::before {
     content: "";
