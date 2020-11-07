@@ -25,9 +25,11 @@ export class ClientVote extends Vote {
   ): Promise<ClientVote[]> {
     const res = await ky
       .get(`/api/food/dishes/${dish}/votes`, {
-        searchParams: {
-          _vercel_no_cache: noCache ? 1 : undefined,
-        },
+        searchParams: noCache
+          ? {
+              _vercel_no_cache: 1,
+            }
+          : null,
       })
       .json<VoteStatic[]>();
 
