@@ -19,9 +19,16 @@ export class ClientVote extends Vote {
     return ky.delete(`/api/food/dishes/${dish}/votes`);
   }
 
-  public static async fetchByDish(dish: string): Promise<ClientVote[]> {
+  public static async fetchByDish(
+    dish: string,
+    noCache = false
+  ): Promise<ClientVote[]> {
     const res = await ky
-      .get(`/api/food/dishes/${dish}/votes`)
+      .get(`/api/food/dishes/${dish}/votes`, {
+        searchParams: {
+          _vercel_no_cache: noCache ? 1 : undefined,
+        },
+      })
       .json<VoteStatic[]>();
 
     return res.map((vote) => new ClientVote(vote));

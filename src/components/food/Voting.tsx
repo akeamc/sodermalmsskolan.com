@@ -117,43 +117,15 @@ const DishVoteRow: React.FunctionComponent<{
   const handleClick = (up: boolean) => {
     mutate(null, false);
 
-    /**
-     * To save money, we only mutate the data client-side instead of reading from the database. This allows the server to cache data without making the website feel unresponsive.
-     * */
-    function voteCallback(deleteVote: boolean) {
-      const newVotes = data?.reduce((votes, vote) => {
-        if (vote.author === user.discord.id) {
-          if (deleteVote) {
-            return votes;
-          }
-
-          vote.up = up;
-        }
-
-        votes.push(vote);
-
-        return votes;
-      }, []);
-
-      if (!userVote) {
-        newVotes.push(
-          new ClientVote({
-            author: user.discord.id,
-            dish,
-            timestamp: new Date().toISOString(),
-            up,
-          })
-        );
-      }
-
-      mutate(newVotes, false);
+    function voteCallback() {
+      mutate(() => ClientVote.fetchByDish(dish, true), false);
     }
 
     if ((votedUp && up) || (votedDown && !up)) {
-      return deleteVote().then(() => voteCallback(true));
+      return deleteVote().then(() => voteCallback());
     }
 
-    return setVote(up).then(() => voteCallback(false));
+    return setVote(up).then(() => voteCallback());
   };
 
   return (
