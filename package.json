@@ -27,7 +27,7 @@
     "ky-universal": "^0.8.1",
     "mcproto": "^0.8.1",
     "mcquery": "^1.0.2",
-    "next": "^9.5.1",
+    "next": "^10.0.1",
     "node-html-parser": "^1.2.21",
     "nookies": "^2.4.0",
     "polished": "^4.0.1",
