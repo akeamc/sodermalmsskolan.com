@@ -6,7 +6,7 @@ import React from "react";
 import { useAuth } from "../../../providers/Auth";
 import { ArrowUpRight } from "react-feather";
 import Link from "next/link";
-import { loginLink } from "../../../lib/auth/href";
+import { loginLink, signupLink } from "../../../lib/auth/href";
 
 export interface Item {
   name: string;
@@ -65,11 +65,7 @@ export const useLinks = (): Category[] => {
       items: isAuthenticated
         ? [
             {
-              name: "Logga ut",
-              href: "/api/auth/logout",
-            },
-            {
-              name: "Konto",
+              name: "Översikt",
               href: "/konto",
             },
           ]
@@ -77,6 +73,10 @@ export const useLinks = (): Category[] => {
             {
               name: "Logga in",
               href: loginLink(),
+            },
+            {
+              name: "Skapa konto",
+              href: signupLink(),
             },
           ],
     },

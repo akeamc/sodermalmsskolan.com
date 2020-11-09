@@ -31,6 +31,7 @@ export const Muted = styled(motion.p)`
 
 export const Anchor = styled.a`
   color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => theme.colors.foreground};

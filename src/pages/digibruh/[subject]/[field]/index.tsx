@@ -1,4 +1,4 @@
-import { Layout } from "../../../../components/layout/Layout";
+import { DefaultLayout } from "../../../../components/layout/Layout/Default";
 import NotFound from "../../../404";
 import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
 import Digibruh from "../../../../lib/digibruh/Digibruh";
@@ -55,7 +55,7 @@ const Page: DigibruhPage = (props) => {
   );
 
   return (
-    <Layout
+    <DefaultLayout
       metadata={{
         title: field?.name,
         description: field?.description,
@@ -88,7 +88,7 @@ const Page: DigibruhPage = (props) => {
         </Base>
         <StudySetGrid field={props.field} />
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

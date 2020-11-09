@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../components/layout/Layout";
+import { DefaultLayout } from "../components/layout/Layout/Default";
 import { Section } from "../components/layout/Section";
 import { Base } from "../components/grid/Base";
 import { Navigation } from "../components/layout/Navigation";
@@ -14,7 +14,7 @@ import { PhotoWidget } from "../components/food/PhotoWidget";
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout>
+    <DefaultLayout>
       <Navigation autoFloat />
       <EpicHero
         left={
@@ -43,7 +43,7 @@ const Page: React.FunctionComponent = () => {
           </NormalWidth>
         </Base>
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

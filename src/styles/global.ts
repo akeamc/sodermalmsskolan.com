@@ -17,6 +17,7 @@ export default createGlobalStyle`
       --font-sans: "Inter var", var(--font-system); 
     }
   }
+  
 
   body {
     margin: 0;

@@ -1,20 +1,18 @@
 import React, { ReactNode, ReactElement } from "react";
-import ky from "ky-universal";
-import { AuthUser, IAuthUser } from "../lib/auth/structures/shared/AuthUser";
+import { auth } from "../lib/firebase/firebase";
+import firebase from "firebase";
+import { toast } from "react-toastify";
 
 type AuthContext = {
   isAuthenticated: boolean;
   isLoading: boolean;
-  user: AuthUser | null;
-  setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  user: firebase.User | null;
 };
 
 const AuthContext = React.createContext<AuthContext>({
   isAuthenticated: false,
   isLoading: true,
   user: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setAuthenticated: () => {},
 });
 
 export const AuthProvider = ({
@@ -22,37 +20,27 @@ export const AuthProvider = ({
 }: {
   children: ReactNode;
 }): ReactElement => {
-  const [isAuthenticated, setAuthenticated] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
-  const [user, setUser] = React.useState<AuthUser>(null);
+  const [user, setUser] = React.useState<firebase.User>(null);
 
   React.useEffect(() => {
     const initializeAuth = async (): Promise<void> => {
-      let ok = false;
-
-      try {
-        const data = await ky.get("/api/auth/status").json<IAuthUser>();
-
-        setUser(AuthUser.parse(data));
-
-        ok = true;
-      } catch (error) {
-        ok = false;
-      } finally {
-        setAuthenticated(ok);
+      auth.onAuthStateChanged((user) => {
+        setUser(user);
         setLoading(false);
-      }
+      });
     };
 
     initializeAuth();
   }, []);
+
+  const isAuthenticated = !!user;
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         isLoading,
-        setAuthenticated,
         user,
       }}
     >
@@ -67,6 +55,30 @@ export function useAuth(): AuthContext {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
+}
+
+export function signOut(): void {
+  auth
+    .signOut()
+    .then(() => {
+      toast("Du har loggats ut.");
+    })
+    .catch((error) => {
+      toast(error.message, { type: "error" });
+    });
+}
+
+export function sendEmailVerification(): void {
+  auth.currentUser
+    .sendEmailVerification()
+    .then(() => {
+      toast(
+        `Ett mejl för att bekräfta e-postadressen har skickats till ${auth.currentUser.email}.`
+      );
+    })
+    .catch((error) => {
+      toast(error.message, { type: "error" });
+    });
 }
 
 export function useIsAuthenticated(): boolean {

@@ -57,6 +57,7 @@ export const StyledButton = styled.a<{
   border-radius: ${({ $height }) => `${$height / 2}rem`};
   line-height: ${({ $height }) => `${$height}rem`};
   transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     background-color: ${({ theme, $background }) =>
@@ -88,7 +89,7 @@ export const StyledButton = styled.a<{
 export interface ButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
   secondary?: boolean;
   large?: boolean;
-  href: string;
+  href?: string;
   foreground?: string;
   background?: string;
   icon?: React.ReactNode;
@@ -106,20 +107,28 @@ export const Button: React.FunctionComponent<ButtonProps> = ({
 }) => {
   const height = large ? 3.5 : 3;
 
-  return (
-    <Link href={href} passHref>
-      <StyledButton
-        $secondary={secondary}
-        $height={height}
-        $foreground={foreground}
-        $background={background}
-        {...rest}
-      >
-        {children}
-        {icon && <ButtonIcon>{icon}</ButtonIcon>}
-      </StyledButton>
-    </Link>
+  const button = (
+    <StyledButton
+      $secondary={secondary}
+      $height={height}
+      $foreground={foreground}
+      $background={background}
+      {...rest}
+    >
+      {children}
+      {icon && <ButtonIcon>{icon}</ButtonIcon>}
+    </StyledButton>
   );
+
+  if (href) {
+    return (
+      <Link href={href} passHref>
+        {button}
+      </Link>
+    );
+  } else {
+    return button;
+  }
 };
 
 export const ButtonRow = styled.div<{ center?: boolean }>`

@@ -1,6 +1,6 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../../404";
-import { Layout } from "../../../components/layout/Layout";
+import { DefaultLayout } from "../../../components/layout/Layout/Default";
 import { getAuthorBySlug } from "../../../lib/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
 import { PostOrPage } from "@tryghost/content-api";
@@ -59,7 +59,7 @@ const Page: React.FunctionComponent = ({
   const digibruhPosts: PostOrPage[] = digibruhSWR.data || [];
 
   return (
-    <Layout metadata={{ title: author?.name, description: author?.bio }}>
+    <DefaultLayout metadata={{ title: author?.name, description: author?.bio }}>
       <HeaderWithBackground image={author?.cover_image}>
         <HeroTitle>{author?.name}</HeroTitle>
         <LeadText>{author?.bio}</LeadText>
@@ -88,7 +88,7 @@ const Page: React.FunctionComponent = ({
           rowLimit={3}
         />
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

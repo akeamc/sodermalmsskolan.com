@@ -2,7 +2,7 @@ import {
   IDiscordAPIMessageAttachment,
   MessageAttachment,
 } from "./MessageAttachment";
-import { IDiscordAPIUser, User } from "./User";
+import { IDiscordAPIUser, DiscordUser } from "./User";
 import { Member, IDiscordAPIMember } from "./Member";
 import { IDiscordAPIMessageReaction } from "./MessageReaction";
 import { Serializable } from "../../../common/Serializable";
@@ -46,7 +46,7 @@ export class Message implements Serializable<IDiscordAPIMessage> {
   id: string;
   channel: string;
   guild?: string;
-  author: User;
+  author: DiscordUser;
   member?: Member;
   content: string;
   pinned: boolean;
@@ -74,7 +74,7 @@ export class Message implements Serializable<IDiscordAPIMessage> {
     this.channel = channel_id;
     this.guild = guild_id;
     this.content = content;
-    this.author = new User(author);
+    this.author = new DiscordUser(author);
     this.member = member ? new Member(member) : null;
     this.pinned = pinned;
     this.tts = tts;

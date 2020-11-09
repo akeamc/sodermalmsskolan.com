@@ -1,5 +1,5 @@
 import { IDiscordAPIUser } from "./User";
-import { User } from "./User";
+import { DiscordUser } from "./User";
 import { IDiscordAPIPermissionOverwrite } from "./PermissionOverwrite";
 import { Serializable } from "../../../common/Serializable";
 
@@ -47,7 +47,7 @@ export class Channel implements Serializable<IDiscordAPIChannel> {
   bitrate?: number;
   userLimit?: number;
   rateLimit?: number;
-  recipients?: User[];
+  recipients?: DiscordUser[];
   icon?: string;
   owner?: string;
   application?: string;
@@ -86,7 +86,9 @@ export class Channel implements Serializable<IDiscordAPIChannel> {
     this.bitrate = bitrate;
     this.userLimit = user_limit;
     this.rateLimit = rate_limit_per_user;
-    this.recipients = recipients?.map((recipient) => new User(recipient));
+    this.recipients = recipients?.map(
+      (recipient) => new DiscordUser(recipient)
+    );
     this.icon = icon;
     this.owner = owner_id;
     this.application = application_id;

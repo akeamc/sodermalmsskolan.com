@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../components/layout/Layout";
+import { DefaultLayout } from "../components/layout/Layout/Default";
 import { Navigation } from "../components/layout/Navigation";
 import { Base } from "../components/grid/Base";
 import { Hero, HeroTitle } from "../components/layout/Hero";
@@ -23,7 +23,7 @@ const Page: React.FunctionComponent = () => {
     "https://blogg.södermalmsskolan.com/content/images/size/w2000/2020/06/51B4F6D2-3A27-4358-9D00-BC57E8C01774.jpeg";
 
   return (
-    <Layout metadata={{ title: "Om", images: [image] }}>
+    <DefaultLayout metadata={{ title: "Om", images: [image] }}>
       <Navigation />
       <Hero>
         <Base>
@@ -56,7 +56,7 @@ const Page: React.FunctionComponent = () => {
           </NormalWidth>
         </Base>
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

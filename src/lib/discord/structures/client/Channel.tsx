@@ -8,6 +8,7 @@ import { useSWRInfinite } from "swr";
 import ky from "ky-universal";
 import { IDiscordAPIMessage } from "../shared/Message";
 import styled from "styled-components";
+import { getAuthorizationHeader } from "../../../auth/token";
 
 const MessageWrapper = styled.div`
   display: grid;
@@ -45,7 +46,13 @@ export class ClientChannel extends Channel {
         return `${base}&before=${firstMessage.id}`;
       },
       async (url: string) => {
-        const data = await ky.get(url).json<IDiscordAPIMessage[]>();
+        const data = await ky
+          .get(url, {
+            headers: {
+              authorization: await getAuthorizationHeader(),
+            },
+          })
+          .json<IDiscordAPIMessage[]>();
 
         return data.map((messageData) => new ClientMessage(messageData));
       }

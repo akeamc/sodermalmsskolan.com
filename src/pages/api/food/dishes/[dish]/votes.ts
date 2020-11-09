@@ -1,4 +1,3 @@
-import { ServerAuthUser } from "../../../../../lib/auth/structures/server/AuthUser";
 import withAuth from "../../../../../lib/auth/withAuth";
 import {
   ServerDish,
@@ -21,13 +20,12 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   }
 
   if (req.method === "POST") {
-    return await withAuth(async (req, res, token) => {
+    return await withAuth(async (req, res, decoded) => {
       const up = !!req.body?.up;
-      const user = await ServerAuthUser.fromAccessToken(token);
 
       await ServerVote.create({
         dish: dish.id,
-        author: user.discord.id,
+        author: decoded.uid,
         up: up,
       });
 
@@ -36,12 +34,10 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   }
 
   if (req.method === "DELETE") {
-    return await withAuth(async (_, res, token) => {
-      const user = await ServerAuthUser.fromAccessToken(token);
-
+    return await withAuth(async (_, res, decoded) => {
       await ServerVote.delete({
         dish: dish.id,
-        author: user.discord.id,
+        author: decoded.uid,
       });
 
       return res.status(204).end();

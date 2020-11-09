@@ -1,12 +1,10 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import { COOKIE_NAME, JWT_SECRET } from "./constants";
-import jwt from "jsonwebtoken";
-import { destroyAuthCookie } from "./cookie";
+import admin from "../firebase/admin";
 
 export type AuthenticatedApiHandler<T = unknown> = (
   req: NextApiRequest,
   res: NextApiResponse<T>,
-  accessToken: string
+  decoded: admin.auth.DecodedIdToken
 ) => void | Promise<void>;
 
 /**
@@ -15,23 +13,27 @@ export type AuthenticatedApiHandler<T = unknown> = (
  */
 const withAuth = (handler: AuthenticatedApiHandler): NextApiHandler => {
   return async (req, res) => {
-    const webToken = req.cookies[COOKIE_NAME];
+    const token = req.headers.authorization?.split(" ")?.[1];
 
-    if (webToken) {
-      try {
-        const accessToken = jwt.verify(webToken, JWT_SECRET).toString();
-
-        return await handler(req, res, accessToken);
-      } catch (error) {
-        if (!(error instanceof jwt.JsonWebTokenError)) {
-          throw error;
-        }
-      }
+    if (token) {
+      return admin
+        .auth()
+        .verifyIdToken(token)
+        .catch(() => {
+          return res.status(403).send("invalid or missing access token");
+        })
+        .then(async (decoded) => {
+          if (decoded) {
+            return handler(req, res, decoded);
+          } else {
+            return res.status(500).send("unknown error");
+          }
+        });
+    } else {
+      return res
+        .status(403)
+        .send("HTTP `Authorization` header not set or invalid");
     }
-
-    res.status(403).setHeader("Set-Cookie", destroyAuthCookie());
-
-    return res.send("invalid or missing access token");
   };
 };
 
