@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../../components/layout/Layout";
+import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { PostGridAuto } from "../../components/blog/PostGrid";
 import { Section } from "../../components/layout/Section";
 import { Navigation } from "../../components/layout/Navigation";
@@ -9,7 +9,7 @@ import { Hero } from "../../components/layout/Hero";
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout metadata={{ title: "Blogg" }}>
+    <DefaultLayout metadata={{ title: "Blogg" }}>
       <Navigation />
       <Hero>
         <Base>
@@ -19,7 +19,7 @@ const Page: React.FunctionComponent = () => {
       <Section>
         <PostGridAuto skip={1} />
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

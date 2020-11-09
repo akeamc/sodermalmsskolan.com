@@ -3,10 +3,9 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 import { useAuth } from "../../../providers/Auth";
-import { Avatar } from "../../basic/Avatar";
 import { UnstyledList } from "../../basic/List";
 import * as breakpoints from "../../../styles/breakpoints";
-import { loginLink } from "../../../lib/auth/href";
+import { loginLink, signupLink } from "../../../lib/auth/href";
 
 const List = styled(UnstyledList)`
   margin: 0;
@@ -54,7 +53,7 @@ const Item: React.FunctionComponent<{
 };
 
 export const DesktopNav: React.FunctionComponent = () => {
-  const { isAuthenticated, user, isLoading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
   return (
     <>
@@ -67,15 +66,14 @@ export const DesktopNav: React.FunctionComponent = () => {
       </List>
       <List>
         {isLoading ? (
-          <Avatar placeholder />
+          <Item href="#">Läser in ...</Item>
         ) : isAuthenticated ? (
-          <Avatar
-            imageUrl={user?.discord?.avatarURL}
-            useProxy={false}
-            href="/konto"
-          />
+          <Item href="/konto">Konto</Item>
         ) : (
-          <Item href={loginLink()}>Logga in</Item>
+          <>
+            <Item href={loginLink()}>Logga in</Item>
+            <Item href={signupLink()}>Skapa konto</Item>
+          </>
         )}
       </List>
     </>

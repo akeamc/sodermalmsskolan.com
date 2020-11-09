@@ -3,10 +3,6 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../providers/Auth";
 import { FullPageSpinner } from "../components/basic/Spinner";
-import { FullPageWrapper } from "../components/layout/Container";
-import { Link } from "../components/basic/Link";
-import { DISCORD_INVITE } from "../components/layout/Footer/Bottom";
-import { Muted } from "../components/basic/Typography";
 import { loginLink } from "../lib/auth/href";
 
 /**
@@ -40,7 +36,7 @@ export default function withAuthRedirect<
 
     const [hasMounted, setHasMounted] = useState(false);
 
-    const { isLoading, isAuthenticated, user } = useAuth();
+    const { isLoading, isAuthenticated } = useAuth();
 
     useEffect(() => {
       setHasMounted(true);
@@ -55,17 +51,6 @@ export default function withAuthRedirect<
         router.push(loginLink(redirectBack ? router.pathname : undefined));
 
         return null;
-      }
-
-      if (expectedAuth !== user?.isMember) {
-        return (
-          <FullPageWrapper>
-            <Muted>
-              Du måste{" "}
-              <Link href={DISCORD_INVITE}>gå med i Discordservern</Link> först.
-            </Muted>
-          </FullPageWrapper>
-        );
       }
     }
 

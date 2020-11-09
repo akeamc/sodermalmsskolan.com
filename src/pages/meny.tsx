@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Layout } from "../components/layout/Layout";
+import { DefaultLayout } from "../components/layout/Layout/Default";
 import { MenuList } from "../components/food/Menus";
 import { AdSection } from "../components/basic/Ad";
 import { Section } from "../components/layout/Section";
@@ -63,7 +63,7 @@ const ImagePane = styled.div`
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout
+    <DefaultLayout
       metadata={{
         title: "Meny",
         description:
@@ -100,7 +100,7 @@ const Page: React.FunctionComponent = () => {
         <MenuList limit={30} />
       </Section>
       <AdSection />
-    </Layout>
+    </DefaultLayout>
   );
 };
 

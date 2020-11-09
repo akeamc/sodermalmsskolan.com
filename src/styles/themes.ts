@@ -5,6 +5,15 @@ export interface SkeletonColors {
   highlight: string;
 }
 
+export interface InputColors {
+  background: string;
+}
+
+export interface ToastColors {
+  background: string;
+  foreground: string;
+}
+
 export interface ColorPalette {
   background: string;
   foreground: string;
@@ -15,6 +24,8 @@ export interface ColorPalette {
   code: string;
   muted: string;
   skeleton: SkeletonColors;
+  input: InputColors;
+  toast: ToastColors;
   success: string;
   error: string;
 }
@@ -59,6 +70,13 @@ export const light: DefaultTheme = {
     },
     success: "#335eea",
     error: "#df4759",
+    input: {
+      background: "#f3f3f3",
+    },
+    toast: {
+      background: "#222222",
+      foreground: "#ffffff",
+    },
   },
   shadows: defaultShadows("#eaeaea", "rgba(0, 0, 0, 0.1)"),
   dark: false,
@@ -77,6 +95,13 @@ export const dark: DefaultTheme = {
     skeleton: {
       base: "#333333",
       highlight: "#444444",
+    },
+    input: {
+      background: "#222222",
+    },
+    toast: {
+      background: "#fafafa",
+      foreground: "#000000",
     },
   },
   shadows: defaultShadows(

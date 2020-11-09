@@ -1,5 +1,5 @@
 import { Serializable } from "../../../common/Serializable";
-import { IDiscordAPIUser, User } from "./User";
+import { IDiscordAPIUser, DiscordUser } from "./User";
 
 export interface IDiscordAPIMember {
   user?: IDiscordAPIUser;
@@ -12,7 +12,7 @@ export interface IDiscordAPIMember {
 }
 
 export class Member implements Serializable<IDiscordAPIMember> {
-  user: User;
+  user: DiscordUser;
   nickname?: string;
   roles: string[];
   joinedAt: Date;
@@ -29,7 +29,7 @@ export class Member implements Serializable<IDiscordAPIMember> {
     deaf,
     mute,
   }: IDiscordAPIMember) {
-    this.user = new User(user);
+    this.user = new DiscordUser(user);
     this.nickname = nick;
     this.roles = roles;
     this.joinedAt = joined_at;

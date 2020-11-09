@@ -1,4 +1,4 @@
-import { Layout } from "../../../components/layout/Layout";
+import { DefaultLayout } from "../../../components/layout/Layout/Default";
 import NotFound from "../../404";
 import { CardGrid } from "../../../components/basic/CardGrid";
 import Digibruh from "../../../lib/digibruh/Digibruh";
@@ -22,7 +22,7 @@ const Page: DigibruhPage = (props) => {
   const subject = digibruh.getSubjectBySlug(props.subject);
 
   return (
-    <Layout
+    <DefaultLayout
       metadata={{
         title: subject?.name,
         description: subject?.description,
@@ -46,7 +46,7 @@ const Page: DigibruhPage = (props) => {
           expectedNumberOfItems={3}
         />
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

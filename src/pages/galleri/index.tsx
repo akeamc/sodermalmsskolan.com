@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../../components/layout/Layout";
+import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { Navigation } from "../../components/layout/Navigation";
 import { SimpleHero } from "../../components/layout/Hero/Simple";
 import { FoodGallery } from "../../components/food/FoodGallery";
@@ -9,7 +9,7 @@ import { NormalWidth } from "../../components/grid/Col";
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout
+    <DefaultLayout
       metadata={{
         title: "Galleri",
         description:
@@ -30,7 +30,7 @@ const Page: React.FunctionComponent = () => {
           </NormalWidth>
         </Base>
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

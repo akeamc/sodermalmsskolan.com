@@ -1,7 +1,6 @@
-import React from "react";
 import Head from "next/head";
-import { Footer } from "../Footer";
 import { useRouter } from "next/router";
+import React from "react";
 import { GA_TRACKING_ID } from "../../../lib/google/analytics";
 
 export interface SiteMetadata {
@@ -11,7 +10,7 @@ export interface SiteMetadata {
   images?: string[];
 }
 
-const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
+export const MetaHead: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
   metadata,
 }) => {
   const {
@@ -53,13 +52,12 @@ const SiteMetadata: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
   );
 };
 
-export const Layout: React.FunctionComponent<{
-  children: React.ReactNode;
+export const DefaultHead: React.FunctionComponent<{
   metadata?: SiteMetadata;
-}> = ({ children, metadata = {} }) => {
+}> = ({ metadata = {} }) => {
   return (
-    <div>
-      <SiteMetadata metadata={metadata} />
+    <>
+      <MetaHead metadata={metadata} />
 
       <Head>
         <link
@@ -110,10 +108,6 @@ export const Layout: React.FunctionComponent<{
           }}
         />
       </Head>
-      <div>
-        {children}
-        <Footer />
-      </div>
-    </div>
+    </>
   );
 };

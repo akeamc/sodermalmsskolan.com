@@ -1,9 +1,9 @@
-import { User, IDiscordAPIUser } from "../shared/User";
+import { DiscordUser, IDiscordAPIUser } from "../shared/User";
 import got from "got";
 import { DISCORD_TOKEN } from "../../credentials";
 
-export class ServerUser extends User {
-  private static async _me(authorizationHeader: string): Promise<User> {
+export class ServerDiscordUser extends DiscordUser {
+  private static async _me(authorizationHeader: string): Promise<DiscordUser> {
     const data = await got
       .get("https://discord.com/api/users/@me", {
         headers: {
@@ -12,14 +12,14 @@ export class ServerUser extends User {
       })
       .json<IDiscordAPIUser>();
 
-    return new User(data);
+    return new DiscordUser(data);
   }
 
-  public static fromAccessToken(accessToken: string): Promise<User> {
-    return ServerUser._me(`Bearer ${accessToken}`);
+  public static fromAccessToken(accessToken: string): Promise<DiscordUser> {
+    return ServerDiscordUser._me(`Bearer ${accessToken}`);
   }
 
-  public static me(): Promise<User> {
-    return ServerUser._me(`Bot ${DISCORD_TOKEN}`);
+  public static me(): Promise<DiscordUser> {
+    return ServerDiscordUser._me(`Bot ${DISCORD_TOKEN}`);
   }
 }

@@ -1,6 +1,7 @@
 import { ResponsePromise } from "ky";
 import ky from "ky-universal";
 import useSWR, { responseInterface } from "swr";
+import { getAuthorizationHeader } from "../../../auth/token";
 import { Vote, VoteStatic } from "../shared/Vote";
 
 export class ClientVote extends Vote {
@@ -12,17 +13,28 @@ export class ClientVote extends Vote {
       json: {
         up,
       },
+      headers: {
+        authorization: await getAuthorizationHeader(),
+      },
     });
   }
 
   public static async deleteVote(dish: string): Promise<ResponsePromise> {
-    return ky.delete(`/api/food/dishes/${dish}/votes`);
+    return ky.delete(`/api/food/dishes/${dish}/votes`, {
+      headers: {
+        authorization: await getAuthorizationHeader(),
+      },
+    });
   }
 
   public static async fetchByDish(
     dish: string,
     noCache = false
   ): Promise<ClientVote[]> {
+    if (!dish) {
+      throw new Error("dish must be specified");
+    }
+
     const res = await ky
       .get(`/api/food/dishes/${dish}/votes`, {
         searchParams: noCache

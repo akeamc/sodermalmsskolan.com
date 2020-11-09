@@ -16,7 +16,7 @@ export interface IDiscordAPIUser {
   public_flags?: number;
 }
 
-export class User implements Serializable<IDiscordAPIUser> {
+export class DiscordUser implements Serializable<IDiscordAPIUser> {
   id: string;
   username: string;
   discriminator: string;

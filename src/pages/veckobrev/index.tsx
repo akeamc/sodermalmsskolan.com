@@ -4,7 +4,7 @@ import { Anchor } from "../../components/basic/Typography";
 import { Base } from "../../components/grid/Base";
 import { NormalWidth } from "../../components/grid/Col";
 import { SimpleHero } from "../../components/layout/Hero/Simple";
-import { Layout } from "../../components/layout/Layout";
+import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { Navigation } from "../../components/layout/Navigation";
 import { Section } from "../../components/layout/Section";
 import withAuth from "../../hocs/withAuth";
@@ -29,7 +29,7 @@ const News: React.FunctionComponent = () => {
 
 const Page: React.FunctionComponent = () => {
   return (
-    <Layout
+    <DefaultLayout
       metadata={{
         title: "Veckobrev",
         description: "Veckobrev",
@@ -44,7 +44,7 @@ const Page: React.FunctionComponent = () => {
           </NormalWidth>
         </Base>
       </Section>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

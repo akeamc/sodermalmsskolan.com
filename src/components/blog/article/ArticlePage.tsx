@@ -1,6 +1,6 @@
 import NotFound from "../../../pages/404";
 import ArticleBody from "./ArticleBody";
-import { Layout } from "../../layout/Layout";
+import { DefaultLayout } from "../../layout/Layout/Default";
 import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
 import { ArticleHero } from "./Hero";
@@ -25,7 +25,7 @@ const ArticlePage: React.FunctionComponent<{
     : `Publicerad ${formattedDate}`;
 
   return (
-    <Layout
+    <DefaultLayout
       metadata={{
         title: post?.meta_title || post?.title,
         description: post?.meta_description || post?.excerpt,
@@ -35,7 +35,7 @@ const ArticlePage: React.FunctionComponent<{
     >
       <ArticleHero post={post} dateText={dateText} />
       <ArticleBody data={post} />
-    </Layout>
+    </DefaultLayout>
   );
 };
 

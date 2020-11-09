@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Anchor } from "../basic/Typography";
 import { loginLink } from "../../lib/auth/href";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const barAnimation = keyframes`
   0% {
@@ -101,17 +102,21 @@ const DishVoteRow: React.FunctionComponent<{
     },
   };
 
-  const userVote = data?.find((vote) => vote.author === user?.discord.id);
+  const userVote = data?.find((vote) => vote.author === user?.uid);
 
   const votedUp = userVote && userVote?.up;
   const votedDown = userVote && userVote?.down;
 
   const setVote = async (up: boolean) => {
     await ClientVote.sendVote(dish, up);
+
+    toast("Din röst har registrerats.");
   };
 
   const deleteVote = async () => {
     await ClientVote.deleteVote(dish);
+
+    toast("Din röst har tagits bort.");
   };
 
   const handleClick = (up: boolean) => {
