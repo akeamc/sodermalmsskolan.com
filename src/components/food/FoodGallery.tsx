@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
 import { SquareGrid } from "../grid/Square";
-import Image from "next/image";
 import { Spinner } from "../basic/Spinner";
 import VisibilitySensor from "react-visibility-sensor";
 import Link from "next/link";
+import pxcmprs from "../../lib/pxcmprs";
 
 const Grid = styled(SquareGrid)`
   grid-gap: 0.5rem;
@@ -62,7 +62,15 @@ const Photo: React.FunctionComponent<{ attachment: MessageAttachment }> = ({
 }) => {
   const container = (
     <PhotoContainer>
-      {attachment?.url ? <Image src={attachment?.url} layout="fill" /> : null}
+      {attachment?.url ? (
+        <img
+          src={pxcmprs.generateUrl({
+            source: attachment?.url,
+            width: 256,
+            quality: 50,
+          })}
+        />
+      ) : null}
     </PhotoContainer>
   );
 

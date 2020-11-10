@@ -5,8 +5,8 @@ import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
 import * as breakpoints from "../../styles/breakpoints";
-import Image from "next/image";
 import { SquareGrid } from "../grid/Square";
+import pxcmprs from "../../lib/pxcmprs";
 
 const Grid = styled(SquareGrid)<{ $width: number; $height: number }>`
   grid-template-columns: repeat(${({ $height }) => $height}, 1fr);
@@ -16,19 +16,6 @@ const Grid = styled(SquareGrid)<{ $width: number; $height: number }>`
 
   @media (min-width: ${breakpoints.small}) {
     grid-gap: 4px;
-  }
-
-  &::before {
-    content: "";
-    width: 0;
-    padding-bottom: 100%;
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
-  }
-
-  *:first-child {
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
   }
 `;
 
@@ -42,6 +29,11 @@ const Cell = styled.a`
   overflow: hidden;
 
   img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     object-fit: cover;
     transition: transform 0.2s ease-in-out;
   }
@@ -63,7 +55,13 @@ const Photo: React.FunctionComponent<{
     return (
       <Link href={attachment.url} passHref>
         <Cell>
-          <Image src={attachment.url} layout="fill" />
+          <img
+            src={pxcmprs.generateUrl({
+              source: attachment.url,
+              width: 64,
+              quality: 50,
+            })}
+          />
         </Cell>
       </Link>
     );

@@ -7,7 +7,6 @@ export const SquareGrid = styled.div`
 
   &::before {
     content: "";
-    width: 0;
     padding-bottom: 100%;
     grid-row: 1 / 1;
     grid-column: 1 / 1;
