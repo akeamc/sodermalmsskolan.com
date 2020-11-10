@@ -1,11 +1,11 @@
-import NotFound from "../../../pages/404";
+import NotFound from "../../pages/404";
 import ArticleBody from "./ArticleBody";
-import { DefaultLayout } from "../../layout/Layout/Default";
+import { DefaultLayout } from "../layout/Layout/Default";
 import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
 import { ArticleHero } from "./Hero";
 import dayjs from "dayjs";
-import { useLocale } from "../../../hooks/locale";
+import { useLocale } from "../../hooks/locale";
 
 const ArticlePage: React.FunctionComponent<{
   post: PostOrPage;

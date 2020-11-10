@@ -2,15 +2,14 @@ import styled from "styled-components";
 import { PostOrPage } from "@tryghost/content-api";
 import ReactHtmlParser, { convertNodeToElement } from "react-html-parser";
 import React from "react";
-import { renderMathInText } from "../../../lib/utils/katex";
-import { ProgressiveImage } from "../../basic/ProgressiveImage";
+import { renderMathInText } from "../../lib/utils/katex";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { Section } from "../../layout/Section";
-import { Base } from "../../grid/Base";
-import * as breakpoints from "../../../styles/breakpoints";
+import { Section } from "../layout/Section";
+import { Base } from "../grid/Base";
+import * as breakpoints from "../../styles/breakpoints";
 import { Link as LinkIcon } from "react-feather";
-import { Table } from "../../basic/Table";
-import { Anchor } from "../../basic/Typography";
+import { Table } from "../basic/Table";
+import { Anchor } from "../basic/Typography";
 import Link from "next/link";
 
 enum FigureWidth {
@@ -23,7 +22,7 @@ const LinkableHeading = styled.div`
   position: relative;
 
   a {
-    color: inherit;
+    color: inherit !important;
     border-bottom: 1px solid transparent;
 
     &:hover {
@@ -52,6 +51,7 @@ const Figure = styled.figure<{ width: FigureWidth }>`
     `
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     flex-flow: wrap;
 
     img {
@@ -62,16 +62,19 @@ const Figure = styled.figure<{ width: FigureWidth }>`
   `}
 
   img {
-    border-radius: 8px;
+    border-radius: 0.5rem;
     box-shadow: ${({ theme }) => theme.shadows.medium};
 
     ${({ width, theme }) => {
       if (width == FigureWidth.Wide)
         return `
         max-width: 1040px;
+        border-radius: 0;
+        box-shadow: none;
 
         @media (min-width: 1040px) {
-          border-radius: 8px;
+          max-width: 1040px;
+          border-radius: 0.5rem;
           box-shadow: ${theme.shadows.medium};
         }
       `;
@@ -79,6 +82,7 @@ const Figure = styled.figure<{ width: FigureWidth }>`
       if (width == FigureWidth.Full)
         return `
         box-shadow: none;
+        border-radius: 0;
       `;
     }}
   }
@@ -162,12 +166,9 @@ const RichText = styled.div`
   p,
   ul,
   ol {
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-
-  p {
-    line-height: 2;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.75;
   }
 
   em {
@@ -236,9 +237,7 @@ const ArticleBody: React.FunctionComponent<{
     if (node.name == "img") {
       const { alt, src, loading = "lazy" } = node.attribs;
 
-      return (
-        <ProgressiveImage key={index} alt={alt} src={src} loading={loading} />
-      );
+      return <img key={index} alt={alt} src={src} loading={loading} />;
     }
 
     if (node.name == "a") {

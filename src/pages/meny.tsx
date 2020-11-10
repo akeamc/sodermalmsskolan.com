@@ -7,11 +7,11 @@ import { Hero, HeroTitle } from "../components/layout/Hero";
 import { Base } from "../components/grid/Base";
 import { Col } from "../components/grid/Col";
 import { Navigation } from "../components/layout/Navigation";
-import { Image } from "../components/basic/Image";
 import { LeadText, GridTitleSection } from "../components/basic/Typography";
 import { TitleContainer } from "../components/layout/Hero/Simple";
 import React from "react";
 import * as breakpoints from "../styles/breakpoints";
+import Image from "next/image";
 
 const HeroContent = styled(Base)`
   grid-auto-flow: dense;
@@ -77,7 +77,11 @@ const Page: React.FunctionComponent = () => {
       <Hero>
         <HeroContent>
           <ImagePane>
-            <Image src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg" />
+            <Image
+              width={100}
+              height={100}
+              src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
+            />
           </ImagePane>
           <TitlePane>
             <TitleContainer>

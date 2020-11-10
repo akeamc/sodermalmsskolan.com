@@ -12,4 +12,11 @@ module.exports = {
 
     return config;
   },
+  images: {
+    domains: [
+      "blogg.xn--sdermalmsskolan-8sb.com",
+      "images.unsplash.com",
+      "cdn.discordapp.com",
+    ],
+  },
 };

@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
-import pxcmprs from "../../lib/utils/pxcmprs";
 import * as breakpoints from "../../styles/breakpoints";
+import Image from "next/image";
+import { SquareGrid } from "../grid/Square";
 
-const Grid = styled.div<{ $width: number; $height: number }>`
-  display: grid;
+const Grid = styled(SquareGrid)<{ $width: number; $height: number }>`
   grid-template-columns: repeat(${({ $height }) => $height}, 1fr);
   grid-template-rows: repeat(${({ $width }) => $width}, 1fr);
   width: 100%;
@@ -32,42 +32,43 @@ const Grid = styled.div<{ $width: number; $height: number }>`
   }
 `;
 
-const Cell = styled.a<{
-  $background: string;
-}>`
+const Cell = styled.a`
   background-color: ${({ theme }) => theme.colors.skeleton.base};
-  background-image: url("${({ $background }) => $background}");
-  background-size: cover;
-  background-position: center;
   border-radius: 4px;
   filter: grayscale(100%);
   opacity: 0.5;
   transition: opacity 0.1s ease, filter 0.1s ease;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+    transition: transform 0.2s ease-in-out;
+  }
 
   &:hover {
     opacity: 1;
     filter: grayscale(0%);
+
+    img {
+      transform: scale(1.2);
+    }
   }
 `;
 
 const Photo: React.FunctionComponent<{
   attachment?: MessageAttachment;
-  resolutionX: number;
-}> = ({ attachment, resolutionX }) => {
+}> = ({ attachment }) => {
   if (attachment) {
-    const url = pxcmprs.generateUrl({
-      source: attachment.url,
-      width: resolutionX,
-      quality: 0,
-    });
-
     return (
       <Link href={attachment.url} passHref>
-        <Cell $background={url} />
+        <Cell>
+          <Image src={attachment.url} layout="fill" />
+        </Cell>
       </Link>
     );
   } else {
-    return <Cell $background="" />;
+    return <Cell />;
   }
 };
 
@@ -87,18 +88,10 @@ export const PhotoWidget: React.FunctionComponent<{
       ?.flatMap((message) => message.attachments)
       .slice(0, width * height) || new Array(width * height).fill(null);
 
-  const resolutionX = Math.floor(512 / width);
-
   return (
     <Grid $width={width} $height={height}>
       {attachments?.map((attachment, index) => {
-        return (
-          <Photo
-            attachment={attachment}
-            key={index}
-            resolutionX={resolutionX}
-          />
-        );
+        return <Photo attachment={attachment} key={index} />;
       })}
     </Grid>
   );

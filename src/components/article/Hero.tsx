@@ -1,10 +1,10 @@
 import { PostOrPage } from "@tryghost/content-api";
 import styled from "styled-components";
-import { LeadText } from "../../basic/Typography";
-import { HeaderWithBackground } from "../../layout/Header";
+import { LeadText } from "../basic/Typography";
+import { HeaderWithBackground } from "../layout/Header";
 import React from "react";
-import PostMeta from "../meta/PostMeta";
-import { HeroTitle } from "../../layout/Hero";
+import PostMeta from "../blog/meta/PostMeta";
+import { HeroTitle } from "../layout/Hero";
 
 const Lead = styled(LeadText)``;
 

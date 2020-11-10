@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { motion } from "framer-motion";
+import { lighten } from "polished";
 
 export const LeadText = styled.h2`
   font-size: 1.25rem;
@@ -34,7 +35,7 @@ export const Anchor = styled.a`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.foreground};
+    color: ${({ theme }) => lighten(0.25, theme.colors.primary)};
   }
 `;
 

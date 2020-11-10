@@ -1,61 +1,84 @@
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
 import React, { useState } from "react";
 import styled from "styled-components";
-import dayjs from "dayjs";
-import VisibilitySensor from "react-visibility-sensor";
-import { Spinner } from "../basic/Spinner";
-import { ProgressiveImage } from "../basic/ProgressiveImage";
-import { LinkBlock } from "../basic/Link";
-import { Emoji } from "../basic/Emoji";
-import { useLocale } from "../../hooks/locale";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
+import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
+import { SquareGrid } from "../grid/Square";
+import Image from "next/image";
+import { Spinner } from "../basic/Spinner";
+import VisibilitySensor from "react-visibility-sensor";
+import Link from "next/link";
 
-const GalleryWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 4rem;
+const Grid = styled(SquareGrid)`
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  &::before {
+    content: "";
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+  }
+
+  *:first-child {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+  }
 `;
 
-const ArtworkWrapper = styled.div`
-  text-align: center;
+const SpinnerContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
 `;
 
-const PhotoContainer = styled.div`
-  display: flex;
-  justify-content: center;
+const PhotoContainer = styled.a`
+  position: relative;
+  background: ${({ theme }) => theme.colors.border};
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.small};
+  transition: box-shadow 0.2s ease-in-out;
+
+  img {
+    transition: all 0.2s ease-in-out;
+    object-fit: cover;
+    filter: grayscale(1);
+  }
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.shadows.large};
+
+    img {
+      transform: scale(1.2);
+      filter: grayscale(0);
+    }
+  }
 `;
 
-const PhotoWrapper = styled.div`
-  max-width: 24rem;
-  margin: 0 1rem;
-`;
-
-const Photo = styled(ProgressiveImage)`
-  border-radius: 8px;
-  box-shadow: ${({ theme }) => theme.shadows.large};
-  width: 100%;
-  object-fit: cover;
-`;
-
-const CaptionWrapper = styled.div`
-  max-width: 48rem;
-  margin-top: 1rem;
-`;
-
-const LoadingWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const FoodGallery: React.FunctionComponent = () => {
-  const { data: messages, size, setSize } = ClientChannel.useMessagesInChannel(
-    DISCORD_CHANNELS.photos.id
+const Photo: React.FunctionComponent<{ attachment: MessageAttachment }> = ({
+  attachment,
+}) => {
+  const container = (
+    <PhotoContainer>
+      {attachment?.url ? <Image src={attachment?.url} layout="fill" /> : null}
+    </PhotoContainer>
   );
 
-  const { locale } = useLocale();
+  return attachment?.url ? (
+    <Link href={attachment?.url} passHref>
+      {container}
+    </Link>
+  ) : (
+    container
+  );
+};
+
+export const FoodGallery: React.FunctionComponent = () => {
+  const { data, size, setSize } = ClientChannel.useMessagesInChannel(
+    DISCORD_CHANNELS.photos.id
+  );
 
   const [scrolledToBottom, setScrolledToBottom] = useState(false);
 
@@ -64,41 +87,18 @@ export const FoodGallery: React.FunctionComponent = () => {
     setScrolledToBottom(false);
   }
 
+  const attachments = data?.flat().flatMap((message) => message.attachments);
+
   return (
-    <GalleryWrapper>
-      {messages?.flat()?.map((message, index) => {
-        return (
-          <ArtworkWrapper key={index}>
-            <PhotoContainer>
-              {message.attachments.map((attachment, index) => {
-                return (
-                  <PhotoWrapper key={index}>
-                    <LinkBlock href={attachment.url}>
-                      <Photo src={attachment.url} loading="lazy" />
-                    </LinkBlock>
-                  </PhotoWrapper>
-                );
-              })}
-            </PhotoContainer>
-            <CaptionWrapper>
-              <small>
-                {dayjs(message.createdAt)
-                  .locale(locale)
-                  .format("HH:mm D MMMM YYYY")}{" "}
-                ·{" "}
-                <i>
-                  <Emoji>{message.content}</Emoji>
-                </i>
-              </small>
-            </CaptionWrapper>
-          </ArtworkWrapper>
-        );
-      })}
+    <Grid>
+      {attachments?.map((attachment, index) => (
+        <Photo key={index} attachment={attachment} />
+      ))}
       <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>
-        <LoadingWrapper>
+        <SpinnerContainer>
           <Spinner />
-        </LoadingWrapper>
+        </SpinnerContainer>
       </VisibilitySensor>
-    </GalleryWrapper>
+    </Grid>
   );
 };

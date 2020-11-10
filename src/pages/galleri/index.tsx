@@ -1,11 +1,10 @@
 import React from "react";
 import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { Navigation } from "../../components/layout/Navigation";
-import { SimpleHero } from "../../components/layout/Hero/Simple";
 import { FoodGallery } from "../../components/food/FoodGallery";
-import { Section } from "../../components/layout/Section";
 import { Base } from "../../components/grid/Base";
-import { NormalWidth } from "../../components/grid/Col";
+import { Col } from "../../components/grid/Col";
+import { Hero } from "../../components/layout/Hero";
 
 const Page: React.FunctionComponent = () => {
   return (
@@ -22,14 +21,13 @@ const Page: React.FunctionComponent = () => {
       }}
     >
       <Navigation />
-      <SimpleHero title="Galleri" />
-      <Section>
+      <Hero>
         <Base>
-          <NormalWidth>
+          <Col>
             <FoodGallery />
-          </NormalWidth>
+          </Col>
         </Base>
-      </Section>
+      </Hero>
     </DefaultLayout>
   );
 };
