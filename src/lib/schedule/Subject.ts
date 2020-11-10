@@ -18,7 +18,7 @@ export const Subjects: { [subjectName: string]: Subject } = {
   Mathematics: new Subject("Matematik", "#0070f3"),
   Swedish: new Subject("Svenska", "#ffeb3b"),
   English: new Subject("Engelska", "#f44336"),
-  SocialStudies: new Subject("Samhällskunskap", "#795548", "SH"),
+  SocialStudies: new Subject("Religion", "#795548"),
   Physics: new Subject("Fysik", "#4caf50"),
   Chemistry: new Subject("Kemi", "#4caf50"),
   Biology: new Subject("Biologi", "#4caf50"),
