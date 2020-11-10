@@ -19,32 +19,19 @@ const Grid = styled(SquareGrid)<{ $width: number; $height: number }>`
   }
 `;
 
-const Cell = styled.a`
+const Cell = styled.a<{ $src?: string }>`
   background-color: ${({ theme }) => theme.colors.skeleton.base};
+  background-image: url(${({ $src }) => $src});
+  background-size: cover;
+  background-position: center;
   border-radius: 4px;
   filter: grayscale(100%);
   opacity: 0.5;
   transition: opacity 0.1s ease, filter 0.1s ease;
-  position: relative;
-  overflow: hidden;
-
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    object-fit: cover;
-    transition: transform 0.2s ease-in-out;
-  }
 
   &:hover {
     opacity: 1;
     filter: grayscale(0%);
-
-    img {
-      transform: scale(1.2);
-    }
   }
 `;
 
@@ -54,15 +41,13 @@ const Photo: React.FunctionComponent<{
   if (attachment) {
     return (
       <Link href={attachment.url} passHref>
-        <Cell>
-          <img
-            src={pxcmprs.generateUrl({
-              source: attachment.url,
-              width: 64,
-              quality: 50,
-            })}
-          />
-        </Cell>
+        <Cell
+          $src={pxcmprs.generateUrl({
+            source: attachment.url,
+            width: 64,
+            quality: 50,
+          })}
+        />
       </Link>
     );
   } else {

@@ -33,32 +33,20 @@ const SpinnerContainer = styled.div`
   align-items: center;
 `;
 
-const PhotoContainer = styled.a`
-  position: relative;
+const PhotoContainer = styled.a<{ $src?: string }>`
   background: ${({ theme }) => theme.colors.border};
+  background-image: url(${({ $src }) => $src});
+  background-size: cover;
+  background-position: center;
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadows.small};
-  transition: box-shadow 0.2s ease-in-out;
-
-  img {
-    transition: all 0.2s ease-in-out;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    filter: grayscale(1);
-  }
+  transition: all 0.2s ease-in-out;
+  filter: grayscale(1);
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.large};
-
-    img {
-      transform: scale(1.2);
-      filter: grayscale(0);
-    }
+    filter: grayscale(0);
   }
 `;
 
@@ -66,17 +54,17 @@ const Photo: React.FunctionComponent<{ attachment: MessageAttachment }> = ({
   attachment,
 }) => {
   const container = (
-    <PhotoContainer>
-      {attachment?.url ? (
-        <img
-          src={pxcmprs.generateUrl({
-            source: attachment?.url,
-            width: 256,
-            quality: 50,
-          })}
-        />
-      ) : null}
-    </PhotoContainer>
+    <PhotoContainer
+      $src={
+        attachment?.url
+          ? pxcmprs.generateUrl({
+              source: attachment?.url,
+              width: 256,
+              quality: 50,
+            })
+          : null
+      }
+    />
   );
 
   return attachment?.url ? (
