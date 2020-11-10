@@ -5,12 +5,12 @@ import * as breakpoints from "../../styles/breakpoints";
 export const StyledToastContainer = styled(ToastContainer).attrs({
   position: "bottom-left",
 })`
-    @media (max-width: ${breakpoints.small}) {
-      bottom: 0.5rem;
-      left: 0.5rem;
-      right: 0.5rem;
-      width: auto;
-    }
+  @media (max-width: ${breakpoints.small}) {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    width: auto;
+  }
 
   .Toastify__toast {
     background: ${({ theme }) => theme.colors.toast.background};
@@ -26,9 +26,8 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
   }
 
   .Toastify__toast--warning {
-    
   }
-  
+
   .Toastify__toast--success {
     /* background: ${({ theme }) => theme.colors.success}; */
   }
