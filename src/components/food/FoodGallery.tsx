@@ -44,6 +44,11 @@ const PhotoContainer = styled.a`
   img {
     transition: all 0.2s ease-in-out;
     object-fit: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     filter: grayscale(1);
   }
 
