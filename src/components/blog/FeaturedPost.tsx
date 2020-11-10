@@ -3,7 +3,6 @@ import styled, { ThemeProvider, useTheme } from "styled-components";
 import { Card, CardContent } from "../basic/Card";
 import { getPosts } from "../../lib/ghost/post";
 import useSWR from "swr";
-import { useProgressiveImage } from "../basic/ProgressiveImage";
 import { getPostUrl } from "./PostGrid";
 import { getLineClamp } from "../basic/CardGrid";
 import dayjs from "dayjs";
@@ -16,24 +15,19 @@ import { useLocale } from "../../hooks/locale";
 import { transparentLightPalette } from "../../styles/themes";
 import { Skeleton } from "../basic/Skeleton";
 import { Anchor, Muted } from "../basic/Typography";
+import Image from "next/image";
 
 const CardWrapper = styled(Anchor)`
   grid-column: span 12;
   display: block;
 `;
 
-const Background = styled.div<{ image: string }>`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-    url("${({ image }) => useProgressiveImage(image).src}");
-  background-size: cover;
-  background-position: center;
+const Background = styled(Image).attrs({
+  layout: "fill",
+})`
   z-index: 0;
   transition: transform 0.2s ease-in-out;
+  object-fit: cover;
 `;
 
 const BigCard = styled(Card)`
@@ -69,7 +63,6 @@ const FeaturedPost: React.FunctionComponent = () => {
   const post = data ? data[0] : null;
   const loading = isValidating && !data;
   const excerptLineLimit = 5;
-  const { src: imageSrc } = useProgressiveImage(post?.feature_image);
 
   const { ref, inView } = useInView();
   const show = inView && post;
@@ -97,7 +90,9 @@ const FeaturedPost: React.FunctionComponent = () => {
             initial={false}
           >
             <BigCard>
-              <Background image={imageSrc} />
+              {post?.feature_image ? (
+                <Background src={post?.feature_image} />
+              ) : null}
               <BigCardContent>
                 <h2>{loading ? <Skeleton count={3} /> : post?.title}</h2>
                 <Muted style={getLineClamp(excerptLineLimit)}>

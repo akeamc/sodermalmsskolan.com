@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { useProgressiveImage } from "../ProgressiveImage";
 import { Muted } from "../Typography";
+import Image from "next/image";
+import React from "react";
 
 export const Card = styled(motion.div)<{ $hoverable?: boolean }>`
   background-color: ${({ theme }) => theme.colors.background};
@@ -28,15 +29,23 @@ export const CardLink = styled.a`
   }
 `;
 
-export const CardHero = styled.div<{ backgroundImage?: string }>`
-  min-height: 15rem;
-  background: ${({ theme }) => theme.colors.border};
-  background-size: cover;
-  background-position: center;
-  background-image: ${(props) =>
-    props.backgroundImage &&
-    `url("${useProgressiveImage(props.backgroundImage).src}")`};
+const HeroImage = styled(Image).attrs({
+  layout: "fill",
+})`
+  object-fit: cover;
 `;
+
+const StyledHero = styled.div`
+  background: ${({ theme }) => theme.colors.border};
+  position: relative;
+  min-height: 15rem;
+`;
+
+export const CardHero: React.FunctionComponent<{ src?: string }> = ({
+  src,
+}) => {
+  return <StyledHero>{src ? <HeroImage src={src} /> : null}</StyledHero>;
+};
 
 export const CardPadding = "1.5rem";
 

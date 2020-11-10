@@ -53,7 +53,7 @@ class CardGridItem extends React.Component<{
     return (
       <CardLink href={item?.href}>
         <Card>
-          <CardHero backgroundImage={item?.image} />
+          {item?.image ? <CardHero src={item?.image} /> : null}
           <CardContent>
             <CardTitle>{loading ? <Skeleton /> : item?.title}</CardTitle>
             <CardDescription style={lineClamp ? getLineClamp(lineClamp) : {}}>

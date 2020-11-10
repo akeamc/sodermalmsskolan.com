@@ -1,7 +1,7 @@
 import { getPostBySlug } from "../../lib/ghost/post";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotFound from "../404";
-import ArticlePage from "../../components/blog/article/ArticlePage";
+import ArticlePage from "../../components/article/ArticlePage";
 import Digibruh from "../../lib/digibruh/Digibruh";
 import React from "react";
 

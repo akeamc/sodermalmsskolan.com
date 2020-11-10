@@ -3,8 +3,8 @@ import { LinkBlock } from "../../basic/Link";
 import { Author } from "@tryghost/content-api";
 import React from "react";
 import { getAuthorUrl } from "../../../lib/ghost/author";
-import { useSmallAvatar } from "../../basic/Avatar";
 import { Skeleton } from "../../basic/Skeleton";
+import Image from "next/image";
 
 const AuthorCardContainer = styled(LinkBlock)`
   display: flex;
@@ -18,15 +18,18 @@ const AuthorCardContainer = styled(LinkBlock)`
   }
 `;
 
-const AuthorImage = styled.div<{ src: string }>`
+const AuthorImageWrapper = styled.div`
   width: 18px;
   height: 18px;
   margin: -2px 8px -2px -2px;
   background-color: ${({ theme }) => theme.colors.border};
-  background-size: cover;
-  background-position: center;
-  background-image: ${({ src }) => `url(${src})`};
   border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
 `;
 
 const AuthorName = styled.small`
@@ -38,11 +41,15 @@ const AuthorCard: React.FunctionComponent<{
   skeleton?: boolean;
 }> = ({ author, skeleton = false }) => {
   const href = skeleton ? "" : getAuthorUrl(author?.slug);
-  const imageSrc = useSmallAvatar(author?.profile_image);
 
   return (
     <AuthorCardContainer href={href}>
-      <AuthorImage src={imageSrc} />
+      <AuthorImageWrapper>
+        {author?.profile_image ? (
+          <Image src={author?.profile_image} layout="fill" />
+        ) : null}
+        ;
+      </AuthorImageWrapper>
       <AuthorName>
         {skeleton ? <Skeleton width="100px" /> : author?.name}
       </AuthorName>

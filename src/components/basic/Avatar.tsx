@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { LinkBlock } from "./Link";
 import { GenericUser } from "../../lib/models/User";
-import pxcmprs from "../../lib/utils/pxcmprs";
+import Image from "next/image";
 
 interface AvatarProps {
   $size?: number;
@@ -13,24 +13,17 @@ function avatarSizeToEm(size = 2): number {
   return size;
 }
 
-export const useSmallAvatar = (source = ""): string => {
-  return pxcmprs.generateUrl({
-    width: 256,
-    source,
-  });
-};
-
-const AvatarImage = styled.img`
-  width: 100%;
-  height: 100%;
+const AvatarImage = styled(Image).attrs({
+  layout: "fill",
+})`
   object-fit: cover;
-  border-radius: 50%;
-  display: block;
 `;
 
 export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
   border-radius: 50%;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 
   ${({ $size }) => {
     const width = avatarSizeToEm($size);
@@ -50,22 +43,13 @@ export const AvatarWrapper = styled(LinkBlock)<AvatarProps>`
 
 export const Avatar: React.FunctionComponent<{
   href?: string;
-  imageUrl?: string;
+  src?: string;
   size?: number;
-  useProxy?: boolean;
   placeholder?: boolean;
-}> = ({
-  href = "#",
-  imageUrl = "",
-  size,
-  useProxy = true,
-  placeholder = false,
-}) => {
+}> = ({ href = "#", src, size, placeholder = false }) => {
   return (
     <AvatarWrapper $placeholder={placeholder} href={href} $size={size}>
-      {!placeholder && (
-        <AvatarImage src={useProxy ? useSmallAvatar(imageUrl) : imageUrl} />
-      )}
+      {!placeholder && src ? <AvatarImage src={src} /> : null}
     </AvatarWrapper>
   );
 };
@@ -106,7 +90,7 @@ export const AuthorGroup: React.FunctionComponent<{
           <Avatar
             key={index}
             href={author.url}
-            imageUrl={author.avatarUrl}
+            src={author.avatarUrl}
             size={size}
           />
         ))}

@@ -1,6 +1,6 @@
 import Digibruh from "../../../../lib/digibruh/Digibruh";
 import NotFound from "../../../404";
-import ArticlePage from "../../../../components/blog/article/ArticlePage";
+import ArticlePage from "../../../../components/article/ArticlePage";
 import useSWR from "swr";
 import {
   DigibruhPage,
