@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { getPostUrl } from "./PostGrid";
 import { getLineClamp } from "../basic/CardGrid";
 import dayjs from "dayjs";
-import PostMeta from "./meta/PostMeta";
+import PostMeta from "../article/meta/PostMeta";
 import * as breakpoints from "../../styles/breakpoints";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
