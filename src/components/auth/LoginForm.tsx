@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { ArrowRight } from "react-feather";
-import { toast } from "react-toastify";
 import { readableErrorMessage } from "../../lib/auth/error";
 import { auth } from "../../lib/firebase/firebase";
+import { sendLoginSuccessToast } from "../../providers/Auth";
 import { Button } from "../basic/Button";
 import { Input } from "../form/Input";
 
@@ -13,9 +13,13 @@ export const LoginForm: React.FunctionComponent = () => {
   const [message, setMessage] = useState<React.ReactNode>("");
   const router = useRouter();
 
+  const continueUrl = router.query.redirect?.toString() || "/konto";
+
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const submit = () => {
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     setMessage("Loggar in ...");
     setLoading(true);
 
@@ -25,8 +29,9 @@ export const LoginForm: React.FunctionComponent = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        toast(`Inloggad som ${email}.`, { type: "success" });
-        router.push("/konto");
+        sendLoginSuccessToast(email);
+        setMessage("Inloggad!");
+        router.push(continueUrl);
       })
       .catch((error) => {
         setMessage(readableErrorMessage(error));
@@ -37,13 +42,14 @@ export const LoginForm: React.FunctionComponent = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={submit}>
       <Input
         disabled={isLoading}
         type="email"
         name="email"
         placeholder="E-post"
         ref={emailRef}
+        required
       />
       <Input
         disabled={isLoading}
@@ -51,11 +57,10 @@ export const LoginForm: React.FunctionComponent = () => {
         name="password"
         placeholder="Lösenord"
         ref={passwordRef}
+        required
       />
       <p>{message}</p>
-      <Button icon={<ArrowRight />} onClick={submit}>
-        Logga in
-      </Button>
+      <Button icon={<ArrowRight />}>Logga in</Button>
     </form>
   );
 };

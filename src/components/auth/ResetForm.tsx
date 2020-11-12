@@ -15,7 +15,9 @@ export const ResetForm: React.FunctionComponent = () => {
 
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const submit = () => {
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     setMessage("Skickar ...");
     setLoading(true);
 
@@ -25,6 +27,7 @@ export const ResetForm: React.FunctionComponent = () => {
       .sendPasswordResetEmail(email)
       .then(() => {
         router.push(loginLink());
+        setMessage("Omdirigerar ...");
         toast(`Instruktioner har skickats till ${email}.`);
       })
       .catch((error) => {
@@ -36,7 +39,7 @@ export const ResetForm: React.FunctionComponent = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={submit}>
       <Input
         disabled={isLoading}
         type="email"
@@ -45,9 +48,7 @@ export const ResetForm: React.FunctionComponent = () => {
         ref={emailRef}
       />
       <p>{message}</p>
-      <Button icon={<ArrowRight />} onClick={submit}>
-        Skicka
-      </Button>
+      <Button icon={<ArrowRight />}>Skicka</Button>
     </form>
   );
 };

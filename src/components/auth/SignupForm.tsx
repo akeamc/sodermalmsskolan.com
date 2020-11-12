@@ -16,7 +16,9 @@ export const SignupForm: React.FunctionComponent = () => {
 
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const submit = () => {
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     setMessage("Skapar konto ...");
     setLoading(true);
 
@@ -31,6 +33,7 @@ export const SignupForm: React.FunctionComponent = () => {
           type: "success",
         });
         sendEmailVerification();
+        setMessage("Omdirigerar ...");
         router.push("/konto");
       })
       .catch((error) => {
@@ -42,13 +45,14 @@ export const SignupForm: React.FunctionComponent = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={submit}>
       <Input
         disabled={isLoading}
         type="email"
         name="email"
         placeholder="E-post"
         ref={emailRef}
+        required
       />
       <Input
         disabled={isLoading}
@@ -56,11 +60,10 @@ export const SignupForm: React.FunctionComponent = () => {
         name="password"
         placeholder="Lösenord"
         ref={passwordRef}
+        required
       />
       <p>{message}</p>
-      <Button icon={<ArrowRight />} onClick={submit}>
-        Skapa konto
-      </Button>
+      <Button icon={<ArrowRight />}>Skapa konto</Button>
     </form>
   );
 };

@@ -1,10 +1,10 @@
+import { FirebaseError } from "firebase-admin";
 import Link from "next/link";
 import React from "react";
 import { Anchor } from "../../components/basic/Typography";
 import { loginLink, resetAccountLink, signupLink } from "./href";
 
-/* eslint-disable */
-export const readableErrorMessage = (error: any): React.ReactNode => {
+export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
   switch (error.code) {
     case "auth/invalid-email":
       return "E-postadressen är ogiltig.";
@@ -40,6 +40,8 @@ export const readableErrorMessage = (error: any): React.ReactNode => {
           ?
         </>
       );
+    case "auth/invalid-action-code":
+      return "Länken är ogiltig eller har redan använts.";
     default:
       return error.message;
   }

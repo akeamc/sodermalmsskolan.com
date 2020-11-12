@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from "react";
+import React, { ReactNode, ReactElement, useEffect } from "react";
 import { auth } from "../lib/firebase/firebase";
 import firebase from "firebase";
 import { toast } from "react-toastify";
@@ -69,16 +69,22 @@ export function signOut(): void {
 }
 
 export function sendEmailVerification(): void {
-  auth.currentUser
-    .sendEmailVerification()
-    .then(() => {
-      toast(
-        `Ett mejl för att bekräfta e-postadressen har skickats till ${auth.currentUser.email}.`
-      );
-    })
-    .catch((error) => {
-      toast(error.message, { type: "error" });
-    });
+  useEffect(() => {
+    auth.currentUser
+      .sendEmailVerification()
+      .then(() => {
+        toast(
+          `Ett mejl för att bekräfta e-postadressen har skickats till ${auth.currentUser.email}.`
+        );
+      })
+      .catch((error) => {
+        toast(error.message, { type: "error" });
+      });
+  });
+}
+
+export function sendLoginSuccessToast(email: string): void {
+  toast(`Inloggad som ${email}.`, { type: "success" });
 }
 
 export function useIsAuthenticated(): boolean {

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { DefaultLayout } from "../components/layout/Layout/Default";
 import { MenuList } from "../components/food/Menus";
 import { AdSection } from "../components/basic/Ad";
@@ -40,15 +40,31 @@ const TitlePane = styled.div`
   }
 `;
 
+const imageKeyframes = keyframes`
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+`;
+
 const ImagePane = styled.div`
   grid-column: span 12;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: calc(var(--section-spacing) / 2);
+  position: relative;
+  min-height: 50vh;
+  box-shadow: ${({ theme }) => theme.shadows.large};
+  animation: ${imageKeyframes} 10s infinite linear;
 
   img {
     box-shadow: ${({ theme }) => theme.shadows.medium};
+    border-radius: 1rem;
+    object-fit: cover;
   }
 
   @media (min-width: ${breakpoints.small}) {
@@ -78,8 +94,7 @@ const Page: React.FunctionComponent = () => {
         <HeroContent>
           <ImagePane>
             <Image
-              width={100}
-              height={100}
+              layout="fill"
               src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
             />
           </ImagePane>
