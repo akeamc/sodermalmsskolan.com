@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { motion } from "framer-motion";
 import { lighten } from "polished";
+import { FullPageWrapper } from "../layout/Container";
 
 export const LeadText = styled.h2`
   font-size: 1.25rem;
@@ -54,5 +55,15 @@ export const GridTitleSection: React.FunctionComponent<{
       <GridTitle>{title}</GridTitle>
       {description ? <GridDescription>{description}</GridDescription> : null}
     </GridTitleContainer>
+  );
+};
+
+export const FullPageText: React.FunctionComponent<React.HTMLAttributes<
+  HTMLParagraphElement
+>> = ({ children }) => {
+  return (
+    <FullPageWrapper>
+      <p>{children}</p>
+    </FullPageWrapper>
   );
 };

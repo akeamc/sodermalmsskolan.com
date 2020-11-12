@@ -61,13 +61,16 @@ const BackButtonContainer = styled.div`
 export const FormWrapper: React.FunctionComponent<{
   headline: React.ReactNode;
   sub: React.ReactNode;
-}> = ({ children, headline, sub }) => {
+  backButton?: boolean;
+}> = ({ children, headline, sub, backButton = true }) => {
   return (
     <BigContainer>
       <LeftPane>
-        <BackButtonContainer>
-          <Button href="/">Tillbaka</Button>
-        </BackButtonContainer>
+        {backButton ? (
+          <BackButtonContainer>
+            <Button href="/">Tillbaka</Button>
+          </BackButtonContainer>
+        ) : null}
         <FormContainer>
           <FormCard $hoverable={false}>
             <CardContent>

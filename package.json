@@ -14,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@tryghost/content-api": "^1.4.1",
-    "cookie": "^0.4.1",
     "dayjs": "^1.9.4",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
@@ -29,7 +28,6 @@
     "mcquery": "^1.0.2",
     "next": "^10.0.1",
     "node-html-parser": "^1.2.21",
-    "nookies": "^2.4.0",
     "polished": "^4.0.1",
     "pxcmprs": "^0.1.0",
     "query-string": "^6.13.1",
@@ -52,10 +50,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
-    "@types/cookie": "^0.4.0",
-    "@types/jsonwebtoken": "^8.5.0",
     "@types/katex": "^0.11.0",
-    "@types/lodash": "^4.14.158",
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.44",
     "@types/react-html-parser": "^2.0.1",

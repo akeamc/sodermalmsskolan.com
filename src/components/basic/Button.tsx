@@ -42,7 +42,7 @@ export const IconButton = styled(motion.a)<{ $disabled?: boolean }>`
   }
 `;
 
-export const StyledButton = styled.a<{
+export const StyledButton = styled.button<{
   $secondary?: boolean;
   $background?: string;
   $foreground?: string;
@@ -58,6 +58,11 @@ export const StyledButton = styled.a<{
   line-height: ${({ $height }) => `${$height}rem`};
   transition: background-color 0.2s ease, color 0.2s ease;
   cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
 
   &:hover {
     background-color: ${({ theme, $background }) =>
@@ -86,7 +91,7 @@ export const StyledButton = styled.a<{
   `}
 `;
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   secondary?: boolean;
   large?: boolean;
   href?: string;
@@ -123,7 +128,7 @@ export const Button: React.FunctionComponent<ButtonProps> = ({
   if (href) {
     return (
       <Link href={href} passHref>
-        {button}
+        <a>{button}</a>
       </Link>
     );
   } else {
