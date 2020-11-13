@@ -89,7 +89,7 @@ export const useLinks = (): Category[] => {
         },
         {
           name: "Serverstatus",
-          href: "https://status.lynx.agency",
+          href: "https://status.södermalmsskolan.com",
         },
       ],
     },
