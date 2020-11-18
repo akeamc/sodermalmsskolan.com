@@ -1,17 +1,14 @@
 {
-  "name": "site",
-  "version": "0.13.4",
-  "description": "",
-  "main": "index.js",
+  "name": "sodermalmsskolan.com",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start -p 80",
     "lint": "eslint **/*.ts **/*.tsx"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
+  "private": true,
   "dependencies": {
     "@tryghost/content-api": "^1.4.1",
     "dayjs": "^1.9.4",
@@ -63,11 +60,8 @@
     "@typescript-eslint/parser": "^4.4.1",
     "babel-plugin-styled-components": "^1.11.1",
     "eslint": "^7.2.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.0.0",
     "typescript": "^4.0.2"
