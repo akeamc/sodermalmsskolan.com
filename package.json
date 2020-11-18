@@ -27,7 +27,7 @@
     "mcproto": "^0.8.1",
     "mcquery": "^1.0.2",
     "next": "^10.0.1",
-    "node-html-parser": "^1.2.21",
+    "node-html-parser": "^2.0.0",
     "polished": "^4.0.1",
     "pxcmprs": "^0.1.0",
     "query-string": "^6.13.1",
