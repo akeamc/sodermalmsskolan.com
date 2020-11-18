@@ -39,23 +39,22 @@ export interface GridItem {
   href: string;
 }
 
-class CardGridItem extends React.Component<{
+const CardGridItem: React.FunctionComponent<{
   item: GridItem | null;
   imageExpected: boolean;
   loading: boolean;
   lineClamp: number | null;
-}> {
-  render() {
-    const { item, loading, lineClamp } = this.props;
-    const descriptionRows = 3;
-    const { locale } = useLocale();
+}> = ({ item, loading, lineClamp }) => {
+  const descriptionRows = 3;
+  const { locale } = useLocale();
 
-    return (
-      <CardLink href={item?.href}>
-        <Card>
-          {item?.image ? <CardHero src={item?.image} /> : null}
-          <CardContent>
-            <CardTitle>{loading ? <Skeleton /> : item?.title}</CardTitle>
+  return (
+    <CardLink href={item?.href}>
+      <Card>
+        {loading || item?.image ? <CardHero src={item?.image} /> : null}
+        <CardContent>
+          <CardTitle>{loading ? <Skeleton /> : item?.title}</CardTitle>
+          {loading || item?.description ? (
             <CardDescription style={lineClamp ? getLineClamp(lineClamp) : {}}>
               {loading ? (
                 <Skeleton count={descriptionRows} />
@@ -63,20 +62,20 @@ class CardGridItem extends React.Component<{
                 <Emoji>{item?.description}</Emoji>
               )}
             </CardDescription>
-          </CardContent>
-          {item?.meta ? (
-            <CardFooter>
-              <Muted>
-                {dayjs(item?.meta.date).locale(locale).format("D MMMM YYYY")}
-              </Muted>
-              <AuthorGroup authors={item.meta.authors} />
-            </CardFooter>
           ) : null}
-        </Card>
-      </CardLink>
-    );
-  }
-}
+        </CardContent>
+        {item?.meta ? (
+          <CardFooter>
+            <Muted>
+              {dayjs(item?.meta.date).locale(locale).format("D MMMM YYYY")}
+            </Muted>
+            <AuthorGroup authors={item.meta.authors} />
+          </CardFooter>
+        ) : null}
+      </Card>
+    </CardLink>
+  );
+};
 
 const ItemContainer = styled(Col)`
   display: flex;
