@@ -1,8 +1,8 @@
 import { Message } from "../../../lib/discord/structures/shared/Message";
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
 import * as breakpoints from "../../../styles/breakpoints";
+import pxcmprs from "../../../lib/pxcmprs";
 
 /**
  * A masterpiece.
@@ -49,15 +49,25 @@ const FlyingArtworkWrapper = styled.div<{ $scale: number }>`
 
   img {
     object-fit: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 `;
 
 export const FlyingArtwork: React.FunctionComponent<{
   artwork: Artwork;
 }> = ({ artwork }) => {
+  const src = pxcmprs.generateUrl({
+    source: artwork.url,
+    width: 128,
+  });
+
   return (
     <FlyingArtworkWrapper $scale={artwork.getScale(1, 1.2)}>
-      <Image layout="fill" src={artwork.url} draggable="false" />
+      <img src={src} draggable="false" />
     </FlyingArtworkWrapper>
   );
 };
