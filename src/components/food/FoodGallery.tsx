@@ -1,13 +1,13 @@
 import { ClientChannel } from "../../lib/discord/structures/client/Channel";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
 import { SquareGrid } from "../grid/Square";
 import { Spinner } from "../basic/Spinner";
-import VisibilitySensor from "react-visibility-sensor";
 import Link from "next/link";
 import pxcmprs from "../../lib/pxcmprs";
+import { useInView } from "react-intersection-observer";
 
 const Grid = styled(SquareGrid)`
   grid-gap: 0.5rem;
@@ -81,12 +81,13 @@ export const FoodGallery: React.FunctionComponent = () => {
     DISCORD_CHANNELS.photos.id
   );
 
-  const [scrolledToBottom, setScrolledToBottom] = useState(false);
+  const { ref, inView } = useInView();
 
-  if (scrolledToBottom) {
-    setSize(size + 1);
-    setScrolledToBottom(false);
-  }
+  useEffect(() => {
+    if (inView) {
+      setSize(size + 1);
+    }
+  }, [inView]);
 
   const attachments = data?.flat().flatMap((message) => message.attachments);
 
@@ -95,11 +96,11 @@ export const FoodGallery: React.FunctionComponent = () => {
       {attachments?.map((attachment, index) => (
         <Photo key={index} attachment={attachment} />
       ))}
-      <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>
+      <div ref={ref}>
         <SpinnerContainer>
           <Spinner />
         </SpinnerContainer>
-      </VisibilitySensor>
+      </div>
     </Grid>
   );
 };
