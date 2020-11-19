@@ -8,6 +8,7 @@ import { GridTitleSection } from "../basic/Typography";
 import { useTime } from "../../hooks/time";
 import { GroupFilter } from "../../lib/schedule/Filter";
 import { useLocale } from "../../hooks/locale";
+import { SinglePeriodComponent } from "../../lib/schedule/Period";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -179,7 +180,7 @@ export const ScheduleTable: React.FunctionComponent<{
                 columnStart={gridColumnStart}
                 columnEnd={gridColumnEnd}
               >
-                <period.Component />
+                <SinglePeriodComponent period={period} />
               </PeriodWrapper>
             );
           })}

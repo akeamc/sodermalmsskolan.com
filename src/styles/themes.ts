@@ -1,3 +1,4 @@
+import { transparentize } from "polished";
 import { DefaultTheme } from "styled-components";
 
 export interface SkeletonColors {
@@ -18,7 +19,6 @@ export interface ColorPalette {
   background: string;
   foreground: string;
   primary: string;
-  shadow: string;
   border: string;
   slightlyHighlighted: string;
   code: string;
@@ -59,7 +59,6 @@ export const light: DefaultTheme = {
     background: "#ffffff",
     foreground: "#000000",
     primary: "#0070f3",
-    shadow: "#333333",
     border: "#eaeaea",
     muted: "#666666",
     code: "rgba(27, 31, 35, 0.05)",
@@ -78,7 +77,10 @@ export const light: DefaultTheme = {
       foreground: "#ffffff",
     },
   },
-  shadows: defaultShadows("#eaeaea", "rgba(0, 0, 0, 0.1)"),
+  shadows: defaultShadows(
+    transparentize(0.9, "#000000"),
+    transparentize(0.9, "#000000")
+  ),
   dark: false,
 };
 
@@ -89,7 +91,6 @@ export const dark: DefaultTheme = {
     background: "#111111",
     foreground: "#ffffff",
     border: "#333333",
-    shadow: "#333333",
     muted: "#888888",
     slightlyHighlighted: "#222222",
     skeleton: {
@@ -105,8 +106,8 @@ export const dark: DefaultTheme = {
     },
   },
   shadows: defaultShadows(
-    "rgba(255, 255, 255, 0.1)",
-    "rgba(255, 255, 255, 0.1)"
+    transparentize(0.9, "#ffffff"),
+    transparentize(0.9, "#ffffff")
   ),
   dark: true,
 };

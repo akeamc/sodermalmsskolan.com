@@ -22,19 +22,21 @@ const MessagePhotos = styled.div`
   }
 `;
 
-export class ClientMessage extends Message {
-  public Component: React.FunctionComponent = () => {
-    return (
-      <Card>
-        <CardContent>
-          <MessagePhotos>
-            {this.attachments.map((attachment, index) => {
-              return <img src={attachment.url} key={index} />;
-            })}
-          </MessagePhotos>
-          <Muted>{this.content}</Muted>
-        </CardContent>
-      </Card>
-    );
-  };
-}
+export class ClientMessage extends Message {}
+
+export const MessageComponent: React.FunctionComponent<{
+  message: Message;
+}> = ({ message }) => {
+  return (
+    <Card>
+      <CardContent>
+        <MessagePhotos>
+          {message.attachments.map((attachment, index) => {
+            return <img src={attachment.url} key={index} />;
+          })}
+        </MessagePhotos>
+        <Muted>{message.content}</Muted>
+      </CardContent>
+    </Card>
+  );
+};

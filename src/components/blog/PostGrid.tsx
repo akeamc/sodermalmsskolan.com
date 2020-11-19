@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { defaultParams } from "../../lib/ghost/post";
 import { useSWRInfinite } from "swr";
 import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
 import api from "../../lib/ghost/credentials";
 import { CardGrid, GridItem } from "../basic/CardGrid";
-import VisibilitySensor from "react-visibility-sensor";
+import { useInView } from "react-intersection-observer";
 
 export function getPostUrl(slug: string | null): string {
   return `/blogg/${slug ? slug : ""}`;
@@ -48,10 +48,10 @@ export const PostGridAuto: React.FunctionComponent<{
   skip?: number;
 }> = (props) => {
   const { params = {}, skip = 0 } = props;
-  const limit = parseInt((params.limit || 10).toString());
+  const limit = parseInt(params.limit?.toString()) || 10;
 
   const [isReachingEnd, setIsReachingEnd] = useState(false);
-  const [scrolledToBottom, setScrolledToBottom] = useState(false);
+  const { ref, inView } = useInView();
 
   const { data, size, setSize } = useSWRInfinite(
     (_, previousPageData) => {
@@ -76,10 +76,11 @@ export const PostGridAuto: React.FunctionComponent<{
     }
   );
 
-  if (scrolledToBottom && !isReachingEnd) {
-    setSize(size + 1);
-    setScrolledToBottom(false);
-  }
+  useEffect(() => {
+    if (inView && !isReachingEnd) {
+      setSize(size + 1);
+    }
+  }, [inView]);
 
   return (
     <>
@@ -87,12 +88,12 @@ export const PostGridAuto: React.FunctionComponent<{
         posts={(data || []).flat().slice(skip)}
         expectedNumberOfPosts={size * limit}
       />
-      <VisibilitySensor onChange={setScrolledToBottom} partialVisibility>
+      <div ref={ref}>
         <PostGrid
           posts={null}
           expectedNumberOfPosts={isReachingEnd ? 0 : limit}
         />
-      </VisibilitySensor>
+      </div>
     </>
   );
 };

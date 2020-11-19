@@ -1,4 +1,4 @@
-import { SinglePeriod } from "./SinglePeriod";
+import { SinglePeriod, SinglePeriodComponent } from "./SinglePeriod";
 import { Period, PeriodBoundary } from ".";
 import React from "react";
 import { Subject, Subjects } from "../Subject";
@@ -56,31 +56,6 @@ export class PeriodGroup implements Period {
     this.groupCategory = groupGroup;
   }
 
-  public Component: React.FunctionComponent = () => {
-    const [groupStart] = this.bounds;
-
-    return (
-      <PeriodGroupWrapper>
-        {this.periods.map((period, index) => {
-          const gridColumnStart = period.start.scheduleTime + 1 - groupStart;
-          const gridColumnEnd = period.end.scheduleTime + 1 - groupStart;
-
-          return (
-            <PeriodContainer
-              key={index}
-              style={{
-                gridColumnStart,
-                gridColumnEnd,
-              }}
-            >
-              <period.Component />
-            </PeriodContainer>
-          );
-        })}
-      </PeriodGroupWrapper>
-    );
-  };
-
   public get bounds(): [number, number] {
     return this.periods.reduce(
       ([minimum, maximum], period) => {
@@ -131,6 +106,33 @@ export class PeriodGroup implements Period {
     );
   }
 }
+
+export const GroupPeriodComponent: React.FunctionComponent<{
+  group: PeriodGroup;
+}> = ({ group }) => {
+  const [groupStart] = group.bounds;
+
+  return (
+    <PeriodGroupWrapper>
+      {group.periods.map((period, index) => {
+        const gridColumnStart = period.start.scheduleTime + 1 - groupStart;
+        const gridColumnEnd = period.end.scheduleTime + 1 - groupStart;
+
+        return (
+          <PeriodContainer
+            key={index}
+            style={{
+              gridColumnStart,
+              gridColumnEnd,
+            }}
+          >
+            <SinglePeriodComponent period={period} />
+          </PeriodContainer>
+        );
+      })}
+    </PeriodGroupWrapper>
+  );
+};
 
 type PracticalSubject = [[number, number], string];
 

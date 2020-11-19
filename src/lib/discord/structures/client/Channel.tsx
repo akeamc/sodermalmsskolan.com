@@ -1,5 +1,5 @@
 import { Channel, IDiscordAPIChannel } from "../shared/Channel";
-import { ClientMessage } from "./Message";
+import { ClientMessage, MessageComponent } from "./Message";
 import { Base } from "../../../../components/grid/Base";
 import React from "react";
 import useSWR, { responseInterface, SWRInfiniteResponseInterface } from "swr";
@@ -73,7 +73,7 @@ export class ClientChannel extends Channel {
         <NormalWidth>
           <MessageWrapper>
             {messages?.flat()?.map((message, index) => (
-              <message.Component key={index} />
+              <MessageComponent message={message} key={index} />
             ))}
           </MessageWrapper>
         </NormalWidth>
