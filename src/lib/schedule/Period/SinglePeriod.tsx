@@ -45,14 +45,18 @@ export class SinglePeriod implements Period {
   public getPeriodByGroup(): SinglePeriod {
     return this;
   }
+}
 
-  public Component: React.FunctionComponent = () => (
+export const SinglePeriodComponent: React.FunctionComponent<{
+  period: SinglePeriod;
+}> = ({ period }) => {
+  return (
     <PeriodComponent
-      start={this.start.format()}
-      end={this.end.format()}
-      room={this.room}
-      title={this.subject.symbol}
-      color={this.subject.color}
+      start={period.start.format()}
+      end={period.end.format()}
+      room={period.room}
+      title={period.subject.symbol}
+      color={period.subject.color}
     />
   );
-}
+};

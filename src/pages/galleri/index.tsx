@@ -1,10 +1,7 @@
 import React from "react";
 import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { Navigation } from "../../components/layout/Navigation";
-import { FoodGallery } from "../../components/food/FoodGallery";
-import { Base } from "../../components/grid/Base";
-import { Col } from "../../components/grid/Col";
-import { Hero } from "../../components/layout/Hero";
+import { FoodGallery } from "../../components/food/Gallery";
 
 const Page: React.FunctionComponent = () => {
   return (
@@ -21,13 +18,7 @@ const Page: React.FunctionComponent = () => {
       }}
     >
       <Navigation />
-      <Hero>
-        <Base>
-          <Col>
-            <FoodGallery />
-          </Col>
-        </Base>
-      </Hero>
+      <FoodGallery />
     </DefaultLayout>
   );
 };

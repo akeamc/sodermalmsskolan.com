@@ -67,8 +67,6 @@ export class PeriodBoundary {
 }
 
 export abstract class Period {
-  public abstract Component: React.FunctionComponent;
-
   public abstract start: PeriodBoundary;
   public abstract end: PeriodBoundary;
 
