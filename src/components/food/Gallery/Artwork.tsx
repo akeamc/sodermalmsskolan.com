@@ -32,7 +32,7 @@ export class Artwork {
   }
 }
 
-const FlyingArtworkWrapper = styled.div<{ $scale: number }>`
+const FlyingArtworkWrapper = styled.div<{ $scale: number; $src: string }>`
   transform: scale(${({ $scale }) => $scale});
   width: ${({ $scale }) => `calc(${$scale} * 2rem)`};
   height: ${({ $scale }) => `calc(${$scale} * 2rem)`};
@@ -40,20 +40,14 @@ const FlyingArtworkWrapper = styled.div<{ $scale: number }>`
   position: relative;
   border-radius: 100%;
   background-color: ${({ theme }) => theme.colors.skeleton.base};
+  background-image: url(${({ $src }) => $src});
+  background-size: cover;
+  background-position: center;
   box-shadow: ${({ theme }) => theme.shadows.small};
 
   @media (min-width: ${breakpoints.medium}) {
     width: ${({ $scale }) => `calc(${$scale} * 5rem)`};
     height: ${({ $scale }) => `calc(${$scale} * 5rem)`};
-  }
-
-  img {
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
   }
 `;
 
@@ -65,9 +59,5 @@ export const FlyingArtwork: React.FunctionComponent<{
     width: 128,
   });
 
-  return (
-    <FlyingArtworkWrapper $scale={artwork.getScale(1, 1.2)}>
-      <img src={src} draggable="false" />
-    </FlyingArtworkWrapper>
-  );
+  return <FlyingArtworkWrapper $scale={artwork.getScale(1, 1.2)} $src={src} />;
 };
