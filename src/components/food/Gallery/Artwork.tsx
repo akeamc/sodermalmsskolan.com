@@ -1,8 +1,8 @@
 import { Message } from "../../../lib/discord/structures/shared/Message";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import { randomFloatFromInterval } from "react-marquee-slider";
+import * as breakpoints from "../../../styles/breakpoints";
 
 /**
  * A masterpiece.
@@ -24,16 +24,28 @@ export class Artwork {
         new Artwork(message.createdAt, attachment.url, message.content)
     );
   }
+
+  public getScale(min: number, max: number): number {
+    const random = (this.publishedAt.getTime() % 1000) / 1000;
+
+    return random * (max - min) + min;
+  }
 }
 
 const FlyingArtworkWrapper = styled.div<{ $scale: number }>`
   transform: scale(${({ $scale }) => $scale});
-  width: 10rem;
-  height: 10rem;
+  width: ${({ $scale }) => `calc(${$scale} * 2rem)`};
+  height: ${({ $scale }) => `calc(${$scale} * 2rem)`};
   overflow: hidden;
   position: relative;
   border-radius: 100%;
+  background-color: ${({ theme }) => theme.colors.skeleton.base};
   box-shadow: ${({ theme }) => theme.shadows.small};
+
+  @media (min-width: ${breakpoints.medium}) {
+    width: ${({ $scale }) => `calc(${$scale} * 5rem)`};
+    height: ${({ $scale }) => `calc(${$scale} * 5rem)`};
+  }
 
   img {
     object-fit: cover;
@@ -43,15 +55,9 @@ const FlyingArtworkWrapper = styled.div<{ $scale: number }>`
 export const FlyingArtwork: React.FunctionComponent<{
   artwork: Artwork;
 }> = ({ artwork }) => {
-  const [scale, setScale] = useState(1);
-
-  useEffect(() => {
-    setScale(randomFloatFromInterval(0.7, 1.5));
-  }, []);
-
   return (
-    <FlyingArtworkWrapper $scale={scale}>
-      <Image layout="fill" src={artwork.url} />
+    <FlyingArtworkWrapper $scale={artwork.getScale(1, 1.2)}>
+      <Image layout="fill" src={artwork.url} draggable="false" />
     </FlyingArtworkWrapper>
   );
 };

@@ -15,7 +15,7 @@ const Container = styled.div<{ $loading: boolean }>`
 export const FoodGallery: React.FunctionComponent = () => {
   const { data } = ClientChannel.useMessagesInChannel(
     DISCORD_CHANNELS.photos.id,
-    100
+    40
   );
 
   const artworks = data?.flat()?.flatMap(Artwork.fromMessage);
@@ -27,7 +27,7 @@ export const FoodGallery: React.FunctionComponent = () => {
       {artworks ? (
         <Marquee
           velocity={12}
-          resetAfterTries={200}
+          resetAfterTries={500}
           scatterRandomly
           direction="rtl"
           onInit={() => setIsScattering(true)}

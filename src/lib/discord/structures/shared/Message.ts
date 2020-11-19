@@ -34,8 +34,8 @@ export interface IDiscordAPIMessage {
   author: IDiscordAPIUser;
   member?: IDiscordAPIMember;
   content: string;
-  timestamp: Date;
-  edited_timestamp?: Date;
+  timestamp: string;
+  edited_timestamp?: string;
   tts: boolean;
   attachments: IDiscordAPIMessageAttachment[];
   pinned: boolean;
@@ -81,8 +81,8 @@ export class Message implements Serializable<IDiscordAPIMessage> {
     this.attachments = attachments.map(
       (attachment) => new MessageAttachment(attachment)
     );
-    this.createdAt = timestamp;
-    this.editedAt = edited_timestamp;
+    this.createdAt = new Date(timestamp);
+    this.editedAt = new Date(edited_timestamp);
     this.reactions = reactions;
   }
 
@@ -97,8 +97,8 @@ export class Message implements Serializable<IDiscordAPIMessage> {
       pinned: this.pinned,
       tts: this.tts,
       attachments: this.attachments.map((attachment) => attachment.serialize()),
-      timestamp: this.createdAt,
-      edited_timestamp: this.editedAt,
+      timestamp: this.createdAt.toISOString(),
+      edited_timestamp: this.editedAt?.toISOString(),
       reactions: this.reactions,
     };
   }
