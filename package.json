@@ -33,7 +33,7 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-html-parser": "^2.0.2",
-    "react-intersection-observer": "^8.28.6",
+    "react-intersection-observer": "^8.30.3",
     "react-marquee-slider": "^1.1.2",
     "react-select": "^3.1.0",
     "react-spinners": "^0.9.0",
