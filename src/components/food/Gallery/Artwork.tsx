@@ -45,9 +45,9 @@ const FlyingArtworkWrapper = styled.div<{ $scale: number; $src: string }>`
   background-position: center;
   box-shadow: ${({ theme }) => theme.shadows.small};
 
-  @media (min-width: ${breakpoints.medium}) {
-    width: ${({ $scale }) => `calc(${$scale} * 5rem)`};
-    height: ${({ $scale }) => `calc(${$scale} * 5rem)`};
+  @media (min-width: ${breakpoints.large}) {
+    width: ${({ $scale }) => `calc(${$scale} * 4rem)`};
+    height: ${({ $scale }) => `calc(${$scale} * 4rem)`};
   }
 `;
 
