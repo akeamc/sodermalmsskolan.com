@@ -15,7 +15,7 @@ const Container = styled.div<{ $loading: boolean }>`
 export const FoodGallery: React.FunctionComponent = () => {
   const { data } = ClientChannel.useMessagesInChannel(
     DISCORD_CHANNELS.photos.id,
-    40
+    30
   );
 
   const artworks = data?.flat()?.flatMap(Artwork.fromMessage);

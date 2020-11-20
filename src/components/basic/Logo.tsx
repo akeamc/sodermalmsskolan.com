@@ -47,9 +47,9 @@ export const Logo: React.FunctionComponent<React.SVGProps<SVGSVGElement>> = (
   );
 };
 
-export const SmallLogo: React.FunctionComponent<React.SVGProps<
-  SVGSVGElement
->> = (props) => {
+export const SmallLogo: React.FunctionComponent<
+  React.SVGProps<SVGSVGElement>
+> = (props) => {
   const theme = useTheme();
 
   return (

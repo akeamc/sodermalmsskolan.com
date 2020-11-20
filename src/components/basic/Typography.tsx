@@ -58,9 +58,9 @@ export const GridTitleSection: React.FunctionComponent<{
   );
 };
 
-export const FullPageText: React.FunctionComponent<React.HTMLAttributes<
-  HTMLParagraphElement
->> = ({ children }) => {
+export const FullPageText: React.FunctionComponent<
+  React.HTMLAttributes<HTMLParagraphElement>
+> = ({ children }) => {
   return (
     <FullPageWrapper>
       <p>{children}</p>
