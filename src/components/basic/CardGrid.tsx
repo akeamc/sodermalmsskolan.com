@@ -14,10 +14,10 @@ import { Col } from "../grid/Col";
 import { Base } from "../grid/Base";
 import { AuthorGroup } from "./Avatar";
 import { Emoji } from "./Emoji";
-import { useLocale } from "../../hooks/locale";
 import { Skeleton } from "./Skeleton";
 import { Muted } from "./Typography";
 import dayjs from "dayjs";
+import { useLang } from "../../hooks/lang";
 
 export function getLineClamp(lines: number): React.CSSProperties {
   return {
@@ -46,7 +46,7 @@ const CardGridItem: React.FunctionComponent<{
   lineClamp: number | null;
 }> = ({ item, loading, lineClamp }) => {
   const descriptionRows = 3;
-  const { locale } = useLocale();
+  const lang = useLang();
 
   return (
     <CardLink href={item?.href}>
@@ -67,7 +67,7 @@ const CardGridItem: React.FunctionComponent<{
         {item?.meta ? (
           <CardFooter>
             <Muted>
-              {dayjs(item?.meta.date).locale(locale).format("D MMMM YYYY")}
+              {dayjs(item?.meta.date).locale(lang).format("D MMMM YYYY")}
             </Muted>
             <AuthorGroup authors={item.meta.authors} />
           </CardFooter>

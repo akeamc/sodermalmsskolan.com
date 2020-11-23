@@ -4,10 +4,10 @@ import { SinglePeriod } from "../../lib/schedule/Period";
 import styled, { keyframes } from "styled-components";
 import { transparentize } from "polished";
 import { useTime } from "../../hooks/time";
-import { useLocale } from "../../hooks/locale";
 import { Muted } from "../basic/Typography";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
+import { useLang } from "../../hooks/lang";
 
 dayjs.extend(relativeTime);
 
@@ -74,9 +74,9 @@ export const PeriodCard: React.FunctionComponent<{
   groupName: string;
 }> = ({ period }) => {
   const now = useTime(1000);
-  const { locale } = useLocale();
+  const lang = useLang();
 
-  const timeLeft = period.start.nextAbsolute(now).locale(locale).from(now);
+  const timeLeft = period.start.nextAbsolute(now).locale(lang).from(now);
 
   return (
     <Card $hoverable={false}>

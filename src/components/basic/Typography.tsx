@@ -1,20 +1,31 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React from "react";
 import { motion } from "framer-motion";
 import { lighten } from "polished";
 import { FullPageWrapper } from "../layout/Container";
 
-export const LeadText = styled.h2`
-  font-size: 1.25rem;
-  line-height: 1.6em;
+export const leadText = css`
+  --size-sm: 1rem;
+  --size-md: 1rem;
+  --size-lg: 1.25rem;
+  --size-xl: 1.25rem;
+  line-height: 1.5;
   letter-spacing: -0.02em;
-  color: ${({ theme }) => theme.colors.muted};
   font-weight: 400;
-  margin-top: 24px;
+`;
+
+export const mutedText = css`
+  color: ${({ theme }) => theme.colors.muted};
+`;
+
+export const LeadText = styled.h2`
+  ${leadText};
+  ${mutedText};
+  margin-top: 1.5rem;
 `;
 
 export const GridTitleContainer = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 `;
 
 export const GridTitle = styled.h3`
@@ -27,8 +38,16 @@ export const GridTitle = styled.h3`
   margin-bottom: 16px;
 `;
 
-export const Muted = styled(motion.p)`
+export const wideText = css`
+  letter-spacing: 2px;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.muted};
+`;
+
+export const Muted = styled(motion.p)`
+  ${mutedText};
 `;
 
 export const Anchor = styled.a`
@@ -58,9 +77,9 @@ export const GridTitleSection: React.FunctionComponent<{
   );
 };
 
-export const FullPageText: React.FunctionComponent<
-  React.HTMLAttributes<HTMLParagraphElement>
-> = ({ children }) => {
+export const FullPageText: React.FunctionComponent<React.HTMLAttributes<
+  HTMLParagraphElement
+>> = ({ children }) => {
   return (
     <FullPageWrapper>
       <p>{children}</p>

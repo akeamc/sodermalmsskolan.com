@@ -7,9 +7,9 @@ const Tnum = styled.span`
   font-feature-settings: "tnum", "ss01", "zero";
 `;
 
-export const MinecraftStatusBadge: React.FunctionComponent<
-  React.HTMLAttributes<HTMLDivElement>
-> = (props) => {
+export const MinecraftStatusBadge: React.FunctionComponent<React.HTMLAttributes<
+  HTMLDivElement
+>> = (props) => {
   const { data: status, isValidating } = useMinecraftStatus();
 
   const { colors } = useTheme();

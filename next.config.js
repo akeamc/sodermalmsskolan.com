@@ -19,4 +19,9 @@ module.exports = {
       "cdn.discordapp.com",
     ],
   },
+  i18n: {
+    // Be sure to include the DayJS locales in the root!
+    locales: ["sv"],
+    defaultLocale: "sv",
+  },
 };

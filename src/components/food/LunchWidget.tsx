@@ -5,10 +5,10 @@ import dayjs from "dayjs";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import React from "react";
 import { ClientMenu } from "../../lib/food/structures/client/Menu";
-import { useLocale } from "../../hooks/locale";
 import { Skeleton } from "../basic/Skeleton";
 import { Muted } from "../basic/Typography";
 import { ArrowRight } from "react-feather";
+import { useLang } from "../../hooks/lang";
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -41,13 +41,13 @@ export const LunchWidget: React.FunctionComponent = () => {
 
   const dishes = menu?.dishes?.map((dish) => dish.title);
 
-  const { locale } = useLocale();
+  const lang = useLang();
 
   const date =
     (menu || isValidating) &&
     (menu?.date ? (
       firstLetterUpperCase(
-        dayjs(menu?.date).locale(locale).format("dddd D MMMM")
+        dayjs(menu?.date).locale(lang).format("dddd D MMMM")
       )
     ) : (
       <Skeleton width="100px" />

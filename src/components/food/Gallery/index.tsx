@@ -6,16 +6,16 @@ import { Artwork, FlyingArtwork } from "./Artwork";
 import Marquee from "react-marquee-slider";
 
 const Container = styled.div<{ $loading: boolean }>`
-  height: calc(100vh - var(--navigation-height));
-  min-height: 500px;
   opacity: ${({ $loading }) => ($loading ? 0 : 1)};
   transition: opacity 1s ease;
+  width: 100%;
+  height: 100%;
 `;
 
 export const FoodGallery: React.FunctionComponent = () => {
   const { data } = ClientChannel.useMessagesInChannel(
     DISCORD_CHANNELS.photos.id,
-    30
+    20
   );
 
   const artworks = data?.flat()?.flatMap(Artwork.fromMessage);
