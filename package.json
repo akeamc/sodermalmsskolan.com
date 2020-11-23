@@ -30,7 +30,7 @@
     "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
-    "react-dom": "^16.13.1",
+    "react-dom": "^16.14.0",
     "react-feather": "^2.0.8",
     "react-html-parser": "^2.0.2",
     "react-intersection-observer": "^8.30.3",
