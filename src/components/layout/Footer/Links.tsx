@@ -41,10 +41,6 @@ export const useLinks = (): Category[] => {
           name: "Schema",
           href: "/schema",
         },
-        {
-          name: "Galleri",
-          href: "/galleri",
-        },
       ],
     },
     {

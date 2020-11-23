@@ -1,6 +1,6 @@
 import { Message } from "../../../lib/discord/structures/shared/Message";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import * as breakpoints from "../../../styles/breakpoints";
 import pxcmprs from "../../../lib/pxcmprs";
 
@@ -33,9 +33,6 @@ export class Artwork {
 }
 
 const FlyingArtworkWrapper = styled.div<{ $scale: number; $src: string }>`
-  transform: scale(${({ $scale }) => $scale});
-  width: ${({ $scale }) => `calc(${$scale} * 2rem)`};
-  height: ${({ $scale }) => `calc(${$scale} * 2rem)`};
   overflow: hidden;
   position: relative;
   border-radius: 100%;
@@ -45,10 +42,25 @@ const FlyingArtworkWrapper = styled.div<{ $scale: number; $src: string }>`
   background-position: center;
   box-shadow: ${({ theme }) => theme.shadows.small};
 
-  @media (min-width: ${breakpoints.large}) {
-    width: ${({ $scale }) => `calc(${$scale} * 4rem)`};
-    height: ${({ $scale }) => `calc(${$scale} * 4rem)`};
-  }
+  ${({ $scale }) => css`
+    width: ${`calc(${$scale} * 2rem)`};
+    height: ${`calc(${$scale} * 2rem)`};
+
+    @media (min-width: ${breakpoints.medium}) {
+      width: ${`calc(${$scale} * 3rem)`};
+      height: ${`calc(${$scale} * 3rem)`};
+    }
+
+    @media (min-width: ${breakpoints.large}) {
+      width: ${`calc(${$scale} * 4rem)`};
+      height: ${`calc(${$scale} * 4rem)`};
+    }
+
+    @media (min-width: ${breakpoints.extraLarge}) {
+      width: ${`calc(${$scale} * 6rem)`};
+      height: ${`calc(${$scale} * 6rem)`};
+    }
+  `}
 `;
 
 export const FlyingArtwork: React.FunctionComponent<{

@@ -11,7 +11,9 @@ export type ServerDishHandler<T = unknown> = (
 ) => void | Promise<void>;
 
 export class ServerDish extends Dish {
-  public static firestoreCollection(): FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData> {
+  public static firestoreCollection(): FirebaseFirestore.CollectionReference<
+    FirebaseFirestore.DocumentData
+  > {
     const db = admin.firestore();
 
     return db.collection("dishes");

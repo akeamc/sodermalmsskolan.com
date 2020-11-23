@@ -170,13 +170,16 @@ export default createGlobalStyle`
     font-weight: bold;
   }
 
-  p, h1, h2, h3, h4, h5, h6 {
-    margin: 0;
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+
+    &, p {
+      margin: 0;
+    }
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  * {
     font-size: var(--size-sm);
-    word-wrap: break-word;
 
     @media (min-width: ${breakpoints.medium}) {
       font-size: var(--size-md);
@@ -200,8 +203,7 @@ export default createGlobalStyle`
   }
 
   p {
-    color: ${({ theme }) => theme.colors.muted};
-    line-height: 1.6;
+    line-height: 1.5;
     letter-spacing: -.02em;
     margin: 1em 0;
   }
