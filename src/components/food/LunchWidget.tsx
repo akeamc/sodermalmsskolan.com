@@ -46,9 +46,7 @@ export const LunchWidget: React.FunctionComponent = () => {
   const date =
     (menu || isValidating) &&
     (menu?.date ? (
-      firstLetterUpperCase(
-        dayjs(menu?.date).locale(lang).format("dddd D MMMM")
-      )
+      firstLetterUpperCase(dayjs(menu?.date).locale(lang).format("dddd D MMMM"))
     ) : (
       <Skeleton width="100px" />
     ));

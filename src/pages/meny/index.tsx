@@ -5,13 +5,8 @@ import { AdSection } from "../../components/basic/Ad";
 import { Section } from "../../components/layout/Section";
 import { Hero } from "../../components/layout/Hero";
 import { Base } from "../../components/grid/Base";
-import { Col } from "../../components/grid/Col";
 import { Navigation } from "../../components/layout/Navigation";
-import {
-  GridTitleSection,
-  wideText,
-  leadText,
-} from "../../components/basic/Typography";
+import { wideText, leadText } from "../../components/basic/Typography";
 import React from "react";
 import * as breakpoints from "../../styles/breakpoints";
 import { FoodGallery } from "../../components/food/Gallery";
@@ -19,7 +14,9 @@ import { Card, CardContent } from "../../components/basic/Card";
 
 const Background = styled.div`
   position: relative;
-  overflow: hidden;
+  overflow: show;
+  padding-top: 1px;
+  margin-top: -1px;
 `;
 
 const GalleryWrapper = styled.div`
@@ -27,7 +24,10 @@ const GalleryWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  bottom: calc(var(--section-spacing) * -2);
+  background-color: ${({ theme }) => theme.colors.slightlyHighlighted};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  overflow: hidden;
   z-index: -1;
 `;
 
@@ -96,32 +96,7 @@ const Page: React.FunctionComponent = () => {
           </Base>
         </Hero>
       </Background>
-      {/* <Hero>
-        <HeroContent>
-          <ImagePane>
-            <Image
-              layout="fill"
-              src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
-            />
-          </ImagePane>
-          <TitlePane>
-            <TitleContainer>
-              <HeroTitle>Vi visar upp Sodexo för världen</HeroTitle>
-              <LeadText>
-                I över ett år har vi fotograferat maten som Sodexo serverar och
-                delat bilderna online. Vi kommer aldrig att ge upp.
-              </LeadText>
-            </TitleContainer>
-          </TitlePane>
-        </HeroContent>
-      </Hero> */}
-      <AdSection />
       <Section>
-        <Base>
-          <Col xs={12}>
-            <GridTitleSection title="Menyn" />
-          </Col>
-        </Base>
         <MenuList limit={30} />
       </Section>
       <AdSection />
