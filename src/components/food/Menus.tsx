@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
 import * as breakpoints from "../../styles/breakpoints";
-import { ClientMenu } from "../../lib/food/structures/client/Menu";
+import { ClientMenu, MenuTitle } from "../../lib/food/structures/client/Menu";
 import { Dish } from "../../lib/food/structures/shared/Dish";
 import { ClientDish } from "../../lib/food/structures/client/Dish";
-import { useLocale } from "../../hooks/locale";
 import { Card, CardContent, CardTitle } from "../basic/Card";
 import { Skeleton } from "../basic/Skeleton";
 import { IconButton } from "../basic/Button";
 import { ArrowDown } from "react-feather";
 import { DishVotes } from "./Voting";
 import { motion } from "framer-motion";
+import { useLang } from "../../hooks/lang";
 
 const DishList = styled.ul`
   margin-top: 1rem;
@@ -25,11 +25,11 @@ const DishList = styled.ul`
 
 const DishEmissions: React.FunctionComponent<{ id: string }> = ({ id }) => {
   const { data } = ClientDish.use(id);
-  const { locale } = useLocale();
+  const lang = useLang();
 
   return (
     <motion.span>
-      ({data?.co2e.toLocaleString(locale) || <Skeleton width="32px" />} kg CO₂e
+      ({data?.co2e.toLocaleString(lang) || <Skeleton width="32px" />} kg CO₂e
       per portion)
     </motion.span>
   );
@@ -88,7 +88,7 @@ const MenuCard: React.FunctionComponent<{
   return (
     <Card layoutId={menu?.id} onClick={onClick}>
       <CardContent>
-        <CardTitle>{menu?.title || <Skeleton />}</CardTitle>
+        <CardTitle>{menu ? <MenuTitle menu={menu} /> : <Skeleton />}</CardTitle>
         <DishList>
           {(menu?.dishes || fallback).map((dish, index) => (
             <DishItem key={index} dish={dish} detailed={detailed} />

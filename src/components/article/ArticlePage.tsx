@@ -5,7 +5,7 @@ import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
 import { ArticleHero } from "./Hero";
 import dayjs from "dayjs";
-import { useLocale } from "../../hooks/locale";
+import { useRouter } from "next/router";
 
 const ArticlePage: React.FunctionComponent<{
   post: PostOrPage;
@@ -16,10 +16,10 @@ const ArticlePage: React.FunctionComponent<{
     return <NotFound />;
   }
 
-  const { locale } = useLocale();
+  const router = useRouter();
 
   const date = digibruh ? post?.updated_at : post?.published_at;
-  const formattedDate = dayjs(date).locale(locale).format("D MMMM YYYY");
+  const formattedDate = dayjs(date).locale(router.locale).format("D MMMM YYYY");
   const dateText = digibruh
     ? `Redigerad ${formattedDate}`
     : `Publicerad ${formattedDate}`;

@@ -11,11 +11,11 @@ import * as breakpoints from "../../styles/breakpoints";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
-import { useLocale } from "../../hooks/locale";
 import { transparentLightPalette } from "../../styles/themes";
 import { Skeleton } from "../basic/Skeleton";
 import { Anchor, Muted } from "../basic/Typography";
 import Image from "next/image";
+import { useLang } from "../../hooks/lang";
 
 const CardWrapper = styled(Anchor)`
   grid-column: span 12;
@@ -67,7 +67,7 @@ const FeaturedPost: React.FunctionComponent = () => {
   const { ref, inView } = useInView();
   const show = inView && post;
 
-  const { locale } = useLocale();
+  const lang = useLang();
 
   const theme = useTheme();
 
@@ -105,7 +105,7 @@ const FeaturedPost: React.FunctionComponent = () => {
                 <PostMeta
                   post={post}
                   dateText={dayjs(post?.published_at)
-                    .locale(locale)
+                    .locale(lang)
                     .format("D MMMM YYYY")}
                   skeleton={loading}
                 />

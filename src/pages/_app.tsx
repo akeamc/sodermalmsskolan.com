@@ -6,6 +6,8 @@ import { ThemeProvider } from "../components/theme/ThemeProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { StyledToastContainer } from "../components/basic/ToastContainer";
 
+import "dayjs/locale/sv";
+
 function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ThemeProvider>

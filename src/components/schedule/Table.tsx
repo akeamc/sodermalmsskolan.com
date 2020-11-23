@@ -7,8 +7,8 @@ import { TimeIndicator } from "./Indicator";
 import { GridTitleSection } from "../basic/Typography";
 import { useTime } from "../../hooks/time";
 import { GroupFilter } from "../../lib/schedule/Filter";
-import { useLocale } from "../../hooks/locale";
 import { SinglePeriodComponent } from "../../lib/schedule/Period";
+import { useLang } from "../../hooks/lang";
 
 const TableWrapper = styled.div`
   overflow-x: auto;
@@ -80,7 +80,7 @@ const ScheduleDetail: React.FunctionComponent<{
   groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
   const now = useTime(1000);
-  const { locale } = useLocale();
+  const lang = useLang();
   const nextPeriod = schedule.periods.filterByGroups(groups).next(now);
 
   return (
@@ -88,7 +88,7 @@ const ScheduleDetail: React.FunctionComponent<{
       title={schedule.group}
       description={`Nästa lektion: ${
         nextPeriod?.summary
-      } (${nextPeriod.start.nextAbsolute(now).locale(locale).from(now)}).`}
+      } (${nextPeriod.start.nextAbsolute(now).locale(lang).from(now)}).`}
     />
   );
 };
@@ -97,7 +97,7 @@ export const ScheduleTable: React.FunctionComponent<{
   schedule: Schedule;
   groups?: GroupFilter;
 }> = ({ schedule, groups }) => {
-  const { locale } = useLocale();
+  const lang = useLang();
 
   const [scheduleStart, scheduleEnd] = schedule.bounds;
 
@@ -151,7 +151,7 @@ export const ScheduleTable: React.FunctionComponent<{
                   <DayTitle>
                     {firstLetterUpperCase(
                       dayjs()
-                        .locale(locale)
+                        .locale(lang)
                         .day(index + 1)
                         .format("ddd")
                     )}

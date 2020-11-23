@@ -3,9 +3,10 @@ import { IMenu, Menu, MenuQuery } from "../shared/Menu";
 import ky from "ky-universal";
 import dayjs from "dayjs";
 import { ClientDish } from "./Dish";
-import { useLocale } from "../../../../hooks/locale";
 import { firstLetterUpperCase } from "../../../utils/letters";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import React from "react";
+import { useLang } from "../../../../hooks/lang";
 
 dayjs.extend(isSameOrBefore);
 
@@ -47,12 +48,16 @@ export class ClientMenu extends Menu {
       }
     );
   }
-
-  public get title(): string {
-    const { locale } = useLocale();
-
-    return firstLetterUpperCase(
-      dayjs(this?.date).locale(locale).format("dddd D MMMM")
-    );
-  }
 }
+
+export const MenuTitle: React.FunctionComponent<{ menu: Menu }> = ({
+  menu,
+}) => {
+  const lang = useLang();
+
+  const title = firstLetterUpperCase(
+    dayjs(menu?.date).locale(lang).format("dddd D MMMM")
+  );
+
+  return <>{title}</>;
+};
