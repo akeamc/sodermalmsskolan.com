@@ -3,7 +3,6 @@ import { PostOrPage } from "@tryghost/content-api";
 import ReactHtmlParser, { convertNodeToElement } from "react-html-parser";
 import React from "react";
 import { renderMathInText } from "../../lib/utils/katex";
-import SyntaxHighlighter from "react-syntax-highlighter";
 import { Section } from "../layout/Section";
 import { Base } from "../grid/Base";
 import * as breakpoints from "../../styles/breakpoints";
@@ -256,30 +255,6 @@ const ArticleBody: React.FunctionComponent<{
           <p>{node.children.map(transform)}</p>
         </Blockquote>
       );
-    }
-
-    if (node.name == "pre") {
-      const { children } = node;
-      if (children.length == 1 && children[0].name == "code") {
-        const child = children[0];
-
-        const language = child.attribs.class?.replace("language-", "") || null;
-
-        if (language) {
-          // Only use `SyntaxHighlighter` if a language is detected. Otherwise, fall back to the default of Ghost.
-          const code = text(child).replace(/\n$/, "");
-
-          return (
-            <SyntaxHighlighter
-              language={language}
-              useInlineStyles={false}
-              key={index}
-            >
-              {code}
-            </SyntaxHighlighter>
-          );
-        }
-      }
     }
 
     if (node.name == "hr") {
