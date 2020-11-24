@@ -141,7 +141,7 @@ export const MenuList: React.FunctionComponent<{
     <Base>
       {menus.map((menu, index) => (
         <>
-          {index % 3 === 0 ? <MenuAd /> : null}
+          {index % 6 === 0 ? <MenuAd /> : null}
           <MenuCard key={index} menu={menu} />
         </>
       ))}
