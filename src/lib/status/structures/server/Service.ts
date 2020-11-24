@@ -9,5 +9,5 @@ export abstract class ServerService<Service, StatusData> {
     this.data = data;
   }
 
-  public abstract async getStatus(): Promise<IServiceStatus<StatusData>>;
+  public abstract getStatus(): Promise<IServiceStatus<StatusData>>;
 }
