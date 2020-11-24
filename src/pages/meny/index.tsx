@@ -23,7 +23,7 @@ const GalleryWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  bottom: calc(var(--section-spacing) * -2);
+  bottom: min(calc(var(--section-spacing) * -2), -12rem);
   background-color: ${({ theme }) => theme.colors.slightlyHighlighted};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   overflow: hidden;
