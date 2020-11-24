@@ -117,7 +117,7 @@ const MenuCard: React.FunctionComponent<{
 const MenuAd: React.FunctionComponent = () => {
   return (
     <Col>
-      <Card>
+      <Card $hoverable={false}>
         <CardContent>
           <ResponsiveAd />
         </CardContent>
