@@ -14,7 +14,7 @@
     "dayjs": "^1.9.4",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
-    "firebase": "^8.0.1",
+    "firebase": "^8.1.1",
     "firebase-admin": "^9.3.0",
     "framer-motion": "^2.9.4",
     "got": "^11.5.2",
@@ -27,10 +27,10 @@
     "node-html-parser": "^2.0.0",
     "polished": "^4.0.1",
     "pxcmprs": "^0.1.0",
-    "query-string": "^6.13.1",
+    "query-string": "^6.13.7",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
-    "react-dom": "^16.13.1",
+    "react-dom": "^16.14.0",
     "react-feather": "^2.0.8",
     "react-html-parser": "^2.0.2",
     "react-intersection-observer": "^8.30.3",
@@ -49,7 +49,7 @@
     "@babel/core": "^7.11.0",
     "@types/katex": "^0.11.0",
     "@types/node": "^14.14.9",
-    "@types/react": "^16.9.44",
+    "@types/react": "^17.0.0",
     "@types/react-html-parser": "^2.0.1",
     "@types/react-select": "^3.0.26",
     "@types/styled-components": "^5.1.2",
@@ -64,6 +64,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.0.0",
-    "typescript": "^4.0.2"
+    "typescript": "^4.1.2"
   }
 }
