@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { MenuList } from "../../components/food/Menus";
-import { AdSection } from "../../components/basic/Ad";
 import { Section } from "../../components/layout/Section";
 import { Hero } from "../../components/layout/Hero";
 import { Base } from "../../components/grid/Base";
@@ -99,7 +98,6 @@ const Page: React.FunctionComponent = () => {
       <Section>
         <MenuList limit={30} />
       </Section>
-      <AdSection />
     </DefaultLayout>
   );
 };

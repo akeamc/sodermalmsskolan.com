@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
-import * as breakpoints from "../../styles/breakpoints";
 import { ClientMenu, MenuTitle } from "../../lib/food/structures/client/Menu";
 import { Dish } from "../../lib/food/structures/shared/Dish";
 import { ClientDish } from "../../lib/food/structures/client/Dish";
@@ -13,6 +12,7 @@ import { ArrowDown } from "react-feather";
 import { DishVotes } from "./Voting";
 import { motion } from "framer-motion";
 import { useLang } from "../../hooks/lang";
+import { ResponsiveAd } from "../basic/Ad";
 
 const DishList = styled.ul`
   margin-top: 1rem;
@@ -78,44 +78,53 @@ const CollapseButton: React.FunctionComponent<{
   );
 };
 
+const CardCol = styled(Col).attrs({
+  xs: 12,
+  md: 6,
+  lg: 4,
+})`
+  display: flex;
+`;
+
 const MenuCard: React.FunctionComponent<{
   menu: ClientMenu;
-  onClick?: () => void;
-}> = ({ menu, onClick }) => {
+}> = ({ menu }) => {
   const fallback = new Array(2).fill(null);
   const [detailed, setDetailed] = useState<boolean>(false);
 
   return (
-    <Card layoutId={menu?.id} onClick={onClick}>
-      <CardContent>
-        <CardTitle>{menu ? <MenuTitle menu={menu} /> : <Skeleton />}</CardTitle>
-        <DishList>
-          {(menu?.dishes || fallback).map((dish, index) => (
-            <DishItem key={index} dish={dish} detailed={detailed} />
-          ))}
-        </DishList>
-        <CollapseButton
-          open={detailed}
-          onClick={() => setDetailed(!detailed)}
-        />
-      </CardContent>
-    </Card>
+    <CardCol>
+      <Card>
+        <CardContent>
+          <CardTitle>
+            {menu ? <MenuTitle menu={menu} /> : <Skeleton />}
+          </CardTitle>
+          <DishList>
+            {(menu?.dishes || fallback).map((dish, index) => (
+              <DishItem key={index} dish={dish} detailed={detailed} />
+            ))}
+          </DishList>
+          <CollapseButton
+            open={detailed}
+            onClick={() => setDetailed(!detailed)}
+          />
+        </CardContent>
+      </Card>
+    </CardCol>
   );
 };
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: var(--grid-gap);
-
-  @media (min-width: ${breakpoints.small}) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: ${breakpoints.large}) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`;
+const MenuAd: React.FunctionComponent = () => {
+  return (
+    <Col>
+      <Card>
+        <CardContent>
+          <ResponsiveAd />
+        </CardContent>
+      </Card>
+    </Col>
+  );
+};
 
 export const MenuList: React.FunctionComponent<{
   limit: number;
@@ -126,13 +135,12 @@ export const MenuList: React.FunctionComponent<{
 
   return (
     <Base>
-      <Col>
-        <Grid>
-          {menus.map((menu, index) => (
-            <MenuCard key={index} menu={menu} />
-          ))}
-        </Grid>
-      </Col>
+      {menus.map((menu, index) => (
+        <>
+          {index % 3 === 0 ? <MenuAd /> : null}
+          <MenuCard key={index} menu={menu} />
+        </>
+      ))}
     </Base>
   );
 };
