@@ -27,7 +27,7 @@
     "node-html-parser": "^2.0.0",
     "polished": "^4.0.1",
     "pxcmprs": "^0.1.0",
-    "query-string": "^6.13.1",
+    "query-string": "^6.13.7",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
     "react-dom": "^16.13.1",
