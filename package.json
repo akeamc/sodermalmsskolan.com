@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p 80",
+    "start": "next start",
     "lint": "eslint **/*.ts **/*.tsx"
   },
   "license": "Apache-2.0",
@@ -37,7 +37,6 @@
     "react-marquee-slider": "^1.1.2",
     "react-select": "^3.1.0",
     "react-spinners": "^0.9.0",
-    "react-syntax-highlighter": "^15.0.1",
     "react-toastify": "^6.1.0",
     "styled-components": "^5.1.1",
     "swr": "^0.3.0",
@@ -47,6 +46,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
+    "@next/bundle-analyzer": "^10.0.3",
     "@types/katex": "^0.11.0",
     "@types/node": "^14.14.9",
     "@types/react": "^17.0.0",

@@ -61,7 +61,7 @@ export const light: DefaultTheme = {
     primary: "#0070f3",
     border: "#eaeaea",
     muted: "#666666",
-    code: "rgba(27, 31, 35, 0.05)",
+    code: "#f5f5f5",
     slightlyHighlighted: "#fafafa",
     skeleton: {
       base: "#eaeaea",
@@ -88,6 +88,7 @@ export const dark: DefaultTheme = {
   ...light,
   colors: {
     ...light.colors,
+    code: "#222222",
     background: "#111111",
     foreground: "#ffffff",
     border: "#333333",

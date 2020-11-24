@@ -1,7 +1,11 @@
 /* eslint-disable */
 require("dotenv").config();
 
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer({
   cssModules: true,
   poweredByHeader: false,
   webpack: (config, { isServer }) => {
@@ -24,4 +28,4 @@ module.exports = {
     locales: ["sv"],
     defaultLocale: "sv",
   },
-};
+});
