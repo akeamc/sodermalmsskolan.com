@@ -84,6 +84,10 @@ const CardCol = styled(Col).attrs({
   lg: 4,
 })`
   display: flex;
+
+  ${Card} {
+    width: 100%;
+  }
 `;
 
 const MenuCard: React.FunctionComponent<{
