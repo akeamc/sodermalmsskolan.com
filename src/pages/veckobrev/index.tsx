@@ -1,29 +1,30 @@
-import Link from "next/link";
 import React from "react";
-import { Anchor } from "../../components/basic/Typography";
-import { Base } from "../../components/grid/Base";
-import { NormalWidth } from "../../components/grid/Col";
+import { CardGrid, GridItem } from "../../components/basic/CardGrid";
 import { SimpleHero } from "../../components/layout/Hero/Simple";
 import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { Navigation } from "../../components/layout/Navigation";
 import { Section } from "../../components/layout/Section";
 import withAuth from "../../hocs/withAuth";
-import { DISCORD_CHANNELS } from "../../lib/discord/constants";
-import { ClientChannel } from "../../lib/discord/structures/client/Channel";
+import { ClientLetter } from "../../lib/news/structures/client/Letter";
 
 const News: React.FunctionComponent = () => {
-  const { data } = ClientChannel.useMessagesInChannel(DISCORD_CHANNELS.news.id);
+  const { data } = ClientLetter.useAll();
+
+  const items: GridItem[] = data?.map((letter) => {
+    return {
+      title: letter.title,
+      description: letter.description,
+      href: letter.url,
+    };
+  });
 
   return (
-    <ul>
-      {data?.flat().map((message, index) => (
-        <li key={index}>
-          <Link href={message.attachments[0].url} passHref>
-            <Anchor>{message.content}</Anchor>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <CardGrid
+      items={items}
+      imagesExpected={false}
+      expectedNumberOfItems={12}
+      rowLimit={5}
+    />
   );
 };
 
@@ -38,11 +39,7 @@ const Page: React.FunctionComponent = () => {
       <Navigation />
       <SimpleHero title="Veckobrev" />
       <Section>
-        <Base>
-          <NormalWidth>
-            <News />
-          </NormalWidth>
-        </Base>
+        <News />
       </Section>
     </DefaultLayout>
   );
