@@ -1,8 +1,9 @@
 import { Serializable } from "../../../common/Serializable";
 
 export interface LetterStatic {
+  id: string;
   title: string;
-  content: string;
+  content?: string;
 
   /**
    * ISO8601 string of the publish date.
@@ -12,12 +13,14 @@ export interface LetterStatic {
 }
 
 export class Letter implements Serializable<LetterStatic> {
+  id: string;
   title: string;
-  content: string;
+  content?: string;
   timestamp: Date;
   url: string;
 
-  constructor({ title, timestamp, content, url }: LetterStatic) {
+  constructor({ id, title, timestamp, content, url }: LetterStatic) {
+    this.id = id;
     this.title = title;
     this.content = content;
     this.timestamp = new Date(timestamp);
@@ -26,6 +29,7 @@ export class Letter implements Serializable<LetterStatic> {
 
   public serialize(): LetterStatic {
     return {
+      id: this.id,
       title: this.title,
       content: this.content,
       timestamp: this.timestamp.toISOString(),

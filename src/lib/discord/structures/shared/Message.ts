@@ -27,6 +27,20 @@ export interface MessageQuery {
   limit?: number;
 }
 
+export interface MessageSearchParams extends Record<string, string | number> {
+  before?: string;
+  after?: string;
+  limit: number;
+}
+
+export function getParams(query: MessageQuery): MessageSearchParams {
+  return {
+    limit: query.limit || 50,
+    before: query.before,
+    after: query.after,
+  };
+}
+
 export interface IDiscordAPIMessage {
   id: string;
   channel_id: string;

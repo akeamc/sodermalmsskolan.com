@@ -8,6 +8,10 @@ export class ClientLetter extends Letter {
     return `/api/news/letters`;
   }
 
+  public static fetchUrl(id: string): string {
+    return `${this.fetchAllUrl}/${id}`;
+  }
+
   public static async fetchAll(): Promise<ClientLetter[]> {
     const res = await ky
       .get(this.fetchAllUrl, {
@@ -20,8 +24,24 @@ export class ClientLetter extends Letter {
     return res.map((letter) => new ClientLetter(letter));
   }
 
+  public static async fetch(id: string): Promise<ClientLetter> {
+    const res = await ky
+      .get(this.fetchUrl(id), {
+        headers: {
+          authorization: await getAuthorizationHeader(),
+        },
+      })
+      .json<LetterStatic>();
+
+    return new ClientLetter(res);
+  }
+
   public static useAll(): responseInterface<ClientLetter[], unknown> {
     return useSWR(this.fetchAllUrl, () => this.fetchAll());
+  }
+
+  public static use(id: string): responseInterface<ClientLetter, unknown> {
+    return useSWR(this.fetchUrl(id), () => this.fetch(id));
   }
 
   public get description(): string {
