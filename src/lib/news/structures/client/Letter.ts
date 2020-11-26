@@ -25,6 +25,10 @@ export class ClientLetter extends Letter {
   }
 
   public static async fetch(id: string): Promise<ClientLetter> {
+    if (!id) {
+      return null;
+    }
+
     const res = await ky
       .get(this.fetchUrl(id), {
         headers: {
