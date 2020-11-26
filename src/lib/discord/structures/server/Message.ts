@@ -1,4 +1,9 @@
-import { Message, IDiscordAPIMessage, MessageQuery } from "../shared/Message";
+import {
+  Message,
+  IDiscordAPIMessage,
+  MessageQuery,
+  getParams,
+} from "../shared/Message";
 import got from "got/dist/source";
 import { AUTHORIZATION_HEADER } from "../../credentials";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
@@ -11,15 +16,36 @@ export type MessageQueryHandler<T = unknown> = (
 ) => void | Promise<void>;
 
 export class ServerMessage extends Message {
+  /**
+   *
+   * @param channel The ID of the channel where the message is.
+   * @param message The ID of the message to be fetched.
+   * @param query
+   */
+  static async fetch(
+    channel: string,
+    message: string,
+    query: MessageQuery = {}
+  ): Promise<ServerMessage> {
+    const params = getParams(query);
+
+    const response = await got
+      .get(`https://discord.com/api/channels/${channel}/messages/${message}`, {
+        headers: {
+          Authorization: AUTHORIZATION_HEADER,
+        },
+        searchParams: params,
+      })
+      .json<IDiscordAPIMessage>();
+
+    return new ServerMessage(response);
+  }
+
   static async fetchMany(
     channel: string,
     query: MessageQuery = {}
-  ): Promise<Message[]> {
-    const params: { limit: number; before?: string; after?: string } = {
-      limit: query.limit || 50,
-      before: query.before,
-      after: query.after,
-    };
+  ): Promise<ServerMessage[]> {
+    const params = getParams(query);
 
     const response = await got
       .get(`https://discord.com/api/channels/${channel}/messages`, {
@@ -30,7 +56,7 @@ export class ServerMessage extends Message {
       })
       .json<IDiscordAPIMessage[]>();
 
-    return response.map((data) => new Message(data));
+    return response.map((data) => new ServerMessage(data));
   }
 
   public static wrapQueryHandler = (

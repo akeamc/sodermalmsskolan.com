@@ -10,6 +10,10 @@ export class ClientDish extends Dish {
   }
 
   public static async fetch(id: string): Promise<ClientDish> {
+    if (!id) {
+      return null;
+    }
+
     const res = await ky.get(`/api/food/dishes/${id}`).json<IDish>();
 
     return new ClientDish(res);
