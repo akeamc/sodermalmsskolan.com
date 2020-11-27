@@ -62,6 +62,7 @@ export const DesktopNav: React.FunctionComponent = () => {
         <Item href="/blogg">Blogg</Item>
         <Item href="/digibruh">Digibruh</Item>
         <Item href="/schema">Schema</Item>
+        <Item href="/veckobrev">Veckobrev</Item>
       </List>
       <List>
         {isLoading ? (

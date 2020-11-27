@@ -28,6 +28,7 @@ const Background = styled(Image).attrs({
   z-index: 0;
   transition: transform 0.2s ease-in-out;
   object-fit: cover;
+  filter: brightness(0.75);
 `;
 
 const BigCard = styled(Card)`

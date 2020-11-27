@@ -1,9 +1,14 @@
 import { Serializable } from "../../../common/Serializable";
 
+export interface LetterAttachment {
+  content: string;
+  pages: number;
+}
+
 export interface LetterStatic {
   id: string;
   title: string;
-  content?: string;
+  attachment?: LetterAttachment;
 
   /**
    * ISO8601 string of the publish date.
@@ -15,14 +20,14 @@ export interface LetterStatic {
 export class Letter implements Serializable<LetterStatic> {
   id: string;
   title: string;
-  content?: string;
+  attachment?: LetterAttachment;
   timestamp: Date;
   url: string;
 
-  constructor({ id, title, timestamp, content, url }: LetterStatic) {
+  constructor({ id, title, timestamp, attachment, url }: LetterStatic) {
     this.id = id;
     this.title = title;
-    this.content = content;
+    this.attachment = attachment;
     this.timestamp = new Date(timestamp);
     this.url = url;
   }
@@ -31,7 +36,7 @@ export class Letter implements Serializable<LetterStatic> {
     return {
       id: this.id,
       title: this.title,
-      content: this.content,
+      attachment: this.attachment,
       timestamp: this.timestamp.toISOString(),
       url: this.url,
     };

@@ -1,6 +1,6 @@
 import { DISCORD_CHANNELS } from "../../../discord/constants";
 import { ServerMessage } from "../../../discord/structures/server/Message";
-import { Letter } from "../shared/Letter";
+import { Letter, LetterAttachment } from "../shared/Letter";
 import pdf from "pdf-parse";
 import got from "got/dist/source";
 import { Message } from "../../../discord/structures/shared/Message";
@@ -10,13 +10,14 @@ export interface PDFParseResult {
 }
 
 export class ServerLetter extends Letter {
-  public static async parsePdf(url: string): Promise<PDFParseResult> {
+  public static async parsePdf(url: string): Promise<LetterAttachment> {
     const buf = await got.get(url).buffer();
 
     const data = await pdf(buf);
 
     return {
-      text: data.text,
+      content: data.text,
+      pages: data.numpages,
     };
   }
 
@@ -40,9 +41,9 @@ export class ServerLetter extends Letter {
     });
 
     if (detailed) {
-      const parsed = await ServerLetter.parsePdf(url);
+      const data = await ServerLetter.parsePdf(url);
 
-      letter.content = parsed.text;
+      letter.attachment = data;
     }
 
     return letter;

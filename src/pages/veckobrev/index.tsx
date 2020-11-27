@@ -3,11 +3,13 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardLink,
   CardTitle,
 } from "../../components/basic/Card";
 import { getLineClamp } from "../../components/basic/CardGrid";
 import { Skeleton } from "../../components/basic/Skeleton";
+import { Muted } from "../../components/basic/Typography";
 import { Base } from "../../components/grid/Base";
 import { Col } from "../../components/grid/Col";
 import { SimpleHero } from "../../components/layout/Hero/Simple";
@@ -25,6 +27,8 @@ const LetterCard: React.FunctionComponent<{ letter: Letter }> = ({
 
   const rowLimit = 5;
 
+  const pages = data?.attachment?.pages;
+
   return (
     <CardLink href={letter?.url}>
       <Card $hoverable={!!letter?.url}>
@@ -34,6 +38,15 @@ const LetterCard: React.FunctionComponent<{ letter: Letter }> = ({
             {data?.description || <Skeleton count={5} />}
           </CardDescription>
         </CardContent>
+        <CardFooter>
+          <Muted>
+            {pages ? (
+              `${pages} ${Math.abs(pages) === 1 ? "sida" : "sidor"}`
+            ) : (
+              <Skeleton width="4em" />
+            )}
+          </Muted>
+        </CardFooter>
       </Card>
     </CardLink>
   );
