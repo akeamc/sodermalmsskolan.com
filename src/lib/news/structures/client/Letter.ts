@@ -51,9 +51,11 @@ export class ClientLetter extends Letter {
   public get description(): string {
     const regex = /Veckobrev Ovalen v.( ?)[0-9]+/gi;
 
-    const matchIndex = Math.max(this.content.search(regex), 0);
-    const matchLength = this.content.match(regex)?.[0]?.length || 0;
+    const content = this.attachment?.content || "";
 
-    return this.content.slice(matchIndex + matchLength).trim();
+    const matchIndex = Math.max(content.search(regex), 0);
+    const matchLength = content.match(regex)?.[0]?.length || 0;
+
+    return content.slice(matchIndex + matchLength).trim();
   }
 }

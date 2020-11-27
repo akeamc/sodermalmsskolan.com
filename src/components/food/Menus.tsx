@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
 import { ClientMenu, MenuTitle } from "../../lib/food/structures/client/Menu";
@@ -140,10 +140,10 @@ export const MenuList: React.FunctionComponent<{
   return (
     <Base>
       {menus.map((menu, index) => (
-        <>
+        <Fragment key={index}>
           {index % 6 === 0 ? <MenuAd /> : null}
-          <MenuCard key={index} menu={menu} />
-        </>
+          <MenuCard menu={menu} />
+        </Fragment>
       ))}
     </Base>
   );

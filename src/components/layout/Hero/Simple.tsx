@@ -21,18 +21,22 @@ export const TitleContainer = styled.div<{ center?: boolean }>`
     --size-md: 4rem;
     --size-lg: 4.5rem;
     --size-xl: 4.5rem;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 
     @media (min-width: ${breakpoints.medium}) {
-      margin-bottom: 56px;
+      margin-bottom: 3.5rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
   ${LeadText} {
-    margin: 24px 0;
+    margin: 1.5rem 0;
 
     @media (min-width: ${breakpoints.medium}) {
-      margin: 48px 0;
+      margin: 3rem 0;
     }
 
     &:last-child {
