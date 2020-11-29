@@ -4,7 +4,7 @@ import { FormWrapper } from "../FormWrapper";
 import { auth } from "../../../lib/firebase/firebase";
 import { useRouter } from "next/router";
 import { FullPageText } from "../../basic/Typography";
-import { FullPageSpinner } from "../../basic/Spinner";
+import { FullPageSpinner } from "../../spinners/spinner";
 import { readableErrorMessage } from "../../../lib/auth/error";
 import { Input } from "../../form/Input";
 import { Button } from "../../basic/Button";

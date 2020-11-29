@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { AuthActionProps } from ".";
 import { readableErrorMessage } from "../../../lib/auth/error";
 import { auth } from "../../../lib/firebase/firebase";
-import { FullPageSpinner } from "../../basic/Spinner";
+import { FullPageSpinner } from "../../spinners/spinner";
 import { FullPageText } from "../../basic/Typography";
 
 export const VerifyEmail: React.FunctionComponent<AuthActionProps> = ({

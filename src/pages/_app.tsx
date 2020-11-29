@@ -5,7 +5,9 @@ import { AppProps } from "next/dist/next-server/lib/router/router";
 import { ThemeProvider } from "../components/theme/ThemeProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { StyledToastContainer } from "../components/basic/ToastContainer";
+import NProgress from "../components/spinners/nprogress";
 
+// DayJS is lightweight, locales must be imported manually.
 import "dayjs/locale/sv";
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
@@ -13,6 +15,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
     <ThemeProvider>
       <GlobalStyles />
       <AuthProvider>
+        <NProgress />
         <StyledToastContainer />
         <Component {...pageProps} />
       </AuthProvider>

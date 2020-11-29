@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../providers/Auth";
-import { FullPageSpinner } from "../components/basic/Spinner";
+import { FullPageSpinner } from "../components/spinners/spinner";
 import { loginLink } from "../lib/auth/href";
 
 /**
