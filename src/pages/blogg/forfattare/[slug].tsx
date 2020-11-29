@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     const slug = query.slug?.toString();
     const author = await getAuthorBySlug(slug);
 
-    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate");
 
     return {
       props: { author, errorCode: null },
