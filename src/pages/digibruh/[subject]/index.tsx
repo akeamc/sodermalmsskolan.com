@@ -2,10 +2,7 @@ import { DefaultLayout } from "../../../components/layout/Layout/Default";
 import NotFound from "../../404";
 import { CardGrid } from "../../../components/basic/CardGrid";
 import Digibruh from "../../../lib/digibruh/Digibruh";
-import {
-  DigibruhPage,
-  getInitialDigibruh,
-} from "../../../lib/digibruh/utils/initialprops";
+import { DigibruhPage, getInitialDigibruh } from "../../../lib/digibruh/ssr";
 import React from "react";
 import { Base } from "../../../components/grid/Base";
 import { Section } from "../../../components/layout/Section";

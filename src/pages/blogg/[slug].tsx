@@ -1,48 +1,63 @@
-import { getPostBySlug } from "../../lib/ghost/post";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { getPostBySlug, getPosts } from "../../lib/ghost/post";
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next";
 import NotFound from "../404";
 import ArticlePage from "../../components/article/ArticlePage";
-import Digibruh from "../../lib/digibruh/Digibruh";
 import React from "react";
+import { useRouter } from "next/router";
+import { postBelongsToBlog } from "../../lib/blog/filter";
 
-export const getServerSideProps: GetServerSideProps = async ({
-  res,
-  query,
-}) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getPosts("all");
+
+  const paths = posts.filter(postBelongsToBlog).map((post) => ({
+    params: { slug: post.slug },
+  }));
+
+  return { paths, fallback: true };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const slug = query.slug?.toString();
+    const slug = params.slug?.toString();
     const post = await getPostBySlug(slug);
 
-    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
-
-    if (post?.tags?.map((tag) => tag.slug).includes(Digibruh.tagPrefix)) {
-      throw new Error("Cannot view Digibruh article here.");
+    if (!postBelongsToBlog(post)) {
+      throw new Error("Post doesn't belong to the blog.");
     }
 
     return {
-      props: { post, errorCode: null },
+      props: { post },
+      revalidate: 30,
     };
   } catch (error) {
-    const statusCode = 404;
-    res.statusCode = statusCode;
     return {
       props: {
         post: null,
-        errorCode: statusCode,
       },
+      revalidate: 1,
     };
   }
 };
 
-const Page: React.FunctionComponent = ({
+const Page: NextPage = ({
   post,
-  errorCode,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  if (errorCode) {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <ArticlePage loading post={null} />;
+  }
+
+  if (!post) {
     return <NotFound />;
   }
 
-  return <ArticlePage post={post} errorCode={errorCode} />;
+  return <ArticlePage post={post} />;
 };
 
 export default Page;

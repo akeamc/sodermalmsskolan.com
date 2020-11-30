@@ -8,13 +8,14 @@ import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { transparentLightPalette } from "../../../styles/themes";
 import Image from "next/image";
 
-const BackgroundWrapper = styled(motion.div)<{ image: string }>`
+const BackgroundWrapper = styled(motion.div)`
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 0;
+  background-color: ${({ theme }) => theme.colors.skeleton.base};
 
   &::before {
     content: "";
@@ -61,7 +62,7 @@ export const HeaderWithBackground: React.FunctionComponent<{
 
   const opacity = useTransform(
     scrollY,
-    (value) => 1 - Math.min(value / ref?.current?.offsetHeight, 1)
+    (value) => 1 - Math.min(value / ref?.current?.offsetHeight || 0, 1)
   );
 
   const y = useTransform(scrollY, (value) => value * 0.5);
@@ -95,8 +96,8 @@ export const HeaderWithBackground: React.FunctionComponent<{
               </Base>
             </Hero>
           </motion.div>
-          <BackgroundWrapper image={image} style={{ scale: backgroundScale }}>
-            <Image src={image} layout="fill" />
+          <BackgroundWrapper style={{ scale: backgroundScale }}>
+            {image ? <Image src={image} layout="fill" /> : null}
           </BackgroundWrapper>
         </Container>
       </ThemeProvider>
