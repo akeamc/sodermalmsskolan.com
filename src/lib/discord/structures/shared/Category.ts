@@ -1,4 +1,4 @@
-import { Serializable } from "../../../common/Serializable";
+import Serializable from "../../../common/serializable";
 import { IDiscordAPIChannel, Channel, ChannelType } from "./Channel";
 
 export interface ICategory {

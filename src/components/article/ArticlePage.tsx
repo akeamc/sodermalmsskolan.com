@@ -10,9 +10,11 @@ import { useRouter } from "next/router";
 const ArticlePage: React.FunctionComponent<{
   post: PostOrPage;
   digibruh?: boolean;
-  errorCode: number | null;
-}> = ({ post, errorCode, digibruh = false }) => {
-  if (errorCode) {
+  loading?: boolean;
+}> = ({ post, digibruh = false }) => {
+  const loading = true;
+
+  if (!post && !loading) {
     return <NotFound />;
   }
 
@@ -34,7 +36,7 @@ const ArticlePage: React.FunctionComponent<{
       }}
     >
       <ArticleHero post={post} dateText={dateText} />
-      <ArticleBody data={post} />
+      <ArticleBody post={post} />
     </DefaultLayout>
   );
 };

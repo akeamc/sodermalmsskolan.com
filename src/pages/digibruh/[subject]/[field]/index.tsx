@@ -4,10 +4,7 @@ import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
 import Digibruh from "../../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
 import { PostOrPage } from "@tryghost/content-api";
-import {
-  DigibruhPage,
-  getInitialDigibruh,
-} from "../../../../lib/digibruh/utils/initialprops";
+import { DigibruhPage, getInitialDigibruh } from "../../../../lib/digibruh/ssr";
 import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
 import { Base } from "../../../../components/grid/Base";

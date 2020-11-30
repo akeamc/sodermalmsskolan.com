@@ -1,9 +1,9 @@
 import ky from "ky-universal";
 import useSWR, { responseInterface } from "swr";
 import { getAuthorizationHeader } from "../../../auth/token";
-import { Letter, LetterStatic } from "../shared/Letter";
+import Letter, { LetterStatic } from "../shared/letter";
 
-export class ClientLetter extends Letter {
+export default class ClientLetter extends Letter {
   public static get fetchAllUrl(): string {
     return `/api/news/letters`;
   }

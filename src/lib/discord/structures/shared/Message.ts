@@ -5,7 +5,7 @@ import {
 import { IDiscordAPIUser, DiscordUser } from "./User";
 import { Member, IDiscordAPIMember } from "./Member";
 import { IDiscordAPIMessageReaction } from "./MessageReaction";
-import { Serializable } from "../../../common/Serializable";
+import Serializable from "../../../common/serializable";
 
 /**
  * Options for fetching messages.

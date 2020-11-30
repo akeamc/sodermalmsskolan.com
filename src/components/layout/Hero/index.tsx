@@ -6,5 +6,6 @@ export const Hero = styled(Section)`
 `;
 
 export const HeroTitle = styled.h1`
+  line-height: 1.1;
   color: ${({ theme }) => theme.colors.foreground};
 `;

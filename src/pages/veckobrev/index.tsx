@@ -17,7 +17,7 @@ import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { Navigation } from "../../components/layout/Navigation";
 import { Section } from "../../components/layout/Section";
 import withAuth from "../../hocs/withAuth";
-import { ClientLetter } from "../../lib/news/structures/client/Letter";
+import ClientLetter from "../../lib/news/structures/client/letter";
 
 const LetterCard: React.FunctionComponent<{ letter: ClientLetter }> = ({
   letter,

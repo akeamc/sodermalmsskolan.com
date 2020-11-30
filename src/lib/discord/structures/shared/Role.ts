@@ -1,4 +1,4 @@
-import { Serializable } from "../../../common/Serializable";
+import Serializable from "../../../common/serializable";
 
 export interface IDiscordAPIRole {
   id: string;

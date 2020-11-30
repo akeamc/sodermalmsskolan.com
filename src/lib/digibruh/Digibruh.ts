@@ -5,7 +5,7 @@ import { getTags } from "../ghost/tag";
 import useSWR, { responseInterface } from "swr";
 import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";
-import { Serializable } from "../common/Serializable";
+import Serializable from "../common/serializable";
 
 /**
  * A static variant of `Digibruh`, used mostly for SSR (because you cannot serialize classes with JSON).
@@ -17,29 +17,23 @@ export interface DigibruhStatic {
 /**
  * A tag manager for Digibruh.
  */
-export class DigibruhTagArray extends Array<Tag> {
+export class DigibruhTags extends Array<Tag> {
   /**
    * Fetch all `Tag`s whose slug has a prefix matching `Digibruh.tagPrefix`.
    */
-  static async fetch(): Promise<DigibruhTagArray> {
+  public static async fetch(): Promise<DigibruhTags> {
     const tags = await getTags();
 
-    const array = new DigibruhTagArray();
-
-    tags.forEach((tag) => {
-      array.push(tag);
-    });
-
-    return array;
+    return new DigibruhTags(...tags);
   }
 
-  fields(subjectSlug = DigibruhCollection.tagWildcard): Field[] {
+  public fields(subjectSlug = DigibruhCollection.tagWildcard): Field[] {
     return this.filter((tag) => Field.regExp(subjectSlug).test(tag.slug)).map(
       (tag) => new Field(tag)
     );
   }
 
-  subjects(): Subject[] {
+  public subjects(): Subject[] {
     return this.filter((tag) => Subject.regExp().test(tag.slug)).map((tag) => {
       const subject = new Subject(tag, []); // Create a subject with no fields now, they will be added when we know the slug of the subject.
 
@@ -53,23 +47,23 @@ export default class Digibruh implements Serializable<DigibruhStatic> {
   /**
    * Global tag prefix used on the Ghost backend to differentiate Digibruh posts from non-Digibruh posts.
    */
-  static tagPrefix = "hash-skola";
+  public static tagPrefix = "hash-skola";
 
-  public tags: DigibruhTagArray;
+  public tags: DigibruhTags;
 
-  get fields(): Field[] {
+  public get fields(): Field[] {
     return this.tags.fields();
   }
 
-  get subjects(): Subject[] {
+  public get subjects(): Subject[] {
     return this.tags.subjects();
   }
 
-  getSubjectBySlug(slug: string): Subject | null {
+  public getSubjectBySlug(slug: string): Subject | null {
     return this.subjects.find((subject) => subject.slug == slug) || null;
   }
 
-  getFieldBySlug(subjectSlug: string, fieldSlug: string): Field | null {
+  public getFieldBySlug(subjectSlug: string, fieldSlug: string): Field | null {
     return (
       this.fields.find(
         (field) => field.subjectSlug == subjectSlug && field.slug == fieldSlug
@@ -77,7 +71,7 @@ export default class Digibruh implements Serializable<DigibruhStatic> {
     );
   }
 
-  async fetchPostBySlug(slug: string): Promise<PostOrPage | null> {
+  public async fetchPostBySlug(slug: string): Promise<PostOrPage | null> {
     const post = await getPostBySlug(slug);
 
     if (!post.tags.find((tag) => tag.slug == Digibruh.tagPrefix)) {
@@ -87,23 +81,25 @@ export default class Digibruh implements Serializable<DigibruhStatic> {
     return post;
   }
 
-  static fetchAllPosts = async (): Promise<PostsOrPages> => {
+  public static fetchAllPosts = async (): Promise<PostsOrPages> => {
     return getPostsByTag(Digibruh.tagPrefix, "all");
   };
 
-  static fetchPostsByAuthor = async (slug: string): Promise<PostsOrPages> => {
+  public static fetchPostsByAuthor = async (
+    slug: string
+  ): Promise<PostsOrPages> => {
     return getPosts("all", `authors.slug:${slug}+tag:${Digibruh.tagPrefix}`);
   };
 
-  static async initialize(): Promise<Digibruh> {
-    return new Digibruh({ tags: await DigibruhTagArray.fetch() });
+  public static async initialize(): Promise<Digibruh> {
+    return new Digibruh({ tags: await DigibruhTags.fetch() });
   }
 
-  constructor(options: DigibruhStatic) {
-    this.tags = new DigibruhTagArray(...options.tags);
+  public constructor(options: DigibruhStatic) {
+    this.tags = new DigibruhTags(...options.tags);
   }
 
-  serialize(): DigibruhStatic {
+  public serialize(): DigibruhStatic {
     return {
       tags: new Array(...this.tags),
     };

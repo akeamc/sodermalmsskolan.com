@@ -1,4 +1,4 @@
-import Digibruh, { DigibruhTagArray } from "../../../digibruh/Digibruh";
+import Digibruh, { DigibruhTags } from "../../../digibruh/Digibruh";
 import { StudySet } from "../shared/StudySet";
 import { parse } from "node-html-parser";
 import url from "url";
@@ -38,7 +38,7 @@ export class ServerStudySet extends StudySet {
             return validLinks;
           }, []);
 
-        const tags = new DigibruhTagArray(...article.tags);
+        const tags = new DigibruhTags(...article.tags);
 
         const digibruh = {
           fields: tags.fields().map((field) => field.slug),

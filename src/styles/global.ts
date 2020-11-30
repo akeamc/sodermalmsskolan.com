@@ -125,7 +125,7 @@ export default createGlobalStyle`
     --size-xl: 4rem;
     font-weight: 700;
     letter-spacing: -.1rem;
-    line-height: 1;
+    line-height: 1.1;
   }
 
   h2 {

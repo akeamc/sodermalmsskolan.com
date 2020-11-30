@@ -10,6 +10,7 @@ import { Link as LinkIcon } from "react-feather";
 import { Table } from "../basic/Table";
 import { Anchor } from "../basic/Typography";
 import Link from "next/link";
+import { Skeleton } from "../basic/Skeleton";
 
 enum FigureWidth {
   Normal,
@@ -198,11 +199,8 @@ const classNameToFigureWidth = (classNames: string): FigureWidth => {
 };
 
 const ArticleBody: React.FunctionComponent<{
-  data: PostOrPage | null;
-  loading?: boolean;
-}> = (props) => {
-  const { data } = props;
-
+  post: PostOrPage | null;
+}> = ({ post }) => {
   const text = (node) => {
     return node.children
       .filter((child) => child.type == "text")
@@ -297,7 +295,18 @@ const ArticleBody: React.FunctionComponent<{
     return convertNodeToElement(node, index, transform);
   }
 
-  const parsedHtml = ReactHtmlParser(data?.html, { transform });
+  const parsedHtml = post ? (
+    ReactHtmlParser(post?.html, { transform })
+  ) : (
+    <>
+      <h2>
+        <Skeleton />
+      </h2>
+      <p>
+        <Skeleton count={23} />
+      </p>
+    </>
+  );
 
   return (
     <RichTextSection>

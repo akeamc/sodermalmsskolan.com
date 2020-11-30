@@ -2,10 +2,7 @@ import Digibruh from "../../../../lib/digibruh/Digibruh";
 import NotFound from "../../../404";
 import ArticlePage from "../../../../components/article/ArticlePage";
 import useSWR from "swr";
-import {
-  DigibruhPage,
-  getInitialDigibruh,
-} from "../../../../lib/digibruh/utils/initialprops";
+import { DigibruhPage, getInitialDigibruh } from "../../../../lib/digibruh/ssr";
 import React from "react";
 
 const Page: DigibruhPage = (props) => {
@@ -22,7 +19,7 @@ const Page: DigibruhPage = (props) => {
     }
   );
 
-  return <ArticlePage digibruh post={post} errorCode={props.errorCode} />;
+  return <ArticlePage digibruh post={post} />;
 };
 
 Page.getInitialProps = getInitialDigibruh;

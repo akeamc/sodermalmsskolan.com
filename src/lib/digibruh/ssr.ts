@@ -1,5 +1,5 @@
 import { NextPageContext, NextPage } from "next";
-import Digibruh, { DigibruhStatic } from "../Digibruh";
+import Digibruh, { DigibruhStatic } from "./Digibruh";
 import { PostOrPage } from "@tryghost/content-api";
 
 export interface DigibruhPageProps {

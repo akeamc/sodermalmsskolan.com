@@ -1,7 +1,7 @@
 import { IDiscordAPIUser } from "./User";
 import { DiscordUser } from "./User";
 import { IDiscordAPIPermissionOverwrite } from "./PermissionOverwrite";
-import { Serializable } from "../../../common/Serializable";
+import Serializable from "../../../common/serializable";
 
 export enum ChannelType {
   GuildText = 0,

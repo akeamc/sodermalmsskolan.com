@@ -1,15 +1,11 @@
 import { DISCORD_CHANNELS } from "../../../discord/constants";
 import { ServerMessage } from "../../../discord/structures/server/Message";
-import { Letter, LetterAttachment } from "../shared/Letter";
+import Letter, { LetterAttachment } from "../shared/letter";
 import pdf from "pdf-parse";
 import got from "got/dist/source";
 import { Message } from "../../../discord/structures/shared/Message";
 
-export interface PDFParseResult {
-  text: string;
-}
-
-export class ServerLetter extends Letter {
+export default class ServerLetter extends Letter {
   public static async parsePdf(url: string): Promise<LetterAttachment> {
     const buf = await got.get(url).buffer();
 
