@@ -18,16 +18,12 @@ import { Navigation } from "../../components/layout/Navigation";
 import { Section } from "../../components/layout/Section";
 import withAuth from "../../hocs/withAuth";
 import { ClientLetter } from "../../lib/news/structures/client/Letter";
-import { Letter } from "../../lib/news/structures/shared/Letter";
 
-const LetterCard: React.FunctionComponent<{ letter: Letter }> = ({
+const LetterCard: React.FunctionComponent<{ letter: ClientLetter }> = ({
   letter,
 }) => {
-  const { data } = ClientLetter.use(letter?.id);
-
   const rowLimit = 5;
-
-  const pages = data?.attachment?.pages;
+  const pages = letter?.attachment?.pages;
 
   return (
     <CardLink href={letter?.url}>
@@ -35,7 +31,7 @@ const LetterCard: React.FunctionComponent<{ letter: Letter }> = ({
         <CardContent>
           <CardTitle>{letter?.title || <Skeleton />}</CardTitle>
           <CardDescription style={getLineClamp(rowLimit)}>
-            {data?.description || <Skeleton count={5} />}
+            {letter?.description || <Skeleton count={5} />}
           </CardDescription>
         </CardContent>
         <CardFooter>

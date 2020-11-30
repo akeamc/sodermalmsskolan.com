@@ -8,7 +8,7 @@ export interface LetterAttachment {
 export interface LetterStatic {
   id: string;
   title: string;
-  attachment?: LetterAttachment;
+  attachment: LetterAttachment;
 
   /**
    * ISO8601 string of the publish date.
@@ -20,7 +20,7 @@ export interface LetterStatic {
 export class Letter implements Serializable<LetterStatic> {
   id: string;
   title: string;
-  attachment?: LetterAttachment;
+  attachment: LetterAttachment;
   timestamp: Date;
   url: string;
 
