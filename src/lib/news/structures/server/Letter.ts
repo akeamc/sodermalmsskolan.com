@@ -22,8 +22,7 @@ export class ServerLetter extends Letter {
   }
 
   public static async fromMessage(
-    message: Message,
-    detailed = false
+    message: Message
   ): Promise<ServerLetter | null> {
     const attachment = message.attachments[0];
 
@@ -33,27 +32,20 @@ export class ServerLetter extends Letter {
 
     const { url } = attachment;
 
-    const letter = new ServerLetter({
+    return new ServerLetter({
       id: message.id,
       title: message.content,
       timestamp: message.createdAt.toISOString(),
+      attachment: await ServerLetter.parsePdf(url),
       url,
     });
-
-    if (detailed) {
-      const data = await ServerLetter.parsePdf(url);
-
-      letter.attachment = data;
-    }
-
-    return letter;
   }
 
   public static async fetchAll(): Promise<ServerLetter[]> {
     const messages = await ServerMessage.fetchMany(DISCORD_CHANNELS.news.id);
 
     const results = await Promise.all(
-      messages.map((message) => ServerLetter.fromMessage(message, false))
+      messages.map((message) => ServerLetter.fromMessage(message))
     );
 
     return results.filter((message) => !!message);
@@ -62,6 +54,6 @@ export class ServerLetter extends Letter {
   public static async fetch(id: string): Promise<ServerLetter> {
     const message = await ServerMessage.fetch(DISCORD_CHANNELS.news.id, id);
 
-    return ServerLetter.fromMessage(message, true);
+    return ServerLetter.fromMessage(message);
   }
 }

@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     const slug = query.slug?.toString();
     const post = await getPostBySlug(slug);
 
-    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
 
     if (post?.tags?.map((tag) => tag.slug).includes(Digibruh.tagPrefix)) {
       throw new Error("Cannot view Digibruh article here.");

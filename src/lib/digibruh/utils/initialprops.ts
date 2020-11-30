@@ -18,7 +18,7 @@ export type DigibruhPage = NextPage<DigibruhPageProps>;
 export async function getInitialDigibruh(
   ctx: Context
 ): Promise<DigibruhPageProps> {
-  ctx.res?.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+  ctx.res?.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate");
 
   const digibruh = await Digibruh.initialize();
 

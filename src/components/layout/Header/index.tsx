@@ -1,4 +1,4 @@
-import styled, { ThemeProvider, useTheme } from "styled-components";
+import styled, { css, ThemeProvider, useTheme } from "styled-components";
 import { Navigation } from "../Navigation";
 import { Hero } from "../Hero";
 import { Base } from "../../grid/Base";
@@ -6,26 +6,39 @@ import { ResponsiveHalf } from "../../grid/Col";
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { transparentLightPalette } from "../../../styles/themes";
+import Image from "next/image";
 
-const Background = styled(motion.div)<{ image: string }>`
-  background: ${({ image }) =>
-    `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)), url(${image})`};
-  background-size: cover;
-  background-position: center;
+const BackgroundWrapper = styled(motion.div)<{ image: string }>`
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 0;
+
+  &::before {
+    content: "";
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  img {
+    z-index: -1;
+    object-fit: cover;
+  }
 `;
 
 const Container = styled.div<{ minHeight?: string }>`
   ${({ minHeight }) =>
-    minHeight &&
-    `
-    min-height: ${minHeight};
-  `}
+    minHeight
+      ? css`
+          min-height: ${minHeight};
+        `
+      : null}
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -50,7 +63,9 @@ export const HeaderWithBackground: React.FunctionComponent<{
     scrollY,
     (value) => 1 - Math.min(value / ref?.current?.offsetHeight, 1)
   );
+
   const y = useTransform(scrollY, (value) => value * 0.5);
+
   const backgroundScale = useTransform(
     scrollY,
     (value) => 1 + Math.max(0, value / (ref?.current?.offsetHeight * 2))
@@ -80,7 +95,9 @@ export const HeaderWithBackground: React.FunctionComponent<{
               </Base>
             </Hero>
           </motion.div>
-          <Background image={image} style={{ scale: backgroundScale }} />
+          <BackgroundWrapper image={image} style={{ scale: backgroundScale }}>
+            <Image src={image} layout="fill" />
+          </BackgroundWrapper>
         </Container>
       </ThemeProvider>
     </>
