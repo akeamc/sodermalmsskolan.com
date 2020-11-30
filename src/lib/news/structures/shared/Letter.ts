@@ -1,4 +1,4 @@
-import { Serializable } from "../../../common/Serializable";
+import Serializable from "../../../common/serializable";
 
 export interface LetterAttachment {
   content: string;
@@ -17,7 +17,10 @@ export interface LetterStatic {
   url: string;
 }
 
-export class Letter implements Serializable<LetterStatic> {
+/**
+ * A letter, derived from a Discord `Message` with a PDF attachment.
+ */
+export default abstract class Letter implements Serializable<LetterStatic> {
   id: string;
   title: string;
   attachment: LetterAttachment;

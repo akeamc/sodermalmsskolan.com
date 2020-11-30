@@ -1,4 +1,4 @@
-import { Serializable } from "../../../common/Serializable";
+import Serializable from "../../../common/serializable";
 import { IDiscordAPIUser, DiscordUser } from "./User";
 
 export interface IDiscordAPIMember {

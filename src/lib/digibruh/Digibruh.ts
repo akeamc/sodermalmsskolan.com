@@ -5,7 +5,7 @@ import { getTags } from "../ghost/tag";
 import useSWR, { responseInterface } from "swr";
 import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";
-import { Serializable } from "../common/Serializable";
+import Serializable from "../common/serializable";
 
 /**
  * A static variant of `Digibruh`, used mostly for SSR (because you cannot serialize classes with JSON).
