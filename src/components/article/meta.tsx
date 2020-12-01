@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
-import { AuthorCardRow } from "./AuthorCard";
-import * as breakpoints from "../../../styles/breakpoints";
-import { Skeleton } from "../../basic/Skeleton";
+import { AuthorCardRow } from "./author";
+import * as breakpoints from "../../styles/breakpoints";
+import { Skeleton } from "../basic/Skeleton";
 
 const MetaRow = styled.div`
   margin-top: 2.5rem;

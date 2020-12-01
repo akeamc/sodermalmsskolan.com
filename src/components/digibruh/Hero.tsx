@@ -3,6 +3,7 @@ import { HeaderWithBackground } from "../layout/Header";
 import React from "react";
 import { Emoji } from "../basic/Emoji";
 import { HeroTitle } from "../layout/Hero";
+import { Skeleton } from "../basic/Skeleton";
 
 export interface HeroProps {
   title: string;
@@ -17,9 +18,9 @@ export const DigibruhHero: React.FunctionComponent<HeroProps> = ({
 }) => {
   return (
     <HeaderWithBackground image={image}>
-      <HeroTitle>{title}</HeroTitle>
+      <HeroTitle>{title || <Skeleton />}</HeroTitle>
       <LeadText>
-        <Emoji>{lead}</Emoji>
+        <Emoji>{lead || <Skeleton count={4} />}</Emoji>
       </LeadText>
     </HeaderWithBackground>
   );
