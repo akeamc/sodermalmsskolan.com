@@ -7,7 +7,7 @@ import { Skeleton } from "../basic/Skeleton";
 
 export interface HeroProps {
   title: string;
-  lead: string;
+  lead?: string;
   image: string;
 }
 
@@ -20,7 +20,7 @@ export const DigibruhHero: React.FunctionComponent<HeroProps> = ({
     <HeaderWithBackground image={image}>
       <HeroTitle>{title || <Skeleton />}</HeroTitle>
       <LeadText>
-        <Emoji>{lead || <Skeleton count={4} />}</Emoji>
+        <Emoji>{typeof lead === "string" ? lead : <Skeleton count={4} />}</Emoji>
       </LeadText>
     </HeaderWithBackground>
   );
