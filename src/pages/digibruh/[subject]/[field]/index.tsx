@@ -1,10 +1,9 @@
 import { DefaultLayout } from "../../../../components/layout/Layout/Default";
 import NotFound from "../../../404";
 import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
-import Digibruh from "../../../../lib/digibruh/Digibruh";
+import Digibruh, { DigibruhFieldPath } from "../../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
-import { PostOrPage } from "@tryghost/content-api";
-import { DigibruhPage, getInitialDigibruh } from "../../../../lib/digibruh/ssr";
+import { DigibruhPage, getStaticDigibruh } from "../../../../lib/digibruh/ssg";
 import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
 import { Base } from "../../../../components/grid/Base";
@@ -13,22 +12,54 @@ import { Section } from "../../../../components/layout/Section";
 import { GridTitleSection } from "../../../../components/basic/Typography";
 import { DigibruhHero } from "../../../../components/digibruh/Hero";
 import { StudySetGrid } from "../../../../components/quizlet/Grid";
+import { GetStaticPaths } from "next";
+import { useRouter } from "next/router";
 
-const Page: DigibruhPage = (props) => {
-  if (props.errorCode) {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const digibruh = await Digibruh.initialize();
+
+  const { subjects } = digibruh;
+
+  return {
+    paths: subjects.flatMap((subject) => {
+      return subject.fields.map((field) => {
+        const params: DigibruhFieldPath = {
+          field: field.slug,
+          subject: subject.slug,
+        };
+
+        return {
+          params,
+        };
+      });
+    }),
+    fallback: true,
+  };
+};
+
+export const getStaticProps = getStaticDigibruh;
+
+const Page: DigibruhPage = ({
+  found,
+  subject: subjectSlug,
+  field: fieldSlug,
+  initialDigibruh,
+}) => {
+  const router = useRouter();
+
+  if (!found && !router.isFallback) {
     return <NotFound />;
   }
 
-  const { data: digibruh } = Digibruh.use(new Digibruh(props.initialDigibruh));
-  const field = digibruh.getFieldBySlug(props.subject, props.field);
-  const postSWR = useSWR(field?.url, () => {
+  const { data: digibruh } = Digibruh.use(initialDigibruh);
+
+  const field = digibruh?.getFieldBySlug(subjectSlug, fieldSlug);
+
+  const { data: posts } = useSWR(field?.url, () => {
     return field?.posts();
   });
 
-  const posts: PostOrPage[] = postSWR.data || [];
-  const loadingPosts = !postSWR.data;
-
-  const items: GridItem[] = posts.map(
+  const items: GridItem[] = posts?.map(
     ({
       title,
       excerpt,
@@ -71,7 +102,7 @@ const Page: DigibruhPage = (props) => {
           </Col>
         </Base>
         <CardGrid
-          items={loadingPosts ? null : items}
+          items={items}
           imagesExpected={true}
           expectedNumberOfItems={3}
           rowLimit={5}
@@ -83,12 +114,10 @@ const Page: DigibruhPage = (props) => {
             <GridTitleSection title="Quizlet" />
           </Col>
         </Base>
-        <StudySetGrid field={props.field} />
+        <StudySetGrid field={fieldSlug} />
       </Section>
     </DefaultLayout>
   );
 };
-
-Page.getInitialProps = getInitialDigibruh;
 
 export default Page;

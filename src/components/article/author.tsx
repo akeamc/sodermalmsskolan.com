@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { LinkBlock } from "../../basic/Link";
+import { LinkBlock } from "../basic/Link";
 import { Author } from "@tryghost/content-api";
 import React from "react";
-import { getAuthorUrl } from "../../../lib/ghost/author";
-import { Skeleton } from "../../basic/Skeleton";
+import { getAuthorUrl } from "../../lib/ghost/author";
+import { Skeleton } from "../basic/Skeleton";
 import Image from "next/image";
 
 const AuthorCardContainer = styled(LinkBlock)`

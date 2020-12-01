@@ -2,7 +2,7 @@ import { PostOrPage } from "@tryghost/content-api";
 import { LeadText } from "../basic/Typography";
 import { HeaderWithBackground } from "../layout/Header";
 import React from "react";
-import PostMeta from "./meta/PostMeta";
+import PostMeta from "./meta";
 import { HeroTitle } from "../layout/Hero";
 import { Skeleton } from "../basic/Skeleton";
 

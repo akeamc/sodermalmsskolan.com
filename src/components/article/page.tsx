@@ -1,9 +1,9 @@
 import NotFound from "../../pages/404";
-import ArticleBody from "./ArticleBody";
+import ArticleBody from "./body";
 import { DefaultLayout } from "../layout/Layout/Default";
 import React from "react";
 import { PostOrPage } from "@tryghost/content-api";
-import { ArticleHero } from "./Hero";
+import { ArticleHero } from "./hero";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 

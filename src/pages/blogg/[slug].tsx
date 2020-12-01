@@ -6,7 +6,7 @@ import {
   NextPage,
 } from "next";
 import NotFound from "../404";
-import ArticlePage from "../../components/article/ArticlePage";
+import ArticlePage from "../../components/article/page";
 import React from "react";
 import { useRouter } from "next/router";
 import { postBelongsToBlog } from "../../lib/blog/filter";
