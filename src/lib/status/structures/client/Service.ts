@@ -1,5 +1,7 @@
 import ky from "ky-universal";
 import useSWR, { responseInterface } from "swr";
+import { IdQuery } from "../../../common/query";
+import { UseSWRResource } from "../../../common/usable";
 import { IMinecraftStatus } from "../shared/Minecraft";
 import { IServiceStatus } from "../shared/Service";
 
@@ -19,19 +21,18 @@ export class ClientService<T> {
 
     return status;
   }
-
-  public static useStatus<T>(
-    id: string
-  ): responseInterface<IServiceStatus<T>, unknown> {
-    const service = new ClientService<T>(id);
-
-    return useSWR(service.url, () => service.getStatus());
-  }
 }
 
-export const useMinecraftStatus = (): responseInterface<
-  IServiceStatus<IMinecraftStatus>,
-  unknown
-> => {
-  return ClientService.useStatus<IMinecraftStatus>("minecraft");
+export function useServiceStatus<T>({
+  id,
+}: IdQuery): responseInterface<IServiceStatus<T>, unknown> {
+  const service = new ClientService<T>(id);
+
+  return useSWR(service.url, () => service.getStatus());
+}
+
+export const useMinecraftStatus: UseSWRResource<IServiceStatus<
+  IMinecraftStatus
+>> = () => {
+  return useServiceStatus<IMinecraftStatus>({ id: "minecraft" });
 };

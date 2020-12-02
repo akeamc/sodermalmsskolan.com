@@ -1,5 +1,7 @@
 import ky from "ky-universal";
-import useSWR, { responseInterface } from "swr";
+import useSWR from "swr";
+import { IdQuery } from "../../../common/query";
+import { UseSWRResource } from "../../../common/usable";
 import { Dish, IDish } from "../shared/Dish";
 
 export class ClientDish extends Dish {
@@ -18,16 +20,16 @@ export class ClientDish extends Dish {
 
     return new ClientDish(res);
   }
-
-  public static useAll(): responseInterface<ClientDish[], unknown> {
-    return useSWR(`/api/food/dishes`, ClientDish.fetchAll, {
-      revalidateOnFocus: false,
-    });
-  }
-
-  public static use(id: string): responseInterface<ClientDish, unknown> {
-    return useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id), {
-      revalidateOnFocus: false,
-    });
-  }
 }
+
+export const useDish: UseSWRResource<ClientDish, IdQuery> = ({ id }) => {
+  return useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id), {
+    revalidateOnFocus: false,
+  });
+};
+
+export const useDishes: UseSWRResource<ClientDish[]> = () => {
+  return useSWR(`/api/food/dishes`, ClientDish.fetchAll, {
+    revalidateOnFocus: false,
+  });
+};

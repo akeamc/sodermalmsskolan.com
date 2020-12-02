@@ -1,5 +1,5 @@
-import useSWR, { responseInterface } from "swr";
-import { IMenu, Menu, MenuQuery } from "../shared/Menu";
+import useSWR from "swr";
+import { IMenu, Menu } from "../shared/Menu";
 import ky from "ky-universal";
 import dayjs from "dayjs";
 import { ClientDish } from "./Dish";
@@ -7,8 +7,14 @@ import { firstLetterUpperCase } from "../../../utils/letters";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import React from "react";
 import { useLang } from "../../../../hooks/lang";
+import { UseSWRResource } from "../../../common/usable";
 
 dayjs.extend(isSameOrBefore);
+
+export interface UseMenuQuery {
+  limit?: number;
+  offset?: number;
+}
 
 export class ClientMenu extends Menu {
   dishes: ClientDish[];
@@ -28,27 +34,24 @@ export class ClientMenu extends Menu {
 
     return menus;
   }
-
-  public static use({
-    limit = 10,
-    offset = 0,
-  }: MenuQuery): responseInterface<ClientMenu[], unknown> {
-    return useSWR(
-      `/api/food/menus?limit=${limit}&offset=${offset}`,
-      async () => {
-        const menus = await ClientMenu.fetchAll();
-
-        const now = dayjs(new Date());
-        const next = menus.findIndex((menu) =>
-          now.isSameOrBefore(menu.date, "date")
-        );
-        const startIndex = next + offset;
-
-        return menus.slice(startIndex, startIndex + limit);
-      }
-    );
-  }
 }
+
+export const useMenu: UseSWRResource<ClientMenu[], UseMenuQuery> = ({
+  limit = 10,
+  offset = 0,
+}) => {
+  return useSWR(`/api/food/menus?limit=${limit}&offset=${offset}`, async () => {
+    const menus = await ClientMenu.fetchAll();
+
+    const now = dayjs(new Date());
+    const next = menus.findIndex((menu) =>
+      now.isSameOrBefore(menu.date, "date")
+    );
+    const startIndex = next + offset;
+
+    return menus.slice(startIndex, startIndex + limit);
+  });
+};
 
 export const MenuTitle: React.FunctionComponent<{ menu: Menu }> = ({
   menu,

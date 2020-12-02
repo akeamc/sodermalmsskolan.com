@@ -1,5 +1,7 @@
 import ky from "ky-universal";
-import useSWR, { responseInterface } from "swr";
+import useSWR from "swr";
+import { IdQuery } from "../../../common/query";
+import { UseSWRResource } from "../../../common/usable";
 import { StudySet, StudySetStatic } from "../shared/StudySet";
 
 export class ClientStudySet extends StudySet {
@@ -11,10 +13,6 @@ export class ClientStudySet extends StudySet {
     const res = await ky.get(this.fetchAllUrl).json<StudySetStatic[]>();
 
     return res.map((studySet) => new ClientStudySet(studySet));
-  }
-
-  public static useAll(): responseInterface<ClientStudySet[], unknown> {
-    return useSWR(this.fetchAllUrl, () => this.fetchAll());
   }
 
   public static fetchUrl(id: string): string {
@@ -30,8 +28,14 @@ export class ClientStudySet extends StudySet {
 
     return new ClientStudySet(res);
   }
-
-  public static use(id: string): responseInterface<ClientStudySet, unknown> {
-    return useSWR(this.fetchUrl(id), () => this.fetch(id));
-  }
 }
+
+export const useStudySet: UseSWRResource<ClientStudySet, IdQuery> = ({
+  id,
+}) => {
+  return useSWR(ClientStudySet.fetchUrl(id), () => ClientStudySet.fetch(id));
+};
+
+export const useStudySets: UseSWRResource<ClientStudySet[]> = () => {
+  return useSWR(ClientStudySet.fetchAllUrl, () => ClientStudySet.fetchAll());
+};

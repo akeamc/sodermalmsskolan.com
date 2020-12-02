@@ -11,14 +11,12 @@ const ArticlePage: React.FunctionComponent<{
   post: PostOrPage;
   digibruh?: boolean;
   loading?: boolean;
-}> = ({ post, digibruh = false }) => {
-  const loading = true;
+}> = ({ post, digibruh = false, loading }) => {
+  const router = useRouter();
 
   if (!post && !loading) {
     return <NotFound />;
   }
-
-  const router = useRouter();
 
   const date = digibruh ? post?.updated_at : post?.published_at;
   const formattedDate = dayjs(date).locale(router.locale).format("D MMMM YYYY");

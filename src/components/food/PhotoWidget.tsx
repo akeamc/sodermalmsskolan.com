@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
-import { ClientChannel } from "../../lib/discord/structures/client/Channel";
+import { useChannelMessages } from "../../lib/discord/structures/client/Channel";
 import { MessageAttachment } from "../../lib/discord/structures/shared/MessageAttachment";
 import * as breakpoints from "../../styles/breakpoints";
 import { SquareGrid } from "../grid/Square";
@@ -59,10 +59,10 @@ export const PhotoWidget: React.FunctionComponent<{
   width?: number;
   height?: number;
 }> = ({ width = 8, height = 8 }) => {
-  const { data } = ClientChannel.useMessagesInChannel(
-    DISCORD_CHANNELS.photos.id,
-    width * height
-  );
+  const { data } = useChannelMessages({
+    channel: DISCORD_CHANNELS.photos.id,
+    pageSize: width * height,
+  });
 
   const messages = data?.flat();
 

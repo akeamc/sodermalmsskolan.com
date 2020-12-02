@@ -1,7 +1,10 @@
 import { DefaultLayout } from "../../../components/layout/Layout/Default";
 import NotFound from "../../404";
 import { CardGrid } from "../../../components/basic/CardGrid";
-import Digibruh, { DigibruhSubjectPath } from "../../../lib/digibruh/Digibruh";
+import Digibruh, {
+  DigibruhSubjectPath,
+  useDigibruh,
+} from "../../../lib/digibruh/Digibruh";
 import { DigibruhPage, getStaticDigibruh } from "../../../lib/digibruh/ssg";
 import React from "react";
 import { Base } from "../../../components/grid/Base";
@@ -38,11 +41,12 @@ const Page: DigibruhPage = ({
 }) => {
   const router = useRouter();
 
+  const digibruh = useDigibruh(initialDigibruh);
+
   if (!found && !router.isFallback) {
     return <NotFound />;
   }
 
-  const { data: digibruh } = Digibruh.use(initialDigibruh);
   const subject = digibruh?.getSubjectBySlug(subjectSlug);
 
   return (

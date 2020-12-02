@@ -1,4 +1,4 @@
-import Digibruh from "../../../../lib/digibruh/Digibruh";
+import Digibruh, { useDigibruh } from "../../../../lib/digibruh/Digibruh";
 import NotFound from "../../../404";
 import ArticlePage from "../../../../components/article/page";
 import useSWR from "swr";
@@ -25,11 +25,7 @@ export const getStaticProps = getStaticDigibruh;
 const Page: DigibruhPage = ({ found, initialDigibruh, post }) => {
   const router = useRouter();
 
-  if (!found && !router.isFallback) {
-    return <NotFound />;
-  }
-
-  const { data: digibruh } = Digibruh.use(initialDigibruh);
+  const digibruh = useDigibruh(initialDigibruh);
 
   const { data } = useSWR(
     `/digibruh/posts/${post?.slug}`,
@@ -38,6 +34,10 @@ const Page: DigibruhPage = ({ found, initialDigibruh, post }) => {
       initialData: post,
     }
   );
+
+  if (!found && !router.isFallback) {
+    return <NotFound />;
+  }
 
   return <ArticlePage digibruh post={data} />;
 };

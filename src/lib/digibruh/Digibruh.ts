@@ -2,7 +2,7 @@ import { PostsOrPages, Tag, PostOrPage } from "@tryghost/content-api";
 import { getPostsByTag, getPosts, getPostBySlug } from "../ghost/post";
 import { Subject } from "./Subject";
 import { getTags } from "../ghost/tag";
-import useSWR, { responseInterface } from "swr";
+import useSWR from "swr";
 import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";
 import Serializable from "../common/serializable";
@@ -131,12 +131,12 @@ export default class Digibruh implements Serializable<DigibruhStatic> {
       tags: new Array(...this.tags),
     };
   }
-
-  public static use(
-    initialData?: DigibruhStatic
-  ): responseInterface<Digibruh, unknown> {
-    return useSWR("/digibruh", Digibruh.initialize, {
-      initialData: initialData ? new Digibruh(initialData) : null,
-    });
-  }
 }
+
+export const useDigibruh = (initial?: DigibruhStatic): Digibruh => {
+  const { data } = useSWR("/digibruh", Digibruh.initialize, {
+    initialData: initial ? new Digibruh(initial) : null,
+  });
+
+  return data;
+};

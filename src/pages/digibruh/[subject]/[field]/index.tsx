@@ -1,7 +1,10 @@
 import { DefaultLayout } from "../../../../components/layout/Layout/Default";
 import NotFound from "../../../404";
 import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
-import Digibruh, { DigibruhFieldPath } from "../../../../lib/digibruh/Digibruh";
+import Digibruh, {
+  DigibruhFieldPath,
+  useDigibruh,
+} from "../../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
 import { DigibruhPage, getStaticDigibruh } from "../../../../lib/digibruh/ssg";
 import { GenericUser } from "../../../../lib/models/User";
@@ -47,17 +50,17 @@ const Page: DigibruhPage = ({
 }) => {
   const router = useRouter();
 
-  if (!found && !router.isFallback) {
-    return <NotFound />;
-  }
-
-  const { data: digibruh } = Digibruh.use(initialDigibruh);
+  const digibruh = useDigibruh(initialDigibruh);
 
   const field = digibruh?.getFieldBySlug(subjectSlug, fieldSlug);
 
   const { data: posts } = useSWR(field?.url, () => {
     return field?.posts();
   });
+
+  if (!found && !router.isFallback) {
+    return <NotFound />;
+  }
 
   const items: GridItem[] = posts?.map(
     ({

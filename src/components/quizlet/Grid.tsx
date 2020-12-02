@@ -1,12 +1,15 @@
 import React from "react";
-import { ClientStudySet } from "../../lib/quizlet/structures/client/StudySet";
+import {
+  ClientStudySet,
+  useStudySets,
+} from "../../lib/quizlet/structures/client/StudySet";
 import { StudySet } from "./StudySet";
 import { Base } from "../grid/Base";
 
 export const StudySetGrid: React.FunctionComponent<{ field?: string }> = ({
   field,
 }) => {
-  const { data } = ClientStudySet.useAll();
+  const { data } = useStudySets();
 
   const studySets: ClientStudySet[] =
     data?.filter(

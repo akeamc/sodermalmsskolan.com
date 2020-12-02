@@ -7,14 +7,14 @@ import { Col } from "../grid/Col";
 import { GridTitleSection } from "../basic/Typography";
 import Link from "next/link";
 import { Emoji } from "../basic/Emoji";
-import Digibruh from "../../lib/digibruh/Digibruh";
+import { useDigibruh } from "../../lib/digibruh/Digibruh";
 import { Skeleton } from "../basic/Skeleton";
 
 const SubjectsOverview: React.FunctionComponent = () => {
-  const { data } = Digibruh.use();
+  const digibruh = useDigibruh();
 
-  const subjects: Subject[] = data?.subjects || new Array(3).fill(null);
-  const loading = !data;
+  const subjects: Subject[] = digibruh?.subjects || new Array(3).fill(null);
+  const loading = !digibruh;
 
   return (
     <>

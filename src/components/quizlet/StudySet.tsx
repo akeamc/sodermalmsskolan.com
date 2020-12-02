@@ -1,5 +1,8 @@
 import React from "react";
-import { ClientStudySet } from "../../lib/quizlet/structures/client/StudySet";
+import {
+  ClientStudySet,
+  useStudySet,
+} from "../../lib/quizlet/structures/client/StudySet";
 import { Col } from "../grid/Col";
 import {
   Card,
@@ -9,15 +12,15 @@ import {
   CardDescription,
 } from "../basic/Card";
 import Link from "next/link";
-import Digibruh from "../../lib/digibruh/Digibruh";
+import { useDigibruh } from "../../lib/digibruh/Digibruh";
 import { Skeleton } from "../basic/Skeleton";
 
 export const StudySet: React.FunctionComponent<{
   studySet: ClientStudySet | null;
 }> = ({ studySet }) => {
-  const { data: digibruh } = Digibruh.use();
+  const digibruh = useDigibruh();
 
-  const { data } = ClientStudySet.use(studySet?.id);
+  const { data } = useStudySet({ id: studySet?.id });
 
   const title = data?.details?.title || <Skeleton count={2} />;
 

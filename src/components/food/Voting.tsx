@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes, useTheme } from "styled-components";
 import { motion, Variants } from "framer-motion";
 import { useAuth } from "../../providers/Auth";
-import { ClientVote } from "../../lib/food/structures/client/Vote";
+import { ClientVote, useVotes } from "../../lib/food/structures/client/Vote";
 import { IconButton } from "../basic/Button";
 import { ThumbsDown, ThumbsUp } from "react-feather";
 import Link from "next/link";
@@ -87,7 +87,7 @@ const DishVoteRow: React.FunctionComponent<{
   dish: string;
   show?: boolean;
 }> = ({ show = true, dish }) => {
-  const { data, mutate } = ClientVote.useByDish(dish);
+  const { data, mutate } = useVotes({ dish });
   const { user, isAuthenticated } = useAuth();
   const theme = useTheme();
   const router = useRouter();
@@ -123,7 +123,7 @@ const DishVoteRow: React.FunctionComponent<{
     mutate(null, false);
 
     function voteCallback() {
-      mutate(() => ClientVote.fetchByDish(dish, true), false);
+      mutate(() => ClientVote.fetchByDish({ dish }, true), false);
     }
 
     if ((votedUp && up) || (votedDown && !up)) {
@@ -182,7 +182,7 @@ export const DishVotes: React.FunctionComponent<{
   id: string;
   detailed?: boolean;
 }> = ({ id, detailed = false }) => {
-  const { data: votes } = ClientVote.useByDish(id);
+  const { data: votes } = useVotes({ dish: id });
 
   const upShare =
     (votes?.filter((vote) => vote.up)?.length || 0) /

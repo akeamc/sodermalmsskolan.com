@@ -3,7 +3,6 @@ import NotFound from "../../404";
 import { DefaultLayout } from "../../../components/layout/Layout/Default";
 import { getAuthorBySlug } from "../../../lib/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
-import { PostOrPage } from "@tryghost/content-api";
 import Digibruh from "../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
 import { CardGrid } from "../../../components/basic/CardGrid";
@@ -48,15 +47,14 @@ const Page: React.FunctionComponent = ({
   author,
   errorCode,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { data: digibruhPosts } = useSWR(
+    `blog/author/${author.slug}/digibruh`,
+    () => Digibruh.fetchPostsByAuthor(author.slug)
+  );
+
   if (errorCode) {
     return <NotFound />;
   }
-
-  const digibruhSWR = useSWR(`blog/author/${author.slug}/digibruh`, () =>
-    Digibruh.fetchPostsByAuthor(author.slug)
-  );
-
-  const digibruhPosts: PostOrPage[] = digibruhSWR.data || [];
 
   return (
     <DefaultLayout metadata={{ title: author?.name, description: author?.bio }}>
@@ -83,7 +81,7 @@ const Page: React.FunctionComponent = ({
           </Col>
         </Base>
         <CardGrid
-          items={digibruhPosts.map(Field.postToGridItem)}
+          items={digibruhPosts?.map(Field.postToGridItem)}
           imagesExpected={true}
           rowLimit={3}
         />

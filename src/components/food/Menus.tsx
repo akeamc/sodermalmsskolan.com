@@ -2,9 +2,13 @@ import styled from "styled-components";
 import React, { Fragment, useState } from "react";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
-import { ClientMenu, MenuTitle } from "../../lib/food/structures/client/Menu";
+import {
+  ClientMenu,
+  MenuTitle,
+  useMenu,
+} from "../../lib/food/structures/client/Menu";
 import { Dish } from "../../lib/food/structures/shared/Dish";
-import { ClientDish } from "../../lib/food/structures/client/Dish";
+import { useDish } from "../../lib/food/structures/client/Dish";
 import { Card, CardContent, CardTitle } from "../basic/Card";
 import { Skeleton } from "../basic/Skeleton";
 import { IconButton } from "../basic/Button";
@@ -24,7 +28,7 @@ const DishList = styled.ul`
 `;
 
 const DishEmissions: React.FunctionComponent<{ id: string }> = ({ id }) => {
-  const { data } = ClientDish.use(id);
+  const { data } = useDish({ id });
   const lang = useLang();
 
   return (
@@ -133,7 +137,7 @@ const MenuAd: React.FunctionComponent = () => {
 export const MenuList: React.FunctionComponent<{
   limit: number;
 }> = ({ limit }) => {
-  const { data } = ClientMenu.use({ limit });
+  const { data } = useMenu({ limit });
   const fallbackArray: ClientMenu[] = new Array(limit).fill(null);
   const menus = data?.length > 0 ? data : fallbackArray;
 

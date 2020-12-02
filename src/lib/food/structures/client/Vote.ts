@@ -1,8 +1,13 @@
 import { ResponsePromise } from "ky";
 import ky from "ky-universal";
-import useSWR, { responseInterface } from "swr";
+import useSWR from "swr";
 import { getAuthorizationHeader } from "../../../auth/token";
+import { UseSWRResource } from "../../../common/usable";
 import { Vote, VoteStatic } from "../shared/Vote";
+
+interface UseVotesQuery {
+  dish: string;
+}
 
 export class ClientVote extends Vote {
   public static async sendVote(
@@ -28,7 +33,7 @@ export class ClientVote extends Vote {
   }
 
   public static async fetchByDish(
-    dish: string,
+    { dish }: UseVotesQuery,
     noCache = false
   ): Promise<ClientVote[]> {
     if (!dish) {
@@ -47,14 +52,14 @@ export class ClientVote extends Vote {
 
     return res.map((vote) => new ClientVote(vote));
   }
-
-  public static useByDish(
-    dish: string
-  ): responseInterface<ClientVote[], unknown> {
-    return useSWR(
-      `/api/food/dishes/${dish}/votes`,
-      () => ClientVote.fetchByDish(dish),
-      { revalidateOnFocus: false }
-    );
-  }
 }
+
+export const useVotes: UseSWRResource<ClientVote[], UseVotesQuery> = (
+  query
+) => {
+  return useSWR(
+    `/api/food/dishes/${query.dish}/votes`,
+    () => ClientVote.fetchByDish(query),
+    { revalidateOnFocus: false }
+  );
+};

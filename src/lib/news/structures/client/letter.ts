@@ -1,6 +1,8 @@
 import ky from "ky-universal";
-import useSWR, { responseInterface } from "swr";
+import useSWR from "swr";
 import { getAuthorizationHeader } from "../../../auth/token";
+import { IdQuery } from "../../../common/query";
+import { UseSWRResource } from "../../../common/usable";
 import Letter, { LetterStatic } from "../shared/letter";
 
 export default class ClientLetter extends Letter {
@@ -40,14 +42,6 @@ export default class ClientLetter extends Letter {
     return new ClientLetter(res);
   }
 
-  public static useAll(): responseInterface<ClientLetter[], unknown> {
-    return useSWR(this.fetchAllUrl, () => this.fetchAll());
-  }
-
-  public static use(id: string): responseInterface<ClientLetter, unknown> {
-    return useSWR(this.fetchUrl(id), () => this.fetch(id));
-  }
-
   public get description(): string {
     const regex = /Veckobrev Ovalen v.( ?)[0-9]+/gi;
 
@@ -59,3 +53,11 @@ export default class ClientLetter extends Letter {
     return content.slice(matchIndex + matchLength).trim();
   }
 }
+
+export const useLetters: UseSWRResource<ClientLetter[]> = () => {
+  return useSWR(ClientLetter.fetchAllUrl, () => ClientLetter.fetchAll());
+};
+
+export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => {
+  return useSWR(ClientLetter.fetchUrl(id), () => ClientLetter.fetch(id));
+};

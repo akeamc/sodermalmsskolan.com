@@ -1,4 +1,7 @@
-import { ClientChannel } from "../../../lib/discord/structures/client/Channel";
+import {
+  ClientChannel,
+  useChannelMessages,
+} from "../../../lib/discord/structures/client/Channel";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { DISCORD_CHANNELS } from "../../../lib/discord/constants";
@@ -13,10 +16,10 @@ const Container = styled.div<{ $loading: boolean }>`
 `;
 
 export const FoodGallery: React.FunctionComponent = () => {
-  const { data } = ClientChannel.useMessagesInChannel(
-    DISCORD_CHANNELS.photos.id,
-    20
-  );
+  const { data } = useChannelMessages({
+    channel: DISCORD_CHANNELS.photos.id,
+    pageSize: 20,
+  });
 
   const artworks = data?.flat()?.flatMap(Artwork.fromMessage);
 

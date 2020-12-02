@@ -4,7 +4,7 @@ import { Button } from "../basic/Button";
 import dayjs from "dayjs";
 import { firstLetterUpperCase } from "../../lib/utils/letters";
 import React from "react";
-import { ClientMenu } from "../../lib/food/structures/client/Menu";
+import { useMenu } from "../../lib/food/structures/client/Menu";
 import { Skeleton } from "../basic/Skeleton";
 import { Muted } from "../basic/Typography";
 import { ArrowRight } from "react-feather";
@@ -35,7 +35,7 @@ const Footer = styled(CardFooter)`
 `;
 
 export const LunchWidget: React.FunctionComponent = () => {
-  const { data, isValidating } = ClientMenu.use({ limit: 1 });
+  const { data, isValidating } = useMenu({ limit: 1 });
 
   const menu = data ? data[0] : null;
 

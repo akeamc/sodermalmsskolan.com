@@ -20,7 +20,9 @@ export const DigibruhHero: React.FunctionComponent<HeroProps> = ({
     <HeaderWithBackground image={image}>
       <HeroTitle>{title || <Skeleton />}</HeroTitle>
       <LeadText>
-        <Emoji>{typeof lead === "string" ? lead : <Skeleton count={4} />}</Emoji>
+        <Emoji>
+          {typeof lead === "string" ? lead : <Skeleton count={4} />}
+        </Emoji>
       </LeadText>
     </HeaderWithBackground>
   );
