@@ -51,7 +51,7 @@ export const TimeIndicator: React.FunctionComponent<{
         )
       );
     }
-  });
+  }, [now, day, scheduleStart, schedule.maximumDuration]);
 
   return (
     <StyledTimeIndicator

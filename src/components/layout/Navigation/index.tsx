@@ -67,7 +67,7 @@ export const Navigation: React.FunctionComponent<{
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [isOpen, toggleOpen] = useCycle(false, true);
 
-  useEffect(() => scrollY.onChange((latest) => setScrolled(latest > 0)), []);
+  useEffect(() => scrollY.onChange((latest) => setScrolled(latest > 0)));
 
   const theme = useTheme();
   const wrapperTheme =

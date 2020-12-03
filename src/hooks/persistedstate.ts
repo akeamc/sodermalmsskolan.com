@@ -17,7 +17,7 @@ export function usePersistedState<T>(
 
   useEffect(() => {
     setTemporaryState(persistedState);
-  });
+  }, [persistedState]);
 
   return [temporaryState, setPersistedState];
 }

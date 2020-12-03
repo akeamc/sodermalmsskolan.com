@@ -37,7 +37,7 @@ export abstract class DigibruhCollection {
   /**
    * A regular expression matching all tags whose slug matches a `DigibruhCollection` of this type.
    */
-  static regExp(_: string = DigibruhCollection.tagWildcard): RegExp | null {
+  static regExp(): RegExp | null {
     return null;
   }
 

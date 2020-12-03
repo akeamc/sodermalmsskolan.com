@@ -80,7 +80,7 @@ export const PostGridAuto: React.FunctionComponent<{
     if (inView && !isReachingEnd) {
       setSize(size + 1);
     }
-  }, [inView]);
+  }, [inView, isReachingEnd, setSize, size]);
 
   return (
     <>

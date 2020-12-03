@@ -72,12 +72,10 @@ export const HeaderWithBackground: React.FunctionComponent<{
     (value) => 1 + Math.max(0, value / (ref?.current?.offsetHeight * 2))
   );
 
-  useEffect(
-    () =>
-      scrollY.onChange((latest) =>
-        setNavFloating(latest > ref?.current?.offsetHeight - 64)
-      ),
-    []
+  useEffect(() =>
+    scrollY.onChange((latest) =>
+      setNavFloating(latest > ref?.current?.offsetHeight - 64)
+    )
   );
 
   const theme = useTheme();

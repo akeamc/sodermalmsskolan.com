@@ -1,7 +1,4 @@
-import {
-  ClientChannel,
-  useChannelMessages,
-} from "../../../lib/discord/structures/client/Channel";
+import { useChannelMessages } from "../../../lib/discord/structures/client/Channel";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { DISCORD_CHANNELS } from "../../../lib/discord/constants";

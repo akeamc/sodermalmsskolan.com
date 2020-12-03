@@ -7,26 +7,26 @@ export const useKeyEvents = (
   handleDown: KeyboardEventHandler = () => null,
   handleUp: KeyboardEventHandler = () => null
 ): void => {
-  const onDown: KeyboardEventHandler = (event) => {
-    if (matchKey(event.key)) {
-      handleDown(event);
-    }
-  };
-
-  const onUp: KeyboardEventHandler = (event) => {
-    if (matchKey(event.key)) {
-      handleUp(event);
-    }
-  };
-
   return useEffect(() => {
+    const onDown: KeyboardEventHandler = (event) => {
+      if (matchKey(event.key)) {
+        handleDown(event);
+      }
+    };
+
+    const onUp: KeyboardEventHandler = (event) => {
+      if (matchKey(event.key)) {
+        handleUp(event);
+      }
+    };
+
     window.addEventListener("keydown", onDown);
     window.addEventListener("keyup", onUp);
     return () => {
       window.removeEventListener("keydown", onDown);
       window.removeEventListener("keyup", onUp);
     };
-  }, [matchKey]);
+  }, [handleDown, handleUp, matchKey]);
 };
 
 const useKey = (key: string): boolean => {

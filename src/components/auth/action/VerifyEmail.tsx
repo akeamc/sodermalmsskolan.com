@@ -28,7 +28,7 @@ export const VerifyEmail: React.FunctionComponent<AuthActionProps> = ({
         console.error(error);
         setMessage(readableErrorMessage(error));
       });
-  }, [oobCode, continueUrl]);
+  }, [oobCode, continueUrl, router]);
 
   return message ? <FullPageText>{message}</FullPageText> : <FullPageSpinner />;
 };
