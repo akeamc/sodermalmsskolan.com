@@ -23,7 +23,7 @@
     "ky-universal": "^0.8.1",
     "mcproto": "^0.8.1",
     "mcquery": "^1.0.2",
-    "next": "^10.0.1",
+    "next": "^10.0.3",
     "next-styled-nprogress": "^1.0.3",
     "node-html-parser": "^2.0.0",
     "pdf-parse": "^1.1.1",
