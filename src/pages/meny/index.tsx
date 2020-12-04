@@ -10,6 +10,7 @@ import React from "react";
 import * as breakpoints from "../../styles/breakpoints";
 import { FoodGallery } from "../../components/food/Gallery";
 import { Card, CardContent } from "../../components/basic/Card";
+import { SimpleCard, StyledCard } from "../../components/card";
 
 const Background = styled.div`
   position: relative;
@@ -82,15 +83,13 @@ const Page: React.FunctionComponent = () => {
         <Hero>
           <Base>
             <HeroCardWrapper>
-              <Card $hoverable={false}>
-                <CardContent>
-                  <CardLead>
-                    I över ett år har vi fotograferat maten som Sodexo serverar
-                    och delat bilderna online. Vi kommer aldrig att ge upp.
-                  </CardLead>
-                  <CardFooter>Åke Amcoff, 2019</CardFooter>
-                </CardContent>
-              </Card>
+              <SimpleCard hoverable={false}>
+                <CardLead>
+                  I över ett år har vi fotograferat maten som Sodexo serverar
+                  och delat bilderna online. Vi kommer aldrig att ge upp.
+                </CardLead>
+                <CardFooter>Åke Amcoff, 2019</CardFooter>
+              </SimpleCard>
             </HeroCardWrapper>
           </Base>
         </Hero>

@@ -9,7 +9,6 @@ import {
 } from "../../lib/food/structures/client/Menu";
 import { Dish } from "../../lib/food/structures/shared/Dish";
 import { useDish } from "../../lib/food/structures/client/Dish";
-import { Card, CardContent, CardTitle } from "../basic/Card";
 import { Skeleton } from "../basic/Skeleton";
 import { IconButton } from "../basic/Button";
 import { ArrowDown } from "react-feather";
@@ -17,6 +16,8 @@ import { DishVotes } from "./Voting";
 import { motion } from "framer-motion";
 import { useLang } from "../../hooks/lang";
 import { ResponsiveAd } from "../basic/Ad";
+import Card from "../card";
+import CardGrid from "../card/grid";
 
 const DishList = styled.ul`
   margin-top: 1rem;
@@ -82,18 +83,6 @@ const CollapseButton: React.FunctionComponent<{
   );
 };
 
-const CardCol = styled(Col).attrs({
-  xs: 12,
-  md: 6,
-  lg: 4,
-})`
-  display: flex;
-
-  ${Card} {
-    width: 100%;
-  }
-`;
-
 const MenuCard: React.FunctionComponent<{
   menu: ClientMenu;
 }> = ({ menu }) => {
@@ -101,34 +90,53 @@ const MenuCard: React.FunctionComponent<{
   const [detailed, setDetailed] = useState<boolean>(false);
 
   return (
-    <CardCol>
-      <Card>
-        <CardContent>
-          <CardTitle>
-            {menu ? <MenuTitle menu={menu} /> : <Skeleton />}
-          </CardTitle>
-          <DishList>
-            {(menu?.dishes || fallback).map((dish, index) => (
-              <DishItem key={index} dish={dish} detailed={detailed} />
-            ))}
-          </DishList>
-          <CollapseButton
-            open={detailed}
-            onClick={() => setDetailed(!detailed)}
-          />
-        </CardContent>
-      </Card>
-    </CardCol>
+    <Card
+      body={{
+        title: <MenuTitle menu={menu} />,
+        description: (
+          <>
+            <DishList>
+              {(menu?.dishes || fallback).map((dish, index) => (
+                <DishItem key={index} dish={dish} detailed={detailed} />
+              ))}
+            </DishList>
+            <CollapseButton
+              open={detailed}
+              onClick={() => setDetailed(!detailed)}
+            />
+          </>
+        ),
+      }}
+    />
   );
+
+  // return (
+  //   <CardCol>
+  //     <Card>
+  //       <CardContent>
+  //         <CardTitle>
+  //           {menu ? <MenuTitle menu={menu} /> : <Skeleton />}
+  //         </CardTitle>
+  //         <DishList>
+  //           {(menu?.dishes || fallback).map((dish, index) => (
+  //             <DishItem key={index} dish={dish} detailed={detailed} />
+  //           ))}
+  //         </DishList>
+  //         <CollapseButton
+  //           open={detailed}
+  //           onClick={() => setDetailed(!detailed)}
+  //         />
+  //       </CardContent>
+  //     </Card>
+  //   </CardCol>
+  // );
 };
 
 const MenuAd: React.FunctionComponent = () => {
   return (
     <Col>
-      <Card $hoverable={false}>
-        <CardContent>
-          <ResponsiveAd />
-        </CardContent>
+      <Card>
+        <ResponsiveAd />
       </Card>
     </Col>
   );
@@ -142,13 +150,13 @@ export const MenuList: React.FunctionComponent<{
   const menus = data?.length > 0 ? data : fallbackArray;
 
   return (
-    <Base>
-      {menus.map((menu, index) => (
+    <CardGrid
+      cards={menus.map((menu, index) => (
         <Fragment key={index}>
           {index % 6 === 0 ? <MenuAd /> : null}
           <MenuCard menu={menu} />
         </Fragment>
       ))}
-    </Base>
+    />
   );
 };

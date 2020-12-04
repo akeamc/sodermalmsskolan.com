@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { defaultParams } from "../../lib/ghost/post";
 import { useSWRInfinite } from "swr";
-import { GenericUser } from "../../lib/models/User";
 import { PostOrPage, Params } from "@tryghost/content-api";
 import api from "../../lib/ghost/credentials";
-import { CardGrid, GridItem } from "../basic/CardGrid";
 import { useInView } from "react-intersection-observer";
+import CardGrid from "../card/grid";
+import PostCard from "../article/postcard";
 
 export function getPostUrl(slug: string | null): string {
   return `/blogg/${slug ? slug : ""}`;
@@ -17,28 +17,24 @@ export const PostGrid: React.FunctionComponent<{
   containerless?: boolean;
 }> = (props) => {
   const { posts, expectedNumberOfPosts = 3, containerless = false } = props;
-  const items: GridItem[] = (posts || []).map(
-    ({ title, excerpt, slug, feature_image, published_at, authors }) => {
-      return {
-        title,
-        description: excerpt,
-        href: getPostUrl(slug),
-        image: feature_image,
-        meta: {
-          date: new Date(published_at),
-          authors: authors?.map(GenericUser.fromAuthor),
-        },
-      };
-    }
-  );
 
   return (
     <CardGrid
-      items={items.length > 0 ? items : null}
-      expectedNumberOfItems={expectedNumberOfPosts}
-      imagesExpected={true}
-      rowLimit={3}
-      containerless={containerless}
+      cards={posts?.map(
+        (post, index) => (
+          <PostCard key={index} post={post} />
+        )
+        // return {
+        //   title,
+        //   description: excerpt,
+        //   href: getPostUrl(slug),
+        //   image: feature_image,
+        //   meta: {
+        //     date: new Date(published_at),
+        //     authors: authors?.map(GenericUser.fromAuthor),
+        //   },
+        // };
+      )}
     />
   );
 };

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import React from "react";
 import { motion } from "framer-motion";
 import { lighten } from "polished";
@@ -44,6 +44,17 @@ export const wideText = css`
   text-transform: uppercase;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.muted};
+`;
+
+export const lineClamp = (lines: number): FlattenSimpleInterpolation => css`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: ${lines};
+  overflow: hidden;
+`;
+
+export const LineClamped = styled.span<{ $lines: number }>`
+  ${({ $lines }) => lineClamp($lines)};
 `;
 
 export const Muted = styled(motion.p)`

@@ -1,22 +1,26 @@
 import { DefaultLayout } from "../../../../components/layout/Layout/Default";
 import NotFound from "../../../404";
-import { CardGrid, GridItem } from "../../../../components/basic/CardGrid";
 import Digibruh, {
   DigibruhFieldPath,
   useDigibruh,
 } from "../../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
 import { DigibruhPage, getStaticDigibruh } from "../../../../lib/digibruh/ssg";
-import { GenericUser } from "../../../../lib/models/User";
 import React from "react";
 import { Base } from "../../../../components/grid/Base";
 import { Col } from "../../../../components/grid/Col";
 import { Section } from "../../../../components/layout/Section";
-import { GridTitleSection } from "../../../../components/basic/Typography";
+import {
+  GridTitleSection,
+  LineClamped,
+} from "../../../../components/basic/Typography";
 import { DigibruhHero } from "../../../../components/digibruh/Hero";
 import { StudySetGrid } from "../../../../components/quizlet/Grid";
 import { GetStaticPaths } from "next";
 import { useRouter } from "next/router";
+import CardGrid from "../../../../components/card/grid";
+import Card from "../../../../components/card";
+import PostCard from "../../../../components/article/postcard";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const digibruh = await Digibruh.initialize();
@@ -62,29 +66,6 @@ const Page: DigibruhPage = ({
     return <NotFound />;
   }
 
-  const items: GridItem[] = posts?.map(
-    ({
-      title,
-      excerpt,
-      slug,
-      feature_image,
-      updated_at,
-      published_at,
-      authors,
-    }) => {
-      return {
-        title,
-        description: excerpt,
-        href: field.postUrl(slug),
-        image: feature_image,
-        meta: {
-          date: new Date(updated_at || published_at),
-          authors: authors.map(GenericUser.fromAuthor),
-        },
-      };
-    }
-  );
-
   return (
     <DefaultLayout
       metadata={{
@@ -105,10 +86,9 @@ const Page: DigibruhPage = ({
           </Col>
         </Base>
         <CardGrid
-          items={items}
-          imagesExpected={true}
-          expectedNumberOfItems={3}
-          rowLimit={5}
+          cards={posts?.map((post, index) => (
+            <PostCard key={index} post={post} digibruh />
+          ))}
         />
       </Section>
       <Section>

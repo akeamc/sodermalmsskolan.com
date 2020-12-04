@@ -1,17 +1,9 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardLink,
-  CardTitle,
-} from "../../components/basic/Card";
 import { getLineClamp } from "../../components/basic/CardGrid";
 import { Skeleton } from "../../components/basic/Skeleton";
-import { Muted } from "../../components/basic/Typography";
-import { Base } from "../../components/grid/Base";
-import { Col } from "../../components/grid/Col";
+import { LineClamped, Muted } from "../../components/basic/Typography";
+import Card from "../../components/card";
+import CardGrid from "../../components/card/grid";
 import { SimpleHero } from "../../components/layout/Hero/Simple";
 import { DefaultLayout } from "../../components/layout/Layout/Default";
 import { Navigation } from "../../components/layout/Navigation";
@@ -28,15 +20,16 @@ const LetterCard: React.FunctionComponent<{ letter: ClientLetter }> = ({
   const pages = letter?.attachment?.pages;
 
   return (
-    <CardLink href={letter?.url}>
-      <Card $hoverable={!!letter?.url}>
-        <CardContent>
-          <CardTitle>{letter?.title || <Skeleton />}</CardTitle>
-          <CardDescription style={getLineClamp(rowLimit)}>
-            {letter?.description || <Skeleton count={5} />}
-          </CardDescription>
-        </CardContent>
-        <CardFooter>
+    <Card
+      href={letter?.url}
+      body={{
+        title: letter?.title || <Skeleton />,
+        description: (
+          <LineClamped $lines={rowLimit}>
+            {letter?.description || <Skeleton count={rowLimit} />}
+          </LineClamped>
+        ),
+        footer: (
           <Muted>
             {pages ? (
               `${pages} ${Math.abs(pages) === 1 ? "sida" : "sidor"}`
@@ -44,9 +37,9 @@ const LetterCard: React.FunctionComponent<{ letter: ClientLetter }> = ({
               <Skeleton width="4em" />
             )}
           </Muted>
-        </CardFooter>
-      </Card>
-    </CardLink>
+        ),
+      }}
+    />
   );
 };
 
@@ -56,13 +49,11 @@ const News: React.FunctionComponent = () => {
   const letters: ClientLetter[] = data || new Array(12).fill(null);
 
   return (
-    <Base>
-      {letters.map((letter, index) => (
-        <Col xs={12} md={6} lg={4} key={index}>
-          <LetterCard letter={letter} />
-        </Col>
+    <CardGrid
+      cards={letters.map((letter, index) => (
+        <LetterCard letter={letter} key={index} />
       ))}
-    </Base>
+    />
   );
 };
 

@@ -1,6 +1,5 @@
 import { DefaultLayout } from "../../../components/layout/Layout/Default";
 import NotFound from "../../404";
-import { CardGrid } from "../../../components/basic/CardGrid";
 import Digibruh, {
   DigibruhSubjectPath,
   useDigibruh,
@@ -14,6 +13,8 @@ import { GridTitleSection } from "../../../components/basic/Typography";
 import { DigibruhHero } from "../../../components/digibruh/Hero";
 import { useRouter } from "next/router";
 import { GetStaticPaths } from "next";
+import CardGrid from "../../../components/card/grid";
+import { FieldCard } from "../../../components/digibruh/field";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const digibruh = await Digibruh.initialize();
@@ -69,9 +70,9 @@ const Page: DigibruhPage = ({
           </Col>
         </Base>
         <CardGrid
-          items={subject?.fields?.map((field) => field.toGridItem())}
-          imagesExpected={true}
-          expectedNumberOfItems={3}
+          cards={subject?.fields?.map((field, index) => (
+            <FieldCard key={index} field={field} />
+          ))}
         />
       </Section>
     </DefaultLayout>

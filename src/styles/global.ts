@@ -17,7 +17,6 @@ export default createGlobalStyle`
       --font-sans: "Inter var", var(--font-system); 
     }
   }
-  
 
   body {
     margin: 0;
@@ -26,7 +25,7 @@ export default createGlobalStyle`
   :root {
     --font-sans: "Inter", var(--font-system);
     --font-system: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-    --font-monospace: "Source Code Pro", monospace;
+    --font-monospace: "IBM Plex Mono", monospace;
 
     --page-gutter: 1.5rem;
     --max-page-width: 78rem;

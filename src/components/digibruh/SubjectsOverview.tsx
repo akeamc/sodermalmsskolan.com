@@ -1,6 +1,5 @@
 import React from "react";
 import { Subject } from "../../lib/digibruh/Subject";
-import { GridItem, CardGrid } from "../basic/CardGrid";
 import { Section } from "../layout/Section";
 import { Base } from "../grid/Base";
 import { Col } from "../grid/Col";
@@ -9,6 +8,8 @@ import Link from "next/link";
 import { Emoji } from "../basic/Emoji";
 import { useDigibruh } from "../../lib/digibruh/Digibruh";
 import { Skeleton } from "../basic/Skeleton";
+import CardGrid from "../card/grid";
+import { FieldCard } from "./field";
 
 const SubjectsOverview: React.FunctionComponent = () => {
   const digibruh = useDigibruh();
@@ -19,10 +20,6 @@ const SubjectsOverview: React.FunctionComponent = () => {
   return (
     <>
       {subjects.map((subject, index) => {
-        const gridItems: GridItem[] = loading
-          ? null
-          : subject.fields.map((field) => field.toGridItem());
-
         return (
           <Section key={index}>
             <Base>
@@ -47,7 +44,11 @@ const SubjectsOverview: React.FunctionComponent = () => {
                 />
               </Col>
             </Base>
-            <CardGrid items={gridItems} imagesExpected={true} />
+            <CardGrid
+              cards={subject?.fields?.map((field, index) => (
+                <FieldCard key={index} field={field} />
+              ))}
+            />
           </Section>
         );
       })}

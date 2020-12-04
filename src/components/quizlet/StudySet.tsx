@@ -3,17 +3,9 @@ import {
   ClientStudySet,
   useStudySet,
 } from "../../lib/quizlet/structures/client/StudySet";
-import { Col } from "../grid/Col";
-import {
-  Card,
-  CardContent,
-  CardLink,
-  CardTitle,
-  CardDescription,
-} from "../basic/Card";
-import Link from "next/link";
 import { useDigibruh } from "../../lib/digibruh/Digibruh";
 import { Skeleton } from "../basic/Skeleton";
+import Card from "../card";
 
 export const StudySet: React.FunctionComponent<{
   studySet: ClientStudySet | null;
@@ -30,25 +22,18 @@ export const StudySet: React.FunctionComponent<{
     studySet?.digibruh.fields[0]
   );
 
-  const description = (
-    <>
-      {field?.name || <Skeleton width="50%" />} ·{" "}
-      {data?.details?.terms || <Skeleton width="16px" />} termer
-    </>
-  );
-
   return (
-    <Col xs={12} sm={6} md={4}>
-      <Link href={data?.url || ""} passHref>
-        <CardLink>
-          <Card>
-            <CardContent>
-              <CardTitle>{title || <Skeleton />}</CardTitle>
-              <CardDescription>{description}</CardDescription>
-            </CardContent>
-          </Card>
-        </CardLink>
-      </Link>
-    </Col>
+    <Card
+      href={data?.url}
+      body={{
+        title: title || <Skeleton />,
+        description: (
+          <>
+            {field?.name || <Skeleton width="50%" />} ·{" "}
+            {data?.details?.terms || <Skeleton width="16px" />} termer
+          </>
+        ),
+      }}
+    />
   );
 };

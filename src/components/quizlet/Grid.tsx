@@ -4,7 +4,7 @@ import {
   useStudySets,
 } from "../../lib/quizlet/structures/client/StudySet";
 import { StudySet } from "./StudySet";
-import { Base } from "../grid/Base";
+import CardGrid from "../card/grid";
 
 export const StudySetGrid: React.FunctionComponent<{ field?: string }> = ({
   field,
@@ -17,10 +17,10 @@ export const StudySetGrid: React.FunctionComponent<{ field?: string }> = ({
     ) || new Array(3).fill(null);
 
   return (
-    <Base>
-      {studySets.map((studySet, index) => (
+    <CardGrid
+      cards={studySets.map((studySet, index) => (
         <StudySet studySet={studySet} key={index} />
       ))}
-    </Base>
+    />
   );
 };

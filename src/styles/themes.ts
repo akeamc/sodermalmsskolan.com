@@ -116,7 +116,7 @@ export const dark: DefaultTheme = {
 export const transparentLightPalette: ColorPalette = {
   ...light.colors,
   foreground: "#ffffff",
-  muted: "rgba(255, 255, 255, 0.75)",
-  border: "rgba(255, 255, 255, 0.9)",
+  muted: transparentize(0.25, "#ffffff"),
+  border: transparentize(0.1, "#ffffff"),
   primary: "#ffffff",
 };

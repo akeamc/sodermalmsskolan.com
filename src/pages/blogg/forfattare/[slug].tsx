@@ -5,7 +5,6 @@ import { getAuthorBySlug } from "../../../lib/ghost/author";
 import { PostGridAuto } from "../../../components/blog/PostGrid";
 import Digibruh from "../../../lib/digibruh/Digibruh";
 import useSWR from "swr";
-import { CardGrid } from "../../../components/basic/CardGrid";
 import { Field } from "../../../lib/digibruh/Field";
 import React from "react";
 import { Section } from "../../../components/layout/Section";
@@ -17,6 +16,8 @@ import {
 } from "../../../components/basic/Typography";
 import { HeaderWithBackground } from "../../../components/layout/Header";
 import { HeroTitle } from "../../../components/layout/Hero";
+import CardGrid from "../../../components/card/grid";
+import PostCard from "../../../components/article/postcard";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -81,9 +82,9 @@ const Page: React.FunctionComponent = ({
           </Col>
         </Base>
         <CardGrid
-          items={digibruhPosts?.map(Field.postToGridItem)}
-          imagesExpected={true}
-          rowLimit={3}
+          cards={digibruhPosts?.map((post, index) => (
+            <PostCard key={index} post={post} digibruh />
+          ))}
         />
       </Section>
     </DefaultLayout>
