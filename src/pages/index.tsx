@@ -3,7 +3,12 @@ import Base from "../components/base";
 import HomeHeader from "../components/header/home";
 import Image from "next/image";
 import styled from "@emotion/styled";
-import { ButtonLink } from "../components/button";
+import Button from "../components/button";
+import Container from "../components/container";
+import Card from "../components/card";
+import Section from "../components/section";
+import { H5 } from "../components/text/headings";
+import MenuSection from "../components/food/menusection";
 
 const GroovyImage = styled(Image)`
   filter: hue-rotate(180deg);
@@ -29,10 +34,10 @@ const Page: React.FunctionComponent = () => {
         sub="Södermalmsskolan, ofiltrerad."
         buttons={
           <>
-            <ButtonLink primary href="/meny">
+            <Button primary href="/meny">
               Visa menyn
-            </ButtonLink>
-            <ButtonLink href="/">Något annat</ButtonLink>
+            </Button>
+            <Button href="/">Något annat</Button>
           </>
         }
         graphic={
@@ -42,6 +47,7 @@ const Page: React.FunctionComponent = () => {
           />
         }
       />
+      <MenuSection />
     </Base>
   );
 };

@@ -1,5 +1,4 @@
 import { SerializedStyles } from "@emotion/react";
-import { FunctionComponent } from "react";
 
 export interface StackProps {
   spacing?: string;

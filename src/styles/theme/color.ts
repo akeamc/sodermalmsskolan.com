@@ -8,6 +8,11 @@ interface Color {
     tertiary: string;
     white: string;
   };
+
+  skeleton: {
+    base: string;
+    highlight: string;
+  };
 }
 
 export default Color;

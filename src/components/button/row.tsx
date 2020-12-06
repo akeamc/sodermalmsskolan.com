@@ -1,7 +1,19 @@
-import styled from "@emotion/styled";
+import React, { FunctionComponent } from "react";
+import { horizontalInlineStack } from "../stack/inline";
 
-const ButtonRow = styled.div`
-  margin-top: 1rem;
-`;
+const ButtonRow: FunctionComponent = ({ children }) => (
+  <div
+    css={[
+      horizontalInlineStack({
+        spacing: "1rem",
+      }),
+      {
+        marginTop: "1rem",
+      },
+    ]}
+  >
+    {children}
+  </div>
+);
 
 export default ButtonRow;

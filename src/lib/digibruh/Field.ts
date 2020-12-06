@@ -1,8 +1,6 @@
 import { DigibruhCollection } from "./Collection";
-import { Tag, PostOrPage } from "@tryghost/content-api";
+import { Tag } from "@tryghost/content-api";
 import Digibruh from "./Digibruh";
-import { GridItem } from "../../components/basic/CardGrid";
-import { GenericUser } from "../models/User";
 
 export class Field extends DigibruhCollection {
   static get subCollectionRegExp(): null {
@@ -15,30 +13,6 @@ export class Field extends DigibruhCollection {
 
   postUrl(postSlug: string): string {
     return `${this.url}/${postSlug}`;
-  }
-
-  static postToGridItem({
-    title,
-    excerpt,
-    feature_image,
-    slug,
-    authors,
-    updated_at,
-    published_at,
-    tags,
-  }: PostOrPage): GridItem {
-    const fieldTag = tags.find((tag) => Field.regExp().test(tag.slug));
-
-    return {
-      title,
-      description: excerpt,
-      image: feature_image,
-      href: new Field(fieldTag).postUrl(slug),
-      meta: {
-        authors: authors.map(GenericUser.fromAuthor),
-        date: new Date(updated_at || published_at),
-      },
-    };
   }
 
   /**

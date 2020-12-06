@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import Link from "next/link";
 import { fonts } from "../../styles/text";
-import { lighten, linearGradient, transparentize } from "polished";
+import { lighten, transparentize } from "polished";
 import { css, Theme, useTheme } from "@emotion/react";
 
 export interface ButtonProps {
@@ -11,13 +11,11 @@ export interface ButtonProps {
    * Whether or not the button is primary.
    */
   primary?: boolean;
+
+  href?: string;
 }
 
-export interface ButtonLinkProps extends ButtonProps {
-  href: string;
-}
-
-const baseButtonStyles = (theme: Theme) =>
+const baseStyles = (theme: Theme) =>
   css({
     color: theme.color.text.primary,
     backgroundColor: "transparent",
@@ -32,68 +30,65 @@ const baseButtonStyles = (theme: Theme) =>
     cursor: "pointer",
     textDecoration: "none",
     transition: "all 0.1s ease",
+    padding: "1rem 1.5rem",
+    lineHeight: 1,
+  });
+
+const primaryStyles = (theme: Theme) =>
+  css({
+    backgroundColor: theme.color.accent,
+    backgroundImage: `linear-gradient(${lighten(0.1, theme.color.accent)}, ${
+      theme.color.accent
+    })`,
+    color: theme.color.text.white,
+
+    ["&:hover"]: {
+      opacity: 0.75,
+    },
+  });
+
+const secondaryStyles = (theme: Theme) =>
+  css({
+    boxShadow: `inset 0 0 0 1px ${transparentize(
+      0.5,
+      theme.color.text.primary
+    )}`,
+    transition: "box-shadow 0.2s ease",
+
+    ["&:hover"]: {
+      boxShadow: `inset 0 0 0 2px ${theme.color.text.primary}`,
+    },
   });
 
 /**
  * A button with a link. Neat, right?
  */
-export const ButtonLink: FunctionComponent<ButtonLinkProps> = ({
+const Button: FunctionComponent<ButtonProps> = ({
   href,
   primary = false,
-  children,
+  ...rest
 }) => {
-  const innerProps: {
-    as?: React.ElementType<unknown>;
-    children: ReactNode;
-  } = {
-    as: "a",
-    children,
-  };
-
   const theme = useTheme();
 
-  const base = baseButtonStyles(theme);
+  const css = [
+    baseStyles(theme),
+    primary ? primaryStyles(theme) : secondaryStyles(theme),
+  ];
 
-  const inner = primary ? (
-    <button
-      css={[
-        base,
-        {
-          backgroundColor: theme.color.accent,
-          backgroundImage: `linear-gradient(${lighten(
-            0.1,
-            theme.color.accent
-          )}, ${theme.color.accent})`,
-          color: theme.color.text.white,
-          [`&:hover`]: {
-            opacity: 0.75,
-          },
-        },
-      ]}
-      {...innerProps}
-    />
-  ) : (
-    <button
-      css={[
-        base,
-        {
-          boxShadow: `inset 0 0 0 1px ${transparentize(
-            0.5,
-            theme.color.text.primary
-          )}`,
-          transition: "box-shadow 0.2s ease",
-          [`&:hover`]: {
-            boxShadow: `inset 0 0 0 2px ${theme.color.text.primary}`,
-          },
-        },
-      ]}
-      {...innerProps}
-    />
-  );
+  const innerProps = {
+    css,
+    ...rest,
+  };
 
-  return (
-    <Link href={href} passHref>
-      {inner}
-    </Link>
-  );
+  if (href) {
+    return (
+      <Link href={href} passHref>
+        <a {...innerProps} />
+      </Link>
+    );
+  } else {
+    return <button {...innerProps} />;
+  }
 };
+
+export default Button;

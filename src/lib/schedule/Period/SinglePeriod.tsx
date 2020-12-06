@@ -1,6 +1,5 @@
 import { Period, PeriodBoundary } from ".";
 import { Subject } from "../Subject";
-import { PeriodComponent } from "./PeriodComponent";
 import React from "react";
 
 export class SinglePeriod implements Period {
@@ -46,17 +45,3 @@ export class SinglePeriod implements Period {
     return this;
   }
 }
-
-export const SinglePeriodComponent: React.FunctionComponent<{
-  period: SinglePeriod;
-}> = ({ period }) => {
-  return (
-    <PeriodComponent
-      start={period.start.format()}
-      end={period.end.format()}
-      room={period.room}
-      title={period.subject.symbol}
-      color={period.subject.color}
-    />
-  );
-};

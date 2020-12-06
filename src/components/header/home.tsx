@@ -1,9 +1,8 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import styled from "@emotion/styled";
 import Container from "../container";
 import { breakpoints, media } from "../../styles/breakpoints";
-import { HeroHeading, SmallHeading } from "../text/headings";
-import { ThemeProvider } from "@emotion/react";
+import { HeroHeading, SmallHeading, SubTitle } from "../text/headings";
+import { Theme, ThemeProvider } from "@emotion/react";
 import darkTheme from "../../styles/theme/dark";
 import ButtonRow from "../button/row";
 import Separator from "../separator";
@@ -16,61 +15,6 @@ export interface HomeHeaderProps {
   graphic: ReactNode;
 }
 
-const Outer = styled.div`
-  background-color: ${({ theme }) => theme.color.background};
-`;
-
-const StyledHomeHeader = styled(Container)`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 2rem;
-
-  ${media(breakpoints.large)} {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const Pane = styled.div``;
-
-const TextPane = styled(Pane)`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 2rem 0;
-`;
-
-const GraphicPane = styled(Pane)`
-  position: relative;
-  min-height: 50vh;
-
-  ${media(breakpoints.large)} {
-    min-height: 80vh;
-  }
-
-  img {
-    object-fit: cover;
-  }
-`;
-
-const Title = styled(HeroHeading)`
-  font-size: 4.5rem;
-  font-weight: 800;
-`;
-
-const Sub = styled.h4`
-  margin: 0;
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.025em;
-  color: ${({ theme }) => theme.color.text.secondary};
-`;
-
-const SuperTitle = styled(SmallHeading)`
-  margin-bottom: 0.25rem;
-`;
-
 const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
   title,
   sub,
@@ -79,17 +23,68 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
   graphic,
 }) => (
   <ThemeProvider theme={darkTheme}>
-    <Outer>
-      <StyledHomeHeader>
-        <TextPane>
-          {superTitle ? <SuperTitle>{superTitle}</SuperTitle> : null}
-          <Title>{title}</Title>
-          {sub ? <Sub>{sub}</Sub> : null}
+    <div
+      css={(theme: Theme) => ({
+        backgroundColor: theme.color.background,
+      })}
+    >
+      <Container
+        css={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: "2rem",
+          paddingBottom: "2rem",
+
+          [media(breakpoints.large)]: {
+            gridTemplateColumns: "repeat(2, 1fr)",
+          },
+        }}
+      >
+        <div
+          css={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            padding: "2rem 0",
+
+            [media(breakpoints.medium)]: {
+              paddingTop: "4rem",
+              paddingBottom: "4rem",
+            },
+
+            [media(breakpoints.large)]: {
+              paddingTop: "8rem",
+              paddingBottom: "8rem",
+            },
+          }}
+        >
+          {superTitle ? (
+            <SmallHeading css={{ marginBottom: "0.25rem" }}>
+              {superTitle}
+            </SmallHeading>
+          ) : null}
+          <HeroHeading>{title}</HeroHeading>
+          {sub ? <SubTitle>{sub}</SubTitle> : null}
           {buttons ? <ButtonRow>{buttons}</ButtonRow> : null}
-        </TextPane>
-        <GraphicPane>{graphic}</GraphicPane>
-      </StyledHomeHeader>
-    </Outer>
+        </div>
+        <div
+          css={{
+            position: "relative",
+            minHeight: "50vh",
+
+            [media(breakpoints.large)]: {
+              minHeight: "80vh",
+            },
+
+            ["img"]: {
+              objectFit: "cover",
+            },
+          }}
+        >
+          {graphic}
+        </div>
+      </Container>
+    </div>
     <Separator />
   </ThemeProvider>
 );

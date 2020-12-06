@@ -1,7 +1,6 @@
 import { FirebaseError } from "firebase-admin";
 import Link from "next/link";
 import React from "react";
-import { Anchor } from "../../components/basic/Typography";
 import { loginLink, resetAccountLink, signupLink } from "./href";
 
 export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
@@ -13,7 +12,7 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
         <>
           Ingen användare med e-postadressen hittades. Vill du{" "}
           <Link href={signupLink()} passHref>
-            <Anchor>skapa ett konto</Anchor>
+            <a>skapa ett konto</a>
           </Link>
           ?
         </>
@@ -23,7 +22,7 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
         <>
           Felaktigt lösenord. Har du{" "}
           <Link href={resetAccountLink()} passHref>
-            <Anchor>glömt lösenordet</Anchor>
+            <a>glömt lösenordet</a>
           </Link>
           ?
         </>
@@ -35,7 +34,7 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
         <>
           E-postadressen används redan av ett annat konto. Vill du{" "}
           <Link href={loginLink()} passHref>
-            <Anchor>logga in</Anchor>
+            <a>logga in</a>
           </Link>
           ?
         </>

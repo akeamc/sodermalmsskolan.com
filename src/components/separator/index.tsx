@@ -1,5 +1,4 @@
 import { Theme } from "@emotion/react";
-import styled from "@emotion/styled";
 import React, { FunctionComponent } from "react";
 
 const Separator: FunctionComponent = () => (

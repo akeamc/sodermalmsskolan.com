@@ -1,7 +1,6 @@
 import { Tag, PostsOrPages } from "@tryghost/content-api";
 import { getPostsByTag } from "../ghost/post";
 import Digibruh from "./Digibruh";
-import { GridItem } from "../../components/basic/CardGrid";
 
 /**
  * Generic collection for use within Digibruh.
@@ -39,15 +38,6 @@ export abstract class DigibruhCollection {
    */
   static regExp(): RegExp | null {
     return null;
-  }
-
-  toGridItem(): GridItem {
-    return {
-      title: this.name,
-      description: this.description,
-      href: this.url,
-      image: this.coverImage,
-    };
   }
 
   get name(): string {

@@ -1,22 +1,12 @@
 import { Channel, IDiscordAPIChannel } from "../shared/Channel";
-import { ClientMessage, MessageComponent } from "./Message";
-import { Base } from "../../../../components/grid/Base";
-import React from "react";
+import { ClientMessage } from "./Message";
 import useSWR, { SWRInfiniteResponseInterface } from "swr";
-import { NormalWidth } from "../../../../components/grid/Col";
 import { useSWRInfinite } from "swr";
 import ky from "ky-universal";
 import { IDiscordAPIMessage } from "../shared/Message";
-import styled from "styled-components";
 import { getAuthorizationHeader } from "../../../auth/token";
 import { UseSWRResource } from "../../../common/usable";
 import { IdQuery } from "../../../common/query";
-
-const MessageWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: var(--grid-gap);
-`;
 
 export interface UseChannelMessagesQuery {
   channel: string;
@@ -65,23 +55,5 @@ export const useChannelMessages = ({
 
       return data.map((messageData) => new ClientMessage(messageData));
     }
-  );
-};
-
-export const ChannelMessages: React.FunctionComponent<UseChannelMessagesQuery> = (
-  query
-) => {
-  const { data } = useChannelMessages(query);
-
-  return (
-    <Base>
-      <NormalWidth>
-        <MessageWrapper>
-          {data?.flat()?.map((message, index) => (
-            <MessageComponent message={message} key={index} />
-          ))}
-        </MessageWrapper>
-      </NormalWidth>
-    </Base>
   );
 };

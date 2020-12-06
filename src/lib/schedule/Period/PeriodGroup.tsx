@@ -1,9 +1,6 @@
-import { SinglePeriod, SinglePeriodComponent } from "./SinglePeriod";
+import { SinglePeriod } from "./SinglePeriod";
 import { Period, PeriodBoundary } from ".";
-import React from "react";
 import { Subject, Subjects } from "../Subject";
-import styled from "styled-components";
-import { PeriodComponent } from "./PeriodComponent";
 
 export class GroupedPeriod extends SinglePeriod {
   public group: string;
@@ -18,28 +15,7 @@ export class GroupedPeriod extends SinglePeriod {
     super([start, end], day, subject, room);
     this.group = group;
   }
-
-  public Component: React.FunctionComponent = () => (
-    <PeriodComponent
-      start={this.start.format()}
-      end={this.end.format()}
-      room={this.room}
-      title={`${this.subject.symbol} ${this.group}`}
-      color={this.subject.color}
-    />
-  );
 }
-
-const PeriodGroupWrapper = styled.div`
-  display: grid;
-  grid-auto-columns: 1fr;
-`;
-
-const PeriodContainer = styled.div`
-  > * {
-    width: 100%;
-  }
-`;
 
 /**
  * A group of parallel periods for different teaching groups.
@@ -106,33 +82,6 @@ export class PeriodGroup implements Period {
     );
   }
 }
-
-export const GroupPeriodComponent: React.FunctionComponent<{
-  group: PeriodGroup;
-}> = ({ group }) => {
-  const [groupStart] = group.bounds;
-
-  return (
-    <PeriodGroupWrapper>
-      {group.periods.map((period, index) => {
-        const gridColumnStart = period.start.scheduleTime + 1 - groupStart;
-        const gridColumnEnd = period.end.scheduleTime + 1 - groupStart;
-
-        return (
-          <PeriodContainer
-            key={index}
-            style={{
-              gridColumnStart,
-              gridColumnEnd,
-            }}
-          >
-            <SinglePeriodComponent period={period} />
-          </PeriodContainer>
-        );
-      })}
-    </PeriodGroupWrapper>
-  );
-};
 
 type PracticalSubject = [[number, number], string];
 
