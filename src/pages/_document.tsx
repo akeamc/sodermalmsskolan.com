@@ -4,9 +4,7 @@ import Document, {
   Main,
   NextScript,
   DocumentInitialProps,
-  DocumentContext,
 } from "next/document";
-import { ServerStyleSheet } from "styled-components";
 import React from "react";
 
 interface Props extends DocumentInitialProps {
@@ -14,35 +12,9 @@ interface Props extends DocumentInitialProps {
 }
 
 export default class MyDocument extends Document<Props> {
-  static async getInitialProps(ctx: DocumentContext): Promise<Props> {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
-
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
-        });
-
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
-    } finally {
-      sheet.seal();
-    }
-  }
-
   render(): JSX.Element {
     return (
-      <Html lang="sv">
+      <Html>
         <Head>
           <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />

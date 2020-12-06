@@ -1,49 +1,48 @@
 import React from "react";
-import { DefaultLayout } from "../components/layout/Layout/Default";
-import { Section } from "../components/layout/Section";
-import { Base } from "../components/grid/Base";
-import { Navigation } from "../components/layout/Navigation";
-import { NormalWidth } from "../components/grid/Col";
-import { ButtonRow, Button } from "../components/basic/Button";
-import { LunchWidget } from "../components/food/LunchWidget";
-import { EpicHero } from "../components/layout/Hero/Epic";
-import { LeadText } from "../components/basic/Typography";
-import { HeroTitle } from "../components/layout/Hero";
-import { ArrowRight, BookOpen } from "react-feather";
-import { PhotoWidget } from "../components/food/PhotoWidget";
+import Base from "../components/base";
+import HomeHeader from "../components/header/home";
+import Image from "next/image";
+import styled from "@emotion/styled";
+import { ButtonLink } from "../components/button";
+
+const GroovyImage = styled(Image)`
+  filter: hue-rotate(180deg);
+  transition: all 0.2s ease-in-out;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
+  &:hover {
+    clip-path: polygon(
+      2rem 2rem,
+      calc(100% - 2rem) 2rem,
+      calc(100% - 2rem) calc(100% - 2rem),
+      2rem calc(100% - 2rem)
+    );
+  }
+`;
 
 const Page: React.FunctionComponent = () => {
   return (
-    <DefaultLayout>
-      <Navigation autoFloat />
-      <EpicHero
-        left={
+    <Base>
+      <HomeHeader
+        superTitle="södermalmsskolan.com"
+        title="Snille och smak"
+        sub="Södermalmsskolan, ofiltrerad."
+        buttons={
           <>
-            <HeroTitle>Snille och smak</HeroTitle>
-            <LeadText>
-              Sedan maj 2019 har vi fotat skolmaten och visat den egentliga
-              innebörden av Sodexos slogan <i>Quality of Life Services</i>.
-            </LeadText>
-            <ButtonRow>
-              <Button large href="/meny" icon={<ArrowRight />}>
-                Visa menyn
-              </Button>
-              <Button large secondary href="/digibruh" icon={<BookOpen />}>
-                Öppna Digibruh
-              </Button>
-            </ButtonRow>
+            <ButtonLink primary href="/meny">
+              Visa menyn
+            </ButtonLink>
+            <ButtonLink href="/">Något annat</ButtonLink>
           </>
         }
-        right={<PhotoWidget />}
+        graphic={
+          <GroovyImage
+            src="https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG"
+            layout="fill"
+          />
+        }
       />
-      <Section>
-        <Base>
-          <NormalWidth>
-            <LunchWidget />
-          </NormalWidth>
-        </Base>
-      </Section>
-    </DefaultLayout>
+    </Base>
   );
 };
 

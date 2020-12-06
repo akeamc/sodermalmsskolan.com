@@ -1,24 +1,16 @@
-import GlobalStyles from "../styles/global";
 import React from "react";
-import { AuthProvider } from "../providers/Auth";
-import { AppProps } from "next/dist/next-server/lib/router/router";
-import { ThemeProvider } from "../components/theme/ThemeProvider";
-import "react-toastify/dist/ReactToastify.css";
-import { StyledToastContainer } from "../components/basic/ToastContainer";
-import NProgress from "../components/spinners/nprogress";
+import { AppProps } from "next/app";
+import { GlobalStyles } from "../styles/global";
 
-// DayJS is lightweight, locales must be imported manually.
+// DayJS is so lightweight that locales must be imported manually.
 import "dayjs/locale/sv";
+import { ThemeProvider } from "../styles/theme/provider";
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ThemeProvider>
       <GlobalStyles />
-      <AuthProvider>
-        <NProgress />
-        <StyledToastContainer />
-        <Component {...pageProps} />
-      </AuthProvider>
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }
