@@ -181,7 +181,7 @@ export const Schedules: Schedule[] = [
     "O93",
     [
       new SinglePeriod([101, 113], 0, Subjects.English, "A307"),
-      new SinglePeriod([117, 132], 0, Subjects.Mathematics, "A307"),
+      new SinglePeriod([117, 132], 0, Subjects.Mathematics, "A311"),
       new SinglePeriod([134, 149], 0, Subjects.SocialStudies, "A309"),
       new SinglePeriod([159, 173], 0, Subjects.Swedish, "A308"),
       new SinglePeriod([101, 114], 1, Subjects.Mathematics, "A307"),
