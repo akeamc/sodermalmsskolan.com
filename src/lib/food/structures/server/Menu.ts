@@ -1,6 +1,6 @@
+import got from "got/dist/source";
 import { ServerDish } from "./Dish";
 import { IMenu, Menu } from "../shared/Menu";
-import got from "got/dist/source";
 import { API_ENDPOINT } from "../../constants";
 
 export class ServerMenu extends Menu {

@@ -19,6 +19,4 @@ export const DISCORD_CHANNELS: Channels = {
   },
 };
 
-export const getChannelDetails = (id: string): ChannelDetails => {
-  return Object.values(DISCORD_CHANNELS).find((details) => details.id === id);
-};
+export const getChannelDetails = (id: string): ChannelDetails => Object.values(DISCORD_CHANNELS).find((details) => details.id === id);

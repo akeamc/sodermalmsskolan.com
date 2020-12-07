@@ -1,6 +1,6 @@
+import got from "got";
 import { Member, IDiscordAPIMember } from "../shared/Member";
 import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
-import got from "got";
 import { ServerDiscordUser } from "./User";
 
 export class ServerMember extends Member {

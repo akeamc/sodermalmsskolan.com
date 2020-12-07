@@ -1,9 +1,10 @@
+import dayjs, { Dayjs } from "dayjs";
 import { SinglePeriod } from "./SinglePeriod";
 import { Schedule } from "../Schedule";
-import dayjs, { Dayjs } from "dayjs";
 
 export class PeriodBoundary {
   private day: number;
+
   private time: number;
 
   constructor(day: number, time: number) {
@@ -60,14 +61,14 @@ export class PeriodBoundary {
 
     if (absoluteTimestamp.day() <= this.isoWeekday) {
       return absoluteTimestamp.day(this.isoWeekday);
-    } else {
-      return absoluteTimestamp.add(1, "week").day(this.isoWeekday);
     }
+    return absoluteTimestamp.add(1, "week").day(this.isoWeekday);
   }
 }
 
 export abstract class Period {
   public abstract start: PeriodBoundary;
+
   public abstract end: PeriodBoundary;
 
   public abstract bounds: [number, number];

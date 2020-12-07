@@ -54,10 +54,6 @@ export default class ClientLetter extends Letter {
   }
 }
 
-export const useLetters: UseSWRResource<ClientLetter[]> = () => {
-  return useSWR(ClientLetter.fetchAllUrl, () => ClientLetter.fetchAll());
-};
+export const useLetters: UseSWRResource<ClientLetter[]> = () => useSWR(ClientLetter.fetchAllUrl, () => ClientLetter.fetchAll());
 
-export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => {
-  return useSWR(ClientLetter.fetchUrl(id), () => ClientLetter.fetch(id));
-};
+export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => useSWR(ClientLetter.fetchUrl(id), () => ClientLetter.fetch(id));

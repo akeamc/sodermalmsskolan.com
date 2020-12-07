@@ -22,14 +22,10 @@ export class ClientDish extends Dish {
   }
 }
 
-export const useDish: UseSWRResource<ClientDish, IdQuery> = ({ id }) => {
-  return useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id), {
-    revalidateOnFocus: false,
-  });
-};
+export const useDish: UseSWRResource<ClientDish, IdQuery> = ({ id }) => useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id), {
+  revalidateOnFocus: false,
+});
 
-export const useDishes: UseSWRResource<ClientDish[]> = () => {
-  return useSWR(`/api/food/dishes`, ClientDish.fetchAll, {
-    revalidateOnFocus: false,
-  });
-};
+export const useDishes: UseSWRResource<ClientDish[]> = () => useSWR("/api/food/dishes", ClientDish.fetchAll, {
+  revalidateOnFocus: false,
+});

@@ -6,10 +6,12 @@ import { useDish } from "../../lib/food/structures/client/Dish";
 import { useMenu } from "../../lib/food/structures/client/Menu";
 import { Dish } from "../../lib/food/structures/shared/Dish";
 import { breakpoints, media } from "../../styles/breakpoints";
-import Card from "../card";
-import Section, { SectionProps } from "../section";
+import Card from "../Card";
+import Section, { SectionProps } from "../Section";
 import Skeleton from "../skeleton";
 import { H5 } from "../text/headings";
+import { SmallParagraph } from "../text/paragraphs";
+import { Asterisk } from "../text/symbols";
 
 const DishCard: FunctionComponent<{
   dish: Dish;
@@ -32,13 +34,18 @@ const DishCard: FunctionComponent<{
           <>
             <span
               css={(theme: Theme) => ({
-                color: theme.color.text.white,
+                color: theme.color.text.primary,
               })}
             >
               {dish?.title}
-            </span>{" "}
-            ({data?.co2e?.toLocaleString() || <Skeleton width="2em" />} kg CO
-            <sub>2</sub>e per portion)
+            </span>
+            {" "}
+            (
+            {data?.co2e?.toLocaleString() || <Skeleton width="2em" />}
+            {" "}
+            kg CO
+            <sub>2</sub>
+            e per portion)
           </>
         ) : (
           <Skeleton count={2} />
@@ -64,7 +71,12 @@ const MenuSection: FunctionComponent<SectionProps> = (props) => {
         ) : (
           <Skeleton width="12em" />
         ),
-        title: "Dagens lunch",
+        title: (
+          <>
+            Dagens lunch&nbsp;
+            <Asterisk />
+          </>
+        ),
       }}
       {...props}
     >
@@ -80,15 +92,21 @@ const MenuSection: FunctionComponent<SectionProps> = (props) => {
         }}
       >
         {(menu?.dishes || new Array(2).fill(null)).map((dish, index) => (
-          <DishCard key={index} dish={dish} />
+          // While it is a bad idea to use the array index as the key, it doesn't really
+          // matter when the elements aren't unique.
+          <DishCard key={dish?.id || index} dish={dish} />
         ))}
       </div>
+      <SmallParagraph
+        css={{
+          marginTop: "2rem",
+        }}
+      >
+        <Asterisk />
+        &nbsp;Källa: Sodexo.
+      </SmallParagraph>
     </Section>
   );
-};
-
-MenuSection.defaultProps = {
-  dark: true,
 };
 
 export default MenuSection;

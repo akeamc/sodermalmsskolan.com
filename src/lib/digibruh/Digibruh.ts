@@ -1,12 +1,12 @@
 import { PostsOrPages, Tag, PostOrPage } from "@tryghost/content-api";
+import useSWR from "swr";
+import { ParsedUrlQuery } from "querystring";
 import { getPostsByTag, getPosts, getPostBySlug } from "../ghost/post";
 import { Subject } from "./Subject";
 import { getTags } from "../ghost/tag";
-import useSWR from "swr";
 import { DigibruhCollection } from "./Collection";
 import { Field } from "./Field";
 import Serializable from "../common/serializable";
-import { ParsedUrlQuery } from "querystring";
 
 /**
  * A static variant of `Digibruh`, used mostly for SSR (because you cannot serialize classes with JSON).
@@ -42,7 +42,7 @@ export class DigibruhTags extends Array<Tag> {
 
   public fields(subjectSlug = DigibruhCollection.tagWildcard): Field[] {
     return this.filter((tag) => Field.regExp(subjectSlug).test(tag.slug)).map(
-      (tag) => new Field(tag)
+      (tag) => new Field(tag),
     );
   }
 
@@ -80,7 +80,7 @@ export default class Digibruh implements Serializable<DigibruhStatic> {
   public getFieldBySlug(subjectSlug: string, fieldSlug: string): Field | null {
     return (
       this.fields.find(
-        (field) => field.subjectSlug == subjectSlug && field.slug == fieldSlug
+        (field) => field.subjectSlug == subjectSlug && field.slug == fieldSlug,
       ) || null
     );
   }
@@ -108,15 +108,11 @@ export default class Digibruh implements Serializable<DigibruhStatic> {
     return post;
   }
 
-  public static fetchAllPosts = async (): Promise<PostsOrPages> => {
-    return getPostsByTag(Digibruh.tagPrefix, "all");
-  };
+  public static fetchAllPosts = async (): Promise<PostsOrPages> => getPostsByTag(Digibruh.tagPrefix, "all");
 
   public static fetchPostsByAuthor = async (
-    slug: string
-  ): Promise<PostsOrPages> => {
-    return getPosts("all", `authors.slug:${slug}+tag:${Digibruh.tagPrefix}`);
-  };
+    slug: string,
+  ): Promise<PostsOrPages> => getPosts("all", `authors.slug:${slug}+tag:${Digibruh.tagPrefix}`);
 
   public static async initialize(): Promise<Digibruh> {
     return new Digibruh({ tags: await DigibruhTags.fetch() });

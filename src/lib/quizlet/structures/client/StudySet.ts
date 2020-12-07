@@ -32,10 +32,6 @@ export class ClientStudySet extends StudySet {
 
 export const useStudySet: UseSWRResource<ClientStudySet, IdQuery> = ({
   id,
-}) => {
-  return useSWR(ClientStudySet.fetchUrl(id), () => ClientStudySet.fetch(id));
-};
+}) => useSWR(ClientStudySet.fetchUrl(id), () => ClientStudySet.fetch(id));
 
-export const useStudySets: UseSWRResource<ClientStudySet[]> = () => {
-  return useSWR(ClientStudySet.fetchAllUrl, () => ClientStudySet.fetchAll());
-};
+export const useStudySets: UseSWRResource<ClientStudySet[]> = () => useSWR(ClientStudySet.fetchAllUrl, () => ClientStudySet.fetchAll());

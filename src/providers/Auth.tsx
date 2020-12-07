@@ -1,7 +1,7 @@
 import React, { ReactNode, ReactElement } from "react";
-import { auth } from "../lib/firebase/firebase";
 import firebase from "firebase";
 import { toast } from "react-toastify";
+import { auth } from "../lib/firebase/firebase";
 
 type AuthContext = {
   isAuthenticated: boolean;
@@ -73,7 +73,7 @@ export function sendEmailVerification(): void {
     .sendEmailVerification()
     .then(() => {
       toast(
-        `Ett mejl för att bekräfta e-postadressen har skickats till ${auth.currentUser.email}.`
+        `Ett mejl för att bekräfta e-postadressen har skickats till ${auth.currentUser.email}.`,
       );
     })
     .catch((error) => {

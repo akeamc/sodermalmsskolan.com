@@ -2,11 +2,11 @@ import admin from "firebase-admin";
 import { Vote } from "../shared/Vote";
 import { ServerDish } from "./Dish";
 
-const FieldValue = admin.firestore.FieldValue;
+const { FieldValue } = admin.firestore;
 
 export class ServerVote extends Vote {
   public static firestoreDocument(
-    dish: string
+    dish: string,
   ): FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> {
     return ServerDish.firestoreDocument(dish);
   }
@@ -16,7 +16,7 @@ export class ServerVote extends Vote {
    * @param document
    */
   public static fromFirestoreDocument(
-    document: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>
+    document: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>,
   ): ServerVote[] {
     if (!document.exists) {
       return [];
@@ -31,10 +31,10 @@ export class ServerVote extends Vote {
 
     return [
       ...data?.upvotes?.map(
-        (author) => new ServerVote({ ...base, author, up: true })
+        (author) => new ServerVote({ ...base, author, up: true }),
       ),
       ...data?.downvotes?.map(
-        (author) => new ServerVote({ ...base, author, up: false })
+        (author) => new ServerVote({ ...base, author, up: false }),
       ),
     ];
 
@@ -76,7 +76,7 @@ export class ServerVote extends Vote {
         upvotes,
         downvotes,
       },
-      { merge: true }
+      { merge: true },
     );
   }
 

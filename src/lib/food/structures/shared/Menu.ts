@@ -7,6 +7,7 @@ export interface IMenu {
 
 export class Menu {
   dishes: Dish[];
+
   date: Date;
 
   constructor({ dishes, date }: IMenu) {

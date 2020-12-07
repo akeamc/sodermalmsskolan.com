@@ -1,4 +1,6 @@
-import { css, keyframes, Theme, useTheme } from "@emotion/react";
+import {
+  css, keyframes, Theme, useTheme,
+} from "@emotion/react";
 import React, { FunctionComponent } from "react";
 
 const animation = keyframes`
@@ -10,18 +12,17 @@ const animation = keyframes`
   }
 `;
 
-const lineStyles = (theme: Theme, width?: string) =>
-  css({
-    backgroundColor: theme.color.skeleton.base,
-    backgroundImage: `linear-gradient(90deg, ${theme.color.skeleton.base}, ${theme.color.skeleton.highlight}, ${theme.color.skeleton.base})`,
-    backgroundSize: "200px 100%",
-    backgroundRepeat: "no-repeat",
-    borderRadius: "0.25rem",
-    display: "inline-block",
-    lineHeight: 1,
-    width: width || "100%",
-    animation: `${animation} 1.2s ease-in-out infinite`,
-  });
+const lineStyles = (theme: Theme, width?: string) => css({
+  backgroundColor: theme.color.skeleton.base,
+  backgroundImage: `linear-gradient(90deg, ${theme.color.skeleton.base}, ${theme.color.skeleton.highlight}, ${theme.color.skeleton.base})`,
+  backgroundSize: "200px 100%",
+  backgroundRepeat: "no-repeat",
+  borderRadius: "0.25rem",
+  display: "inline-block",
+  lineHeight: 1,
+  width: width || "100%",
+  animation: `${animation} 1.2s ease-in-out infinite`,
+});
 
 const Line: FunctionComponent<{ width?: string }> = ({ width, ...props }) => {
   const theme = useTheme();
@@ -42,7 +43,7 @@ const Skeleton: React.FunctionComponent<{
     elements.push(
       <Line key={i} width={width}>
         &zwnj;
-      </Line>
+      </Line>,
     );
   }
 

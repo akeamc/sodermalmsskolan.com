@@ -7,9 +7,7 @@ import { IDiscordAPIChannel } from "../../../../../lib/discord/structures/shared
 const handler: ServerChannelHandler<IDiscordAPIChannel> = async (
   _,
   res,
-  channel
-) => {
-  return res.json(channel.serialize());
-};
+  channel,
+) => res.json(channel.serialize());
 
 export default ServerChannel.wrapHandler(handler);

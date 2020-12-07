@@ -12,6 +12,7 @@ import { PeriodCollection } from "./PeriodCollection";
 
 export class Schedule {
   public group: string;
+
   public periods: PeriodCollection;
 
   constructor(group: string, periods: Period[], base?: Schedule) {
@@ -19,7 +20,7 @@ export class Schedule {
     this.periods = new PeriodCollection(
       ...periods
         .concat(base?.periods || [])
-        .sort((a, b) => a.start.weekTime - b.start.weekTime)
+        .sort((a, b) => a.start.weekTime - b.start.weekTime),
     );
   }
 
@@ -33,7 +34,7 @@ export class Schedule {
 
         return [minimum, maximum];
       },
-      [60 * 24, 0]
+      [60 * 24, 0],
     );
   }
 
@@ -53,10 +54,10 @@ export class Schedule {
 
   public static dateToScheduleTime(timestamp: Date = new Date()): number {
     return (
-      (timestamp.getHours() * 60 +
-        timestamp.getMinutes() +
-        timestamp.getSeconds() / 60) /
-      5
+      (timestamp.getHours() * 60
+        + timestamp.getMinutes()
+        + timestamp.getSeconds() / 60)
+      / 5
     );
   }
 
@@ -95,7 +96,7 @@ export const CommonSchedule = new Schedule("Ovalen", [
       new GroupedPeriod([137, 149], 1, Subjects.English, "A309", "EV SDO"),
       new GroupedPeriod([137, 149], 1, Subjects.Mathematics, "A112", "EV MA"),
     ],
-    "Elevens val"
+    "Elevens val",
   ),
   languages([173, 188], 1),
   practicalSubjects(2, {
@@ -156,7 +157,7 @@ export const Schedules: Schedule[] = [
       new SinglePeriod([157, 167], 3, Subjects.English, "A307"),
       new SinglePeriod([177, 189], 4, Subjects.Mathematics, "A307"),
     ],
-    CommonSchedule
+    CommonSchedule,
   ),
   new Schedule(
     "O92",
@@ -175,7 +176,7 @@ export const Schedules: Schedule[] = [
       new SinglePeriod([157, 167], 3, Subjects.Mathematics, "A308"),
       new SinglePeriod([176, 186], 4, Subjects.SocialStudies, "A309"),
     ],
-    CommonSchedule
+    CommonSchedule,
   ),
   new Schedule(
     "O93",
@@ -194,6 +195,6 @@ export const Schedules: Schedule[] = [
       new SinglePeriod([157, 167], 3, Subjects.SocialStudies, "A309"),
       new SinglePeriod([176, 186], 4, Subjects.Chemistry, "A311"),
     ],
-    CommonSchedule
+    CommonSchedule,
   ),
 ];

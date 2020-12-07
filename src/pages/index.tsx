@@ -1,14 +1,12 @@
 import React from "react";
-import Base from "../components/base";
-import HomeHeader from "../components/header/home";
 import Image from "next/image";
 import styled from "@emotion/styled";
-import Button from "../components/button";
-import Container from "../components/container";
-import Card from "../components/card";
-import Section from "../components/section";
-import { H5 } from "../components/text/headings";
-import MenuSection from "../components/food/menusection";
+import { NextPage } from "next";
+import Base from "../components/Base";
+import HomeHeader from "../components/header/Home";
+import Button from "../components/button/Button";
+import MenuSection from "../components/food/MenuSection";
+import Footer from "../components/footer";
 
 const GroovyImage = styled(Image)`
   filter: hue-rotate(180deg);
@@ -25,31 +23,30 @@ const GroovyImage = styled(Image)`
   }
 `;
 
-const Page: React.FunctionComponent = () => {
-  return (
-    <Base>
-      <HomeHeader
-        superTitle="södermalmsskolan.com"
-        title="Snille och smak"
-        sub="Södermalmsskolan, ofiltrerad."
-        buttons={
-          <>
-            <Button primary href="/meny">
-              Visa menyn
-            </Button>
-            <Button href="/">Något annat</Button>
-          </>
-        }
-        graphic={
-          <GroovyImage
-            src="https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG"
-            layout="fill"
-          />
-        }
-      />
-      <MenuSection />
-    </Base>
-  );
-};
+const Page: NextPage = () => (
+  <Base>
+    <HomeHeader
+      superTitle="södermalmsskolan.com"
+      title="Snille och smak"
+      sub="Södermalmsskolan, ofiltrerad."
+      buttons={(
+        <>
+          <Button primary href="/meny">
+            Visa menyn
+          </Button>
+          <Button href="/">Något annat</Button>
+        </>
+        )}
+      graphic={(
+        <GroovyImage
+          src="https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG"
+          layout="fill"
+        />
+        )}
+    />
+    <MenuSection />
+    <Footer />
+  </Base>
+);
 
 export default Page;

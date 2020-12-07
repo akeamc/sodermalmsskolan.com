@@ -1,11 +1,11 @@
-export interface Fonts extends Record<string, string> {
-  sans: string;
-  serif: string;
-  monospace: string;
+export interface Fonts<T = string> extends Record<string, T> {
+  sans: T;
+  serif: T;
+  monospace: T;
 }
 
 export const fallback: Fonts = {
-  sans: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Helvetica, sans-serif`,
+  sans: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", Helvetica, sans-serif",
   serif: "serif",
   monospace: "monospace",
 };

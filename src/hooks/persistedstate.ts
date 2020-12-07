@@ -1,5 +1,7 @@
 import createPersistedState from "use-persisted-state";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import {
+  useState, useEffect, Dispatch, SetStateAction,
+} from "react";
 
 /**
  * A persistent `useState`, compatible with SSR.
@@ -8,7 +10,7 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
  */
 export function usePersistedState<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, Dispatch<SetStateAction<T>>] {
   const usePeristed = createPersistedState(key);
 

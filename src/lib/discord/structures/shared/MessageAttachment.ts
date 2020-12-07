@@ -11,13 +11,19 @@ export interface IDiscordAPIMessageAttachment {
 }
 
 export class MessageAttachment
-  implements Serializable<IDiscordAPIMessageAttachment> {
+implements Serializable<IDiscordAPIMessageAttachment> {
   id: string;
+
   filename: string;
+
   size: number;
+
   url: string;
+
   proxyUrl: string;
+
   height?: number;
+
   width?: number;
 
   constructor({

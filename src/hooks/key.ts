@@ -5,29 +5,27 @@ export type KeyboardEventHandler = (event: KeyboardEvent) => void;
 export const useKeyEvents = (
   matchKey: (string) => boolean,
   handleDown: KeyboardEventHandler = () => null,
-  handleUp: KeyboardEventHandler = () => null
-): void => {
-  return useEffect(() => {
-    const onDown: KeyboardEventHandler = (event) => {
-      if (matchKey(event.key)) {
-        handleDown(event);
-      }
-    };
+  handleUp: KeyboardEventHandler = () => null,
+): void => useEffect(() => {
+  const onDown: KeyboardEventHandler = (event) => {
+    if (matchKey(event.key)) {
+      handleDown(event);
+    }
+  };
 
-    const onUp: KeyboardEventHandler = (event) => {
-      if (matchKey(event.key)) {
-        handleUp(event);
-      }
-    };
+  const onUp: KeyboardEventHandler = (event) => {
+    if (matchKey(event.key)) {
+      handleUp(event);
+    }
+  };
 
-    window.addEventListener("keydown", onDown);
-    window.addEventListener("keyup", onUp);
-    return () => {
-      window.removeEventListener("keydown", onDown);
-      window.removeEventListener("keyup", onUp);
-    };
-  }, [handleDown, handleUp, matchKey]);
-};
+  window.addEventListener("keydown", onDown);
+  window.addEventListener("keyup", onUp);
+  return () => {
+    window.removeEventListener("keydown", onDown);
+    window.removeEventListener("keyup", onUp);
+  };
+}, [handleDown, handleUp, matchKey]);
 
 const useKey = (key: string): boolean => {
   const [pressed, setPressed] = useState(false);
@@ -35,7 +33,7 @@ const useKey = (key: string): boolean => {
   useKeyEvents(
     (code) => code === key,
     () => setPressed(true),
-    () => setPressed(false)
+    () => setPressed(false),
   );
 
   return pressed;

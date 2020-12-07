@@ -11,30 +11,24 @@ export type AuthenticatedApiHandler<T = unknown> = (
  * Assert that the request contains a valid authentication token.
  * @param handler
  */
-const withAuth = (handler: AuthenticatedApiHandler): NextApiHandler => {
-  return async (req, res) => {
-    const token = req.headers.authorization?.split(" ")?.[1];
+const withAuth = (handler: AuthenticatedApiHandler): NextApiHandler => async (req, res) => {
+  const token = req.headers.authorization?.split(" ")?.[1];
 
-    if (token) {
-      return admin
-        .auth()
-        .verifyIdToken(token)
-        .catch(() => {
-          return res.status(403).send("invalid or missing access token");
-        })
-        .then(async (decoded) => {
-          if (decoded) {
-            return handler(req, res, decoded);
-          } else {
-            return res.status(500).send("unknown error");
-          }
-        });
-    } else {
-      return res
-        .status(403)
-        .send("HTTP `Authorization` header not set or invalid");
-    }
-  };
+  if (token) {
+    return admin
+      .auth()
+      .verifyIdToken(token)
+      .catch(() => res.status(403).send("invalid or missing access token"))
+      .then(async (decoded) => {
+        if (decoded) {
+          return handler(req, res, decoded);
+        }
+        return res.status(500).send("unknown error");
+      });
+  }
+  return res
+    .status(403)
+    .send("HTTP `Authorization` header not set or invalid");
 };
 
 export default withAuth;

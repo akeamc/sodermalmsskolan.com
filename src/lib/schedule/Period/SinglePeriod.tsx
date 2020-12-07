@@ -1,19 +1,23 @@
+import React from "react";
 import { Period, PeriodBoundary } from ".";
 import { Subject } from "../Subject";
-import React from "react";
 
 export class SinglePeriod implements Period {
   public readonly start: PeriodBoundary;
+
   public readonly end: PeriodBoundary;
+
   public readonly subject: Subject;
+
   public readonly room: string;
+
   public readonly day: number;
 
   constructor(
     [start, end]: [number, number],
     day: number,
     subject: Subject,
-    room: string
+    room: string,
   ) {
     this.start = new PeriodBoundary(day, start);
     this.end = new PeriodBoundary(day, end);

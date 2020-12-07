@@ -1,15 +1,14 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import Container from "../container";
-import { breakpoints, media } from "../../styles/breakpoints";
-import { HeroHeading, SmallHeading, SubTitle } from "../text/headings";
 import { Theme, ThemeProvider } from "@emotion/react";
+import Container from "../Container";
+import { breakpoints, media } from "../../styles/breakpoints";
+import { HeaderHeading, SmallHeading, SubTitle } from "../text/headings";
 import darkTheme from "../../styles/theme/dark";
 import ButtonRow from "../button/row";
-import Separator from "../separator";
+import Divider from "../divider";
+import HeaderProps from "./props";
 
-export interface HomeHeaderProps {
-  title: ReactNode;
-  sub?: ReactNode;
+export interface HomeHeaderProps extends HeaderProps {
   superTitle?: ReactNode;
   buttons?: ReactNode;
   graphic: ReactNode;
@@ -63,7 +62,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
               {superTitle}
             </SmallHeading>
           ) : null}
-          <HeroHeading>{title}</HeroHeading>
+          <HeaderHeading>{title}</HeaderHeading>
           {sub ? <SubTitle>{sub}</SubTitle> : null}
           {buttons ? <ButtonRow>{buttons}</ButtonRow> : null}
         </div>
@@ -76,7 +75,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
               minHeight: "80vh",
             },
 
-            ["img"]: {
+            img: {
               objectFit: "cover",
             },
           }}
@@ -85,7 +84,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
         </div>
       </Container>
     </div>
-    <Separator />
+    <Divider />
   </ThemeProvider>
 );
 

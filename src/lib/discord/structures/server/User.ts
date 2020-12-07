@@ -1,5 +1,5 @@
-import { DiscordUser, IDiscordAPIUser } from "../shared/User";
 import got from "got";
+import { DiscordUser, IDiscordAPIUser } from "../shared/User";
 import { DISCORD_TOKEN } from "../../credentials";
 
 export class ServerDiscordUser extends DiscordUser {

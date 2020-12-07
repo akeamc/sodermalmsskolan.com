@@ -1,4 +1,4 @@
-/*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
+/* eslint no-constant-condition: ["error", { "checkLoops": false }] */
 import katex from "katex";
 import "katex/dist/contrib/mhchem.js";
 
@@ -22,11 +22,11 @@ const findEndOfMath = function (delimiter: string, text: string, startIndex) {
     const character = text[index];
 
     if (
-      braceLevel <= 0 &&
-      text.slice(index, index + delimLength) === delimiter
+      braceLevel <= 0
+      && text.slice(index, index + delimLength) === delimiter
     ) {
       return index;
-    } else if (character === "\\") {
+    } if (character === "\\") {
       index++;
     } else if (character === "{") {
       braceLevel++;
@@ -55,7 +55,7 @@ const splitAtDelimiters = function (
   startData,
   leftDelim: string,
   rightDelim: string,
-  display: boolean
+  display: boolean,
 ): SplitFragment[] {
   const finalData = [];
 
@@ -94,7 +94,7 @@ const splitAtDelimiters = function (
           nextIndex = findEndOfMath(
             rightDelim,
             text,
-            currIndex + leftDelim.length
+            currIndex + leftDelim.length,
           );
           if (nextIndex === -1) {
             break;
@@ -104,7 +104,7 @@ const splitAtDelimiters = function (
             type: SplitFragmentType.Math,
             data: text.slice(currIndex + leftDelim.length, nextIndex),
             rawData: text.slice(currIndex, nextIndex + rightDelim.length),
-            display: display,
+            display,
           });
 
           currIndex = nextIndex + rightDelim.length;
@@ -133,7 +133,7 @@ const splitWithDelimiters = function (text, delimiters: Delimeters) {
       data,
       delimiter.left,
       delimiter.right,
-      delimiter.display || false
+      delimiter.display || false,
     );
   }
   return data;
@@ -172,7 +172,7 @@ export const renderMathInText = function (text: string): string {
           katex.renderToString(math, {
             displayMode: data[i].display,
             output: "html",
-          })
+          }),
         );
       } catch (e) {
         console.warn(e);

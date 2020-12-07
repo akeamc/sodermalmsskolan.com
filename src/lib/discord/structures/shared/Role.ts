@@ -13,12 +13,19 @@ export interface IDiscordAPIRole {
 
 export class Role implements Serializable<IDiscordAPIRole> {
   id: string;
+
   name: string;
+
   color: number;
+
   hoist: boolean;
+
   position: number;
+
   permissionBits: number;
+
   managed: boolean;
+
   mentionable: boolean;
 
   constructor({

@@ -1,9 +1,9 @@
-import Digibruh, { DigibruhTags } from "../../../digibruh/Digibruh";
-import { StudySet } from "../shared/StudySet";
 import { parse } from "node-html-parser";
 import url from "url";
-import { API_ENDPOINT } from "../../../food/constants";
 import got from "got";
+import Digibruh, { DigibruhTags } from "../../../digibruh/Digibruh";
+import { StudySet } from "../shared/StudySet";
+import { API_ENDPOINT } from "../../../food/constants";
 
 export interface PotatoStudySetDetails {
   id: string;
@@ -24,19 +24,19 @@ export class ServerStudySet extends StudySet {
         const ids = root
           .querySelectorAll("a")
           .reduce<string[]>((validLinks, anchor) => {
-            const link = url.parse(anchor.getAttribute("href"));
+          const link = url.parse(anchor.getAttribute("href"));
 
-            if (
-              link.host === "quizlet.com" &&
-              this.pathRegExp.test(link.path)
-            ) {
-              const id = this.parseUrl(link.href);
+          if (
+            link.host === "quizlet.com"
+              && this.pathRegExp.test(link.path)
+          ) {
+            const id = this.parseUrl(link.href);
 
-              validLinks.push(id);
-            }
+            validLinks.push(id);
+          }
 
-            return validLinks;
-          }, []);
+          return validLinks;
+        }, []);
 
         const tags = new DigibruhTags(...article.tags);
 
@@ -47,16 +47,15 @@ export class ServerStudySet extends StudySet {
 
         return accumulator.concat(
           ids.map(
-            (id) =>
-              new ServerStudySet({
-                digibruh,
-                id,
-                details: null,
-              })
-          )
+            (id) => new ServerStudySet({
+              digibruh,
+              id,
+              details: null,
+            }),
+          ),
         );
       },
-      []
+      [],
     );
 
     return studySets;

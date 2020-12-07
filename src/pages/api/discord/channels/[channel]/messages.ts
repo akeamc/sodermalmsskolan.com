@@ -17,7 +17,7 @@ const handler: ChannelMessagesHandler<IDiscordAPIMessage[]> = async (
   _,
   res,
   channel: ServerChannel,
-  query: MessageQuery
+  query: MessageQuery,
 ) => {
   const messages = await ServerMessage.fetchMany(channel.id, query);
 
@@ -25,7 +25,5 @@ const handler: ChannelMessagesHandler<IDiscordAPIMessage[]> = async (
 };
 
 export default ServerChannel.wrapHandler(async (req, res, channel) => {
-  await ServerMessage.wrapQueryHandler(async (req, res, query) => {
-    return await handler(req, res, channel, query);
-  })(req, res);
+  await ServerMessage.wrapQueryHandler(async (req, res, query) => await handler(req, res, channel, query))(req, res);
 });

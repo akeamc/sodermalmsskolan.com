@@ -13,11 +13,17 @@ export interface IDiscordAPIMember {
 
 export class Member implements Serializable<IDiscordAPIMember> {
   user: DiscordUser;
+
   nickname?: string;
+
   roles: string[];
+
   joinedAt: Date;
+
   premiumSince: Date;
+
   deaf: boolean;
+
   mute: boolean;
 
   constructor({

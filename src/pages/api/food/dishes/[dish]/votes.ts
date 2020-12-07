@@ -9,7 +9,7 @@ import { VoteStatic } from "../../../../../lib/food/structures/shared/Vote";
 const handler: ServerDishHandler<VoteStatic[] | string> = async (
   req,
   res,
-  dish
+  dish,
 ) => {
   if (req.method === "GET") {
     res.setHeader("Cache-Control", "s-maxage=3600");
@@ -26,7 +26,7 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
       await ServerVote.create({
         dish: dish.id,
         author: decoded.uid,
-        up: up,
+        up,
       });
 
       return res.send(`vote accepted (${up ? "up" : "down"})`);

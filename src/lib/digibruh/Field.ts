@@ -1,5 +1,5 @@
-import { DigibruhCollection } from "./Collection";
 import { Tag } from "@tryghost/content-api";
+import { DigibruhCollection } from "./Collection";
 import Digibruh from "./Digibruh";
 
 export class Field extends DigibruhCollection {
@@ -20,7 +20,7 @@ export class Field extends DigibruhCollection {
    */
   static regExp(slug = DigibruhCollection.tagWildcard): RegExp {
     return new RegExp(
-      `^${Digibruh.tagPrefix}-${slug}-${DigibruhCollection.tagWildcard}$`
+      `^${Digibruh.tagPrefix}-${slug}-${DigibruhCollection.tagWildcard}$`,
     );
   }
 

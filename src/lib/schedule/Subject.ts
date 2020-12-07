@@ -1,6 +1,8 @@
 export class Subject {
   public name: string;
+
   public color: string;
+
   private _symbol?: string;
 
   constructor(name: string, color: string, symbol?: string) {

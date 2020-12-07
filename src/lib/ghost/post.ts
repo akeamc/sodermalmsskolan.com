@@ -1,4 +1,3 @@
-import api from "./credentials";
 import {
   PostsOrPages,
   PostOrPage,
@@ -6,20 +5,19 @@ import {
   FilterParam,
 } from "@tryghost/content-api";
 import { Params } from "next/dist/next-server/server/router";
+import api from "./credentials";
 import Digibruh from "../digibruh/Digibruh";
 
-export const defaultParams = (): Params => {
-  return {
-    include: ["tags", "authors"],
-    order: "published_at DESC",
-    filter: "tag:-" + Digibruh.tagPrefix,
-    limit: 6,
-  };
-};
+export const defaultParams = (): Params => ({
+  include: ["tags", "authors"],
+  order: "published_at DESC",
+  filter: `tag:-${Digibruh.tagPrefix}`,
+  limit: 6,
+});
 
 export async function getPosts(
   limit: LimitParam = 10,
-  filter: FilterParam = `tag:-${Digibruh.tagPrefix}`
+  filter: FilterParam = `tag:-${Digibruh.tagPrefix}`,
 ): Promise<PostsOrPages> {
   return api.posts.browse({
     ...defaultParams(),
@@ -49,7 +47,7 @@ export async function getPostBySlug(slug: string): Promise<PostOrPage> {
 
 export async function getPostsByTag(
   tag: string,
-  limit: LimitParam = "all"
+  limit: LimitParam = "all",
 ): Promise<PostsOrPages> {
   return getPosts(limit, `tag:${tag}`);
 }
@@ -61,7 +59,7 @@ export async function getPostsByTag(
  */
 export async function getPostsByAuthor(
   slug: string,
-  limit: LimitParam = 10
+  limit: LimitParam = 10,
 ): Promise<PostOrPage[]> {
   return getPosts(limit, `tag:-${Digibruh.tagPrefix}+authors.slug:${slug}`);
 }

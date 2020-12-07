@@ -1,10 +1,10 @@
-import { Channel, IDiscordAPIChannel } from "../shared/Channel";
-import got from "got";
-import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
+import got, { HTTPError } from "got";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import withAuth from "../../../auth/withAuth";
-import { HTTPError } from "got";
 import { Permissions } from "discord.js";
+import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
+import withAuth from "../../../auth/withAuth";
+
+import { Channel, IDiscordAPIChannel } from "../shared/Channel";
 import { getChannelDetails } from "../../constants";
 
 export interface RolePermissions {
@@ -48,32 +48,26 @@ export class ServerChannel extends Channel {
    * @param handler
    */
   public static wrapHandler = (
-    handler: ServerChannelHandler
-  ): NextApiHandler => {
-    return async (req, res) => {
-      const id = req.query.channel?.toString();
+    handler: ServerChannelHandler,
+  ): NextApiHandler => async (req, res) => {
+    const id = req.query.channel?.toString();
 
-      let channel: ServerChannel;
+    let channel: ServerChannel;
 
-      try {
-        channel = await ServerChannel.fetch(id);
-      } catch (error) {
-        if (error instanceof HTTPError) {
-          return res.status(404).send("channel not found");
-        } else {
-          throw error;
-        }
+    try {
+      channel = await ServerChannel.fetch(id);
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        return res.status(404).send("channel not found");
       }
+      throw error;
+    }
 
-      const details = getChannelDetails(channel.id);
+    const details = getChannelDetails(channel.id);
 
-      if (!details || details?.authenticated) {
-        return await withAuth(async (req, res) => {
-          return await handler(req, res, channel);
-        })(req, res);
-      } else {
-        return await handler(req, res, channel);
-      }
-    };
+    if (!details || details?.authenticated) {
+      return await withAuth(async (req, res) => await handler(req, res, channel))(req, res);
+    }
+    return await handler(req, res, channel);
   };
 }

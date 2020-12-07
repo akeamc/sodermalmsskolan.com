@@ -8,7 +8,7 @@ const ButtonRow: FunctionComponent = ({ children }) => (
         spacing: "1rem",
       }),
       {
-        marginTop: "1rem",
+        marginTop: "2rem",
       },
     ]}
   >

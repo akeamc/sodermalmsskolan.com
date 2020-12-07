@@ -1,8 +1,8 @@
+import pdf from "pdf-parse";
+import got from "got/dist/source";
 import { DISCORD_CHANNELS } from "../../../discord/constants";
 import { ServerMessage } from "../../../discord/structures/server/Message";
 import Letter, { LetterAttachment } from "../shared/letter";
-import pdf from "pdf-parse";
-import got from "got/dist/source";
 import { Message } from "../../../discord/structures/shared/Message";
 
 export default class ServerLetter extends Letter {
@@ -18,7 +18,7 @@ export default class ServerLetter extends Letter {
   }
 
   public static async fromMessage(
-    message: Message
+    message: Message,
   ): Promise<ServerLetter | null> {
     const attachment = message.attachments[0];
 
@@ -41,7 +41,7 @@ export default class ServerLetter extends Letter {
     const messages = await ServerMessage.fetchMany(DISCORD_CHANNELS.news.id);
 
     const results = await Promise.all(
-      messages.map((message) => ServerLetter.fromMessage(message))
+      messages.map((message) => ServerLetter.fromMessage(message)),
     );
 
     return results.filter((message) => !!message);

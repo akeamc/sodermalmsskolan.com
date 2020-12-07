@@ -1,11 +1,11 @@
 import useSWR from "swr";
-import { IMenu, Menu } from "../shared/Menu";
 import ky from "ky-universal";
 import dayjs from "dayjs";
-import { ClientDish } from "./Dish";
-import { firstLetterUpperCase } from "../../../utils/letters";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import React from "react";
+import { ClientDish } from "./Dish";
+import { firstLetterUpperCase } from "../../../utils/letters";
+import { IMenu, Menu } from "../shared/Menu";
 import { useLang } from "../../../../hooks/lang";
 import { UseSWRResource } from "../../../common/usable";
 
@@ -39,19 +39,15 @@ export class ClientMenu extends Menu {
 export const useMenu: UseSWRResource<ClientMenu[], UseMenuQuery> = ({
   limit = 10,
   offset = 0,
-}) => {
-  return useSWR(`/api/food/menus?limit=${limit}&offset=${offset}`, async () => {
-    const menus = await ClientMenu.fetchAll();
+}) => useSWR(`/api/food/menus?limit=${limit}&offset=${offset}`, async () => {
+  const menus = await ClientMenu.fetchAll();
 
-    const now = dayjs(new Date());
-    const next = menus.findIndex((menu) =>
-      now.isSameOrBefore(menu.date, "date")
-    );
-    const startIndex = next + offset;
+  const now = dayjs(new Date());
+  const next = menus.findIndex((menu) => now.isSameOrBefore(menu.date, "date"));
+  const startIndex = next + offset;
 
-    return menus.slice(startIndex, startIndex + limit);
-  });
-};
+  return menus.slice(startIndex, startIndex + limit);
+});
 
 export const MenuTitle: React.FunctionComponent<{ menu: Menu }> = ({
   menu,
@@ -59,7 +55,7 @@ export const MenuTitle: React.FunctionComponent<{ menu: Menu }> = ({
   const lang = useLang();
 
   const title = firstLetterUpperCase(
-    dayjs(menu?.date).locale(lang).format("dddd D MMMM")
+    dayjs(menu?.date).locale(lang).format("dddd D MMMM"),
   );
 
   return <>{title}</>;

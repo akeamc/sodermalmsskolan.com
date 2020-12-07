@@ -1,5 +1,5 @@
-import api from "./credentials";
 import { Author } from "@tryghost/content-api";
+import api from "./credentials";
 
 export async function getAuthors(): Promise<Author[]> {
   return api.authors.browse({

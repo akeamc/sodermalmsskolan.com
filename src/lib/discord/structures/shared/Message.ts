@@ -58,16 +58,27 @@ export interface IDiscordAPIMessage {
 
 export class Message implements Serializable<IDiscordAPIMessage> {
   id: string;
+
   channel: string;
+
   guild?: string;
+
   author: DiscordUser;
+
   member?: Member;
+
   content: string;
+
   pinned: boolean;
+
   tts: boolean;
+
   attachments: MessageAttachment[];
+
   createdAt: Date;
+
   editedAt?: Date;
+
   reactions?: IDiscordAPIMessageReaction[];
 
   constructor({
@@ -93,7 +104,7 @@ export class Message implements Serializable<IDiscordAPIMessage> {
     this.pinned = pinned;
     this.tts = tts;
     this.attachments = attachments.map(
-      (attachment) => new MessageAttachment(attachment)
+      (attachment) => new MessageAttachment(attachment),
     );
     this.createdAt = new Date(timestamp);
     this.editedAt = new Date(edited_timestamp);

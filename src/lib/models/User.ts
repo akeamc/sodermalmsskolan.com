@@ -9,7 +9,9 @@ export interface IGenericUser {
 
 export class GenericUser implements IGenericUser {
   name: string;
+
   url: string | null;
+
   avatarUrl: string;
 
   constructor({ name, url, avatarUrl }: IGenericUser) {

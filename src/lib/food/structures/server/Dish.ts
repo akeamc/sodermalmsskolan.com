@@ -1,8 +1,8 @@
 import got, { HTTPError } from "got";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { API_ENDPOINT } from "../../constants";
 import { Dish, IDish } from "../shared/Dish";
 import admin from "../../../firebase/admin";
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
 export type ServerDishHandler<T = unknown> = (
   req: NextApiRequest,
@@ -12,7 +12,7 @@ export type ServerDishHandler<T = unknown> = (
 
 export class ServerDish extends Dish {
   public static firestoreCollection(): FirebaseFirestore.CollectionReference<
-    FirebaseFirestore.DocumentData
+  FirebaseFirestore.DocumentData
   > {
     const db = admin.firestore();
 
@@ -20,7 +20,7 @@ export class ServerDish extends Dish {
   }
 
   public static firestoreDocument(
-    id: string
+    id: string,
   ): FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> {
     return ServerDish.firestoreCollection().doc(id);
   }
@@ -43,23 +43,20 @@ export class ServerDish extends Dish {
     });
   }
 
-  public static wrapHandler = (handler: ServerDishHandler): NextApiHandler => {
-    return async (req, res) => {
-      const id = req.query.dish?.toString();
+  public static wrapHandler = (handler: ServerDishHandler): NextApiHandler => async (req, res) => {
+    const id = req.query.dish?.toString();
 
-      let dish: ServerDish;
+    let dish: ServerDish;
 
-      try {
-        dish = await ServerDish.fetch(id);
-      } catch (error) {
-        if (error instanceof HTTPError) {
-          return res.status(404).send("dish not found");
-        } else {
-          throw error;
-        }
+    try {
+      dish = await ServerDish.fetch(id);
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        return res.status(404).send("dish not found");
       }
+      throw error;
+    }
 
-      return await handler(req, res, dish);
-    };
+    return await handler(req, res, dish);
   };
 }

@@ -8,7 +8,9 @@ export interface IDish {
 
 export class Dish implements Serializable<IDish> {
   title: string;
+
   id: string;
+
   co2e?: number;
 
   constructor({ title, id, co2e }: IDish) {

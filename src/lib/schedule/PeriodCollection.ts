@@ -5,12 +5,10 @@ import { Schedule } from "./Schedule";
 
 export class PeriodCollection<T extends Period = Period> extends Array<T> {
   public filterByGroups(
-    groupFilter: GroupFilter
+    groupFilter: GroupFilter,
   ): PeriodCollection<SinglePeriod> {
     return new PeriodCollection(
-      ...this.map((period) =>
-        period.getPeriodByGroup(groupFilter[period.groupCategory])
-      )
+      ...this.map((period) => period.getPeriodByGroup(groupFilter[period.groupCategory])),
     );
   }
 
@@ -24,11 +22,11 @@ export class PeriodCollection<T extends Period = Period> extends Array<T> {
     // Find the index of the current time.
     const pivot = Math.max(
       this.findIndex((period) => period.start.weekTime >= weekTime),
-      0
+      0,
     );
 
     return new PeriodCollection(
-      ...this.slice(pivot).concat(this.slice(0, pivot))
+      ...this.slice(pivot).concat(this.slice(0, pivot)),
     );
   }
 

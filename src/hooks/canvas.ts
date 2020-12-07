@@ -6,7 +6,7 @@ export type CanvasRenderFunction = (
 ) => void;
 
 const useCanvas = (
-  draw: CanvasRenderFunction
+  draw: CanvasRenderFunction,
 ): MutableRefObject<HTMLCanvasElement> => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

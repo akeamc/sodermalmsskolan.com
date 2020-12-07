@@ -1,12 +1,24 @@
-import { css, ThemeProvider, useTheme } from "@emotion/react";
+import {
+  css, SerializedStyles, ThemeProvider, useTheme,
+} from "@emotion/react";
 import React, { FunctionComponent } from "react";
+import { breakpoints, media } from "../../styles/breakpoints";
 import darkTheme from "../../styles/theme/dark";
-import Container from "../container";
-import SectionHeader, { SectionHeaderProps } from "../header/section";
+import Container from "../Container";
+import SectionHeader, { SectionHeaderProps } from "../header/Section";
 
-export const sectionPadding = css({
-  padding: "10.75rem 0 3rem",
-});
+export const sectionPaddingStyles: Record<string, SerializedStyles> = {
+  top: css({
+    paddingTop: "6rem",
+
+    [media(breakpoints.large)]: {
+      paddingTop: "8rem",
+    },
+  }),
+  bottom: css({
+    paddingBottom: "3rem",
+  }),
+};
 
 export interface InnerSectionProps {
   header?: SectionHeaderProps;
@@ -26,7 +38,8 @@ const InnerSection: FunctionComponent<InnerSectionProps> = ({
   return (
     <section
       css={[
-        sectionPadding,
+        sectionPaddingStyles.top,
+        sectionPaddingStyles.bottom,
         {
           backgroundColor: theme.color.background,
         },
@@ -51,9 +64,8 @@ const Section: FunctionComponent<SectionProps> = ({
         <InnerSection {...props} />
       </ThemeProvider>
     );
-  } else {
-    return <InnerSection {...props} />;
   }
+  return <InnerSection {...props} />;
 };
 
 export default Section;

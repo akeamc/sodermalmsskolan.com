@@ -1,6 +1,6 @@
-import Digibruh, { DigibruhStatic } from "./Digibruh";
 import { PostOrPage } from "@tryghost/content-api";
 import { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
+import Digibruh, { DigibruhStatic } from "./Digibruh";
 
 export interface StaticDigibruhProps {
   initialDigibruh: DigibruhStatic;

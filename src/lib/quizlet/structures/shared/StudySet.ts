@@ -24,7 +24,9 @@ export interface StudySetStatic {
 
 export class StudySet implements Serializable<StudySetStatic> {
   public digibruh: StudySetDigibruh;
+
   public id: string;
+
   public details: StudySetDetails | null;
 
   constructor({ digibruh, id, details }: StudySetStatic) {
@@ -43,7 +45,7 @@ export class StudySet implements Serializable<StudySetStatic> {
 
   public static get pathRegExp(): RegExp {
     return new RegExp(
-      /^\//.source + this.idRegExp.source + /\/([a-z0-9-]+\/)?$/.source
+      /^\//.source + this.idRegExp.source + /\/([a-z0-9-]+\/)?$/.source,
     );
   }
 

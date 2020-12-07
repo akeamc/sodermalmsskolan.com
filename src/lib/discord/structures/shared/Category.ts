@@ -11,14 +11,14 @@ export class Category implements Serializable<ICategory> {
   constructor(
     public name: string,
     public id: string,
-    public channels: Channel[]
+    public channels: Channel[],
   ) {}
 
   public static parse({ name, id, channels }: ICategory): Category {
     return new Category(
       name,
       id,
-      channels.map((channel) => new Channel(channel))
+      channels.map((channel) => new Channel(channel)),
     );
   }
 
@@ -32,16 +32,15 @@ export class Category implements Serializable<ICategory> {
 
   public static fromChannels(channels: Channel[]): Category[] {
     const categories = channels.filter(
-      (channel) => channel.type == ChannelType.GuildCategory
+      (channel) => channel.type == ChannelType.GuildCategory,
     );
 
     return categories.map(
-      ({ name, id }) =>
-        new Category(
-          name,
-          id,
-          channels.filter((channel) => channel.parent == id)
-        )
+      ({ name, id }) => new Category(
+        name,
+        id,
+        channels.filter((channel) => channel.parent == id),
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
-import { DigibruhCollection } from "./Collection";
 import { Tag } from "@tryghost/content-api";
+import { DigibruhCollection } from "./Collection";
 import Digibruh from "./Digibruh";
 import { Field } from "./Field";
 

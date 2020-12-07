@@ -10,7 +10,8 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
     case "auth/user-not-found":
       return (
         <>
-          Ingen användare med e-postadressen hittades. Vill du{" "}
+          Ingen användare med e-postadressen hittades. Vill du
+          {" "}
           <Link href={signupLink()} passHref>
             <a>skapa ett konto</a>
           </Link>
@@ -20,7 +21,8 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
     case "auth/wrong-password":
       return (
         <>
-          Felaktigt lösenord. Har du{" "}
+          Felaktigt lösenord. Har du
+          {" "}
           <Link href={resetAccountLink()} passHref>
             <a>glömt lösenordet</a>
           </Link>
@@ -32,7 +34,8 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
     case "auth/email-already-in-use":
       return (
         <>
-          E-postadressen används redan av ett annat konto. Vill du{" "}
+          E-postadressen används redan av ett annat konto. Vill du
+          {" "}
           <Link href={loginLink()} passHref>
             <a>logga in</a>
           </Link>

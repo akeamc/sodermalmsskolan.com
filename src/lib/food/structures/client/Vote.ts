@@ -12,7 +12,7 @@ interface UseVotesQuery {
 export class ClientVote extends Vote {
   public static async sendVote(
     dish: string,
-    up: boolean
+    up: boolean,
   ): Promise<ResponsePromise> {
     return ky.post(`/api/food/dishes/${dish}/votes`, {
       json: {
@@ -34,7 +34,7 @@ export class ClientVote extends Vote {
 
   public static async fetchByDish(
     { dish }: UseVotesQuery,
-    noCache = false
+    noCache = false,
   ): Promise<ClientVote[]> {
     if (!dish) {
       throw new Error("dish must be specified");
@@ -44,8 +44,8 @@ export class ClientVote extends Vote {
       .get(`/api/food/dishes/${dish}/votes`, {
         searchParams: noCache
           ? {
-              _vercel_no_cache: 1,
-            }
+            _vercel_no_cache: 1,
+          }
           : null,
       })
       .json<VoteStatic[]>();
@@ -55,11 +55,9 @@ export class ClientVote extends Vote {
 }
 
 export const useVotes: UseSWRResource<ClientVote[], UseVotesQuery> = (
-  query
-) => {
-  return useSWR(
-    `/api/food/dishes/${query.dish}/votes`,
-    () => ClientVote.fetchByDish(query),
-    { revalidateOnFocus: false }
-  );
-};
+  query,
+) => useSWR(
+  `/api/food/dishes/${query.dish}/votes`,
+  () => ClientVote.fetchByDish(query),
+  { revalidateOnFocus: false },
+);
