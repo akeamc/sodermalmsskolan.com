@@ -31,15 +31,6 @@ export const useRoutes = (): Routes => [
       },
     ],
   },
-  {
-    name: "Resurser",
-    routes: [
-      {
-        name: "Serverstatus",
-        href: "https://status.södermalmsskolan.com",
-      },
-    ],
-  },
 ];
 
 export default Routes;

@@ -5,6 +5,7 @@ import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import { sectionPaddingStyles } from "../Section";
 import { horizontalInlineStack } from "../stack/inline";
+import { AccentText } from "../text/modifiers";
 import FooterList from "./list";
 
 /**
@@ -59,8 +60,9 @@ const Footer: FunctionComponent = () => {
               spacing: "2rem",
             })}
           >
-            <span>a</span>
-            <span>b</span>
+            <span>
+              Designed by Lynx in Norrland
+            </span>
           </div>
         </div>
       </Container>
