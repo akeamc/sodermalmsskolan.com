@@ -45,8 +45,9 @@ export const MetaHead: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={type} />
-      {images.map((image, index) => (
-        <meta key={index} property="og:image" content={image} />
+
+      {images.map((image) => (
+        <meta key={image} property="og:image" content={image} />
       ))}
     </Head>
   );
@@ -99,6 +100,7 @@ const SiteHead: React.FunctionComponent<{
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
       />
       <script
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}

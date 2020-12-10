@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
 import Button from "../components/button/Button";
-import MenuSection from "../components/menu/Section";
+import DayMenuSection from "../components/menu/DayMenuSection";
 import Footer from "../components/footer/Footer";
 import PostListSection from "../components/blog/PostListSection";
 
@@ -45,7 +45,7 @@ const Page: NextPage = () => (
         />
         )}
     />
-    <MenuSection />
+    <DayMenuSection />
     <PostListSection
       dark
       upperDivider

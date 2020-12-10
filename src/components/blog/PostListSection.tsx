@@ -29,6 +29,10 @@ const PostListSection: FunctionComponent<PostListSectionProps> = ({ limit = "all
         gridTemplateColumns: "1fr",
         gap: "1.5rem",
 
+        [media(breakpoints.small)]: {
+          gridTemplateColumns: "repeat(2, 1fr)",
+        },
+
         [media(breakpoints.medium)]: {
           gridTemplateColumns: "repeat(3, 1fr)",
         },

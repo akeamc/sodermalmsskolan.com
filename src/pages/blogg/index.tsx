@@ -6,7 +6,10 @@ import PostListSection from "../../components/blog/PostListSection";
 import Footer from "../../components/footer/Footer";
 
 const Page: NextPage = () => (
-  <Base>
+  <Base metadata={{
+    title: "Blogg",
+  }}
+  >
     <BlogHeader />
     <PostListSection />
     <Footer />

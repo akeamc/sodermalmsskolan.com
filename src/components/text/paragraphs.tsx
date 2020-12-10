@@ -26,7 +26,6 @@ export const CardDescription: Paragraph = (props) => (
       margin: "1rem 0 0",
       lineHeight: 1.75,
       fontFamily: fonts.sans,
-      width: "90%",
     })}
     {...props}
   />

@@ -18,6 +18,7 @@ export const SectionHeading: Heading = (props) => (
       margin: 0,
       letterSpacing: "-0.025em",
       color: theme.color.text.primary,
+      wordWrap: "break-word",
 
       [media(breakpoints.medium)]: {
         fontSize: "4.5rem",

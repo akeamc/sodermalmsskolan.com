@@ -20,6 +20,10 @@ export class ClientDish extends Dish {
 
     return new ClientDish(res);
   }
+
+  public get url(): string {
+    return `/mat/#${this.id}`;
+  }
 }
 
 export const useDish: UseSWRResource<ClientDish, IdQuery> = ({ id }) => useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id), {

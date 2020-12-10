@@ -47,6 +47,7 @@ const FeaturedPost: FunctionComponent<{post: PostOrPage}> = ({ post }) => {
             WebkitLineClamp: 5,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
+            width: "90%",
           }}
           >
             {post?.excerpt || <Skeleton count={5} />}

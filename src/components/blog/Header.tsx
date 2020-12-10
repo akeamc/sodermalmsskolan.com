@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { usePosts } from "../../lib/ghost/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
+import CardGrid from "../grid/CardGrid";
 import Navbar from "../navigation/Navbar";
 import { sectionPaddingStyles } from "../Section";
 import FeaturedPost from "./FeaturedPost";
@@ -20,21 +21,7 @@ const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
       <Navbar />
       <header css={[sectionPaddingStyles.top]}>
         <Container>
-          <div css={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "1.5rem",
-
-            [media(breakpoints.medium)]: {
-              gridTemplateColumns: "repeat(2, 1fr)",
-            },
-
-            [media(breakpoints.large)]: {
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gridTemplateRows: "repeat(2, 1fr)",
-            },
-          }}
-          >
+          <CardGrid>
             <div css={{
               [media(breakpoints.medium)]: {
                 gridColumn: "1 / span 2",
@@ -48,7 +35,7 @@ const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
             </div>
             {(rest || new Array(posts - 1).fill(null))
               .map((post, index) => <PostCard post={post} key={post?.id || index} />)}
-          </div>
+          </CardGrid>
         </Container>
       </header>
     </div>
