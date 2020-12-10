@@ -1,6 +1,6 @@
 import { Theme } from "@emotion/react";
 import React, { FunctionComponent } from "react";
-import SiteHead, { SiteMetadata } from "../head";
+import SiteHead, { SiteMetadata } from "../Head";
 
 export interface BaseProps {
   metadata?: SiteMetadata;
