@@ -5,8 +5,7 @@ import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import { sectionPaddingStyles } from "../Section";
 import { horizontalInlineStack } from "../stack/inline";
-import { AccentText } from "../text/modifiers";
-import FooterList from "./list";
+import FooterList from "./List";
 
 /**
  * The standard page footer.

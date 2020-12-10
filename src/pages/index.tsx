@@ -6,7 +6,7 @@ import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
 import Button from "../components/button/Button";
 import MenuSection from "../components/food/MenuSection";
-import Footer from "../components/footer";
+import Footer from "../components/footer/Footer";
 
 const GroovyImage = styled(Image)`
   filter: hue-rotate(180deg);
