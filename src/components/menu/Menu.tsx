@@ -18,6 +18,7 @@ const Menu: FunctionComponent<{menu: ClientMenu}> = ({ menu }) => {
         css={{
           writingMode: "vertical-rl",
           marginRight: "1rem",
+          lineHeight: 1,
         }}
       >
         {menu?.date ? dayjs(menu?.date).locale(lang).format("dddd DD MMMM") : "Läser in ..."}
