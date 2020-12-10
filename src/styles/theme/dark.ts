@@ -7,6 +7,9 @@ const darkTheme: Theme = {
   card: {
     background: "#131618",
   },
+  navigation: {
+    ...defaultTheme.navigation,
+  },
   color: {
     ...defaultTheme.color,
     background: "#000000",
@@ -20,7 +23,7 @@ const darkTheme: Theme = {
       base: "#333333",
       highlight: "#444444",
     },
-    border: transparentize(0.95, "#ffffff"),
+    border: transparentize(0.9, "#ffffff"),
   },
 };
 

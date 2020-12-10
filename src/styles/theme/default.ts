@@ -7,7 +7,6 @@ const defaultTheme: Theme = {
     background: "#ffffff",
   },
   navigation: {
-    boxShadow: `0 1px 0 0 ${transparentize(0.9, "#000000")}`,
     height: "3.75rem",
   },
   shadow: {

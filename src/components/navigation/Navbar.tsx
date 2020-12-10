@@ -50,8 +50,9 @@ const Navbar: FunctionComponent = () => {
   return (
     <div css={(theme: Theme) => ({
       backgroundColor: theme.color.background,
-      boxShadow: theme.navigation.boxShadow,
+      borderBottom: `1px solid ${theme.color.border}`,
       height: theme.navigation.height,
+      boxSizing: "border-box",
     })}
     >
       <Container>
