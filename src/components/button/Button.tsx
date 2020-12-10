@@ -36,7 +36,7 @@ const baseStyles = (theme: Theme) => css({
 
 const primaryStyles = (theme: Theme) => css({
   backgroundColor: theme.color.accent,
-  backgroundImage: `linear-gradient(${lighten(0.1, theme.color.accent)}, ${
+  backgroundImage: `linear-gradient(${lighten(0.05, theme.color.accent)}, ${
     theme.color.accent
   })`,
   color: theme.color.text.white,
