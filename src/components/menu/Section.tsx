@@ -8,8 +8,8 @@ import { Dish } from "../../lib/food/structures/shared/Dish";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Card from "../Card";
 import Section, { SectionProps } from "../Section";
-import Skeleton from "../skeleton";
-import { H5 } from "../text/headings";
+import Skeleton from "../Skeleton";
+import { CardTitle } from "../text/headings";
 import { SmallParagraph } from "../text/paragraphs";
 import { Asterisk } from "../text/symbols";
 
@@ -29,28 +29,29 @@ const DishCard: FunctionComponent<{
         justifyContent: "center",
       }}
     >
-      <H5>
+      <CardTitle>
         {dish?.title ? (
           <>
-            <span
-              css={(theme: Theme) => ({
-                color: theme.color.text.primary,
-              })}
+            {dish?.title}
+            {" "}
+            <span css={(theme: Theme) => ({
+              color: theme.color.text.tertiary,
+            })}
             >
-              {dish?.title}
+              (
+              {data?.co2e?.toLocaleString() || <Skeleton width="2em" />}
+              {" "}
+              kg CO
+              <sub>2</sub>
+              e per portion)
             </span>
-            {" "}
-            (
-            {data?.co2e?.toLocaleString() || <Skeleton width="2em" />}
-            {" "}
-            kg CO
-            <sub>2</sub>
-            e per portion)
+            &nbsp;
+            <Asterisk />
           </>
         ) : (
           <Skeleton count={2} />
         )}
-      </H5>
+      </CardTitle>
     </Card>
   );
 };
@@ -73,8 +74,7 @@ const MenuSection: FunctionComponent<SectionProps> = (props) => {
         ),
         title: (
           <>
-            Dagens lunch&nbsp;
-            <Asterisk />
+            Dagens lunch
           </>
         ),
       }}

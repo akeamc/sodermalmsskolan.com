@@ -1,6 +1,7 @@
 interface Color {
   background: string;
   accent: string;
+  border: string;
 
   text: {
     primary: string;

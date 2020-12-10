@@ -6,7 +6,6 @@ const darkTheme: Theme = {
   ...defaultTheme,
   card: {
     background: "#131618",
-    boxShadow: `inset 0 0 0 1px ${transparentize(0.95, "#ffffff")}`,
   },
   color: {
     ...defaultTheme.color,
@@ -21,6 +20,7 @@ const darkTheme: Theme = {
       base: "#333333",
       highlight: "#444444",
     },
+    border: transparentize(0.95, "#ffffff"),
   },
 };
 

@@ -5,6 +5,7 @@ import React, { FunctionComponent } from "react";
 import { breakpoints, media } from "../../styles/breakpoints";
 import darkTheme from "../../styles/theme/dark";
 import Container from "../Container";
+import { LowerDivider, UpperDivider } from "../divider";
 import SectionHeader, { SectionHeaderProps } from "../header/Section";
 
 export const sectionPaddingStyles: Record<string, SerializedStyles> = {
@@ -22,6 +23,8 @@ export const sectionPaddingStyles: Record<string, SerializedStyles> = {
 
 export interface InnerSectionProps {
   header?: SectionHeaderProps;
+  upperDivider?: boolean;
+  lowerDivider?: boolean;
 }
 
 export interface SectionProps extends InnerSectionProps {
@@ -31,26 +34,32 @@ export interface SectionProps extends InnerSectionProps {
 const InnerSection: FunctionComponent<InnerSectionProps> = ({
   children,
   header,
+  upperDivider,
+  lowerDivider,
   ...props
 }) => {
   const theme = useTheme();
 
   return (
-    <section
-      css={[
-        sectionPaddingStyles.top,
-        sectionPaddingStyles.bottom,
-        {
-          backgroundColor: theme.color.background,
-        },
-      ]}
-      {...props}
-    >
-      <Container>
-        {header ? <SectionHeader {...header} /> : null}
-        {children}
-      </Container>
-    </section>
+    <>
+      {upperDivider ? <UpperDivider /> : null}
+      <section
+        css={[
+          sectionPaddingStyles.top,
+          sectionPaddingStyles.bottom,
+          {
+            backgroundColor: theme.color.background,
+          },
+        ]}
+        {...props}
+      >
+        <Container>
+          {header ? <SectionHeader {...header} /> : null}
+          {children}
+        </Container>
+      </section>
+      {lowerDivider ? <LowerDivider /> : null}
+    </>
   );
 };
 

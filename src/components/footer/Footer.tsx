@@ -1,11 +1,31 @@
-import { useTheme } from "@emotion/react";
+import { Theme, useTheme } from "@emotion/react";
 import React, { FunctionComponent } from "react";
 import { useRoutes } from "../../lib/sitemap/routes";
 import { breakpoints, media } from "../../styles/breakpoints";
+import { fonts } from "../../styles/text";
 import Container from "../Container";
 import { sectionPaddingStyles } from "../Section";
 import { horizontalInlineStack } from "../stack/inline";
 import FooterList from "./List";
+
+const BottomRow: FunctionComponent = () => (
+  <div
+    css={horizontalInlineStack({
+      spacing: "2rem",
+    })}
+  >
+    <span css={(theme: Theme) => ({
+      fontSize: "0.875rem",
+      fontFamily: fonts.monospace,
+      letterSpacing: "-0.025em",
+      fontStyle: "italic",
+      color: theme.color.text.tertiary,
+    })}
+    >
+      Designed by Lynx in Norrland
+    </span>
+  </div>
+);
 
 /**
  * The standard page footer.
@@ -54,15 +74,7 @@ const Footer: FunctionComponent = () => {
               />
             ))}
           </div>
-          <div
-            css={horizontalInlineStack({
-              spacing: "2rem",
-            })}
-          >
-            <span>
-              Designed by Lynx in Norrland
-            </span>
-          </div>
+          <BottomRow />
         </div>
       </Container>
     </footer>

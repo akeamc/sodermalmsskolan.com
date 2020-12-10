@@ -5,8 +5,9 @@ import { NextPage } from "next";
 import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
 import Button from "../components/button/Button";
-import MenuSection from "../components/food/MenuSection";
+import MenuSection from "../components/menu/Section";
 import Footer from "../components/footer/Footer";
+import PostListSection from "../components/blog/PostListSection";
 
 const GroovyImage = styled(Image)`
   filter: hue-rotate(180deg);
@@ -45,6 +46,16 @@ const Page: NextPage = () => (
         )}
     />
     <MenuSection />
+    <PostListSection
+      dark
+      upperDivider
+      header={{
+        superTitle: "Blogg",
+        title: "Senaste inläggen",
+      }}
+      limit={6}
+      showMoreButton
+    />
     <Footer />
   </Base>
 );

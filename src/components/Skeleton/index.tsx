@@ -39,7 +39,7 @@ const Skeleton: React.FunctionComponent<{
 }> = ({ count = 1, width }) => {
   const elements = [];
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i += 1) {
     elements.push(
       <Line key={i} width={width}>
         &zwnj;

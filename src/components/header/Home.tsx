@@ -5,8 +5,9 @@ import { breakpoints, media } from "../../styles/breakpoints";
 import { HeaderHeading, SmallHeading, SubTitle } from "../text/headings";
 import darkTheme from "../../styles/theme/dark";
 import ButtonRow from "../button/row";
-import Divider from "../divider";
 import HeaderProps from "./props";
+import Navbar from "../navigation/Navbar";
+import { LowerDivider } from "../divider";
 
 export interface HomeHeaderProps extends HeaderProps {
   superTitle?: ReactNode;
@@ -27,6 +28,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
         backgroundColor: theme.color.background,
       })}
     >
+      <Navbar />
       <Container
         css={{
           display: "grid",
@@ -84,7 +86,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
         </div>
       </Container>
     </div>
-    <Divider />
+    <LowerDivider />
   </ThemeProvider>
 );
 

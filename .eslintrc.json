@@ -30,6 +30,7 @@
     "react/prop-types": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/quotes": [2, "double", { "avoidEscape": true }],
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/anchor-is-valid": "off"
   }
 }

@@ -1,9 +1,25 @@
 import RouteCategory from "./category";
+import Route from "./route";
 
 /**
  * Well-known routes on the website.
  */
 type Routes = RouteCategory[];
+
+export const useBasicRoutes = (): Route[] => ([
+  {
+    name: "Start",
+    href: "/",
+  },
+  {
+    name: "Meny",
+    href: "/meny",
+  },
+  {
+    name: "Blogg",
+    href: "/blogg",
+  },
+]);
 
 /**
  * React hook to use the routes.
@@ -11,16 +27,7 @@ type Routes = RouteCategory[];
 export const useRoutes = (): Routes => [
   {
     name: "Navigera",
-    routes: [
-      {
-        name: "Start",
-        href: "/",
-      },
-      {
-        name: "Meny",
-        href: "/meny",
-      },
-    ],
+    routes: useBasicRoutes(),
   },
   {
     name: "Resurser",

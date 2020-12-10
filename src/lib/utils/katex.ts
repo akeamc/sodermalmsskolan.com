@@ -27,14 +27,14 @@ const findEndOfMath = function (delimiter: string, text: string, startIndex) {
     ) {
       return index;
     } if (character === "\\") {
-      index++;
+      index += 1;
     } else if (character === "{") {
-      braceLevel++;
+      braceLevel += 1;
     } else if (character === "}") {
-      braceLevel--;
+      braceLevel -= 1;
     }
 
-    index++;
+    index += 1;
   }
 
   return -1;
@@ -59,7 +59,7 @@ const splitAtDelimiters = function (
 ): SplitFragment[] {
   const finalData = [];
 
-  for (let i = 0; i < startData.length; i++) {
+  for (let i = 0; i < startData.length; i += 1) {
     if (startData[i].type === SplitFragmentType.Text) {
       const text = startData[i].data;
 
@@ -127,7 +127,7 @@ const splitAtDelimiters = function (
 
 const splitWithDelimiters = function (text, delimiters: Delimeters) {
   let data: SplitFragment[] = [{ type: SplitFragmentType.Text, data: text }];
-  for (let i = 0; i < delimiters.length; i++) {
+  for (let i = 0; i < delimiters.length; i += 1) {
     const delimiter = delimiters[i];
     data = splitAtDelimiters(
       data,
@@ -141,7 +141,6 @@ const splitWithDelimiters = function (text, delimiters: Delimeters) {
 
 /**
  * NOTE: Don't forget to include the KaTeX CSS stylesheet.
- *
  */
 export const renderMathInText = function (text: string): string {
   const options = {
@@ -162,7 +161,7 @@ export const renderMathInText = function (text: string): string {
 
   const output = [];
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i += 1) {
     if (data[i].type === SplitFragmentType.Text) {
       output.push(data[i].data);
     } else {

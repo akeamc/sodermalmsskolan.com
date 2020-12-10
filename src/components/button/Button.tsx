@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React, { FunctionComponent, ReactNode } from "react";
 import Link from "next/link";
 import { lighten, transparentize } from "polished";
@@ -67,13 +68,13 @@ const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   const theme = useTheme();
 
-  const css = [
+  const styles = [
     baseStyles(theme),
     primary ? primaryStyles(theme) : secondaryStyles(theme),
   ];
 
   const innerProps = {
-    css,
+    css: styles,
     ...rest,
   };
 
@@ -84,6 +85,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       </Link>
     );
   }
+  // eslint-disable-next-line react/button-has-type
   return <button {...innerProps} />;
 };
 

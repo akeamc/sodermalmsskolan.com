@@ -63,6 +63,19 @@ export const SubTitle: Heading = (props) => (
   />
 );
 
+export const H2: Heading = (props) => (
+  <h2
+    css={(theme: Theme) => ({
+      fontSize: "2.5rem",
+      lineHeight: 1.1,
+      margin: 0,
+      fontWeight: 700,
+      color: theme.color.text.primary,
+    })}
+    {...props}
+  />
+);
+
 export const H5: Heading = (props) => (
   <h5
     css={(theme: Theme) => ({
@@ -71,6 +84,31 @@ export const H5: Heading = (props) => (
       lineHeight: 1.25,
       color: theme.color.text.tertiary,
       margin: 0,
+    })}
+    {...props}
+  />
+);
+
+export const CardTitle: Heading = (props) => (
+  <H5
+    css={(theme: Theme) => ({
+      color: theme.color.text.primary,
+    })}
+    {...props}
+  />
+);
+
+export const SmallCardHeading: Heading = (props) => (
+  <h4
+    css={(theme: Theme) => ({
+      fontFamily: fonts.monospace,
+      fontSize: "0.6875rem",
+      fontWeight: 400,
+      lineHeight: 1.5,
+      letterSpacing: "0.075rem",
+      textTransform: "uppercase",
+      color: theme.color.text.tertiary,
+      margin: "0 0 1.25rem",
     })}
     {...props}
   />
