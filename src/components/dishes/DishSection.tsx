@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useMemo } from "react";
 import { useDishes } from "../../lib/food/structures/client/Dish";
-import { breakpoints, media } from "../../styles/breakpoints";
 import CardGrid from "../grid/CardGrid";
 import Section, { SectionProps } from "../Section";
 import DishCard from "./DishCard";

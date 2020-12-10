@@ -48,45 +48,55 @@ const Navbar: FunctionComponent = () => {
   const routes = useBasicRoutes();
 
   return (
-    <div css={(theme: Theme) => ({
-      backgroundColor: theme.color.background,
-      borderBottom: `1px solid ${theme.color.border}`,
-      height: theme.navigation.height,
-      boxSizing: "border-box",
-    })}
-    >
-      <Container>
-        <nav css={{
-          display: "flex",
-        }}
-        >
-          <Link href="/" passHref>
-            <a css={{
-              display: "flex",
-              width: "1.5rem",
-              marginRight: "2rem",
-              placeItems: "center",
-            }}
-            >
-              <LogoIcon css={{
-                flex: 1,
-              }}
-              />
-            </a>
-          </Link>
-          <ul css={(theme: Theme) => ({
-            listStyle: "none",
+    <>
+      <div css={(theme: Theme) => ({
+        height: theme.navigation.height,
+      })}
+      />
+      <div css={(theme: Theme) => ({
+        backgroundColor: theme.color.background,
+        borderBottom: `1px solid ${theme.color.border}`,
+        height: theme.navigation.height,
+        boxSizing: "border-box",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+      })}
+      >
+        <Container>
+          <nav css={{
             display: "flex",
-            padding: 0,
-            margin: 0,
-            height: theme.navigation.height,
-          })}
+          }}
           >
-            {routes.map((route) => <RouteLink key={route.href} route={route} />)}
-          </ul>
-        </nav>
-      </Container>
-    </div>
+            <Link href="/" passHref>
+              <a css={{
+                display: "flex",
+                width: "1.5rem",
+                marginRight: "2rem",
+                placeItems: "center",
+              }}
+              >
+                <LogoIcon css={{
+                  flex: 1,
+                }}
+                />
+              </a>
+            </Link>
+            <ul css={(theme: Theme) => ({
+              listStyle: "none",
+              display: "flex",
+              padding: 0,
+              margin: 0,
+              height: theme.navigation.height,
+            })}
+            >
+              {routes.map((route) => <RouteLink key={route.href} route={route} />)}
+            </ul>
+          </nav>
+        </Container>
+      </div>
+    </>
   );
 };
 

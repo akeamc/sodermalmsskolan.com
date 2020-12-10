@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import React, { FunctionComponent } from "react";
 import { useLang } from "../../hooks/lang";
-import { ClientMenu, MenuTitle } from "../../lib/food/structures/client/Menu";
+import { ClientMenu } from "../../lib/food/structures/client/Menu";
 import DishCard from "../dishes/DishCard";
 import CardGrid from "../grid/CardGrid";
 import { SmallHeading } from "../text/headings";
