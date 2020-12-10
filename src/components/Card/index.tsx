@@ -15,8 +15,8 @@ export const cardStyles = (theme: Theme, big = false): SerializedStyles => css({
   color: "inherit",
   textDecoration: "none",
   transition: "all 0.1s",
-  placeItems: big ? "center" : "unset",
-  textAlign: big ? "center" : "unset",
+  justifyContent: big ? "center" : null,
+  textAlign: big ? "center" : null,
 });
 
 export const cardLinkStyles = (theme: Theme): SerializedStyles => css({
