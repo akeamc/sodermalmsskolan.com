@@ -1,9 +1,10 @@
 import { parse } from "node-html-parser";
 import url from "url";
 import got from "got";
-import Digibruh, { DigibruhTags } from "../../../digibruh/Digibruh";
 import { StudySet } from "../shared/StudySet";
 import { API_ENDPOINT } from "../../../food/constants";
+import { browsePosts } from "../../../ghost/post";
+import { digibruhTagPrefix } from "../../../digibruh/constants";
 
 export interface PotatoStudySetDetails {
   id: string;
@@ -15,7 +16,10 @@ export interface PotatoStudySetDetails {
 
 export class ServerStudySet extends StudySet {
   public static async fetchAll(): Promise<ServerStudySet[]> {
-    const articles = await Digibruh.fetchAllPosts();
+    const articles = await browsePosts({
+      limit: "all",
+      filter: `tag:${digibruhTagPrefix}`,
+    });
 
     const studySets: ServerStudySet[] = articles.reduce<ServerStudySet[]>(
       (accumulator, article) => {
@@ -38,17 +42,9 @@ export class ServerStudySet extends StudySet {
           return validLinks;
         }, []);
 
-        const tags = new DigibruhTags(...article.tags);
-
-        const digibruh = {
-          fields: tags.fields().map((field) => field.slug),
-          subjects: tags.subjects().map((field) => field.slug),
-        };
-
         return accumulator.concat(
           ids.map(
             (id) => new ServerStudySet({
-              digibruh,
               id,
               details: null,
             }),
