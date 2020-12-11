@@ -1,14 +1,21 @@
 import { Theme, ThemeProvider } from "@emotion/react";
 import { PostOrPage } from "@tryghost/content-api";
+import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
+import { useLang } from "../../hooks/lang";
+import { breakpoints, media } from "../../styles/breakpoints";
 import darkTheme from "../../styles/theme/dark";
 import Skeleton from "../Skeleton";
-import { H2 } from "../text/headings";
+import { H2, SmallHeading } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 
 const FeaturedPost: FunctionComponent<{post: PostOrPage}> = ({ post }) => {
+  const lang = useLang();
+
+  const timestamp = post?.published_at ? dayjs(post?.published_at).locale(lang) : null;
+
   const inner = (
     <article css={(theme: Theme) => ({
       position: "relative",
@@ -32,10 +39,20 @@ const FeaturedPost: FunctionComponent<{post: PostOrPage}> = ({ post }) => {
         <div css={{
           position: "relative",
           zIndex: 1,
-          padding: "4rem",
+          padding: "2rem",
           boxSizing: "border-box",
+
+          [media(breakpoints.medium)]: {
+            padding: "4rem",
+          },
         }}
         >
+          <SmallHeading css={{
+            marginBottom: "1rem",
+          }}
+          >
+            {timestamp?.format("D MMMM YYYY HH:mm") || <Skeleton width="11em" />}
+          </SmallHeading>
           <H2 css={{
             maxWidth: "37.5rem",
           }}

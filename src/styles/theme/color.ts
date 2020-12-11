@@ -2,6 +2,7 @@ interface Color {
   background: string;
   accent: string;
   border: string;
+  danger: string;
 
   text: {
     primary: string;

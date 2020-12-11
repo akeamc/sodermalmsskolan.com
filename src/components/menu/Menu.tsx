@@ -4,6 +4,7 @@ import { useLang } from "../../hooks/lang";
 import { ClientMenu } from "../../lib/food/structures/client/Menu";
 import DishCard from "../dishes/DishCard";
 import CardGrid from "../grid/CardGrid";
+import Skeleton from "../Skeleton";
 import { SmallHeading } from "../text/headings";
 
 const Menu: FunctionComponent<{menu: ClientMenu}> = ({ menu }) => {
@@ -16,12 +17,12 @@ const Menu: FunctionComponent<{menu: ClientMenu}> = ({ menu }) => {
     >
       <SmallHeading
         css={{
-          writingMode: "vertical-rl",
+          writingMode: "vertical-lr",
           marginRight: "1rem",
           lineHeight: 1,
         }}
       >
-        {menu?.date ? dayjs(menu?.date).locale(lang).format("dddd DD MMMM") : "Läser in ..."}
+        {menu?.date ? dayjs(menu?.date).locale(lang).format("dddd DD MMMM") : <Skeleton height="100%" />}
       </SmallHeading>
       <CardGrid css={{
         flex: 1,

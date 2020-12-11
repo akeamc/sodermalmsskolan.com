@@ -15,6 +15,7 @@ const defaultTheme: Theme = {
   color: {
     background: "#ffffff",
     accent: "#4969ed",
+    danger: "#cb2431",
     text: {
       primary: "#000000",
       secondary: lighten(0.25, "#000000"),

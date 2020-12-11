@@ -15,7 +15,7 @@ const DishSection: FunctionComponent<SectionProps> = ({ ...sectionProps }) => {
     <Section {...sectionProps}>
       <CardGrid>
         {(dishes || new Array(30).fill(null))
-          .map((dish) => <DishCard dish={dish} key={dish?.id} />)}
+          .map((dish, index) => <DishCard dish={dish} key={dish?.id || index} />)}
       </CardGrid>
     </Section>
   );

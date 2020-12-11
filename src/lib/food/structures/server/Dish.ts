@@ -1,7 +1,7 @@
 import got, { HTTPError } from "got";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { API_ENDPOINT } from "../../constants";
-import { Dish, IDish } from "../shared/Dish";
+import { Dish, DishStatic } from "../shared/Dish";
 import admin from "../../../firebase/admin";
 
 export type ServerDishHandler<T = unknown> = (
@@ -26,17 +26,18 @@ export class ServerDish extends Dish {
   }
 
   public static async fetchAll(): Promise<ServerDish[]> {
-    const res = await got.get(`${API_ENDPOINT}/dishes`).json<IDish[]>();
+    const res = await got.get(`${API_ENDPOINT}/dishes`).json<DishStatic[]>();
 
     return res.map((dish) => new ServerDish(dish));
   }
 
   /**
-   * Returns detailed information about a `Dish` with a specified `id` such as carbon dioxide equivalent emissions.
+   * Returns detailed information about a `Dish` with a specified `id` such as carbon dioxide
+   * equivalent emissions and images.
    * @param id
    */
   public static async fetch(id: string): Promise<ServerDish> {
-    const res = await got.get(`${API_ENDPOINT}/dishes/${id}`).json<IDish>();
+    const res = await got.get(`${API_ENDPOINT}/dishes/${id}`).json<DishStatic>();
 
     return new ServerDish({
       ...res,
@@ -57,6 +58,6 @@ export class ServerDish extends Dish {
       throw error;
     }
 
-    return await handler(req, res, dish);
+    return handler(req, res, dish);
   };
 }

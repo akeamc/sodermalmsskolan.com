@@ -1,5 +1,5 @@
 import {
-  css, keyframes, Theme, useTheme,
+  keyframes, Theme,
 } from "@emotion/react";
 import React, { FunctionComponent } from "react";
 
@@ -12,23 +12,25 @@ const animation = keyframes`
   }
 `;
 
-const lineStyles = (theme: Theme, width?: string) => css({
-  backgroundColor: theme.color.skeleton.base,
-  backgroundImage: `linear-gradient(90deg, ${theme.color.skeleton.base}, ${theme.color.skeleton.highlight}, ${theme.color.skeleton.base})`,
-  backgroundSize: "200px 100%",
-  backgroundRepeat: "no-repeat",
-  borderRadius: "0.25rem",
-  display: "inline-block",
-  lineHeight: 1,
-  width: width || "100%",
-  animation: `${animation} 1.2s ease-in-out infinite`,
-});
+interface LineProps { width?: string, height?: string }
 
-const Line: FunctionComponent<{ width?: string }> = ({ width, ...props }) => {
-  const theme = useTheme();
-
-  return <span css={lineStyles(theme, width)} {...props} />;
-};
+const Line: FunctionComponent<LineProps> = ({ width, height, ...props }) => (
+  <span
+    css={(theme: Theme) => ({
+      backgroundColor: theme.color.skeleton.base,
+      backgroundImage: `linear-gradient(90deg, ${theme.color.skeleton.base}, ${theme.color.skeleton.highlight}, ${theme.color.skeleton.base})`,
+      backgroundSize: "200px 100%",
+      backgroundRepeat: "no-repeat",
+      borderRadius: "0.25rem",
+      display: "inline-block",
+      lineHeight: 1,
+      width: width || "100%",
+      height,
+      animation: `${animation} 1.2s ease-in-out infinite`,
+    })}
+    {...props}
+  />
+);
 
 /**
  * A skeleton, working as a perfect replacement for ANYTHING.
@@ -36,12 +38,13 @@ const Line: FunctionComponent<{ width?: string }> = ({ width, ...props }) => {
 const Skeleton: React.FunctionComponent<{
   count?: number;
   width?: string;
-}> = ({ count = 1, width }) => {
+  height?: string;
+}> = ({ count = 1, width, height }) => {
   const elements = [];
 
   for (let i = 0; i < count; i += 1) {
     elements.push(
-      <Line key={i} width={width}>
+      <Line key={i} width={width} height={height}>
         &zwnj;
       </Line>,
     );
