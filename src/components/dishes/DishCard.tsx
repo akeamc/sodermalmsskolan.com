@@ -68,7 +68,8 @@ const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, .
             margin: "0.5rem -0.5rem -0.5rem",
           }}
           >
-            {(photos || new Array(2).fill(null)).map((photo, index) => <Photo photo={photo} key={photo?.id || index} alt={photo?.label} layout="fixed" width="200" height="100" key={photo?.id} />)}
+            {(photos || new Array(2).fill(null))
+              .map((photo, index) => <Photo photo={photo} key={photo?.id || index} />)}
           </div>
         )}
     </Card>
