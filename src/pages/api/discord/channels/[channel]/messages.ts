@@ -24,6 +24,7 @@ const handler: ChannelMessagesHandler<IDiscordAPIMessage[]> = async (
   return res.json(messages.map((message) => message.serialize()));
 };
 
-export default ServerChannel.wrapHandler(async (req, res, channel) => {
-  await ServerMessage.wrapQueryHandler(async (req, res, query) => await handler(req, res, channel, query))(req, res);
+export default ServerChannel.wrapHandler(async (oReq, oRes, channel) => {
+  await ServerMessage
+    .wrapQueryHandler(async (iReq, iRes, query) => handler(iReq, iRes, channel, query))(oReq, oRes);
 });

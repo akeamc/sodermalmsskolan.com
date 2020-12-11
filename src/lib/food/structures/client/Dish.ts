@@ -21,7 +21,7 @@ export class ClientDish extends Dish {
   }
 
   public get url(): string {
-    return `/mat/#${this.id}`;
+    return `/${encodeURIComponent("maträtter")}/#${this.id}`;
   }
 }
 

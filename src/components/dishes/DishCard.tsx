@@ -24,6 +24,10 @@ const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => (
     width: "4rem",
     height: "4rem",
     margin: "0.5rem",
+
+    img: {
+      objectFit: "cover",
+    },
   })}
   >
     {photo?.url ? <Image src={photo?.url} layout="fill" /> : null}

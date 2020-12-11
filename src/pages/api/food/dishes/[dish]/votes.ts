@@ -20,7 +20,7 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   }
 
   if (req.method === "POST") {
-    return await withAuth(async (req, res, decoded) => {
+    return withAuth(async (_req, _res, decoded) => {
       const up = !!req.body?.up;
 
       await ServerVote.create({
@@ -34,7 +34,7 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   }
 
   if (req.method === "DELETE") {
-    return await withAuth(async (_, res, decoded) => {
+    return withAuth(async (_, _res, decoded) => {
       await ServerVote.delete({
         dish: dish.id,
         author: decoded.uid,
@@ -44,7 +44,7 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
     })(req, res);
   }
 
-  res.status(405).end();
+  return res.status(405).end();
 };
 
 export default ServerDish.wrapHandler(handler);

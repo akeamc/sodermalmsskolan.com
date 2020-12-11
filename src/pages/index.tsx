@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
 import Image from "next/image";
-import styled from "@emotion/styled";
 import { NextPage } from "next";
 import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
@@ -10,6 +9,7 @@ import Footer from "../components/footer/Footer";
 import PostListSection from "../components/blog/PostListSection";
 import { useDayMenu } from "../lib/food/hooks/menu";
 import { useDishPhotos } from "../lib/food/hooks/photos";
+import DigibruhArticleSection from "../components/digibruh/Section";
 
 const HomeImage: FunctionComponent = () => {
   const menu = useDayMenu();
@@ -53,9 +53,18 @@ const Page: NextPage = () => (
     <PostListSection
       dark
       upperDivider
+      lowerDivider
       header={{
         superTitle: "Blogg",
         title: "Senaste inläggen",
+      }}
+      limit={6}
+      showMoreButton
+    />
+    <DigibruhArticleSection
+      header={{
+        title: "Ett bruh-urval",
+        superTitle: "Digibruh",
       }}
       limit={6}
       showMoreButton

@@ -19,6 +19,14 @@ export const useBasicRoutes = (): Route[] => ([
     name: "Blogg",
     href: "/blogg",
   },
+  {
+    name: "Schema",
+    href: "/schema",
+  },
+  {
+    name: "Digibruh",
+    href: "/digibruh",
+  },
 ]);
 
 /**

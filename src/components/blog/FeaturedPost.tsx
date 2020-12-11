@@ -1,20 +1,23 @@
 import { Theme, ThemeProvider } from "@emotion/react";
-import { PostOrPage } from "@tryghost/content-api";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import { useLang } from "../../hooks/lang";
+import { usePostUrl } from "../../lib/blog/hooks/post";
+import Post from "../../lib/ghost/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import darkTheme from "../../styles/theme/dark";
 import Skeleton from "../Skeleton";
 import { H2, SmallHeading } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 
-const FeaturedPost: FunctionComponent<{post: PostOrPage}> = ({ post }) => {
+const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
   const lang = useLang();
 
-  const timestamp = post?.published_at ? dayjs(post?.published_at).locale(lang) : null;
+  const timestamp = post?.publishedAt ? dayjs(post?.publishedAt).locale(lang) : null;
+
+  const url = usePostUrl(post?.slug);
 
   const inner = (
     <article css={(theme: Theme) => ({
@@ -84,7 +87,7 @@ const FeaturedPost: FunctionComponent<{post: PostOrPage}> = ({ post }) => {
         backgroundColor: "#000000",
       }}
       >
-        {post?.feature_image
+        {post?.cover
           ? (
             <Image
               css={{
@@ -93,7 +96,7 @@ const FeaturedPost: FunctionComponent<{post: PostOrPage}> = ({ post }) => {
                 transition: "all 0.2s ease-in-out",
                 opacity: 0.5,
               }}
-              src={post?.feature_image}
+              src={post?.cover}
               layout="fill"
             />
           ) : null}
@@ -101,8 +104,8 @@ const FeaturedPost: FunctionComponent<{post: PostOrPage}> = ({ post }) => {
     </article>
   );
 
-  return post?.url ? (
-    <Link href={post?.url} passHref>
+  return url ? (
+    <Link href={url} passHref>
       <a css={{
         textDecoration: "none",
       }}

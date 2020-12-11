@@ -12,7 +12,7 @@ export type Heading = FunctionComponent<HeadingProps>;
 export const SectionHeading: Heading = (props) => (
   <h1
     css={(theme: Theme) => ({
-      fontSize: "3.5rem",
+      fontSize: "3rem",
       fontWeight: 800,
       lineHeight: 0.96,
       margin: 0,
@@ -21,14 +21,25 @@ export const SectionHeading: Heading = (props) => (
       wordWrap: "break-word",
 
       [media(breakpoints.medium)]: {
-        fontSize: "4.5rem",
+        fontSize: "4rem",
       },
     })}
     {...props}
   />
 );
 
-export const HeaderHeading: Heading = (props) => <SectionHeading {...props} />;
+export const HeaderHeading: Heading = (props) => (
+  <SectionHeading
+    css={{
+      fontSize: "4rem",
+
+      [media(breakpoints.medium)]: {
+        fontSize: "5rem",
+      },
+    }}
+    {...props}
+  />
+);
 
 /**
  * A smaller, all-uppercase monospaced heading perfect for complementing a larger one.

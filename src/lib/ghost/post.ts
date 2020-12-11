@@ -1,72 +1,74 @@
 import {
-  PostsOrPages,
-  PostOrPage,
-  LimitParam,
+  PostOrPage as GhostPostOrPage,
   FilterParam,
 } from "@tryghost/content-api";
-import { Params } from "next/dist/next-server/server/router";
-import useSWR from "swr";
 import api from "./credentials";
-import Digibruh from "../digibruh/Digibruh";
-import { UseSWRResource } from "../common/usable";
+import Identification from "./identification";
+import Tag, { ghostTagToTag } from "./tag";
+import Author, { ghostAuthorToAuthor } from "./author";
+import {
+  defaultReadParams, defaultSharedParams, ReadParams, SharedParams,
+} from "./common";
 
-export const defaultParams = (): Params => ({
-  include: ["tags", "authors"],
-  order: "published_at DESC",
-  filter: `tag:-${Digibruh.tagPrefix}`,
-  limit: 6,
+export interface BrowsePostsParams extends SharedParams {
+  filter?: FilterParam;
+}
+
+export default interface Post extends Identification {
+  title: string;
+  tags: Tag[];
+  cover?: string;
+  html: string;
+  createdAt: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  authors: Author[];
+  excerpt?: string;
+  featured: boolean;
+}
+
+export const ghostPostToPost = ({
+  title,
+  tags,
+  id,
+  slug,
+  feature_image,
+  html,
+  created_at,
+  published_at,
+  updated_at,
+  authors,
+  excerpt,
+  featured,
+}: GhostPostOrPage): Post => ({
+  title,
+  tags: tags.map(ghostTagToTag),
+  id,
+  slug,
+  cover: feature_image,
+  html,
+  createdAt: new Date(created_at).toISOString(),
+  publishedAt: new Date(published_at).toISOString(),
+  updatedAt: new Date(updated_at).toISOString(),
+  authors: authors.map(ghostAuthorToAuthor),
+  excerpt,
+  featured: !!featured,
 });
 
-export async function getPosts(
-  limit: LimitParam = 10,
-  filter: FilterParam = `tag:-${Digibruh.tagPrefix}`,
-): Promise<PostsOrPages> {
-  return api.posts.browse({
-    ...defaultParams(),
-    filter,
-    limit,
-  });
-}
+/**
+ * Browse posts.
+ */
+export const browsePosts = async (params: BrowsePostsParams = {}): Promise<Post[]> => {
+  const posts = await api.posts.browse(defaultSharedParams(params));
 
-export function getPostBySlug(slug: string): Promise<PostOrPage> {
-  return api.posts.read({
-    slug,
-    // @ts-ignore
-    include: ["tags", "authors"],
-  });
-}
-
-export async function getPostsByTag(
-  tag: string,
-  limit: LimitParam = "all",
-): Promise<PostsOrPages> {
-  return getPosts(limit, `tag:${tag}`);
-}
+  return posts.map(ghostPostToPost);
+};
 
 /**
- *
- * @param slug
- * @param limit
+ * Read a single post.
  */
-export async function getPostsByAuthor(
-  slug: string,
-  limit: LimitParam = 10,
-): Promise<PostOrPage[]> {
-  return getPosts(limit, `tag:-${Digibruh.tagPrefix}+authors.slug:${slug}`);
-}
+export const readPost = async (params: ReadParams): Promise<Post> => {
+  const post = await api.posts.read(defaultReadParams(params));
 
-export interface UsePostsQuery {
-  limit?: LimitParam,
-  filter?: FilterParam
-}
-
-export const usePosts: UseSWRResource<PostsOrPages, UsePostsQuery> = (query) => {
-  const params = {
-    ...defaultParams(),
-    ...query,
-  };
-
-  return useSWR(`/ghost/browse?limit=${params.limit}&filter=${params.filter}`, () => (
-    api.posts.browse(params)
-  ));
+  return ghostPostToPost(post);
 };

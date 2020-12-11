@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { usePosts } from "../../lib/ghost/post";
+import { usePosts } from "../../lib/blog/hooks/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import CardGrid from "../grid/CardGrid";
@@ -9,9 +9,9 @@ import FeaturedPost from "./FeaturedPost";
 import PostCard from "./PostCard";
 
 const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
-  const { data } = usePosts({
-    limit: posts,
-  });
+  const { data } = usePosts(
+    posts,
+  );
 
   const featured = data?.[0];
   const rest = data?.slice(1, posts);
