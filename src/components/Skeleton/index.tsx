@@ -21,7 +21,7 @@ const Line: FunctionComponent<LineProps> = ({ width, height, ...props }) => (
       backgroundImage: `linear-gradient(90deg, ${theme.color.skeleton.base}, ${theme.color.skeleton.highlight}, ${theme.color.skeleton.base})`,
       backgroundSize: "200px 100%",
       backgroundRepeat: "no-repeat",
-      borderRadius: "0.25rem",
+      borderRadius: "0.5rem",
       display: "inline-block",
       lineHeight: 1,
       width: width || "100%",
