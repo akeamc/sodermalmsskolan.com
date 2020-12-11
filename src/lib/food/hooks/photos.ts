@@ -41,6 +41,6 @@ export const useDishPhotos = (id: string): FoodPhoto[] => {
       }, []);
     }
 
-    return null;
+    return undefined;
   }, [dish, messages]);
 };

@@ -28,7 +28,7 @@ export default class ClientLetter extends Letter {
 
   public static async fetch(id: string): Promise<ClientLetter> {
     if (!id) {
-      return null;
+      return undefined;
     }
 
     const res = await ky

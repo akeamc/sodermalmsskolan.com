@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import Image from "next/image";
 import styled from "@emotion/styled";
 import { NextPage } from "next";
@@ -8,21 +8,28 @@ import Button from "../components/button/Button";
 import DayMenuSection from "../components/menu/DayMenuSection";
 import Footer from "../components/footer/Footer";
 import PostListSection from "../components/blog/PostListSection";
+import { useDayMenu } from "../lib/food/hooks/menu";
+import { useDishPhotos } from "../lib/food/hooks/photos";
 
-const GroovyImage = styled(Image)`
-  filter: hue-rotate(180deg);
-  transition: all 0.2s ease-in-out;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+const HomeImage: FunctionComponent = () => {
+  const menu = useDayMenu();
 
-  &:hover {
-    clip-path: polygon(
-      2rem 2rem,
-      calc(100% - 2rem) 2rem,
-      calc(100% - 2rem) calc(100% - 2rem),
-      2rem calc(100% - 2rem)
-    );
-  }
-`;
+  const dish = menu?.dishes?.[0];
+
+  const photos = useDishPhotos(dish?.id);
+
+  const src = typeof photos !== "undefined" ? photos?.[0]?.url || "https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG" : null;
+
+  return src ? (
+    <Image
+      src={src}
+      css={{
+        borderRadius: "0.5rem",
+      }}
+      layout="fill"
+    />
+  ) : null;
+};
 
 const Page: NextPage = () => (
   <Base>
@@ -39,10 +46,7 @@ const Page: NextPage = () => (
         </>
         )}
       graphic={(
-        <GroovyImage
-          src="https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG"
-          layout="fill"
-        />
+        <HomeImage />
         )}
     />
     <DayMenuSection />

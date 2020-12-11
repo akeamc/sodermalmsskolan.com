@@ -12,7 +12,7 @@ export class ClientDish extends Dish {
 
   public static async fetchEmissions(id: string): Promise<number> {
     if (!id) {
-      return null;
+      return undefined;
     }
 
     const res = await ky.get(`/api/food/dishes/${id}`).json<DishStatic>();

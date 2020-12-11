@@ -47,6 +47,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
             justifyContent: "center",
             flexDirection: "column",
             padding: "2rem 0",
+            gridRow: 2,
 
             [media(breakpoints.medium)]: {
               paddingTop: "4rem",
@@ -56,6 +57,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
             [media(breakpoints.large)]: {
               paddingTop: "8rem",
               paddingBottom: "8rem",
+              gridRow: 1,
             },
           }}
         >
@@ -72,9 +74,11 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
           css={{
             position: "relative",
             minHeight: "50vh",
+            marginTop: "2rem",
 
             [media(breakpoints.large)]: {
-              minHeight: "80vh",
+              minHeight: "70vh",
+              marginBottom: "2rem",
             },
 
             img: {

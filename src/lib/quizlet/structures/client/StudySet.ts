@@ -21,7 +21,7 @@ export class ClientStudySet extends StudySet {
 
   public static async fetch(id: string): Promise<ClientStudySet> {
     if (!id) {
-      return null;
+      return undefined;
     }
 
     const res = await ky.get(this.fetchUrl(id)).json<StudySetStatic>();

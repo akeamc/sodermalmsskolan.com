@@ -23,7 +23,7 @@ export default class ServerLetter extends Letter {
     const attachment = message.attachments[0];
 
     if (!attachment) {
-      return null;
+      return undefined;
     }
 
     const { url } = attachment;
