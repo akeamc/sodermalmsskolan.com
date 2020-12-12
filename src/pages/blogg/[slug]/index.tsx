@@ -3,6 +3,7 @@ import {
 } from "next";
 import { useRouter } from "next/router";
 import React from "react";
+import BlogPostPage from "../../../components/blog/PostPage";
 import { postBelongsToBlog } from "../../../lib/blog/filter";
 import { browsePosts, readPost } from "../../../lib/ghost/post";
 
@@ -52,13 +53,7 @@ const Page: NextPage = ({
     return <h1>404</h1>;
   }
 
-  // eslint-disable-next-line react/no-danger
-  return (
-    <>
-      <h1>Work in progress</h1>
-      <div dangerouslySetInnerHTML={{ __html: post?.html }} />
-    </>
-  );
+  return <BlogPostPage post={post} />;
 };
 
 export default Page;

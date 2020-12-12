@@ -1,14 +1,20 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import { SectionHeading, SmallHeading } from "../text/headings";
+import { PromoSectionHeading, SectionHeading, SmallHeading } from "../text/headings";
 
 export interface SectionHeaderProps {
   superTitle?: ReactNode;
   title: ReactNode;
+
+  /**
+   * Whether or not this is a promotional section, used for example on the front page.
+   */
+  promo?: boolean;
 }
 
 const SectionHeader: FunctionComponent<SectionHeaderProps> = ({
   superTitle,
   title,
+  promo = false,
 }) => (
   <div
     css={{
@@ -16,7 +22,9 @@ const SectionHeader: FunctionComponent<SectionHeaderProps> = ({
     }}
   >
     {superTitle ? <SmallHeading>{superTitle}</SmallHeading> : null}
-    <SectionHeading>{title}</SectionHeading>
+    {promo
+      ? <PromoSectionHeading>{title}</PromoSectionHeading>
+      : <SectionHeading>{title}</SectionHeading>}
   </div>
 );
 

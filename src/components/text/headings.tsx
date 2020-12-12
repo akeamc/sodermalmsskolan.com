@@ -9,10 +9,13 @@ export type HeadingProps = HTMLElementProps<HTMLHeadingElement>;
 
 export type Heading = FunctionComponent<HeadingProps>;
 
+/**
+ * A section heading intended to be used for things *not* related to promotionals.
+ */
 export const SectionHeading: Heading = (props) => (
   <h1
     css={(theme: Theme) => ({
-      fontSize: "3rem",
+      fontSize: "2.5rem",
       fontWeight: 800,
       lineHeight: 0.96,
       margin: 0,
@@ -21,9 +24,25 @@ export const SectionHeading: Heading = (props) => (
       wordWrap: "break-word",
 
       [media(breakpoints.medium)]: {
-        fontSize: "4rem",
+        fontSize: "3.5rem",
       },
     })}
+    {...props}
+  />
+);
+
+/**
+ * Promotional section heading.
+ */
+export const PromoSectionHeading: Heading = (props) => (
+  <SectionHeading
+    css={{
+      fontSize: "3.5rem",
+
+      [media(breakpoints.medium)]: {
+        fontSize: "4.5rem",
+      },
+    }}
     {...props}
   />
 );

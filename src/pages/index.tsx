@@ -57,6 +57,7 @@ const Page: NextPage = () => (
       header={{
         superTitle: "Blogg",
         title: "Senaste inläggen",
+        promo: true,
       }}
       limit={6}
       showMoreButton
@@ -65,6 +66,7 @@ const Page: NextPage = () => (
       header={{
         title: "Ett bruh-urval",
         superTitle: "Digibruh",
+        promo: true,
       }}
       limit={6}
       showMoreButton

@@ -25,6 +25,7 @@ const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
             Dagens lunch
           </>
         ),
+        promo: true,
       }}
       {...props}
     >

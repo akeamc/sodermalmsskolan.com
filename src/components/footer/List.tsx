@@ -45,8 +45,8 @@ const FooterList: FunctionComponent<{ category: RouteCategory }> = ({
         listStyle: "none",
       }}
     >
-      {category.routes.map((route, index) => (
-        <RouteLink route={route} key={index} />
+      {category.routes.map((route) => (
+        <RouteLink route={route} key={route.href} />
       ))}
     </ul>
   </div>
