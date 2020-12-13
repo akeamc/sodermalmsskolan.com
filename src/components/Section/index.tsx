@@ -48,7 +48,7 @@ const InnerSection: FunctionComponent<InnerSectionProps> = ({
           sectionPaddingStyles.top,
           sectionPaddingStyles.bottom,
           {
-            backgroundColor: theme.color.background,
+            backgroundColor: theme.color.background.primary,
           },
         ]}
         {...props}

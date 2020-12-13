@@ -5,6 +5,7 @@ import ReactHtmlParser, { convertNodeToElement, Transform } from "react-html-par
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import KatexText from "../katex/Text";
+import Table from "../Table";
 
 const Figure: FunctionComponent = (props) => (
   <div
@@ -146,6 +147,10 @@ const transform: Transform = (node, index) => {
         {node.children.map(transform)}
       </blockquote>
     );
+  }
+
+  if (node.name === "table") {
+    return <Table key={index}>{node.children.map(transform)}</Table>;
   }
 
   if (node.type === "text") {

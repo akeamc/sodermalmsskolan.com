@@ -25,7 +25,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
   <ThemeProvider theme={darkTheme}>
     <div
       css={(theme: Theme) => ({
-        backgroundColor: theme.color.background,
+        backgroundColor: theme.color.background.primary,
       })}
     >
       <Navbar />

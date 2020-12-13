@@ -40,7 +40,7 @@ const Footer: FunctionComponent = () => {
         sectionPaddingStyles.top,
         sectionPaddingStyles.bottom,
         {
-          backgroundColor: theme.color.background,
+          backgroundColor: theme.color.background.primary,
         },
       ]}
     >

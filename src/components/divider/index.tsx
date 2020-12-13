@@ -6,7 +6,7 @@ export const dividerHeight = "15vw";
 const Divider: FunctionComponent = (props) => (
   <div
     css={(theme: Theme) => ({
-      backgroundColor: theme.color.background,
+      backgroundColor: theme.color.background.primary,
       width: "100%",
       height: dividerHeight,
     })}

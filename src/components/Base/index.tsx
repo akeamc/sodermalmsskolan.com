@@ -11,7 +11,7 @@ const Base: FunctionComponent<BaseProps> = ({ metadata, children }) => (
     <SiteHead metadata={metadata} />
     <main
       css={(theme: Theme) => ({
-        backgroundColor: theme.color.background,
+        backgroundColor: theme.color.background.primary,
         color: theme.color.text.primary,
       })}
     >

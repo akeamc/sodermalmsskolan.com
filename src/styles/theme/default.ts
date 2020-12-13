@@ -13,7 +13,10 @@ const defaultTheme: Theme = {
     large: `0 60px 120px -10px ${transparentize(0.8, "#000000")}`,
   },
   color: {
-    background: "#ffffff",
+    background: {
+      primary: "#ffffff",
+      secondary: "#fafafa",
+    },
     accent: "#4969ed",
     danger: "#cb2431",
     text: {

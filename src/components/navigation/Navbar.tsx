@@ -54,7 +54,7 @@ const Navbar: FunctionComponent = () => {
       })}
       />
       <div css={(theme: Theme) => ({
-        backgroundColor: theme.color.background,
+        backgroundColor: theme.color.background.primary,
         borderBottom: `1px solid ${theme.color.border}`,
         height: theme.navigation.height,
         boxSizing: "border-box",

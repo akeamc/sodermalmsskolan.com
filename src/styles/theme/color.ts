@@ -1,5 +1,8 @@
 interface Color {
-  background: string;
+  background: {
+    primary: string;
+    secondary: string;
+  };
   accent: string;
   border: string;
   danger: string;

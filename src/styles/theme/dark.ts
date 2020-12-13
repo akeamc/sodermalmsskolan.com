@@ -12,7 +12,10 @@ const darkTheme: Theme = {
   },
   color: {
     ...defaultTheme.color,
-    background: "#000000",
+    background: {
+      primary: "#000000",
+      secondary: "#000000",
+    },
     text: {
       ...defaultTheme.color.text,
       primary: "#ffffff",
