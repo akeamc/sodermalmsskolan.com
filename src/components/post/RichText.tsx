@@ -4,6 +4,7 @@ import React, { FunctionComponent } from "react";
 import ReactHtmlParser, { convertNodeToElement, Transform } from "react-html-parser";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
+import KatexText from "../katex/Text";
 
 const Figure: FunctionComponent = (props) => (
   <div
@@ -30,7 +31,7 @@ const transform: Transform = (node, index) => {
     const { href } = node.attribs;
 
     return (
-      <Link href={href} passHref>
+      <Link key={index} href={href} passHref>
         <a css={(theme: Theme) => ({
           color: "inherit",
           textDecoration: "underline",
@@ -47,12 +48,12 @@ const transform: Transform = (node, index) => {
   }
 
   if (node.name === "figure") {
-    return <Figure>{node.children.map(transform)}</Figure>;
+    return <Figure key={index}>{node.children.map(transform)}</Figure>;
   }
 
   if (node.name === "iframe") {
     return (
-      <Figure>
+      <Figure key={index}>
         <div css={{
           position: "relative",
           display: "block",
@@ -88,15 +89,17 @@ const transform: Transform = (node, index) => {
 
   if (node.name === "figcaption") {
     return (
-      <figcaption css={(theme: Theme) => ({
-        textAlign: "center",
-        margin: 0,
-        marginTop: "0.625rem",
-        color: theme.color.text.tertiary,
-        fontSize: "0.8125rem",
-        lineHeight: 1.5,
-        letterSpacing: "0.00625em",
-      })}
+      <figcaption
+        key={index}
+        css={(theme: Theme) => ({
+          textAlign: "center",
+          margin: 0,
+          marginTop: "0.625rem",
+          color: theme.color.text.tertiary,
+          fontSize: "0.8125rem",
+          lineHeight: 1.5,
+          letterSpacing: "0.00625em",
+        })}
       >
         {node.children.map(transform)}
       </figcaption>
@@ -108,6 +111,7 @@ const transform: Transform = (node, index) => {
 
     return (
       <img
+        key={index}
         css={{
           width: "100%",
           borderRadius: "0.5rem",
@@ -121,25 +125,31 @@ const transform: Transform = (node, index) => {
 
   if (node.name === "blockquote") {
     return (
-      <blockquote css={(theme: Theme) => ({
-        margin: 0,
-        padding: 0,
-        color: theme.color.accent,
-        fontFamily: fonts.monospace,
-        fontSize: "1.5rem",
-        fontWeight: 400,
-        marginTop: "1rem",
-        marginBottom: "2rem",
-        lineHeight: 1.5,
+      <blockquote
+        key={index}
+        css={(theme: Theme) => ({
+          margin: 0,
+          padding: 0,
+          color: theme.color.accent,
+          fontFamily: fonts.monospace,
+          fontSize: "1.5rem",
+          fontWeight: 400,
+          marginTop: "1rem",
+          marginBottom: "2rem",
+          lineHeight: 1.5,
 
-        [media(breakpoints.medium)]: {
-          padding: "2rem 3rem",
-        },
-      })}
+          [media(breakpoints.medium)]: {
+            padding: "2rem 3rem",
+          },
+        })}
       >
         {node.children.map(transform)}
       </blockquote>
     );
+  }
+
+  if (node.type === "text") {
+    return <KatexText text={node.data} key={index} />;
   }
 
   return convertNodeToElement(node, index, transform);

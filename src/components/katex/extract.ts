@@ -1,7 +1,3 @@
-/* eslint no-constant-condition: ["error", { "checkLoops": false }] */
-import katex from "katex";
-import "katex/dist/contrib/mhchem.js";
-
 interface Delimeter {
   left: string;
   right: string;
@@ -10,7 +6,7 @@ interface Delimeter {
 
 type Delimeters = Delimeter[];
 
-const findEndOfMath = function (delimiter: string, text: string, startIndex) {
+const findEndOfMath = (delimiter: string, text: string, startIndex) => {
   // Adapted from
   // https://github.com/Khan/perseus/blob/master/src/perseus-markdown.jsx
   let index = startIndex;
@@ -40,27 +36,24 @@ const findEndOfMath = function (delimiter: string, text: string, startIndex) {
   return -1;
 };
 
-enum SplitFragmentType {
-  Text,
-  Math,
-}
+type SplitFragmentKind = "text" | "math";
 
 interface SplitFragment {
-  type: SplitFragmentType;
+  type: SplitFragmentKind;
   data: string;
   display?: boolean;
 }
 
-const splitAtDelimiters = function (
+const splitAtDelimiters = (
   startData,
   leftDelim: string,
   rightDelim: string,
   display: boolean,
-): SplitFragment[] {
+): SplitFragment[] => {
   const finalData = [];
 
   for (let i = 0; i < startData.length; i += 1) {
-    if (startData[i].type === SplitFragmentType.Text) {
+    if (startData[i].type === "text") {
       const text = startData[i].data;
 
       let lookingForLeft = true;
@@ -71,12 +64,13 @@ const splitAtDelimiters = function (
       if (nextIndex !== -1) {
         currIndex = nextIndex;
         finalData.push({
-          type: SplitFragmentType.Text,
+          type: "text",
           data: text.slice(0, currIndex),
         });
         lookingForLeft = false;
       }
 
+      // eslint-disable-next-line no-constant-condition
       while (true) {
         if (lookingForLeft) {
           nextIndex = text.indexOf(leftDelim, currIndex);
@@ -85,7 +79,7 @@ const splitAtDelimiters = function (
           }
 
           finalData.push({
-            type: SplitFragmentType.Text,
+            type: "text",
             data: text.slice(currIndex, nextIndex),
           });
 
@@ -101,7 +95,7 @@ const splitAtDelimiters = function (
           }
 
           finalData.push({
-            type: SplitFragmentType.Math,
+            type: "math",
             data: text.slice(currIndex + leftDelim.length, nextIndex),
             rawData: text.slice(currIndex, nextIndex + rightDelim.length),
             display,
@@ -114,7 +108,7 @@ const splitAtDelimiters = function (
       }
 
       finalData.push({
-        type: SplitFragmentType.Text,
+        type: "text",
         data: text.slice(currIndex),
       });
     } else {
@@ -125,8 +119,8 @@ const splitAtDelimiters = function (
   return finalData;
 };
 
-const splitWithDelimiters = function (text, delimiters: Delimeters) {
-  let data: SplitFragment[] = [{ type: SplitFragmentType.Text, data: text }];
+const splitWithDelimiters = (text, delimiters: Delimeters) => {
+  let data: SplitFragment[] = [{ type: "text", data: text }];
   for (let i = 0; i < delimiters.length; i += 1) {
     const delimiter = delimiters[i];
     data = splitAtDelimiters(
@@ -139,10 +133,7 @@ const splitWithDelimiters = function (text, delimiters: Delimeters) {
   return data;
 };
 
-/**
- * NOTE: Don't forget to include the KaTeX CSS stylesheet.
- */
-export const renderMathInText = function (text: string): string {
+const extractKatex = (text: string): SplitFragment[] => {
   const options = {
     delimeters: [
       { left: "$$", right: "$$", display: true },
@@ -152,33 +143,12 @@ export const renderMathInText = function (text: string): string {
 
   const data = splitWithDelimiters(text, options.delimeters);
 
-  if (data.length === 1 && data[0].type === SplitFragmentType.Text) {
+  if (data.length === 1 && data[0].type === "text") {
     // There is no formula in the text.
-    // Let's return null which means there is no need to replace
-    // the current text node with a new one.
     return null;
   }
 
-  const output = [];
-
-  for (let i = 0; i < data.length; i += 1) {
-    if (data[i].type === SplitFragmentType.Text) {
-      output.push(data[i].data);
-    } else {
-      const math = data[i].data;
-      try {
-        output.push(
-          katex.renderToString(math, {
-            displayMode: data[i].display,
-            output: "html",
-          }),
-        );
-      } catch (e) {
-        console.warn(e);
-        continue;
-      }
-    }
-  }
-
-  return output.join("");
+  return data;
 };
+
+export default extractKatex;

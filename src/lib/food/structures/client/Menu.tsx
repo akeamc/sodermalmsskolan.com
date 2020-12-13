@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import React from "react";
 import { ClientDish } from "./Dish";
-import { firstLetterUpperCase } from "../../../utils/letters";
 import { IMenu, Menu } from "../shared/Menu";
 import { useLang } from "../../../../hooks/lang";
 import { UseSWRResource } from "../../../common/usable";
@@ -48,15 +47,3 @@ export const useMenu: UseSWRResource<ClientMenu[], UseMenuQuery> = ({
 
   return menus.slice(startIndex, startIndex + limit);
 });
-
-export const MenuTitle: React.FunctionComponent<{ menu: Menu }> = ({
-  menu,
-}) => {
-  const lang = useLang();
-
-  const title = firstLetterUpperCase(
-    dayjs(menu?.date).locale(lang).format("dddd D MMMM"),
-  );
-
-  return <>{title}</>;
-};
