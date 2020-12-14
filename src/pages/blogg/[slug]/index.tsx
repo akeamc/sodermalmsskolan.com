@@ -3,9 +3,10 @@ import {
 } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import BlogPostPage from "../../../components/blog/PostPage";
+import PostPage from "../../../components/post/PostPage";
 import { postBelongsToBlog } from "../../../lib/blog/filter";
 import { browsePosts, readPost } from "../../../lib/ghost/post";
+import NotFound from "../../404";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await browsePosts();
@@ -45,15 +46,11 @@ const Page: NextPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <p>läser in ...</p>;
+  if (!post && !router.isFallback) {
+    return <NotFound />;
   }
 
-  if (!post) {
-    return <h1>404</h1>;
-  }
-
-  return <BlogPostPage post={post} />;
+  return <PostPage post={post} />;
 };
 
 export default Page;

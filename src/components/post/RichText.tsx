@@ -168,7 +168,7 @@ const RichText: FunctionComponent<{html: string}> = ({ html, ...props }) => {
 
   return (
     <div
-      css={{
+      css={(theme: Theme) => ({
         p: {
           lineHeight: 2,
           letterSpacing: "0.00625em",
@@ -222,7 +222,12 @@ const RichText: FunctionComponent<{html: string}> = ({ html, ...props }) => {
           marginBottom: "0.5rem",
           lineHeight: 1.7,
         },
-      }}
+
+        hr: {
+          border: 0,
+          borderTop: `1px solid ${theme.color.border}`,
+        },
+      })}
       {...props}
     >
       {parsedHtml}

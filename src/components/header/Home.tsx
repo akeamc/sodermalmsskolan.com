@@ -2,7 +2,9 @@ import React, { FunctionComponent, ReactNode } from "react";
 import { Theme, ThemeProvider } from "@emotion/react";
 import Container from "../Container";
 import { breakpoints, media } from "../../styles/breakpoints";
-import { HeaderHeading, SmallHeading, SubTitle } from "../text/headings";
+import {
+  HeaderHeading, PromoHeaderHeading, SmallHeading, SubTitle,
+} from "../text/headings";
 import darkTheme from "../../styles/theme/dark";
 import ButtonRow from "../button/row";
 import HeaderProps from "./props";
@@ -66,7 +68,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
               {superTitle}
             </SmallHeading>
           ) : null}
-          <HeaderHeading>{title}</HeaderHeading>
+          <PromoHeaderHeading>{title}</PromoHeaderHeading>
           {sub ? <SubTitle>{sub}</SubTitle> : null}
           {buttons ? <ButtonRow>{buttons}</ButtonRow> : null}
         </div>

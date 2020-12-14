@@ -24,7 +24,7 @@ export const SectionHeading: Heading = (props) => (
       wordWrap: "break-word",
 
       [media(breakpoints.medium)]: {
-        fontSize: "3.5rem",
+        fontSize: "3rem",
       },
     })}
     {...props}
@@ -37,10 +37,10 @@ export const SectionHeading: Heading = (props) => (
 export const PromoSectionHeading: Heading = (props) => (
   <SectionHeading
     css={{
-      fontSize: "3.5rem",
+      fontSize: "4rem",
 
       [media(breakpoints.medium)]: {
-        fontSize: "4.5rem",
+        fontSize: "5rem",
       },
     }}
     {...props}
@@ -50,10 +50,23 @@ export const PromoSectionHeading: Heading = (props) => (
 export const HeaderHeading: Heading = (props) => (
   <SectionHeading
     css={{
-      fontSize: "4rem",
+      fontSize: "3rem",
 
       [media(breakpoints.medium)]: {
-        fontSize: "5rem",
+        fontSize: "4.5rem",
+      },
+    }}
+    {...props}
+  />
+);
+
+export const PromoHeaderHeading: Heading = (props) => (
+  <HeaderHeading
+    css={{
+      fontSize: "4.5rem",
+
+      [media(breakpoints.medium)]: {
+        fontSize: "5.5rem",
       },
     }}
     {...props}
