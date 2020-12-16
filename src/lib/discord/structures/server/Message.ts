@@ -61,7 +61,7 @@ export class ServerMessage extends Message {
 
   public static wrapQueryHandler = (
     handler: MessageQueryHandler,
-  ): NextApiHandler => async (req, res) => {
+  ): NextApiHandler => (req, res) => {
     const { query } = req;
 
     const before = query.before?.toString();
@@ -81,7 +81,7 @@ export class ServerMessage extends Message {
         );
     }
 
-    return await handler(req, res, {
+    return handler(req, res, {
       before,
       after,
       limit: validator.toInt(limit),

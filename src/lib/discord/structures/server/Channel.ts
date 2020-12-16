@@ -44,7 +44,8 @@ export class ServerChannel extends Channel {
   }
 
   /**
-   * Wrap an API handler to authenticate the user and verify that the channel exists. The channel ID is aquired from the `channel` path parameter.
+   * Wrap an API handler to authenticate the user and verify that the channel exists.
+   * The channel ID is aquired from the `channel` path parameter.
    * @param handler
    */
   public static wrapHandler = (
@@ -66,8 +67,9 @@ export class ServerChannel extends Channel {
     const details = getChannelDetails(channel.id);
 
     if (!details || details?.authenticated) {
-      return await withAuth(async (req, res) => await handler(req, res, channel))(req, res);
+      return withAuth((authReq, authRes) => handler(authReq, authRes, channel))(req, res);
     }
-    return await handler(req, res, channel);
+
+    return handler(req, res, channel);
   };
 }

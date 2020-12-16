@@ -4,7 +4,7 @@ import { ServerDish } from "./Dish";
 
 const { FieldValue } = admin.firestore;
 
-export class ServerVote extends Vote {
+export default class ServerVote extends Vote {
   public static firestoreDocument(
     dish: string,
   ): FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> {

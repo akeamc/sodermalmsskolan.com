@@ -32,14 +32,14 @@ export class Category implements Serializable<ICategory> {
 
   public static fromChannels(channels: Channel[]): Category[] {
     const categories = channels.filter(
-      (channel) => channel.type == ChannelType.GuildCategory,
+      (channel) => channel.type === ChannelType.GuildCategory,
     );
 
     return categories.map(
       ({ name, id }) => new Category(
         name,
         id,
-        channels.filter((channel) => channel.parent == id),
+        channels.filter((channel) => channel.parent === id),
       ),
     );
   }

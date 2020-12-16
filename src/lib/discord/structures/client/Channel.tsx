@@ -1,7 +1,7 @@
 import useSWR, { SWRInfiniteResponseInterface, useSWRInfinite } from "swr";
 
 import ky from "ky-universal";
-import { ClientMessage } from "./Message";
+import ClientMessage from "./Message";
 import { Channel, IDiscordAPIChannel } from "../shared/Channel";
 import { IDiscordAPIMessage } from "../shared/Message";
 import { getAuthorizationHeader } from "../../../auth/token";

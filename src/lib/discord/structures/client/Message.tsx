@@ -1,3 +1,3 @@
 import { Message } from "../shared/Message";
 
-export class ClientMessage extends Message {}
+export default class ClientMessage extends Message {}

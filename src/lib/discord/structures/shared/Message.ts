@@ -22,7 +22,8 @@ export interface MessageQuery {
   after?: string;
 
   /**
-   * The limit of how many messages to fetch. According to Discord's API, it must be an integer larger than 0 and at most 100.
+   * The limit of how many messages to fetch. According to Discord's API,
+   * it must be an integer larger than 0 and at most 100.
    */
   limit?: number;
 }

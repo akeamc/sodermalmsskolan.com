@@ -3,7 +3,7 @@ import { ServerDish } from "./Dish";
 import { IMenu, Menu } from "../shared/Menu";
 import { API_ENDPOINT } from "../../constants";
 
-export class ServerMenu extends Menu {
+export default class ServerMenu extends Menu {
   dishes: ServerDish[];
 
   constructor({ dishes, date }: IMenu) {

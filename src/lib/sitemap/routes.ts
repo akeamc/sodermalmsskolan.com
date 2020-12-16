@@ -38,8 +38,19 @@ export const useRoutes = (): Routes => [
     routes: useBasicRoutes(),
   },
   {
+    name: "Organisationen",
+    routes: [{
+      name: "Författare",
+      href: "/författare",
+    }],
+  },
+  {
     name: "Resurser",
     routes: [
+      {
+        name: "Maträtter",
+        href: "/maträtter",
+      },
       {
         name: "Serverstatus",
         href: "https://status.södermalmsskolan.com",

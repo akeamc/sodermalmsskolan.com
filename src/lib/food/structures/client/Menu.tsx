@@ -2,10 +2,8 @@ import useSWR from "swr";
 import ky from "ky-universal";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import React from "react";
 import { ClientDish } from "./Dish";
 import { IMenu, Menu } from "../shared/Menu";
-import { useLang } from "../../../../hooks/lang";
 import { UseSWRResource } from "../../../common/usable";
 
 dayjs.extend(isSameOrBefore);

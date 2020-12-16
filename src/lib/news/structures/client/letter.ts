@@ -7,7 +7,7 @@ import Letter, { LetterStatic } from "../shared/letter";
 
 export default class ClientLetter extends Letter {
   public static get fetchAllUrl(): string {
-    return `/api/news/letters`;
+    return "/api/news/letters";
   }
 
   public static fetchUrl(id: string): string {
@@ -54,6 +54,10 @@ export default class ClientLetter extends Letter {
   }
 }
 
-export const useLetters: UseSWRResource<ClientLetter[]> = () => useSWR(ClientLetter.fetchAllUrl, () => ClientLetter.fetchAll());
+export const useLetters: UseSWRResource<ClientLetter[]> = () => useSWR(ClientLetter.fetchAllUrl,
+  () => ClientLetter.fetchAll());
 
-export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => useSWR(ClientLetter.fetchUrl(id), () => ClientLetter.fetch(id));
+export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => useSWR(
+  ClientLetter.fetchUrl(id),
+  () => ClientLetter.fetch(id),
+);

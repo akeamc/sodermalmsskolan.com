@@ -72,3 +72,5 @@ export const readPost = async (params: ReadParams): Promise<Post> => {
 
   return ghostPostToPost(post);
 };
+
+export type PostFilter = (post: Post) => boolean;

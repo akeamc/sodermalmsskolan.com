@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import { useDigibruhArticles } from "../../lib/digibruh/hooks/article";
 import { LimitParam } from "../../lib/ghost/common";
+import { PostFilter } from "../../lib/ghost/post";
 import Button from "../button/Button";
 import CardGridSection from "../CardGridSection";
 import { SectionProps } from "../Section";
@@ -9,14 +10,19 @@ import ArticleCard from "./ArticleCard";
 
 export interface DigibruhSectionProps extends SectionProps {
   limit?: LimitParam;
+  filter?: PostFilter;
   showMoreButton?: boolean;
 }
 
 /**
  * A section presenting a few Digibruh articles.
  */
-const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({ limit = "all", showMoreButton = false, ...sectionProps }) => {
+const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({
+  limit = "all", filter = () => true, showMoreButton = false, ...sectionProps
+}) => {
   const { data } = useDigibruhArticles(limit);
+
+  const articles = useMemo(() => data?.filter(filter), [data, filter]);
 
   const skeletonArticles = typeof limit === "number" ? limit : 30;
 
@@ -34,7 +40,7 @@ const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({ limit
       bottomText={showMoreButton ? <Button href="/digibruh" primary>Öppna Digibruh</Button> : null}
       {...sectionProps}
     >
-      {(data || new Array(skeletonArticles).fill(null))
+      {(articles || new Array(skeletonArticles).fill(null))
         .map((post, index) => <ArticleCard post={post} key={post?.id || index} />)}
     </CardGridSection>
   );

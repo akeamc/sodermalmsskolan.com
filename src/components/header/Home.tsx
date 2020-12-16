@@ -3,7 +3,7 @@ import { Theme, ThemeProvider } from "@emotion/react";
 import Container from "../Container";
 import { breakpoints, media } from "../../styles/breakpoints";
 import {
-  HeaderHeading, PromoHeaderHeading, SmallHeading, SubTitle,
+  PromoHeaderHeading, SmallHeading, SubTitle,
 } from "../text/headings";
 import darkTheme from "../../styles/theme/dark";
 import ButtonRow from "../button/row";

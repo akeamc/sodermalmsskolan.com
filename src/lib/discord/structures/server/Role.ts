@@ -2,9 +2,9 @@ import got from "got";
 import { Permissions } from "discord.js";
 import { Role, IDiscordAPIRole } from "../shared/Role";
 import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
-import { ServerMember } from "./Member";
+import ServerMember from "./Member";
 
-export class ServerRole extends Role {
+export default class ServerRole extends Role {
   public static async fetchAll(): Promise<ServerRole[]> {
     const data = await got
       .get(`https://discord.com/api/guilds/${DISCORD_GUILD}/roles`, {

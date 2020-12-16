@@ -3,7 +3,7 @@ import {
   ServerDish,
   ServerDishHandler,
 } from "../../../../../lib/food/structures/server/Dish";
-import { ServerVote } from "../../../../../lib/food/structures/server/Vote";
+import ServerVote from "../../../../../lib/food/structures/server/Vote";
 import { VoteStatic } from "../../../../../lib/food/structures/shared/Vote";
 
 const handler: ServerDishHandler<VoteStatic[] | string> = async (

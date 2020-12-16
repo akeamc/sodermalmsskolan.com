@@ -11,10 +11,16 @@ export interface PostPageProps {
   digibruh?: boolean;
 }
 
-const PostPage: FunctionComponent<PostPageProps> = ({ post, digibruh = false }) => (
+const PostPage: FunctionComponent<PostPageProps> = ({ post }) => (
   <Base metadata={{
     title: post?.title,
     description: post?.excerpt,
+    images: [post?.cover],
+    type: "article",
+    article: {
+      published: post?.publishedAt ? new Date(post?.publishedAt) : null,
+      modified: post?.updatedAt ? new Date(post?.updatedAt) : null,
+    },
   }}
   >
     <PostHeader post={post} />

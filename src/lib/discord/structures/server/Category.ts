@@ -11,20 +11,20 @@ export type ServerCategoryHandler<T = unknown> = (
 ) => void | Promise<void>;
 
 export class ServerCategory extends Category {
-  public static async fetch(id: string): Promise<ServerCategory> {
+  public static async fetch(categoryId: string): Promise<ServerCategory> {
     const channels = await ServerChannel.fetchAll();
 
-    for (const parent of channels) {
-      if (parent.id == id) {
-        return new ServerCategory(
-          parent.name,
-          parent.id,
-          channels.filter((channel) => channel.parent == parent.id),
-        );
-      }
+    const category = channels.find(({ id }) => id === categoryId);
+
+    if (category) {
+      return new ServerCategory(
+        category.name,
+        category.id,
+        channels.filter((channel) => channel.parent === category.id),
+      );
     }
 
-    throw new Error(`Channel with id "${id}" not found`);
+    throw new Error(`Channel with id "${categoryId}" not found`);
   }
 
   public static fromCategory({ name, id, channels }: Category): ServerCategory {
@@ -55,6 +55,6 @@ export class ServerCategory extends Category {
       throw error;
     }
 
-    return await handler(req, res, category);
+    return handler(req, res, category);
   });
 }
