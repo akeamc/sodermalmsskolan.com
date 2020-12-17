@@ -50,9 +50,11 @@ const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
           },
         }}
         >
-          <SmallHeading css={{
+          <SmallHeading css={(theme: Theme) => ({
             marginBottom: "1rem",
-          }}
+            color: theme.color.text.primary,
+            opacity: 0.5,
+          })}
           >
             {timestamp?.format("D MMMM YYYY HH:mm") || <Skeleton width="11em" />}
           </SmallHeading>

@@ -50,15 +50,11 @@ const Navbar: FunctionComponent = () => {
   return (
     <>
       <div css={(theme: Theme) => ({
-        height: theme.navigation.height,
-      })}
-      />
-      <div css={(theme: Theme) => ({
         backgroundColor: theme.color.background.primary,
         borderBottom: `1px solid ${theme.color.border}`,
         height: theme.navigation.height,
         boxSizing: "border-box",
-        position: "fixed",
+        position: "sticky",
         top: 0,
         left: 0,
         right: 0,

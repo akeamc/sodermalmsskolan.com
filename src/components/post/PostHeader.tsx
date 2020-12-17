@@ -1,14 +1,16 @@
-import React, { FunctionComponent, useRef } from "react";
+import React, { Fragment, FunctionComponent, useRef } from "react";
 import Image from "next/image";
-import { ThemeProvider } from "@emotion/react";
+import { Theme, ThemeProvider } from "@emotion/react";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
+import dayjs from "dayjs";
 import Post from "../../lib/ghost/post";
 import Skeleton from "../Skeleton";
-import { HeaderHeading, SubTitle } from "../text/headings";
+import { HeaderHeading, SmallHeading, SubTitle } from "../text/headings";
 import { breakpoints, media } from "../../styles/breakpoints";
-import Navbar from "../navigation/Navbar";
 import Container from "../Container";
 import darkTheme from "../../styles/theme/dark";
+import { useLang } from "../../hooks/lang";
+import AuthorName from "../author/Name";
 
 export interface PostHeaderProps {
   post: Post;
@@ -24,9 +26,11 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
   const backgroundOpacity = useTransform(scrollProgress, (progress) => (0.5 + progress));
   const foregroundOpacity = useTransform(scrollProgress, (progress) => (1 - progress));
 
+  const lang = useLang();
+
   return (
     <>
-      <Navbar />
+
       <div
         ref={wrapperRef}
         css={{
@@ -76,6 +80,25 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
               >
                 {post?.excerpt}
               </SubTitle>
+              <div css={{
+                marginTop: "2rem",
+              }}
+              >
+                <SmallHeading css={(theme: Theme) => ({
+                  color: theme.color.text.primary,
+                  opacity: 0.7,
+                })}
+                >
+                  {(post?.authors || new Array(2).fill(null)).map((author, index) => (
+                    <Fragment key={author?.id || index}>
+                      {index !== 0 ? ", " : null}
+                      <AuthorName author={author} />
+                    </Fragment>
+                  ))}
+                  {" "}
+                  {post?.publishedAt ? dayjs(post?.publishedAt).locale(lang).format("HH:mm D MMMM YYYY") : <Skeleton width="10em" />}
+                </SmallHeading>
+              </div>
             </motion.div>
           </Container>
         </ThemeProvider>

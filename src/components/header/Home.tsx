@@ -7,7 +7,6 @@ import {
 } from "../text/headings";
 import ButtonRow from "../button/row";
 import HeaderProps from "./props";
-import Navbar from "../navigation/Navbar";
 
 export interface HomeHeaderProps extends HeaderProps {
   superTitle?: ReactNode;
@@ -27,7 +26,6 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
       backgroundColor: theme.color.background.primary,
     })}
   >
-    <Navbar />
     <Container
       css={{
         display: "grid",

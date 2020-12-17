@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
 import Container from "../Container";
-import Navbar from "../navigation/Navbar";
 import { sectionPaddingStyles } from "../Section";
 import { HeaderHeading, SubTitle } from "../text/headings";
 import HeaderProps from "./props";
@@ -9,7 +8,6 @@ export type SimpleHeaderProps = HeaderProps;
 
 const SimpleHeader: FunctionComponent<SimpleHeaderProps> = ({ title, sub }) => (
   <>
-    <Navbar />
     <header
       css={[
         sectionPaddingStyles.bottom,

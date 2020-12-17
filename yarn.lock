@@ -7305,6 +7305,11 @@ react-dom@^16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-fast-marquee@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-fast-marquee/-/react-fast-marquee-1.0.7.tgz#8f41b6d5258c627b8d3857e8579db9cedab0697b"
+  integrity sha512-tLO4YhQ5r81V4PctpZPYKwwrogQSy6QpUGtj+i+EFTcbVHL49nidB9axt7Gbwz7sMbUbXsFFk+x3bKNRqsFilw==
+
 react-feather@^2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-2.0.8.tgz#455baf1470f756a57e2ad6c72545444ce5925781"

@@ -1,12 +1,15 @@
 import { FirebaseError } from "firebase-admin";
 import Link from "next/link";
-import React from "react";
-import { loginLink, resetAccountLink, signupLink } from "./href";
+import React, { FunctionComponent } from "react";
+import { loginLink, resetAccountLink, signupLink } from "../../lib/auth/href";
 
-export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
+/**
+ * Human-readable `FirebaseError` view.
+ */
+const FancyFirebaseError: FunctionComponent<{error: FirebaseError}> = ({ error }) => {
   switch (error.code) {
     case "auth/invalid-email":
-      return "E-postadressen är ogiltig.";
+      return <>E-postadressen är ogiltig.</>;
     case "auth/user-not-found":
       return (
         <>
@@ -30,7 +33,7 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
         </>
       );
     case "auth/weak-password":
-      return "Lösenordet måste vara minst 6 tecken långt.";
+      return <>Lösenordet måste vara minst 6 tecken långt.</>;
     case "auth/email-already-in-use":
       return (
         <>
@@ -43,8 +46,10 @@ export const readableErrorMessage = (error: FirebaseError): React.ReactNode => {
         </>
       );
     case "auth/invalid-action-code":
-      return "Länken är ogiltig eller har redan använts.";
+      return <>Länken är ogiltig eller har redan använts.</>;
     default:
-      return error.message;
+      return <>{error.message}</>;
   }
 };
+
+export default FancyFirebaseError;

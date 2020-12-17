@@ -3,7 +3,6 @@ import { usePosts } from "../../lib/blog/hooks/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import CardGrid from "../grid/CardGrid";
-import Navbar from "../navigation/Navbar";
 import { sectionPaddingStyles } from "../Section";
 import FeaturedPost from "./FeaturedPost";
 import PostCard from "./PostCard";
@@ -18,7 +17,6 @@ const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
 
   return (
     <div>
-      <Navbar />
       <header css={[sectionPaddingStyles.top]}>
         <Container>
           <CardGrid>
