@@ -22,7 +22,7 @@ const ArticleCard: FunctionComponent<ArticleCardProps> = ({ post, ...cardProps }
       href={url}
       {...cardProps}
     >
-      <SmallCardHeading>{subject?.name}</SmallCardHeading>
+      <SmallCardHeading>{subject?.name || <Skeleton width="10em" />}</SmallCardHeading>
       <CardTitle>{post?.title || <Skeleton count={2} />}</CardTitle>
     </Card>
   );
