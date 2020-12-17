@@ -8,10 +8,6 @@ type Routes = RouteCategory[];
 
 export const useBasicRoutes = (): Route[] => ([
   {
-    name: "Start",
-    href: "/",
-  },
-  {
     name: "Meny",
     href: "/meny",
   },
