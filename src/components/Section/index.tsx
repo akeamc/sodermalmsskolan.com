@@ -1,11 +1,9 @@
 import {
-  css, SerializedStyles, ThemeProvider, useTheme,
+  css, SerializedStyles, useTheme,
 } from "@emotion/react";
 import React, { FunctionComponent } from "react";
 import { breakpoints, media } from "../../styles/breakpoints";
-import darkTheme from "../../styles/theme/dark";
 import Container from "../Container";
-import { LowerDivider, UpperDivider } from "../divider";
 import SectionHeader, { SectionHeaderProps } from "../header/Section";
 
 export const sectionPaddingStyles: Record<string, SerializedStyles> = {
@@ -21,60 +19,34 @@ export const sectionPaddingStyles: Record<string, SerializedStyles> = {
   }),
 };
 
-export interface InnerSectionProps {
+export interface SectionProps {
   header?: SectionHeaderProps;
-  upperDivider?: boolean;
-  lowerDivider?: boolean;
 }
 
-export interface SectionProps extends InnerSectionProps {
-  dark?: boolean;
-}
-
-const InnerSection: FunctionComponent<InnerSectionProps> = ({
+const Section: FunctionComponent<SectionProps> = ({
   children,
   header,
-  upperDivider,
-  lowerDivider,
   ...props
 }) => {
   const theme = useTheme();
 
   return (
-    <>
-      {upperDivider ? <UpperDivider /> : null}
-      <section
-        css={[
-          sectionPaddingStyles.top,
-          sectionPaddingStyles.bottom,
-          {
-            backgroundColor: theme.color.background.primary,
-          },
-        ]}
-        {...props}
-      >
-        <Container>
-          {header ? <SectionHeader {...header} /> : null}
-          {children}
-        </Container>
-      </section>
-      {lowerDivider ? <LowerDivider /> : null}
-    </>
+    <section
+      css={[
+        sectionPaddingStyles.top,
+        sectionPaddingStyles.bottom,
+        {
+          backgroundColor: theme.color.background.primary,
+        },
+      ]}
+      {...props}
+    >
+      <Container>
+        {header ? <SectionHeader {...header} /> : null}
+        {children}
+      </Container>
+    </section>
   );
-};
-
-const Section: FunctionComponent<SectionProps> = ({
-  dark = false,
-  ...props
-}) => {
-  if (dark) {
-    return (
-      <ThemeProvider theme={darkTheme}>
-        <InnerSection {...props} />
-      </ThemeProvider>
-    );
-  }
-  return <InnerSection {...props} />;
 };
 
 export default Section;

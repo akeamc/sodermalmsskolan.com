@@ -21,7 +21,7 @@ const Table: FunctionComponent = (props) => (
         "tbody tr": {
           transition: "background-color 0.2s ease",
 
-          "&:nth-child(odd)": {
+          "&:nth-of-type(2n + 1)": {
             background: theme.color.background.secondary,
           },
 

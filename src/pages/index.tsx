@@ -51,9 +51,6 @@ const Page: NextPage = () => (
     />
     <DayMenuSection />
     <PostListSection
-      dark
-      upperDivider
-      lowerDivider
       header={{
         superTitle: "Blogg",
         title: "Senaste inläggen",
