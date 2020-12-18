@@ -15,14 +15,8 @@ const NotFound: NextPage = () => (
       <meta name="robots" content="noindex" />
     </Head>
     <SimpleHeader
-      title="404"
-      sub={(
-        <>
-          Sidan hittades inte.
-          {" "}
-          <MenuText />
-        </>
-      )}
+      title="Sidan hittades inte"
+      sub={<MenuText />}
     />
     <Footer />
   </Base>
