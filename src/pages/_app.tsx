@@ -5,11 +5,32 @@ import { GlobalStyles } from "../styles/global";
 // DayJS is so lightweight that locales must be imported manually.
 import "dayjs/locale/sv";
 import { ThemeProvider } from "../styles/theme/Provider";
+import useFreshTelegrams from "../lib/news/hooks/telegram";
+import Banner from "../components/Banner";
+import TelegramText from "../components/telegram/TelegramText";
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
+  const telegrams = useFreshTelegrams();
+
   return (
     <ThemeProvider>
       <GlobalStyles />
+      {telegrams?.length > 0 ? (
+        <Banner>
+          {telegrams
+            .map((telegram) => (
+              <span
+                key={telegram.id}
+                css={{
+                  display: "inline-block",
+                  margin: "0 2rem",
+                }}
+              >
+                <TelegramText telegram={telegram} />
+              </span>
+            ))}
+        </Banner>
+      ) : null}
       <Component {...pageProps} />
     </ThemeProvider>
   );
