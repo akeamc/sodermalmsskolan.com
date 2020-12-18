@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import dayjs from "dayjs";
 import Telegram from "../../lib/news/telegram";
 import { useLang } from "../../hooks/lang";
+import Emoji from "../Emoji";
 
 const TelegramText: FunctionComponent<{telegram: Telegram}> = ({ telegram }) => {
   const lang = useLang();
@@ -10,7 +11,7 @@ const TelegramText: FunctionComponent<{telegram: Telegram}> = ({ telegram }) => 
     <>
       {(dayjs(telegram.timestamp).locale(lang).format("HH:mm DD MMM YYYY"))}
       {" – "}
-      {telegram.content}
+      <Emoji>{telegram.content}</Emoji>
     </>
   );
 };
