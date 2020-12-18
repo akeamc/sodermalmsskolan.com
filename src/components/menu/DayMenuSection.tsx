@@ -4,7 +4,7 @@ import { useLang } from "../../hooks/lang";
 import { useDayMenu } from "../../lib/food/hooks/menu";
 import { breakpoints, media } from "../../styles/breakpoints";
 import DishCard from "../dishes/DishCard";
-import Section, { SectionProps } from "../Section";
+import Section, { SectionProps } from "../section/Section";
 import Skeleton from "../Skeleton";
 import { SmallParagraph } from "../text/paragraphs";
 

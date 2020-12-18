@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Container from "../Container";
-import { sectionPaddingStyles } from "../Section";
+import { sectionPaddingStyles } from "../section/Section";
 import { HeaderHeading, SubTitle } from "../text/headings";
 import HeaderProps from "./props";
 

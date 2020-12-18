@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useMenu } from "../../lib/food/structures/client/Menu";
-import Section, { SectionProps } from "../Section";
+import Section, { SectionProps } from "../section/Section";
 import Menu from "./Menu";
 
 export interface MenuSectionProps extends SectionProps {

@@ -3,7 +3,7 @@ import { usePosts } from "../../lib/blog/hooks/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import CardGrid from "../grid/CardGrid";
-import { sectionPaddingStyles } from "../Section";
+import { sectionPaddingStyles } from "../section/Section";
 import FeaturedPost from "./FeaturedPost";
 import PostCard from "./PostCard";
 

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { LimitParam } from "../../lib/ghost/common";
 import { useAuthors } from "../../lib/ghost/hooks/author";
 import { breakpoints, media } from "../../styles/breakpoints";
-import Section, { SectionProps } from "../Section";
+import Section, { SectionProps } from "../section/Section";
 import BigAuthor from "./BigAuthor";
 
 export interface AuthorSectionProps extends SectionProps {

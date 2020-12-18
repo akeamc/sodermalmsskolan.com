@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import Post from "../../lib/ghost/post";
 import Base from "../Base";
 import Footer from "../footer/Footer";
-import Section from "../Section";
+import Section from "../section/Section";
 import PostHeader from "./PostHeader";
 import PostView from "./PostView";
 

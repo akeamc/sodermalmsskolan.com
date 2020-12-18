@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import CardGrid from "../grid/CardGrid";
-import Section, { SectionProps } from "../Section";
+import Section, { SectionProps } from "../section/Section";
 
 export interface CardGridSectionProps extends SectionProps {
   bottomText?: ReactNode;

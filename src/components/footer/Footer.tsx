@@ -4,7 +4,7 @@ import { useRoutes } from "../../lib/sitemap/routes";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import Container from "../Container";
-import { sectionPaddingStyles } from "../Section";
+import { sectionPaddingStyles } from "../section/Section";
 import { horizontalInlineStack } from "../stack/inline";
 import FooterList from "./List";
 

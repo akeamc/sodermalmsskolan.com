@@ -23,6 +23,10 @@ export const useBasicRoutes = (): Route[] => ([
     name: "Digibruh",
     href: "/digibruh",
   },
+  {
+    name: "Nyheter",
+    href: "/nyheter",
+  },
 ]);
 
 /**

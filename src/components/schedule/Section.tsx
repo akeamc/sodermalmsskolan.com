@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Section, { SectionProps } from "../Section";
+import Section, { SectionProps } from "../section/Section";
 import ScheduleTable from "./Table";
 
 const ScheduleSection: FunctionComponent<SectionProps> = ({ ...sectionProps }) => (

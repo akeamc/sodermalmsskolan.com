@@ -4,7 +4,7 @@ import { LimitParam } from "../../lib/ghost/common";
 import { PostFilter } from "../../lib/ghost/post";
 import Button from "../button/Button";
 import CardGridSection from "../CardGridSection";
-import { SectionProps } from "../Section";
+import { SectionProps } from "../section/Section";
 import Skeleton from "../Skeleton";
 import ArticleCard from "./ArticleCard";
 
