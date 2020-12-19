@@ -1,6 +1,6 @@
 import got, { HTTPError } from "got";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import { API_ENDPOINT } from "../../constants";
+import API_ENDPOINT from "../../endpoint";
 import { Dish, DishStatic } from "../shared/Dish";
 import admin from "../../../firebase/admin";
 

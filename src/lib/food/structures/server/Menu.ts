@@ -1,7 +1,7 @@
 import got from "got/dist/source";
 import { ServerDish } from "./Dish";
 import { IMenu, Menu } from "../shared/Menu";
-import { API_ENDPOINT } from "../../constants";
+import API_ENDPOINT from "../../endpoint";
 
 export default class ServerMenu extends Menu {
   dishes: ServerDish[];

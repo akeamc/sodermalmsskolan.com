@@ -2,7 +2,7 @@ import { parse } from "node-html-parser";
 import url from "url";
 import got from "got";
 import { StudySet } from "../shared/StudySet";
-import { API_ENDPOINT } from "../../../food/constants";
+import API_ENDPOINT from "../../../food/endpoint";
 import { browsePosts } from "../../../ghost/post";
 import { digibruhTagPrefix } from "../../../digibruh/constants";
 

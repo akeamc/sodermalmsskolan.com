@@ -12,9 +12,9 @@ import { useDishPhotos } from "../lib/food/hooks/photos";
 import DigibruhArticleSection from "../components/digibruh/Section";
 
 const HomeImage: FunctionComponent = () => {
-  const menu = useDayMenu();
+  const { data } = useDayMenu();
 
-  const dish = menu?.dishes?.[0];
+  const dish = data?.dishes?.[0];
 
   const photos = useDishPhotos(dish?.id);
 

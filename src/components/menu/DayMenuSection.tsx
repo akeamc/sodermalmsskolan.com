@@ -9,22 +9,20 @@ import Skeleton from "../Skeleton";
 import { SmallParagraph } from "../text/paragraphs";
 
 const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
-  const menu = useDayMenu();
+  const { data, loading } = useDayMenu();
   const lang = useLang();
+
+  const dishes = data?.dishes || loading ? new Array(2).fill(null) : null;
+
+  const fallbackSuper = loading ? <Skeleton width="12em" /> : null;
 
   return (
     <Section
       header={{
-        superTitle: menu?.date ? (
-          dayjs(menu?.date).locale(lang).format("dddd D MMMM")
-        ) : (
-          <Skeleton width="12em" />
-        ),
-        title: (
-          <>
-            Dagens lunch
-          </>
-        ),
+        superTitle: data?.date ? (
+          dayjs(data?.date).locale(lang).format("dddd D MMMM")
+        ) : fallbackSuper,
+        title: "Dagens lunch",
         promo: true,
       }}
       {...props}
@@ -40,9 +38,9 @@ const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
           },
         }}
       >
-        {(menu?.dishes || new Array(2).fill(null)).map((dish, index) => (
+        {dishes?.map((dish, index) => (
           <DishCard key={dish?.id || index} dish={dish} big />
-        ))}
+        )) || <SmallParagraph>Menyn är inte tillgänglig.</SmallParagraph>}
       </div>
       <SmallParagraph
         css={{

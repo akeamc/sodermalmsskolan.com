@@ -8,15 +8,17 @@ import Emphasis from "../text/atomics/Emphasis";
  * A short text describing today's lunch.
  */
 const MenuText: FunctionComponent = () => {
-  const menu = useDayMenu();
+  const { data, loading } = useDayMenu();
+
+  const fallback = loading ? <Skeleton count={3} /> : "Menyn är inte tillgänglig.";
 
   return (
     <>
-      {menu?.dishes?.length > 0 ? (
+      {data?.dishes?.length > 0 ? (
         <>
           Det blir
           {" "}
-          {menu?.dishes?.map((dish, index) => (
+          {data?.dishes?.map((dish, index) => (
             <Fragment key={dish?.id || index}>
               {index !== 0 ? " och " : null}
               <Emphasis
@@ -32,7 +34,7 @@ const MenuText: FunctionComponent = () => {
           till lunch.
           {" "}
         </>
-      ) : <Skeleton count={3} />}
+      ) : fallback}
     </>
   );
 };

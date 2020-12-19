@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { useMenu } from "../../lib/food/structures/client/Menu";
+import { useMenu } from "../../lib/food/hooks/menu";
 import Section, { SectionProps } from "../section/Section";
 import Menu from "./Menu";
 
