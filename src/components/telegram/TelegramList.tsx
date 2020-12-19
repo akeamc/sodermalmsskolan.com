@@ -54,7 +54,7 @@ const TelegramList: FunctionComponent = () => {
             color: theme.color.text.tertiary,
           })}
           >
-            {dayjs(telegram.timestamp).locale(lang).from(now, true)}
+            {dayjs(telegram.timestamp).locale(lang).from(now)}
           </span>
         </li>
       ))}

@@ -26,3 +26,5 @@ export const DISCORD_CHANNELS: Channels = {
 
 export const getChannelDetails = (id: string): ChannelDetails => Object.values(DISCORD_CHANNELS)
   .find((details) => details.id === id);
+
+export const DISCORD_INVITE_LINK = "https://discord.gg/4hEnTpd";
