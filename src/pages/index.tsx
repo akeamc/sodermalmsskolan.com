@@ -18,9 +18,9 @@ const HomeImage: FunctionComponent = () => {
 
   const photos = useDishPhotos(dish?.id);
 
-  const src = typeof photos !== "undefined" ? photos?.[0]?.url || "https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG" : null;
+  const src = photos?.[0]?.url || "https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG";
 
-  return src ? (
+  return (
     <Image
       src={src}
       css={{
@@ -28,7 +28,7 @@ const HomeImage: FunctionComponent = () => {
       }}
       layout="fill"
     />
-  ) : null;
+  );
 };
 
 const Page: NextPage = () => (
