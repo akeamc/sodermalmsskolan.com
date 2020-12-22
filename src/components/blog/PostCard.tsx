@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import React, { FunctionComponent } from "react";
-import { useLang } from "../../hooks/lang";
+import useLocale from "../../hooks/useLocale";
 import { usePostUrl } from "../../lib/blog/hooks/post";
 import Post from "../../lib/ghost/post";
 import Card, { CardProps } from "../Card";
@@ -12,7 +12,7 @@ export interface PostCardProps extends CardProps {
 }
 
 const PostCard: FunctionComponent<PostCardProps> = ({ post, ...cardProps }) => {
-  const lang = useLang();
+  const { language } = useLocale();
   const url = usePostUrl(post?.slug);
 
   return (
@@ -23,7 +23,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post, ...cardProps }) => {
       }}
       {...cardProps}
     >
-      <SmallCardHeading>{post?.publishedAt ? dayjs(post?.publishedAt).locale(lang).format("HH:mm D MMMM YYYY") : <Skeleton />}</SmallCardHeading>
+      <SmallCardHeading>{post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <Skeleton />}</SmallCardHeading>
       <CardTitle>{post?.title || <Skeleton count={2} />}</CardTitle>
     </Card>
   );

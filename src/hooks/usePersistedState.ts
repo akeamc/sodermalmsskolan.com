@@ -4,14 +4,14 @@ import {
 } from "react";
 
 /**
- * A persistent `useState`, compatible with SSR.
+ * A persistent, SSR-compliant, `useState`.
  * @param key
  * @param initialValue
  */
-export function usePersistedState<T>(
+const usePersistedState = <T>(
   key: string,
   initialValue: T,
-): [T, Dispatch<SetStateAction<T>>] {
+): [T, Dispatch<SetStateAction<T>>] => {
   const usePeristed = createPersistedState(key);
 
   const [persistedState, setPersistedState] = usePeristed<T>(initialValue);
@@ -22,4 +22,6 @@ export function usePersistedState<T>(
   }, [persistedState]);
 
   return [temporaryState, setPersistedState];
-}
+};
+
+export default usePersistedState;

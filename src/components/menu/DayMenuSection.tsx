@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import React, { FunctionComponent } from "react";
-import { useLang } from "../../hooks/lang";
+import useLocale from "../../hooks/useLocale";
 import { useDayMenu } from "../../lib/food/hooks/menu";
 import { breakpoints, media } from "../../styles/breakpoints";
 import DishCard from "../dishes/DishCard";
@@ -10,7 +10,7 @@ import { SmallParagraph } from "../text/paragraphs";
 
 const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
   const { data, loading } = useDayMenu();
-  const lang = useLang();
+  const { language } = useLocale();
 
   const dishes = data?.dishes || loading ? new Array(2).fill(null) : null;
 
@@ -20,7 +20,7 @@ const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
     <Section
       header={{
         superTitle: data?.date ? (
-          dayjs(data?.date).locale(lang).format("dddd D MMMM")
+          dayjs(data?.date).locale(language).format("dddd D MMMM")
         ) : fallbackSuper,
         title: "Dagens lunch",
         promo: true,

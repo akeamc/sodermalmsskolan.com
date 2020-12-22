@@ -9,6 +9,7 @@ export type AuthenticatedApiHandler<T = unknown> = (
 
 /**
  * Assert that the request contains a valid authentication token.
+ * **Not to be confused with any client-side HOCs.**
  * @param handler
  */
 const withAuth = (handler: AuthenticatedApiHandler): NextApiHandler => async (req, res) => {

@@ -7,6 +7,9 @@ import { useAuthorUrl } from "../../lib/ghost/hooks/author";
 import Skeleton from "../Skeleton";
 import { CardTitle } from "../text/headings";
 
+/**
+ * A component used to display an author.
+ */
 const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
   const url = useAuthorUrl(author?.slug);
 

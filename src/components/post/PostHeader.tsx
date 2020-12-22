@@ -9,7 +9,7 @@ import { HeaderHeading, SmallHeading, SubTitle } from "../text/headings";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import darkTheme from "../../styles/theme/dark";
-import { useLang } from "../../hooks/lang";
+import useLocale from "../../hooks/useLocale";
 import AuthorName from "../author/Name";
 
 export interface PostHeaderProps {
@@ -26,7 +26,7 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
   const backgroundOpacity = useTransform(scrollProgress, (progress) => (0.5 + progress));
   const foregroundOpacity = useTransform(scrollProgress, (progress) => (1 - progress));
 
-  const lang = useLang();
+  const { language } = useLocale();
 
   return (
     <>
@@ -96,7 +96,7 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
                     </Fragment>
                   ))}
                   {" "}
-                  {post?.publishedAt ? dayjs(post?.publishedAt).locale(lang).format("HH:mm D MMMM YYYY") : <Skeleton width="10em" />}
+                  {post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <Skeleton width="10em" />}
                 </SmallHeading>
               </div>
             </motion.div>

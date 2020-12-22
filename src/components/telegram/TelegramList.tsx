@@ -2,8 +2,8 @@ import { Theme } from "@emotion/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import React, { FunctionComponent } from "react";
-import { useLang } from "../../hooks/lang";
-import { useTime } from "../../hooks/time";
+import useLocale from "../../hooks/useLocale";
+import useTime from "../../hooks/useTime";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { useChannelMessages } from "../../lib/discord/structures/client/Channel";
 import { telegramFromMessage } from "../../lib/news/telegram";
@@ -17,7 +17,7 @@ const TelegramList: FunctionComponent = () => {
   });
 
   const telegrams = data?.flat()?.map(telegramFromMessage);
-  const lang = useLang();
+  const { language } = useLocale();
   const now = useTime(1000);
 
   return (
@@ -54,7 +54,7 @@ const TelegramList: FunctionComponent = () => {
             color: theme.color.text.tertiary,
           })}
           >
-            {dayjs(telegram.timestamp).locale(lang).from(now)}
+            {dayjs(telegram.timestamp).locale(language).from(now)}
           </span>
         </li>
       ))}

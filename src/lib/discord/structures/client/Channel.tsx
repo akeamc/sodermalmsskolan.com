@@ -4,7 +4,7 @@ import ky from "ky-universal";
 import ClientMessage from "./Message";
 import { Channel, IDiscordAPIChannel } from "../shared/Channel";
 import { IDiscordAPIMessage } from "../shared/Message";
-import { getAuthorizationHeader } from "../../../auth/token";
+import getAuthorizationHeader from "../../../auth/header";
 import { UseSWRResource } from "../../../common/usable";
 import { IdQuery } from "../../../common/query";
 

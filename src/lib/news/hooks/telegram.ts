@@ -1,4 +1,4 @@
-import { useTime } from "../../../hooks/time";
+import useTime from "../../../hooks/useTime";
 import { DISCORD_CHANNELS } from "../../discord/constants";
 import { useChannelMessages } from "../../discord/structures/client/Channel";
 import Telegram, { telegramFromMessage } from "../telegram";

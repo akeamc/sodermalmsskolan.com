@@ -1,6 +1,6 @@
 import ky from "ky-universal";
 import useSWR from "swr";
-import { getAuthorizationHeader } from "../../../auth/token";
+import { getAuthorizationHeader } from "../../../auth/header";
 import { IdQuery } from "../../../common/query";
 import { UseSWRResource } from "../../../common/usable";
 import Letter, { LetterStatic } from "../shared/letter";

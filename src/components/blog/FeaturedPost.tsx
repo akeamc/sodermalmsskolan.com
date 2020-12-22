@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
-import { useLang } from "../../hooks/lang";
+import useLocale from "../../hooks/useLocale";
 import { usePostUrl } from "../../lib/blog/hooks/post";
 import Post from "../../lib/ghost/post";
 import { breakpoints, media } from "../../styles/breakpoints";
@@ -13,9 +13,9 @@ import { H2, SmallHeading } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 
 const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
-  const lang = useLang();
+  const { language } = useLocale();
 
-  const timestamp = post?.publishedAt ? dayjs(post?.publishedAt).locale(lang) : null;
+  const timestamp = post?.publishedAt ? dayjs(post?.publishedAt).locale(language) : null;
 
   const url = usePostUrl(post?.slug);
 

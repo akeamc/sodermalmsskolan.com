@@ -7,6 +7,9 @@ export interface BaseProps {
   metadata?: SiteMetadata;
 }
 
+/**
+ * The base of the page, with important metadata and common page components such as the navbar.
+ */
 const Base: FunctionComponent<BaseProps> = ({ metadata, children }) => (
   <>
     <SiteHead metadata={metadata} />

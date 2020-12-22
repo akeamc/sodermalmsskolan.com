@@ -1,7 +1,7 @@
 import { ResponsePromise } from "ky";
 import ky from "ky-universal";
 import useSWR from "swr";
-import { getAuthorizationHeader } from "../../../auth/token";
+import getAuthorizationHeader from "../../../auth/header";
 import { UseSWRResource } from "../../../common/usable";
 import { Vote, VoteStatic } from "../shared/Vote";
 
