@@ -6,7 +6,7 @@ import PostListSection from "../../../components/blog/PostListSection";
 import DigibruhArticleSection from "../../../components/digibruh/Section";
 import Footer from "../../../components/footer/Footer";
 import SimpleHeader from "../../../components/header/Simple";
-import Skeleton from "../../../components/Skeleton";
+import InlineSkeleton from "../../../components/skeleton/InlineSkeleton";
 import Author, { browseAuthors, getAuthor } from "../../../lib/ghost/author";
 import Post from "../../../lib/ghost/post";
 import NotFound from "../../404";
@@ -63,7 +63,7 @@ const Page: NextPage<PageProps> = ({
       type: "profile",
     }}
     >
-      <SimpleHeader title={author?.name || <Skeleton />} sub={author?.bio} />
+      <SimpleHeader title={author?.name || <InlineSkeleton />} sub={author?.bio} />
       <PostListSection
         header={{
           title: `Blogginlägg av ${author?.name}`,

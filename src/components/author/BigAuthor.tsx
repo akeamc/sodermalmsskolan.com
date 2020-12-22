@@ -1,10 +1,11 @@
-import { Theme } from "@emotion/react";
+import { useTheme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import Author from "../../lib/ghost/author";
 import { useAuthorUrl } from "../../lib/ghost/hooks/author";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
+import { skeletonBackground } from "../skeleton/Skeleton";
 import { CardTitle } from "../text/headings";
 
 /**
@@ -12,6 +13,7 @@ import { CardTitle } from "../text/headings";
  */
 const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
   const url = useAuthorUrl(author?.slug);
+  const theme = useTheme();
 
   const inner = (
     <a css={{
@@ -20,19 +22,18 @@ const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
       textDecoration: "none",
     }}
     >
-      <div css={(theme: Theme) => ({
+      <div css={[skeletonBackground(theme), {
         width: "6rem",
         height: "6rem",
         position: "relative",
         overflow: "hidden",
         borderRadius: "50%",
-        backgroundColor: theme.color.skeleton.base,
         margin: "0 auto",
 
         img: {
           objectFit: "cover",
         },
-      })}
+      }]}
       >
         {author?.profileImage ? <Image src={author?.profileImage} layout="fill" /> : null}
       </div>
@@ -40,7 +41,7 @@ const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
         marginTop: "1rem",
       }}
       >
-        {author?.name || <Skeleton />}
+        {author?.name || <InlineSkeleton />}
       </CardTitle>
     </a>
   );

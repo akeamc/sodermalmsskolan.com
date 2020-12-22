@@ -4,7 +4,7 @@ import useLocale from "../../hooks/useLocale";
 import { usePostUrl } from "../../lib/blog/hooks/post";
 import Post from "../../lib/ghost/post";
 import Card, { CardProps } from "../Card";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { CardTitle, SmallCardHeading } from "../text/headings";
 
 export interface PostCardProps extends CardProps {
@@ -23,8 +23,8 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post, ...cardProps }) => {
       }}
       {...cardProps}
     >
-      <SmallCardHeading>{post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <Skeleton />}</SmallCardHeading>
-      <CardTitle>{post?.title || <Skeleton count={2} />}</CardTitle>
+      <SmallCardHeading>{post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <InlineSkeleton />}</SmallCardHeading>
+      <CardTitle>{post?.title || <InlineSkeleton count={2} />}</CardTitle>
     </Card>
   );
 };

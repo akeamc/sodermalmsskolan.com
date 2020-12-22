@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import Author from "../../lib/ghost/author";
 import { useAuthorUrl } from "../../lib/ghost/hooks/author";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 /**
  * The clickable full name of an author.
@@ -20,7 +20,7 @@ const AuthorName: FunctionComponent<{author: Author}> = ({ author }) => {
       },
     }}
     >
-      {author?.name || <Skeleton width="4em" />}
+      {author?.name || <InlineSkeleton width="4em" />}
     </a>
   );
 

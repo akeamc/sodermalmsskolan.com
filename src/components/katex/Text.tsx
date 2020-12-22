@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from "react";
 import dynamic from "next/dynamic";
 import extractKatex from "./extract";
-import Skeleton from "../Skeleton";
-// import Math from "./Math";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 /**
  * A Katex renderer that dynamically imports Katex only when necessary.
@@ -15,7 +14,7 @@ const KatexText: FunctionComponent<{text: string}> = ({ text }) => {
   }
 
   const Math = dynamic(() => import("./Math"), {
-    loading: () => <Skeleton width="25%" />,
+    loading: () => <InlineSkeleton width="25%" />,
   });
 
   return (

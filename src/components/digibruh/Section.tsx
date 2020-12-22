@@ -5,7 +5,7 @@ import { PostFilter } from "../../lib/ghost/post";
 import Button from "../button/Button";
 import CardGridSection from "../CardGridSection";
 import { SectionProps } from "../section/Section";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import ArticleCard from "./ArticleCard";
 
 export interface DigibruhSectionProps extends SectionProps {
@@ -30,7 +30,7 @@ const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({
     <CardGridSection
       header={{
         superTitle: <>
-          {data?.length || <Skeleton width="1.5em" />}
+          {data?.length || <InlineSkeleton width="1.5em" />}
           {" "}
           artiklar
           {/* eslint-disable-next-line react/jsx-closing-tag-location */}

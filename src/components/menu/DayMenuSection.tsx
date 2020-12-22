@@ -5,16 +5,17 @@ import { useDayMenu } from "../../lib/food/hooks/menu";
 import { breakpoints, media } from "../../styles/breakpoints";
 import DishCard from "../dishes/DishCard";
 import Section, { SectionProps } from "../section/Section";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { SmallParagraph } from "../text/paragraphs";
 
 const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
   const { data, loading } = useDayMenu();
   const { language } = useLocale();
 
-  const dishes = data?.dishes || loading ? new Array(2).fill(null) : null;
+  // const dishes = data?.dishes || (loading ? new Array(2).fill(null) : null);
+  const dishes = new Array(2).fill(null);
 
-  const fallbackSuper = loading ? <Skeleton width="12em" /> : null;
+  const fallbackSuper = loading ? <InlineSkeleton width="12em" /> : null;
 
   return (
     <Section

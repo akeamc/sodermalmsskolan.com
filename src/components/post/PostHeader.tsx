@@ -4,7 +4,7 @@ import { Theme, ThemeProvider } from "@emotion/react";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import dayjs from "dayjs";
 import Post from "../../lib/ghost/post";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { HeaderHeading, SmallHeading, SubTitle } from "../text/headings";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
@@ -73,7 +73,7 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
                 opacity: foregroundOpacity,
               }}
             >
-              <HeaderHeading>{post?.title || <Skeleton />}</HeaderHeading>
+              <HeaderHeading>{post?.title || <InlineSkeleton />}</HeaderHeading>
               <SubTitle css={{
                 marginTop: "2rem",
               }}
@@ -96,7 +96,7 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
                     </Fragment>
                   ))}
                   {" "}
-                  {post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <Skeleton width="10em" />}
+                  {post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <InlineSkeleton width="10em" />}
                 </SmallHeading>
               </div>
             </motion.div>

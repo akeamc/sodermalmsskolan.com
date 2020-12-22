@@ -8,22 +8,20 @@ import { usePostUrl } from "../../lib/blog/hooks/post";
 import Post from "../../lib/ghost/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import darkTheme from "../../styles/theme/dark";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { H2, SmallHeading } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 
 const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
   const { language } = useLocale();
+  const url = usePostUrl(post?.slug);
 
   const timestamp = post?.publishedAt ? dayjs(post?.publishedAt).locale(language) : null;
-
-  const url = usePostUrl(post?.slug);
 
   const inner = (
     <article css={(theme: Theme) => ({
       position: "relative",
       minHeight: "30rem",
-      backgroundColor: theme.color.skeleton.base,
 
       "&:hover": {
         figure: {
@@ -56,13 +54,13 @@ const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
             opacity: 0.5,
           })}
           >
-            {timestamp?.format("D MMMM YYYY HH:mm") || <Skeleton width="11em" />}
+            {timestamp?.format("D MMMM YYYY HH:mm") || <InlineSkeleton width="11em" />}
           </SmallHeading>
           <H2 css={{
             maxWidth: "37.5rem",
           }}
           >
-            {post?.title || <Skeleton count={2} />}
+            {post?.title || <InlineSkeleton count={2} />}
           </H2>
           <CardDescription css={{
             display: "-webkit-box",
@@ -72,7 +70,7 @@ const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
             width: "90%",
           }}
           >
-            {post?.excerpt || <Skeleton count={5} />}
+            {post?.excerpt || <InlineSkeleton count={5} />}
           </CardDescription>
         </div>
       </ThemeProvider>

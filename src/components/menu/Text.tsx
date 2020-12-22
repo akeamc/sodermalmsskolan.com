@@ -1,7 +1,7 @@
 import { Theme } from "@emotion/react";
 import React, { Fragment, FunctionComponent } from "react";
 import { useDayMenu } from "../../lib/food/hooks/menu";
-import Skeleton from "../Skeleton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Emphasis from "../text/atomics/Emphasis";
 
 /**
@@ -10,7 +10,7 @@ import Emphasis from "../text/atomics/Emphasis";
 const MenuText: FunctionComponent = () => {
   const { data, loading } = useDayMenu();
 
-  const fallback = loading ? <Skeleton count={3} /> : "Menyn är inte tillgänglig.";
+  const fallback = loading ? <InlineSkeleton count={3} /> : "Menyn är inte tillgänglig.";
 
   return (
     <>
@@ -26,7 +26,7 @@ const MenuText: FunctionComponent = () => {
                   color: theme.color.text.primary,
                 })}
               >
-                {dish?.title || <Skeleton />}
+                {dish?.title || <InlineSkeleton />}
               </Emphasis>
             </Fragment>
           ))}
