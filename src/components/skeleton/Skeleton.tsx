@@ -36,7 +36,7 @@ const Skeleton: FunctionComponent<SkeletonProps> = ({ width, height, ...props })
   return (
     <span
       css={[skeletonBackground(theme), {
-        borderRadius: "0.5rem",
+        borderRadius: "0.3125rem",
         display: "inline-block",
         lineHeight: 1,
         width: width || "100%",

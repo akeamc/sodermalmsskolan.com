@@ -12,8 +12,7 @@ const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
   const { data, loading } = useDayMenu();
   const { language } = useLocale();
 
-  // const dishes = data?.dishes || (loading ? new Array(2).fill(null) : null);
-  const dishes = new Array(2).fill(null);
+  const dishes = data?.dishes || (loading ? new Array(2).fill(null) : null);
 
   const fallbackSuper = loading ? <InlineSkeleton width="12em" /> : null;
 
