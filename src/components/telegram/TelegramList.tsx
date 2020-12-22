@@ -8,6 +8,7 @@ import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { useChannelMessages } from "../../lib/discord/structures/client/Channel";
 import { telegramFromMessage } from "../../lib/news/telegram";
 import Emoji from "../Emoji";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 dayjs.extend(relativeTime);
 
@@ -16,7 +17,7 @@ const TelegramList: FunctionComponent = () => {
     channel: DISCORD_CHANNELS.telegrams.id,
   });
 
-  const telegrams = data?.flat()?.map(telegramFromMessage);
+  const telegrams = data?.flat()?.map(telegramFromMessage) || new Array(3).fill(null);
   const { language } = useLocale();
   const now = useTime(1000);
 
@@ -27,9 +28,9 @@ const TelegramList: FunctionComponent = () => {
       borderTop: `1px solid ${theme.color.border}`,
     })}
     >
-      {telegrams?.map((telegram) => (
+      {telegrams.map((telegram, index) => (
         <li
-          key={telegram.id}
+          key={telegram?.id || index}
           css={(theme: Theme) => ({
             padding: "0.625rem 0",
             listStyle: "none",
@@ -47,14 +48,14 @@ const TelegramList: FunctionComponent = () => {
             lineHeight: 1.25,
           })}
           >
-            <Emoji>{telegram.content}</Emoji>
+            {telegram?.content ? <Emoji>{telegram.content}</Emoji> : <InlineSkeleton count={2} />}
           </p>
           <span css={(theme: Theme) => ({
             marginLeft: "0.625rem",
             color: theme.color.text.tertiary,
           })}
           >
-            {dayjs(telegram.timestamp).locale(language).from(now)}
+            {telegram?.timestamp ? dayjs(telegram.timestamp).locale(language).from(now) : <InlineSkeleton width="8em" />}
           </span>
         </li>
       ))}
