@@ -51,8 +51,6 @@ export const evaluateSchedule = (
       .between(after, before)
       .map(normalizeRRuleDate);
 
-    console.log(before);
-
     occurrences.forEach((start) => {
       evaluated.push({
         ...shared,
