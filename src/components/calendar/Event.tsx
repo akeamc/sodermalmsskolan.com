@@ -11,6 +11,10 @@ export interface CalendarEventViewProps extends CalendarEvent {
    * The number of seconds since midnight.
    */
   start: number;
+
+  width?: number;
+
+  left?: number;
 }
 
 const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
@@ -22,83 +26,100 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   canceled = false,
   description,
   placeholder = false,
-}) => (
-  <li css={{
-    width: "100%",
-    height: "6rem",
-    marginBottom: "1rem",
-    boxSizing: "border-box",
-    listStyle: "none",
+  width = 1,
+  left = 0,
+}) => {
+  const minimal = width < 1;
 
-    [media(breakpoints.large)]: {
-      position: "absolute",
-      top: `calc(((${start} / var(--row-duration)) - var(--row-pad-start)) * var(--row-height))`,
-      height: `calc((${duration} / var(--row-duration)) * var(--row-height))`,
-      margin: 0,
-    },
-  }}
-  >
-    {placeholder ? <Skeleton width="100%" height="100%" /> : (
-      <div css={[{
-        backgroundColor: color,
-        borderRadius: "0.3125rem",
-        borderLeft: `4px solid ${darken(0.1, color)}`,
-        boxSizing: "border-box",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-        padding: "0.5rem",
-        color: "#ffffff",
-        height: "100%",
-      }, canceled ? {
-        opacity: 0.5,
-        filter: "grayscale(1)",
-        cursor: "not-allowed",
-      } : null]}
-      >
-        <div css={{
-          fontFamily: fonts.monospace,
-          fontSize: "0.8125rem",
-          fontWeight: 400,
-          opacity: 0.7,
-          lineHeight: 1,
-          marginBottom: "0.5rem",
-          display: "inline-block",
-        }}
+  return (
+    <li css={{
+      width: "100%",
+      height: "6rem",
+      marginBottom: "1rem",
+      boxSizing: "border-box",
+      listStyle: "none",
+
+      [media(breakpoints.large)]: {
+        position: "absolute",
+        top: `calc(((${start} / var(--row-duration)) - var(--row-pad-start)) * var(--row-height))`,
+        height: `calc((${duration} / var(--row-duration)) * var(--row-height))`,
+        width: `${width * 100}%`,
+        left: `${left * 100}%`,
+        margin: 0,
+      },
+    }}
+    >
+      {placeholder ? <Skeleton width="100%" height="100%" /> : (
+        <div css={[{
+          backgroundColor: color,
+          borderRadius: "0.3125rem",
+          borderLeft: `4px solid ${darken(0.1, color)}`,
+          boxSizing: "border-box",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+          padding: "0.5rem",
+          color: "#ffffff",
+          height: "100%",
+          position: "relative",
+
+          "&:hover": {
+            zIndex: 1,
+          },
+        }, canceled ? {
+          opacity: 0.5,
+          filter: "grayscale(1)",
+          cursor: "not-allowed",
+        } : null]}
         >
-          <time>
-            {humanReadableTime(start)}
-            –
-            {humanReadableTime(start + duration)}
-          </time>
-          {location ? (
-            <>
-              {" · "}
-              <span>
-                {location}
-              </span>
-            </>
-          ) : null}
-        </div>
-        <div css={{
-          fontSize: "1rem",
-          fontWeight: 500,
-        }}
-        >
-          <Emoji>{title}</Emoji>
-        </div>
-        {description ? (
           <div css={{
-            marginTop: "0.25rem",
-            fontSize: "0.825rem",
-            fontWeight: 500,
-            lineHeight: 1.25,
+            fontFamily: fonts.monospace,
+            fontSize: "0.8125rem",
+            fontWeight: 400,
+            opacity: 0.7,
+            lineHeight: 1,
+            marginBottom: "0.5rem",
+            display: "inline-block",
           }}
           >
-            <Emoji>{description}</Emoji>
+            <time>
+              {humanReadableTime(start)}
+              {minimal ? null : (
+                <>
+                  –
+                  {humanReadableTime(start + duration)}
+                </>
+              )}
+            </time>
+            {location && !minimal ? (
+              <>
+                {" · "}
+                <span>
+                  {location}
+                </span>
+              </>
+            ) : null}
           </div>
-        ) : null}
-      </div>
-    )}
-  </li>
-);
+          <div css={{
+            fontSize: "1rem",
+            fontWeight: 500,
+          }}
+          >
+            <Emoji>{title}</Emoji>
+          </div>
+          {description ? (
+            <div css={{
+              marginTop: "0.25rem",
+              fontSize: "0.825rem",
+              fontWeight: 500,
+              lineHeight: 1.25,
+            }}
+            >
+              <Emoji>{description}</Emoji>
+            </div>
+          ) : null}
+        </div>
+      )}
+    </li>
+  );
+};
 
 export default CalendarEventView;
