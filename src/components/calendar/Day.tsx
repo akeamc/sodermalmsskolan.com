@@ -23,7 +23,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({ weekday, children })
       [media(breakpoints.large)]: {
         borderRight: "1px solid #eee",
 
-        "&:first-child": {
+        "&:first--of-type": {
           borderLeft: "1px solid #eee",
         },
       },
