@@ -20,7 +20,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
 }) => {
   const { language } = useLocale();
 
-  const dayText = placeholder ? <InlineSkeleton width="10em" /> : dayjs().locale(language).day(weekday + 1).format("dddd"); // DayJS uses 0 for Sunday, we use 0 for Monday.
+  const dayText = placeholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).day(weekday + 1).format("dddd"); // DayJS uses 0 for Sunday, we use 0 for Monday.
 
   return (
     <section css={{

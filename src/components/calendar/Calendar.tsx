@@ -1,10 +1,11 @@
 import dayjs, { Dayjs } from "dayjs";
 import React, { FunctionComponent, useMemo, useState } from "react";
 import isoWeek from "dayjs/plugin/isoWeek";
-import { ScheduledCalendarEvent, evaluateSchedule, CalendarEventInstance } from "../../lib/calendar/event";
+import { ScheduledCalendarEvent, evaluateSchedule } from "../../lib/calendar/event";
 import { breakpoints, media } from "../../styles/breakpoints";
 import CalendarLabels from "./Labels";
 import CalendarWeek from "./Week";
+import usePlaceholderEvents from "../../lib/calendar/hooks/usePlaceholderEvents";
 
 dayjs.extend(isoWeek);
 
@@ -13,31 +14,6 @@ export interface CalendarProps {
   hideWeekend?: boolean;
   shrink?: boolean;
 }
-
-const usePlaceholderEvents = (
-  after: Dayjs,
-  before: Dayjs,
-  count = 3,
-): CalendarEventInstance[] => useMemo(() => {
-  const days = before.diff(after, "day");
-
-  return Array.from({
-    length: days + 1,
-  }).map((_, index) => Array.from({
-    length: count,
-  }).map(() => {
-    const hours = Math.floor(Math.random() * 8) + 9;
-
-    const start = after.add(index, "day").add(hours, "hour");
-
-    return {
-      start: start.toDate(),
-      title: null,
-      duration: (Math.floor(Math.random() * 10) + 10) * 5 * 60,
-      placeholder: true,
-    };
-  })).flat();
-}, [after, before, count]);
 
 /**
  * A calendar.
