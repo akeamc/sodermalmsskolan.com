@@ -11,6 +11,11 @@ export interface CalendarEvent {
   color?: string;
   location?: string;
   canceled?: boolean;
+
+  /**
+   * Whether the event is a placeholder or not. Should only be used client-side.
+   */
+  placeholder?: boolean;
 }
 
 export interface CalendarEventInstance extends CalendarEvent {
@@ -66,11 +71,11 @@ export const evaluateSchedule = (
     return evaluated;
   }, []);
 
-export const humanReadableTime = (totalSeconds: number): string => {
+export const humanReadableTime = (totalSeconds: number, padHour = false): string => {
   const totalMinutes = totalSeconds / 60;
 
   const hour = Math.floor(totalMinutes / 60).toString();
   const minute = (totalMinutes % 60).toString().padStart(2, "0");
 
-  return [hour, minute].join(":");
+  return [padHour ? hour.padStart(2, "0") : hour, minute].join(":");
 };

@@ -1,9 +1,9 @@
 import dayjs, { Dayjs } from "dayjs";
 import React, { FunctionComponent, useMemo, useState } from "react";
 import isoWeek from "dayjs/plugin/isoWeek";
-import { ScheduledCalendarEvent, evaluateSchedule } from "../../lib/calendar/event";
+import { ScheduledCalendarEvent, evaluateSchedule, CalendarEventInstance } from "../../lib/calendar/event";
 import { breakpoints, media } from "../../styles/breakpoints";
-import { fonts } from "../../styles/text";
+import CalendarLabels from "./Labels";
 import CalendarWeek from "./Week";
 
 dayjs.extend(isoWeek);
@@ -13,6 +13,31 @@ export interface CalendarProps {
   hideWeekend?: boolean;
   shrink?: boolean;
 }
+
+const usePlaceholderEvents = (
+  after: Dayjs,
+  before: Dayjs,
+  count = 3,
+): CalendarEventInstance[] => useMemo(() => {
+  const days = before.diff(after, "day");
+
+  return Array.from({
+    length: days + 1,
+  }).map((_, index) => Array.from({
+    length: count,
+  }).map(() => {
+    const hours = Math.floor(Math.random() * 8) + 9;
+
+    const start = after.add(index, "day").add(hours, "hour");
+
+    return {
+      start: start.toDate(),
+      title: null,
+      duration: (Math.floor(Math.random() * 10) + 10) * 5 * 60,
+      placeholder: true,
+    };
+  })).flat();
+}, [after, before, count]);
 
 /**
  * A calendar.
@@ -29,12 +54,20 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const viewStart = cursor.startOf("isoWeek");
   const viewEnd = cursor.endOf("isoWeek").subtract(7 - dayCount, "day");
 
-  const eventInstances = useMemo(() => evaluateSchedule(
-    events,
-    viewStart.toDate(),
-    viewEnd.toDate(),
-  ), [
-    events, viewStart, viewEnd,
+  const placeholderEvents = usePlaceholderEvents(viewStart, viewEnd);
+
+  const eventInstances = useMemo(() => {
+    if (!events) {
+      return placeholderEvents;
+    }
+
+    return evaluateSchedule(
+      events,
+      viewStart.toDate(),
+      viewEnd.toDate(),
+    );
+  }, [
+    events, viewStart, viewEnd, placeholderEvents,
   ]);
 
   const [earliest, latest] = useMemo(() => eventInstances
@@ -66,69 +99,12 @@ const Calendar: FunctionComponent<CalendarProps> = ({
       },
     }}
     >
-      <div css={{
-        position: "absolute",
-        top: "var(--header-height)",
-        left: 0,
-        width: "100%",
-      }}
-      >
-        {Array.from({
-          length: rows + 1, // Include both starting and finishing time label
-        }).map((_, index) => {
-          const totalSeconds = (index + rowPadStart) * rowDuration;
-          const totalMinutes = totalSeconds / 60;
-
-          const hour = Math.floor(totalMinutes / 60);
-          const minute = totalMinutes % 60;
-
-          return (
-            <div
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              css={{
-                height: "var(--row-height)",
-                position: "relative",
-
-                "&::after": {
-                  content: "\"\"",
-                  height: "1px",
-                  width: "calc(100% - var(--labels-width))",
-                  left: "var(--labels-width)",
-                  backgroundColor: "#eee",
-                  position: "absolute",
-                  top: 0,
-                  display: "none",
-
-                  [media(breakpoints.large)]: {
-                    display: "block",
-                  },
-                },
-              }}
-            >
-              <span css={{
-                position: "absolute",
-                top: "-0.5em",
-                lineHeight: 1,
-                left: 0,
-                fontFamily: fonts.monospace,
-                fontSize: "0.875rem",
-                opacity: 0.7,
-                display: "none",
-
-                [media(breakpoints.extraLarge)]: {
-                  display: "inline-block",
-                },
-              }}
-              >
-                {hour.toString().padStart(2, "0")}
-                :
-                {minute.toString().padStart(2, "0")}
-              </span>
-            </div>
-          );
-        })}
-      </div>
+      <CalendarLabels
+        placeholder={!events}
+        rowCount={rows}
+        rowPadStart={rowPadStart}
+        rowDuration={rowDuration}
+      />
       <div css={{
         marginLeft: "var(--labels-width)",
 
@@ -138,7 +114,7 @@ const Calendar: FunctionComponent<CalendarProps> = ({
         },
       }}
       >
-        <CalendarWeek dayCount={dayCount} eventInstances={eventInstances} />
+        <CalendarWeek placeholder={!events} dayCount={dayCount} eventInstances={eventInstances} />
       </div>
     </div>
   );

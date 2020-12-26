@@ -6,14 +6,19 @@ import CalendarEventView from "./Event";
 export interface CalendarWeekProps {
   dayCount?: number;
   eventInstances: CalendarEventInstance[];
+  placeholder?: boolean;
 }
 
-const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({ dayCount = 7, eventInstances }) => (
+const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
+  dayCount = 7,
+  eventInstances,
+  placeholder = false,
+}) => (
   <>
     {Array.from({ length: dayCount })
       .map((_, weekday) => (
         // eslint-disable-next-line react/no-array-index-key
-        <CalendarDay key={weekday} weekday={weekday}>
+        <CalendarDay key={weekday} weekday={weekday} placeholder={placeholder}>
           {eventInstances
             .filter(({ start }) => (start.getDay() + 6) % 7 === weekday)
             .map((calendarEvent, index) => {

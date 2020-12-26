@@ -23,18 +23,24 @@ const usePeriods = (): Period[] => {
 
   const changes = useChanges();
 
-  return useMemo(() => periods.map((period) => {
-    const clone = period;
-
-    const change = changes.find(({ periodId }) => periodId === period.id);
-
-    if (change) {
-      clone.canceled = change.canceled;
-      clone.note = change.note || clone.note;
+  return useMemo(() => {
+    if (!changes || !periods) {
+      return null;
     }
 
-    return clone;
-  }), [periods, changes]);
+    return periods.map((period) => {
+      const clone = period;
+
+      const change = changes.find(({ periodId }) => periodId === period.id);
+
+      if (change) {
+        clone.canceled = change.canceled;
+        clone.note = change.note || clone.note;
+      }
+
+      return clone;
+    });
+  }, [periods, changes]);
 };
 
 export default usePeriods;

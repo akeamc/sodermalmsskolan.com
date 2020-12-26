@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import React, { FunctionComponent } from "react";
 import useLocale from "../../hooks/useLocale";
 import { breakpoints, media } from "../../styles/breakpoints";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { SectionHeading } from "../text/headings";
 
 export interface CalendarDayProps {
@@ -9,12 +10,17 @@ export interface CalendarDayProps {
    * The index of the weekday, starting from 0 with **Monday**.
    */
   weekday: number;
+  placeholder?: boolean;
 }
 
-const CalendarDay: FunctionComponent<CalendarDayProps> = ({ weekday, children }) => {
+const CalendarDay: FunctionComponent<CalendarDayProps> = ({
+  weekday,
+  children,
+  placeholder = false,
+}) => {
   const { language } = useLocale();
 
-  const dayText = dayjs().locale(language).day(weekday + 1).format("dddd"); // DayJS uses 0 for Sunday, we use 0 for Monday.
+  const dayText = placeholder ? <InlineSkeleton width="10em" /> : dayjs().locale(language).day(weekday + 1).format("dddd"); // DayJS uses 0 for Sunday, we use 0 for Monday.
 
   return (
     <section css={{
