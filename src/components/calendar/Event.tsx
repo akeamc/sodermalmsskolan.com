@@ -1,6 +1,7 @@
 import { darken } from "polished";
-import React, { FunctionComponent } from "react";
+import React, { Fragment, FunctionComponent, useMemo } from "react";
 import { CalendarEvent, humanReadableTime } from "../../lib/calendar/event";
+import { useHighlightedTag } from "../../lib/calendar/highlightedTagContext";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import Emoji from "../Emoji";
@@ -21,8 +22,10 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   start,
   duration,
   title,
+  shortTitle,
   color,
   location,
+  tag,
   canceled = false,
   description,
   placeholder = false,
@@ -30,6 +33,54 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   left = 0,
 }) => {
   const minimal = width < 1;
+
+  const [highlightedTag, setHighlightedTag] = useHighlightedTag();
+
+  const metadata: JSX.Element = useMemo(() => {
+    const fragments = [];
+
+    if (tag) {
+      fragments.push((
+        <span>
+          {tag}
+        </span>
+      ));
+    }
+
+    if (!tag || !minimal) {
+      fragments.push((
+        <time>
+          {humanReadableTime(start)}
+          {minimal ? null : (
+            <>
+              –
+              {humanReadableTime(start + duration)}
+            </>
+          )}
+        </time>
+      ));
+    }
+
+    if (location && !minimal) {
+      fragments.push((
+        <span>
+          {location}
+        </span>
+      ));
+    }
+
+    return (
+      <>
+        {fragments.map((element, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Fragment key={index}>
+            {index !== 0 ? " · " : null}
+            {element}
+          </Fragment>
+        ))}
+      </>
+    );
+  }, [location, minimal, start, tag, duration]);
 
   return (
     <li css={{
@@ -50,25 +101,31 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
     }}
     >
       {placeholder ? <Skeleton width="100%" height="100%" /> : (
-        <div css={[{
-          backgroundColor: color,
-          borderRadius: "0.3125rem",
-          borderLeft: `4px solid ${darken(0.1, color)}`,
-          boxSizing: "border-box",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-          padding: "0.5rem",
-          color: "#ffffff",
-          height: "100%",
-          position: "relative",
+        <div
+          css={[{
+            backgroundColor: color,
+            borderRadius: "0.3125rem",
+            borderLeft: `4px solid ${darken(0.1, color)}`,
+            boxSizing: "border-box",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            padding: "0.5rem",
+            color: "#ffffff",
+            height: "100%",
+            position: "relative",
+            transition: "opacity 0.1s",
 
-          "&:hover": {
-            zIndex: 1,
-          },
-        }, canceled ? {
-          opacity: 0.5,
-          filter: "grayscale(1)",
-          cursor: "not-allowed",
-        } : null]}
+            "&:hover": {
+              zIndex: 1,
+            },
+          }, canceled ? {
+            opacity: 0.5,
+            filter: "grayscale(1)",
+            cursor: "not-allowed",
+          } : null, (highlightedTag && tag !== highlightedTag) ? {
+            opacity: 0.1,
+          } : null]}
+          onMouseEnter={() => setHighlightedTag(tag)}
+          onMouseLeave={() => setHighlightedTag(null)}
         >
           <div css={{
             fontFamily: fonts.monospace,
@@ -80,30 +137,14 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             display: "inline-block",
           }}
           >
-            <time>
-              {humanReadableTime(start)}
-              {minimal ? null : (
-                <>
-                  –
-                  {humanReadableTime(start + duration)}
-                </>
-              )}
-            </time>
-            {location && !minimal ? (
-              <>
-                {" · "}
-                <span>
-                  {location}
-                </span>
-              </>
-            ) : null}
+            {metadata}
           </div>
           <div css={{
             fontSize: "1rem",
             fontWeight: 500,
           }}
           >
-            <Emoji>{title}</Emoji>
+            <Emoji>{minimal ? shortTitle || title : title}</Emoji>
           </div>
           {description ? (
             <div css={{

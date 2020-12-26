@@ -7,10 +7,12 @@ export interface CalendarEvent {
    */
   duration: number;
   title: string;
+  shortTitle?: string;
   description?: string;
   color?: string;
   location?: string;
   canceled?: boolean;
+  tag?: string;
 
   /**
    * Whether the event is a placeholder or not. Should only be used client-side.

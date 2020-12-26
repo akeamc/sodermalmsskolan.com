@@ -25,6 +25,8 @@ export default class Period {
 
   note: string;
 
+  collection?: string;
+
   constructor(
     weekday: number,
     hour: number,
@@ -76,9 +78,11 @@ export default class Period {
       rrule: this.rrule(),
       duration: this.duration * 60,
       title: this.subject.name,
+      shortTitle: this.subject.symbol,
       color: this.subject.color,
       location: this.room,
       canceled: this.canceled,
+      tag: this.collection,
       description: this.note || (this.canceled ? "Inställd" : undefined),
     };
   }

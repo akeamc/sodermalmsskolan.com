@@ -27,12 +27,37 @@ export const SUBJECTS: Record<string, Subject> = {
   },
   SPORTS: {
     name: "Idrott",
-    symbol: "ID",
+    symbol: "IDH",
     color: "#6f42c1",
   },
   SWEDISH: {
     name: "Svenska",
     symbol: "SV",
     color: "#ffd33d",
+  },
+  RANDOM: {
+    name: "Mentorstid",
+    symbol: "MT",
+    color: "#000000",
+  },
+  STUDENTS_CHOICE: {
+    name: "Elevens val",
+    symbol: "EV",
+    color: "#000000",
+  },
+  GERMAN: {
+    name: "Tyska",
+    symbol: "TY",
+    color: "#ffa400",
+  },
+  FRENCH: {
+    name: "Franska",
+    symbol: "FR",
+    color: "#ffa400",
+  },
+  SPANISH: {
+    name: "Spanska",
+    symbol: "SP",
+    color: "#ffa400",
   },
 };
