@@ -22,6 +22,10 @@ export const DISCORD_CHANNELS: Channels = {
     id: process.env.NEXT_PUBLIC_DISCORD_TELEGRAM_CHANNEL,
     authenticated: false,
   },
+  schedule: {
+    id: process.env.NEXT_PUBLIC_DISCORD_SCHEDULE_CHANNEL,
+    authenticated: false,
+  },
 };
 
 export const getChannelDetails = (id: string): ChannelDetails => Object.values(DISCORD_CHANNELS)

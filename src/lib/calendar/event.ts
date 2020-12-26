@@ -10,6 +10,7 @@ export interface CalendarEvent {
   description?: string;
   color?: string;
   location?: string;
+  canceled?: boolean;
 }
 
 export interface CalendarEventInstance extends CalendarEvent {
@@ -19,6 +20,10 @@ export interface CalendarEventInstance extends CalendarEvent {
 export interface ScheduledCalendarEvent extends CalendarEvent {
   rrule: RRule;
 }
+
+export const getCalendarEventId = (calendarEvent: CalendarEventInstance): string => (
+  [calendarEvent.start.getTime(), calendarEvent.duration.toString(), calendarEvent.title].join("-")
+);
 
 /**
  * Normalize a strange date. Makes it easier to handle.

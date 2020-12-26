@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { CalendarEventInstance } from "../../lib/calendar/event";
+import { CalendarEventInstance, getCalendarEventId } from "../../lib/calendar/event";
 import CalendarDay from "./Day";
 import CalendarEventView from "./Event";
 
@@ -16,13 +16,17 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({ dayCount = 7, even
         <CalendarDay key={weekday} weekday={weekday}>
           {eventInstances
             .filter(({ start }) => (start.getDay() + 6) % 7 === weekday)
-            .map(({ start, ...rest }, index) => (
-              <CalendarEventView
-                key={index}
-                start={start.getHours() * 3600 + start.getMinutes() * 60 + start.getSeconds()}
-                {...rest}
-              />
-            ))}
+            .map((calendarEvent) => {
+              const { start, ...rest } = calendarEvent;
+
+              return (
+                <CalendarEventView
+                  key={getCalendarEventId(calendarEvent)}
+                  start={start.getHours() * 3600 + start.getMinutes() * 60 + start.getSeconds()}
+                  {...rest}
+                />
+              );
+            })}
         </CalendarDay>
       ))}
   </>

@@ -3,6 +3,7 @@ import React, { FunctionComponent } from "react";
 import { CalendarEvent, humanReadableTime } from "../../lib/calendar/event";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
+import Emoji from "../Emoji";
 
 export interface CalendarEventViewProps extends CalendarEvent {
   /**
@@ -17,8 +18,10 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   title,
   color,
   location,
+  canceled = false,
+  description,
 }) => (
-  <li css={{
+  <li css={[{
     backgroundColor: color,
     width: "100%",
     height: "6rem",
@@ -37,9 +40,13 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
       height: `calc((${duration} / var(--row-duration)) * var(--row-height))`,
       margin: 0,
     },
-  }}
+  }, canceled ? {
+    opacity: 0.5,
+    filter: "grayscale(1)",
+    cursor: "not-allowed",
+  } : null]}
   >
-    <time css={{
+    <div css={{
       fontFamily: fonts.monospace,
       fontSize: "0.8125rem",
       fontWeight: 400,
@@ -49,18 +56,39 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
       display: "inline-block",
     }}
     >
-      {humanReadableTime(start)}
-      –
-      {humanReadableTime(start + duration)}
-      {location ? ` · ${location}` : null}
-    </time>
+      <time>
+        {humanReadableTime(start)}
+        –
+        {humanReadableTime(start + duration)}
+      </time>
+      {location ? (
+        <>
+          {" · "}
+          <span>
+            {location}
+          </span>
+        </>
+      ) : null}
+    </div>
     <div css={{
       fontSize: "1rem",
       fontWeight: 500,
     }}
     >
-      {title}
+      <Emoji>{title}</Emoji>
     </div>
+    {description ? (
+      <div css={{
+        marginTop: "0.25rem",
+        fontSize: "0.825rem",
+        fontWeight: 500,
+        opacity: 0.7,
+        lineHeight: 1.25,
+      }}
+      >
+        <Emoji>{description}</Emoji>
+      </div>
+    ) : null}
   </li>
 );
 

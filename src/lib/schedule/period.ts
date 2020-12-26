@@ -1,5 +1,5 @@
 import RRule from "rrule";
-import { ScheduledCalendarEvent } from "../calendar/event";
+import { humanReadableTime, ScheduledCalendarEvent } from "../calendar/event";
 import Subject from "./subject";
 
 export default class Period {
@@ -21,6 +21,10 @@ export default class Period {
 
   room: string;
 
+  canceled = false;
+
+  note: string;
+
   constructor(
     weekday: number,
     hour: number,
@@ -35,6 +39,22 @@ export default class Period {
     this.duration = duration;
     this.subject = subject;
     this.room = room;
+  }
+
+  get totalMinutes(): number {
+    return this.hour * 60 + this.minute;
+  }
+
+  get totalSeconds(): number {
+    return this.totalMinutes * 60;
+  }
+
+  /**
+   * A unique identifier, based on the period's room and time. The subject is without significance,
+   * since no more than one period can be held in a room at any given time.
+   */
+  get id(): string {
+    return `${this.room}-${this.weekday}T${humanReadableTime(this.totalSeconds)}`;
   }
 
   first(): Date {
@@ -58,6 +78,8 @@ export default class Period {
       title: this.subject.name,
       color: this.subject.color,
       location: this.room,
+      canceled: this.canceled,
+      description: this.note || (this.canceled ? "Inställd" : undefined),
     };
   }
 }
