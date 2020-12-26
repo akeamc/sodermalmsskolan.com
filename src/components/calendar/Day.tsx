@@ -68,8 +68,10 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
           {dayText}
         </span>
       </div>
-      <div css={{
+      <ul css={{
         position: "relative",
+        padding: 0,
+        margin: 0,
 
         [media(breakpoints.large)]: {
           height: "calc(var(--rows) * var(--row-height))",
@@ -77,7 +79,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
       }}
       >
         {children}
-      </div>
+      </ul>
     </section>
   );
 };
