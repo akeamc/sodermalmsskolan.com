@@ -29,7 +29,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
       [media(breakpoints.large)]: {
         borderRight: "1px solid #eee",
 
-        "&:first--of-type": {
+        "&:first-of-type": {
           borderLeft: "1px solid #eee",
         },
       },
