@@ -90,7 +90,6 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             marginTop: "0.25rem",
             fontSize: "0.825rem",
             fontWeight: 500,
-            opacity: 0.7,
             lineHeight: 1.25,
           }}
           >
