@@ -63,8 +63,8 @@ const Calendar: FunctionComponent<CalendarProps> = ({
     <div css={{
       position: "relative",
       "--row-duration": rowDuration,
-      "--row-height": "50px",
-      "--header-height": "50px",
+      "--row-height": "3.25rem",
+      "--header-height": "var(--row-height)",
       "--row-pad-start": rowPadStart,
       "--row-pad-end": rowPadEnd,
       "--rows": rows,
