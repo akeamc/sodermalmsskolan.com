@@ -1,103 +1,54 @@
 import React, { FunctionComponent } from "react";
+import Select from "react-select";
 import { CHOICES } from "../../lib/schedule/choice";
 import { useScheduleContext } from "../../lib/schedule/options";
-import { fonts } from "../../styles/text";
-import { SmallHeading } from "../text/headings";
-
-interface OptionProps {
-  name: string;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-}
-
-const Option: FunctionComponent<OptionProps> = ({ name, checked, onChange }) => (
-  <li css={{
-    margin: "0.5rem 0",
-    listStyle: "none",
-  }}
-  >
-    <input
-      id={name}
-      type="checkbox"
-      checked={checked}
-      onChange={(e) => {
-        onChange(e.target.checked);
-      }}
-      css={{
-        verticalAlign: "middle",
-      }}
-    />
-    <label
-      htmlFor={name}
-      css={{
-        marginLeft: "0.25rem",
-        fontSize: "0.825rem",
-        fontWeight: 500,
-        fontFamily: fonts.monospace,
-      }}
-    >
-      {name}
-    </label>
-  </li>
-);
 
 const ScheduleFilter: FunctionComponent = () => {
   const [options, setOptions] = useScheduleContext();
 
   return (
     <div css={{
-      display: "flex",
-      margin: "-1rem",
-      marginBottom: "1rem", // +1rem
-      flexWrap: "wrap",
+      marginBottom: "2rem",
     }}
     >
-      {CHOICES.map(({ title, id, collections }) => (
-        <div
-          key={id}
-          css={{
-            margin: "1rem",
-          }}
-        >
-          <SmallHeading css={{
-            marginBottom: "0.5rem",
-          }}
-          >
-            {title}
-          </SmallHeading>
-          <ul css={{
-            margin: 0,
-            padding: 0,
-          }}
-          >
-            {collections.map(({ name }) => (
-              <Option
-                key={name}
-                name={name}
-                checked={options.collectionFilter.includes(name)}
-                onChange={(checked) => {
-                  const newFilter = options.collectionFilter;
+      <div css={{
+        display: "flex",
+        margin: "-1rem",
+        flexWrap: "wrap",
+      }}
+      >
+        {CHOICES.map(({ id: choiceId, collections }) => {
+          const selectedId = options.selectedCollections[choiceId];
 
-                  const index = newFilter.indexOf(name);
+          const selected = collections.find(({ id: collectionId }) => collectionId === selectedId);
 
-                  if (checked && index === -1) {
-                    newFilter.push(name);
-                  }
-
-                  if (!checked && index !== -1) {
-                    newFilter.splice(index, 1);
-                  }
-
-                  setOptions({
-                    ...options,
-                    collectionFilter: newFilter,
-                  });
+          return (
+            <div css={{
+              flex: "1 0 8rem",
+              margin: "1rem",
+            }}
+            >
+              <Select
+                options={collections.map(({ fullName, id: collectionId }) => ({
+                  label: fullName,
+                  value: collectionId,
+                }))}
+                value={{
+                  label: selected.fullName,
+                  value: selected.id,
                 }}
+                onChange={({ value }: { value: string; label: string }) => setOptions({
+                  ...options,
+                  selectedCollections: {
+                    ...options.selectedCollections,
+                    [choiceId]: value,
+                  },
+                })}
               />
-            ))}
-          </ul>
-        </div>
-      ))}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -1,12 +1,15 @@
 import Period from "./period";
 
 export default class PeriodCollection {
-  name: string;
+  fullName: string;
+
+  shortName: string;
 
   private innerPeriods: Period[];
 
-  constructor(name: string, periods: Period[]) {
-    this.name = name;
+  constructor(fullName: string, shortName: string, periods: Period[]) {
+    this.fullName = fullName;
+    this.shortName = shortName;
     this.innerPeriods = periods;
   }
 
@@ -14,9 +17,13 @@ export default class PeriodCollection {
     return this.innerPeriods.map((period) => {
       const clone = period;
 
-      clone.collection = this.name;
+      clone.collection = this.shortName;
 
       return clone;
     });
+  }
+
+  public get id(): string {
+    return this.shortName;
   }
 }

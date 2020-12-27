@@ -21,7 +21,7 @@ export interface CalendarProps {
 const Calendar: FunctionComponent<CalendarProps> = ({
   events,
   hideWeekend = false,
-  shrink = true,
+  shrink = false,
 }) => {
   const [cursor] = useState<Dayjs>(dayjs());
 

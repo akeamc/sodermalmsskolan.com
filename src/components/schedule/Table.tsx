@@ -8,7 +8,7 @@ const ScheduleTable: FunctionComponent = () => {
   const events = periods?.map((period) => period.calendarEvent());
 
   return (
-    <Calendar hideWeekend events={events} />
+    <Calendar hideWeekend shrink events={events} />
   );
 };
 

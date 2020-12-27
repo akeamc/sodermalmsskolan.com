@@ -5,10 +5,10 @@ import React, {
 } from "react";
 import { ReactState } from "../state/state";
 import usePersistedState from "../state/usePersistedState";
-import { CHOICE_NAMES } from "./choice";
+import { CHOICES } from "./choice";
 
 export interface ScheduleOptions {
-  collectionFilter: string[],
+  selectedCollections: Record<string, string>,
 }
 
 export type ScheduleContextInner = ReactState<ScheduleOptions>;
@@ -19,9 +19,13 @@ const { Provider } = ScheduleContext;
 
 export const useScheduleContext = (): ScheduleContextInner => useContext(ScheduleContext);
 
+export const defaultSelectedCollections = Object.fromEntries(
+  CHOICES.map(({ id, collections }) => [id, collections[0].id]),
+);
+
 export const ScheduleContextProvider: FunctionComponent = (props) => {
   const state = usePersistedState<ScheduleOptions>("schedule-options", {
-    collectionFilter: CHOICE_NAMES,
+    selectedCollections: defaultSelectedCollections,
   });
 
   return <Provider value={state} {...props} />;

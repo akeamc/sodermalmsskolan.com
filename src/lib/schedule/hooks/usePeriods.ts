@@ -5,26 +5,23 @@ import Period from "../period";
 import useChanges from "./useChanges";
 
 const usePeriods = (): Period[] => {
-  const [{ collectionFilter }] = useScheduleContext();
+  const [{ selectedCollections }] = useScheduleContext();
 
-  const periods = CHOICES.reduce((total, choice) => {
-    choice.collections.forEach(({ name, periods: collectionPeriods }) => {
-      if (collectionFilter.includes(name)) {
-        total.push(...collectionPeriods);
-      }
-    });
+  const initialPeriods: Period[] = CHOICES.reduce((total, { id, collections }) => {
+    const selectedCollection = collections
+      .find(({ id: collectionId }) => collectionId === selectedCollections[id]);
 
-    return total;
+    return total.concat(selectedCollection.periods);
   }, []);
 
   const changes = useChanges();
 
-  return useMemo(() => {
-    if (!changes || !periods) {
+  const periods = useMemo(() => {
+    if (!changes || !initialPeriods) {
       return null;
     }
 
-    return periods.map((period) => {
+    return initialPeriods.map((period) => {
       const clone = period;
 
       const change = changes.find(({ periodId }) => periodId === period.id);
@@ -36,7 +33,9 @@ const usePeriods = (): Period[] => {
 
       return clone;
     });
-  }, [periods, changes]);
+  }, [initialPeriods, changes]);
+
+  return periods;
 };
 
 export default usePeriods;
