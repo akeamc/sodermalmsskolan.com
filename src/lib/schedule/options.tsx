@@ -24,9 +24,11 @@ export const defaultSelectedCollections = Object.fromEntries(
 );
 
 export const ScheduleContextProvider: FunctionComponent = (props) => {
-  const state = usePersistedState<ScheduleOptions>("schedule-options", {
+  const initialState: ScheduleOptions = {
     selectedCollections: defaultSelectedCollections,
-  });
+  };
+
+  const state = usePersistedState<ScheduleOptions>("scheduleOptions", initialState);
 
   return <Provider value={state} {...props} />;
 };

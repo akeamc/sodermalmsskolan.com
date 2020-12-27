@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { humanReadableTime } from "../../lib/calendar/event";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
@@ -75,4 +75,4 @@ const CalendarLabels: FunctionComponent<CalendarLabelProps> = ({
   </div>
 );
 
-export default CalendarLabels;
+export default memo(CalendarLabels);

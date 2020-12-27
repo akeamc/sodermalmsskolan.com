@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { darken } from "polished";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { CalendarEvent, humanReadableTime } from "../../lib/calendar/event";
 import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
 import { breakpoints, media } from "../../styles/breakpoints";
@@ -146,4 +146,4 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   );
 };
 
-export default CalendarEventView;
+export default memo(CalendarEventView);
