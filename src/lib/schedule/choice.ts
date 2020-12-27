@@ -96,11 +96,26 @@ export const CHOICES: PeriodChoice[] = [
       new PeriodCollection("DKA", [
         new Period(4, 9, 30, 50, SUBJECTS.RANDOM, "A309"),
       ]),
+      new PeriodCollection("JZH", [
+        new Period(4, 9, 30, 50, SUBJECTS.RANDOM, "A415"),
+      ]),
+      new PeriodCollection("MBE", [
+        new Period(4, 9, 30, 50, SUBJECTS.RANDOM, "A308"),
+      ]),
+      new PeriodCollection("IER", [
+        new Period(4, 9, 30, 50, SUBJECTS.RANDOM, "A402"),
+      ]),
+      new PeriodCollection("LWA", [
+        new Period(4, 9, 30, 50, SUBJECTS.RANDOM, "A307"),
+      ]),
     ],
   },
 ];
 
-export const CHOICE_NAMES = CHOICES.map((choice) => ({
-  choice: choice.id,
-  alternatives: choice.collections.map((collection) => collection.name),
-}));
+export const CHOICE_NAMES: string[] = CHOICES.reduce((names, choice) => {
+  choice.collections.forEach((collection) => {
+    names.push(collection.name);
+  });
+
+  return names;
+}, [] as string[]);

@@ -1,7 +1,8 @@
+import { css } from "@emotion/react";
 import { darken } from "polished";
-import React, { Fragment, FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent } from "react";
 import { CalendarEvent, humanReadableTime } from "../../lib/calendar/event";
-import { useHighlightedTag } from "../../lib/calendar/highlightedTagContext";
+import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import Emoji from "../Emoji";
@@ -18,6 +19,12 @@ export interface CalendarEventViewProps extends CalendarEvent {
   left?: number;
 }
 
+const hideIfTable = css({
+  [media(breakpoints.large)]: {
+    display: "none",
+  },
+});
+
 const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   start,
   duration,
@@ -32,55 +39,9 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   width = 1,
   left = 0,
 }) => {
-  const minimal = width < 1;
+  const minified = width < 1;
 
   const [highlightedTag, setHighlightedTag] = useHighlightedTag();
-
-  const metadata: JSX.Element = useMemo(() => {
-    const fragments = [];
-
-    if (tag) {
-      fragments.push((
-        <span>
-          {tag}
-        </span>
-      ));
-    }
-
-    if (!tag || !minimal) {
-      fragments.push((
-        <time>
-          {humanReadableTime(start)}
-          {minimal ? null : (
-            <>
-              –
-              {humanReadableTime(start + duration)}
-            </>
-          )}
-        </time>
-      ));
-    }
-
-    if (location && !minimal) {
-      fragments.push((
-        <span>
-          {location}
-        </span>
-      ));
-    }
-
-    return (
-      <>
-        {fragments.map((element, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Fragment key={index}>
-            {index !== 0 ? " · " : null}
-            {element}
-          </Fragment>
-        ))}
-      </>
-    );
-  }, [location, minimal, start, tag, duration]);
 
   return (
     <li css={{
@@ -135,16 +96,38 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             lineHeight: 1,
             marginBottom: "0.5rem",
             display: "inline-block",
+
+            "> *:not(:first-child)::before": {
+              content: "\" · \"",
+            },
           }}
           >
-            {metadata}
+            {tag ? (
+              <span>
+                {tag}
+              </span>
+            ) : null}
+
+            <span css={tag && minified ? hideIfTable : null}>
+              <time>
+                {humanReadableTime(start)}
+                <span css={minified ? hideIfTable : null}>
+                  –
+                  {humanReadableTime(start + duration)}
+                </span>
+              </time>
+            </span>
+
+            <span css={minified ? hideIfTable : null}>
+              {location}
+            </span>
           </div>
           <div css={{
             fontSize: "1rem",
             fontWeight: 500,
           }}
           >
-            <Emoji>{minimal ? shortTitle || title : title}</Emoji>
+            <Emoji>{minified ? shortTitle || title : title}</Emoji>
           </div>
           {description ? (
             <div css={{

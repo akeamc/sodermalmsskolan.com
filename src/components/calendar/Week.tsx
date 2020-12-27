@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 import { CalendarEventInstance } from "../../lib/calendar/event";
-import { HighlightedTagProvider } from "../../lib/calendar/highlightedTagContext";
+import { HighlightedTagProvider } from "../../lib/calendar/HighlightedTagContext";
 import CalendarDay from "./Day";
 
 export interface CalendarWeekProps {

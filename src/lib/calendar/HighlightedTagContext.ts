@@ -1,14 +1,10 @@
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
   useContext,
 } from "react";
+import { ReactState } from "../state/state";
 
-export type HighlightedTagContextData = [
-  string,
-  Dispatch<SetStateAction<string>>,
-];
+export type HighlightedTagContextData = ReactState<string>;
 
 export const HighlightedTagContext = createContext<HighlightedTagContextData>(null);
 

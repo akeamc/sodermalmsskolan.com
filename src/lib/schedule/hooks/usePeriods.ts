@@ -1,16 +1,21 @@
 import { useMemo } from "react";
 import { CHOICES } from "../choice";
+import { useScheduleContext } from "../options";
 import Period from "../period";
 import useChanges from "./useChanges";
 
 const usePeriods = (): Period[] => {
-  const periods = useMemo(() => CHOICES.reduce((total, choice) => {
-    choice.collections.forEach(({ periods: collectionPeriods }) => {
-      total.push(...collectionPeriods);
+  const [{ collectionFilter }] = useScheduleContext();
+
+  const periods = CHOICES.reduce((total, choice) => {
+    choice.collections.forEach(({ name, periods: collectionPeriods }) => {
+      if (collectionFilter.includes(name)) {
+        total.push(...collectionPeriods);
+      }
     });
 
     return total;
-  }, []), []);
+  }, []);
 
   const changes = useChanges();
 
