@@ -87,6 +87,9 @@ export const CHOICES: PeriodChoice[] = [
       ]), new PeriodCollection("SP-C", [
         new Period(1, 14, 25, 75, SUBJECTS.SPANISH, "A220"),
         new Period(2, 14, 25, 75, SUBJECTS.SPANISH, "A220"),
+      ]), new PeriodCollection("ASV", [
+        new Period(1, 14, 25, 75, SUBJECTS.SWEDISH, "A308"),
+        new Period(2, 14, 25, 75, SUBJECTS.SWEDISH, "A308"),
       ]),
     ],
   }, {
