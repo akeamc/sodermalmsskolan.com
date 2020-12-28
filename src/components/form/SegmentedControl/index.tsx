@@ -10,9 +10,11 @@ export interface SegmentedControlProps {
 export const SegmentedControlOption: FunctionComponent<{
   option: FormOption,
   onClick: (value: string) => void,
+  selected?: boolean,
 }> = ({
   option,
   onClick,
+  selected = false,
 }) => (
   <button
     css={{
@@ -21,7 +23,7 @@ export const SegmentedControlOption: FunctionComponent<{
       outline: "none",
       border: 0,
       backgroundColor: "transparent",
-      padding: "3px 4px",
+      padding: "0.5em 4px",
       textOverflow: "ellipsis",
       overflow: "hidden",
       whiteSpace: "nowrap",
@@ -30,8 +32,9 @@ export const SegmentedControlOption: FunctionComponent<{
       cursor: "pointer",
       font: "inherit",
       fontSize: "0.75rem",
-      fontWeight: 500,
+      fontWeight: selected ? 600 : 500,
       WebkitTapHighlightColor: "transparent",
+      transition: "all 0.1s ease",
     }}
     onClick={() => onClick(option.value)}
     type="button"
@@ -68,7 +71,6 @@ const SegmentedControl: FunctionComponent<SegmentedControlProps> = ({
 
   return (
     <div>
-      {/* <p>{selectedOption.label}</p> */}
       <div css={{
         backgroundColor: "#eee",
         borderRadius: "6px",
@@ -81,7 +83,12 @@ const SegmentedControl: FunctionComponent<SegmentedControlProps> = ({
         }}
         >
           {options.map((option) => (
-            <SegmentedControlOption option={option} key={option.value} onClick={handleChange} />
+            <SegmentedControlOption
+              option={option}
+              key={option.value}
+              selected={value === option.value}
+              onClick={handleChange}
+            />
           ))}
           <div css={{
             position: "absolute",

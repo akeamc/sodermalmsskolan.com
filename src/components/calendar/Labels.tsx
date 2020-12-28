@@ -22,6 +22,11 @@ const CalendarLabels: FunctionComponent<CalendarLabelProps> = ({
     top: "var(--header-height)",
     left: 0,
     width: "100%",
+    display: "none",
+
+    [media(breakpoints.large)]: {
+      display: "block",
+    },
   }}
   >
     {Array.from({
