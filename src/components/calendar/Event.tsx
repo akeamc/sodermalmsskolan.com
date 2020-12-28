@@ -72,6 +72,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
           css={[{
             backgroundColor: color,
             borderRadius: "0.3125rem",
+            border: 0,
             borderLeft: `4px solid ${darken(0.1, color)}`,
             boxSizing: "border-box",
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
@@ -82,7 +83,6 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             transition: "opacity 0.1s",
             display: "flex",
             flexDirection: "column",
-            border: 0,
             font: "inherit",
             textAlign: "left",
             width: "100%",
