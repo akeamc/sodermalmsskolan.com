@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { ScheduleContextProvider } from "../../lib/schedule/options";
 import Section, { SectionProps } from "../section/Section";
-import ScheduleFilter from "./Filter";
+import ScheduleFilter from "./filter/Filter";
 import ScheduleTable from "./Table";
 
 const ScheduleSection: FunctionComponent<SectionProps> = ({ ...sectionProps }) => (

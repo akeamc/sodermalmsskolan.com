@@ -1,7 +1,18 @@
 import dayjs, { Dayjs } from "dayjs";
-import React, { FunctionComponent, useMemo, useState } from "react";
+import React, {
+  FunctionComponent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import isoWeek from "dayjs/plugin/isoWeek";
-import { ScheduledCalendarEvent, evaluateSchedule } from "../../lib/calendar/event";
+import {
+  ScheduledCalendarEvent,
+  evaluateSchedule,
+  getScheduledArrayId,
+  CalendarEventInstance,
+} from "../../lib/calendar/event";
 import { breakpoints, media } from "../../styles/breakpoints";
 import CalendarLabels from "./Labels";
 import CalendarWeek from "./Week";
@@ -23,6 +34,12 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   hideWeekend = false,
   shrink = false,
 }) => {
+  const prevEventsKey = useRef<string>(null);
+
+  const eventsKey = getScheduledArrayId(events);
+
+  const [evaluatedEvents, setEvaluatedEvents] = useState<CalendarEventInstance[]>(null);
+
   const [cursor] = useState<Dayjs>(dayjs());
 
   const dayCount = hideWeekend ? 5 : 7;
@@ -32,19 +49,33 @@ const Calendar: FunctionComponent<CalendarProps> = ({
 
   const placeholderEvents = usePlaceholderEvents(viewStart, viewEnd);
 
-  const eventInstances = useMemo(() => {
-    if (!events) {
-      return placeholderEvents;
+  useEffect(() => {
+    if (prevEventsKey.current === eventsKey) {
+      return;
     }
 
-    return evaluateSchedule(
-      events,
-      viewStart.toDate(),
-      viewEnd.toDate(),
-    );
-  }, [
-    events, viewStart, viewEnd, placeholderEvents,
-  ]);
+    prevEventsKey.current = eventsKey;
+
+    setEvaluatedEvents(null);
+
+    if (!events) {
+      return;
+    }
+
+    const triggerEvaluation = () => {
+      const evaluated = evaluateSchedule(
+        events,
+        viewStart.toDate(),
+        viewEnd.toDate(),
+      );
+
+      setEvaluatedEvents(evaluated);
+    };
+
+    triggerEvaluation();
+  }, [events, eventsKey, viewEnd, viewStart]);
+
+  const eventInstances = evaluatedEvents || placeholderEvents;
 
   const [earliest, latest] = useMemo(() => eventInstances
     .reduce(([min, max], { start, duration }) => {

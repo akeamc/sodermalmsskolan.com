@@ -43,6 +43,8 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
 
   const [highlightedTag, setHighlightedTag] = useHighlightedTag();
 
+  const isHidden = highlightedTag && tag !== highlightedTag;
+
   return (
     <li css={{
       width: "100%",
@@ -62,18 +64,26 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
     }}
     >
       {placeholder ? <Skeleton width="100%" height="100%" /> : (
-        <div
+        <button
           css={[{
             backgroundColor: color,
             borderRadius: "0.3125rem",
             borderLeft: `4px solid ${darken(0.1, color)}`,
             boxSizing: "border-box",
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-            padding: "0.5rem",
+            padding: "0.625rem",
             color: "#ffffff",
             height: "100%",
             position: "relative",
             transition: "opacity 0.1s",
+            display: "flex",
+            flexDirection: "column",
+            border: 0,
+            font: "inherit",
+            textAlign: "left",
+            width: "100%",
+            outline: "none",
+            cursor: "pointer",
 
             "&:hover": {
               zIndex: 1,
@@ -82,11 +92,12 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             opacity: 0.5,
             filter: "grayscale(1)",
             cursor: "not-allowed",
-          } : null, (highlightedTag && tag !== highlightedTag) ? {
+          } : null, isHidden ? {
             opacity: 0.1,
           } : null]}
-          onMouseEnter={() => setHighlightedTag(tag)}
-          onMouseLeave={() => setHighlightedTag(null)}
+          onFocus={() => setHighlightedTag(tag)}
+          onBlur={() => setHighlightedTag(null)}
+          type="button"
         >
           <div css={{
             fontFamily: fonts.monospace,
@@ -97,7 +108,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             marginBottom: "0.5rem",
             display: "inline-block",
 
-            "> *:not(:first-child)::before": {
+            "> *:not(:first-of-type)::before": {
               content: "\" · \"",
             },
           }}
@@ -140,7 +151,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
               <Emoji>{description}</Emoji>
             </div>
           ) : null}
-        </div>
+        </button>
       )}
     </li>
   );

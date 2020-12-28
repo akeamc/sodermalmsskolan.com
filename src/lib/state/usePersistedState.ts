@@ -1,6 +1,6 @@
 import createPersistedState from "use-persisted-state";
 import {
-  useState, useEffect,
+  useMemo,
 } from "react";
 import { ReactState } from "./state";
 
@@ -13,16 +13,9 @@ const usePersistedState = <T>(
   key: string,
   initialValue: T,
 ): ReactState<T> => {
-  const usePeristed = createPersistedState(key);
+  const usePeristed = useMemo(() => createPersistedState(key), [key]);
 
-  const [persistedState, setPersistedState] = usePeristed<T>(initialValue);
-  const [temporaryState, setTemporaryState] = useState<T>(initialValue);
-
-  useEffect(() => {
-    setTemporaryState(persistedState);
-  }, [persistedState]);
-
-  return [temporaryState, setPersistedState];
+  return usePeristed<T>(initialValue);
 };
 
 export default usePersistedState;

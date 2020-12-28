@@ -28,9 +28,53 @@ export interface ScheduledCalendarEvent extends CalendarEvent {
   rrule: RRule;
 }
 
-export const getCalendarEventId = (calendarEvent: CalendarEventInstance): string => (
-  [calendarEvent.start.getTime(), calendarEvent.duration.toString(), calendarEvent.title].join("-")
-);
+export const getEventId = (calendarEvent: CalendarEvent, startKey: string): string => {
+  const {
+    duration,
+    title,
+    description,
+  } = calendarEvent;
+
+  return [startKey, duration.toString(), title, description].join(".");
+};
+
+export const getScheduledId = ({
+  rrule,
+  ...rest
+}: ScheduledCalendarEvent): string => {
+  const startKey = rrule.toString();
+
+  return getEventId(rest, startKey);
+};
+
+export const getInstanceId = ({
+  start,
+  ...rest
+}: CalendarEventInstance): string => {
+  const startKey = start.getTime().toString();
+
+  return getEventId(rest, startKey);
+};
+
+export const getScheduledArrayId = (scheduledEvents: ScheduledCalendarEvent[]): string => {
+  if (!scheduledEvents) {
+    return null;
+  }
+
+  const keys = scheduledEvents.map(getScheduledId);
+
+  return keys.join(",");
+};
+
+export const getInstanceArrayId = (eventInstances: CalendarEventInstance[]): string => {
+  if (!eventInstances) {
+    return null;
+  }
+
+  const keys = eventInstances.map(getInstanceId);
+
+  return keys.join(",");
+};
 
 /**
  * Normalize a strange date. Makes it easier to handle.

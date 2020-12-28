@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
-import React, { FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent } from "react";
 import useLocale from "../../hooks/useLocale";
 import { CalendarEventInstance } from "../../lib/calendar/event";
+import useEventInstanceTransform from "../../lib/calendar/hooks/useEventInstanceTransform";
 import { breakpoints, media } from "../../styles/breakpoints";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { SectionHeading } from "../text/headings";
@@ -25,57 +26,59 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
 
   const dayText = placeholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).day(weekday + 1).format("dddd"); // DayJS uses 0 for Sunday, we use 0 for Monday.
 
-  const sorted = useMemo(() => (
-    eventInstances.sort((a, b) => a.start.getTime() - b.start.getTime())
-  ), [eventInstances]);
+  const instanceProps = useEventInstanceTransform<CalendarEventViewProps[]>(
+    eventInstances,
+    () => {
+      const sorted = eventInstances.sort((a, b) => a.start.getTime() - b.start.getTime());
 
-  const instanceProps = useMemo(() => (
-    sorted
-      .reduce((elements, calendarEvent) => {
-        const clone = elements;
+      return sorted
+        .reduce((elements, calendarEvent) => {
+          const clone = elements;
 
-        const { start: startDate, duration, ...rest } = calendarEvent;
+          const { start: startDate, duration, ...rest } = calendarEvent;
 
-        const start = startDate.getHours() * 3600
-          + startDate.getMinutes() * 60
-          + startDate.getSeconds();
+          const start = startDate.getHours() * 3600
+            + startDate.getMinutes() * 60
+            + startDate.getSeconds();
 
-        // Find all events conflicting with the current and change their widths.
-        const intersections = elements
-          .reduce((indexes, props, index) => {
-            if (start + duration > props.start
-            && props.start + props.duration > start) {
-              indexes.push(index);
-            }
+          // Find all events conflicting with the current and change their widths.
+          const intersections = elements
+            .reduce((indexes, props, index) => {
+              if (start + duration > props.start
+              && props.start + props.duration > start) {
+                indexes.push(index);
+              }
 
-            return indexes;
-          }, [] as number[]);
+              return indexes;
+            }, [] as number[]);
 
-        clone.push({
-          start,
-          duration,
-          ...rest,
-        });
-
-        // Save computing power by not changing things that don't need to.
-        if (intersections.length > 0) {
-          // The recently pushed item must also be cropped.
-          intersections.push(clone.length - 1);
-
-          // Divide equally.
-          const elementWidth = 1 / intersections.length;
-
-          intersections.forEach((intersectionIndex, index) => {
-            const intersection = clone[intersectionIndex];
-
-            intersection.width = elementWidth;
-            intersection.left = index * elementWidth;
+          clone.push({
+            start,
+            duration,
+            ...rest,
           });
-        }
 
-        return clone;
-      }, [] as CalendarEventViewProps[])
-  ), [sorted]);
+          // Save computing power by not changing things that don't need to.
+          if (intersections.length > 0) {
+            // The recently pushed item must also be cropped.
+            intersections.push(clone.length - 1);
+
+            // Divide equally.
+            const elementWidth = 1 / intersections.length;
+
+            intersections.forEach((intersectionIndex, index) => {
+              const intersection = clone[intersectionIndex];
+
+              intersection.width = elementWidth;
+              intersection.left = index * elementWidth;
+            });
+          }
+
+          return clone;
+        }, []);
+    },
+    [],
+  );
 
   return (
     <section css={{
