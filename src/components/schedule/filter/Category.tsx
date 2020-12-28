@@ -27,11 +27,7 @@ const FilterCategory: FunctionComponent<{
   }, [choice, collections, options.selectedCollections]);
 
   return (
-    <div css={{
-      flex: "1 0 8rem",
-      margin: "1rem",
-    }}
-    >
+    <div>
       <Select
         options={collections.map(({ fullName, id: collectionId }) => ({
           label: fullName,
