@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { CalendarEventInstance } from "../../lib/calendar/event";
+import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 import { HighlightedTagProvider } from "../../lib/calendar/HighlightedTagContext";
 import CalendarDay from "./Day";
 
