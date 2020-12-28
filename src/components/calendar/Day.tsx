@@ -5,7 +5,6 @@ import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstanc
 import useEventInstanceTransform from "../../lib/calendar/hooks/useEventInstanceTransform";
 import { breakpoints, media } from "../../styles/breakpoints";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
-import { SectionHeading } from "../text/headings";
 import CalendarEventView, { CalendarEventViewProps } from "./Event";
 
 export interface CalendarDayProps {
@@ -96,39 +95,23 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
       },
     }}
     >
-      <div css={{
+      <span css={{
         textTransform: "capitalize",
+        display: "none",
+        lineHeight: "var(--header-height)",
+        fontWeight: 500,
+        fontSize: "1rem",
+        height: "var(--header-height)",
+        textAlign: "center",
+        width: "100%",
 
         [media(breakpoints.large)]: {
-          height: "var(--header-height)",
-          textAlign: "center",
+          display: "inline-block",
         },
       }}
       >
-        <SectionHeading css={{
-          margin: "2rem 0 1rem",
-
-          [media(breakpoints.large)]: {
-            display: "none",
-          },
-        }}
-        >
-          {dayText}
-        </SectionHeading>
-        <span css={{
-          display: "none",
-          lineHeight: "var(--header-height)",
-          fontWeight: 500,
-          fontSize: "1rem",
-
-          [media(breakpoints.large)]: {
-            display: "inline",
-          },
-        }}
-        >
-          {dayText}
-        </span>
-      </div>
+        {dayText}
+      </span>
       <ul css={{
         position: "relative",
         padding: 0,

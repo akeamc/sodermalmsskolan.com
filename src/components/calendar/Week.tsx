@@ -44,6 +44,8 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
   return (
     <div>
       <div css={{
+        margin: "2rem 0",
+
         [media(breakpoints.large)]: {
           display: "none",
         },

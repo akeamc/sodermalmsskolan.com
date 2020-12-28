@@ -21,7 +21,7 @@ export const SegmentedControlOption: FunctionComponent<{
       outline: "none",
       border: 0,
       backgroundColor: "transparent",
-      padding: "0.5rem 0.25rem",
+      padding: "3px 4px",
       textOverflow: "ellipsis",
       overflow: "hidden",
       whiteSpace: "nowrap",
@@ -29,7 +29,7 @@ export const SegmentedControlOption: FunctionComponent<{
       zIndex: 1,
       cursor: "pointer",
       font: "inherit",
-      fontSize: "0.8125rem",
+      fontSize: "0.75rem",
       fontWeight: 500,
       WebkitTapHighlightColor: "transparent",
     }}
