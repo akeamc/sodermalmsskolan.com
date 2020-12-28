@@ -32,10 +32,25 @@ export const getEventId = (calendarEvent: CalendarEvent, startKey: string): stri
   const {
     duration,
     title,
-    description,
+    shortTitle = "",
+    description = "",
+    color = "",
+    location = "",
+    canceled = false,
+    tag = "",
   } = calendarEvent;
 
-  return [startKey, duration.toString(), title, description].join(".");
+  return [
+    startKey,
+    duration.toString(),
+    title,
+    shortTitle,
+    description,
+    color,
+    location,
+    canceled ? "1" : "0",
+    tag,
+  ].join(".");
 };
 
 export const getScheduledId = ({
