@@ -13,6 +13,10 @@ import CalendarWeek from "./Week";
 import usePlaceholderEvents from "../../lib/calendar/hooks/usePlaceholderEvents";
 import ScheduledCalendarEvent from "../../lib/calendar/event/ScheduledCalendarEvent";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
+import SegmentedControl from "../form/SegmentedControl";
+import { FormOption } from "../form/types";
+import useLocale from "../../hooks/useLocale";
+import capitalize from "../../lib/utils/capitalize";
 
 dayjs.extend(isoWeek);
 
@@ -37,6 +41,8 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const [evaluatedEvents, setEvaluatedEvents] = useState<CalendarEventInstance[]>(null);
 
   const [cursor] = useState<Dayjs>(dayjs());
+
+  const { language } = useLocale();
 
   const dayCount = hideWeekend ? 5 : 7;
 
@@ -85,38 +91,74 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const rowPadEnd = shrink ? (86400 / rowDuration) - Math.ceil(latest / rowDuration) : 0;
   const rows = 86400 / rowDuration - rowPadStart - rowPadEnd;
 
+  const weekdayControlOptions: FormOption[] = useMemo(() => {
+    const options: FormOption[] = Array.from({
+      length: dayCount,
+    }).map((_, index) => ({
+      value: index.toString(),
+      label: capitalize(dayjs().locale(language).isoWeekday(index + 1).format("dddd")),
+    }));
+
+    return options;
+  }, [dayCount, language]);
+
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    const weekday = (dayjs().isoWeekday() + 6) % 7;
+
+    return Math.min(weekday, dayCount - 1).toString();
+  });
+
   return (
-    <div css={{
-      position: "relative",
-      "--row-duration": rowDuration,
-      "--row-height": "3.25rem",
-      "--header-height": "var(--row-height)",
-      "--row-pad-start": rowPadStart,
-      "--row-pad-end": rowPadEnd,
-      "--rows": rows,
-      "--labels-width": "0px",
-
-      [media(breakpoints.extraLarge)]: {
-        "--labels-width": "4rem",
-      },
-    }}
-    >
-      <CalendarLabels
-        placeholder={!events}
-        rowCount={rows}
-        rowPadStart={rowPadStart}
-        rowDuration={rowDuration}
-      />
+    <div>
       <div css={{
-        marginLeft: "var(--labels-width)",
-
         [media(breakpoints.large)]: {
-          display: "flex",
-          height: "calc(var(--rows) * var(--row-height)) + var(--header-height)",
+          display: "none",
         },
       }}
       >
-        <CalendarWeek placeholder={!events} dayCount={dayCount} eventInstances={eventInstances} />
+        <SegmentedControl
+          options={weekdayControlOptions}
+          onChange={setActiveTab}
+          value={activeTab}
+        />
+      </div>
+      <div css={{
+        position: "relative",
+        "--row-duration": rowDuration,
+        "--row-height": "3.25rem",
+        "--header-height": "var(--row-height)",
+        "--row-pad-start": rowPadStart,
+        "--row-pad-end": rowPadEnd,
+        "--rows": rows,
+        "--labels-width": "0px",
+
+        [media(breakpoints.extraLarge)]: {
+          "--labels-width": "4rem",
+        },
+      }}
+      >
+        <CalendarLabels
+          placeholder={!events}
+          rowCount={rows}
+          rowPadStart={rowPadStart}
+          rowDuration={rowDuration}
+        />
+        <div css={{
+          marginLeft: "var(--labels-width)",
+
+          [media(breakpoints.large)]: {
+            display: "flex",
+            height: "calc(var(--rows) * var(--row-height)) + var(--header-height)",
+          },
+        }}
+        >
+          <CalendarWeek
+            placeholder={!events}
+            dayCount={dayCount}
+            eventInstances={eventInstances}
+            activeTab={parseInt(activeTab, 10)}
+          />
+        </div>
       </div>
     </div>
   );

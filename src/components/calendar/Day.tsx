@@ -15,12 +15,14 @@ export interface CalendarDayProps {
   weekday: number;
   placeholder?: boolean;
   eventInstances: CalendarEventInstance[];
+  active?: boolean;
 }
 
 const CalendarDay: FunctionComponent<CalendarDayProps> = ({
   weekday,
   placeholder = false,
   eventInstances,
+  active = false,
 }) => {
   const { language } = useLocale();
 
@@ -82,9 +84,11 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
   return (
     <section css={{
       flex: 1,
+      display: active ? "initial" : "none",
 
       [media(breakpoints.large)]: {
         borderRight: "1px solid #eee",
+        display: "initial",
 
         "&:first-of-type": {
           borderLeft: "1px solid #eee",

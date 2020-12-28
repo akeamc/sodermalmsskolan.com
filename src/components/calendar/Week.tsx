@@ -7,12 +7,14 @@ export interface CalendarWeekProps {
   dayCount?: number;
   eventInstances: CalendarEventInstance[];
   placeholder?: boolean;
+  activeTab: number;
 }
 
 const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
   dayCount = 7,
   eventInstances,
   placeholder = false,
+  activeTab,
 }) => {
   const [highlightedTag, setHighlightedTag] = useState<string>(null);
 
@@ -29,6 +31,7 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
             key={weekday}
             weekday={weekday}
             placeholder={placeholder}
+            active={weekday === activeTab}
           />
         ))}
     </HighlightedTagProvider>
