@@ -1,5 +1,7 @@
 import RRule from "rrule";
-import { humanReadableTime, ScheduledCalendarEvent } from "../calendar/event";
+import CalendarEvent from "../calendar/event/CalendarEvent";
+import ScheduledCalendarEvent from "../calendar/event/ScheduledCalendarEvent";
+import humanReadableTime from "../calendar/humanReadableTime";
 import Subject from "./subject";
 
 export default class Period {
@@ -73,9 +75,8 @@ export default class Period {
     });
   }
 
-  calendarEvent(): ScheduledCalendarEvent {
-    return {
-      rrule: this.rrule(),
+  calendarEvent(): CalendarEvent {
+    return new CalendarEvent({
       duration: this.duration * 60,
       title: this.subject.name,
       shortTitle: this.subject.symbol,
@@ -84,6 +85,10 @@ export default class Period {
       canceled: this.canceled,
       tag: this.collection,
       description: this.note || (this.canceled ? "Inställd" : undefined),
-    };
+    });
+  }
+
+  scheduledEvent(): ScheduledCalendarEvent {
+    return new ScheduledCalendarEvent(this.rrule(), this.calendarEvent());
   }
 }

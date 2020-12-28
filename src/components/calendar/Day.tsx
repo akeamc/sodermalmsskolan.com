@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import React, { FunctionComponent } from "react";
 import useLocale from "../../hooks/useLocale";
-import { CalendarEventInstance } from "../../lib/calendar/event";
+import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 import useEventInstanceTransform from "../../lib/calendar/hooks/useEventInstanceTransform";
 import { breakpoints, media } from "../../styles/breakpoints";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
@@ -35,7 +35,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
         .reduce((elements, calendarEvent) => {
           const clone = elements;
 
-          const { start: startDate, duration, ...rest } = calendarEvent;
+          const { start: startDate, data } = calendarEvent;
 
           const start = startDate.getHours() * 3600
             + startDate.getMinutes() * 60
@@ -44,8 +44,8 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
           // Find all events conflicting with the current and change their widths.
           const intersections = elements
             .reduce((indexes, props, index) => {
-              if (start + duration > props.start
-              && props.start + props.duration > start) {
+              if (start + data.duration > props.start
+              && props.start + props.data.duration > start) {
                 indexes.push(index);
               }
 
@@ -54,8 +54,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
 
           clone.push({
             start,
-            duration,
-            ...rest,
+            data,
           });
 
           // Save computing power by not changing things that don't need to.
@@ -75,7 +74,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
           }
 
           return clone;
-        }, []);
+        }, [] as CalendarEventViewProps[]);
     },
     [],
   );

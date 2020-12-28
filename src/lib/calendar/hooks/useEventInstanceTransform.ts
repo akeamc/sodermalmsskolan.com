@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { CalendarEventInstance, getInstanceArrayId } from "../event";
+import CalendarEventInstance from "../event/CalendarEventInstance";
 
 const useEventInstanceTransform = <T>(
   eventInstances: CalendarEventInstance[],
   callback: () => T,
   initialValue?: T,
 ): T => {
-  const prevKeyRef = useRef<string>(null);
+  const prevSignatureRef = useRef<string>(null);
 
   const [output, setOutput] = useState<T>(initialValue);
 
   useEffect(() => {
-    const key = getInstanceArrayId(eventInstances);
+    const signature = eventInstances.map((eventInstance) => eventInstance.signature).join(",");
 
-    if (prevKeyRef.current === key) {
+    if (prevSignatureRef.current === signature) {
       return;
     }
 
-    prevKeyRef.current = key;
+    prevSignatureRef.current = signature;
 
     const newOutput = callback();
 

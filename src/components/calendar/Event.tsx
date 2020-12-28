@@ -1,22 +1,22 @@
 import { css } from "@emotion/react";
 import { darken } from "polished";
 import React, { FunctionComponent, memo } from "react";
-import { CalendarEvent, humanReadableTime } from "../../lib/calendar/event";
+import CalendarEvent from "../../lib/calendar/event/CalendarEvent";
 import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
+import humanReadableTime from "../../lib/calendar/humanReadableTime";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import Emoji from "../Emoji";
 import Skeleton from "../skeleton/Skeleton";
 
-export interface CalendarEventViewProps extends CalendarEvent {
+export interface CalendarEventViewProps {
   /**
    * The number of seconds since midnight.
    */
   start: number;
-
   width?: number;
-
   left?: number;
+  data: CalendarEvent;
 }
 
 const hideIfTable = css({
@@ -27,18 +27,22 @@ const hideIfTable = css({
 
 const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   start,
-  duration,
-  title,
-  shortTitle,
-  color,
-  location,
-  tag,
-  canceled = false,
-  description,
-  placeholder = false,
+  data,
   width = 1,
   left = 0,
 }) => {
+  const {
+    duration,
+    title,
+    shortTitle,
+    color,
+    location,
+    tag,
+    canceled = false,
+    description,
+    placeholder = false,
+  } = data;
+
   const minified = width < 1;
 
   const [highlightedTag, setHighlightedTag] = useHighlightedTag();

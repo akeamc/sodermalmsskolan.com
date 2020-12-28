@@ -7,16 +7,12 @@ import React, {
   useState,
 } from "react";
 import isoWeek from "dayjs/plugin/isoWeek";
-import {
-  ScheduledCalendarEvent,
-  evaluateSchedule,
-  getScheduledArrayId,
-  CalendarEventInstance,
-} from "../../lib/calendar/event";
 import { breakpoints, media } from "../../styles/breakpoints";
 import CalendarLabels from "./Labels";
 import CalendarWeek from "./Week";
 import usePlaceholderEvents from "../../lib/calendar/hooks/usePlaceholderEvents";
+import ScheduledCalendarEvent from "../../lib/calendar/event/ScheduledCalendarEvent";
+import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 
 dayjs.extend(isoWeek);
 
@@ -36,7 +32,7 @@ const Calendar: FunctionComponent<CalendarProps> = ({
 }) => {
   const prevEventsKey = useRef<string>(null);
 
-  const eventsKey = getScheduledArrayId(events);
+  const eventsSignature = events?.map((calendarEvent) => calendarEvent.signature).join(",");
 
   const [evaluatedEvents, setEvaluatedEvents] = useState<CalendarEventInstance[]>(null);
 
@@ -50,11 +46,11 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const placeholderEvents = usePlaceholderEvents(viewStart, viewEnd);
 
   useEffect(() => {
-    if (prevEventsKey.current === eventsKey) {
+    if (prevEventsKey.current === eventsSignature) {
       return;
     }
 
-    prevEventsKey.current = eventsKey;
+    prevEventsKey.current = eventsSignature;
 
     setEvaluatedEvents(null);
 
@@ -63,22 +59,21 @@ const Calendar: FunctionComponent<CalendarProps> = ({
     }
 
     const triggerEvaluation = () => {
-      const evaluated = evaluateSchedule(
-        events,
-        viewStart.toDate(),
-        viewEnd.toDate(),
-      );
+      const after = viewStart.toDate();
+      const before = viewEnd.toDate();
+
+      const evaluated = events.flatMap((calendarEvent) => calendarEvent.evaluate(after, before));
 
       setEvaluatedEvents(evaluated);
     };
 
     triggerEvaluation();
-  }, [events, eventsKey, viewEnd, viewStart]);
+  }, [events, eventsSignature, viewEnd, viewStart]);
 
   const eventInstances = evaluatedEvents || placeholderEvents;
 
   const [earliest, latest] = useMemo(() => eventInstances
-    .reduce(([min, max], { start, duration }) => {
+    .reduce(([min, max], { start, data: { duration } }) => {
       const startSeconds = start.getHours() * 3600 + start.getMinutes() * 60 + start.getSeconds();
       const endSeconds = startSeconds + duration;
 

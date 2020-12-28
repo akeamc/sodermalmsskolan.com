@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { CHOICES } from "../choice";
 import { useScheduleContext } from "../options";
-import Period from "../period";
+import Period from "../Period";
 import useChanges from "./useChanges";
 
 const usePeriods = (): Period[] => {

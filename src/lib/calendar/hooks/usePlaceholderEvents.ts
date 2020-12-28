@@ -2,7 +2,8 @@ import { Dayjs } from "dayjs";
 import { useMemo } from "react";
 import seedrandom from "seedrandom";
 import map from "../../utils/map";
-import { CalendarEventInstance } from "../event";
+import CalendarEvent from "../event/CalendarEvent";
+import CalendarEventInstance from "../event/CalendarEventInstance";
 
 /**
  * Generate placeholder events from a common seed, making it SSR-safe.
@@ -28,12 +29,11 @@ const usePlaceholderEvents = (
 
       const duration = Math.floor(map(rng.quick(), 0, 1, 45, 100) / 5) * 5 * 60;
 
-      return {
-        start: start.toDate(),
+      return new CalendarEventInstance(start.toDate(), new CalendarEvent({
         title: null,
         duration,
         placeholder: true,
-      };
+      }));
     });
   }).flat();
 }, [after, before, count]);

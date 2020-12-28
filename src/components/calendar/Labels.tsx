@@ -1,5 +1,5 @@
 import React, { FunctionComponent, memo } from "react";
-import { humanReadableTime } from "../../lib/calendar/event";
+import humanReadableTime from "../../lib/calendar/humanReadableTime";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import InlineSkeleton from "../skeleton/InlineSkeleton";

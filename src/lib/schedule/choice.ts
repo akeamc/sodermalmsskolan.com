@@ -1,5 +1,5 @@
 import PeriodCollection from "./collection";
-import Period from "./period";
+import Period from "./Period";
 import { SUBJECTS } from "./subject";
 
 export default interface PeriodChoice {

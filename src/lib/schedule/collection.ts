@@ -1,4 +1,4 @@
-import Period from "./period";
+import Period from "./Period";
 
 export default class PeriodCollection {
   fullName: string;
