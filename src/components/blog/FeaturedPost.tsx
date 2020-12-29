@@ -1,4 +1,3 @@
-import { Theme, ThemeProvider } from "@emotion/react";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +6,7 @@ import useLocale from "../../hooks/useLocale";
 import { usePostUrl } from "../../lib/blog/hooks/post";
 import Post from "../../lib/ghost/post";
 import { breakpoints, media } from "../../styles/breakpoints";
-import darkTheme from "../../styles/theme/dark";
+import darkTheme from "../../styles/themes/dark";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { H2, SmallHeading } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
@@ -19,14 +18,14 @@ const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
   const timestamp = post?.publishedAt ? dayjs(post?.publishedAt).locale(language) : null;
 
   const inner = (
-    <article css={(theme: Theme) => ({
+    <article css={{
       position: "relative",
       minHeight: "30rem",
 
       "&:hover": {
         figure: {
           margin: "-5px",
-          boxShadow: theme.shadow.large,
+          boxShadow: "var(--shadow-large)",
 
           img: {
             transform: "scale(1)",
@@ -34,46 +33,44 @@ const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
           },
         },
       },
-    })}
+    }}
     >
-      <ThemeProvider theme={darkTheme}>
-        <div css={{
-          position: "relative",
-          zIndex: 1,
-          padding: "2rem",
-          boxSizing: "border-box",
+      <div css={[darkTheme, {
+        position: "relative",
+        zIndex: 1,
+        padding: "2rem",
+        boxSizing: "border-box",
 
-          [media(breakpoints.medium)]: {
-            padding: "4rem",
-          },
+        [media(breakpoints.medium)]: {
+          padding: "4rem",
+        },
+      }]}
+      >
+        <SmallHeading css={{
+          marginBottom: "1rem",
+          color: "var(--color-text-primary)",
+          opacity: 0.5,
         }}
         >
-          <SmallHeading css={(theme: Theme) => ({
-            marginBottom: "1rem",
-            color: theme.color.text.primary,
-            opacity: 0.5,
-          })}
-          >
-            {timestamp?.format("D MMMM YYYY HH:mm") || <InlineSkeleton width="11em" />}
-          </SmallHeading>
-          <H2 css={{
-            maxWidth: "37.5rem",
-          }}
-          >
-            {post?.title || <InlineSkeleton count={2} />}
-          </H2>
-          <CardDescription css={{
-            display: "-webkit-box",
-            WebkitLineClamp: 5,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            width: "90%",
-          }}
-          >
-            {post?.excerpt || <InlineSkeleton count={5} />}
-          </CardDescription>
-        </div>
-      </ThemeProvider>
+          {timestamp?.format("D MMMM YYYY HH:mm") || <InlineSkeleton width="11em" />}
+        </SmallHeading>
+        <H2 css={{
+          maxWidth: "37.5rem",
+        }}
+        >
+          {post?.title || <InlineSkeleton count={2} />}
+        </H2>
+        <CardDescription css={{
+          display: "-webkit-box",
+          WebkitLineClamp: 5,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          width: "90%",
+        }}
+        >
+          {post?.excerpt || <InlineSkeleton count={5} />}
+        </CardDescription>
+      </div>
       <figure css={{
         position: "absolute",
         top: 0,

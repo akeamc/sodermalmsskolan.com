@@ -1,4 +1,3 @@
-import { Theme, useTheme } from "@emotion/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
@@ -13,7 +12,6 @@ import NavbarWrapper from "./Wrapper";
 
 const RouteLink: FunctionComponent<{route: Route}> = ({ route }) => {
   const router = useRouter();
-  const theme = useTheme();
 
   return (
     <li>
@@ -29,7 +27,7 @@ const RouteLink: FunctionComponent<{route: Route}> = ({ route }) => {
           fontSize: "0.9375rem",
           fontWeight: 600,
           letterSpacing: "-0.02em",
-          color: theme.color.text.primary,
+          color: "var(--color-text-primary)",
           opacity: 0.5,
           transition: "opacity 0.2s",
 
@@ -51,15 +49,15 @@ const DesktopNavbar: FunctionComponent = () => {
   const routes = useBasicRoutes();
 
   return (
-    <NavbarWrapper css={(theme: Theme) => ({
-      borderBottom: `1px solid ${theme.color.border}`,
+    <NavbarWrapper css={{
+      borderBottom: "1px solid var(--border-color)",
       top: 0,
       display: "none",
 
       [media(navbarBreakpoint)]: {
         display: "block",
       },
-    })}
+    }}
     >
       <Container>
         <nav css={{
@@ -80,13 +78,13 @@ const DesktopNavbar: FunctionComponent = () => {
               />
             </a>
           </Link>
-          <ul css={(theme: Theme) => ({
+          <ul css={{
             display: "flex",
             listStyle: "none",
             padding: 0,
             margin: 0,
-            height: theme.navigation.height,
-          })}
+            height: "var(--navbar-height)",
+          }}
           >
             {routes.map((route) => <RouteLink key={route.href} route={route} />)}
           </ul>

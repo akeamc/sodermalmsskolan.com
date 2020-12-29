@@ -3,7 +3,6 @@ import { usePosts } from "../../lib/blog/hooks/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import CardGrid from "../grid/CardGrid";
-import { sectionPaddingStyles } from "../section/Section";
 import FeaturedPost from "./FeaturedPost";
 import PostCard from "./PostCard";
 
@@ -18,10 +17,7 @@ const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
   return (
     <div>
       <header css={{
-        paddingTop: "2rem",
-
-        [media(breakpoints.small)]: sectionPaddingStyles.top,
-
+        padding: "var(--header-padding)",
       }}
       >
         <Container>

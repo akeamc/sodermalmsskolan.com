@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { Theme, useTheme } from "@emotion/react";
 import Image from "next/image";
 import React, { FunctionComponent } from "react";
 import { useDishEmissions } from "../../lib/food/hooks/dish";
@@ -16,27 +15,23 @@ export interface DishCardProps extends CardProps {
   showPhotos?: boolean;
 }
 
-const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => {
-  const theme = useTheme();
+const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => (
+  <div css={[skeletonBackground, {
+    position: "relative",
+    borderRadius: "0.375rem",
+    overflow: "hidden",
+    width: "4rem",
+    height: "4rem",
+    margin: "0.5rem",
 
-  return (
-    <div css={[skeletonBackground(theme), {
-      position: "relative",
-      borderRadius: "0.375rem",
-      overflow: "hidden",
-      width: "4rem",
-      height: "4rem",
-      margin: "0.5rem",
-
-      img: {
-        objectFit: "cover",
-      },
-    }]}
-    >
-      {photo?.url ? <Image src={photo?.url} layout="fill" /> : null}
-    </div>
-  );
-};
+    img: {
+      objectFit: "cover",
+    },
+  }]}
+  >
+    {photo?.url ? <Image src={photo?.url} layout="fill" /> : null}
+  </div>
+);
 
 /**
  * Dish information.
@@ -55,9 +50,9 @@ const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, .
       <CardTitle>{dish?.title || <InlineSkeleton count={2} />}</CardTitle>
       <CardDescription>
         {emissionsError ? (
-          <span css={(theme: Theme) => ({
-            color: theme.color.danger,
-          })}
+          <span css={{
+            color: "var(--color-text-danger)",
+          }}
           >
             ???
           </span>

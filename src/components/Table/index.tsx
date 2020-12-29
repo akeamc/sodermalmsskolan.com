@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import React, { FunctionComponent } from "react";
 
 const Table: FunctionComponent = (props) => (
@@ -8,25 +7,25 @@ const Table: FunctionComponent = (props) => (
   }}
   >
     <table
-      css={(theme: Theme) => ({
-        border: `1px solid ${theme.color.border}`,
+      css={{
+        border: "1px solid var(--border-color)",
         borderSpacing: 0,
         borderRadius: "0.5rem",
         overflow: "hidden",
 
         "tr:not(:last-child) td, thead th": {
-          borderBottom: `1px solid ${theme.color.border}`,
+          borderBottom: "1px solid var(--border-color)",
         },
 
         "tbody tr": {
           transition: "background-color 0.2s ease",
 
           "&:nth-of-type(2n + 1)": {
-            background: theme.color.background.secondary,
+            background: "var(--color-bg-secondary)",
           },
 
           "&:hover": {
-            background: theme.color.border,
+            background: "var(--border-color)",
           },
         },
 
@@ -35,14 +34,14 @@ const Table: FunctionComponent = (props) => (
           textAlign: "left",
 
           "&:not(:last-child)": {
-            borderRight: `1px solid ${theme.color.border}`,
+            borderRight: "1px solid var(--border-color)",
           },
         },
 
         th: {
           fontWeight: 700,
         },
-      })}
+      }}
       {...props}
     />
   </div>

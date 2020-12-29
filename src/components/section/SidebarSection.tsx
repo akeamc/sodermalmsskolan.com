@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import React, { FunctionComponent, ReactNode } from "react";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Section, { SectionProps } from "./Section";
@@ -37,19 +36,19 @@ const SidebarSection: FunctionComponent<SidebarSectionProps> = ({
         },
       }}
       >
-        <h3 css={(theme: Theme) => ({
+        <h3 css={{
           fontSize: "1.5rem",
           fontWeight: 700,
           margin: "0 0 1rem",
           lineHeight: 1.5,
-          color: theme.color.text.primary,
+          color: "var(--color-text-primary)",
           textAlign: "center",
 
           [media(breakpoints.large)]: {
             fontSize: "1rem",
             textAlign: "initial",
           },
-        })}
+        }}
         >
           {sidebarTitle}
         </h3>

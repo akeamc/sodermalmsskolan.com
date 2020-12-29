@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
@@ -13,7 +12,6 @@ import { CardTitle } from "../text/headings";
  */
 const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
   const url = useAuthorUrl(author?.slug);
-  const theme = useTheme();
 
   const inner = (
     <a css={{
@@ -22,7 +20,7 @@ const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
       textDecoration: "none",
     }}
     >
-      <div css={[skeletonBackground(theme), {
+      <div css={[skeletonBackground, {
         width: "6rem",
         height: "6rem",
         position: "relative",

@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import ReactHtmlParser, { convertNodeToElement, Transform } from "react-html-parser";
@@ -33,14 +32,14 @@ const transform: Transform = (node, index) => {
 
     return (
       <Link key={index} href={href} passHref>
-        <a css={(theme: Theme) => ({
+        <a css={{
           color: "inherit",
           textDecoration: "underline",
 
           "&:hover": {
-            color: theme.color.accent,
+            color: "var(--link-color)",
           },
-        })}
+        }}
         >
           {node.children.map(transform)}
         </a>
@@ -92,15 +91,15 @@ const transform: Transform = (node, index) => {
     return (
       <figcaption
         key={index}
-        css={(theme: Theme) => ({
+        css={{
           textAlign: "center",
           margin: 0,
           marginTop: "0.625rem",
-          color: theme.color.text.tertiary,
+          color: "var(--color-text-tertiary)",
           fontSize: "0.8125rem",
           lineHeight: 1.5,
           letterSpacing: "0.00625em",
-        })}
+        }}
       >
         {node.children.map(transform)}
       </figcaption>
@@ -128,10 +127,10 @@ const transform: Transform = (node, index) => {
     return (
       <blockquote
         key={index}
-        css={(theme: Theme) => ({
+        css={{
           margin: 0,
           padding: 0,
-          color: theme.color.accent,
+          color: "var(--color-highlight)",
           fontFamily: fonts.monospace,
           fontSize: "1.5rem",
           fontWeight: 400,
@@ -142,7 +141,7 @@ const transform: Transform = (node, index) => {
           [media(breakpoints.medium)]: {
             padding: "2rem 3rem",
           },
-        })}
+        }}
       >
         {node.children.map(transform)}
       </blockquote>
@@ -168,7 +167,7 @@ const RichText: FunctionComponent<{html: string}> = ({ html, ...props }) => {
 
   return (
     <div
-      css={(theme: Theme) => ({
+      css={{
         p: {
           lineHeight: 2,
           letterSpacing: "0.00625em",
@@ -225,9 +224,9 @@ const RichText: FunctionComponent<{html: string}> = ({ html, ...props }) => {
 
         hr: {
           border: 0,
-          borderTop: `1px solid ${theme.color.border}`,
+          borderTop: "1px solid var(--border-color)",
         },
-      })}
+      }}
       {...props}
     >
       {parsedHtml}

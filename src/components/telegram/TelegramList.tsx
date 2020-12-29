@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import React, { FunctionComponent } from "react";
@@ -22,38 +21,38 @@ const TelegramList: FunctionComponent = () => {
   const now = useTime(1000);
 
   return (
-    <ul css={(theme: Theme) => ({
+    <ul css={{
       margin: 0,
       padding: 0,
-      borderTop: `1px solid ${theme.color.border}`,
-    })}
+      borderTop: "1px solid var(--border-color)",
+    }}
     >
       {telegrams.map((telegram, index) => (
         <li
           key={telegram?.id || index}
-          css={(theme: Theme) => ({
+          css={{
             padding: "0.625rem 0",
             listStyle: "none",
             display: "flex",
             fontSize: "0.875rem",
-            borderBottom: `1px solid ${theme.color.border}`,
+            borderBottom: "1px solid var(--border-color)",
             alignItems: "center",
-          })}
+          }}
         >
-          <p css={(theme: Theme) => ({
+          <p css={{
             flex: 1,
-            color: theme.color.text.secondary,
+            color: "var(--color-text-secondary)",
             fontWeight: 500,
             margin: 0,
             lineHeight: 1.25,
-          })}
+          }}
           >
             {telegram?.content ? <Emoji>{telegram.content}</Emoji> : <InlineSkeleton count={2} />}
           </p>
-          <span css={(theme: Theme) => ({
+          <span css={{
             marginLeft: "0.625rem",
-            color: theme.color.text.tertiary,
-          })}
+            color: "var(--color-text-tertiary)",
+          }}
           >
             {telegram?.timestamp ? dayjs(telegram.timestamp).locale(language).from(now) : <InlineSkeleton width="8em" />}
           </span>

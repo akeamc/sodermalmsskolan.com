@@ -35,6 +35,7 @@ export const SegmentedControlOption: FunctionComponent<{
       fontWeight: selected ? 600 : 500,
       WebkitTapHighlightColor: "transparent",
       transition: "all 0.1s ease",
+      color: "var(--color-text-primary)",
     }}
     onClick={() => onClick(option.value)}
     type="button"
@@ -72,7 +73,7 @@ const SegmentedControl: FunctionComponent<SegmentedControlProps> = ({
   return (
     <div>
       <div css={{
-        backgroundColor: "#eee",
+        backgroundColor: "var(--segmented-control-track)",
         borderRadius: "6px",
         padding: "2px",
       }}
@@ -96,7 +97,7 @@ const SegmentedControl: FunctionComponent<SegmentedControlProps> = ({
             top: 0,
             bottom: 0,
             width: `${100 / options.length}%`,
-            backgroundColor: "#ffffff",
+            backgroundColor: "var(--segmented-control-indicator)",
             borderRadius: "5px",
             transition: "all 0.2s ease-in-out",
             boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",

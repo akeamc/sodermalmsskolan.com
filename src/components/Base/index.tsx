@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import React, { FunctionComponent } from "react";
 import Footer from "../footer/Footer";
 import SiteHead, { SiteMetadata } from "../Head";
@@ -17,10 +16,10 @@ const Base: FunctionComponent<BaseProps> = ({ metadata, children }) => (
     <SiteHead metadata={metadata} />
     <DesktopNavbar />
     <main
-      css={(theme: Theme) => ({
-        backgroundColor: theme.color.background.primary,
-        color: theme.color.text.primary,
-      })}
+      css={{
+        backgroundColor: "var(--color-bg-primary)",
+        color: "var(--color-text-primary)",
+      }}
     >
       {children}
     </main>

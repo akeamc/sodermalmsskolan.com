@@ -1,5 +1,4 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import { Theme } from "@emotion/react";
 import Container from "../Container";
 import { breakpoints, media } from "../../styles/breakpoints";
 import {
@@ -22,9 +21,9 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
   graphic,
 }) => (
   <div
-    css={(theme: Theme) => ({
-      backgroundColor: theme.color.background.primary,
-    })}
+    css={{
+      backgroundColor: "var(--color-bg-primary)",
+    }}
   >
     <Container
       css={{

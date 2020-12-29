@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FunctionComponent, ReactNode } from "react";
@@ -26,7 +25,7 @@ const NavbarItem: FunctionComponent<{
     }}
     >
       <Link href={href} passHref>
-        <a css={(theme: Theme) => ({
+        <a css={{
           padding: "0.25rem",
           display: "flex",
           alignItems: "center",
@@ -34,7 +33,7 @@ const NavbarItem: FunctionComponent<{
           flexDirection: "column",
           height: "100%",
           boxSizing: "border-box",
-          color: theme.color.text.primary,
+          color: "var(--color-text-primary)",
           opacity: isActive ? 1 : 0.5,
           textDecoration: "none",
           transition: "opacity 0.1s",
@@ -43,7 +42,7 @@ const NavbarItem: FunctionComponent<{
             width: "1.375rem",
             height: "1.375rem",
           },
-        })}
+        }}
         >
           {icon}
           <span css={{
@@ -61,14 +60,14 @@ const NavbarItem: FunctionComponent<{
 };
 
 const MobileNavbar: FunctionComponent = () => (
-  <NavbarWrapper css={(theme: Theme) => ({
-    borderTop: `1px solid ${theme.color.border}`,
+  <NavbarWrapper css={{
+    borderTop: "1px solid var(--border-color)",
     bottom: 0,
 
     [media(navbarBreakpoint)]: {
       display: "none",
     },
-  })}
+  }}
   >
     <ul css={{
       display: "flex",

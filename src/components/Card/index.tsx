@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import {
-  css, SerializedStyles, Theme, useTheme,
+  css, SerializedStyles,
 } from "@emotion/react";
 import Link from "next/link";
 import React, { FunctionComponent, HTMLAttributes } from "react";
 
-export const cardStyles = (theme: Theme, big = false): SerializedStyles => css({
-  background: theme.card.background,
+export const cardStyles = (big = false): SerializedStyles => css({
+  background: "var(--color-bg-primary)",
   borderRadius: "0.375rem",
-  boxShadow: `inset 0 0 0 1px ${theme.color.border}`,
+  boxShadow: "inset 0 0 0 1px var(--border-color)",
   padding: big ? "4rem 2rem" : "1rem",
   display: "flex",
   flexDirection: "column",
@@ -19,9 +19,9 @@ export const cardStyles = (theme: Theme, big = false): SerializedStyles => css({
   textAlign: big ? "center" : null,
 });
 
-export const cardLinkStyles = (theme: Theme): SerializedStyles => css({
+export const cardLinkStyles = css({
   "&:hover": {
-    boxShadow: `inset 0 0 0 1px ${theme.color.text.primary}`,
+    boxShadow: "inset 0 0 0 1px var(--color-text-primary)",
   },
 });
 
@@ -31,15 +31,13 @@ export interface CardProps extends HTMLAttributes<HTMLOrSVGElement> {
 }
 
 const Card: FunctionComponent<CardProps> = ({ href, big, ...rest }) => {
-  const theme = useTheme();
-
-  const sharedStyles = cardStyles(theme, big);
+  const sharedStyles = cardStyles(big);
 
   if (href) {
     return (
       <Link href={href} passHref>
         <a
-          css={[sharedStyles, cardLinkStyles(theme)]}
+          css={[sharedStyles, cardLinkStyles]}
           {...rest}
         />
       </Link>

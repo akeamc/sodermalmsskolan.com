@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import RouteCategory from "../../lib/sitemap/category";
@@ -13,8 +12,8 @@ const RouteLink: FunctionComponent<{ route: Route }> = ({ route }) => (
   >
     <Link href={route.href} passHref>
       <a
-        css={(theme: Theme) => ({
-          color: theme.color.text.secondary,
+        css={{
+          color: "var(--color-text-secondary)",
           transition: "color 0.1s ease",
           textDecoration: "none",
           lineHeight: 1.5,
@@ -23,9 +22,9 @@ const RouteLink: FunctionComponent<{ route: Route }> = ({ route }) => (
           fontWeight: 500,
 
           "&:hover": {
-            color: theme.color.text.primary,
+            color: "var(--color-text-primary)",
           },
-        })}
+        }}
       >
         {route.name}
       </a>

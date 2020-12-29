@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import React, { Fragment, FunctionComponent } from "react";
 import { useDayMenu } from "../../lib/food/hooks/menu";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
@@ -22,9 +21,9 @@ const MenuText: FunctionComponent = () => {
             <Fragment key={dish?.id || index}>
               {index !== 0 ? " och " : null}
               <Emphasis
-                css={(theme: Theme) => ({
-                  color: theme.color.text.primary,
-                })}
+                css={{
+                  color: "var(--color-text-primary",
+                }}
               >
                 {dish?.title || <InlineSkeleton />}
               </Emphasis>

@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { FunctionComponent, ReactNode } from "react";
 import Link from "next/link";
-import { lighten, transparentize } from "polished";
-import { css, Theme, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 import { fonts } from "../../styles/text";
 
 export interface ButtonProps {
@@ -16,8 +15,8 @@ export interface ButtonProps {
   href?: string;
 }
 
-const baseStyles = (theme: Theme) => css({
-  color: theme.color.text.primary,
+const baseStyles = css({
+  color: "var(--color-text-primary)",
   backgroundColor: "transparent",
   display: "inline-block",
   border: "none",
@@ -34,27 +33,22 @@ const baseStyles = (theme: Theme) => css({
   lineHeight: 1,
 });
 
-const primaryStyles = (theme: Theme) => css({
-  backgroundColor: theme.color.accent,
-  backgroundImage: `linear-gradient(${lighten(0.05, theme.color.accent)}, ${
-    theme.color.accent
-  })`,
-  color: theme.color.text.white,
+const primaryStyles = css({
+  backgroundColor: "var(--color-highlight)",
+  backgroundImage: "linear-gradient(var(--color-highlight-light), var(--color-highlight))",
+  color: "#ffffff",
 
   "&:hover": {
     opacity: 0.75,
   },
 });
 
-const secondaryStyles = (theme: Theme) => css({
-  boxShadow: `inset 0 0 0 1px ${transparentize(
-    0.5,
-    theme.color.text.primary,
-  )}`,
+const secondaryStyles = css({
+  boxShadow: "inset 0 0 0 1px var(--color-text-secondary)",
   transition: "box-shadow 0.2s ease",
 
   "&:hover": {
-    boxShadow: `inset 0 0 0 2px ${theme.color.text.primary}`,
+    boxShadow: "inset 0 0 0 2px var(--color-text-primary)",
   },
 });
 
@@ -66,11 +60,9 @@ const Button: FunctionComponent<ButtonProps> = ({
   primary = false,
   ...rest
 }) => {
-  const theme = useTheme();
-
   const styles = [
-    baseStyles(theme),
-    primary ? primaryStyles(theme) : secondaryStyles(theme),
+    baseStyles,
+    primary ? primaryStyles : secondaryStyles,
   ];
 
   const innerProps = {

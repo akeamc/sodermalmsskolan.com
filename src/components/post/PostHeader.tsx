@@ -1,6 +1,5 @@
 import React, { Fragment, FunctionComponent, useRef } from "react";
 import Image from "next/image";
-import { Theme, ThemeProvider } from "@emotion/react";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import dayjs from "dayjs";
 import Post from "../../lib/ghost/post";
@@ -8,9 +7,9 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { HeaderHeading, SmallHeading, SubTitle } from "../text/headings";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
-import darkTheme from "../../styles/theme/dark";
 import useLocale from "../../hooks/useLocale";
 import AuthorName from "../author/Name";
+import darkTheme from "../../styles/themes/dark";
 
 export interface PostHeaderProps {
   post: Post;
@@ -52,56 +51,54 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
           },
         }}
       >
-        <ThemeProvider theme={darkTheme}>
-          <Container css={{
-            flex: 1,
-          }}
-          >
-            <motion.div
-              css={{
-                position: "relative",
-                padding: "3rem 0",
-                zIndex: 1,
-                maxWidth: "56rem",
+        <Container css={[darkTheme, {
+          flex: 1,
+        }]}
+        >
+          <motion.div
+            css={{
+              position: "relative",
+              padding: "3rem 0",
+              zIndex: 1,
+              maxWidth: "56rem",
 
-                [media(breakpoints.large)]: {
-                  paddingTop: "6rem",
-                  paddingBottom: "6rem",
-                },
-              }}
-              style={{
-                opacity: foregroundOpacity,
-              }}
+              [media(breakpoints.large)]: {
+                paddingTop: "6rem",
+                paddingBottom: "6rem",
+              },
+            }}
+            style={{
+              opacity: foregroundOpacity,
+            }}
+          >
+            <HeaderHeading>{post?.title || <InlineSkeleton />}</HeaderHeading>
+            <SubTitle css={{
+              marginTop: "2rem",
+            }}
             >
-              <HeaderHeading>{post?.title || <InlineSkeleton />}</HeaderHeading>
-              <SubTitle css={{
-                marginTop: "2rem",
+              {post?.excerpt}
+            </SubTitle>
+            <div css={{
+              marginTop: "2rem",
+            }}
+            >
+              <SmallHeading css={{
+                color: "var(--color-text-primary)",
+                opacity: 0.7,
               }}
               >
-                {post?.excerpt}
-              </SubTitle>
-              <div css={{
-                marginTop: "2rem",
-              }}
-              >
-                <SmallHeading css={(theme: Theme) => ({
-                  color: theme.color.text.primary,
-                  opacity: 0.7,
-                })}
-                >
-                  {(post?.authors || new Array(2).fill(null)).map((author, index) => (
-                    <Fragment key={author?.id || index}>
-                      {index !== 0 ? ", " : null}
-                      <AuthorName author={author} />
-                    </Fragment>
-                  ))}
-                  {" "}
-                  {post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <InlineSkeleton width="10em" />}
-                </SmallHeading>
-              </div>
-            </motion.div>
-          </Container>
-        </ThemeProvider>
+                {(post?.authors || new Array(2).fill(null)).map((author, index) => (
+                  <Fragment key={author?.id || index}>
+                    {index !== 0 ? ", " : null}
+                    <AuthorName author={author} />
+                  </Fragment>
+                ))}
+                {" "}
+                {post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <InlineSkeleton width="10em" />}
+              </SmallHeading>
+            </div>
+          </motion.div>
+        </Container>
         {post?.cover ? (
           <motion.div style={{
             opacity: backgroundOpacity,

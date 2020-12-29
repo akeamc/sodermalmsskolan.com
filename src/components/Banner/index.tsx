@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import React, { FunctionComponent } from "react";
 import Marquee from "react-fast-marquee";
 
@@ -7,10 +6,10 @@ import Marquee from "react-fast-marquee";
  */
 const Banner: FunctionComponent = ({ children }) => (
   <div
-    css={(theme: Theme) => ({
-      backgroundColor: theme.color.accent,
-      color: theme.color.text.white,
-    })}
+    css={{
+      backgroundColor: "var(--color-highlight)",
+      color: "#ffffff",
+    }}
   >
     <Marquee direction="left" pauseOnHover gradient={null} speed={20}>
       <div css={{
