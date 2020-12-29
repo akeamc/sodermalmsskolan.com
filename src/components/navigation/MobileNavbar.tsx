@@ -33,14 +33,14 @@ const NavbarItem: FunctionComponent<{
           flexDirection: "column",
           height: "100%",
           boxSizing: "border-box",
-          color: "var(--color-text-primary)",
-          opacity: isActive ? 1 : 0.5,
+          color: isActive
+            ? "var(--color-highlight)"
+            : "var(--color-text-tertiary)",
           textDecoration: "none",
-          transition: "opacity 0.1s",
+          transition: "all 0.2s",
 
-          svg: {
-            width: "1.375rem",
-            height: "1.375rem",
+          "&:hover": {
+            opacity: 0.5,
           },
         }}
         >
