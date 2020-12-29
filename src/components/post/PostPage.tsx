@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Post from "../../lib/ghost/post";
 import Base from "../Base";
-import Footer from "../footer/Footer";
 import Section from "../section/Section";
 import PostHeader from "./PostHeader";
 import PostView from "./PostView";
@@ -27,7 +26,6 @@ const PostPage: FunctionComponent<PostPageProps> = ({ post }) => (
     <Section>
       <PostView post={post} />
     </Section>
-    <Footer />
   </Base>
 );
 

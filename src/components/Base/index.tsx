@@ -1,7 +1,9 @@
 import { Theme } from "@emotion/react";
 import React, { FunctionComponent } from "react";
+import Footer from "../footer/Footer";
 import SiteHead, { SiteMetadata } from "../Head";
-import Navbar from "../navigation/Navbar";
+import DesktopNavbar from "../navigation/DesktopNavbar";
+import MobileNavbar from "../navigation/MobileNavbar";
 
 export interface BaseProps {
   metadata?: SiteMetadata;
@@ -13,7 +15,7 @@ export interface BaseProps {
 const Base: FunctionComponent<BaseProps> = ({ metadata, children }) => (
   <>
     <SiteHead metadata={metadata} />
-    <Navbar />
+    <DesktopNavbar />
     <main
       css={(theme: Theme) => ({
         backgroundColor: theme.color.background.primary,
@@ -22,6 +24,8 @@ const Base: FunctionComponent<BaseProps> = ({ metadata, children }) => (
     >
       {children}
     </main>
+    <Footer />
+    <MobileNavbar />
   </>
 );
 

@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import Link from "next/link";
 import React from "react";
 import Base from "../../components/Base";
-import Footer from "../../components/footer/Footer";
 import SimpleHeader from "../../components/header/Simple";
 import SidebarSection from "../../components/section/SidebarSection";
 import TelegramList from "../../components/telegram/TelegramList";
@@ -27,7 +26,6 @@ const Page: NextPage = () => (
       sidebar={<TelegramList />}
       sidebarTitle="Senaste nytt"
     />
-    <Footer />
   </Base>
 );
 

@@ -4,9 +4,12 @@ import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
 import Route from "../../lib/sitemap/route";
 import { useBasicRoutes } from "../../lib/sitemap/routes";
+import { media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import Container from "../Container";
 import LogoIcon from "../logo/Icon";
+import navbarBreakpoint from "./breakpoint";
+import NavbarWrapper from "./Wrapper";
 
 const RouteLink: FunctionComponent<{route: Route}> = ({ route }) => {
   const router = useRouter();
@@ -44,57 +47,53 @@ const RouteLink: FunctionComponent<{route: Route}> = ({ route }) => {
   );
 };
 
-const Navbar: FunctionComponent = () => {
+const DesktopNavbar: FunctionComponent = () => {
   const routes = useBasicRoutes();
 
   return (
-    <>
-      <div css={(theme: Theme) => ({
-        backgroundColor: theme.color.background.primary,
-        borderBottom: `1px solid ${theme.color.border}`,
-        height: theme.navigation.height,
-        boxSizing: "border-box",
-        position: "sticky",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-      })}
-      >
-        <Container>
-          <nav css={{
-            display: "flex",
-          }}
-          >
-            <Link href="/" passHref>
-              <a css={{
-                display: "flex",
-                width: "1.5rem",
-                marginRight: "2rem",
-                placeItems: "center",
-              }}
-              >
-                <LogoIcon css={{
-                  flex: 1,
-                }}
-                />
-              </a>
-            </Link>
-            <ul css={(theme: Theme) => ({
-              listStyle: "none",
+    <NavbarWrapper css={(theme: Theme) => ({
+      borderBottom: `1px solid ${theme.color.border}`,
+      top: 0,
+      display: "none",
+
+      [media(navbarBreakpoint)]: {
+        display: "block",
+      },
+    })}
+    >
+      <Container>
+        <nav css={{
+          display: "flex",
+        }}
+        >
+          <Link href="/" passHref>
+            <a css={{
               display: "flex",
-              padding: 0,
-              margin: 0,
-              height: theme.navigation.height,
-            })}
+              width: "1.5rem",
+              marginRight: "2rem",
+              placeItems: "center",
+            }}
             >
-              {routes.map((route) => <RouteLink key={route.href} route={route} />)}
-            </ul>
-          </nav>
-        </Container>
-      </div>
-    </>
+              <LogoIcon css={{
+                flex: 1,
+              }}
+              />
+            </a>
+          </Link>
+          <ul css={(theme: Theme) => ({
+            display: "flex",
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            height: theme.navigation.height,
+          })}
+          >
+            {routes.map((route) => <RouteLink key={route.href} route={route} />)}
+          </ul>
+        </nav>
+      </Container>
+    </NavbarWrapper>
   );
 };
 
-export default Navbar;
+export default DesktopNavbar;

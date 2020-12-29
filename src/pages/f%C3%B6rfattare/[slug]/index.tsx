@@ -4,7 +4,6 @@ import React from "react";
 import Base from "../../../components/Base";
 import PostListSection from "../../../components/blog/PostListSection";
 import DigibruhArticleSection from "../../../components/digibruh/Section";
-import Footer from "../../../components/footer/Footer";
 import SimpleHeader from "../../../components/header/Simple";
 import InlineSkeleton from "../../../components/skeleton/InlineSkeleton";
 import Author, { browseAuthors, getAuthor } from "../../../lib/ghost/author";
@@ -78,7 +77,6 @@ const Page: NextPage<PageProps> = ({
         }}
         filter={postFilter}
       />
-      <Footer />
     </Base>
   );
 };

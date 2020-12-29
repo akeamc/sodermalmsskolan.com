@@ -5,7 +5,6 @@ import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
 import Button from "../components/button/Button";
 import DayMenuSection from "../components/menu/DayMenuSection";
-import Footer from "../components/footer/Footer";
 import PostListSection from "../components/blog/PostListSection";
 import { useDayMenu } from "../lib/food/hooks/menu";
 import { useDishPhotos } from "../lib/food/hooks/photos";
@@ -68,7 +67,6 @@ const Page: NextPage = () => (
       limit={6}
       showMoreButton
     />
-    <Footer />
   </Base>
 );
 

@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import React from "react";
 import Base from "../../components/Base";
 import DigibruhArticleSection from "../../components/digibruh/Section";
-import Footer from "../../components/footer/Footer";
 import SimpleHeader from "../../components/header/Simple";
 
 export const Page: NextPage = () => (
@@ -13,7 +12,6 @@ export const Page: NextPage = () => (
   >
     <SimpleHeader title="Digibruh" sub="Ett digitalt läromedel av elever, för elever." />
     <DigibruhArticleSection limit="all" />
-    <Footer />
   </Base>
 );
 
