@@ -30,6 +30,10 @@ const PostListSection: FunctionComponent<PostListSectionProps> = ({
       bottomText={
         showMoreButton ? <Button href="/blogg" primary>Visa alla inlägg</Button> : null
       }
+      header={{
+        superTitle: "Blogg",
+        title: "Samtliga inlägg",
+      }}
       {...sectionProps}
     >
       {(posts || new Array(skeletonPosts).fill(null))

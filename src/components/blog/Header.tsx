@@ -17,7 +17,13 @@ const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
 
   return (
     <div>
-      <header css={[sectionPaddingStyles.top]}>
+      <header css={{
+        paddingTop: "2rem",
+
+        [media(breakpoints.small)]: sectionPaddingStyles.top,
+
+      }}
+      >
         <Container>
           <CardGrid>
             <div css={{

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import { sectionPaddingStyles } from "../section/Section";
 import { HeaderHeading, SubTitle } from "../text/headings";
@@ -12,8 +13,12 @@ const SimpleHeader: FunctionComponent<SimpleHeaderProps> = ({ title, sub }) => (
       css={[
         sectionPaddingStyles.bottom,
         {
-          paddingTop: "5rem",
           background: "transparent",
+          paddingTop: "2rem",
+
+          [media(breakpoints.small)]: {
+            paddingTop: "5rem",
+          },
         },
       ]}
     >
