@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
-import { GA_TRACKING_ID } from "../../lib/google/analytics";
+import { ANALYTICS_ID } from "../../lib/google/constants";
 
 export interface SiteMetadata {
   title?: string;
@@ -106,7 +106,7 @@ const SiteHead: React.FunctionComponent<{
       {/* Global site tag (gtag.js) - Google Analytics */}
       <script
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`}
       />
       <script
         // eslint-disable-next-line react/no-danger
@@ -114,7 +114,7 @@ const SiteHead: React.FunctionComponent<{
           __html: `window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${GA_TRACKING_ID}');`,
+              gtag('config', '${ANALYTICS_ID}');`,
         }}
       />
     </Head>

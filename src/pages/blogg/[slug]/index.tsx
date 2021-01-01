@@ -4,7 +4,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 import PostPage from "../../../components/post/PostPage";
-import { postBelongsToBlog } from "../../../lib/blog/filter";
+import postBelongsToBlog from "../../../lib/blog/postBelongsToBlog";
 import { browsePosts, readPost } from "../../../lib/ghost/post";
 import NotFound from "../../404";
 

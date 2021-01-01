@@ -3,7 +3,7 @@ import { useRoutes } from "../../lib/sitemap/routes";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import Container from "../Container";
-import { horizontalInlineStack } from "../stack/inline";
+import horizontalInlineStack from "../stack/horizontalInlineStack";
 import FooterList from "./List";
 
 const BottomRow: FunctionComponent = () => (

@@ -1,6 +1,6 @@
 import Post from "../ghost/post";
 import Tag from "../ghost/tag";
-import { digibruhTagPrefix } from "./constants";
+import digibruhTagPrefix from "./digibruhTagPrefix";
 
 export default interface DigibruhSubject {
   name: string;

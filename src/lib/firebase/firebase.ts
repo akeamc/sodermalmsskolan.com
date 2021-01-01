@@ -15,4 +15,5 @@ if (firebase.apps.length <= 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export const auth = firebase.auth();

@@ -1,5 +1,5 @@
 import useSWR, { responseInterface } from "swr";
-import { digibruhTagPrefix } from "../../digibruh/constants";
+import digibruhTagPrefix from "../../digibruh/digibruhTagPrefix";
 import { LimitParam } from "../../ghost/common";
 import Post, { browsePosts } from "../../ghost/post";
 

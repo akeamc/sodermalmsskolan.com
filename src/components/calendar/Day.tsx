@@ -122,7 +122,8 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
         },
       }}
       >
-        {instanceProps.map((props, index) => <CalendarEventView {...props} key={index} />)}
+        {instanceProps
+          .map((props) => <CalendarEventView {...props} key={props.data.signature} />)}
       </ul>
     </section>
   );

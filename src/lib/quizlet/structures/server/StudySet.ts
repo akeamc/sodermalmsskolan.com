@@ -4,7 +4,7 @@ import got from "got";
 import { StudySet } from "../shared/StudySet";
 import API_ENDPOINT from "../../../food/endpoint";
 import { browsePosts } from "../../../ghost/post";
-import { digibruhTagPrefix } from "../../../digibruh/constants";
+import digibruhTagPrefix from "../../../digibruh/digibruhTagPrefix";
 
 export interface PotatoStudySetDetails {
   id: string;

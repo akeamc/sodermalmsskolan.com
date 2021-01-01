@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { horizontalInlineStack } from "../stack/inline";
+import horizontalInlineStack from "../stack/horizontalInlineStack";
 
 const ButtonRow: FunctionComponent = ({ children }) => (
   <div

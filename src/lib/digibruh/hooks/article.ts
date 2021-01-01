@@ -1,7 +1,7 @@
 import useSWR, { responseInterface } from "swr";
 import { LimitParam } from "../../ghost/common";
 import Post, { browsePosts } from "../../ghost/post";
-import { digibruhTagPrefix } from "../constants";
+import digibruhTagPrefix from "../digibruhTagPrefix";
 
 export const browseDigibruhArticles = (limit: LimitParam = "all"): Promise<Post[]> => browsePosts({
   limit,
