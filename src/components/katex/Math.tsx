@@ -11,10 +11,16 @@ const Math: FunctionComponent<{math: string, display?: boolean}> = ({ math, disp
   });
 
   return (
-    // eslint-disable-next-line react/no-danger
-    <span dangerouslySetInnerHTML={{
-      __html: html,
-    }}
+    <span
+      css={{
+        display: "inline-block",
+        maxWidth: "100%",
+        overflow: "auto",
+      }}
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{
+        __html: html,
+      }}
     />
   );
 };
