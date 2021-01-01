@@ -54,6 +54,8 @@ const Page: NextPage<PageProps> = ({
 
   const postFilter = (post: Post) => !!post?.authors.find(({ slug }) => slug === author?.slug);
 
+  const authorNameComponent = author?.name || <InlineSkeleton width="4em" />;
+
   return (
     <Base metadata={{
       title: author?.name,
@@ -65,14 +67,26 @@ const Page: NextPage<PageProps> = ({
       <SimpleHeader title={author?.name || <InlineSkeleton />} sub={author?.bio} />
       <PostListSection
         header={{
-          title: `Blogginlägg av ${author?.name}`,
+          title: (
+            <>
+              Blogginlägg av
+              {" "}
+              {authorNameComponent}
+            </>
+          ),
           superTitle: "Blogg",
         }}
         filter={postFilter}
       />
       <DigibruhArticleSection
         header={{
-          title: `Digibruh-artiklar av ${author?.name}`,
+          title: (
+            <>
+              Digibruh-artiklar av
+              {" "}
+              {authorNameComponent}
+            </>
+          ),
           superTitle: "Digibruh",
         }}
         filter={postFilter}
