@@ -34,6 +34,8 @@ const baseTheme: CSSObject = {
 
   "--segmented-control-track": "var(--accents-2)",
   "--segmented-control-indicator": "var(--color-bg-primary)",
+
+  "--select-selected-background": transparentize(0.9, "#4969ed"),
 };
 
 export default baseTheme;

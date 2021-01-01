@@ -1,12 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import Select from "react-select";
+import Select, { SelectOption } from "../../form/Select";
 import PeriodChoice from "../../../lib/schedule/choice";
 import { useScheduleContext } from "../../../lib/schedule/options";
-
-export interface SelectOption {
-  value: string;
-  label: string;
-}
 
 const FilterCategory: FunctionComponent<{
   choice: PeriodChoice;
