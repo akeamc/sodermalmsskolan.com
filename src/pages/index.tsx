@@ -41,7 +41,7 @@ const Page: NextPage = () => (
           <Button primary href="/meny">
             Visa menyn
           </Button>
-          <Button href="/">Något annat</Button>
+          <Button href="/schema">Visa schemat</Button>
         </>
         )}
       graphic={(
