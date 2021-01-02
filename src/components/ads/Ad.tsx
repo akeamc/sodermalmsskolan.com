@@ -32,7 +32,6 @@ const Ad: FunctionComponent<AdProps> = ({
       className={className}
       css={{
         display: "block",
-        backgroundColor: "var(--skeleton-base)",
       }}
       data-ad-format={format}
       data-ad-layout-key={layoutKey}
