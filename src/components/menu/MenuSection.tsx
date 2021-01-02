@@ -7,7 +7,7 @@ export interface MenuSectionProps extends SectionProps {
   limit?: number;
 }
 
-const MenuSection: FunctionComponent<MenuSectionProps> = ({ limit = 90, ...sectionProps }) => {
+const MenuSection: FunctionComponent<MenuSectionProps> = ({ limit = 30, ...sectionProps }) => {
   const { data } = useMenu({
     limit,
   });
