@@ -3,16 +3,22 @@ import { ADSENSE_CLIENT, ADSENSE_SLOT } from "../../lib/google/constants";
 
 export type AdFormat = "auto" | "fluid";
 
+export type AdLayout = "in-article";
+
 export interface AdProps {
   className?: string;
   format?: AdFormat,
-  layoutKey: string,
+  layoutKey?: string,
+  layout?: string,
+  fullWidthResponsive?: boolean,
 }
 
 const Ad: FunctionComponent<AdProps> = ({
   className = "adsbygoogle",
   format = "auto",
   layoutKey,
+  layout,
+  fullWidthResponsive,
 }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -30,6 +36,8 @@ const Ad: FunctionComponent<AdProps> = ({
       }}
       data-ad-format={format}
       data-ad-layout-key={layoutKey}
+      data-ad-layout={layout}
+      data-full-width-responsive={fullWidthResponsive}
       data-ad-client={ADSENSE_CLIENT}
       data-ad-slot={ADSENSE_SLOT}
     />

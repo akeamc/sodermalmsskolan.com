@@ -19,7 +19,6 @@ const Base: FunctionComponent<BaseProps> = ({ metadata, children }) => (
       css={{
         backgroundColor: "var(--color-bg-primary)",
         color: "var(--color-text-primary)",
-        overflowX: "hidden",
       }}
     >
       {children}

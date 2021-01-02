@@ -36,6 +36,8 @@ const baseTheme: CSSObject = {
   "--segmented-control-indicator": "var(--color-bg-primary)",
 
   "--select-selected-background": transparentize(0.9, "#4969ed"),
+
+  "--navbar-height": "3.75rem",
 };
 
 export default baseTheme;

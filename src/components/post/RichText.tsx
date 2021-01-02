@@ -156,18 +156,26 @@ const transform: Transform = (node, index) => {
     return <KatexText text={node.data} key={index} />;
   }
 
-  return convertNodeToElement(node, index, transform);
+  const element = convertNodeToElement(node, index, transform);
+
+  return element;
 };
+
+export interface RichTextProps {
+  html: string;
+}
 
 /**
  * XSS-safe HTML renderer.
  */
-const RichText: FunctionComponent<{html: string}> = ({ html, ...props }) => {
+const RichText: FunctionComponent<RichTextProps> = ({ html, ...props }) => {
   const parsedHtml = ReactHtmlParser(html, { transform });
 
   return (
     <div
       css={{
+        overflowX: "hidden",
+
         p: {
           lineHeight: 2,
           letterSpacing: "0.00625em",
