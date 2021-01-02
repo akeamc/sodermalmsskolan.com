@@ -1,25 +1,27 @@
 import Link from "next/link";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import ReactHtmlParser, { convertNodeToElement, Transform } from "react-html-parser";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import KatexText from "../katex/Text";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
+import Skeleton from "../skeleton/Skeleton";
 import Table from "../Table";
 
 const Figure: FunctionComponent = (props) => (
   <div
     css={{
-      marginTop: "4rem",
-      marginBottom: "4rem",
+      "--figure-margin-x": "0px",
+      "--figure-margin-y": "4rem",
+
+      margin: "var(--figure-margin-y) var(--figure-margin-x)",
 
       [media(breakpoints.small)]: {
-        marginLeft: "-2rem",
-        marginRight: "-2rem",
+        "--figure-margin-x": "-2rem",
       },
 
       [media(breakpoints.medium)]: {
-        marginLeft: "-4rem",
-        marginRight: "-4rem",
+        "--figure-margin-x": "-3rem",
       },
     }}
     {...props}
@@ -169,16 +171,31 @@ export interface RichTextProps {
  * XSS-safe HTML renderer.
  */
 const RichText: FunctionComponent<RichTextProps> = ({ html, ...props }) => {
-  const parsedHtml = ReactHtmlParser(html, { transform });
+  const parsedHtml = useMemo(() => {
+    if (html) {
+      return ReactHtmlParser(html, { transform });
+    }
+
+    return (
+      <>
+        <Skeleton height="20rem" />
+        <h2>
+          <InlineSkeleton />
+        </h2>
+        <p>
+          <InlineSkeleton count={5} />
+        </p>
+      </>
+    );
+  }, [html]);
 
   return (
     <div
       css={{
-        overflowX: "hidden",
-
         p: {
           lineHeight: 2,
           letterSpacing: "0.00625em",
+          overflowX: "hidden",
         },
 
         "> *": {
@@ -208,21 +225,6 @@ const RichText: FunctionComponent<RichTextProps> = ({ html, ...props }) => {
           [media(breakpoints.medium)]: {
             fontSize: "1.5rem",
           },
-        },
-
-        h4: {
-
-        },
-
-        h5: {
-
-        },
-
-        h6: {
-
-        },
-
-        "ul, ol": {
         },
 
         li: {

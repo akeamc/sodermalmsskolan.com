@@ -4,7 +4,7 @@ import React, { FunctionComponent } from "react";
 export const containerStyles = css({
   maxWidth: "1280px",
   margin: "0 auto",
-  padding: "0 2rem",
+  padding: "0 var(--page-gutter)",
 });
 
 /**

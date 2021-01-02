@@ -2,7 +2,20 @@ import React, { FunctionComponent } from "react";
 import Post from "../../lib/ghost/post";
 import { breakpoints, media } from "../../styles/breakpoints";
 import VerticalAd from "../ads/VerticalAd";
+import Card from "../Card";
+import MenuText from "../menu/Text";
+import { CardTitle } from "../text/headings";
+import { CardDescription } from "../text/paragraphs";
 import RichText from "./RichText";
+
+const SidebarSection: FunctionComponent = (props) => (
+  <div
+    css={{
+      margin: "2rem 0",
+    }}
+    {...props}
+  />
+);
 
 const PostView: FunctionComponent<{post: Post}> = ({ post }) => (
   <div css={{
@@ -47,7 +60,17 @@ const PostView: FunctionComponent<{post: Post}> = ({ post }) => (
         },
       }}
       >
-        <VerticalAd />
+        <SidebarSection>
+          <VerticalAd />
+        </SidebarSection>
+        <SidebarSection>
+          <Card href="/meny">
+            <CardTitle>Dagens lunch</CardTitle>
+            <CardDescription>
+              <MenuText />
+            </CardDescription>
+          </Card>
+        </SidebarSection>
       </div>
     </div>
   </div>
