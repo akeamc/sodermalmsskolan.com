@@ -8,10 +8,12 @@ import TelegramList from "../../components/telegram/TelegramList";
 import { DISCORD_INVITE_LINK } from "../../lib/discord/constants";
 
 const Page: NextPage = () => (
-  <Base metadata={{
-    title: "Nyheter",
-    description: "Senaste nytt om Södermalmsskolan.",
-  }}
+  <Base
+    metadata={{
+      title: "Nyheter",
+      description: "Senaste nytt om Södermalmsskolan.",
+    }}
+    leadingAd
   >
     <SimpleHeader title="Nyheter" sub="Vi är Södermalmsskolans inofficiella nyhetsbyrå." />
     <SidebarSection

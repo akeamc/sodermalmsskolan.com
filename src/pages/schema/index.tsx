@@ -5,10 +5,12 @@ import SimpleHeader from "../../components/header/Simple";
 import ScheduleSection from "../../components/schedule/Section";
 
 const Page: NextPage = () => (
-  <Base metadata={{
-    title: "Schema",
-    description: "Schema.",
-  }}
+  <Base
+    metadata={{
+      title: "Schema",
+      description: "Schema.",
+    }}
+    leadingAd
   >
     <SimpleHeader title="Schema" />
     <ScheduleSection />

@@ -37,7 +37,7 @@ const Ad: FunctionComponent<AdProps> = ({
       data-ad-format={format}
       data-ad-layout-key={layoutKey}
       data-ad-layout={layout}
-      data-full-width-responsive={fullWidthResponsive}
+      data-full-width-responsive={fullWidthResponsive ? "true" : undefined}
       data-ad-client={ADSENSE_CLIENT}
       data-ad-slot={ADSENSE_SLOT}
     />
