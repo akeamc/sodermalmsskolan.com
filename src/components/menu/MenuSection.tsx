@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { Fragment, FunctionComponent } from "react";
 import { useMenu } from "../../lib/food/hooks/menu";
 import Section, { SectionProps } from "../section/Section";
 import Menu from "./Menu";
@@ -20,7 +20,12 @@ const MenuSection: FunctionComponent<MenuSectionProps> = ({ limit = 90, ...secti
       }}
       >
         {(data || new Array(limit).fill(null))
-          .map((menu, index) => <Menu menu={menu} key={menu?.date?.getTime() || index} />)}
+          .map((menu, index) => (
+            <Fragment key={menu?.date?.getTime() || index}>
+              {index % 3 === 0 ? <Menu ad /> : null}
+              <Menu menu={menu} />
+            </Fragment>
+          ))}
       </div>
     </Section>
   );
