@@ -13,7 +13,6 @@ export const globalStyles = css({
     padding: 0,
     fontFamily: fonts.sans,
     wordBreak: "break-word",
-    overflowX: "hidden",
   },
 
   ":root": {
