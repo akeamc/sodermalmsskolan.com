@@ -32,6 +32,7 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/quotes": [2, "double", { "avoidEscape": true }],
     "react/jsx-props-no-spreading": "off",
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "@typescript-eslint/switch-exhaustiveness-check": "error"
   }
 }

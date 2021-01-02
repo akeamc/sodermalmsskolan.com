@@ -4,6 +4,7 @@ import {
 } from "@emotion/react";
 import { fonts } from "./text";
 import spacingVariables from "./spacing";
+import darkTheme from "./themes/dark";
 import baseTheme from "./themes/base";
 
 export const globalStyles = css({
@@ -25,13 +26,13 @@ export const globalStyles = css({
   },
 });
 
-export const GlobalStyles: FunctionComponent = () => {
-  const theme = baseTheme; // TODO: Dark mode support
+export const GlobalStyles: FunctionComponent = () => (
+  <Global styles={[globalStyles, {
+    ":root": {
+      ...baseTheme,
 
-  return (
-    <Global styles={[globalStyles, {
-      ":root": theme,
-    }]}
-    />
-  );
-};
+      "@media (prefers-color-scheme: dark)": darkTheme,
+    },
+  }]}
+  />
+);
