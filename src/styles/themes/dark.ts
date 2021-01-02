@@ -4,7 +4,7 @@ import baseTheme from "./base";
 const darkTheme: CSSObject = {
   ...baseTheme,
 
-  "--accents-1": "#111111",
+  "--accents-1": "#222222",
   "--accents-2": "#333333",
   "--accents-3": "#444444",
   "--accents-4": "#666666",
@@ -13,13 +13,13 @@ const darkTheme: CSSObject = {
   "--accents-7": "#eaeaea",
   "--accents-8": "#fafafa",
 
-  "--color-bg-primary": "#000000",
+  "--color-bg-primary": "#111111",
 
   "--color-text-primary": "#ffffff",
   "--color-text-secondary": "#cccccc",
   "--color-text-tertiary": "#a0a0a0",
 
-  "--shadow-color": "rgba(255, 255, 255, 0.5)",
+  "--shadow-color": "rgba(255, 255, 255, 0.1)",
 
   "--skeleton-highlight": "var(--accents-3)",
 
