@@ -61,7 +61,7 @@ const NavbarItem: FunctionComponent<{
 
 const MobileNavbar: FunctionComponent = () => (
   <NavbarWrapper css={{
-    borderTop: "1px solid var(--border-color)",
+    borderTop: "1px solid var(--color-border-primary)",
     bottom: 0,
 
     [media(navbarBreakpoint)]: {

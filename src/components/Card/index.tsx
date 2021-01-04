@@ -8,7 +8,7 @@ import React, { FunctionComponent, HTMLAttributes } from "react";
 export const cardStyles = (big = false): SerializedStyles => css({
   background: "var(--color-bg-primary)",
   borderRadius: "0.375rem",
-  boxShadow: "inset 0 0 0 1px var(--border-color)",
+  boxShadow: "inset 0 0 0 1px var(--color-border-primary)",
   padding: big ? "4rem 2rem" : "1rem",
   display: "flex",
   flexDirection: "column",

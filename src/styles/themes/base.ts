@@ -23,9 +23,12 @@ const baseTheme: CSSObject = {
   "--color-highlight-light": "#607cef",
 
   "--shadow-color": transparentize(0.8, "#000000"),
+
+  "--shadow-small": "0 2px 10px 0 var(--shadow-color)",
   "--shadow-large": "0 60px 120px -10px var(--shadow-color)",
 
-  "--border-color": "var(--accents-2)",
+  "--color-border-primary": "var(--accents-2)",
+  "--color-border-danger": "#d73a49",
 
   "--link-color": "var(--color-highlight)",
 

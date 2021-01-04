@@ -234,7 +234,7 @@ const RichText: FunctionComponent<RichTextProps> = ({ html, ...props }) => {
 
         hr: {
           border: 0,
-          borderTop: "1px solid var(--border-color)",
+          borderTop: "1px solid var(--color-border-primary)",
         },
       }}
       {...props}

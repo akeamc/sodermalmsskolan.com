@@ -46,7 +46,7 @@ const CalendarLabels: FunctionComponent<CalendarLabelProps> = ({
               height: "1px",
               width: "calc(100% - var(--labels-width))",
               left: "var(--labels-width)",
-              backgroundColor: "var(--border-color)",
+              backgroundColor: "var(--color-border-primary)",
               position: "absolute",
               top: 0,
               display: "none",

@@ -1,18 +1,20 @@
 import React from "react";
 import { AppProps } from "next/app";
-import { GlobalStyles } from "../styles/global";
 
-// DayJS is so lightweight that locales must be imported manually.
 import "dayjs/locale/sv";
+import { ToastContainer } from "react-toastify";
 import useFreshTelegrams from "../lib/news/hooks/telegram";
 import Banner from "../components/Banner";
 import TelegramText from "../components/telegram/TelegramText";
+import "react-toastify/dist/ReactToastify.css";
+import { GlobalStyles } from "../styles/global";
+import { AuthProvider } from "../lib/auth/AuthContext";
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const telegrams = useFreshTelegrams();
 
   return (
-    <>
+    <AuthProvider>
       <GlobalStyles />
       {telegrams?.length > 0 ? (
         <Banner>
@@ -30,8 +32,9 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
             ))}
         </Banner>
       ) : null}
+      <ToastContainer position="bottom-left" />
       <Component {...pageProps} />
-    </>
+    </AuthProvider>
   );
 }
 

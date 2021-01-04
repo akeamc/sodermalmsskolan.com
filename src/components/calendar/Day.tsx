@@ -108,7 +108,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
         top: "var(--navbar-height)",
         backgroundColor: "var(--color-bg-primary)",
         zIndex: 2,
-        boxShadow: "0 1px 0 0 var(--border-color)",
+        boxShadow: "0 1px 0 0 var(--color-border-primary)",
 
         [media(breakpoints.large)]: {
           display: "inline-block",

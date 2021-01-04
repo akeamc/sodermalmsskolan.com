@@ -64,7 +64,14 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
         ) : null}
         <PromoHeaderHeading>{title}</PromoHeaderHeading>
         {sub ? <SubTitle>{sub}</SubTitle> : null}
-        {buttons ? <ButtonRow>{buttons}</ButtonRow> : null}
+        {buttons ? (
+          <ButtonRow css={{
+            marginTop: "2rem",
+          }}
+          >
+            {buttons}
+          </ButtonRow>
+        ) : null}
       </div>
       <div
         css={{

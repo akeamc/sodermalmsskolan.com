@@ -44,7 +44,7 @@ const Select: FunctionComponent<SelectProps> = (props) => (
 
         return {
           ...provided,
-          border: `1px solid ${isFocused ? highlightedBorderColor : "var(--border-color)"}`,
+          border: `1px solid ${isFocused ? highlightedBorderColor : "var(--color-border-primary)"}`,
           backgroundColor: "var(--accents-1)",
           borderRadius: "var(--select-border-radius)",
           transition: "border 0.1s",
@@ -57,7 +57,7 @@ const Select: FunctionComponent<SelectProps> = (props) => (
       },
       menu: (provided) => ({
         ...provided,
-        border: "1px solid var(--border-color)",
+        border: "1px solid var(--color-border-primary)",
         boxShadow: "none",
         margin: "0.25rem 0",
         borderRadius: "var(--select-border-radius)",

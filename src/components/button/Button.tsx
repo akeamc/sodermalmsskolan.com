@@ -1,37 +1,60 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React, { FunctionComponent, ReactNode } from "react";
+import React, { FunctionComponent } from "react";
 import Link from "next/link";
-import { css } from "@emotion/react";
+import { css, CSSObject, SerializedStyles } from "@emotion/react";
 import { fonts } from "../../styles/text";
 
-export interface ButtonProps {
-  children: ReactNode;
+export type ButtonSize = "medium" | "small";
 
+export interface ButtonProps {
   /**
    * Whether or not the button is primary.
    */
   primary?: boolean;
-
   href?: string;
+  size?: ButtonSize;
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset",
 }
 
-const baseStyles = css({
-  color: "var(--color-text-primary)",
-  backgroundColor: "transparent",
-  display: "inline-block",
-  border: "none",
-  outline: "none",
-  fontFamily: fonts.sans,
-  fontWeight: 800,
-  fontSize: "1rem",
-  whiteSpace: "nowrap",
-  borderRadius: "0.375rem",
-  cursor: "pointer",
-  textDecoration: "none",
-  transition: "all 0.1s ease",
-  padding: "1rem 1.5rem",
-  lineHeight: 1,
-});
+const baseStyles = (size: ButtonSize) => {
+  let paddingX: string;
+  let paddingY: string;
+
+  // eslint-disable-next-line default-case
+  switch (size) {
+    case "medium": {
+      paddingX = "1.5rem";
+      paddingY = "1rem";
+      break;
+    }
+
+    case "small": {
+      paddingX = "1rem";
+      paddingY = "0.75rem";
+      break;
+    }
+  }
+
+  return css({
+    color: "var(--color-text-primary)",
+    backgroundColor: "transparent",
+    display: "inline-block",
+    border: "none",
+    outline: "none",
+    fontFamily: fonts.sans,
+    fontWeight: 800,
+    fontSize: "1rem",
+    whiteSpace: "nowrap",
+    borderRadius: "0.375rem",
+    cursor: "pointer",
+    textDecoration: "none",
+    transition: "all 0.1s ease",
+    padding: `${paddingY} ${paddingX}`,
+    lineHeight: 1,
+  });
+};
 
 const primaryStyles = css({
   backgroundColor: "var(--color-highlight)",
@@ -58,11 +81,18 @@ const secondaryStyles = css({
 const Button: FunctionComponent<ButtonProps> = ({
   href,
   primary = false,
+  size = "medium",
+  disabled = false,
   ...rest
 }) => {
-  const styles = [
-    baseStyles,
+  const styles: (SerializedStyles | CSSObject)[] = [
+    baseStyles(size),
     primary ? primaryStyles : secondaryStyles,
+    disabled ? {
+      opacity: 0.1,
+      pointerEvents: "none",
+      userSelect: "none",
+    } : null,
   ];
 
   const innerProps = {

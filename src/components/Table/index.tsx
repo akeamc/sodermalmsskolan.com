@@ -8,13 +8,13 @@ const Table: FunctionComponent = (props) => (
   >
     <table
       css={{
-        border: "1px solid var(--border-color)",
+        border: "1px solid var(--color-border-primary)",
         borderSpacing: 0,
         borderRadius: "0.5rem",
         overflow: "hidden",
 
         "tr:not(:last-child) td, thead th": {
-          borderBottom: "1px solid var(--border-color)",
+          borderBottom: "1px solid var(--color-border-primary)",
         },
 
         "tbody tr": {
@@ -25,7 +25,7 @@ const Table: FunctionComponent = (props) => (
           },
 
           "&:hover": {
-            background: "var(--border-color)",
+            background: "var(--color-border-primary)",
           },
         },
 
@@ -34,7 +34,7 @@ const Table: FunctionComponent = (props) => (
           textAlign: "left",
 
           "&:not(:last-child)": {
-            borderRight: "1px solid var(--border-color)",
+            borderRight: "1px solid var(--color-border-primary)",
           },
         },
 

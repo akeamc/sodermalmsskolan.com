@@ -5,6 +5,7 @@ import Route from "../../lib/sitemap/route";
 import { useBasicRoutes } from "../../lib/sitemap/routes";
 import { media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
+import AuthNavSection from "../auth/AuthNavSection";
 import Container from "../Container";
 import LogoIcon from "../logo/Icon";
 import navbarBreakpoint from "./breakpoint";
@@ -45,23 +46,19 @@ const RouteLink: FunctionComponent<{route: Route}> = ({ route }) => {
   );
 };
 
-const DesktopNavbar: FunctionComponent = () => {
+const MainNavbar: FunctionComponent = () => {
   const routes = useBasicRoutes();
 
   return (
     <NavbarWrapper css={{
-      borderBottom: "1px solid var(--border-color)",
+      borderBottom: "1px solid var(--color-border-primary)",
       top: 0,
-      display: "none",
-
-      [media(navbarBreakpoint)]: {
-        display: "block",
-      },
     }}
     >
       <Container>
         <nav css={{
           display: "flex",
+          height: "var(--navbar-height)",
         }}
         >
           <Link href="/" passHref>
@@ -79,19 +76,24 @@ const DesktopNavbar: FunctionComponent = () => {
             </a>
           </Link>
           <ul css={{
-            display: "flex",
+            display: "none",
             listStyle: "none",
             padding: 0,
             margin: 0,
             height: "var(--navbar-height)",
+
+            [media(navbarBreakpoint)]: {
+              display: "flex",
+            },
           }}
           >
             {routes.map((route) => <RouteLink key={route.href} route={route} />)}
           </ul>
+          <AuthNavSection />
         </nav>
       </Container>
     </NavbarWrapper>
   );
 };
 
-export default DesktopNavbar;
+export default MainNavbar;

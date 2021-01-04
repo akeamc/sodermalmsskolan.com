@@ -24,7 +24,7 @@ const TelegramList: FunctionComponent = () => {
     <ul css={{
       margin: 0,
       padding: 0,
-      borderTop: "1px solid var(--border-color)",
+      borderTop: "1px solid var(--color-border-primary)",
     }}
     >
       {telegrams.map((telegram, index) => (
@@ -35,7 +35,7 @@ const TelegramList: FunctionComponent = () => {
             listStyle: "none",
             display: "flex",
             fontSize: "0.875rem",
-            borderBottom: "1px solid var(--border-color)",
+            borderBottom: "1px solid var(--color-border-primary)",
             alignItems: "center",
           }}
         >
