@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { toast } from "react-toastify";
 import { useAuth } from "../../lib/auth/AuthContext";
+import { loginLink, signupLink } from "../../lib/auth/href";
 import Button from "../button/Button";
 
 const AuthNavSection: FunctionComponent = () => {
@@ -25,8 +25,8 @@ const AuthNavSection: FunctionComponent = () => {
         </code>
       ) : (
         <>
-          <Button size="small">Logga in</Button>
-          <Button primary size="small" onClick={() => toast("Bruh")}>Skapa konto</Button>
+          <Button size="small" href={loginLink()}>Logga in</Button>
+          <Button primary size="small" href={signupLink()}>Skapa konto</Button>
         </>
       )}
     </div>

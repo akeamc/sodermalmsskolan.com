@@ -7,12 +7,12 @@ export interface AuthQueryParams extends Record<string, string> {
   [redirectUriQueryKey]?: string;
 }
 
-export const loginLink = (query: AuthQueryParams): string => queryString.stringifyUrl({
+export const loginLink = (query?: AuthQueryParams): string => queryString.stringifyUrl({
   url: "/konto/inloggning",
   query,
 });
 
-export const signupLink = (query: AuthQueryParams): string => queryString.stringifyUrl({
+export const signupLink = (query?: AuthQueryParams): string => queryString.stringifyUrl({
   url: "/konto/registrering",
   query,
 });
