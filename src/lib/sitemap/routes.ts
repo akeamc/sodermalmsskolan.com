@@ -35,7 +35,11 @@ export const useBasicRoutes = (): Route[] => ([
 export const useRoutes = (): Routes => [
   {
     name: "Navigera",
-    routes: useBasicRoutes(),
+    routes: [{
+      name: "Start",
+      href: "/",
+    },
+    ...useBasicRoutes()],
   },
   {
     name: "Organisationen",
