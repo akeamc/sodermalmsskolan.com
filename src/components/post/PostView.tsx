@@ -11,7 +11,9 @@ import RichText from "./RichText";
 const SidebarSection: FunctionComponent = (props) => (
   <div
     css={{
-      margin: "2rem 0",
+      "&:not(:first-of-type)": {
+        marginTop: "2rem",
+      },
     }}
     {...props}
   />
@@ -48,12 +50,12 @@ const PostView: FunctionComponent<{post: Post}> = ({ post }) => (
     </div>
     <div css={{
       flex: "0 1 20rem",
+      marginTop: "2rem",
     }}
     >
       <div css={{
         position: "sticky",
         top: "calc(var(--navbar-height) + 2rem)",
-        marginTop: "2rem",
 
         [media(breakpoints.large)]: {
           marginTop: 0,
