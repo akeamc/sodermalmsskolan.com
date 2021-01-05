@@ -64,7 +64,6 @@ const Page: NextPage = () => {
               >
                 <a>Logga in</a>
               </Link>
-              .
             </p>
           </Form>
         )}

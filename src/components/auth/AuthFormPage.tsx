@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Base from "../Base";
+import Card from "../Card";
 import { SmallHeading } from "../text/headings";
 
 export interface AuthFormPageProps {
@@ -27,9 +28,8 @@ const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
         minHeight: "100vh",
       }}
       >
-        <div css={{
+        <Card css={{
           padding: "2rem",
-          boxShadow: "var(--shadow-small)",
           width: "30rem",
           position: "relative",
           zIndex: 1,
@@ -46,7 +46,7 @@ const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
           <div>
             {children}
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   </Base>
