@@ -4,24 +4,30 @@ import { Formik, Form, FormikProps } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AuthFormPage from "../../components/auth/AuthFormPage";
-import usePrefilledEmail from "../../lib/auth/hooks/usePrefilledEmail";
+import usePrefilledEmail, { prefilledEmailQueryKey } from "../../lib/auth/hooks/usePrefilledEmail";
 import { SignupFormValues, translateFirebaseError } from "../../lib/auth/forms";
 import Button from "../../components/button/Button";
 import { auth } from "../../lib/firebase/firebase";
 import EmailAndPassword from "../../components/auth/EmailAndPassword";
 import { loginLink } from "../../lib/auth/href";
-import useRedirectUri from "../../lib/auth/hooks/useRedirectUri";
+import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
+import { useAuth } from "../../lib/auth/AuthContext";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const initialEmail = usePrefilledEmail();
   const redirectUri = useRedirectUri();
   const formRef = useRef<FormikProps<SignupFormValues>>();
+  const { user } = useAuth();
 
   const initialValues: SignupFormValues = {
     email: initialEmail,
     password: "",
   };
+
+  if (user) {
+    router.push(redirectUri);
+  }
 
   return (
     <AuthFormPage title="Registrering">
@@ -58,8 +64,8 @@ const Page: NextPage = () => {
               Har du redan ett konto?
               {" "}
               <Link href={loginLink({
-                email: formRef.current?.values?.email,
-                redirect: redirectUri,
+                [prefilledEmailQueryKey]: formRef.current?.values?.email,
+                [redirectUriQueryKey]: redirectUri,
               })}
               >
                 <a>Logga in</a>

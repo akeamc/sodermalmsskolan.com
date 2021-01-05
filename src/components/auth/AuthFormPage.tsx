@@ -1,6 +1,8 @@
+import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import Base from "../Base";
 import Card from "../Card";
+import LogoIcon from "../logo/Icon";
 import { SmallHeading } from "../text/headings";
 
 export interface AuthFormPageProps {
@@ -18,6 +20,17 @@ const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
       backgroundSize: "20px 20px",
     }}
     >
+      <Link href="/" passHref>
+        <a css={{
+          position: "absolute",
+          top: "var(--page-gutter)",
+          left: "var(--page-gutter)",
+          display: "flex",
+        }}
+        >
+          <LogoIcon height="2.5rem" />
+        </a>
+      </Link>
       <div css={{
         padding: "var(--page-gutter)",
         boxSizing: "border-box",

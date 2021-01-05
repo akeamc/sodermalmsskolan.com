@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
+import { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import { loginLink } from "../../lib/auth/href";
 import ClientLetter, { useLetters } from "../../lib/news/structures/client/letter";
 import Card from "../Card";
@@ -29,7 +30,7 @@ const LetterSection: FunctionComponent = () => {
             Du måste
             {" "}
             <Link href={loginLink({
-              redirect: router.asPath,
+              [redirectUriQueryKey]: router.asPath,
             })}
             >
               <a>logga in</a>

@@ -40,7 +40,7 @@ const Base: FunctionComponent<BaseProps> = ({
       {children}
     </main>
     {footer ? <Footer /> : null}
-    <MobileNavbar />
+    {navbar ? <MobileNavbar /> : null}
   </>
 );
 

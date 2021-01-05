@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export const redirectUriQueryKey = "redirect";
+export const redirectUriQueryKey = "next";
 
 const useRedirectUri = (): string => {
   const { query } = useRouter();

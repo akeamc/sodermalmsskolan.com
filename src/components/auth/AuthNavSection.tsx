@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { loginLink, signupLink } from "../../lib/auth/href";
 import Button from "../button/Button";
+import UserAvatar from "./UserAvatar";
 
 const AuthNavSection: FunctionComponent = () => {
   const { user } = useAuth();
@@ -18,11 +19,7 @@ const AuthNavSection: FunctionComponent = () => {
     }}
     >
       {user ? (
-        <code>
-          inloggad som
-          {" "}
-          {user.uid}
-        </code>
+        <UserAvatar href="/konto" />
       ) : (
         <>
           <Button size="small" href={loginLink()}>Logga in</Button>
