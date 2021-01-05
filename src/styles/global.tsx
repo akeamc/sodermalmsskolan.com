@@ -23,6 +23,15 @@ export const globalStyles = css({
     background: "var(--color-highlight)",
     color: "#ffffff",
   },
+
+  a: {
+    color: "var(--color-highlight)",
+    transition: "opacity 0.1s",
+
+    "&:hover": {
+      opacity: 0.7,
+    },
+  },
 });
 
 export const GlobalStyles: FunctionComponent = () => (

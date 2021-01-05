@@ -64,16 +64,6 @@ const TextField: FunctionComponent<TextFieldProps> = ({
           color: "var(--color-text-danger)",
           marginTop: "0.5rem",
           display: "flex",
-
-          a: {
-            color: "inherit",
-            fontWeight: 500,
-            transition: "opacity 0.1s",
-
-            "&:hover": {
-              opacity: "0.7",
-            },
-          },
         }}
         >
           <AlertCircle css={{

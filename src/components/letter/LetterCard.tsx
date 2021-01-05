@@ -27,6 +27,7 @@ const LetterCard: FunctionComponent<LetterCardProps> = ({ letter }) => (
         left: 0,
         content: "\"\"",
         backgroundImage: "linear-gradient(rgba(0, 0, 0, 0), var(--color-bg-primary))",
+        pointerEvents: "none",
       },
     }}
     >

@@ -56,6 +56,7 @@ const Page: NextPage = () => {
             </Button>
             <p>
               Har du redan ett konto?
+              {" "}
               <Link href={loginLink({
                 email: formRef.current?.values?.email,
                 redirect: redirectUri,

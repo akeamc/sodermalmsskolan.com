@@ -1,15 +1,19 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
+import { useAuth } from "../../lib/auth/AuthContext";
+import { loginLink } from "../../lib/auth/href";
 import ClientLetter, { useLetters } from "../../lib/news/structures/client/letter";
 import Card from "../Card";
 import CardGrid from "../grid/CardGrid";
 import { CardTitle } from "../text/headings";
+import { CardDescription } from "../text/paragraphs";
 import LetterCard from "./LetterCard";
 
 const LetterSection: FunctionComponent = () => {
-  const { data, error } = useLetters();
-
-  const httpCode = error?.response?.status;
-  const forbidden = httpCode === 401 || httpCode === 403;
+  const { data } = useLetters();
+  const { user } = useAuth();
+  const router = useRouter();
 
   const letters: ClientLetter[] = data || new Array(12).fill(null);
 
@@ -18,27 +22,27 @@ const LetterSection: FunctionComponent = () => {
       position: "relative",
     }}
     >
-      <CardGrid>
+      <CardGrid overlay={user ? undefined : (
+        <Card>
+          <CardTitle>Inloggning krävs</CardTitle>
+          <CardDescription>
+            Du måste
+            {" "}
+            <Link href={loginLink({
+              redirect: router.asPath,
+            })}
+            >
+              <a>logga in</a>
+            </Link>
+            {" "}
+            för att visa veckobreven.
+          </CardDescription>
+        </Card>
+      )}
+      >
         {letters
           .map((letter, index) => <LetterCard letter={letter} key={letter?.id || index} />)}
       </CardGrid>
-      {forbidden ? (
-        <div css={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        >
-          <Card>
-            <CardTitle>du måste logga in för att visa veckobreven</CardTitle>
-          </Card>
-        </div>
-      ) : null}
     </div>
   );
 };
