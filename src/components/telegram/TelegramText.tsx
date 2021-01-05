@@ -9,7 +9,7 @@ const TelegramText: FunctionComponent<{telegram: Telegram}> = ({ telegram }) => 
 
   return (
     <>
-      {(dayjs(telegram.timestamp).locale(language).format("HH:mm DD MMM YYYY"))}
+      {(dayjs(telegram.timestamp).locale(language).format("HH:mm D MMM YYYY"))}
       {": "}
       <Emoji>{telegram.content}</Emoji>
     </>

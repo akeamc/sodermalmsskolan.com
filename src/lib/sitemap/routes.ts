@@ -61,6 +61,15 @@ export const useRoutes = (): Routes => [
       },
     ],
   },
+  {
+    name: "Konto",
+    routes: [
+      {
+        name: "Konto",
+        href: "/konto",
+      },
+    ],
+  },
 ];
 
 export default Routes;

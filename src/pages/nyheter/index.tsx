@@ -1,11 +1,10 @@
 import { NextPage } from "next";
-import Link from "next/link";
 import React from "react";
 import Base from "../../components/Base";
 import SimpleHeader from "../../components/header/Simple";
+import LetterSection from "../../components/letter/LetterSection";
 import SidebarSection from "../../components/section/SidebarSection";
 import TelegramList from "../../components/telegram/TelegramList";
-import { DISCORD_INVITE_LINK } from "../../lib/discord/constants";
 
 const Page: NextPage = () => (
   <Base
@@ -17,14 +16,7 @@ const Page: NextPage = () => (
   >
     <SimpleHeader title="Nyheter" sub="Vi är Södermalmsskolans inofficiella nyhetsbyrå." />
     <SidebarSection
-      main={(
-        <p>
-          Veckobreven finns för tillfället på
-          {" "}
-          <Link href={DISCORD_INVITE_LINK}><a>vår Discordserver</a></Link>
-          .
-        </p>
-)}
+      main={<LetterSection />}
       sidebar={<TelegramList />}
       sidebarTitle="Senaste nytt"
     />

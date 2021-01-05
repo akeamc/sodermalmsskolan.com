@@ -23,7 +23,7 @@ const MenuTitle: FunctionComponent<{
 
   return (
     <>
-      {date ? dayjs(date).locale(language).format("dddd DD MMMM") : <InlineSkeleton height="100%" />}
+      {date ? dayjs(date).locale(language).format("dddd D MMMM") : <InlineSkeleton height="100%" />}
     </>
   );
 };

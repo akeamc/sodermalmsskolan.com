@@ -1,4 +1,4 @@
-import ky from "ky-universal";
+import ky, { HTTPError } from "ky-universal";
 import useSWR from "swr";
 import getAuthorizationHeader from "../../../auth/header";
 import { IdQuery } from "../../../common/query";
@@ -54,7 +54,11 @@ export default class ClientLetter extends Letter {
   }
 }
 
-export const useLetters: UseSWRResource<ClientLetter[]> = () => useSWR(ClientLetter.fetchAllUrl,
+export const useLetters: UseSWRResource<
+ClientLetter[],
+Record<string, never>,
+HTTPError
+> = () => useSWR(ClientLetter.fetchAllUrl,
   () => ClientLetter.fetchAll());
 
 export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => useSWR(

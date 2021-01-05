@@ -27,6 +27,7 @@ const withAuth = (handler: AuthenticatedApiHandler): NextApiHandler => async (re
         return res.status(500).send("unknown error");
       });
   }
+
   return res
     .status(403)
     .send("HTTP `Authorization` header not set or invalid");
