@@ -7,19 +7,21 @@ import { CardDescription } from "../text/paragraphs";
 
 export interface LetterCardProps {
   letter: Letter;
+  rows?: number;
 }
 
-const LetterCard: FunctionComponent<LetterCardProps> = ({ letter }) => (
+const LetterCard: FunctionComponent<LetterCardProps> = ({ letter, rows = 5 }) => (
   <Card href={letter?.url}>
     <CardTitle>{letter?.title || <InlineSkeleton />}</CardTitle>
     <CardDescription css={{
       display: "-webkit-box",
-      WebkitLineClamp: 5,
+      WebkitLineClamp: rows,
       WebkitBoxOrient: "vertical",
       overflow: "hidden",
       position: "relative",
 
       "&::before": {
+        display: letter?.attachment?.content ? "block" : "none",
         position: "absolute",
         top: 0,
         right: 0,
@@ -31,7 +33,7 @@ const LetterCard: FunctionComponent<LetterCardProps> = ({ letter }) => (
       },
     }}
     >
-      {letter?.attachment?.content || <InlineSkeleton count={3} />}
+      {letter?.attachment?.content || <InlineSkeleton count={rows} />}
     </CardDescription>
   </Card>
 );
