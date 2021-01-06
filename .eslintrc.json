@@ -9,7 +9,8 @@
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb-typescript"
+    "airbnb-typescript",
+    "plugin:jsdoc/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -26,7 +27,7 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "@typescript-eslint", "@emotion"],
+  "plugins": ["react", "@typescript-eslint", "@emotion", "jsdoc"],
   "rules": {
     "react/prop-types": "off",
     "@typescript-eslint/ban-ts-comment": "off",
