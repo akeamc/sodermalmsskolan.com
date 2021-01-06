@@ -8,6 +8,8 @@ import React, {
 import firebase from "firebase";
 import { auth } from "../firebase/firebase";
 
+export type UserSetter = (user: firebase.User) => void;
+
 export interface AuthContextData {
   user: firebase.User,
   isLoading: boolean,
@@ -20,9 +22,21 @@ const initialAuthContext: AuthContextData = {
 
 const AuthContext = createContext<AuthContextData>(initialAuthContext);
 
-const onAuthStateChange = (setUser: (user: firebase.User) => void) => auth
+/**
+ * Firebase Authentication state change handler.
+ *
+ * @param {UserSetter} setUser Function to set the user.
+ * @returns {firebase.Unsubscribe} The handler.
+ */
+const onAuthStateChange = (setUser: UserSetter) => auth
   .onAuthStateChanged(setUser);
 
+/**
+ * Authentication provider.
+ *
+ * @param {any} props Common props.
+ * @returns {React.ReactElement} The provider.
+ */
 export const AuthProvider: FunctionComponent = (props) => {
   const [user, setUser] = useState<firebase.User>(initialAuthContext.user);
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -49,6 +63,11 @@ export const AuthProvider: FunctionComponent = (props) => {
   );
 };
 
+/**
+ * React hook to use the authentication context.
+ *
+ * @returns {AuthContextData} The context.
+ */
 export const useAuth = (): AuthContextData => useContext(AuthContext);
 
 export default AuthContext;
