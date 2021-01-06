@@ -10,8 +10,8 @@ import { CardTitle } from "../text/headings";
 /**
  * A component used to display an author.
  *
- * @param root0
- * @param root0.author
+ * @param props
+ * @param props.author
  */
 const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
   const url = useAuthorUrl(author?.slug);

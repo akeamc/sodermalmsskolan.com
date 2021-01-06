@@ -4,8 +4,8 @@ import twemoji from "twemoji";
 /**
  * Twemoji-powered emoji renderer to make sure they look the same on all devices.
  *
- * @param root0
- * @param root0.children
+ * @param props
+ * @param props.children
  */
 const Emoji: FunctionComponent<{ children: React.ReactNode }> = ({
   children,

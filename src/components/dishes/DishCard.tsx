@@ -36,9 +36,9 @@ const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => (
 /**
  * Dish information.
  *
- * @param root0
- * @param root0.dish
- * @param root0.showPhotos
+ * @param props
+ * @param props.dish
+ * @param props.showPhotos
  */
 const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, ...rest }) => {
   const { data: co2e, error: emissionsError } = useDishEmissions(dish?.id);

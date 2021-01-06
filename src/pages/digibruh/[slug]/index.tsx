@@ -1,6 +1,4 @@
-import {
-  GetStaticPaths, GetStaticProps, NextPage,
-} from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import PostPage, { PostPageProps } from "../../../components/post/PostPage";
@@ -42,9 +40,9 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
 };
 
 /**
- * 
+ *
  * @param props
- * @param props.
+ * @param props.post
  */
 const DigibruhPostPage: NextPage<PostPageProps> = ({
   post,

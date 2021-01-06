@@ -78,11 +78,11 @@ const secondaryStyles = css({
 /**
  * A button with a link. Neat, right?
  *
- * @param root0
- * @param root0.href
- * @param root0.primary
- * @param root0.size
- * @param root0.disabled
+ * @param props
+ * @param props.href
+ * @param props.primary
+ * @param props.size
+ * @param props.disabled
  */
 const Button: FunctionComponent<ButtonProps> = ({
   href,

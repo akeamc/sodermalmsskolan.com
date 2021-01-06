@@ -16,10 +16,10 @@ export interface PostListSectionProps extends SectionProps {
 /**
  * A section displaying all posts.
  *
- * @param root0
- * @param root0.limit
- * @param root0.filter
- * @param root0.showMoreButton
+ * @param props
+ * @param props.limit
+ * @param props.filter
+ * @param props.showMoreButton
  */
 const PostListSection: FunctionComponent<PostListSectionProps> = ({
   limit = "all", filter = () => true, showMoreButton = false, ...sectionProps

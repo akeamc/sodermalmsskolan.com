@@ -56,10 +56,10 @@ export default class ServerVote extends Vote {
   /**
    * Save to the database.
    *
-   * @param root0
-   * @param root0.dish
-   * @param root0.author
-   * @param root0.up
+   * @param options
+   * @param options.dish
+   * @param options.author
+   * @param options.up
    */
   public static async create({
     dish,

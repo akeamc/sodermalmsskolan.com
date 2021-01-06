@@ -6,8 +6,8 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 /**
  * A Katex renderer that dynamically imports Katex only when necessary.
  *
- * @param root0
- * @param root0.text
+ * @param props
+ * @param props.text
  */
 const KatexText: FunctionComponent<{text: string}> = ({ text }) => {
   const fragments = extractKatex(text);

@@ -1,13 +1,13 @@
 /**
  * Map a number from one range to another.
  *
- * @param value The value to be mapped.
- * @param x1 Lower input bounds.
- * @param y1 Higher input bounds.
- * @param x2 Lower output bounds.
- * @param y2 Higher output bounds.
+ * @param {number} value The value to be mapped.
+ * @param {number} x1 Lower input bounds.
+ * @param {number} y1 Higher input bounds.
+ * @param {number} x2 Lower output bounds.
+ * @param {number} y2 Higher output bounds.
  *
- * @returns The mapped value.
+ * @returns {number} The mapped value.
  */
 const map = (
   value: number,

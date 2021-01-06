@@ -22,13 +22,18 @@
       "jsx": true
     }
   },
-  "ignorePatterns": ["next.config.js", "jest.config.js"],
   "settings": {
     "react": {
       "version": "detect"
     }
   },
-  "plugins": ["react", "@typescript-eslint", "@emotion", "jsdoc", "jest"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "@emotion",
+    "jsdoc",
+    "jest"
+  ],
   "rules": {
     "react/prop-types": "off",
     "@typescript-eslint/ban-ts-comment": "off",
