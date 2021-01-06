@@ -13,7 +13,7 @@ import { auth } from "../../lib/firebase/firebase";
 /**
  * Account overview page (seems unfinished because it is).
  *
- * @returns JSX element.
+ * @returns {React.ReactElement} JSX element.
  */
 const Page: NextPage = () => {
   const { user, isLoading } = useAuth();

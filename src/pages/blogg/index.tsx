@@ -4,7 +4,12 @@ import Base from "../../components/Base";
 import BlogHeader from "../../components/blog/Header";
 import PostListSection from "../../components/blog/PostListSection";
 
-const Page: NextPage = () => (
+/**
+ * The front cover of the blog.
+ *
+ * @returns {React.ReactElement} The generated JSX.
+ */
+const BlogIndexPage: NextPage = () => (
   <Base metadata={{
     title: "Blogg",
   }}
@@ -14,4 +19,4 @@ const Page: NextPage = () => (
   </Base>
 );
 
-export default Page;
+export default BlogIndexPage;

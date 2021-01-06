@@ -27,6 +27,12 @@ export default interface Post extends Identification {
   featured: boolean;
 }
 
+/**
+ * Convert an "internal" post (returned by the Ghost API) to a `Post`.
+ *
+ * @param {GhostPostOrPage} post The post to be converted.
+ * @returns {Post} A better `GhostPostOrPage`.
+ */
 export const ghostPostToPost = ({
   title,
   tags,
@@ -58,7 +64,8 @@ export const ghostPostToPost = ({
 /**
  * Browse posts.
  *
- * @param params
+ * @param {BrowsePostsParams} params Browsing parameters passed to the API.
+ * @returns {Promise<Post[]>} The posts (wrapped in a `Promise`).
  */
 export const browsePosts = async (params: BrowsePostsParams = {}): Promise<Post[]> => {
   const posts = await api.posts.browse(defaultSharedParams(params));
@@ -69,7 +76,8 @@ export const browsePosts = async (params: BrowsePostsParams = {}): Promise<Post[
 /**
  * Read a single post.
  *
- * @param params
+ * @param {ReadParams} params Parameters passed to the API.
+ * @returns {Promise<Post>} The post, wrapped in a `Promise`.
  */
 export const readPost = async (params: ReadParams): Promise<Post> => {
   const post = await api.posts.read(defaultReadParams(params));
@@ -78,3 +86,13 @@ export const readPost = async (params: ReadParams): Promise<Post> => {
 };
 
 export type PostFilter = (post: Post) => boolean;
+
+/**
+ * Get a `PostFilter` function based on an author's slug.
+ *
+ * @param {string} authorSlug The author's `slug`.
+ * @returns {PostFilter} Function used to filter `Array<Post>`.
+ */
+export const getAuthorPostFilter = (authorSlug: string): PostFilter => (
+  post,
+) => !!post?.authors.find(({ slug }) => slug === authorSlug);

@@ -1,4 +1,5 @@
 import { FormatParam, IncludeParam, OrderParam } from "@tryghost/content-api";
+import { ParsedUrlQuery } from "querystring";
 
 export type LimitParam = number | "all";
 
@@ -32,3 +33,7 @@ export const defaultReadParams = (input: ReadParams): ReadParams => ({
   ...defaultSharedParams(input),
   slug: input.slug,
 });
+
+export interface GhostStaticPathParams extends ParsedUrlQuery {
+  slug: string;
+}

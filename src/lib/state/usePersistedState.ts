@@ -7,10 +7,10 @@ import { ReactState } from "./state";
 /**
  * A persistent, SSR-compliant, `useState`.
  *
- * @param key The key to use in storage.
- * @param initialValue The initial, or default, value.
+ * @param {string} key The key to use in storage.
+ * @param {string} initialValue The initial, or default, value.
  *
- * @returns The persistent state, with getters and setters.
+ * @returns {ReactState} The persistent state, with getters and setters.
  */
 const usePersistedState = <T>(
   key: string,

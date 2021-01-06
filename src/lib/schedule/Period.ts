@@ -4,6 +4,9 @@ import ScheduledCalendarEvent from "../calendar/event/ScheduledCalendarEvent";
 import humanReadableTime from "../calendar/humanReadableTime";
 import Subject from "./subject";
 
+/**
+ * A class representing a period, with utilities for converting to regular calendar events.
+ */
 export default class Period {
   /**
    * The weekday of the period, with `0` representing **Monday**.
@@ -29,6 +32,16 @@ export default class Period {
 
   collection?: string;
 
+  /**
+   * Construct a new period.
+   *
+   * @param {number} weekday The weekday of the period.
+   * @param {number} hour The starting hour of the period.
+   * @param {number} minute The starting minute of the period.
+   * @param {number} duration The duration of the period in seconds.
+   * @param {Subject} subject The subject in which the period is held.
+   * @param {number} room The location of the period.
+   */
   constructor(
     weekday: number,
     hour: number,
@@ -56,6 +69,8 @@ export default class Period {
   /**
    * A unique identifier, based on the period's room and time. The subject is without significance,
    * since no more than one period can be held in a room at any given time.
+   *
+   * @returns {string} The ID.
    */
   get id(): string {
     return `${this.room}-${this.weekday}T${humanReadableTime(this.totalSeconds)}`;

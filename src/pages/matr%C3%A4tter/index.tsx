@@ -7,7 +7,7 @@ import SimpleHeader from "../../components/header/Simple";
 /**
  * A page listing all the dishes served in the cafeteria.
  *
- * @returns JSX element.
+ * @returns {React.ReactElement} JSX element.
  */
 const DishesPage: NextPage = () => (
   <Base

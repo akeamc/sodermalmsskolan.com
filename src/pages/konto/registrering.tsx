@@ -16,7 +16,7 @@ import { useAuth } from "../../lib/auth/AuthContext";
 /**
  * The page used by users to create an account.
  *
- * @returns JSX element.
+ * @returns {React.ReactElement} JSX element.
  */
 const RegistrationPage: NextPage = () => {
   const router = useRouter();

@@ -7,7 +7,7 @@ import ScheduleSection from "../../components/schedule/Section";
 /**
  * The schedule page.
  *
- * @returns The JSX element.
+ * @returns {React.ReactElement} The JSX element.
  */
 const SchedulePage: NextPage = () => (
   <Base

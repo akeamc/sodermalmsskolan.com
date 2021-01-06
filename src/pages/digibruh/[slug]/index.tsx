@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import PostPage, { PostPageProps } from "../../../components/post/PostPage";
 import { browseDigibruhArticles, postIsDigibruhArticle } from "../../../lib/digibruh/hooks/article";
+import { GhostStaticPathParams } from "../../../lib/ghost/common";
 import { readPost } from "../../../lib/ghost/post";
 import NotFoundPage from "../../404";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () => {
   const posts = await browseDigibruhArticles();
 
   const paths = posts.filter(postIsDigibruhArticle).map((post) => ({
@@ -16,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostPageProps, GhostStaticPathParams> = async ({ params }) => {
   try {
     const slug = params.slug?.toString();
     const post = await readPost({ slug });

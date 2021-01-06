@@ -7,7 +7,7 @@ import MenuSection from "../../components/menu/MenuSection";
 /**
  * A page with useful food menu information.
  *
- * @returns JSX element.
+ * @returns {React.ReactElement} JSX element.
  */
 const MenuPage: NextPage = () => (
   <Base metadata={{

@@ -16,7 +16,7 @@ import { useAuth } from "../../lib/auth/AuthContext";
 /**
  * Login page. Used to log in.
  *
- * @returns JSX element.
+ * @returns {React.ReactElement} JSX element.
  */
 const LoginPage: NextPage = () => {
   const router = useRouter();

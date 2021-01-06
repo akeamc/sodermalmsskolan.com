@@ -5,11 +5,16 @@ import { useRouter } from "next/router";
 import React from "react";
 import PostPage, { PostPageProps } from "../../../components/post/PostPage";
 import postBelongsToBlog from "../../../lib/blog/postBelongsToBlog";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Post, { browsePosts, readPost } from "../../../lib/ghost/post";
+import { GhostStaticPathParams } from "../../../lib/ghost/common";
+import { browsePosts, readPost } from "../../../lib/ghost/post";
 import NotFoundPage from "../../404";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+/**
+ * Pre-generate paths to the blog posts.
+ *
+ * @returns {Promise<import("next").GetStaticPathsResult<GhostStaticPathParams>>} The static paths.
+ */
+export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () => {
   const posts = await browsePosts();
 
   const paths = posts.filter(postBelongsToBlog).map((post) => ({
@@ -19,7 +24,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) => {
+/**
+ * `getStaticProps` for the blog posts.
+ *
+ * @param {import("next").GetStaticPropsContext<GhostStaticPathParams>} context The context.
+ * @returns {Promise<import("next").GetStaticPropsResult<PostPageProps>>} The props for each page.
+ */
+export const getStaticProps: GetStaticProps<
+PostPageProps,
+GhostStaticPathParams
+> = async ({ params }) => {
   try {
     const slug = params.slug?.toString();
     const post = await readPost({ slug });
@@ -44,7 +58,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
 
 /**
  * @param {PostPageProps} props Props.
- * @param {Post} props.post The post.
+ * @param {import("../../../lib/ghost/post")} props.post The post.
  *
  * @returns {React.ReactElement} The blog post page.
  */

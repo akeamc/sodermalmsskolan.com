@@ -9,7 +9,7 @@ import TelegramList from "../../components/telegram/TelegramList";
 /**
  * The news page.
  *
- * @returns The JSX element.
+ * @returns {React.ReactElement} The JSX element.
  */
 const NewsPage: NextPage = () => (
   <Base

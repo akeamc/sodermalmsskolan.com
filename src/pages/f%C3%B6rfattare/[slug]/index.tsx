@@ -7,10 +7,16 @@ import DigibruhArticleSection from "../../../components/digibruh/Section";
 import SimpleHeader from "../../../components/header/Simple";
 import InlineSkeleton from "../../../components/skeleton/InlineSkeleton";
 import Author, { browseAuthors, getAuthor } from "../../../lib/ghost/author";
-import Post from "../../../lib/ghost/post";
+import { GhostStaticPathParams } from "../../../lib/ghost/common";
+import { getAuthorPostFilter } from "../../../lib/ghost/post";
 import NotFoundPage from "../../404";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+/**
+ * Pre-generate paths to the authors.
+ *
+ * @returns {Promise<import("next").GetStaticPathsResult<GhostStaticPathParams>>} The static paths.
+ */
+export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () => {
   const authors = await browseAuthors();
 
   const paths = authors.map((author) => ({
@@ -24,7 +30,16 @@ export interface AuthorPageProps {
   author: Author;
 }
 
-export const getStaticProps: GetStaticProps<AuthorPageProps> = async ({ params }) => {
+/**
+ * Get static props for the author pages.
+ *
+ * @param {import("next").GetStaticPropsContext<GhostStaticPathParams>} context The context.
+ * @returns {Promise<import("next").GetStaticPropsResult<AuthorPageProps>>} The props for each page.
+ */
+export const getStaticProps: GetStaticProps<
+AuthorPageProps,
+GhostStaticPathParams
+> = async ({ params }) => {
   try {
     const slug = params.slug?.toString();
     const author = await getAuthor({ slug });
@@ -60,9 +75,9 @@ const AuthorPage: NextPage<AuthorPageProps> = ({
     return <NotFoundPage />;
   }
 
-  const postFilter = (post: Post) => !!post?.authors.find(({ slug }) => slug === author?.slug);
-
   const authorNameComponent = author?.name || <InlineSkeleton width="4em" />;
+
+  const filterPosts = getAuthorPostFilter(author?.slug);
 
   return (
     <Base metadata={{
@@ -84,7 +99,7 @@ const AuthorPage: NextPage<AuthorPageProps> = ({
           ),
           superTitle: "Blogg",
         }}
-        filter={postFilter}
+        filter={filterPosts}
       />
       <DigibruhArticleSection
         header={{
@@ -97,7 +112,7 @@ const AuthorPage: NextPage<AuthorPageProps> = ({
           ),
           superTitle: "Digibruh",
         }}
-        filter={postFilter}
+        filter={filterPosts}
       />
     </Base>
   );
