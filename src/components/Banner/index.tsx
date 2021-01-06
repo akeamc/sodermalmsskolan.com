@@ -4,12 +4,13 @@ import Marquee from "react-fast-marquee";
 /**
  * A simple banner, used for urgent messages.
  */
-const Banner: FunctionComponent = ({ children }) => (
+const Banner: FunctionComponent = ({ children, ...props }) => (
   <div
     css={{
       backgroundColor: "var(--color-highlight)",
       color: "#ffffff",
     }}
+    {...props}
   >
     <Marquee direction="left" pauseOnHover gradient={null} speed={20}>
       <div css={{

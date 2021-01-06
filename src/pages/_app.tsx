@@ -10,6 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { GlobalStyles } from "../styles/global";
 import { AuthProvider } from "../lib/auth/AuthContext";
 
+/**
+ * The main application, batteries included.
+ * @param props
+ * @param props.Component bruh
+ * @param props.pageProps hello
+ * 
+ * @returns The application.
+ */
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const telegrams = useFreshTelegrams();
 

@@ -34,6 +34,9 @@
     "@typescript-eslint/quotes": [2, "double", { "avoidEscape": true }],
     "react/jsx-props-no-spreading": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    "@typescript-eslint/switch-exhaustiveness-check": "error"
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+    "jsdoc/require-jsdoc": "warn",
+    "jsdoc/require-returns-type": "off",
+    "jsdoc/require-param-type"
   }
 }

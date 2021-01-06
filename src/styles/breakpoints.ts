@@ -19,7 +19,9 @@ export const breakpoints: Breakpoints<number> = {
  * Generate a CSS media property with a single function! Incredible, right?
  * Returns `@media screen and (min-width: <width>px)`.
  *
- * @param minWidth CSS `min-width`.
+ * @param {number} minWidth CSS `min-width` (with `px` as the unit).
+ *
+ * @returns {string} The media query.
  */
 export function media(minWidth: number): string {
   return `@media screen and (min-width: ${minWidth}px)`;
