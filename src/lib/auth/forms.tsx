@@ -22,13 +22,21 @@ export interface AuthFormError {
  * Validate an email address and return a string containing the errors found.
  * `undefined` as a return value is good. Very good.
  */
-export const findEmailErrors = (email: string): string => {
+export const validateEmail = (email: string): string => {
   if (!email) {
     return "Du måste ange en giltig e-postadress.";
   }
 
   if (!emailRegEx.test(email)) {
     return "E-postadressen är ogiltig.";
+  }
+
+  return undefined;
+};
+
+export const validatePassword = (password: string): string => {
+  if (!password) {
+    return "Du måste ange ett lösenord.";
   }
 
   return undefined;

@@ -1,11 +1,11 @@
 import { Field } from "formik";
 import React, { FunctionComponent } from "react";
-import { findEmailErrors } from "../../lib/auth/forms";
+import { validateEmail, validatePassword } from "../../lib/auth/forms";
 import TextField from "../form/field/TextField";
 
 const EmailAndPassword: FunctionComponent = () => (
   <>
-    <Field name="email" validate={findEmailErrors}>
+    <Field name="email" validate={validateEmail}>
       {({
         field,
         meta: {
@@ -15,7 +15,7 @@ const EmailAndPassword: FunctionComponent = () => (
         <TextField {...field} type="email" placeholder="E-post" error={error} />
       )}
     </Field>
-    <Field name="password">
+    <Field name="password" validate={validatePassword}>
       {({
         field,
         meta: {
