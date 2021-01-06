@@ -14,15 +14,10 @@ jobs:
         with:
           node-version: "v14.x"
 
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - run: yarn install
 
@@ -39,15 +34,10 @@ jobs:
         with:
           node-version: "v14.x"
 
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - run: yarn install
 
