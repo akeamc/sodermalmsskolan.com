@@ -35,8 +35,16 @@
     "react/jsx-props-no-spreading": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "@typescript-eslint/switch-exhaustiveness-check": "error",
-    "jsdoc/require-jsdoc": "warn",
+    "require-jsdoc": ["warn", {
+      "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true,
+          "ArrowFunctionExpression": true,
+          "FunctionExpression": true
+      }
+    }],
     "jsdoc/require-returns-type": "off",
-    "jsdoc/require-param-type"
+    "jsdoc/require-param-type": "off"
   }
 }
