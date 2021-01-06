@@ -72,6 +72,12 @@ export const translateFirebaseError = (
         message: "E-postadressen används redan.",
       };
     }
+    case "auth/internal-error": {
+      return {
+        field: "email",
+        message: "Ett okänt fel uppstod.",
+      };
+    }
     default: {
       return {
         field: "email",

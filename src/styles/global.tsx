@@ -13,6 +13,7 @@ export const globalStyles = css({
     padding: 0,
     fontFamily: fonts.sans,
     wordBreak: "break-word",
+    backgroundColor: "var(--color-bg-primary)",
   },
 
   ":root": {

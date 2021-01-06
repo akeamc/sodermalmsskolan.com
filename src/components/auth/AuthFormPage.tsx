@@ -9,6 +9,13 @@ export interface AuthFormPageProps {
   title: string;
 }
 
+/**
+ * A component used to display a form related to authentication.
+ *
+ * @param {AuthFormPageProps} props Props.
+ *
+ * @returns {React.ReactElement} The rendered elements.
+ */
 const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
   title,
   children,
