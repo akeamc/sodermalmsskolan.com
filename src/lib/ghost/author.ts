@@ -31,6 +31,8 @@ export const ghostAuthorToAuthor = ({
 
 /**
  * Browse authors.
+ *
+ * @param params
  */
 export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<Author[]> => {
   const authors = await api.authors.browse(defaultSharedParams(params));
@@ -40,6 +42,8 @@ export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<A
 
 /**
  * Get the details of an author.
+ *
+ * @param params
  */
 export const getAuthor = async (params: ReadParams): Promise<Author> => {
   const author = await api.authors.read(defaultReadParams(params));

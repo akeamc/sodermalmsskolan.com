@@ -57,6 +57,8 @@ export const ghostPostToPost = ({
 
 /**
  * Browse posts.
+ *
+ * @param params
  */
 export const browsePosts = async (params: BrowsePostsParams = {}): Promise<Post[]> => {
   const posts = await api.posts.browse(defaultSharedParams(params));
@@ -66,6 +68,8 @@ export const browsePosts = async (params: BrowsePostsParams = {}): Promise<Post[
 
 /**
  * Read a single post.
+ *
+ * @param params
  */
 export const readPost = async (params: ReadParams): Promise<Post> => {
   const post = await api.posts.read(defaultReadParams(params));

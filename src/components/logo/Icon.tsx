@@ -2,6 +2,8 @@ import React, { FunctionComponent, SVGProps } from "react";
 
 /**
  * The famous logo, now as SVG!
+ *
+ * @param props
  */
 const LogoIcon: FunctionComponent<SVGProps<SVGSVGElement>> = (props) => (
   <svg

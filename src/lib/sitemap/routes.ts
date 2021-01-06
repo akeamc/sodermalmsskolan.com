@@ -8,6 +8,11 @@ import Route from "./route";
  */
 type Routes = RouteCategory[];
 
+/**
+ * React hook that returns the basic routes on the site, such as those in the navbar.
+ *
+ * @returns The basic routes.
+ */
 export const useBasicRoutes = (): Route[] => (
   [
     {
@@ -34,6 +39,8 @@ export const useBasicRoutes = (): Route[] => (
 
 /**
  * React hook to use the routes.
+ *
+ * @returns The routes.
  */
 export const useRoutes = (): Routes => {
   const { user } = useAuth();

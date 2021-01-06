@@ -10,6 +10,8 @@ export type Heading = FunctionComponent<HeadingProps>;
 
 /**
  * A section heading intended to be used for things *not* related to promotionals.
+ *
+ * @param props
  */
 export const SectionHeading: Heading = (props) => (
   <h1
@@ -32,6 +34,8 @@ export const SectionHeading: Heading = (props) => (
 
 /**
  * Promotional section heading.
+ *
+ * @param props
  */
 export const PromoSectionHeading: Heading = (props) => (
   <SectionHeading
@@ -74,6 +78,8 @@ export const PromoHeaderHeading: Heading = (props) => (
 
 /**
  * A smaller, all-uppercase monospaced heading perfect for complementing a larger one.
+ *
+ * @param props
  */
 export const SmallHeading: Heading = (props) => (
   <h4

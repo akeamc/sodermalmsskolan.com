@@ -1,12 +1,13 @@
 import {
-  GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage,
+  GetStaticPaths, GetStaticProps, NextPage,
 } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import PostPage from "../../../components/post/PostPage";
+import PostPage, { PostPageProps } from "../../../components/post/PostPage";
 import postBelongsToBlog from "../../../lib/blog/postBelongsToBlog";
-import { browsePosts, readPost } from "../../../lib/ghost/post";
-import NotFound from "../../404";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import Post, { browsePosts, readPost } from "../../../lib/ghost/post";
+import NotFoundPage from "../../404";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await browsePosts();
@@ -18,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) => {
   try {
     const slug = params.slug?.toString();
     const post = await readPost({ slug });
@@ -41,16 +42,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 };
 
-const Page: NextPage = ({
+/**
+ * @param {PostPageProps} props Props.
+ * @param {Post} props.post The post.
+ *
+ * @returns {React.ReactElement} The blog post page.
+ */
+const BlogPostPage: NextPage<PostPageProps> = ({
   post,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}) => {
   const router = useRouter();
 
   if (!post && !router.isFallback) {
-    return <NotFound />;
+    return <NotFoundPage />;
   }
 
   return <PostPage post={post} />;
 };
 
-export default Page;
+export default BlogPostPage;

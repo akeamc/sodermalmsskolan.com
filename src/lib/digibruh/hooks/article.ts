@@ -13,6 +13,8 @@ export const postIsDigibruhArticle = (post: Post): boolean => !!post.tags
 
 /**
  * Browse Digibruh articles.
+ *
+ * @param limit
  */
 export const useDigibruhArticles = (limit: LimitParam = "all"): responseInterface<Post[], unknown> => useSWR(`/digibruh/articles?limit=${limit}`, () => browseDigibruhArticles(limit));
 

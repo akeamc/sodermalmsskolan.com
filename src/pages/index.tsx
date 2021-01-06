@@ -10,6 +10,11 @@ import { useDayMenu } from "../lib/food/hooks/menu";
 import { useDishPhotos } from "../lib/food/hooks/photos";
 import DigibruhArticleSection from "../components/digibruh/Section";
 
+/**
+ * Image shown on the home page.
+ *
+ * @returns {React.ReactElement} JSX element.
+ */
 const HomeImage: FunctionComponent = () => {
   const { data } = useDayMenu();
 
@@ -30,7 +35,12 @@ const HomeImage: FunctionComponent = () => {
   );
 };
 
-const Page: NextPage = () => (
+/**
+ * The home page of [södermalmsskolan.com](https://södermalmsskolan.com).
+ *
+ * @returns {React.ReactElement} JSX element.
+ */
+const HomePage: NextPage = () => (
   <Base>
     <HomeHeader
       superTitle="södermalmsskolan.com"
@@ -70,4 +80,4 @@ const Page: NextPage = () => (
   </Base>
 );
 
-export default Page;
+export default HomePage;

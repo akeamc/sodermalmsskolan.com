@@ -29,6 +29,11 @@ export const globalStyles = css({
   },
 });
 
+/**
+ * A global stylesheet, providing the universal CSS variables. It has dark theme support! 🌑
+ *
+ * @returns {React.ReactElement} An `@emotion/react` `Global` component.
+ */
 export const GlobalStyles: FunctionComponent = () => (
   <Global styles={[globalStyles, {
     ":root": {

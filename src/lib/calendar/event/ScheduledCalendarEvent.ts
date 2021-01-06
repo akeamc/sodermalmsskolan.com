@@ -5,6 +5,7 @@ import CalendarEventInstance from "./CalendarEventInstance";
 
 /**
  * Normalize a strange date. Makes it easier to handle.
+ *
  * @param input
  */
 export const normalizeRRuleDate = (input: Date): Date => (
@@ -36,6 +37,7 @@ export default class ScheduledCalendarEvent {
 
   /**
    * Find all scheduled events within a timeframe.
+   *
    * @param after
    * @param before
    */

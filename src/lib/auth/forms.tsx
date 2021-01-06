@@ -21,6 +21,8 @@ export interface AuthFormError {
 /**
  * Validate an email address and return a string containing the errors found.
  * `undefined` as a return value is good. Very good.
+ *
+ * @param email
  */
 export const validateEmail = (email: string): string => {
   if (!email) {

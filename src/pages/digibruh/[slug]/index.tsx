@@ -1,12 +1,12 @@
 import {
-  GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage,
+  GetStaticPaths, GetStaticProps, NextPage,
 } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import PostPage from "../../../components/post/PostPage";
+import PostPage, { PostPageProps } from "../../../components/post/PostPage";
 import { browseDigibruhArticles, postIsDigibruhArticle } from "../../../lib/digibruh/hooks/article";
 import { readPost } from "../../../lib/ghost/post";
-import NotFound from "../../404";
+import NotFoundPage from "../../404";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await browseDigibruhArticles();
@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) => {
   try {
     const slug = params.slug?.toString();
     const post = await readPost({ slug });
@@ -41,16 +41,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 };
 
-const Page: NextPage = ({
+/**
+ * 
+ * @param props
+ * @param props.
+ */
+const DigibruhPostPage: NextPage<PostPageProps> = ({
   post,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}) => {
   const router = useRouter();
 
   if (!post && !router.isFallback) {
-    return <NotFound />;
+    return <NotFoundPage />;
   }
 
   return <PostPage post={post} digibruh />;
 };
 
-export default Page;
+export default DigibruhPostPage;

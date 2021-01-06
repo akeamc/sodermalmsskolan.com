@@ -8,11 +8,19 @@ import Document, {
 import React from "react";
 
 interface Props extends DocumentInitialProps {
-  styles: JSX.Element;
+  styles: React.ReactElement;
 }
 
+/**
+ * A customized Next.js `Document`.
+ */
 export default class MyDocument extends Document<Props> {
-  render(): JSX.Element {
+  /**
+   * Render the document.
+   *
+   * @returns {React.ReactElement} The document.
+   */
+  render(): React.ReactElement {
     return (
       <Html>
         <Head>

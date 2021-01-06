@@ -18,6 +18,7 @@ export interface ReadParams extends SharedParams {
 
 /**
  * Fill `Params` with the default parameters.
+ *
  * @param input
  */
 export const defaultSharedParams = (input: SharedParams): SharedParams => ({

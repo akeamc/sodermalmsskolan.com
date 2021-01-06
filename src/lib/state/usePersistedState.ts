@@ -6,8 +6,11 @@ import { ReactState } from "./state";
 
 /**
  * A persistent, SSR-compliant, `useState`.
- * @param key
- * @param initialValue
+ *
+ * @param key The key to use in storage.
+ * @param initialValue The initial, or default, value.
+ *
+ * @returns The persistent state, with getters and setters.
  */
 const usePersistedState = <T>(
   key: string,

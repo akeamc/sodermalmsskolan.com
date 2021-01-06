@@ -3,6 +3,9 @@ import Marquee from "react-fast-marquee";
 
 /**
  * A simple banner, used for urgent messages.
+ *
+ * @param root0
+ * @param root0.children
  */
 const Banner: FunctionComponent = ({ children, ...props }) => (
   <div

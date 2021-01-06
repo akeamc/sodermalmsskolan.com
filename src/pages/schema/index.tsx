@@ -4,7 +4,12 @@ import Base from "../../components/Base";
 import SimpleHeader from "../../components/header/Simple";
 import ScheduleSection from "../../components/schedule/Section";
 
-const Page: NextPage = () => (
+/**
+ * The schedule page.
+ *
+ * @returns The JSX element.
+ */
+const SchedulePage: NextPage = () => (
   <Base
     metadata={{
       title: "Schema",
@@ -17,4 +22,4 @@ const Page: NextPage = () => (
   </Base>
 );
 
-export default Page;
+export default SchedulePage;

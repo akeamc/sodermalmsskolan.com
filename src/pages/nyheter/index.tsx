@@ -6,7 +6,12 @@ import LetterSection from "../../components/letter/LetterSection";
 import SidebarSection from "../../components/section/SidebarSection";
 import TelegramList from "../../components/telegram/TelegramList";
 
-const Page: NextPage = () => (
+/**
+ * The news page.
+ *
+ * @returns The JSX element.
+ */
+const NewsPage: NextPage = () => (
   <Base
     metadata={{
       title: "Nyheter",
@@ -23,4 +28,4 @@ const Page: NextPage = () => (
   </Base>
 );
 
-export default Page;
+export default NewsPage;

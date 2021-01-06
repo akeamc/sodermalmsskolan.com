@@ -4,7 +4,12 @@ import Base from "../../components/Base";
 import DishSection from "../../components/dishes/DishSection";
 import SimpleHeader from "../../components/header/Simple";
 
-const Page: NextPage = () => (
+/**
+ * A page listing all the dishes served in the cafeteria.
+ *
+ * @returns JSX element.
+ */
+const DishesPage: NextPage = () => (
   <Base
     metadata={{
       title: "Maträtter",
@@ -17,4 +22,4 @@ const Page: NextPage = () => (
   </Base>
 );
 
-export default Page;
+export default DishesPage;

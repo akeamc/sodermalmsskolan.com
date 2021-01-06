@@ -3,6 +3,8 @@ import { HTMLElementProps } from "../../../styles/overrides";
 
 /**
  * Some bit of text that is REALLY important.
+ *
+ * @param props
  */
 const Emphasis: FunctionComponent<HTMLElementProps<HTMLElement>> = (
   props,

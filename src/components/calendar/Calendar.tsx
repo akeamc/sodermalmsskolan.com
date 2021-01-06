@@ -24,6 +24,11 @@ export interface CalendarProps {
 
 /**
  * A calendar.
+ *
+ * @param root0
+ * @param root0.events
+ * @param root0.hideWeekend
+ * @param root0.shrink
  */
 const Calendar: FunctionComponent<CalendarProps> = ({
   events,

@@ -15,6 +15,13 @@ export interface BaseProps {
 
 /**
  * The base of the page, with important metadata and common page components such as the navbar.
+ *
+ * @param root0
+ * @param root0.metadata
+ * @param root0.leadingAd
+ * @param root0.children
+ * @param root0.navbar
+ * @param root0.footer
  */
 const Base: FunctionComponent<BaseProps> = ({
   metadata,

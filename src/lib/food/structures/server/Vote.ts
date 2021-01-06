@@ -13,6 +13,7 @@ export default class ServerVote extends Vote {
 
   /**
    * Create a `ServerVote` from a Firestore document.
+   *
    * @param document
    */
   public static fromFirestoreDocument(
@@ -54,6 +55,11 @@ export default class ServerVote extends Vote {
 
   /**
    * Save to the database.
+   *
+   * @param root0
+   * @param root0.dish
+   * @param root0.author
+   * @param root0.up
    */
   public static async create({
     dish,

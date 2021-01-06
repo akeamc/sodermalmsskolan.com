@@ -4,7 +4,12 @@ import AuthorSection from "../../components/author/AuthorSection";
 import Base from "../../components/Base";
 import SimpleHeader from "../../components/header/Simple";
 
-const Page: NextPage = () => (
+/**
+ * A page listing the authors of the website.
+ *
+ * @returns {React.ReactElement} The page.
+ */
+const AuthorsPage: NextPage = () => (
   <Base metadata={{
     title: "Författare",
   }}
@@ -14,4 +19,4 @@ const Page: NextPage = () => (
   </Base>
 );
 
-export default Page;
+export default AuthorsPage;

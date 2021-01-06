@@ -169,6 +169,9 @@ export interface RichTextProps {
 
 /**
  * XSS-safe HTML renderer.
+ *
+ * @param root0
+ * @param root0.html
  */
 const RichText: FunctionComponent<RichTextProps> = ({ html, ...props }) => {
   const parsedHtml = useMemo(() => {

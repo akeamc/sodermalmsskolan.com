@@ -16,6 +16,8 @@ export const convertTagToSubject = (tag: Tag): DigibruhSubject => ({
 
 /**
  * Extract a Digibruh subject.
+ *
+ * @param article
  */
 export const extractSubjectFromPost = (article: Post): DigibruhSubject => {
   const tag = article?.tags?.find(({ slug }) => subjectRegex.test(slug));

@@ -46,6 +46,7 @@ export class ServerChannel extends Channel {
   /**
    * Wrap an API handler to authenticate the user and verify that the channel exists.
    * The channel ID is aquired from the `channel` path parameter.
+   *
    * @param handler
    */
   public static wrapHandler = (

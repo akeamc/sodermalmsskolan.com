@@ -7,6 +7,10 @@ export interface CardGridProps {
 
 /**
  * A grid of cards.
+ *
+ * @param root0
+ * @param root0.children
+ * @param root0.overlay
  */
 const CardGrid: FunctionComponent<CardGridProps> = ({ children, overlay, ...rest }) => (
   <div

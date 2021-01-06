@@ -16,6 +16,11 @@ export interface DigibruhSectionProps extends SectionProps {
 
 /**
  * A section presenting a few Digibruh articles.
+ *
+ * @param root0
+ * @param root0.limit
+ * @param root0.filter
+ * @param root0.showMoreButton
  */
 const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({
   limit = "all", filter = () => true, showMoreButton = false, ...sectionProps

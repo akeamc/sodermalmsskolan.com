@@ -38,6 +38,8 @@ export class StudySet implements Serializable<StudySetStatic> {
 
   /**
    * Extract the id from a Quizlet study set url.
+   *
+   * @param url
    */
   public static parseUrl(url: string): string {
     return url.match(/[0-9]{9}/)[0];

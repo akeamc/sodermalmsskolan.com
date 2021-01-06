@@ -7,6 +7,10 @@ import CalendarEventInstance from "../event/CalendarEventInstance";
 
 /**
  * Generate placeholder events from a common seed, making it SSR-safe.
+ *
+ * @param after
+ * @param before
+ * @param count
  */
 const usePlaceholderEvents = (
   after: Dayjs,

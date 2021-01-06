@@ -34,6 +34,7 @@ export class ServerDish extends Dish {
   /**
    * Returns detailed information about a `Dish` with a specified `id` such as carbon dioxide
    * equivalent emissions and images.
+   *
    * @param id
    */
   public static async fetch(id: string): Promise<ServerDish> {

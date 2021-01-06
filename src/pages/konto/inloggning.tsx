@@ -13,7 +13,12 @@ import { signupLink } from "../../lib/auth/href";
 import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import { useAuth } from "../../lib/auth/AuthContext";
 
-const Page: NextPage = () => {
+/**
+ * Login page. Used to log in.
+ *
+ * @returns JSX element.
+ */
+const LoginPage: NextPage = () => {
   const router = useRouter();
   const initialEmail = usePrefilledEmail();
   const redirectUri = useRedirectUri();
@@ -78,4 +83,4 @@ const Page: NextPage = () => {
   );
 };
 
-export default Page;
+export default LoginPage;

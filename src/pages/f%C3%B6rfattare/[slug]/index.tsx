@@ -8,7 +8,7 @@ import SimpleHeader from "../../../components/header/Simple";
 import InlineSkeleton from "../../../components/skeleton/InlineSkeleton";
 import Author, { browseAuthors, getAuthor } from "../../../lib/ghost/author";
 import Post from "../../../lib/ghost/post";
-import NotFound from "../../404";
+import NotFoundPage from "../../404";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const authors = await browseAuthors();
@@ -20,11 +20,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: true };
 };
 
-export interface PageProps {
+export interface AuthorPageProps {
   author: Author;
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<AuthorPageProps> = async ({ params }) => {
   try {
     const slug = params.slug?.toString();
     const author = await getAuthor({ slug });
@@ -43,13 +43,21 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   }
 };
 
-const Page: NextPage<PageProps> = ({
+/**
+ * A page dedicated to a particular author.
+ *
+ * @param {AuthorPageProps} props React props.
+ * @param {Author} props.author `Author`
+ *
+ * @returns {React.ReactElement} The page.
+ */
+const AuthorPage: NextPage<AuthorPageProps> = ({
   author,
 }) => {
   const router = useRouter();
 
   if (!author && !router.isFallback) {
-    return <NotFound />;
+    return <NotFoundPage />;
   }
 
   const postFilter = (post: Post) => !!post?.authors.find(({ slug }) => slug === author?.slug);
@@ -95,4 +103,4 @@ const Page: NextPage<PageProps> = ({
   );
 };
 
-export default Page;
+export default AuthorPage;

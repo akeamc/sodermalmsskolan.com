@@ -10,6 +10,11 @@ import { useAuth } from "../../lib/auth/AuthContext";
 import { loginLink } from "../../lib/auth/href";
 import { auth } from "../../lib/firebase/firebase";
 
+/**
+ * Account overview page (seems unfinished because it is).
+ *
+ * @returns JSX element.
+ */
 const Page: NextPage = () => {
   const { user, isLoading } = useAuth();
   const router = useRouter();

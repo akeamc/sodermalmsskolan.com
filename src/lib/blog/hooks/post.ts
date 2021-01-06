@@ -5,6 +5,8 @@ import Post, { browsePosts } from "../../ghost/post";
 
 /**
  * Use the latest posts published on the blog.
+ *
+ * @param limit
  */
 export const usePosts = (limit: LimitParam = "all"): responseInterface<Post[], unknown> => useSWR(`/blog/posts?limit=${limit}`, () => browsePosts({
   limit,

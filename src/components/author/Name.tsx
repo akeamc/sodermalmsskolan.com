@@ -6,6 +6,9 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 /**
  * The clickable full name of an author.
+ *
+ * @param root0
+ * @param root0.author
  */
 const AuthorName: FunctionComponent<{author: Author}> = ({ author }) => {
   const url = useAuthorUrl(author?.slug);

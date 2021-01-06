@@ -11,6 +11,9 @@ export interface AuthorSectionProps extends SectionProps {
 
 /**
  * A section displaying authors.
+ *
+ * @param root0
+ * @param root0.limit
  */
 const AuthorSection: FunctionComponent<AuthorSectionProps> = ({ limit, ...sectionProps }) => {
   const { data } = useAuthors(limit);

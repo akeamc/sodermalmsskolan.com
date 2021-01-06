@@ -9,6 +9,8 @@ export const containerStyles = css({
 
 /**
  * A container to contain contained content.
+ *
+ * @param props
  */
 const Container: FunctionComponent = (props) => (
   <div css={containerStyles} {...props} />
