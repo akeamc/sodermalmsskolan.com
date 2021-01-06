@@ -17,7 +17,10 @@ export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () =>
   return { paths, fallback: true };
 };
 
-export const getStaticProps: GetStaticProps<PostPageProps, GhostStaticPathParams> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<
+PostPageProps,
+GhostStaticPathParams
+> = async ({ params }) => {
   try {
     const slug = params.slug?.toString();
     const post = await readPost({ slug });
