@@ -63,7 +63,7 @@ export const IconParagraph: FunctionComponent<ParagraphProps & {
   >
     <Icon css={{
       marginRight: "0.25rem",
-      width: "var(--icon-size)",
+      flex: "0 0 var(--icon-size)",
       height: "var(--icon-size)",
     }}
     />
