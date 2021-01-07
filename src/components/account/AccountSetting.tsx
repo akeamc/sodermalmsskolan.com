@@ -1,55 +1,54 @@
 import {
-  Formik, FormikHelpers, FormikProps, FormikValues,
+  Form,
+  Formik, FormikHelpers, FormikValues,
 } from "formik";
 import React, {
-  PropsWithChildren, ReactElement, ReactNode, useRef,
+  PropsWithChildren, ReactElement, ReactNode,
 } from "react";
-import Button from "../button/Button";
 import Card from "../Card";
+import SubmitButton from "../form/SubmitButton";
 import { CardTitle } from "../text/headings";
 
 export interface AccountSettingProps<Values extends FormikValues> {
   initialValues: Values;
   onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void | Promise<unknown>;
-  children: ((props: FormikProps<Values>) => React.ReactNode);
   label: ReactNode;
 }
 
+/**
+ * Account option form.
+ *
+ * @param {PropsWithChildren<AccountSettingProps>} props The props.
+ *
+ * @returns {React.ReactElement} The rendered form.
+ */
 const AccountSetting = <Values extends FormikValues>({
   onSubmit,
   initialValues,
   children,
   label,
-}: PropsWithChildren<AccountSettingProps<Values>>): ReactElement => {
-  const formRef = useRef<FormikProps<Values>>();
-
-  return (
-    <Card>
-      <CardTitle>{label}</CardTitle>
-      <Formik
-        innerRef={formRef}
-        onSubmit={onSubmit}
-        initialValues={initialValues}
-        enableReinitialize
-      >
+}: PropsWithChildren<AccountSettingProps<Values>>): ReactElement => (
+  <Card>
+    <CardTitle>{label}</CardTitle>
+    <Formik
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      <Form>
         {children}
-      </Formik>
-      <div>
-        <Button
+        <SubmitButton
           css={{
             padding: "0.75rem 1rem",
             fontSize: "0.75rem",
             float: "right",
           }}
-          primary
-          disabled={formRef.current?.isSubmitting}
-          onClick={() => formRef.current?.submitForm()}
         >
           Ändra
-        </Button>
-      </div>
-    </Card>
+        </SubmitButton>
+      </Form>
+    </Formik>
+  </Card>
   );
-};
 
 export default AccountSetting;

@@ -18,7 +18,16 @@ export interface ButtonProps {
   type?: "button" | "submit" | "reset",
 }
 
-const baseStyles = (size: ButtonSize) => {
+const disabledSelector = "&:disabled, &[disabled]";
+
+/**
+ * Base styles of a button. Not to be used on its own.
+ *
+ * @param {ButtonSize} size The desired size of the button.
+ *
+ * @returns {SerializedStyles} Styles.
+ */
+const baseStyles = (size: ButtonSize): SerializedStyles => {
   let paddingX: string;
   let paddingY: string;
 
@@ -53,6 +62,12 @@ const baseStyles = (size: ButtonSize) => {
     transition: "all 0.1s",
     padding: `${paddingY} ${paddingX}`,
     lineHeight: 1,
+
+    [disabledSelector]: {
+      boxShadow: "inset 0 0 0 1px var(--accents-2)",
+      color: "transparent",
+      pointerEvents: "none",
+    },
   });
 };
 
@@ -63,6 +78,10 @@ const primaryStyles = css({
 
   "&:hover": {
     opacity: 0.75,
+  },
+
+  [disabledSelector]: {
+    background: "var(--accents-1)",
   },
 });
 
@@ -78,11 +97,13 @@ const secondaryStyles = css({
 /**
  * A button with a link. Neat, right?
  *
- * @param props
- * @param props.href
- * @param props.primary
- * @param props.size
- * @param props.disabled
+ * @param {React.PropsWithChildren<ButtonProps>} props Button props.
+ * @param {string} props.href Optional `href`.
+ * @param {boolean} props.primary Is the button primary?
+ * @param {ButtonSize} props.size Size of the button.
+ * @param {boolean} props.disabled Is the button clickable?
+ *
+ * @returns {React.ReactElement} The rendered button.
  */
 const Button: FunctionComponent<ButtonProps> = ({
   href,
@@ -94,15 +115,11 @@ const Button: FunctionComponent<ButtonProps> = ({
   const styles: (SerializedStyles | CSSObject)[] = [
     baseStyles(size),
     primary ? primaryStyles : secondaryStyles,
-    disabled ? {
-      opacity: 0.1,
-      pointerEvents: "none",
-      userSelect: "none",
-    } : null,
   ];
 
   const innerProps = {
     css: styles,
+    disabled,
     ...rest,
   };
 

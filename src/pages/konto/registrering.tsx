@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import AuthFormPage from "../../components/auth/AuthFormPage";
 import usePrefilledEmail, { prefilledEmailQueryKey } from "../../lib/auth/hooks/usePrefilledEmail";
 import { SignupFormValues, translateFirebaseError } from "../../lib/auth/forms";
-import Button from "../../components/button/Button";
 import { auth } from "../../lib/firebase/firebase";
 import EmailAndPassword from "../../components/auth/EmailAndPassword";
 import { loginLink } from "../../lib/auth/href";
 import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import { useAuth } from "../../lib/auth/AuthContext";
+import FormText from "../../components/form/text/FormText";
+import SubmitButton from "../../components/form/SubmitButton";
 
 /**
  * The page used by users to create an account.
@@ -62,10 +63,13 @@ const RegistrationPage: NextPage = () => {
         }) => (
           <Form>
             <EmailAndPassword />
-            <Button type="submit" disabled={isSubmitting} primary>
+            <SubmitButton>
               {isSubmitting ? "Skapar konto ..." : "Skapa konto"}
-            </Button>
-            <p>
+            </SubmitButton>
+            <FormText css={{
+              marginBottom: 0,
+            }}
+            >
               Har du redan ett konto?
               {" "}
               <Link href={loginLink({
@@ -75,7 +79,7 @@ const RegistrationPage: NextPage = () => {
               >
                 <a>Logga in</a>
               </Link>
-            </p>
+            </FormText>
           </Form>
         )}
       </Formik>

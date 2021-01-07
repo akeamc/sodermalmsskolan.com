@@ -6,17 +6,20 @@ import React, {
   useState,
 } from "react";
 import firebase from "firebase";
+import _ from "lodash";
 import { auth } from "../firebase/firebase";
 
 export type UserSetter = (user: firebase.User) => void;
 
 export interface AuthContextData {
   user: firebase.User,
+  reloadUser: () => Promise<void>,
   isLoading: boolean,
 }
 
 const initialAuthContext: AuthContextData = {
   user: undefined,
+  reloadUser: () => Promise.resolve(),
   isLoading: true,
 };
 
@@ -43,7 +46,7 @@ export const AuthProvider: FunctionComponent = (props) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange((newUser) => {
-      setUser(newUser);
+      setUser(_.cloneDeep(newUser));
       setLoading(false);
     });
 
@@ -52,11 +55,21 @@ export const AuthProvider: FunctionComponent = (props) => {
     };
   }, []);
 
+  /**
+   * Reload the user.
+   */
+  const reloadUser = async () => {
+    await auth.currentUser?.reload();
+
+    setUser(_.cloneDeep(auth?.currentUser));
+  };
+
   return (
     <AuthContext.Provider
       {...props}
       value={{
         user,
+        reloadUser,
         isLoading,
       }}
     />

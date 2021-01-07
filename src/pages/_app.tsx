@@ -8,6 +8,7 @@ import TelegramText from "../components/telegram/TelegramText";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalStyles } from "../styles/global";
 import { AuthProvider } from "../lib/auth/AuthContext";
+import { fonts } from "../styles/text";
 
 /**
  * The main application, batteries included.
@@ -40,7 +41,26 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
             ))}
         </Banner>
       ) : null}
-      <ToastContainer position="bottom-left" />
+      <ToastContainer
+        position="bottom-right"
+        closeButton={false}
+        hideProgressBar
+        css={{
+          ".Toastify__toast": {
+            backgroundColor: "var(--color-bg-primary)",
+            color: "var(--color-text-primary)",
+            borderRadius: "0.3125rem",
+            boxShadow: "var(--shadow-small)",
+            padding: "1.5rem",
+            fontSize: "1rem",
+            fontFamily: fonts.sans,
+          },
+          ".Toastify__toast--success": {
+            backgroundColor: "var(--color-bg-success)",
+            color: "#ffffff",
+          },
+        }}
+      />
       <Component {...pageProps} />
     </AuthProvider>
   );

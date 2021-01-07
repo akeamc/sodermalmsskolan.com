@@ -1,20 +1,17 @@
 import { Field } from "formik";
 import React, { FunctionComponent } from "react";
-import { validateEmail, validatePassword } from "../../lib/auth/forms";
+import { validatePassword } from "../../lib/auth/forms";
 import TextField from "../form/field/TextField";
+import EmailField from "./EmailField";
 
+/**
+ * Reusable component used to display email-and-password text fields.
+ *
+ * @returns {React.ReactElement} The text fields.
+ */
 const EmailAndPassword: FunctionComponent = () => (
   <>
-    <Field name="email" validate={validateEmail}>
-      {({
-        field,
-        meta: {
-          error,
-        },
-      }) => (
-        <TextField {...field} type="email" placeholder="E-post" error={error} />
-      )}
-    </Field>
+    <EmailField />
     <Field name="password" validate={validatePassword}>
       {({
         field,

@@ -13,6 +13,7 @@ const baseTheme: CSSObject = {
 
   "--color-bg-primary": "#ffffff",
   "--color-bg-secondary": "#fafafa",
+  "--color-bg-success": "#4969ed",
 
   "--color-text-primary": "#000000",
   "--color-text-secondary": "#404040",

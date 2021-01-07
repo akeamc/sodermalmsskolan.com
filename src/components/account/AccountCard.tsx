@@ -12,9 +12,6 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Emphasis from "../text/atomics/Emphasis";
 import { SectionHeading } from "../text/headings";
 
-/**
- *
- */
 const AccountCard: FunctionComponent = () => {
   const { user } = useAuth();
   const { language } = useLocale();

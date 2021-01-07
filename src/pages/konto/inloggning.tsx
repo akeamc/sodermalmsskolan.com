@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import AuthFormPage from "../../components/auth/AuthFormPage";
 import usePrefilledEmail, { prefilledEmailQueryKey } from "../../lib/auth/hooks/usePrefilledEmail";
 import { LoginFormValues, translateFirebaseError } from "../../lib/auth/forms";
-import Button from "../../components/button/Button";
 import { auth } from "../../lib/firebase/firebase";
 import EmailAndPassword from "../../components/auth/EmailAndPassword";
-import { signupLink } from "../../lib/auth/href";
+import { AuthQueryParams, resetLink, signupLink } from "../../lib/auth/href";
 import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import { useAuth } from "../../lib/auth/AuthContext";
+import FormText from "../../components/form/text/FormText";
+import SubmitButton from "../../components/form/SubmitButton";
 
 /**
  * Login page. Used to log in.
@@ -33,6 +34,11 @@ const LoginPage: NextPage = () => {
   if (user) {
     router.push(redirectUri);
   }
+
+  const query: AuthQueryParams = {
+    [prefilledEmailQueryKey]: formRef.current?.values?.email,
+    [redirectUriQueryKey]: redirectUri,
+  };
 
   return (
     <AuthFormPage title="Inloggning">
@@ -62,20 +68,22 @@ const LoginPage: NextPage = () => {
         }) => (
           <Form>
             <EmailAndPassword />
-            <Button type="submit" disabled={isSubmitting} primary>
+            <FormText>
+              <Link href={resetLink(query)}>Glömt lösenordet?</Link>
+            </FormText>
+            <SubmitButton>
               {isSubmitting ? "Loggar in ..." : "Logga in"}
-            </Button>
-            <p>
+            </SubmitButton>
+            <FormText css={{
+              marginBottom: 0,
+            }}
+            >
               Har du inget konto?
               {" "}
-              <Link href={signupLink({
-                [prefilledEmailQueryKey]: formRef.current?.values?.email,
-                [redirectUriQueryKey]: redirectUri,
-              })}
-              >
+              <Link href={signupLink(query)}>
                 <a>Skapa ett</a>
               </Link>
-            </p>
+            </FormText>
           </Form>
         )}
       </Formik>
