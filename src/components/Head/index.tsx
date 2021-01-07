@@ -8,6 +8,7 @@ export interface SiteMetadata {
   description?: string;
   type?: string;
   images?: string[];
+  noIndex?: boolean;
 
   /**
    * Data to be specified if the `type` property is set to `article`.
@@ -18,6 +19,13 @@ export interface SiteMetadata {
   }
 }
 
+/**
+ * Universal SSO god.
+ *
+ * @param {React.PropsWithChildren<SiteMetadata>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered meta tags.
+ */
 export const MetaHead: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
   metadata,
 }) => {
@@ -28,6 +36,7 @@ export const MetaHead: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
     images = [
       "https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg",
     ],
+    noIndex = false,
     article,
   } = metadata;
 
@@ -59,6 +68,8 @@ export const MetaHead: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
         <meta key={image} property="og:image" content={image} />
       ))}
 
+      {noIndex ? <meta name="robots" content="noindex" /> : null}
+
       {article ? (
         <>
           {article?.published ? <meta property="og:article:published_time" content={article.published.toISOString()} /> : null}
@@ -69,9 +80,18 @@ export const MetaHead: React.FunctionComponent<{ metadata: SiteMetadata }> = ({
   );
 };
 
-const SiteHead: React.FunctionComponent<{
+export interface SiteHeadProps {
   metadata?: SiteMetadata;
-}> = ({ metadata = {} }) => (
+}
+
+/**
+ * `<head>` including metadata and icons.
+ *
+ * @param {React.PropsWithChildren<SiteHeadProps>} props Props.
+ *
+ * @returns {React.ReactElement} Lots of meta tags.
+ */
+const SiteHead: React.FunctionComponent<SiteHeadProps> = ({ metadata = {} }) => (
   <>
     <MetaHead metadata={metadata} />
 

@@ -31,7 +31,13 @@ const AccountResetPage: NextPage = () => {
   };
 
   return (
-    <AuthFormPage title="Kontoåterställning">
+    <AuthFormPage
+      title="Kontoåterställning"
+      metadata={{
+        title: "Kontoåterställning",
+        description: "Återställ ditt konto här.",
+      }}
+    >
       <Formik
         initialValues={initialValues}
         enableReinitialize

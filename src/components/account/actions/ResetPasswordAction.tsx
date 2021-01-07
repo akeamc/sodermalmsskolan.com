@@ -62,6 +62,9 @@ const ResetPasswordAction: AccountAction = ({
           <code>{email}</code>
         </>
       ) : <InlineSkeleton width="80%" />}
+      metadata={{
+        noIndex: true,
+      }}
     >
       <Formik
         initialValues={initialValues}

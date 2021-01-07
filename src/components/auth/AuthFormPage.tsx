@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React, { FunctionComponent, ReactNode } from "react";
-import Base from "../Base";
+import Base, { BaseProps } from "../Base";
 import Card from "../Card";
 import FormText from "../form/text/FormText";
 import LogoIcon from "../logo/Icon";
 import { SmallHeading } from "../text/headings";
 
-export interface AuthFormPageProps {
+export interface AuthFormPageProps extends BaseProps {
   title: ReactNode;
   description?: ReactNode;
 }
@@ -22,8 +22,13 @@ const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
   title,
   description,
   children,
+  ...baseProps
 }) => (
-  <Base navbar={false} footer={false}>
+  <Base
+    navbar={false}
+    footer={false}
+    {...baseProps}
+  >
     <div css={{
       position: "relative",
       backgroundImage: "radial-gradient(var(--accents-2) 2px, transparent 2px)",
