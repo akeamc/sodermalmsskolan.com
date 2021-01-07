@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import { ServerMenu } from "../../../../lib/food/structures/server/Menu";
+import ServerMenu from "../../../../lib/food/structures/server/Menu";
 import { IMenu } from "../../../../lib/food/structures/shared/Menu";
 
 const handler: NextApiHandler<IMenu[]> = async (_, res) => {

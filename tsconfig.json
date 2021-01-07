@@ -12,13 +12,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "types": ["@emotion/core", "jest"],
   },
   "exclude": ["node_modules"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/pages/api/food/dishes/[dish]"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

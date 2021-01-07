@@ -7,17 +7,17 @@ const handler: NextApiHandler<StudySetStatic> = async (req, res) => {
 
   const sets = await ServerStudySet.fetchAll();
 
-  const set = sets.find((set) => set.id === id);
+  const studySet = sets.find((set) => set.id === id);
 
-  if (!set) {
+  if (!studySet) {
     return res.status(404).end();
   }
 
-  await set.fetchDetails();
+  await studySet.fetchDetails();
 
   res.setHeader("Cache-Control", "s-maxage=86400");
 
-  return res.json(set.serialize());
+  return res.json(studySet.serialize());
 };
 
 export default handler;

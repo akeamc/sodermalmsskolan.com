@@ -2,7 +2,7 @@ import * as admin from "firebase-admin";
 
 const serviceAccountJson = Buffer.from(
   process.env.FIREBASE_TOKEN,
-  "base64"
+  "base64",
 ).toString("ascii");
 
 const serviceAccount = JSON.parse(serviceAccountJson);

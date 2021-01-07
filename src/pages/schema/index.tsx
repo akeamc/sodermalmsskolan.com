@@ -1,20 +1,25 @@
+import { NextPage } from "next";
 import React from "react";
-import { Schedules } from "../../lib/schedule/Schedule";
-import { DefaultLayout } from "../../components/layout/Layout/Default";
-import { Navigation } from "../../components/layout/Navigation";
-import { SimpleHero } from "../../components/layout/Hero/Simple";
-import { ScheduleView } from "../../components/schedule/ScheduleView";
-import { AdSection } from "../../components/basic/Ad";
+import Base from "../../components/Base";
+import SimpleHeader from "../../components/header/Simple";
+import ScheduleSection from "../../components/schedule/Section";
 
-const Page: React.FunctionComponent = () => {
-  return (
-    <DefaultLayout metadata={{ title: "Schema" }}>
-      <Navigation />
-      <SimpleHero title="Schema" />
-      <AdSection />
-      <ScheduleView schedules={Schedules} />
-    </DefaultLayout>
-  );
-};
+/**
+ * The schedule page.
+ *
+ * @returns {React.ReactElement} The JSX element.
+ */
+const SchedulePage: NextPage = () => (
+  <Base
+    metadata={{
+      title: "Schema",
+      description: "Schema.",
+    }}
+    leadingAd
+  >
+    <SimpleHeader title="Schema" />
+    <ScheduleSection />
+  </Base>
+);
 
-export default Page;
+export default SchedulePage;

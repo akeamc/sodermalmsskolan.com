@@ -1,9 +1,9 @@
+import got from "got/dist/source";
 import { ServerDish } from "./Dish";
 import { IMenu, Menu } from "../shared/Menu";
-import got from "got/dist/source";
-import { API_ENDPOINT } from "../../constants";
+import API_ENDPOINT from "../../endpoint";
 
-export class ServerMenu extends Menu {
+export default class ServerMenu extends Menu {
   dishes: ServerDish[];
 
   constructor({ dishes, date }: IMenu) {

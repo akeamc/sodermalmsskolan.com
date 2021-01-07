@@ -7,11 +7,16 @@ export interface VoteStatic {
 
 export class Vote {
   author: string;
+
   dish: string;
+
   timestamp: Date;
+
   up: boolean;
 
-  constructor({ author, dish, timestamp, up }: VoteStatic) {
+  constructor({
+    author, dish, timestamp, up,
+  }: VoteStatic) {
     this.author = author;
     this.dish = dish;
     this.timestamp = new Date(timestamp);

@@ -1,9 +1,10 @@
-import Digibruh, { DigibruhTags } from "../../../digibruh/Digibruh";
-import { StudySet } from "../shared/StudySet";
 import { parse } from "node-html-parser";
 import url from "url";
-import { API_ENDPOINT } from "../../../food/constants";
 import got from "got";
+import { StudySet } from "../shared/StudySet";
+import API_ENDPOINT from "../../../food/endpoint";
+import { browsePosts } from "../../../ghost/post";
+import digibruhTagPrefix from "../../../digibruh/digibruhTagPrefix";
 
 export interface PotatoStudySetDetails {
   id: string;
@@ -15,7 +16,10 @@ export interface PotatoStudySetDetails {
 
 export class ServerStudySet extends StudySet {
   public static async fetchAll(): Promise<ServerStudySet[]> {
-    const articles = await Digibruh.fetchAllPosts();
+    const articles = await browsePosts({
+      limit: "all",
+      filter: `tag:${digibruhTagPrefix}`,
+    });
 
     const studySets: ServerStudySet[] = articles.reduce<ServerStudySet[]>(
       (accumulator, article) => {
@@ -24,39 +28,30 @@ export class ServerStudySet extends StudySet {
         const ids = root
           .querySelectorAll("a")
           .reduce<string[]>((validLinks, anchor) => {
-            const link = url.parse(anchor.getAttribute("href"));
+          const link = url.parse(anchor.getAttribute("href"));
 
-            if (
-              link.host === "quizlet.com" &&
-              this.pathRegExp.test(link.path)
-            ) {
-              const id = this.parseUrl(link.href);
+          if (
+            link.host === "quizlet.com"
+              && this.pathRegExp.test(link.path)
+          ) {
+            const id = this.parseUrl(link.href);
 
-              validLinks.push(id);
-            }
+            validLinks.push(id);
+          }
 
-            return validLinks;
-          }, []);
-
-        const tags = new DigibruhTags(...article.tags);
-
-        const digibruh = {
-          fields: tags.fields().map((field) => field.slug),
-          subjects: tags.subjects().map((field) => field.slug),
-        };
+          return validLinks;
+        }, []);
 
         return accumulator.concat(
           ids.map(
-            (id) =>
-              new ServerStudySet({
-                digibruh,
-                id,
-                details: null,
-              })
-          )
+            (id) => new ServerStudySet({
+              id,
+              details: null,
+            }),
+          ),
         );
       },
-      []
+      [],
     );
 
     return studySets;

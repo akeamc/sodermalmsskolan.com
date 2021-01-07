@@ -1,13 +1,18 @@
 import { ResponsePromise } from "ky";
 import ky from "ky-universal";
-import useSWR, { responseInterface } from "swr";
-import { getAuthorizationHeader } from "../../../auth/token";
+import useSWR from "swr";
+import getAuthorizationHeader from "../../../auth/header";
+import { UseSWRResource } from "../../../common/usable";
 import { Vote, VoteStatic } from "../shared/Vote";
+
+interface UseVotesQuery {
+  dish: string;
+}
 
 export class ClientVote extends Vote {
   public static async sendVote(
     dish: string,
-    up: boolean
+    up: boolean,
   ): Promise<ResponsePromise> {
     return ky.post(`/api/food/dishes/${dish}/votes`, {
       json: {
@@ -28,8 +33,8 @@ export class ClientVote extends Vote {
   }
 
   public static async fetchByDish(
-    dish: string,
-    noCache = false
+    { dish }: UseVotesQuery,
+    noCache = false,
   ): Promise<ClientVote[]> {
     if (!dish) {
       throw new Error("dish must be specified");
@@ -39,22 +44,20 @@ export class ClientVote extends Vote {
       .get(`/api/food/dishes/${dish}/votes`, {
         searchParams: noCache
           ? {
-              _vercel_no_cache: 1,
-            }
+            _vercel_no_cache: 1,
+          }
           : null,
       })
       .json<VoteStatic[]>();
 
     return res.map((vote) => new ClientVote(vote));
   }
-
-  public static useByDish(
-    dish: string
-  ): responseInterface<ClientVote[], unknown> {
-    return useSWR(
-      `/api/food/dishes/${dish}/votes`,
-      () => ClientVote.fetchByDish(dish),
-      { revalidateOnFocus: false }
-    );
-  }
 }
+
+export const useVotes: UseSWRResource<ClientVote[], UseVotesQuery> = (
+  query,
+) => useSWR(
+  `/api/food/dishes/${query.dish}/votes`,
+  () => ClientVote.fetchByDish(query),
+  { revalidateOnFocus: false },
+);

@@ -1,12 +1,13 @@
-import { IDish, Dish } from "./Dish";
+import { DishStatic, Dish } from "./Dish";
 
 export interface IMenu {
-  dishes: IDish[];
+  dishes: DishStatic[];
   date: string;
 }
 
 export class Menu {
   dishes: Dish[];
+
   date: Date;
 
   constructor({ dishes, date }: IMenu) {

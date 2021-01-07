@@ -1,33 +1,30 @@
 import ky from "ky-universal";
-import useSWR, { responseInterface } from "swr";
-import { Dish, IDish } from "../shared/Dish";
+import useSWR from "swr";
+import { UseSWRResource } from "../../../common/usable";
+import { Dish, DishStatic } from "../shared/Dish";
 
 export class ClientDish extends Dish {
   public static async fetchAll(): Promise<ClientDish[]> {
-    const res = await ky.get("/api/food/dishes").json<IDish[]>();
+    const res = await ky.get("/api/food/dishes").json<DishStatic[]>();
 
     return res.map((dish) => new ClientDish(dish));
   }
 
-  public static async fetch(id: string): Promise<ClientDish> {
+  public static async fetchEmissions(id: string): Promise<number> {
     if (!id) {
-      return null;
+      return undefined;
     }
 
-    const res = await ky.get(`/api/food/dishes/${id}`).json<IDish>();
+    const res = await ky.get(`/api/food/dishes/${id}`).json<DishStatic>();
 
-    return new ClientDish(res);
+    return res?.co2e;
   }
 
-  public static useAll(): responseInterface<ClientDish[], unknown> {
-    return useSWR(`/api/food/dishes`, ClientDish.fetchAll, {
-      revalidateOnFocus: false,
-    });
-  }
-
-  public static use(id: string): responseInterface<ClientDish, unknown> {
-    return useSWR(`/api/food/dishes/${id}`, () => ClientDish.fetch(id), {
-      revalidateOnFocus: false,
-    });
+  public get url(): string {
+    return `/${encodeURIComponent("maträtter")}/#${this.id}`;
   }
 }
+
+export const useDishes: UseSWRResource<ClientDish[]> = () => useSWR("/api/food/dishes", ClientDish.fetchAll, {
+  revalidateOnFocus: false,
+});

@@ -3,13 +3,13 @@ import {
   ServerDish,
   ServerDishHandler,
 } from "../../../../../lib/food/structures/server/Dish";
-import { ServerVote } from "../../../../../lib/food/structures/server/Vote";
+import ServerVote from "../../../../../lib/food/structures/server/Vote";
 import { VoteStatic } from "../../../../../lib/food/structures/shared/Vote";
 
 const handler: ServerDishHandler<VoteStatic[] | string> = async (
   req,
   res,
-  dish
+  dish,
 ) => {
   if (req.method === "GET") {
     res.setHeader("Cache-Control", "s-maxage=3600");
@@ -20,13 +20,13 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   }
 
   if (req.method === "POST") {
-    return await withAuth(async (req, res, decoded) => {
+    return withAuth(async (_req, _res, decoded) => {
       const up = !!req.body?.up;
 
       await ServerVote.create({
         dish: dish.id,
         author: decoded.uid,
-        up: up,
+        up,
       });
 
       return res.send(`vote accepted (${up ? "up" : "down"})`);
@@ -34,7 +34,7 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
   }
 
   if (req.method === "DELETE") {
-    return await withAuth(async (_, res, decoded) => {
+    return withAuth(async (_, _res, decoded) => {
       await ServerVote.delete({
         dish: dish.id,
         author: decoded.uid,
@@ -44,7 +44,7 @@ const handler: ServerDishHandler<VoteStatic[] | string> = async (
     })(req, res);
   }
 
-  res.status(405).end();
+  return res.status(405).end();
 };
 
 export default ServerDish.wrapHandler(handler);

@@ -1,13 +1,13 @@
+import got from "got/dist/source";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import validator from "validator";
+import { AUTHORIZATION_HEADER } from "../../credentials";
 import {
   Message,
   IDiscordAPIMessage,
   MessageQuery,
   getParams,
 } from "../shared/Message";
-import got from "got/dist/source";
-import { AUTHORIZATION_HEADER } from "../../credentials";
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import validator from "validator";
 
 export type MessageQueryHandler<T = unknown> = (
   req: NextApiRequest,
@@ -25,7 +25,7 @@ export class ServerMessage extends Message {
   static async fetch(
     channel: string,
     message: string,
-    query: MessageQuery = {}
+    query: MessageQuery = {},
   ): Promise<ServerMessage> {
     const params = getParams(query);
 
@@ -43,7 +43,7 @@ export class ServerMessage extends Message {
 
   static async fetchMany(
     channel: string,
-    query: MessageQuery = {}
+    query: MessageQuery = {},
   ): Promise<ServerMessage[]> {
     const params = getParams(query);
 
@@ -60,33 +60,31 @@ export class ServerMessage extends Message {
   }
 
   public static wrapQueryHandler = (
-    handler: MessageQueryHandler
-  ): NextApiHandler => {
-    return async (req, res) => {
-      const { query } = req;
+    handler: MessageQueryHandler,
+  ): NextApiHandler => (req, res) => {
+    const { query } = req;
 
-      const before = query.before?.toString();
-      const after = query.after?.toString();
-      const limit = (query.limit || 50).toString();
+    const before = query.before?.toString();
+    const after = query.after?.toString();
+    const limit = (query.limit || 50).toString();
 
-      if (
-        !validator.isInt(limit, {
-          max: 100,
-          min: 1,
-        })
-      ) {
-        return res
-          .status(400)
-          .send(
-            "`limit` must be a positive integer less than or equal to 100."
-          );
-      }
+    if (
+      !validator.isInt(limit, {
+        max: 100,
+        min: 1,
+      })
+    ) {
+      return res
+        .status(400)
+        .send(
+          "`limit` must be a positive integer less than or equal to 100.",
+        );
+    }
 
-      return await handler(req, res, {
-        before,
-        after,
-        limit: validator.toInt(limit),
-      });
-    };
+    return handler(req, res, {
+      before,
+      after,
+      limit: validator.toInt(limit),
+    });
   };
 }
