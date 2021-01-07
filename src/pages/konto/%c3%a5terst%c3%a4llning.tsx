@@ -42,7 +42,6 @@ const AccountResetPage: NextPage = () => {
                 Ett mejl med instruktioner har skickats till
                 {" "}
                 <code>{email}</code>
-                {" "}
                 .
               </>
             ));
