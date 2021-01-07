@@ -24,6 +24,8 @@ const darkTheme: CSSObject = {
   "--skeleton-highlight": "var(--accents-3)",
 
   "--segmented-control-indicator": "var(--accents-5)",
+
+  "--code-background": "rgba(255, 255, 255, 0.1)",
 };
 
 export default darkTheme;

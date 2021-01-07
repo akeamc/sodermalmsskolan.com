@@ -42,6 +42,8 @@ const baseTheme: CSSObject = {
 
   "--select-selected-background": transparentize(0.9, "#4969ed"),
 
+  "--code-background": "rgba(0, 0, 0, 0.1)",
+
   "--navbar-height": "3.75rem",
 };
 

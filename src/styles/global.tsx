@@ -28,6 +28,15 @@ export const globalStyles = css({
   a: {
     color: "var(--color-highlight)",
   },
+
+  code: {
+    backgroundColor: "var(--code-background)",
+    color: "inherit",
+    fontFamily: fonts.monospace,
+    padding: "0.2em 0.4em",
+    fontSize: "85%",
+    borderRadius: "0.3125rem",
+  },
 });
 
 /**
