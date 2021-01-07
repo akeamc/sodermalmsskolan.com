@@ -13,6 +13,7 @@ import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRed
 import { useAuth } from "../../lib/auth/AuthContext";
 import FormText from "../../components/form/text/FormText";
 import SubmitButton from "../../components/form/SubmitButton";
+import { sendEmailVerification } from "../../components/account/EmailVerificationButton";
 
 /**
  * The page used by users to create an account.
@@ -49,6 +50,7 @@ const RegistrationPage: NextPage = () => {
           setFieldError,
         }) => {
           auth.createUserWithEmailAndPassword(email, password).then(() => {
+            sendEmailVerification();
             router.push(redirectUri);
           }).catch((error) => {
             const { field, message } = translateFirebaseError(error);

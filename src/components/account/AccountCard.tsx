@@ -11,7 +11,14 @@ import Card from "../Card";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Emphasis from "../text/atomics/Emphasis";
 import { SectionHeading } from "../text/headings";
+import { WarningParagraph } from "../text/paragraphs";
+import EmailVerificationButton from "./EmailVerificationButton";
 
+/**
+ * Informative card with an overview of a user's account.
+ *
+ * @returns {React.ReactElement} Card.
+ */
 const AccountCard: FunctionComponent = () => {
   const { user } = useAuth();
   const { language } = useLocale();
@@ -63,6 +70,18 @@ const AccountCard: FunctionComponent = () => {
               ? dayjs(user.metadata.lastSignInTime).locale(language).format("HH:mm D MMMM YYYY")
               : <InlineSkeleton width="10em" />}
           </span>
+          {user && !user?.emailVerified ? (
+            <WarningParagraph>
+              <span css={{
+                display: "block",
+                marginBottom: "1rem",
+              }}
+              >
+                Du har inte bekräftat din e-postadress.
+              </span>
+              <EmailVerificationButton>Skicka ett nytt mejl</EmailVerificationButton>
+            </WarningParagraph>
+          ) : null}
           <div css={{
             marginTop: "2rem",
           }}

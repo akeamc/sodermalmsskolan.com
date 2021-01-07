@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import { AlertCircle } from "react-feather";
 import { fonts } from "../../../styles/text";
+import { DangerParagraph } from "../../text/paragraphs";
 
 export interface TextFieldProps {
   name: string;
@@ -60,26 +60,12 @@ const TextField: FunctionComponent<TextFieldProps> = ({
       />
       {label ? <label htmlFor={id}>{label}</label> : null}
       {error ? (
-        <div css={{
-          color: "var(--color-text-danger)",
-          marginTop: "0.5rem",
-          display: "flex",
+        <DangerParagraph css={{
+          margin: "0.5rem 0 0",
         }}
         >
-          <AlertCircle css={{
-            marginRight: "0.25rem",
-            width: "1.5rem",
-            height: "1.5rem",
-          }}
-          />
-          <span css={{
-            margin: "0.125rem 0",
-            fontSize: "1rem",
-          }}
-          >
-            {error}
-          </span>
-        </div>
+          {error}
+        </DangerParagraph>
       ) : null}
     </div>
   );
