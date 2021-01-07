@@ -12,7 +12,7 @@ import Button, { ButtonProps } from "../../button/Button";
 export const submitButtonDisabled = <Values extends FormikValues>(
   formProps: FormikProps<Values>,
 ): boolean => {
-  const isDisabled = !formProps?.isValid || !formProps?.dirty || formProps?.isSubmitting;
+  const isDisabled = !formProps?.isValid || formProps?.isSubmitting;
 
   return isDisabled;
 };
