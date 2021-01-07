@@ -18,17 +18,29 @@ export interface IDiscordAPIUser {
 
 export class DiscordUser implements Serializable<IDiscordAPIUser> {
   id: string;
+
   username: string;
+
   discriminator: string;
+
   avatar?: string;
+
   bot?: boolean;
+
   system?: boolean;
+
   mfa?: boolean;
+
   locale?: string;
+
   verified?: boolean;
+
   email?: string;
+
   flags?: number;
+
   premiumType?: number;
+
   publicFlags?: number;
 
   constructor({

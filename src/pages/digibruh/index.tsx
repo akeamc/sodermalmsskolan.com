@@ -1,25 +1,18 @@
+import { NextPage } from "next";
 import React from "react";
-import { DefaultLayout } from "../../components/layout/Layout/Default";
-import SubjectsOverview from "../../components/digibruh/SubjectsOverview";
-import { Navigation } from "../../components/layout/Navigation";
-import { SimpleHero } from "../../components/layout/Hero/Simple";
+import Base from "../../components/Base";
+import DigibruhArticleSection from "../../components/digibruh/Section";
+import SimpleHeader from "../../components/header/Simple";
 
-const Page: React.FunctionComponent = () => {
-  return (
-    <DefaultLayout
-      metadata={{
-        title: "Digibruh",
-        description: "Ett digitalt läromedel av elever, för elever.",
-      }}
-    >
-      <Navigation />
-      <SimpleHero
-        title="Digibruh"
-        lead="Ett digitalt läromedel av elever, för elever."
-      />
-      <SubjectsOverview />
-    </DefaultLayout>
-  );
-};
+export const Page: NextPage = () => (
+  <Base metadata={{
+    title: "Digibruh",
+    description: "Ett digitalt läromedel av elever, för elever.",
+  }}
+  >
+    <SimpleHeader title="Digibruh" sub="Ett digitalt läromedel av elever, för elever." />
+    <DigibruhArticleSection limit="all" />
+  </Base>
+);
 
 export default Page;

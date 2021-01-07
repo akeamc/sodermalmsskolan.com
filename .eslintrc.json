@@ -8,12 +8,16 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-typescript",
+    "plugin:jsdoc/recommended",
+    "plugin:jest/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
+    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
     }
@@ -23,12 +27,28 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "@emotion",
+    "jsdoc",
+    "jest"
+  ],
   "rules": {
-    // "no-unused-vars": "off",
-    // "@typescript-eslint/no-unused-vars": "off",
-    // "@typescript-eslint/no-unused-vars-experimental": "error",
     "react/prop-types": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/quotes": [2, "double", { "avoidEscape": true }],
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+    "require-jsdoc": ["warn", {
+      "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true,
+          "ArrowFunctionExpression": true,
+          "FunctionExpression": true
+      }
+    }]
   }
 }

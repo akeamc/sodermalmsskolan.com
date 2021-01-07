@@ -22,7 +22,8 @@ export interface MessageQuery {
   after?: string;
 
   /**
-   * The limit of how many messages to fetch. According to Discord's API, it must be an integer larger than 0 and at most 100.
+   * The limit of how many messages to fetch. According to Discord's API,
+   * it must be an integer larger than 0 and at most 100.
    */
   limit?: number;
 }
@@ -33,6 +34,9 @@ export interface MessageSearchParams extends Record<string, string | number> {
   limit: number;
 }
 
+/**
+ * @param query
+ */
 export function getParams(query: MessageQuery): MessageSearchParams {
   return {
     limit: query.limit || 50,
@@ -58,16 +62,27 @@ export interface IDiscordAPIMessage {
 
 export class Message implements Serializable<IDiscordAPIMessage> {
   id: string;
+
   channel: string;
+
   guild?: string;
+
   author: DiscordUser;
+
   member?: Member;
+
   content: string;
+
   pinned: boolean;
+
   tts: boolean;
+
   attachments: MessageAttachment[];
+
   createdAt: Date;
+
   editedAt?: Date;
+
   reactions?: IDiscordAPIMessageReaction[];
 
   constructor({
@@ -93,7 +108,7 @@ export class Message implements Serializable<IDiscordAPIMessage> {
     this.pinned = pinned;
     this.tts = tts;
     this.attachments = attachments.map(
-      (attachment) => new MessageAttachment(attachment)
+      (attachment) => new MessageAttachment(attachment),
     );
     this.createdAt = new Date(timestamp);
     this.editedAt = new Date(edited_timestamp);

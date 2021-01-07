@@ -1,26 +1,22 @@
+import { NextPage } from "next";
 import React from "react";
-import { DefaultLayout } from "../../components/layout/Layout/Default";
-import { PostGridAuto } from "../../components/blog/PostGrid";
-import { Section } from "../../components/layout/Section";
-import { Navigation } from "../../components/layout/Navigation";
-import FeaturedPost from "../../components/blog/FeaturedPost";
-import { Base } from "../../components/grid/Base";
-import { Hero } from "../../components/layout/Hero";
+import Base from "../../components/Base";
+import BlogHeader from "../../components/blog/Header";
+import PostListSection from "../../components/blog/PostListSection";
 
-const Page: React.FunctionComponent = () => {
-  return (
-    <DefaultLayout metadata={{ title: "Blogg" }}>
-      <Navigation />
-      <Hero>
-        <Base>
-          <FeaturedPost />
-        </Base>
-      </Hero>
-      <Section>
-        <PostGridAuto skip={1} />
-      </Section>
-    </DefaultLayout>
-  );
-};
+/**
+ * The front cover of the blog.
+ *
+ * @returns {React.ReactElement} The generated JSX.
+ */
+const BlogIndexPage: NextPage = () => (
+  <Base metadata={{
+    title: "Blogg",
+  }}
+  >
+    <BlogHeader />
+    <PostListSection />
+  </Base>
+);
 
-export default Page;
+export default BlogIndexPage;

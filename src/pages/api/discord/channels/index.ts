@@ -1,5 +1,5 @@
-import withAuth from "../../../../lib/auth/withAuth";
 import { NextApiHandler } from "next";
+import withAuth from "../../../../lib/auth/withAuth";
 import { IDiscordAPIChannel } from "../../../../lib/discord/structures/shared/Channel";
 import { ServerChannel } from "../../../../lib/discord/structures/server/Channel";
 

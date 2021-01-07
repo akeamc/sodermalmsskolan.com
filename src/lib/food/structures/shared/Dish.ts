@@ -1,23 +1,26 @@
 import Serializable from "../../../common/serializable";
 
-export interface IDish {
+export interface DishStatic {
   title: string;
   id: string;
   co2e?: number;
+  images?: string[];
 }
 
-export class Dish implements Serializable<IDish> {
+export class Dish implements Serializable<DishStatic> {
   title: string;
+
   id: string;
+
   co2e?: number;
 
-  constructor({ title, id, co2e }: IDish) {
+  constructor({ title, id, co2e }: DishStatic) {
     this.title = title;
     this.id = id;
     this.co2e = co2e;
   }
 
-  public serialize(): IDish {
+  public serialize(): DishStatic {
     return {
       title: this.title,
       id: this.id,

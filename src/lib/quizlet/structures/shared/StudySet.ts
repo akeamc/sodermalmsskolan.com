@@ -7,28 +7,17 @@ export interface StudySetDetails {
   author: string;
 }
 
-export interface StudySetDigibruh {
-  subjects: string[];
-
-  /**
-   * The Digibruh field of the study set, determined by the article in which the study set is linked.
-   */
-  fields: string[];
-}
-
 export interface StudySetStatic {
-  digibruh: StudySetDigibruh;
   id: string;
   details: StudySetDetails | null;
 }
 
 export class StudySet implements Serializable<StudySetStatic> {
-  public digibruh: StudySetDigibruh;
   public id: string;
+
   public details: StudySetDetails | null;
 
-  constructor({ digibruh, id, details }: StudySetStatic) {
-    this.digibruh = digibruh;
+  constructor({ id, details }: StudySetStatic) {
     this.id = id;
     this.details = details || null;
   }
@@ -43,12 +32,14 @@ export class StudySet implements Serializable<StudySetStatic> {
 
   public static get pathRegExp(): RegExp {
     return new RegExp(
-      /^\//.source + this.idRegExp.source + /\/([a-z0-9-]+\/)?$/.source
+      /^\//.source + this.idRegExp.source + /\/([a-z0-9-]+\/)?$/.source,
     );
   }
 
   /**
    * Extract the id from a Quizlet study set url.
+   *
+   * @param url
    */
   public static parseUrl(url: string): string {
     return url.match(/[0-9]{9}/)[0];
@@ -56,7 +47,6 @@ export class StudySet implements Serializable<StudySetStatic> {
 
   public serialize(): StudySetStatic {
     return {
-      digibruh: this.digibruh,
       id: this.id,
       details: this.details,
     };

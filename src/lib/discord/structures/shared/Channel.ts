@@ -1,5 +1,5 @@
-import { IDiscordAPIUser } from "./User";
-import { DiscordUser } from "./User";
+import { IDiscordAPIUser, DiscordUser } from "./User";
+
 import { IDiscordAPIPermissionOverwrite } from "./PermissionOverwrite";
 import Serializable from "../../../common/serializable";
 
@@ -36,22 +36,39 @@ export interface IDiscordAPIChannel {
 
 export class Channel implements Serializable<IDiscordAPIChannel> {
   id: string;
+
   type: ChannelType;
+
   guild: string;
+
   position?: number;
+
   permissionOverwrites: IDiscordAPIPermissionOverwrite[];
+
   name?: string;
+
   topic?: string;
+
   nsfw?: boolean;
+
   lastMessage: string;
+
   bitrate?: number;
+
   userLimit?: number;
+
   rateLimit?: number;
+
   recipients?: DiscordUser[];
+
   icon?: string;
+
   owner?: string;
+
   application?: string;
+
   parent?: string;
+
   lastPin: Date;
 
   constructor({
@@ -87,7 +104,7 @@ export class Channel implements Serializable<IDiscordAPIChannel> {
     this.userLimit = user_limit;
     this.rateLimit = rate_limit_per_user;
     this.recipients = recipients?.map(
-      (recipient) => new DiscordUser(recipient)
+      (recipient) => new DiscordUser(recipient),
     );
     this.icon = icon;
     this.owner = owner_id;

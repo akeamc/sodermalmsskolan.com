@@ -1,8 +1,8 @@
 import got, { HTTPError } from "got";
-import { API_ENDPOINT } from "../../constants";
-import { Dish, IDish } from "../shared/Dish";
-import admin from "../../../firebase/admin";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import API_ENDPOINT from "../../endpoint";
+import { Dish, DishStatic } from "../shared/Dish";
+import admin from "../../../firebase/admin";
 
 export type ServerDishHandler<T = unknown> = (
   req: NextApiRequest,
@@ -12,7 +12,7 @@ export type ServerDishHandler<T = unknown> = (
 
 export class ServerDish extends Dish {
   public static firestoreCollection(): FirebaseFirestore.CollectionReference<
-    FirebaseFirestore.DocumentData
+  FirebaseFirestore.DocumentData
   > {
     const db = admin.firestore();
 
@@ -20,46 +20,45 @@ export class ServerDish extends Dish {
   }
 
   public static firestoreDocument(
-    id: string
+    id: string,
   ): FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> {
     return ServerDish.firestoreCollection().doc(id);
   }
 
   public static async fetchAll(): Promise<ServerDish[]> {
-    const res = await got.get(`${API_ENDPOINT}/dishes`).json<IDish[]>();
+    const res = await got.get(`${API_ENDPOINT}/dishes`).json<DishStatic[]>();
 
     return res.map((dish) => new ServerDish(dish));
   }
 
   /**
-   * Returns detailed information about a `Dish` with a specified `id` such as carbon dioxide equivalent emissions.
+   * Returns detailed information about a `Dish` with a specified `id` such as carbon dioxide
+   * equivalent emissions and images.
+   *
    * @param id
    */
   public static async fetch(id: string): Promise<ServerDish> {
-    const res = await got.get(`${API_ENDPOINT}/dishes/${id}`).json<IDish>();
+    const res = await got.get(`${API_ENDPOINT}/dishes/${id}`).json<DishStatic>();
 
     return new ServerDish({
       ...res,
     });
   }
 
-  public static wrapHandler = (handler: ServerDishHandler): NextApiHandler => {
-    return async (req, res) => {
-      const id = req.query.dish?.toString();
+  public static wrapHandler = (handler: ServerDishHandler): NextApiHandler => async (req, res) => {
+    const id = req.query.dish?.toString();
 
-      let dish: ServerDish;
+    let dish: ServerDish;
 
-      try {
-        dish = await ServerDish.fetch(id);
-      } catch (error) {
-        if (error instanceof HTTPError) {
-          return res.status(404).send("dish not found");
-        } else {
-          throw error;
-        }
+    try {
+      dish = await ServerDish.fetch(id);
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        return res.status(404).send("dish not found");
       }
+      throw error;
+    }
 
-      return await handler(req, res, dish);
-    };
+    return handler(req, res, dish);
   };
 }

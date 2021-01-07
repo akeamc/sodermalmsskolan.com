@@ -1,122 +1,116 @@
-import React from "react";
-import styled, { ThemeProvider, useTheme } from "styled-components";
-import { Card, CardContent } from "../basic/Card";
-import { getPosts } from "../../lib/ghost/post";
-import useSWR from "swr";
-import { getPostUrl } from "./PostGrid";
-import { getLineClamp } from "../basic/CardGrid";
 import dayjs from "dayjs";
-import PostMeta from "../article/meta";
-import * as breakpoints from "../../styles/breakpoints";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import Link from "next/link";
-import { transparentLightPalette } from "../../styles/themes";
-import { Skeleton } from "../basic/Skeleton";
-import { Anchor, Muted } from "../basic/Typography";
 import Image from "next/image";
-import { useLang } from "../../hooks/lang";
+import Link from "next/link";
+import React, { FunctionComponent } from "react";
+import useLocale from "../../hooks/useLocale";
+import { usePostUrl } from "../../lib/blog/hooks/post";
+import Post from "../../lib/ghost/post";
+import { breakpoints, media } from "../../styles/breakpoints";
+import darkTheme from "../../styles/themes/dark";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
+import { H2, SmallHeading } from "../text/headings";
+import { CardDescription } from "../text/paragraphs";
 
-const CardWrapper = styled(Anchor)`
-  grid-column: span 12;
-  display: block;
-`;
+const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
+  const { language } = useLocale();
+  const url = usePostUrl(post?.slug);
 
-const Background = styled(Image).attrs({
-  layout: "fill",
-})`
-  z-index: 0;
-  transition: transform 0.2s ease-in-out;
-  object-fit: cover;
-  filter: brightness(0.75);
-`;
+  const timestamp = post?.publishedAt ? dayjs(post?.publishedAt).locale(language) : null;
 
-const BigCard = styled(Card)`
-  position: relative;
-  overflow: hidden;
+  const inner = (
+    <article css={{
+      position: "relative",
+      minHeight: "30rem",
 
-  &:hover {
-    ${Background} {
-      transform: scale(1.1);
-    }
-  }
-`;
+      "&:hover": {
+        figure: {
+          margin: "-5px",
+          boxShadow: "var(--shadow-large)",
 
-const BigCardContent = styled(CardContent)`
-  padding: 2rem 1rem;
-  max-width: 400px;
-  z-index: 1;
+          img: {
+            transform: "scale(1)",
+            opacity: 0.75,
+          },
+        },
+      },
+    }}
+    >
+      <div css={[darkTheme, {
+        position: "relative",
+        zIndex: 1,
+        padding: "2rem",
+        boxSizing: "border-box",
 
-  @media (min-width: ${breakpoints.small}) {
-    padding: 4rem 2rem;
-  }
-
-  @media (min-width: ${breakpoints.medium}) {
-    padding: 6rem 3rem;
-  }
-`;
-
-const FeaturedPost: React.FunctionComponent = () => {
-  const { data, isValidating } = useSWR("/blog/posts?limit=1", () =>
-    getPosts(1)
+        [media(breakpoints.medium)]: {
+          padding: "4rem",
+        },
+      }]}
+      >
+        <SmallHeading css={{
+          marginBottom: "1rem",
+          color: "var(--color-text-primary)",
+          opacity: 0.5,
+        }}
+        >
+          {timestamp?.format("D MMMM YYYY HH:mm") || <InlineSkeleton width="11em" />}
+        </SmallHeading>
+        <H2 css={{
+          maxWidth: "37.5rem",
+        }}
+        >
+          {post?.title || <InlineSkeleton count={2} />}
+        </H2>
+        <CardDescription css={{
+          display: "-webkit-box",
+          WebkitLineClamp: 5,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          width: "90%",
+        }}
+        >
+          {post?.excerpt || <InlineSkeleton count={5} />}
+        </CardDescription>
+      </div>
+      <figure css={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        margin: 0,
+        borderRadius: "0.5rem",
+        overflow: "hidden",
+        transition: "all 0.2s ease-in-out",
+        backgroundColor: "#000000",
+      }}
+      >
+        {post?.cover
+          ? (
+            <Image
+              css={{
+                objectFit: "cover",
+                transform: "scale(1.1)",
+                transition: "all 0.2s ease-in-out",
+                opacity: 0.5,
+              }}
+              src={post?.cover}
+              layout="fill"
+            />
+          ) : null}
+      </figure>
+    </article>
   );
 
-  const post = data ? data[0] : null;
-  const loading = isValidating && !data;
-  const excerptLineLimit = 5;
-
-  const { ref, inView } = useInView();
-  const show = inView && post;
-
-  const lang = useLang();
-
-  const theme = useTheme();
-
-  return (
-    <ThemeProvider theme={{ ...theme, colors: transparentLightPalette }}>
-      <Link href={getPostUrl(post?.slug)} passHref>
-        <CardWrapper ref={ref}>
-          <motion.div
-            variants={{
-              show: {
-                opacity: 1,
-                y: 0,
-              },
-              hide: {
-                opacity: 0,
-                y: 32,
-              },
-            }}
-            animate={show ? "show" : "hide"}
-            initial={false}
-          >
-            <BigCard>
-              {post?.feature_image ? (
-                <Background src={post?.feature_image} />
-              ) : null}
-              <BigCardContent>
-                <h2>{loading ? <Skeleton count={3} /> : post?.title}</h2>
-                <Muted style={getLineClamp(excerptLineLimit)}>
-                  {loading ? (
-                    <Skeleton count={excerptLineLimit} />
-                  ) : (
-                    post?.excerpt
-                  )}
-                </Muted>
-                <PostMeta
-                  post={post}
-                  dateText={dayjs(post?.published_at)
-                    .locale(lang)
-                    .format("D MMMM YYYY")}
-                  skeleton={loading}
-                />
-              </BigCardContent>
-            </BigCard>
-          </motion.div>
-        </CardWrapper>
-      </Link>
-    </ThemeProvider>
-  );
+  return url ? (
+    <Link href={url} passHref>
+      <a css={{
+        textDecoration: "none",
+      }}
+      >
+        {inner}
+      </a>
+    </Link>
+  ) : inner;
 };
 
 export default FeaturedPost;

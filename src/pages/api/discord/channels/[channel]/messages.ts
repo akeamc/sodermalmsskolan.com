@@ -17,15 +17,14 @@ const handler: ChannelMessagesHandler<IDiscordAPIMessage[]> = async (
   _,
   res,
   channel: ServerChannel,
-  query: MessageQuery
+  query: MessageQuery,
 ) => {
   const messages = await ServerMessage.fetchMany(channel.id, query);
 
   return res.json(messages.map((message) => message.serialize()));
 };
 
-export default ServerChannel.wrapHandler(async (req, res, channel) => {
-  await ServerMessage.wrapQueryHandler(async (req, res, query) => {
-    return await handler(req, res, channel, query);
-  })(req, res);
+export default ServerChannel.wrapHandler(async (oReq, oRes, channel) => {
+  await ServerMessage
+    .wrapQueryHandler(async (iReq, iRes, query) => handler(iReq, iRes, channel, query))(oReq, oRes);
 });

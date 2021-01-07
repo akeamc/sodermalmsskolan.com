@@ -1,21 +1,52 @@
+import { Author as GhostAuthor, Identification } from "@tryghost/content-api";
+import {
+  defaultReadParams, defaultSharedParams, ReadParams, SharedParams,
+} from "./common";
 import api from "./credentials";
-import { Author } from "@tryghost/content-api";
 
-export async function getAuthors(): Promise<Author[]> {
-  return api.authors.browse({
-    limit: "all",
-    include: ["count.posts"],
-  });
+export type BrowseAuthorsParams = SharedParams;
+
+export default interface Author extends Identification {
+  name?: string;
+  profileImage?: string;
+  coverImage?: string;
+  bio?: string;
 }
 
-export async function getAuthorBySlug(slug: string): Promise<Author> {
-  return api.authors.read({
-    slug,
-    // @ts-ignore
-    include: ["count.posts"],
-  });
-}
+export const ghostAuthorToAuthor = ({
+  id,
+  slug,
+  name,
+  profile_image,
+  cover_image,
+  bio,
+}: GhostAuthor): Author => ({
+  id,
+  slug,
+  name,
+  profileImage: profile_image,
+  coverImage: cover_image,
+  bio,
+});
 
-export function getAuthorUrl(slug: string): string {
-  return `/blogg/forfattare/${slug}`;
-}
+/**
+ * Browse authors.
+ *
+ * @param params
+ */
+export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<Author[]> => {
+  const authors = await api.authors.browse(defaultSharedParams(params));
+
+  return authors.map(ghostAuthorToAuthor);
+};
+
+/**
+ * Get the details of an author.
+ *
+ * @param params
+ */
+export const getAuthor = async (params: ReadParams): Promise<Author> => {
+  const author = await api.authors.read(defaultReadParams(params));
+
+  return ghostAuthorToAuthor(author);
+};

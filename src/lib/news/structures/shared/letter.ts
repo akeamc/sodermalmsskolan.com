@@ -22,12 +22,18 @@ export interface LetterStatic {
  */
 export default abstract class Letter implements Serializable<LetterStatic> {
   id: string;
+
   title: string;
+
   attachment: LetterAttachment;
+
   timestamp: Date;
+
   url: string;
 
-  constructor({ id, title, timestamp, attachment, url }: LetterStatic) {
+  constructor({
+    id, title, timestamp, attachment, url,
+  }: LetterStatic) {
     this.id = id;
     this.title = title;
     this.attachment = attachment;

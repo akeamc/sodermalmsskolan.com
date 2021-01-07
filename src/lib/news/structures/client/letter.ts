@@ -1,13 +1,13 @@
-import ky from "ky-universal";
+import ky, { HTTPError } from "ky-universal";
 import useSWR from "swr";
-import { getAuthorizationHeader } from "../../../auth/token";
+import getAuthorizationHeader from "../../../auth/header";
 import { IdQuery } from "../../../common/query";
 import { UseSWRResource } from "../../../common/usable";
 import Letter, { LetterStatic } from "../shared/letter";
 
 export default class ClientLetter extends Letter {
   public static get fetchAllUrl(): string {
-    return `/api/news/letters`;
+    return "/api/news/letters";
   }
 
   public static fetchUrl(id: string): string {
@@ -28,7 +28,7 @@ export default class ClientLetter extends Letter {
 
   public static async fetch(id: string): Promise<ClientLetter> {
     if (!id) {
-      return null;
+      return undefined;
     }
 
     const res = await ky
@@ -54,10 +54,14 @@ export default class ClientLetter extends Letter {
   }
 }
 
-export const useLetters: UseSWRResource<ClientLetter[]> = () => {
-  return useSWR(ClientLetter.fetchAllUrl, () => ClientLetter.fetchAll());
-};
+export const useLetters: UseSWRResource<
+ClientLetter[],
+Record<string, never>,
+HTTPError
+> = () => useSWR(ClientLetter.fetchAllUrl,
+  () => ClientLetter.fetchAll());
 
-export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => {
-  return useSWR(ClientLetter.fetchUrl(id), () => ClientLetter.fetch(id));
-};
+export const useLetter: UseSWRResource<ClientLetter, IdQuery> = ({ id }) => useSWR(
+  ClientLetter.fetchUrl(id),
+  () => ClientLetter.fetch(id),
+);

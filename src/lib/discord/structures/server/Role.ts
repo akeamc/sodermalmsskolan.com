@@ -1,10 +1,10 @@
-import { Role, IDiscordAPIRole } from "../shared/Role";
 import got from "got";
-import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
 import { Permissions } from "discord.js";
-import { ServerMember } from "./Member";
+import { Role, IDiscordAPIRole } from "../shared/Role";
+import { DISCORD_GUILD, AUTHORIZATION_HEADER } from "../../credentials";
+import ServerMember from "./Member";
 
-export class ServerRole extends Role {
+export default class ServerRole extends Role {
   public static async fetchAll(): Promise<ServerRole[]> {
     const data = await got
       .get(`https://discord.com/api/guilds/${DISCORD_GUILD}/roles`, {
@@ -27,8 +27,6 @@ export class ServerRole extends Role {
       ServerRole.fetchAll(),
     ]);
 
-    return member.roles.map((roleId) =>
-      roles.find((role) => role.id === roleId)
-    );
+    return member.roles.map((roleId) => roles.find((role) => role.id === roleId));
   }
 }
