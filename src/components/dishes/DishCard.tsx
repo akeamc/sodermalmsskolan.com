@@ -15,6 +15,13 @@ export interface DishCardProps extends CardProps {
   showPhotos?: boolean;
 }
 
+/**
+ * Dish photo with small dimensions to reduce data usage and increase responsiveness.
+ *
+ * @param {any} props Props.
+ *
+ * @returns {React.ReactElement} The rendered photo.
+ */
 const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => (
   <div css={[skeletonBackground, {
     position: "relative",
@@ -26,19 +33,30 @@ const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => (
 
     img: {
       objectFit: "cover",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
     },
   }]}
   >
-    {photo?.url ? <Image src={photo?.url} layout="fill" /> : null}
+    {photo?.url ? (
+      <Image
+        src={photo?.url}
+        width={100}
+        height={100}
+      />
+    ) : null}
   </div>
 );
 
 /**
  * Dish information.
  *
- * @param props
- * @param props.dish
- * @param props.showPhotos
+ * @param {React.PropsWithChildren<DishCardProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered card.
  */
 const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, ...rest }) => {
   const { data: co2e, error: emissionsError } = useDishEmissions(dish?.id);
