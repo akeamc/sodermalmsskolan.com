@@ -41,17 +41,6 @@ export default class ClientLetter extends Letter {
 
     return new ClientLetter(res);
   }
-
-  public get description(): string {
-    const regex = /Veckobrev Ovalen v.( ?)[0-9]+/gi;
-
-    const content = this.attachment?.content || "";
-
-    const matchIndex = Math.max(content.search(regex), 0);
-    const matchLength = content.match(regex)?.[0]?.length || 0;
-
-    return content.slice(matchIndex + matchLength).trim();
-  }
 }
 
 export const useLetters: UseSWRResource<
