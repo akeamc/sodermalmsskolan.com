@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import React, { FunctionComponent } from "react";
+import Linkify from "react-linkify";
 import useLocale from "../../hooks/useLocale";
 import useTime from "../../hooks/useTime";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
@@ -11,6 +12,11 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 dayjs.extend(relativeTime);
 
+/**
+ * List of telegrams.
+ *
+ * @returns {React.ReactElement} Rendered list.
+ */
 const TelegramList: FunctionComponent = () => {
   const { data } = useChannelMessages({
     channel: DISCORD_CHANNELS.telegrams.id,
@@ -47,7 +53,11 @@ const TelegramList: FunctionComponent = () => {
             lineHeight: 1.25,
           }}
           >
-            {telegram?.content ? <Emoji>{telegram.content}</Emoji> : <InlineSkeleton count={2} />}
+            {telegram?.content ? (
+              <Linkify>
+                <Emoji>{telegram.content}</Emoji>
+              </Linkify>
+            ) : <InlineSkeleton count={2} />}
           </p>
           <span css={{
             marginLeft: "0.625rem",
