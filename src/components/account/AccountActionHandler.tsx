@@ -59,7 +59,12 @@ const AccountActionHandler: FunctionComponent<AccountActionHandlerProps> = ({
   );
 
   return (
-    <AuthFormPage title="Ett fel uppstod">
+    <AuthFormPage
+      title="Ett fel uppstod"
+      metadata={{
+        noIndex: true,
+      }}
+    >
       <DangerParagraph>
         {error}
       </DangerParagraph>

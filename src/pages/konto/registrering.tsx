@@ -37,7 +37,12 @@ const RegistrationPage: NextPage = () => {
   }
 
   return (
-    <AuthFormPage title="Registrering">
+    <AuthFormPage
+      title="Registrering"
+      metadata={{
+        title: "Registrering",
+      }}
+    >
       <Formik
         initialValues={initialValues}
         enableReinitialize

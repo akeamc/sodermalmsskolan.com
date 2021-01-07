@@ -36,7 +36,12 @@ const VerifyEmailAction: AccountAction = ({
   }, [oobCode, continueUrl, router]);
 
   return (
-    <AuthFormPage title="Bekräftar kod ...">
+    <AuthFormPage
+      title="Bekräftar kod ..."
+      metadata={{
+        noIndex: true,
+      }}
+    >
       {errorMessage ? <DangerParagraph>{errorMessage}</DangerParagraph> : null}
     </AuthFormPage>
   );
