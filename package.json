@@ -16,7 +16,7 @@
     "dayjs": "^1.9.4",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "firebase": "^8.1.1",
+    "firebase": "^8.2.1",
     "firebase-admin": "^9.4.2",
     "formik": "^2.2.6",
     "framer-motion": "^2.9.4",
