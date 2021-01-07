@@ -2,8 +2,14 @@ import { useMemo } from "react";
 import { CHOICES } from "../choice";
 import { useScheduleContext } from "../options";
 import Period from "../Period";
+import universalPeriods from "../universalPeriods";
 import useChanges from "./useChanges";
 
+/**
+ * React hook used to filter the periods based on user preference.
+ *
+ * @returns {Period[]} The filtered periods.
+ */
 const usePeriods = (): Period[] => {
   const [{ selectedCollections }] = useScheduleContext();
 
@@ -12,7 +18,7 @@ const usePeriods = (): Period[] => {
       .find(({ id: collectionId }) => collectionId === selectedCollections[id]);
 
     return total.concat(selectedCollection.periods);
-  }, []);
+  }, []).concat(universalPeriods);
 
   const changes = useChanges();
 
