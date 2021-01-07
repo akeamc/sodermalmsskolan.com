@@ -1,12 +1,14 @@
 import Link from "next/link";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactNode } from "react";
 import Base from "../Base";
 import Card from "../Card";
+import FormText from "../form/text/FormText";
 import LogoIcon from "../logo/Icon";
 import { SmallHeading } from "../text/headings";
 
 export interface AuthFormPageProps {
-  title: string;
+  title: ReactNode;
+  description?: ReactNode;
 }
 
 /**
@@ -18,6 +20,7 @@ export interface AuthFormPageProps {
  */
 const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
   title,
+  description,
   children,
 }) => (
   <Base navbar={false} footer={false}>
@@ -62,6 +65,7 @@ const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
           }}
           >
             <SmallHeading>{title}</SmallHeading>
+            {description ? <FormText>{description}</FormText> : null}
           </div>
           <div>
             {children}

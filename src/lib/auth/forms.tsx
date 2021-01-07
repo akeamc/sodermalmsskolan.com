@@ -78,6 +78,12 @@ export const translateFirebaseError = (
         message: "Ett okänt fel uppstod.",
       };
     }
+    case "auth/invalid-action-code": {
+      return {
+        field: "email",
+        message: "Koden är ogiltig eller har redan använts.",
+      };
+    }
     default: {
       return {
         field: "email",

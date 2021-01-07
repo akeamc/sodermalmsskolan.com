@@ -10,10 +10,18 @@ export interface TextFieldProps {
   placeholder?: string;
   label?: ReactNode;
   error?: string;
+  disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * A better `input`.
+ *
+ * @param {React.PropsWithChildren<TextFieldProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered `input`.
+ */
 const TextField: FunctionComponent<TextFieldProps> = ({
   label,
   id: specifiedId,
@@ -50,6 +58,11 @@ const TextField: FunctionComponent<TextFieldProps> = ({
           "&::placeholder": {
             opacity: 1,
             color: "var(--color-text-tertiary)",
+          },
+
+          "&:disabled, &[disabled]": {
+            backgroundColor: "var(--accents-1)",
+            cursor: "not-allowed",
           },
         }, error ? {
           borderColor: "var(--color-border-danger) !important",

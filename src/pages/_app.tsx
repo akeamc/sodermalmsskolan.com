@@ -54,10 +54,16 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
             padding: "1.5rem",
             fontSize: "1rem",
             fontFamily: fonts.sans,
-          },
-          ".Toastify__toast--success": {
-            backgroundColor: "var(--color-bg-success)",
-            color: "#ffffff",
+
+            "&--success": {
+              backgroundColor: "var(--color-bg-success)",
+              color: "#ffffff",
+            },
+
+            "&--error": {
+              backgroundColor: "var(--color-bg-danger)",
+              color: "#ffffff",
+            },
           },
         }}
       />

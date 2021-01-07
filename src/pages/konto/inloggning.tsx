@@ -35,10 +35,15 @@ const LoginPage: NextPage = () => {
     router.push(redirectUri);
   }
 
-  const query: AuthQueryParams = {
+  /**
+   * Query to pass along to other routes.
+   *
+   * @returns {AuthQueryParams} Query parameters.
+   */
+  const query = (): AuthQueryParams => ({
     [prefilledEmailQueryKey]: formRef.current?.values?.email,
     [redirectUriQueryKey]: redirectUri,
-  };
+  });
 
   return (
     <AuthFormPage title="Inloggning">
@@ -69,7 +74,7 @@ const LoginPage: NextPage = () => {
           <Form>
             <EmailAndPassword />
             <FormText>
-              <Link href={resetLink(query)}>Glömt lösenordet?</Link>
+              <Link href={resetLink(query())}>Glömt lösenordet?</Link>
             </FormText>
             <SubmitButton>
               {isSubmitting ? "Loggar in ..." : "Logga in"}
@@ -80,7 +85,7 @@ const LoginPage: NextPage = () => {
             >
               Har du inget konto?
               {" "}
-              <Link href={signupLink(query)}>
+              <Link href={signupLink(query())}>
                 <a>Skapa ett</a>
               </Link>
             </FormText>
