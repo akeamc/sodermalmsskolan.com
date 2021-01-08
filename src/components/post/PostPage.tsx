@@ -11,6 +11,13 @@ export interface PostPageProps {
   digibruh?: boolean;
 }
 
+/**
+ * Pseudo page used to render blog and Digibruh posts.
+ *
+ * @param {React.PropsWithChildren<PostPageProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered post.
+ */
 const PostPage: FunctionComponent<PostPageProps> = ({ post }) => (
   <Base metadata={{
     title: post?.title,
@@ -24,10 +31,16 @@ const PostPage: FunctionComponent<PostPageProps> = ({ post }) => (
   }}
   >
     <PostHeader post={post} />
-    <Section>
+    <Section containerProps={{
+      width: "wide",
+    }}
+    >
       <BannerAd />
     </Section>
-    <Section>
+    <Section containerProps={{
+      width: "wide",
+    }}
+    >
       <PostView post={post} />
     </Section>
   </Base>

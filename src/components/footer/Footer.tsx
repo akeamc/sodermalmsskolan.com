@@ -6,6 +6,11 @@ import Container from "../Container";
 import horizontalInlineStack from "../stack/horizontalInlineStack";
 import FooterList from "./List";
 
+/**
+ * Bottom row of footer.
+ *
+ * @returns {React.ReactElement} Rendered bottom row.
+ */
 const BottomRow: FunctionComponent = () => (
   <div
     css={horizontalInlineStack({
@@ -27,6 +32,8 @@ const BottomRow: FunctionComponent = () => (
 
 /**
  * The standard page footer.
+ *
+ * @returns {React.ReactElement} The rendered footer.
  */
 const Footer: FunctionComponent = () => {
   const routes = useRoutes();
@@ -38,7 +45,7 @@ const Footer: FunctionComponent = () => {
         backgroundColor: "var(--color-bg-primary)",
       }}
     >
-      <Container>
+      <Container width="normal">
         <div
           css={{
             display: "grid",

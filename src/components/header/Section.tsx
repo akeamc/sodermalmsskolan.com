@@ -11,6 +11,9 @@ export interface SectionHeaderProps {
   promo?: boolean;
 }
 
+/**
+ * @deprecated Deprecated in favor of more *creative* headers.
+ */
 const SectionHeader: FunctionComponent<SectionHeaderProps> = ({
   superTitle,
   title,
