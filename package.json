@@ -30,7 +30,7 @@
     "node-html-parser": "^2.0.0",
     "pdf-parse": "^1.1.1",
     "polished": "^4.0.5",
-    "query-string": "^6.13.7",
+    "query-string": "^6.13.8",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
     "react-dom": "^16.14.0",
