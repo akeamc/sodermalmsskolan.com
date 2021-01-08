@@ -7,13 +7,25 @@ export interface MenuSectionProps extends SectionProps {
   limit?: number;
 }
 
+/**
+ * Section displaying the menu. Simple enough.
+ *
+ * @param {React.PropsWithChildren<MenuSectionProps>} props The props.
+ *
+ * @returns {React.ReactElement} Rendered section.
+ */
 const MenuSection: FunctionComponent<MenuSectionProps> = ({ limit = 30, ...sectionProps }) => {
   const { data } = useMenu({
     limit,
   });
 
   return (
-    <Section {...sectionProps}>
+    <Section
+      containerProps={{
+        width: "wide",
+      }}
+      {...sectionProps}
+    >
       <div css={{
         display: "grid",
         gap: "2rem",
