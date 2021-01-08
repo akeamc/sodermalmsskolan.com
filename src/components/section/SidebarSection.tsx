@@ -8,10 +8,22 @@ export interface SidebarSectionProps extends SectionProps {
   sidebarTitle: ReactNode;
 }
 
+/**
+ * Section with a sidebar.
+ *
+ * @param {React.PropsWithChildren<SidebarSectionProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered section.
+ */
 const SidebarSection: FunctionComponent<SidebarSectionProps> = ({
   main, sidebar, sidebarTitle, ...sectionProps
 }) => (
-  <Section {...sectionProps}>
+  <Section
+    containerProps={{
+      width: "wide",
+    }}
+    {...sectionProps}
+  >
     <div css={{
       [media(breakpoints.large)]: {
         display: "flex",

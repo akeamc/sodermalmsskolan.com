@@ -69,6 +69,10 @@ export const useRoutes = (): Routes => {
           href: "/maträtter",
         },
         {
+          name: "Quizlet",
+          href: "/quizlet",
+        },
+        {
           name: "Serverstatus",
           href: "https://status.södermalmsskolan.com",
         },
