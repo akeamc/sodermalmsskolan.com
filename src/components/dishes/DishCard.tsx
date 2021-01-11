@@ -29,7 +29,7 @@ const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => (
     overflow: "hidden",
     width: "4rem",
     height: "4rem",
-    margin: "0.5rem",
+    margin: "var(--photo-spacing)",
   }]}
   >
     {photo?.url ? (
@@ -82,7 +82,8 @@ const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, .
             display: "flex",
             flexWrap: "wrap",
             justifyContent: rest.big ? "center" : null,
-            margin: "0.5rem -0.5rem -0.5rem",
+            "--photo-spacing": "0.25rem",
+            margin: "0.5rem calc(-1 * var(--photo-spacing)) calc(-1 * var(--photo-spacing))",
           }}
           >
             {(photos || new Array(2).fill(null))

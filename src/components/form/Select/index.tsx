@@ -9,7 +9,12 @@ export interface SelectOption {
 
 export type SelectProps = NamedProps<SelectOption>;
 
-const DropdownIndicator: FunctionComponent<IndicatorProps<SelectOption>> = () => (
+/**
+ * The little arrow to the right of a dropdown.
+ *
+ * @returns {React.ReactElement} The rendered indicator.
+ */
+const DropdownIndicator: FunctionComponent<IndicatorProps<SelectOption, false>> = () => (
   <ChevronDown css={{
     padding: "0.25rem",
     color: "var(--select-color)",
@@ -23,6 +28,13 @@ const DropdownIndicator: FunctionComponent<IndicatorProps<SelectOption>> = () =>
   />
 );
 
+/**
+ * Styled `react-select` select.
+ *
+ * @param {React.PropsWithChildren<SelectProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered select.
+ */
 const Select: FunctionComponent<SelectProps> = (props) => (
   <ReactSelect
     loadingMessage={() => "Laddar ..."}
