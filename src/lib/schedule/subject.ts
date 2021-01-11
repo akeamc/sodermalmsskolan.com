@@ -38,12 +38,12 @@ export const SUBJECTS: Record<string, Subject> = {
   RANDOM: {
     name: "Mentorstid",
     symbol: "MT",
-    color: "#000000",
+    color: "#ffffff",
   },
   STUDENTS_CHOICE: {
     name: "Elevens val",
     symbol: "EV",
-    color: "#000000",
+    color: "#ffffff",
   },
   GERMAN: {
     name: "Tyska",
