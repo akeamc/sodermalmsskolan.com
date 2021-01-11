@@ -60,4 +60,14 @@ export const SUBJECTS: Record<string, Subject> = {
     symbol: "SP",
     color: "#ffa400",
   },
+  ART: {
+    name: "Bild",
+    symbol: "BL",
+    color: "#000000",
+  },
+  ENGINEERING: {
+    name: "Teknik",
+    symbol: "TK",
+    color: "#000000",
+  },
 };
