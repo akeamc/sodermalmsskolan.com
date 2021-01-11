@@ -1,11 +1,12 @@
 import { css } from "@emotion/react";
 import { darken } from "polished";
-import React, { FunctionComponent, memo } from "react";
+import React, { FunctionComponent, memo, PropsWithChildren } from "react";
 import CalendarEvent from "../../lib/calendar/event/CalendarEvent";
 import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
 import humanReadableTime from "../../lib/calendar/humanReadableTime";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
+import relativelyReadableColor from "../../styles/utils/relativelyReadableColor";
 import Emoji from "../Emoji";
 import Skeleton from "../skeleton/Skeleton";
 
@@ -25,6 +26,13 @@ const hideIfTable = css({
   },
 });
 
+/**
+ * A box, essentially rendering a `CalendarEventInstance`.
+ *
+ * @param {PropsWithChildren<CalendarEventViewProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered elements.
+ */
 const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
   start,
   data,
@@ -77,7 +85,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             boxSizing: "border-box",
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
             padding: "0.625rem",
-            color: "#ffffff",
+            color: relativelyReadableColor(color),
             height: "100%",
             position: "relative",
             transition: "opacity 0.1s",

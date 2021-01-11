@@ -28,7 +28,7 @@ export const SUBJECTS: Record<string, Subject> = {
   SPORTS: {
     name: "Idrott",
     symbol: "IDH",
-    color: "#6f42c1",
+    color: "#ffffff",
   },
   SWEDISH: {
     name: "Svenska",
@@ -63,11 +63,11 @@ export const SUBJECTS: Record<string, Subject> = {
   ART: {
     name: "Bild",
     symbol: "BL",
-    color: "#000000",
+    color: "#6f42c1",
   },
   ENGINEERING: {
     name: "Teknik",
     symbol: "TK",
-    color: "#000000",
+    color: "#0cce6b",
   },
 };
