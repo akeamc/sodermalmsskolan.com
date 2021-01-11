@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { darken } from "polished";
+import { darken, transparentize } from "polished";
 import React, { FunctionComponent, memo, PropsWithChildren } from "react";
 import CalendarEvent from "../../lib/calendar/event/CalendarEvent";
 import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
@@ -96,6 +96,12 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             width: "100%",
             outline: "none",
             cursor: "pointer",
+
+            "@media (prefers-color-scheme: dark)": {
+              backgroundColor: transparentize(0.5, color),
+              borderColor: color,
+              color: "#ffffff",
+            },
 
             "&:hover": {
               zIndex: 1,

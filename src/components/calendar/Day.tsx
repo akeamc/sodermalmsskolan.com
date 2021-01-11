@@ -12,11 +12,27 @@ export interface CalendarDayProps {
    * The index of the weekday, starting from 0 with **Monday**.
    */
   weekday: number;
+
+  /**
+   * Whether the calendar day is a placeholder and should display fake events.
+   */
   placeholder?: boolean;
+
   eventInstances: CalendarEventInstance[];
+
+  /**
+   * For mobile devices. Whether the day, which is displayed as a tab, is the one being shown.
+   */
   active?: boolean;
 }
 
+/**
+ * Component for rendering the `CalendarEventInstance`s of a day.
+ *
+ * @param {React.PropsWithChildren<CalendarDayProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered calendar events.
+ */
 const CalendarDay: FunctionComponent<CalendarDayProps> = ({
   weekday,
   placeholder = false,
@@ -86,11 +102,11 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
       display: active ? "initial" : "none",
 
       [media(breakpoints.large)]: {
-        borderRight: "1px solid #eee",
+        borderRight: "1px solid var(--color-border-primary)",
         display: "initial",
 
         "&:first-of-type": {
-          borderLeft: "1px solid #eee",
+          borderLeft: "1px solid var(--color-border-primary)",
         },
       },
     }}

@@ -11,6 +11,13 @@ export interface CalendarLabelProps {
   placeholder?: boolean,
 }
 
+/**
+ * Calendar time labels.
+ *
+ * @param {React.PropsWithChildren<CalendarLabelProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered labels.
+ */
 const CalendarLabels: FunctionComponent<CalendarLabelProps> = ({
   rowCount,
   rowPadStart,
