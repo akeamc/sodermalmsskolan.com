@@ -12,6 +12,10 @@ export interface CalendarEventData {
   placeholder?: boolean;
 }
 
+/**
+ * An event, used to specify either a scheduled event *or* a series of event, scheduled at different
+ * times but with matching data.
+ */
 export default class CalendarEvent implements CalendarEventData {
   /**
    * The duration of the event, in seconds.
@@ -37,10 +41,20 @@ export default class CalendarEvent implements CalendarEventData {
    */
   public placeholder?: boolean;
 
+  /**
+   * Initialize a new `CalendarEvent`.
+   *
+   * @param {CalendarEventData} data The inner data.
+   */
   constructor(data: CalendarEventData) {
     Object.assign(this, data);
   }
 
+  /**
+   * Get the characteristics of this event, sort of like a checksum.
+   *
+   * @returns {CalendarEventCharacteristics} The characteristics.
+   */
   public get characteristics(): CalendarEventCharacteristics {
     const {
       duration,
@@ -65,6 +79,11 @@ export default class CalendarEvent implements CalendarEventData {
     ];
   }
 
+  /**
+   * Get the signature of the event, i.e. the characteristics serialized.
+   *
+   * @returns {string} The serialized characteristics.
+   */
   public get signature(): string {
     return this.characteristics.join(".");
   }
