@@ -12,6 +12,10 @@ export interface SectionHeaderProps {
 }
 
 /**
+ * @param root0
+ * @param root0.superTitle
+ * @param root0.title
+ * @param root0.promo
  * @deprecated Deprecated in favor of more *creative* headers.
  */
 const SectionHeader: FunctionComponent<SectionHeaderProps> = ({

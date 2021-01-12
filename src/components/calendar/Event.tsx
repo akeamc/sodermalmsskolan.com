@@ -2,8 +2,7 @@ import { css } from "@emotion/react";
 import { darken, transparentize } from "polished";
 import React, { FunctionComponent, memo, PropsWithChildren } from "react";
 import CalendarEvent from "../../lib/calendar/event/CalendarEvent";
-import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
-import humanReadableTime from "../../lib/calendar/humanReadableTime";
+import { getHumanReadableDuration } from "../../lib/calendar/utils/humanReadable";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import relativelyReadableColor from "../../styles/utils/relativelyReadableColor";
@@ -25,6 +24,31 @@ const hideIfTable = css({
     display: "none",
   },
 });
+
+/**
+ * Display the times of a calendar event.
+ *
+ * @param {any} props The props.
+ *
+ * @returns {React.ReactElement} The rendered times.
+ */
+const CalendarEventTime: FunctionComponent<{
+  start: number,
+  duration: number,
+  minified?: boolean,
+}> = ({
+  start,
+  duration,
+  minified = true,
+}) => (
+  <time>
+    {getHumanReadableDuration(start)}
+    <span css={minified ? hideIfTable : null}>
+      –
+      {getHumanReadableDuration(start + duration)}
+    </span>
+  </time>
+);
 
 /**
  * A box, essentially rendering a `CalendarEventInstance`.
@@ -49,13 +73,14 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
     canceled = false,
     description,
     placeholder = false,
+    deltaStart,
+    deltaDuration,
   } = data;
 
+  const actualStart = start + deltaStart;
+  const actualDuration = duration + deltaDuration;
+
   const minified = width < 1;
-
-  const [highlightedTag, setHighlightedTag] = useHighlightedTag();
-
-  const isHidden = highlightedTag && tag !== highlightedTag;
 
   return (
     <li css={{
@@ -67,8 +92,8 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
 
       [media(breakpoints.large)]: {
         position: "absolute",
-        top: `calc(((${start} / var(--row-duration)) - var(--row-pad-start)) * var(--row-height))`,
-        height: `calc((${duration} / var(--row-duration)) * var(--row-height))`,
+        top: `calc(((${actualStart} / var(--row-duration)) - var(--row-pad-start)) * var(--row-height))`,
+        height: `calc((${actualDuration} / var(--row-duration)) * var(--row-height))`,
         width: `${width * 100}%`,
         left: `${left * 100}%`,
         margin: 0,
@@ -110,11 +135,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             opacity: 0.5,
             filter: "grayscale(1)",
             cursor: "not-allowed",
-          } : null, isHidden ? {
-            opacity: 0.1,
           } : null]}
-          onFocus={() => setHighlightedTag(tag)}
-          onBlur={() => setHighlightedTag(null)}
           type="button"
         >
           <div css={{
@@ -138,15 +159,24 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             ) : null}
 
             <span css={tag && minified ? hideIfTable : null}>
-              <time>
-                {humanReadableTime(start)}
-                <span css={minified ? hideIfTable : null}>
-                  –
-                  {humanReadableTime(start + duration)}
-                </span>
-              </time>
+              {deltaStart !== 0 || deltaDuration !== 0 ? (
+                <>
+                  <del>
+                    <CalendarEventTime
+                      start={start}
+                      duration={duration}
+                      minified={minified}
+                    />
+                  </del>
+                  {" "}
+                </>
+              ) : null}
+              <CalendarEventTime
+                start={actualStart}
+                duration={actualDuration}
+                minified={minified}
+              />
             </span>
-
             <span css={minified ? hideIfTable : null}>
               {location}
             </span>

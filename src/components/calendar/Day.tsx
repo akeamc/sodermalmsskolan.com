@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React, { FunctionComponent } from "react";
 import useLocale from "../../hooks/useLocale";
+import useTime from "../../hooks/useTime";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 import useEventInstanceTransform from "../../lib/calendar/hooks/useEventInstanceTransform";
 import { breakpoints, media } from "../../styles/breakpoints";
@@ -26,6 +27,45 @@ export interface CalendarDayProps {
   active?: boolean;
 }
 
+export interface CalendarTextProps {
+  weekday?: number;
+  placeholder?: boolean;
+}
+
+/**
+ * Component displaying the name of a day in the calendar.
+ *
+ * @param {React.PropsWithChildren<CalendarTextProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered text.
+ */
+export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
+  weekday,
+  placeholder = false,
+}) => {
+  const { language } = useLocale();
+
+  const dateNow = useTime(10000);
+  const now = dayjs(dateNow);
+
+  const isPast = now.isoWeekday() > weekday + 1;
+
+  return (
+    <span css={[{
+      display: "inline-block",
+      textTransform: "capitalize",
+      fontWeight: 500,
+      fontSize: "1rem",
+      textAlign: "center",
+    }, isPast ? {
+      textDecoration: "line-through",
+    } : null]}
+    >
+      {placeholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).isoWeekday(weekday + 1).format("dddd")}
+    </span>
+  );
+};
+
 /**
  * Component for rendering the `CalendarEventInstance`s of a day.
  *
@@ -39,10 +79,6 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
   eventInstances,
   active = false,
 }) => {
-  const { language } = useLocale();
-
-  const dayText = placeholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).day(weekday + 1).format("dddd"); // DayJS uses 0 for Sunday, we use 0 for Monday.
-
   const instanceProps = useEventInstanceTransform<CalendarEventViewProps[]>(
     eventInstances,
     () => {
@@ -58,11 +94,17 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
             + startDate.getMinutes() * 60
             + startDate.getSeconds();
 
+          const actualStart = start + data.deltaStart;
+          const actualDuration = data.duration + data.deltaDuration;
+
           // Find all events conflicting with the current and change their widths.
           const intersections = elements
-            .reduce((indexes, props, index) => {
-              if (start + data.duration > props.start
-              && props.start + props.data.duration > start) {
+            .reduce((indexes, other, index) => {
+              const actualOtherStart = other.start + other.data.deltaStart;
+              const actualOtherDuration = other.data.duration + other.data.deltaDuration;
+
+              if (actualStart + actualDuration > actualOtherStart
+              && actualOtherStart + actualOtherDuration > actualStart) {
                 indexes.push(index);
               }
 
@@ -111,28 +153,25 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
       },
     }}
     >
-      <span css={{
-        textTransform: "capitalize",
-        display: "none",
-        lineHeight: "var(--header-height)",
-        fontWeight: 500,
-        fontSize: "1rem",
+      <div css={{
         height: "var(--header-height)",
-        textAlign: "center",
         width: "100%",
         position: "sticky",
         top: "var(--navbar-height)",
         backgroundColor: "var(--color-bg-primary)",
         zIndex: 2,
         boxShadow: "0 1px 0 0 var(--color-border-primary)",
+        display: "none",
+        alignItems: "center",
+        justifyContent: "center",
 
         [media(breakpoints.large)]: {
-          display: "inline-block",
+          display: "flex",
         },
       }}
       >
-        {dayText}
-      </span>
+        <CalendarDayText weekday={weekday} placeholder={placeholder} />
+      </div>
       <ul css={{
         position: "relative",
         padding: 0,

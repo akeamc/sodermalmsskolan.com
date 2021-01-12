@@ -35,6 +35,16 @@ const usePeriods = (): Period[] => {
       if (change) {
         clone.canceled = change.canceled;
         clone.note = change.note || clone.note;
+
+        if (change.newStart) {
+          clone.deltaStart = change.newStart / 60 - clone.totalMinutes;
+        }
+
+        if (change.newEnd) {
+          const newEnd = (change.newEnd) / 60 - (clone.totalMinutes + (clone.deltaStart || 0));
+
+          clone.deltaDuration = newEnd - clone.duration;
+        }
       }
 
       return clone;

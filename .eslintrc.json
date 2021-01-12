@@ -44,7 +44,7 @@
     "require-jsdoc": ["warn", {
       "require": {
           "FunctionDeclaration": true,
-          "MethodDefinition": true,
+          "MethodDefinition": false,
           "ClassDeclaration": true,
           "ArrowFunctionExpression": true,
           "FunctionExpression": true

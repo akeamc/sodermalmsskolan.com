@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import React, { FunctionComponent, useMemo, useState } from "react";
 import useLocale from "../../hooks/useLocale";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
-import { HighlightedTagProvider } from "../../lib/calendar/HighlightedTagContext";
 import capitalize from "../../lib/utils/capitalize";
 import { breakpoints, media } from "../../styles/breakpoints";
 import SegmentedControl from "../form/SegmentedControl";
@@ -15,13 +14,18 @@ export interface CalendarWeekProps {
   placeholder?: boolean;
 }
 
+/**
+ * Component for rendering calendar events in a week table.
+ *
+ * @param {React.PropsWithChildren<CalendarWeekProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered week.
+ */
 const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
   dayCount = 7,
   eventInstances,
   placeholder = false,
 }) => {
-  const [highlightedTag, setHighlightedTag] = useState<string>(null);
-
   const { language } = useLocale();
 
   const weekdayControlOptions: FormOption[] = useMemo(() => {
@@ -66,22 +70,20 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
         },
       }}
       >
-        <HighlightedTagProvider value={[highlightedTag, setHighlightedTag]}>
-          {Array.from({ length: dayCount })
-            .map((_, weekday) => (
-              <CalendarDay
-                eventInstances={
-                  eventInstances
-                    .filter(({ start }) => (start.getDay() + 6) % 7 === weekday)
-                  }
-                // eslint-disable-next-line react/no-array-index-key
-                key={weekday}
-                weekday={weekday}
-                placeholder={placeholder}
-                active={weekday === parseInt(activeTab, 10)}
-              />
-            ))}
-        </HighlightedTagProvider>
+        {Array.from({ length: dayCount })
+          .map((_, weekday) => (
+            <CalendarDay
+              eventInstances={
+                eventInstances
+                  .filter(({ start }) => (start.getDay() + 6) % 7 === weekday)
+                }
+              // eslint-disable-next-line react/no-array-index-key
+              key={weekday}
+              weekday={weekday}
+              placeholder={placeholder}
+              active={weekday === parseInt(activeTab, 10)}
+            />
+          ))}
       </div>
     </div>
   );

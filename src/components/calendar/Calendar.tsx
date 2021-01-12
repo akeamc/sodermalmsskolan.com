@@ -25,10 +25,9 @@ export interface CalendarProps {
 /**
  * A calendar.
  *
- * @param props
- * @param props.events
- * @param props.hideWeekend
- * @param props.shrink
+ * @param {React.PropsWithChildren<CalendarProps>} props Calendar props.
+ *
+ * @returns {React.ReactElement} The rendered calendar.
  */
 const Calendar: FunctionComponent<CalendarProps> = ({
   events,
@@ -63,6 +62,7 @@ const Calendar: FunctionComponent<CalendarProps> = ({
       return;
     }
 
+    // eslint-disable-next-line require-jsdoc
     const triggerEvaluation = () => {
       const after = viewStart.toDate();
       const before = viewEnd.toDate();

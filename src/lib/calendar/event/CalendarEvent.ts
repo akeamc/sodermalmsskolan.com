@@ -10,6 +10,8 @@ export interface CalendarEventData {
   canceled?: boolean;
   tag?: string;
   placeholder?: boolean;
+  deltaStart?: number;
+  deltaDuration?: number;
 }
 
 /**
@@ -40,6 +42,34 @@ export default class CalendarEvent implements CalendarEventData {
    * Whether the event is a placeholder or not. Should only be used client-side.
    */
   public placeholder?: boolean;
+
+  private internalDeltaStart?: number;
+
+  public get deltaStart(): number {
+    if (typeof this.internalDeltaStart === "number") {
+      return this.internalDeltaStart;
+    }
+
+    return 0;
+  }
+
+  public set deltaStart(newValue: number) {
+    this.internalDeltaStart = newValue;
+  }
+
+  private internalDeltaDuration?: number;
+
+  public get deltaDuration(): number {
+    if (typeof this.internalDeltaDuration === "number") {
+      return this.internalDeltaDuration;
+    }
+
+    return 0;
+  }
+
+  public set deltaDuration(newValue: number) {
+    this.internalDeltaDuration = newValue;
+  }
 
   /**
    * Initialize a new `CalendarEvent`.

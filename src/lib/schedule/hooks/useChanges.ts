@@ -1,6 +1,6 @@
 import { DISCORD_CHANNELS } from "../../discord/constants";
 import { useChannelMessages } from "../../discord/structures/client/Channel";
-import ScheduleChange, { parseMessage } from "../change";
+import ScheduleChange, { parseMessageContent } from "../ScheduleChange";
 
 const useChanges = (): ScheduleChange[] => {
   const { data } = useChannelMessages({
@@ -8,7 +8,7 @@ const useChanges = (): ScheduleChange[] => {
     pageSize: 100,
   });
 
-  return data?.flat()?.map(parseMessage);
+  return data?.flat()?.map(({ content }) => parseMessageContent(content));
 };
 
 export default useChanges;
