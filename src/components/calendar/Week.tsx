@@ -14,6 +14,13 @@ export interface CalendarWeekProps {
   placeholder?: boolean;
 }
 
+/**
+ * Component for rendering calendar events in a week table.
+ *
+ * @param {React.PropsWithChildren<CalendarWeekProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered week.
+ */
 const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
   dayCount = 7,
   eventInstances,
