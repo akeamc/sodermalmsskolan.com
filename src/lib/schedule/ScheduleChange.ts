@@ -1,4 +1,4 @@
-import { parseHumanReadableTime } from "../calendar/humanReadableTime";
+import { parseHumanReadableDuration } from "../calendar/utils/humanReadable";
 
 export default interface ScheduleChange {
   periodId: string;

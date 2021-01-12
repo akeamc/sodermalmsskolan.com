@@ -1,7 +1,7 @@
 import RRule from "rrule";
 import CalendarEvent from "../calendar/event/CalendarEvent";
 import ScheduledCalendarEvent from "../calendar/event/ScheduledCalendarEvent";
-import humanReadableTime from "../calendar/humanReadableTime";
+import { getHumanReadableDuration } from "../calendar/utils/humanReadable";
 import Subject from "./subject";
 
 /**
@@ -73,7 +73,7 @@ export default class Period {
    * @returns {string} The ID.
    */
   get id(): string {
-    return `${this.room}-${this.weekday}T${humanReadableTime(this.totalSeconds)}`;
+    return `${this.room}-${this.weekday}T${getHumanReadableDuration(this.totalSeconds)}`;
   }
 
   first(): Date {

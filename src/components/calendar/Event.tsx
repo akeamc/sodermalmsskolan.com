@@ -3,7 +3,7 @@ import { darken, transparentize } from "polished";
 import React, { FunctionComponent, memo, PropsWithChildren } from "react";
 import CalendarEvent from "../../lib/calendar/event/CalendarEvent";
 import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
-import humanReadableTime from "../../lib/calendar/humanReadableTime";
+import { getHumanReadableDuration } from "../../lib/calendar/utils/humanReadable";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import relativelyReadableColor from "../../styles/utils/relativelyReadableColor";
@@ -139,10 +139,10 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
 
             <span css={tag && minified ? hideIfTable : null}>
               <time>
-                {humanReadableTime(start)}
+                {getHumanReadableDuration(start)}
                 <span css={minified ? hideIfTable : null}>
                   –
-                  {humanReadableTime(start + duration)}
+                  {getHumanReadableDuration(start + duration)}
                 </span>
               </time>
             </span>

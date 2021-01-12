@@ -1,5 +1,5 @@
 import React, { FunctionComponent, memo } from "react";
-import humanReadableTime from "../../lib/calendar/humanReadableTime";
+import { getHumanReadableDuration } from "../../lib/calendar/utils/humanReadable";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
@@ -79,7 +79,7 @@ const CalendarLabels: FunctionComponent<CalendarLabelProps> = ({
             },
           }}
           >
-            {placeholder ? <InlineSkeleton width="3em" /> : humanReadableTime(totalSeconds, true)}
+            {placeholder ? <InlineSkeleton width="3em" /> : getHumanReadableDuration(totalSeconds, true)}
           </span>
         </div>
       );
