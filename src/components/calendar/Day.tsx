@@ -58,11 +58,17 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
             + startDate.getMinutes() * 60
             + startDate.getSeconds();
 
+          const actualStart = start + data.deltaStart;
+          const actualDuration = data.duration + data.deltaDuration;
+
           // Find all events conflicting with the current and change their widths.
           const intersections = elements
-            .reduce((indexes, props, index) => {
-              if (start + data.duration > props.start
-              && props.start + props.data.duration > start) {
+            .reduce((indexes, other, index) => {
+              const actualOtherStart = other.start + other.data.deltaStart;
+              const actualOtherDuration = other.data.duration + other.data.deltaDuration;
+
+              if (actualStart + actualDuration > actualOtherStart
+              && actualOtherStart + actualOtherDuration > actualStart) {
                 indexes.push(index);
               }
 

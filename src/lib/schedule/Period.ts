@@ -33,12 +33,22 @@ export default class Period {
   collection?: string;
 
   /**
+   * The change in the start time of the period, in minutes.
+   */
+  deltaStart?: number;
+
+  /**
+   * The change in the duration of the period (minutes).
+   */
+  deltaDuration?: number;
+
+  /**
    * Construct a new period.
    *
    * @param {number} weekday The weekday of the period.
    * @param {number} hour The starting hour of the period.
    * @param {number} minute The starting minute of the period.
-   * @param {number} duration The duration of the period in seconds.
+   * @param {number} duration The duration of the period in minutes.
    * @param {Subject} subject The subject in which the period is held.
    * @param {number} room The location of the period.
    */
@@ -62,8 +72,20 @@ export default class Period {
     return this.hour * 60 + this.minute;
   }
 
+  set totalMinutes(newValue: number) {
+    const minute = newValue % 60;
+    const hour = (newValue - minute) / 60;
+
+    this.hour = hour;
+    this.minute = minute;
+  }
+
   get totalSeconds(): number {
     return this.totalMinutes * 60;
+  }
+
+  set totalSeconds(newValue: number) {
+    this.totalMinutes = Math.floor(newValue / 60);
   }
 
   /**
@@ -74,6 +96,22 @@ export default class Period {
    */
   get id(): string {
     return `${this.room}-${this.weekday}T${getHumanReadableDuration(this.totalSeconds)}`;
+  }
+
+  get description(): string {
+    if (this.note) {
+      return this.note;
+    }
+
+    if (this.canceled) {
+      return "Inställd";
+    }
+
+    if (this.deltaStart || this.deltaDuration) {
+      return "Ny tid";
+    }
+
+    return undefined;
   }
 
   first(): Date {
@@ -99,7 +137,9 @@ export default class Period {
       location: this.room,
       canceled: this.canceled,
       tag: this.collection,
-      description: this.note || (this.canceled ? "Inställd" : undefined),
+      description: this.description,
+      deltaStart: typeof this.deltaStart === "number" ? this.deltaStart * 60 : undefined,
+      deltaDuration: typeof this.deltaDuration === "number" ? this.deltaDuration * 60 : undefined,
     });
   }
 

@@ -27,6 +27,31 @@ const hideIfTable = css({
 });
 
 /**
+ * Display the times of a calendar event.
+ *
+ * @param {any} props The props.
+ *
+ * @returns {React.ReactElement} The rendered times.
+ */
+const CalendarEventTime: FunctionComponent<{
+  start: number,
+  duration: number,
+  minified?: boolean,
+}> = ({
+  start,
+  duration,
+  minified = true,
+}) => (
+  <time>
+    {getHumanReadableDuration(start)}
+    <span css={minified ? hideIfTable : null}>
+      –
+      {getHumanReadableDuration(start + duration)}
+    </span>
+  </time>
+);
+
+/**
  * A box, essentially rendering a `CalendarEventInstance`.
  *
  * @param {PropsWithChildren<CalendarEventViewProps>} props Props.
@@ -49,7 +74,12 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
     canceled = false,
     description,
     placeholder = false,
+    deltaStart,
+    deltaDuration,
   } = data;
+
+  const actualStart = start + deltaStart;
+  const actualDuration = duration + deltaDuration;
 
   const minified = width < 1;
 
@@ -67,8 +97,8 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
 
       [media(breakpoints.large)]: {
         position: "absolute",
-        top: `calc(((${start} / var(--row-duration)) - var(--row-pad-start)) * var(--row-height))`,
-        height: `calc((${duration} / var(--row-duration)) * var(--row-height))`,
+        top: `calc(((${actualStart} / var(--row-duration)) - var(--row-pad-start)) * var(--row-height))`,
+        height: `calc((${actualDuration} / var(--row-duration)) * var(--row-height))`,
         width: `${width * 100}%`,
         left: `${left * 100}%`,
         margin: 0,
@@ -138,15 +168,24 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             ) : null}
 
             <span css={tag && minified ? hideIfTable : null}>
-              <time>
-                {getHumanReadableDuration(start)}
-                <span css={minified ? hideIfTable : null}>
-                  –
-                  {getHumanReadableDuration(start + duration)}
-                </span>
-              </time>
+              {deltaStart !== 0 || deltaDuration !== 0 ? (
+                <>
+                  <del>
+                    <CalendarEventTime
+                      start={start}
+                      duration={duration}
+                      minified={minified}
+                    />
+                  </del>
+                  {" "}
+                </>
+              ) : null}
+              <CalendarEventTime
+                start={actualStart}
+                duration={actualDuration}
+                minified={minified}
+              />
             </span>
-
             <span css={minified ? hideIfTable : null}>
               {location}
             </span>

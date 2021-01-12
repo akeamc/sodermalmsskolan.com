@@ -1,5 +1,8 @@
 import CalendarEvent from "./CalendarEvent";
 
+/**
+ * A `CalendarEvent` with a concrete starting date.
+ */
 export default class CalendarEventInstance {
   start: Date;
 
