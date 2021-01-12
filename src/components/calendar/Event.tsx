@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 import { darken, transparentize } from "polished";
 import React, { FunctionComponent, memo, PropsWithChildren } from "react";
 import CalendarEvent from "../../lib/calendar/event/CalendarEvent";
-import { useHighlightedTag } from "../../lib/calendar/HighlightedTagContext";
 import { getHumanReadableDuration } from "../../lib/calendar/utils/humanReadable";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
@@ -83,10 +82,6 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
 
   const minified = width < 1;
 
-  const [highlightedTag, setHighlightedTag] = useHighlightedTag();
-
-  const isHidden = highlightedTag && tag !== highlightedTag;
-
   return (
     <li css={{
       width: "100%",
@@ -140,11 +135,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             opacity: 0.5,
             filter: "grayscale(1)",
             cursor: "not-allowed",
-          } : null, isHidden ? {
-            opacity: 0.1,
           } : null]}
-          onFocus={() => setHighlightedTag(tag)}
-          onBlur={() => setHighlightedTag(null)}
           type="button"
         >
           <div css={{
