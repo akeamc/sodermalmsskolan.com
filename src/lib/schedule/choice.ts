@@ -47,7 +47,7 @@ export const CHOICES: PeriodChoice[] = [
         new Period(3, 8, 30, 50, SUBJECTS.MATH, "A311"),
         new Period(3, 9, 30, 110, SUBJECTS.ART, "A302"),
         new Period(3, 11, 25, 65, SUBJECTS.SWEDISH, "A308"),
-        new Period(3, 13, 5, 50, SUBJECTS.MATH, "A311"),
+        new Period(3, 13, 5, 50, SUBJECTS.MATH, "A308"),
         new Period(4, 13, 0, 50, SUBJECTS.SWEDISH, "A308"),
         new Period(4, 14, 40, 50, SUBJECTS.SOCIAL_STUDIES, "A309"),
       ]),
