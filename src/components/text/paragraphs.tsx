@@ -1,5 +1,5 @@
 import React, { ComponentType, FunctionComponent } from "react";
-import { AlertCircle, AlertTriangle } from "react-feather";
+import { AlertCircle, AlertTriangle, CheckCircle } from "react-feather";
 import { HTMLElementProps } from "../../styles/overrides";
 import { fonts } from "../../styles/text";
 
@@ -46,6 +46,7 @@ export const IconParagraph: FunctionComponent<ParagraphProps & {
       display: "flex",
       margin: "1em 0",
       position: "relative",
+      lineHeight: 1.25,
       "--icon-size": "1.5rem",
 
       "&::after": {
@@ -98,6 +99,16 @@ export const WarningParagraph: Paragraph = (props) => (
     Icon={AlertTriangle}
     css={{
       color: "var(--color-text-warning)",
+    }}
+    {...props}
+  />
+);
+
+export const SuccessParagraph: Paragraph = (props) => (
+  <IconParagraph
+    Icon={CheckCircle}
+    css={{
+      color: "var(--color-text-success)",
     }}
     {...props}
   />

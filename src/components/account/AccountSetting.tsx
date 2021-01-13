@@ -8,11 +8,13 @@ import React, {
 import Card from "../Card";
 import SubmitButton from "../form/SubmitButton";
 import { CardTitle } from "../text/headings";
+import { CardDescription } from "../text/paragraphs";
 
 export interface AccountSettingProps<Values extends FormikValues> {
   initialValues: Values;
   onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void | Promise<unknown>;
   label: ReactNode;
+  description?: ReactNode;
 }
 
 /**
@@ -27,9 +29,11 @@ const AccountSetting = <Values extends FormikValues>({
   initialValues,
   children,
   label,
+  description,
 }: PropsWithChildren<AccountSettingProps<Values>>): ReactElement => (
   <Card>
     <CardTitle>{label}</CardTitle>
+    {description ? <CardDescription>{description}</CardDescription> : null}
     <Formik
       onSubmit={onSubmit}
       initialValues={initialValues}

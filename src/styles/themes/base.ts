@@ -21,6 +21,7 @@ const baseTheme: CSSObject = {
   "--color-text-tertiary": "#808080",
   "--color-text-danger": "#cb2431",
   "--color-text-warning": "#b08800",
+  "--color-text-success": "#4969ed",
 
   "--color-highlight": "#4969ed",
   "--color-highlight-light": "#607cef",
