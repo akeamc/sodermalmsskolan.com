@@ -21,7 +21,7 @@ interface InstagramStatus {
   verified: boolean;
 }
 
-const BOT_ENDPOINT = "http://bot.södermalmsskolan.com";
+const BOT_ENDPOINT = "https://bot.xn--sdermalmsskolan-8sb.com";
 
 /**
  * Use the status of the Instagram settings.
