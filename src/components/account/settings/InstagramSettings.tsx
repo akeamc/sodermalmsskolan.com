@@ -97,7 +97,7 @@ const InstagramSettings: FunctionComponent = () => {
       description={<Description />}
       initialValues={initialValues}
       onSubmit={async ({ igUsername }, { setSubmitting, setFieldError }) => {
-        ky.post("http://localhost:8080/instagram/subscribe", {
+        ky.post(`${BOT_ENDPOINT}/instagram/subscribe`, {
           json: {
             username: igUsername,
           },
