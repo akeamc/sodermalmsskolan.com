@@ -39,6 +39,8 @@ const useInstagramStatus = (): responseInterface<InstagramStatus, unknown> => {
     }).json<InstagramStatus>();
 
     return res;
+  }, {
+    refreshInterval: 10000,
   });
 };
 
@@ -54,8 +56,8 @@ const Description: FunctionComponent = () => {
     margin: 0,
   };
 
-  if (isValidating && !data) {
-    return <InlineSkeleton count={3} />;
+  if (isValidating) {
+    return <InlineSkeleton count={1} />;
   }
 
   if (data?.uid) {
@@ -85,7 +87,7 @@ const Description: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered setting.
  */
 const InstagramSettings: FunctionComponent = () => {
-  const { data } = useInstagramStatus();
+  const { data, revalidate } = useInstagramStatus();
 
   const initialValues: Values = {
     igUsername: data?.username,
@@ -106,6 +108,7 @@ const InstagramSettings: FunctionComponent = () => {
           },
         }).then(() => {
           toast.success("Du har fått ett meddelande med instruktioner.");
+          revalidate();
         }).catch((error) => {
           if (error.response?.status === 404) {
             setFieldError("igUsername", "Det finns ingen sådan användare.");
