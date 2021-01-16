@@ -1,15 +1,15 @@
 import { NextPage } from "next";
 import React from "react";
-import AccountSettingsPage from "../../components/account/settings/AccountSettingsPage";
+import AccountSettingsPage from "../../../components/account/settings/AccountSettingsPage";
 
 /**
- * General account settings.
+ * Notifications settings page.
  *
  * @returns {React.ReactElement} The rendered page.
  */
 const Page: NextPage = () => (
-  <AccountSettingsPage title="Allmänt">
-    allmänna inställningar
+  <AccountSettingsPage title="Notiser">
+    notisinställningar
   </AccountSettingsPage>
 );
 
