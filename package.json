@@ -11,7 +11,7 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.1.1",
+    "@emotion/react": "^11.1.4",
     "@tryghost/content-api": "^1.4.1",
     "dayjs": "^1.10.3",
     "discord.js": "^12.5.1",
