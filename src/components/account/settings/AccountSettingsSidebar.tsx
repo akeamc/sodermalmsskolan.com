@@ -38,7 +38,6 @@ const AccountSettingsLink: FunctionComponent<AccountSettingsLinkProps> = ({
   return (
     <li css={{
       listStyle: "none",
-      margin: "1rem 0",
     }}
     >
       <Link href={href} passHref>
@@ -49,6 +48,7 @@ const AccountSettingsLink: FunctionComponent<AccountSettingsLinkProps> = ({
           display: "inline-flex",
           alignItems: "center",
           width: "100%",
+          padding: "var(--link-padding) 0",
         }}
         >
           <Icon css={{
@@ -84,16 +84,18 @@ const AccountSettingsSidebar: FunctionComponent<AccountSettingsSidebarProps> = (
   isLoading,
 }) => (
   <div css={{
+    "--link-padding": "0.75rem",
+    "--aside-padding": "0.5rem",
     marginRight: "2rem",
     flex: "0 0 12rem",
-    marginTop: "calc(var(--page-gutter) - 1.5rem)",
+    marginTop: "calc(var(--page-gutter) - var(--aside-padding) - var(--link-padding))",
   }}
   >
     <aside
       css={{
         position: "sticky",
         top: "var(--navbar-height)",
-        paddingTop: "0.5rem",
+        paddingTop: "var(--aside-padding)",
       }}
     >
       <ul css={{
