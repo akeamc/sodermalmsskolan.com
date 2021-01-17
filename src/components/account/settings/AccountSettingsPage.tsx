@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { FunctionComponent, useEffect } from "react";
 import { useAuth } from "../../../lib/auth/AuthContext";
+import { redirectUriQueryKey } from "../../../lib/auth/hooks/useRedirectUri";
 import { loginLink } from "../../../lib/auth/href";
 import { breakpoints, media } from "../../../styles/breakpoints";
 import Base, { BaseProps } from "../../Base";
@@ -30,7 +31,9 @@ const AccountSettingsPage: FunctionComponent<AccountSettingsPageProps> = ({
 
   useEffect(() => {
     if (!user && !isLoading) {
-      router.push(loginLink());
+      router.push(loginLink({
+        [redirectUriQueryKey]: router.asPath,
+      }));
     }
   }, [isLoading, router, user]);
 
