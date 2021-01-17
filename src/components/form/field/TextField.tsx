@@ -105,6 +105,7 @@ const TextField: FunctionComponent<TextFieldProps> = ({
             fontSize: "var(--font-size)",
             boxShadow: "none",
             WebkitAppearance: "none",
+            margin: 0,
 
             "&:focus": {
               borderColor: "var(--accents-5)",
