@@ -87,7 +87,7 @@ const InstagramSettings: FunctionComponent = () => {
             marginBottom: "0.75rem",
           }}
           >
-            Genom att registrera ditt användarnamn på Instagram, får du meddelanden vid viktiga
+            Genom att registrera ditt Instagram-användarnamn, får du meddelanden vid viktiga
             händelser såsom inställda lektioner.
           </div>
           <InstagramStatusText />
