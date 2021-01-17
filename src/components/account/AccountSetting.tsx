@@ -38,29 +38,29 @@ const AccountSetting = <Values extends FormikValues>({
     initialValues={initialValues}
     enableReinitialize
   >
-    <Card footer={(
-      <SubmitButton
-        css={{
-          padding: "0.75rem 1rem",
-          fontSize: "0.75rem",
-          float: "right",
-        }}
+    <Form>
+      <Card footer={(
+        <SubmitButton
+          css={{
+            padding: "0.75rem 1rem",
+            fontSize: "0.75rem",
+            float: "right",
+          }}
+        >
+          {submitButton}
+        </SubmitButton>
+    )}
       >
-        {submitButton}
-      </SubmitButton>
-  )}
-    >
-      <CardTitle>{label}</CardTitle>
-      {description ? <CardDescription>{description}</CardDescription> : null}
-      <Form>
+        <CardTitle>{label}</CardTitle>
+        {description ? <CardDescription>{description}</CardDescription> : null}
         <div css={{
           maxWidth: "20rem",
         }}
         >
           {children}
         </div>
-      </Form>
-    </Card>
+      </Card>
+    </Form>
   </Formik>
   );
 
