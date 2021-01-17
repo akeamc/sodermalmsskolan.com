@@ -12,6 +12,7 @@ const baseTheme: CSSObject = {
   "--accents-8": "#111111",
 
   "--color-bg-primary": "#ffffff",
+  "--color-bg-transparent": transparentize(1, "#ffffff"),
   "--color-bg-secondary": "#fafafa",
   "--color-bg-success": "#4969ed",
   "--color-bg-danger": "#d73a49",

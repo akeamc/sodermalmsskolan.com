@@ -103,6 +103,8 @@ const TextField: FunctionComponent<TextFieldProps> = ({
             color: "var(--color-text-primary)",
             backgroundColor: "var(--color-bg-primary)",
             fontSize: "var(--font-size)",
+            boxShadow: "none",
+            WebkitAppearance: "none",
 
             "&:focus": {
               borderColor: "var(--accents-5)",

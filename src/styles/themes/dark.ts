@@ -1,4 +1,5 @@
 import { CSSObject } from "@emotion/react";
+import { transparentize } from "polished";
 import baseTheme from "./base";
 
 const darkTheme: CSSObject = {
@@ -14,6 +15,7 @@ const darkTheme: CSSObject = {
   "--accents-8": "#fafafa",
 
   "--color-bg-primary": "#111111",
+  "--color-bg-transparent": transparentize(1, "#111111"),
 
   "--color-text-primary": "#ffffff",
   "--color-text-secondary": "#cccccc",

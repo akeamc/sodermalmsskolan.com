@@ -27,9 +27,9 @@ export const skeletonBackground = css({
 /**
  * A loading skeleton, used as a placeholder.
  *
- * @param props
- * @param props.width
- * @param props.height
+ * @param {React.PropsWithChildren<SkeletonProps>} props Props.
+ *
+ * @returns {React.ReactElement} The skeleton.
  */
 const Skeleton: FunctionComponent<SkeletonProps> = ({ width, height, ...props }) => (
   <span

@@ -73,7 +73,7 @@ const baseStyles = (size: ButtonSize): SerializedStyles => {
 
 const primaryStyles = css({
   backgroundColor: "var(--color-highlight)",
-  backgroundImage: "linear-gradient(var(--color-highlight-light), var(--color-highlight))",
+  backgroundImage: "linear-gradient(180deg, var(--color-highlight-light), var(--color-highlight))",
   color: "#ffffff",
 
   "&:hover": {

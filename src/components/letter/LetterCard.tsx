@@ -41,7 +41,7 @@ const LetterCard: FunctionComponent<LetterCardProps> = ({ letter, rows = 5 }) =>
           bottom: 0,
           left: 0,
           content: "\"\"",
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0), var(--color-bg-primary))",
+          backgroundImage: "linear-gradient(180deg, var(--color-bg-transparent) 0%, var(--color-bg-primary) 100%)",
           pointerEvents: "none",
         },
       }}
