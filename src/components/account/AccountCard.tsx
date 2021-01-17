@@ -1,11 +1,15 @@
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
+import { transparentize } from "polished";
+import { toast } from "react-toastify";
 import useLocale from "../../hooks/useLocale";
 import { useAuth } from "../../lib/auth/AuthContext";
+import { DISCORD_CHANNELS } from "../../lib/discord/constants";
+import { useChannelMessages } from "../../lib/discord/structures/client/Channel";
 import { auth } from "../../lib/firebase/firebase";
 import { breakpoints, media } from "../../styles/breakpoints";
-import UserAvatar from "../auth/UserAvatar";
+import UserAvatar from "./UserAvatar";
 import Button from "../button/Button";
 import Card from "../Card";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
@@ -13,6 +17,8 @@ import Emphasis from "../text/atomics/Emphasis";
 import { SectionHeading } from "../text/headings";
 import { WarningParagraph } from "../text/paragraphs";
 import EmailVerificationButton from "./EmailVerificationButton";
+import { translateFirebaseError } from "../../lib/auth/forms";
+import { fonts } from "../../styles/text";
 
 /**
  * Informative card with an overview of a user's account.
@@ -20,11 +26,20 @@ import EmailVerificationButton from "./EmailVerificationButton";
  * @returns {React.ReactElement} Card.
  */
 const AccountCard: FunctionComponent = () => {
-  const { user } = useAuth();
+  const { user, reloadUser } = useAuth();
   const { language } = useLocale();
   const router = useRouter();
 
   const displayName = user?.displayName || <Emphasis>Namnlös</Emphasis>;
+
+  const { data } = useChannelMessages({
+    channel: DISCORD_CHANNELS.photos.id,
+    pageSize: 100,
+  });
+
+  const photoUrls: string[] = useMemo(() => data?.flat()
+    ?.reduce((urls, message) => urls
+      .concat(message.attachments.map((attachment) => attachment.url)), []), [data]);
 
   return (
     <Card css={{
@@ -35,21 +50,68 @@ const AccountCard: FunctionComponent = () => {
       },
     }}
     >
-      <div css={{
-        display: "flex",
-      }}
-      >
-        <UserAvatar css={{
-          "--avatar-size": "4rem",
-          flex: "0 0 var(--avatar-size)",
-          height: "var(--avatar-size)",
-          marginRight: "1rem",
-
-          [media(breakpoints.medium)]: {
-            "--avatar-size": "6rem",
-            marginRight: "2rem",
-          },
+      <div
+        css={{
+          display: "flex",
         }}
+      >
+        <UserAvatar
+          css={{
+            "--avatar-size": "4rem",
+            flex: "0 0 var(--avatar-size)",
+            height: "var(--avatar-size)",
+            marginRight: "1rem",
+            cursor: "pointer",
+
+            [media(breakpoints.medium)]: {
+              "--avatar-size": "6rem",
+              marginRight: "2rem",
+            },
+
+            "&::after": {
+              color: "#ffffff",
+              backgroundColor: transparentize(0.5, "#000000"),
+              content: "\"Byt bild\"",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: fonts.sans,
+              fontWeight: 500,
+              fontSize: "0.825rem",
+              transition: "opacity 0.2s",
+              opacity: 0,
+            },
+
+            "&:hover": {
+              "&::after": {
+                opacity: 1,
+              },
+            },
+          }}
+          onClick={() => {
+            if (typeof photoUrls === "undefined") {
+              return;
+            }
+
+            const newAvatarUrl = photoUrls[Math.floor(Math.random() * photoUrls.length)];
+
+            user.updateProfile({
+              photoURL: newAvatarUrl,
+            })
+              .then(() => reloadUser())
+              .then(() => {
+                toast.success("Din profilbild har uppdaterats.");
+              })
+              .catch((error) => {
+                const { message } = translateFirebaseError(error);
+                toast.error(message);
+              });
+          }}
         />
         <div css={{
           flex: 1,

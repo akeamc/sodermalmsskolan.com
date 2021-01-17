@@ -1,18 +1,34 @@
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
+import { HTMLElementProps } from "../../styles/overrides";
 import { skeletonBackground } from "../skeleton/Skeleton";
 
 export const fallbackAvatarUrl = "https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg";
 
-export interface UserAvatarProps {
+export interface UserAvatarProps extends HTMLElementProps<HTMLAnchorElement> {
   href?: string;
 }
 
+/**
+ * A component displaying the logged in user's avatar.
+ *
+ * @param {React.PropsWithChildren<UserAvatarProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered avatar.
+ */
 const UserAvatar: FunctionComponent<UserAvatarProps> = ({ href, ...props }) => {
   const { user, isLoading } = useAuth();
 
-  const src = isLoading ? user?.photoURL : fallbackAvatarUrl;
+  let src: string;
+
+  if (!isLoading) {
+    if (typeof user?.photoURL === "string") {
+      src = user?.photoURL;
+    } else {
+      src = fallbackAvatarUrl;
+    }
+  }
 
   const inner = (
     <a
@@ -22,6 +38,7 @@ const UserAvatar: FunctionComponent<UserAvatarProps> = ({ href, ...props }) => {
         height: "2rem",
         borderRadius: "50%",
         overflow: "hidden",
+        display: "inline-block",
       }]}
       {...props}
     >

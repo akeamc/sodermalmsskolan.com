@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { loginLink, signupLink } from "../../lib/auth/href";
 import Button from "../button/Button";
-import UserAvatar from "./UserAvatar";
+import UserAvatar from "../account/UserAvatar";
 
 const AuthNavSection: FunctionComponent = () => {
   const { user } = useAuth();
