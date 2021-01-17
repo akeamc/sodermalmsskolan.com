@@ -1,11 +1,11 @@
 import { CSSObject } from "@emotion/react";
 import { Field, FormikValues } from "formik";
 import ky from "ky-universal";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useSWR, { responseInterface } from "swr";
-import { useAuth } from "../../../lib/auth/AuthContext";
 import getAuthorizationHeader from "../../../lib/auth/header";
+import INSTAGRAM_BOT_ENDPOINT from "../../../lib/notifications/instagram/endpoint";
+import useInstagramStatus from "../../../lib/notifications/instagram/useInstagramStatus";
 import TextField from "../../form/field/TextField";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import { SuccessParagraph, WarningParagraph } from "../../text/paragraphs";
@@ -14,35 +14,6 @@ import AccountSetting from "../AccountSetting";
 export interface Values extends FormikValues {
   igUsername: string;
 }
-
-interface InstagramStatus {
-  uid: string;
-  username: string;
-  verified: boolean;
-}
-
-const BOT_ENDPOINT = "https://bot.xn--sdermalmsskolan-8sb.com";
-
-/**
- * Use the status of the Instagram settings.
- *
- * @returns {responseInterface<InstagramStatus, *>} The status.
- */
-const useInstagramStatus = (): responseInterface<InstagramStatus, unknown> => {
-  const { user } = useAuth();
-
-  return useSWR<InstagramStatus>(() => (user ? "/instagram/status" : undefined), async () => {
-    const res = await ky.get(`${BOT_ENDPOINT}/instagram/status`, {
-      headers: {
-        authorization: await getAuthorizationHeader(),
-      },
-    }).json<InstagramStatus>();
-
-    return res;
-  }, {
-    refreshInterval: 10000,
-  });
-};
 
 /**
  * Description of the card.
@@ -93,9 +64,23 @@ const InstagramSettings: FunctionComponent = () => {
     igUsername: data?.username,
   };
 
+  const [inputValue, setInputValue] = useState<string>();
+  const [submitButton, setSubmitButton] = useState<string>();
+
+  useEffect(() => {
+    const username = typeof inputValue === "undefined" ? data?.username : inputValue;
+
+    if (!data?.verified && username === data?.username) {
+      setSubmitButton("Skicka en ny länk");
+    } else {
+      setSubmitButton(undefined);
+    }
+  }, [inputValue, data]);
+
   return (
     <AccountSetting
       label="Instagram-notiser"
+      submitButton={submitButton}
       description={(
         <>
           <div css={{
@@ -110,7 +95,7 @@ const InstagramSettings: FunctionComponent = () => {
       )}
       initialValues={initialValues}
       onSubmit={async ({ igUsername }, { setSubmitting, setFieldError }) => {
-        ky.post(`${BOT_ENDPOINT}/instagram/subscribe`, {
+        ky.post(`${INSTAGRAM_BOT_ENDPOINT}/instagram/subscribe`, {
           json: {
             username: igUsername,
           },
@@ -118,7 +103,19 @@ const InstagramSettings: FunctionComponent = () => {
             authorization: await getAuthorizationHeader(),
           },
         }).then(() => {
-          toast.success("Du har fått ett meddelande med instruktioner.");
+          toast.success(
+            <>
+              Instruktioner har skickats till
+              {" "}
+              <code>
+                @
+                {igUsername}
+              </code>
+              {" "}
+              på Instagram
+              .
+            </>,
+          );
           revalidate();
         }).catch((error) => {
           if (error.response?.status === 404) {
@@ -134,12 +131,16 @@ const InstagramSettings: FunctionComponent = () => {
       <Field
         name="igUsername"
         validate={(username) => {
+          setInputValue(username);
+
           if (username?.length <= 0) {
             return "Du måste ange ett användarnamn.";
           }
 
           if (username === data?.username) {
-            return "Du kan inte byta till ditt nuvarande användarnamn.";
+            if (data?.verified) {
+              return "Du kan inte byta till ditt nuvarande användarnamn.";
+            }
           }
 
           return undefined;
@@ -151,7 +152,14 @@ const InstagramSettings: FunctionComponent = () => {
             error,
           },
         }) => (
-          <TextField {...field} type="text" placeholder="Användarnamn" error={error} status={<InstagramStatusText />} prefix="@" />
+          <TextField
+            {...field}
+            type="text"
+            placeholder="Användarnamn"
+            error={error}
+            status={<InstagramStatusText />}
+            prefix="@"
+          />
         )}
       </Field>
     </AccountSetting>

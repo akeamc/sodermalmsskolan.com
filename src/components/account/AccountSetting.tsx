@@ -1,6 +1,6 @@
 import {
   Form,
-  Formik, FormikHelpers, FormikValues,
+  Formik, FormikConfig, FormikValues,
 } from "formik";
 import React, {
   PropsWithChildren, ReactElement, ReactNode,
@@ -10,9 +10,7 @@ import SubmitButton from "../form/SubmitButton";
 import { CardTitle } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 
-export interface AccountSettingProps<Values extends FormikValues> {
-  initialValues: Values;
-  onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void | Promise<unknown>;
+export interface AccountSettingProps<Values extends FormikValues> extends FormikConfig<Values> {
   label: ReactNode;
   description?: ReactNode;
   submitButton?: ReactNode;
@@ -26,17 +24,15 @@ export interface AccountSettingProps<Values extends FormikValues> {
  * @returns {React.ReactElement} The rendered form.
  */
 const AccountSetting = <Values extends FormikValues>({
-  onSubmit,
-  initialValues,
   children,
   label,
   description,
   submitButton = "Spara",
+  ...formikProps
 }: PropsWithChildren<AccountSettingProps<Values>>): ReactElement => (
   <Formik
-    onSubmit={onSubmit}
-    initialValues={initialValues}
     enableReinitialize
+    {...formikProps}
   >
     <Form>
       <Card footer={(
