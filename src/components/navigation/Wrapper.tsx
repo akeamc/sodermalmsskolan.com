@@ -1,5 +1,12 @@
 import React, { FunctionComponent } from "react";
 
+/**
+ * The common sticky wrapper of a navbar.
+ *
+ * @param {React.PropsWithChildren} props Generic props.
+ *
+ * @returns {React.ReactElement} The rendered wrapper.
+ */
 const NavbarWrapper: FunctionComponent = (props) => (
   <div
     css={{

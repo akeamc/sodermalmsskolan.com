@@ -6,10 +6,19 @@ import { media } from "../../styles/breakpoints";
 import navbarBreakpoint from "./breakpoint";
 import NavbarWrapper from "./Wrapper";
 
-const NavbarItem: FunctionComponent<{
+interface NavbarItemProps {
   href: string,
   icon: ReactNode,
-}> = ({
+}
+
+/**
+ * Mobile navbar item with a complementary icon.
+ *
+ * @param {React.PropsWithChildren<NavbarItemProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered item.
+ */
+const NavbarItem: FunctionComponent<NavbarItemProps> = ({
   href,
   icon,
   children,
@@ -59,6 +68,11 @@ const NavbarItem: FunctionComponent<{
   );
 };
 
+/**
+ * Mobile navbar fixed at the bottom of the page.
+ *
+ * @returns {React.ReactElement} The rendered navbar.
+ */
 const MobileNavbar: FunctionComponent = () => (
   <NavbarWrapper css={{
     borderTop: "1px solid var(--color-border-primary)",
