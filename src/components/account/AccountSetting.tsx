@@ -15,6 +15,7 @@ export interface AccountSettingProps<Values extends FormikValues> {
   onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void | Promise<unknown>;
   label: ReactNode;
   description?: ReactNode;
+  submitButton?: ReactNode;
 }
 
 /**
@@ -30,29 +31,37 @@ const AccountSetting = <Values extends FormikValues>({
   children,
   label,
   description,
+  submitButton = "Spara",
 }: PropsWithChildren<AccountSettingProps<Values>>): ReactElement => (
-  <Card>
-    <CardTitle>{label}</CardTitle>
-    {description ? <CardDescription>{description}</CardDescription> : null}
-    <Formik
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-      enableReinitialize
+  <Formik
+    onSubmit={onSubmit}
+    initialValues={initialValues}
+    enableReinitialize
+  >
+    <Card footer={(
+      <SubmitButton
+        css={{
+          padding: "0.75rem 1rem",
+          fontSize: "0.75rem",
+          float: "right",
+        }}
+      >
+        {submitButton}
+      </SubmitButton>
+  )}
     >
+      <CardTitle>{label}</CardTitle>
+      {description ? <CardDescription>{description}</CardDescription> : null}
       <Form>
-        {children}
-        <SubmitButton
-          css={{
-            padding: "0.75rem 1rem",
-            fontSize: "0.75rem",
-            float: "right",
-          }}
+        <div css={{
+          maxWidth: "20rem",
+        }}
         >
-          Ändra
-        </SubmitButton>
+          {children}
+        </div>
       </Form>
-    </Formik>
-  </Card>
+    </Card>
+  </Formik>
   );
 
 export default AccountSetting;

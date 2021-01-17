@@ -49,14 +49,14 @@ const useInstagramStatus = (): responseInterface<InstagramStatus, unknown> => {
  *
  * @returns {React.ReactElement} Rendered description.
  */
-const Description: FunctionComponent = () => {
+const InstagramStatusText: FunctionComponent = () => {
   const { data, isValidating } = useInstagramStatus();
 
   const css: CSSObject = {
     margin: 0,
   };
 
-  if (isValidating) {
+  if (isValidating && !data) {
     return <InlineSkeleton count={1} />;
   }
 
@@ -76,7 +76,7 @@ const Description: FunctionComponent = () => {
 
   return (
     <>
-      Du kan få automatiska direktmeddelanden vid viktiga händelser såsom inställda lektioner.
+      Ange ditt användarnamn på Instagram för att fortsätta.
     </>
   );
 };
@@ -96,7 +96,18 @@ const InstagramSettings: FunctionComponent = () => {
   return (
     <AccountSetting
       label="Instagram-notiser"
-      description={<Description />}
+      description={(
+        <>
+          <div css={{
+            marginBottom: "0.75rem",
+          }}
+          >
+            Genom att registrera ditt användarnamn på Instagram, får du meddelanden vid viktiga
+            händelser såsom inställda lektioner.
+          </div>
+          <InstagramStatusText />
+        </>
+      )}
       initialValues={initialValues}
       onSubmit={async ({ igUsername }, { setSubmitting, setFieldError }) => {
         ky.post(`${BOT_ENDPOINT}/instagram/subscribe`, {
@@ -123,12 +134,12 @@ const InstagramSettings: FunctionComponent = () => {
       <Field
         name="igUsername"
         validate={(username) => {
-          if (username === data?.username) {
-            return "Du kan inte byta till ditt nuvarande användarnamn.";
-          }
-
           if (username?.length <= 0) {
             return "Du måste ange ett användarnamn.";
+          }
+
+          if (username === data?.username) {
+            return "Du kan inte byta till ditt nuvarande användarnamn.";
           }
 
           return undefined;
@@ -140,7 +151,7 @@ const InstagramSettings: FunctionComponent = () => {
             error,
           },
         }) => (
-          <TextField {...field} type="text" placeholder="Användarnamn" error={error} />
+          <TextField {...field} type="text" placeholder="Användarnamn" error={error} status={<InstagramStatusText />} prefix="@" />
         )}
       </Field>
     </AccountSetting>
