@@ -8,9 +8,9 @@ export interface CardGridProps {
 /**
  * A grid of cards.
  *
- * @param props
- * @param props.children
- * @param props.overlay
+ * @param {React.PropsWithChildren<CardGridProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered card grid.
  */
 const CardGrid: FunctionComponent<CardGridProps> = ({ children, overlay, ...rest }) => (
   <div
@@ -33,7 +33,8 @@ const CardGrid: FunctionComponent<CardGridProps> = ({ children, overlay, ...rest
         bottom: 0,
         left: 0,
         content: "\"\"",
-        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0), var(--color-bg-primary))",
+        zIndex: 1,
+        backgroundImage: "linear-gradient(180deg, var(--color-bg-transparent) 0%, var(--color-bg-primary) 100%)",
       } : undefined,
 
       [media(breakpoints.medium)]: {

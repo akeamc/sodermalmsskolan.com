@@ -1,6 +1,6 @@
 import {
   Form,
-  Formik, FormikHelpers, FormikValues,
+  Formik, FormikConfig, FormikValues,
 } from "formik";
 import React, {
   PropsWithChildren, ReactElement, ReactNode,
@@ -8,11 +8,12 @@ import React, {
 import Card from "../Card";
 import SubmitButton from "../form/SubmitButton";
 import { CardTitle } from "../text/headings";
+import { CardDescription } from "../text/paragraphs";
 
-export interface AccountSettingProps<Values extends FormikValues> {
-  initialValues: Values;
-  onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void | Promise<unknown>;
+export interface AccountSettingProps<Values extends FormikValues> extends FormikConfig<Values> {
   label: ReactNode;
+  description?: ReactNode;
+  submitButton?: ReactNode;
 }
 
 /**
@@ -23,20 +24,18 @@ export interface AccountSettingProps<Values extends FormikValues> {
  * @returns {React.ReactElement} The rendered form.
  */
 const AccountSetting = <Values extends FormikValues>({
-  onSubmit,
-  initialValues,
   children,
   label,
+  description,
+  submitButton = "Spara",
+  ...formikProps
 }: PropsWithChildren<AccountSettingProps<Values>>): ReactElement => (
-  <Card>
-    <CardTitle>{label}</CardTitle>
-    <Formik
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-      enableReinitialize
-    >
-      <Form>
-        {children}
+  <Formik
+    enableReinitialize
+    {...formikProps}
+  >
+    <Form>
+      <Card footer={(
         <SubmitButton
           css={{
             padding: "0.75rem 1rem",
@@ -44,11 +43,21 @@ const AccountSetting = <Values extends FormikValues>({
             float: "right",
           }}
         >
-          Ändra
+          {submitButton}
         </SubmitButton>
-      </Form>
-    </Formik>
-  </Card>
+    )}
+      >
+        <CardTitle>{label}</CardTitle>
+        {description ? <CardDescription>{description}</CardDescription> : null}
+        <div css={{
+          maxWidth: "20rem",
+        }}
+        >
+          {children}
+        </div>
+      </Card>
+    </Form>
+  </Formik>
   );
 
 export default AccountSetting;

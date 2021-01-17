@@ -1,5 +1,6 @@
 import { useAuth } from "../auth/AuthContext";
 import { loginLink } from "../auth/href";
+import { DISCORD_INVITE_LINK } from "../discord/constants";
 import RouteCategory from "./category";
 import Route from "./route";
 
@@ -56,10 +57,20 @@ export const useRoutes = (): Routes => {
     },
     {
       name: "Organisationen",
-      routes: [{
-        name: "Författare",
-        href: "/författare",
-      }],
+      routes: [
+        {
+          name: "Författare",
+          href: "/författare",
+        },
+        {
+          name: "Instagram",
+          href: "https://instagram.com/sodermalmsskolan.c0m",
+        },
+        {
+          name: "Discord",
+          href: DISCORD_INVITE_LINK,
+        },
+      ],
     },
     {
       name: "Resurser",

@@ -11,7 +11,18 @@ import LogoIcon from "../logo/Icon";
 import navbarBreakpoint from "./breakpoint";
 import NavbarWrapper from "./Wrapper";
 
-const RouteLink: FunctionComponent<{route: Route}> = ({ route }) => {
+interface RouteLinkProps {
+  route: Route
+}
+
+/**
+ * A link shown in the navbar.
+ *
+ * @param {React.PropsWithChildren<RouteLinkProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered link.
+ */
+const RouteLink: FunctionComponent<RouteLinkProps> = ({ route }) => {
   const router = useRouter();
 
   return (
@@ -46,6 +57,11 @@ const RouteLink: FunctionComponent<{route: Route}> = ({ route }) => {
   );
 };
 
+/**
+ * The main desktop navbar for the page.
+ *
+ * @returns {React.ReactElement} The rendered navbar.
+ */
 const MainNavbar: FunctionComponent = () => {
   const routes = useBasicRoutes();
 

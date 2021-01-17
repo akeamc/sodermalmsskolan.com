@@ -1,38 +1,22 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import React from "react";
 import AccountCard from "../../components/account/AccountCard";
-import AccountSettingsSection from "../../components/account/AccountSettingsSection";
-import Base from "../../components/Base";
-import Section from "../../components/section/Section";
-import { useAuth } from "../../lib/auth/AuthContext";
-import { loginLink } from "../../lib/auth/href";
+import AccountSettingsPage from "../../components/account/settings/AccountSettingsPage";
+import DisplayNameSetting from "../../components/account/settings/DisplayNameSetting";
 
 /**
- * Account overview page (seems unfinished because it is).
+ * General account settings.
  *
- * @returns {React.ReactElement} JSX element.
+ * @returns {React.ReactElement} The rendered page.
  */
-const Page: NextPage = () => {
-  const { user, isLoading } = useAuth();
-  const router = useRouter();
-
-  if (!user && !isLoading) {
-    router.push(loginLink());
-    return <>Omdirigerar ...</>;
-  }
-
-  return (
-    <Base metadata={{
-      title: "Konto",
-    }}
-    >
-      <Section>
-        <AccountCard />
-      </Section>
-      <AccountSettingsSection />
-    </Base>
-  );
-};
+const Page: NextPage = () => (
+  <AccountSettingsPage metadata={{
+    title: "Allmänna inställningar",
+  }}
+  >
+    <AccountCard />
+    <DisplayNameSetting />
+  </AccountSettingsPage>
+);
 
 export default Page;
