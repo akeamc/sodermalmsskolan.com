@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import AccountSettingsPage from "../../../components/account/settings/AccountSettingsPage";
+import InstagramSettings from "../../../components/account/settings/InstagramSettings";
 
 /**
  * Notifications settings page.
@@ -8,8 +9,11 @@ import AccountSettingsPage from "../../../components/account/settings/AccountSet
  * @returns {React.ReactElement} The rendered page.
  */
 const Page: NextPage = () => (
-  <AccountSettingsPage title="Notiser">
-    notisinställningar
+  <AccountSettingsPage metadata={{
+    title: "Notisinställningar",
+  }}
+  >
+    <InstagramSettings />
   </AccountSettingsPage>
 );
 

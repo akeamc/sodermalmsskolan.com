@@ -1,15 +1,16 @@
 import { useRouter } from "next/router";
-import React, { FunctionComponent, ReactNode, useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { useAuth } from "../../../lib/auth/AuthContext";
 import { loginLink } from "../../../lib/auth/href";
-import Base from "../../Base";
+import { breakpoints, media } from "../../../styles/breakpoints";
+import Base, { BaseProps } from "../../Base";
 import Container from "../../Container";
-import { SectionHeading } from "../../text/headings";
+import SimpleHeader from "../../header/Simple";
+import InlineSkeleton from "../../skeleton/InlineSkeleton";
+import Emphasis from "../../text/atomics/Emphasis";
 import AccountSettingsSidebar from "./AccountSettingsSidebar";
 
-export interface AccountSettingsPageProps {
-  title: ReactNode;
-}
+export type AccountSettingsPageProps = BaseProps;
 
 /**
  * A page used to change account settings.
@@ -20,7 +21,7 @@ export interface AccountSettingsPageProps {
  */
 const AccountSettingsPage: FunctionComponent<AccountSettingsPageProps> = ({
   children,
-  title,
+  ...baseProps
 }) => {
   const router = useRouter();
   const { user, isLoading } = useAuth();
@@ -35,24 +36,43 @@ const AccountSettingsPage: FunctionComponent<AccountSettingsPageProps> = ({
 
   return (
     <Base
+      {...baseProps}
       metadata={{
         noIndex: true,
+        ...baseProps?.metadata,
       }}
     >
+      <SimpleHeader
+        title="Konto"
+        sub={initialLoading ? <InlineSkeleton /> : (
+          <>
+            Inloggad som
+            {" "}
+            {user.displayName || <Emphasis>Namnlös</Emphasis>}
+          </>
+        )}
+      />
       <Container>
         <div css={{
           display: "flex",
           position: "relative",
+          flexDirection: "column",
+
+          [media(breakpoints.medium)]: {
+            flexDirection: "row",
+          },
         }}
         >
           <AccountSettingsSidebar isLoading={initialLoading} />
           <div css={{
             paddingTop: "var(--page-gutter)",
+            flex: "1",
           }}
           >
-            <SectionHeading>{title}</SectionHeading>
             <div css={{
-              marginTop: "2rem",
+              display: "grid",
+              gridAutoColumns: "1fr",
+              gap: "2rem",
             }}
             >
               {children}

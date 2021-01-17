@@ -45,13 +45,6 @@ const DisplayNameSetting: FunctionComponent = () => {
     >
       <Field
         name="displayName"
-        validate={(displayName) => {
-          if (displayName === user?.displayName) {
-            return "Du måste välja ett nytt namn.";
-          }
-
-          return undefined;
-        }}
       >
         {({
           field,

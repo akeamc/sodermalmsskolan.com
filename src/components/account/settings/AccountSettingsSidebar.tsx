@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ComponentType, FunctionComponent } from "react";
 import { Bell, User } from "react-feather";
+import { breakpoints, media } from "../../../styles/breakpoints";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import Skeleton from "../../skeleton/Skeleton";
 
@@ -40,7 +41,7 @@ const AccountSettingsLink: FunctionComponent<AccountSettingsLinkProps> = ({
       listStyle: "none",
     }}
     >
-      <Link href={href} passHref>
+      <Link href={href} passHref scroll={false}>
         <a css={{
           color: "var(--color-text-primary)",
           textDecoration: "none",
@@ -84,11 +85,16 @@ const AccountSettingsSidebar: FunctionComponent<AccountSettingsSidebarProps> = (
   isLoading,
 }) => (
   <div css={{
-    "--link-padding": "0.75rem",
-    "--aside-padding": "0.5rem",
-    marginRight: "2rem",
-    flex: "0 0 12rem",
-    marginTop: "calc(var(--page-gutter) - var(--aside-padding) - var(--link-padding))",
+    "--link-padding": "0.25rem",
+    "--aside-padding": "0rem",
+
+    [media(breakpoints.medium)]: {
+      flex: "0 0 12rem",
+      "--link-padding": "0.75rem",
+      "--aside-padding": "0.5rem",
+      marginTop: "calc(var(--page-gutter) - var(--aside-padding) - var(--link-padding))",
+      marginRight: "2rem",
+    },
   }}
   >
     <aside

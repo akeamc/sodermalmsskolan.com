@@ -45,7 +45,7 @@ export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
 }) => {
   const { language } = useLocale();
 
-  const dateNow = useTime(10000);
+  const dateNow = useTime(1000);
   const now = dayjs(dateNow);
 
   const isPast = now.isoWeekday() > weekday + 1;
