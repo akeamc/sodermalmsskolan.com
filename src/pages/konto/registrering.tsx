@@ -14,6 +14,7 @@ import { useAuth } from "../../lib/auth/AuthContext";
 import FormText from "../../components/form/text/FormText";
 import SubmitButton from "../../components/form/SubmitButton";
 import { sendEmailVerification } from "../../components/account/EmailVerificationButton";
+import reportEvent from "../../lib/analytics/reportEvent";
 
 /**
  * The page used by users to create an account.
@@ -55,6 +56,9 @@ const RegistrationPage: NextPage = () => {
           setFieldError,
         }) => {
           auth.createUserWithEmailAndPassword(email, password).then(() => {
+            reportEvent("sign_up", {
+              method: "password",
+            });
             sendEmailVerification();
             router.push(redirectUri);
           }).catch((error) => {

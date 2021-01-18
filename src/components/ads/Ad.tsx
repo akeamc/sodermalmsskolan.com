@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { ADSENSE_CLIENT, ADSENSE_SLOT } from "../../lib/google/constants";
+import { ADSENSE_CLIENT, ADSENSE_SLOT } from "../../lib/adsense/constants";
 
 export type AdFormat = "auto" | "fluid";
 
