@@ -34,7 +34,7 @@ type EventName = keyof AnalyticsEvent;
  * @param {any} value The value to be sent to Analytics.
  */
 const reportEvent = <E extends EventName>(name: E, value: AnalyticsEvent[E]): void => {
-  gtag("event", "name", value);
+  gtag("event", name, value);
 };
 
 export default reportEvent;
