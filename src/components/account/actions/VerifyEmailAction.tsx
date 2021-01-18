@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "../../../lib/auth/AuthContext";
 import { translateFirebaseError } from "../../../lib/auth/forms";
 import { auth } from "../../../lib/firebase/firebase";
 import AuthFormPage from "../../auth/AuthFormPage";
@@ -20,11 +21,13 @@ const VerifyEmailAction: AccountAction = ({
 }) => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>();
+  const { reloadUser } = useAuth();
 
   useEffect(() => {
     auth
       .applyActionCode(oobCode)
       .then(() => auth.currentUser?.getIdToken(true))
+      .then(() => reloadUser())
       .then(() => {
         toast.success("Din e-postadress har bekräftats.");
         router.push(continueUrl);
@@ -33,7 +36,7 @@ const VerifyEmailAction: AccountAction = ({
         const { message } = translateFirebaseError(error);
         setErrorMessage(message);
       });
-  }, [oobCode, continueUrl, router]);
+  }, [oobCode, continueUrl, router, reloadUser]);
 
   return (
     <AuthFormPage

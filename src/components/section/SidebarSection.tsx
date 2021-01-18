@@ -32,8 +32,12 @@ const SidebarSection: FunctionComponent<SidebarSectionProps> = ({
     >
       <div css={{
         [media(breakpoints.large)]: {
-          marginRight: "5rem",
+          marginRight: "2rem",
           flex: "1",
+        },
+
+        [media(breakpoints.extraLarge)]: {
+          marginRight: "4rem",
         },
       }}
       >
@@ -43,8 +47,12 @@ const SidebarSection: FunctionComponent<SidebarSectionProps> = ({
         marginTop: "2rem",
 
         [media(breakpoints.large)]: {
-          width: "400px",
+          width: "20rem",
           marginTop: 0,
+        },
+
+        [media(breakpoints.extraLarge)]: {
+          width: "24rem",
         },
       }}
       >

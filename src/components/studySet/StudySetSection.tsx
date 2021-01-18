@@ -15,6 +15,8 @@ export type StudySetSectionProps = SectionProps;
 const StudySetSection: FunctionComponent<StudySetSectionProps> = ({ ...sectionProps }) => {
   const { data } = useStudySets();
 
+  const sets = data || new Array(20).fill(undefined);
+
   return (
     <Section {...sectionProps}>
       <ul css={{
@@ -22,9 +24,9 @@ const StudySetSection: FunctionComponent<StudySetSectionProps> = ({ ...sectionPr
         margin: 0,
       }}
       >
-        {data
-          ?.map((({ id }) => (
-            <StudySetListItem key={id} id={id} />
+        {sets
+          .map((({ id } = {}, index) => (
+            <StudySetListItem key={id || index} id={id} />
           )))}
       </ul>
     </Section>
