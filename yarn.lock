@@ -6939,10 +6939,10 @@ node-html-parser@1.4.9:
   dependencies:
     he "1.2.0"
 
-node-html-parser@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/node-html-parser/-/node-html-parser-2.0.0.tgz#fe03a9e99efac16819969802e17a9e51d968d65f"
-  integrity sha512-3wJdYSxiVIBxuiFm9UtfNWAlBw2P+Vb/RN1nqf40q2JeZDpcJ1HsrWuWV3j15SSJ25TvfnOoac2Q+uDU9iY0sw==
+node-html-parser@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/node-html-parser/-/node-html-parser-2.0.2.tgz#168c9cfb77ae58fe4038d84862a0fc8f2ad8e3fd"
+  integrity sha512-N2000Ho9dkabvRZcyiwm6zOpdiAzxAxcJ0Z0WNoh/yXHG0YCuiK2WpNQfN+9vheLNY/h/It11Gk7uwT4QTfk9Q==
   dependencies:
     he "1.2.0"
 

@@ -27,7 +27,7 @@
     "lodash": "^4.17.20",
     "luxon": "^1.25.0",
     "next": "^10.0.5",
-    "node-html-parser": "^2.0.0",
+    "node-html-parser": "^2.0.2",
     "pdf-parse": "^1.1.1",
     "polished": "^4.0.5",
     "query-string": "^6.13.8",
