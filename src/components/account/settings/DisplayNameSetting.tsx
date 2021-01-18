@@ -16,7 +16,7 @@ export interface Values extends FormikValues {
  * @returns {React.ReactElement} The rendered setting.
  */
 const DisplayNameSetting: FunctionComponent = () => {
-  const { user, reloadUser } = useAuth();
+  const { user, reloadUser, isLoading } = useAuth();
 
   const initialValues: Values = {
     displayName: user?.displayName,
@@ -26,6 +26,7 @@ const DisplayNameSetting: FunctionComponent = () => {
     <AccountSetting
       label="Namn"
       initialValues={initialValues}
+      isLoading={isLoading}
       onSubmit={({ displayName }, { setSubmitting, setFieldError }) => {
         user.updateProfile({
           displayName,

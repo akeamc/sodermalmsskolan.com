@@ -148,10 +148,12 @@ const AccountCard: FunctionComponent = () => {
             marginTop: "2rem",
           }}
           >
-            <Button onClick={() => {
-              auth.signOut();
-              router.push("/");
-            }}
+            <Button
+              onClick={() => {
+                auth.signOut();
+                router.push("/");
+              }}
+              disabled={!user}
             >
               Logga ut
             </Button>

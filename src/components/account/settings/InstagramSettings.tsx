@@ -21,20 +21,22 @@ export interface Values extends FormikValues {
  * @returns {React.ReactElement} Rendered description.
  */
 const InstagramStatusText: FunctionComponent = () => {
-  const { data, isValidating } = useInstagramStatus();
+  const { data } = useInstagramStatus();
 
   const css: CSSObject = {
     margin: 0,
   };
 
-  if (isValidating && !data) {
-    return <InlineSkeleton count={1} />;
+  if (!data) {
+    return <InlineSkeleton count={2} width="100%" />;
   }
 
   if (data?.uid) {
     if (data?.verified) {
       return (
-        <SuccessParagraph css={css}>Ditt användarnamn har bekräftats.</SuccessParagraph>
+        <SuccessParagraph css={css}>
+          Ditt användarnamn har bekräftats.
+        </SuccessParagraph>
       );
     }
 
@@ -70,7 +72,7 @@ const InstagramSettings: FunctionComponent = () => {
   useEffect(() => {
     const username = typeof inputValue === "undefined" ? data?.username : inputValue;
 
-    if (!data?.verified && username === data?.username) {
+    if (!data?.verified && typeof username === "string" && username === data?.username) {
       setSubmitButton("Skicka en ny länk");
     } else {
       setSubmitButton(undefined);
@@ -83,17 +85,19 @@ const InstagramSettings: FunctionComponent = () => {
       submitButton={submitButton}
       description={(
         <>
-          <div css={{
+          <span css={{
             marginBottom: "0.75rem",
+            display: "inline-block",
           }}
           >
             Genom att registrera ditt Instagram-användarnamn, får du meddelanden vid viktiga
             händelser såsom inställda lektioner.
-          </div>
+          </span>
           <InstagramStatusText />
         </>
       )}
       initialValues={initialValues}
+      isLoading={!data}
       onSubmit={async ({ igUsername }, { setSubmitting, setFieldError }) => {
         ky.post(`${INSTAGRAM_BOT_ENDPOINT}/instagram/subscribe`, {
           json: {

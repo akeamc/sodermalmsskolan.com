@@ -24,10 +24,10 @@ export const submitButtonDisabled = <Values extends FormikValues>(
  *
  * @returns {React.ReactElement} The rendered submit button.
  */
-const SubmitButton: FunctionComponent<ButtonProps> = (props) => {
+const SubmitButton: FunctionComponent<ButtonProps> = ({ disabled: overrideDisabled, ...props }) => {
   const formProps = useFormikContext();
 
-  const disabled = submitButtonDisabled(formProps);
+  const disabled = submitButtonDisabled(formProps) || overrideDisabled;
 
   return (
     <Button size="small" disabled={disabled} type="submit" primary {...props} />

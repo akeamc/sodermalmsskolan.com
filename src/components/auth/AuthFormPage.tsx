@@ -57,12 +57,11 @@ const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
       }}
       >
         <Card css={{
-          padding: "2rem",
+          "--card-padding-x": "2rem",
+          "--card-padding-y": "2rem",
           width: "30rem",
           position: "relative",
           zIndex: 1,
-          backgroundColor: "var(--color-bg-primary)",
-          borderRadius: "0.3125rem",
         }}
         >
           <div css={{

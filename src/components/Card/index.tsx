@@ -16,7 +16,7 @@ export interface CardProps extends HTMLAttributes<HTMLOrSVGElement> {
  * @returns {React.ReactElement} The rendered card.
  */
 const Card: FunctionComponent<CardProps> = ({
-  href, big, footer, ...rest
+  href, big, footer, children, ...rest
 }) => {
   const inner = (
     <div
@@ -26,7 +26,7 @@ const Card: FunctionComponent<CardProps> = ({
         "--card-padding-x": big ? "2rem" : "1rem",
         borderRadius: "0.375rem",
         border: "1px solid var(--color-border-primary)",
-        boxShadow: "border-box",
+        boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
         color: "inherit",
@@ -39,15 +39,19 @@ const Card: FunctionComponent<CardProps> = ({
           borderColor: "var(--color-text-primary)",
         },
       } : null]}
+      {...rest}
     >
       <div
         css={{
+          boxSizing: "border-box",
           padding: "var(--card-padding-y) var(--card-padding-x)",
         }}
-        {...rest}
-      />
+      >
+        {children}
+      </div>
       {footer ? (
         <footer css={{
+          boxSizing: "border-box",
           padding: "0.5rem var(--card-padding-x)",
           backgroundColor: "var(--accents-1)",
           borderTop: "1px solid var(--color-border-primary)",
