@@ -22,7 +22,7 @@ const UserAvatar: FunctionComponent<UserAvatarProps> = ({ href, ...props }) => {
 
   let src: string;
 
-  if (!isLoading) {
+  if (!isLoading && typeof user?.uid !== "undefined") {
     if (typeof user?.photoURL === "string") {
       src = user?.photoURL;
     } else {

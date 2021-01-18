@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import Card from "../Card";
 import SubmitButton from "../form/SubmitButton";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { CardTitle } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 
@@ -14,6 +15,7 @@ export interface AccountSettingProps<Values extends FormikValues> extends Formik
   label: ReactNode;
   description?: ReactNode;
   submitButton?: ReactNode;
+  isLoading?: boolean;
 }
 
 /**
@@ -28,6 +30,7 @@ const AccountSetting = <Values extends FormikValues>({
   label,
   description,
   submitButton = "Spara",
+  isLoading = false,
   ...formikProps
 }: PropsWithChildren<AccountSettingProps<Values>>): ReactElement => (
   <Formik
@@ -37,6 +40,7 @@ const AccountSetting = <Values extends FormikValues>({
     <Form>
       <Card footer={(
         <SubmitButton
+          disabled={isLoading ? true : undefined}
           css={{
             padding: "0.75rem 1rem",
             fontSize: "0.75rem",
@@ -47,11 +51,18 @@ const AccountSetting = <Values extends FormikValues>({
         </SubmitButton>
     )}
       >
-        <CardTitle>{label}</CardTitle>
-        {description ? <CardDescription>{description}</CardDescription> : null}
-        <div css={{
-          maxWidth: "20rem",
-        }}
+        <CardTitle>{isLoading ? <InlineSkeleton width="10em" /> : label}</CardTitle>
+        {description ? (
+          <CardDescription>
+            {isLoading ? <InlineSkeleton count={2} /> : description}
+          </CardDescription>
+        ) : null}
+        <div
+          css={{
+            maxWidth: "20rem",
+            opacity: isLoading ? 0 : 1,
+            transition: "opacity 0.1s",
+          }}
         >
           {children}
         </div>

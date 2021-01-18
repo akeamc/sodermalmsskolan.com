@@ -7,6 +7,13 @@ export type ParagraphProps = HTMLElementProps<HTMLParagraphElement>;
 
 export type Paragraph = FunctionComponent<ParagraphProps>;
 
+/**
+ * A small paragraph.
+ *
+ * @param {React.PropsWithChildren<ParagraphProps>} props The props.
+ *
+ * @returns {React.ReactElement} The rendered small paragraph.
+ */
 export const SmallParagraph: Paragraph = (props) => (
   <p
     css={{
@@ -18,8 +25,15 @@ export const SmallParagraph: Paragraph = (props) => (
   />
 );
 
+/**
+ * Paragraph used as card descriptions.
+ *
+ * @param {React.PropsWithChildren<ParagraphProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered paragraph.
+ */
 export const CardDescription: Paragraph = (props) => (
-  <p
+  <div
     css={{
       color: "var(--color-text-primary)",
       fontSize: "1rem",
@@ -39,8 +53,8 @@ export const CardDescription: Paragraph = (props) => (
  * @returns {React.ReactElement} The rendered paragraph.
  */
 export const IconParagraph: FunctionComponent<ParagraphProps & {
-  Icon: ComponentType,
-}> = ({ Icon, children, ...props }) => (
+  icon: ComponentType,
+}> = ({ icon: Icon, children, ...props }) => (
   <div
     css={{
       display: "flex",
@@ -72,6 +86,7 @@ export const IconParagraph: FunctionComponent<ParagraphProps & {
       margin: "0.125rem 0",
       fontSize: "1rem",
       fontFamily: fonts.sans,
+      flex: 1,
 
       a: {
         color: "inherit",
@@ -84,9 +99,16 @@ export const IconParagraph: FunctionComponent<ParagraphProps & {
   </div>
 );
 
+/**
+ * Paragraph used to indicate danger or errors.
+ *
+ * @param {React.PropsWithChildren<ParagraphProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered paragraph.
+ */
 export const DangerParagraph: Paragraph = (props) => (
   <IconParagraph
-    Icon={AlertCircle}
+    icon={AlertCircle}
     css={{
       color: "var(--color-text-danger)",
     }}
@@ -94,9 +116,16 @@ export const DangerParagraph: Paragraph = (props) => (
   />
 );
 
+/**
+ * Paragraph used to indicate warnings.
+ *
+ * @param {React.PropsWithChildren<ParagraphProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered paragraph.
+ */
 export const WarningParagraph: Paragraph = (props) => (
   <IconParagraph
-    Icon={AlertTriangle}
+    icon={AlertTriangle}
     css={{
       color: "var(--color-text-warning)",
     }}
@@ -104,9 +133,16 @@ export const WarningParagraph: Paragraph = (props) => (
   />
 );
 
+/**
+ * Paragraph used to indicate success.
+ *
+ * @param {React.PropsWithChildren<ParagraphProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered paragraph.
+ */
 export const SuccessParagraph: Paragraph = (props) => (
   <IconParagraph
-    Icon={CheckCircle}
+    icon={CheckCircle}
     css={{
       color: "var(--color-text-success)",
     }}

@@ -61,6 +61,7 @@ const TextField: FunctionComponent<TextFieldProps> = ({
   type = "text",
   prefix,
   suffix,
+  value = "",
   ...inputProps
 }) => {
   const id = specifiedId || inputProps.name;
@@ -131,6 +132,7 @@ const TextField: FunctionComponent<TextFieldProps> = ({
           } : null]}
           id={id}
           type={type}
+          value={value}
           {...inputProps}
         />
         {suffix ? (
