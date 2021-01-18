@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
-import { ANALYTICS_ID } from "../../lib/google/constants";
+import ANALYTICS_ID from "../../lib/analytics/constants";
 
 export interface SiteMetadata {
   title?: string;

@@ -13,6 +13,7 @@ import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRed
 import { useAuth } from "../../lib/auth/AuthContext";
 import FormText from "../../components/form/text/FormText";
 import SubmitButton from "../../components/form/SubmitButton";
+import reportEvent from "../../lib/analytics/reportEvent";
 
 /**
  * Login page. Used to log in.
@@ -64,6 +65,9 @@ const LoginPage: NextPage = () => {
           setFieldError,
         }) => {
           auth.signInWithEmailAndPassword(email, password).then(() => {
+            reportEvent("login", {
+              method: "password",
+            });
             router.push(redirectUri);
           }).catch((error) => {
             const { field, message } = translateFirebaseError(error);
