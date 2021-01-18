@@ -1,6 +1,7 @@
 import Link from "next/link";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { useStudySet } from "../../lib/quizlet/structures/client/StudySet";
+import { StudySetDetails } from "../../lib/quizlet/structures/shared/StudySet";
 import { breakpoints, media } from "../../styles/breakpoints";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 
@@ -22,9 +23,11 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
     id,
   });
 
-  const title = data?.details?.title;
-  const description = data?.details?.description;
-  const author = data?.details?.author;
+  const details = data?.details || ({} as StudySetDetails);
+
+  const {
+    title, description, author, terms,
+  } = details;
 
   const inner = (
     <a css={{
@@ -38,6 +41,7 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
       [media(breakpoints.medium)]: {
         padding: "0.5rem 0",
         alignItems: "normal",
+        display: "flex",
       },
 
       "&:hover": {
@@ -52,6 +56,7 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
 
         [media(breakpoints.medium)]: {
           display: "flex",
+          marginRight: "0.75rem",
         },
       }}
       >
@@ -69,8 +74,21 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
         >
           {typeof title !== "undefined" ? title : <InlineSkeleton width="100%" />}
         </strong>
-        <div>
+        <div css={{
+          flex: 1,
+          marginRight: "0.75rem",
+        }}
+        >
           {typeof description !== "undefined" ? (description || "—") : <InlineSkeleton width="20em" />}
+        </div>
+        <div>
+          {typeof terms !== "undefined" ? (
+            <>
+              {terms}
+              {" "}
+              termer
+            </>
+          ) : <InlineSkeleton width="4em" />}
         </div>
       </div>
       <div css={{
@@ -79,10 +97,12 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
 
         [media(breakpoints.medium)]: {
           marginLeft: "auto",
+          flex: "0 0 10rem",
+          textAlign: "right",
         },
       }}
       >
-        {typeof data !== "undefined" ? author : <InlineSkeleton width="4em" />}
+        {typeof data !== "undefined" ? author : <InlineSkeleton />}
       </div>
     </a>
   );
@@ -106,4 +126,4 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
   );
 };
 
-export default StudySetListItem;
+export default memo(StudySetListItem);
