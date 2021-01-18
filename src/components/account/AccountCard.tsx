@@ -43,29 +43,34 @@ const AccountCard: FunctionComponent = () => {
 
   return (
     <Card css={{
-      padding: "2rem",
-
-      [media(breakpoints.medium)]: {
-        padding: "4rem 2rem",
+      [media(breakpoints.small)]: {
+        "--card-padding-x": "2rem",
+        "--card-padding-y": "4rem",
       },
     }}
     >
       <div
         css={{
-          display: "flex",
+          [media(breakpoints.small)]: {
+            display: "flex",
+          },
         }}
       >
         <UserAvatar
           css={{
             "--avatar-size": "4rem",
-            flex: "0 0 var(--avatar-size)",
             height: "var(--avatar-size)",
-            marginRight: "1rem",
+            marginBottom: "2rem",
             cursor: "pointer",
+
+            [media(breakpoints.small)]: {
+              marginRight: "2rem",
+              marginBottom: 0,
+            },
 
             [media(breakpoints.medium)]: {
               "--avatar-size": "6rem",
-              marginRight: "2rem",
+              flex: "0 0 var(--avatar-size)",
             },
 
             "&::after": {

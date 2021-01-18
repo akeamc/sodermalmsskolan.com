@@ -33,9 +33,10 @@ const UserAvatar: FunctionComponent<UserAvatarProps> = ({ href, ...props }) => {
   const inner = (
     <a
       css={[skeletonBackground, {
+        "--avatar-size": "2rem",
         position: "relative",
-        width: "2rem",
-        height: "2rem",
+        width: "var(--avatar-size)",
+        height: "var(--avatar-size)",
         borderRadius: "50%",
         overflow: "hidden",
         display: "inline-block",
