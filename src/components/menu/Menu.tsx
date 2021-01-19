@@ -14,9 +14,22 @@ export interface MenuProps {
   ad?: boolean;
 }
 
-const MenuTitle: FunctionComponent<{
+interface MenuTitleProps {
   date: Date;
-}> = ({
+}
+
+interface MenuDishesProps {
+  dishes: ClientDish[];
+}
+
+/**
+ * Text showing the title of a menu, i.e. the date.
+ *
+ * @param {React.PropsWithChildren<MenuTitleProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered props.
+ */
+const MenuTitle: FunctionComponent<MenuTitleProps> = ({
   date,
 }) => {
   const { language } = useLocale();
@@ -28,9 +41,14 @@ const MenuTitle: FunctionComponent<{
   );
 };
 
-const MenuDishes: FunctionComponent<{
-  dishes: ClientDish[]
-}> = ({
+/**
+ * Dishes, displayed neatly.
+ *
+ * @param {React.PropsWithChildren<MenuDishesProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered dishes.
+ */
+const MenuDishes: FunctionComponent<MenuDishesProps> = ({
   dishes,
 }) => (
   <>
@@ -39,20 +57,34 @@ const MenuDishes: FunctionComponent<{
   </>
 );
 
+/**
+ * A menu, displaying dishes served on a particular day.
+ *
+ * @param {React.PropsWithChildren<MenuProps>} props Menu props.
+ *
+ * @returns {React.ReactElement} Rendered menu.
+ */
 const Menu: FunctionComponent<MenuProps> = ({ menu, ad = false }) => (
   <div css={{
     display: "flex",
   }}
   >
-    <SmallHeading
-      css={{
-        writingMode: "vertical-lr",
-        marginRight: "1rem",
-        lineHeight: 1,
-      }}
+    <div css={{
+      position: "relative",
+    }}
     >
-      {ad ? "Annons" : <MenuTitle date={menu?.date} />}
-    </SmallHeading>
+      <SmallHeading
+        css={{
+          writingMode: "vertical-lr",
+          marginRight: "1rem",
+          lineHeight: 1,
+          position: "sticky",
+          top: "calc(var(--navbar-height) + 1rem)",
+        }}
+      >
+        {ad ? "Annons" : <MenuTitle date={menu?.date} />}
+      </SmallHeading>
+    </div>
     {ad ? (
       <div css={{
         flex: 1,
