@@ -4,6 +4,13 @@ import CardGrid from "../grid/CardGrid";
 import Section, { SectionProps } from "../section/Section";
 import DishCard from "./DishCard";
 
+/**
+ * A section displaying all dishes.
+ *
+ * @param {React.PropsWithChildren<SectionProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered dish section.
+ */
 const DishSection: FunctionComponent<SectionProps> = ({ ...sectionProps }) => {
   const { data } = useDishes();
 
