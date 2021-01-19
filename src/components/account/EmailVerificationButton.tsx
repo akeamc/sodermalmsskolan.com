@@ -57,7 +57,7 @@ const EmailVerificationButton: FunctionComponent<ButtonProps> = (props) => {
       }}
       {...props}
     >
-      Bekräfta e-postadressen
+      Skicka ett nytt mejl
     </Button>
   );
 };
