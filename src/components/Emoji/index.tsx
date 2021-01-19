@@ -1,13 +1,18 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactNode } from "react";
 import twemoji from "twemoji";
+
+export interface EmojiProps {
+  children: ReactNode;
+}
 
 /**
  * Twemoji-powered emoji renderer to make sure they look the same on all devices.
  *
- * @param props
- * @param props.children
+ * @param {React.PropsWithChildren<EmojiProps>} props Emoji props.
+ *
+ * @returns {React.ReactElement} Rendered emoji text.
  */
-const Emoji: FunctionComponent<{ children: React.ReactNode }> = ({
+const Emoji: FunctionComponent<EmojiProps> = ({
   children,
 }) => (
   <>

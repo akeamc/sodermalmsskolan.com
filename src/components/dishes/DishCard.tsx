@@ -15,14 +15,18 @@ export interface DishCardProps extends CardProps {
   showPhotos?: boolean;
 }
 
+interface PhotoProps {
+  photo: FoodPhoto;
+}
+
 /**
  * Dish photo with small dimensions to reduce data usage and increase responsiveness.
  *
- * @param {any} props Props.
+ * @param {React.PropsWithChildren<PhotoProps>} props Props.
  *
  * @returns {React.ReactElement} The rendered photo.
  */
-const Photo: FunctionComponent<{photo: FoodPhoto}> = ({ photo }) => (
+const Photo: FunctionComponent<PhotoProps> = ({ photo }) => (
   <div css={[skeletonBackground, {
     position: "relative",
     borderRadius: "0.375rem",

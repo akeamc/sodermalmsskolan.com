@@ -33,7 +33,6 @@ const Card: FunctionComponent<CardProps> = ({
         transition: "all 0.1s",
         justifyContent: big ? "center" : null,
         textAlign: big ? "center" : null,
-        height: "100%",
       }, href ? {
         "&:hover": {
           borderColor: "var(--color-text-primary)",
