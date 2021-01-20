@@ -101,7 +101,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
     }}
     >
       {placeholder ? <Skeleton width="100%" height="100%" /> : (
-        <button
+        <div
           css={[{
             backgroundColor: color,
             borderRadius: "0.3125rem",
@@ -120,7 +120,6 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             textAlign: "left",
             width: "100%",
             outline: "none",
-            cursor: "pointer",
 
             "@media (prefers-color-scheme: dark)": {
               backgroundColor: transparentize(0.5, color),
@@ -136,7 +135,6 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             filter: "grayscale(1)",
             cursor: "not-allowed",
           } : null]}
-          type="button"
         >
           <div css={{
             fontFamily: fonts.monospace,
@@ -199,7 +197,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
               <Emoji>{description}</Emoji>
             </div>
           ) : null}
-        </button>
+        </div>
       )}
     </li>
   );
