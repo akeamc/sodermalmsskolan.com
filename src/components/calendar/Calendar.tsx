@@ -13,6 +13,7 @@ import CalendarWeek from "./Week";
 import usePlaceholderEvents from "../../lib/calendar/hooks/usePlaceholderEvents";
 import ScheduledCalendarEvent from "../../lib/calendar/event/ScheduledCalendarEvent";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
+import secondsSinceMidnight from "../../lib/calendar/utils/secondsSinceMidnight";
 
 dayjs.extend(isoWeek);
 
@@ -79,7 +80,7 @@ const Calendar: FunctionComponent<CalendarProps> = ({
 
   const [earliest, latest] = useMemo(() => eventInstances
     .reduce(([min, max], { start, data: { duration } }) => {
-      const startSeconds = start.getHours() * 3600 + start.getMinutes() * 60 + start.getSeconds();
+      const startSeconds = secondsSinceMidnight(start);
       const endSeconds = startSeconds + duration;
 
       return [Math.min(min, startSeconds), Math.max(max, endSeconds)];

@@ -4,6 +4,7 @@ import useLocale from "../../hooks/useLocale";
 import useTime from "../../hooks/useTime";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 import useEventInstanceTransform from "../../lib/calendar/hooks/useEventInstanceTransform";
+import secondsSinceMidnight from "../../lib/calendar/utils/secondsSinceMidnight";
 import { breakpoints, media } from "../../styles/breakpoints";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import CalendarEventView, { CalendarEventViewProps } from "./Event";
@@ -30,6 +31,7 @@ export interface CalendarDayProps {
 export interface CalendarTextProps {
   weekday?: number;
   placeholder?: boolean;
+  dayEnd?: number;
 }
 
 /**
@@ -42,13 +44,26 @@ export interface CalendarTextProps {
 export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
   weekday,
   placeholder = false,
+  dayEnd = 60 * 60 * 24,
 }) => {
   const { language } = useLocale();
 
   const dateNow = useTime(1000);
   const now = dayjs(dateNow);
 
-  const isPast = now.isoWeekday() > weekday + 1;
+  const isoWeekday = weekday + 1;
+
+  const weekdayDiff = isoWeekday - now.isoWeekday();
+
+  let isPast = false;
+
+  if (weekdayDiff < 0) {
+    isPast = true;
+  }
+
+  if (weekdayDiff === 0) {
+    isPast = secondsSinceMidnight(dateNow) > dayEnd;
+  }
 
   return (
     <span css={[{
@@ -61,7 +76,7 @@ export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
       textDecoration: "line-through",
     } : null]}
     >
-      {placeholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).isoWeekday(weekday + 1).format("dddd")}
+      {placeholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).isoWeekday(isoWeekday).format("dddd")}
     </span>
   );
 };
@@ -90,9 +105,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
 
           const { start: startDate, data } = calendarEvent;
 
-          const start = startDate.getHours() * 3600
-            + startDate.getMinutes() * 60
-            + startDate.getSeconds();
+          const start = secondsSinceMidnight(startDate);
 
           const actualStart = start + data.deltaStart;
           const actualDuration = data.duration + data.deltaDuration;
@@ -138,6 +151,13 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
     [],
   );
 
+  const dayEnd = instanceProps
+    .reduce((max, { start, data: { duration, deltaDuration, canceled } }) => {
+      const endTime = canceled ? 0 : start + duration + deltaDuration;
+
+      return Math.max(max, endTime);
+    }, 0);
+
   return (
     <section css={{
       flex: 1,
@@ -170,7 +190,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
         },
       }}
       >
-        <CalendarDayText weekday={weekday} placeholder={placeholder} />
+        <CalendarDayText weekday={weekday} placeholder={placeholder} dayEnd={dayEnd} />
       </div>
       <ul css={{
         position: "relative",
