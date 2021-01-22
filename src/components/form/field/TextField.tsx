@@ -64,7 +64,7 @@ const TextField: FunctionComponent<TextFieldProps> = ({
   value = "",
   ...inputProps
 }) => {
-  const id = specifiedId || inputProps.name;
+  const id = specifiedId ?? inputProps.name;
 
   return (
     <div css={{

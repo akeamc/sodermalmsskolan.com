@@ -6,13 +6,24 @@ import CardGrid from "../grid/CardGrid";
 import FeaturedPost from "./FeaturedPost";
 import PostCard from "./PostCard";
 
-const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
+export interface BlogHeaderProps {
+  postCount?: number;
+}
+
+/**
+ * A blog header.
+ *
+ * @param {React.PropsWithChildren<BlogHeaderProps>} props Props!
+ *
+ * @returns {React.ReactElement} The rendered header.
+ */
+const BlogHeader: FunctionComponent<BlogHeaderProps> = ({ postCount = 3 }) => {
   const { data } = usePosts(
-    posts,
+    postCount,
   );
 
   const featured = data?.[0];
-  const rest = data?.slice(1, posts);
+  const rest = data?.slice(1, postCount);
 
   return (
     <div>
@@ -33,8 +44,8 @@ const BlogHeader: FunctionComponent<{posts?: number}> = ({ posts = 3 }) => {
                 post={featured}
               />
             </div>
-            {(rest || new Array(posts - 1).fill(null))
-              .map((post, index) => <PostCard post={post} key={post?.id || index} />)}
+            {(rest ?? new Array(postCount - 1).fill(null))
+              .map((post, index) => <PostCard post={post} key={post?.id ?? index} />)}
           </CardGrid>
         </Container>
       </header>

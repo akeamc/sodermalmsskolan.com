@@ -22,7 +22,7 @@ const TelegramList: FunctionComponent = () => {
     channel: DISCORD_CHANNELS.telegrams.id,
   });
 
-  const telegrams = data?.flat()?.map(telegramFromMessage) || new Array(3).fill(null);
+  const telegrams = data?.flat()?.map(telegramFromMessage) ?? new Array(3).fill(null);
   const { language } = useLocale();
   const now = useTime(1000);
 
@@ -35,7 +35,7 @@ const TelegramList: FunctionComponent = () => {
     >
       {telegrams.map((telegram, index) => (
         <li
-          key={telegram?.id || index}
+          key={telegram?.id ?? index}
           css={{
             padding: "0.625rem 0",
             listStyle: "none",

@@ -52,8 +52,8 @@ const MenuDishes: FunctionComponent<MenuDishesProps> = ({
   dishes,
 }) => (
   <>
-    {(dishes || new Array(2).fill(null))
-      .map((dish, index) => <DishCard dish={dish} key={dish?.id || index} />)}
+    {(dishes ?? new Array(2).fill(null))
+      .map((dish, index) => <DishCard dish={dish} key={dish?.id ?? index} />)}
   </>
 );
 

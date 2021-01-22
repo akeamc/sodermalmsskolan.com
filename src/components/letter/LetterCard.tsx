@@ -25,7 +25,7 @@ const LetterCard: FunctionComponent<LetterCardProps> = ({ letter, rows = 5 }) =>
 
   return (
     <Card href={letter?.url}>
-      <CardTitle>{letter?.title || <InlineSkeleton />}</CardTitle>
+      <CardTitle>{letter?.title ?? <InlineSkeleton />}</CardTitle>
       <CardDescription css={{
         display: "-webkit-box",
         WebkitLineClamp: rows,
@@ -46,7 +46,7 @@ const LetterCard: FunctionComponent<LetterCardProps> = ({ letter, rows = 5 }) =>
         },
       }}
       >
-        {excerpt || <InlineSkeleton count={rows} />}
+        {excerpt ?? <InlineSkeleton count={rows} />}
       </CardDescription>
     </Card>
   );

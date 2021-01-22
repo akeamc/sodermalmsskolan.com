@@ -65,7 +65,7 @@ const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, .
       href={dish?.url}
       {...rest}
     >
-      <CardTitle>{dish?.title || <InlineSkeleton count={2} />}</CardTitle>
+      <CardTitle>{dish?.title ?? <InlineSkeleton count={2} />}</CardTitle>
       <CardDescription>
         {emissionsError ? (
           <span css={{
@@ -74,7 +74,7 @@ const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, .
           >
             ???
           </span>
-        ) : co2e?.toLocaleString() || <InlineSkeleton width="2em" />}
+        ) : co2e?.toLocaleString() ?? <InlineSkeleton width="2em" />}
         {" "}
         kg CO
         <sub>2</sub>
@@ -90,8 +90,8 @@ const DishCard: FunctionComponent<DishCardProps> = ({ dish, showPhotos = true, .
             margin: "0.5rem calc(-1 * var(--photo-spacing)) calc(-1 * var(--photo-spacing))",
           }}
           >
-            {(photos || new Array(2).fill(null))
-              .map((photo, index) => <Photo photo={photo} key={photo?.id || index} />)}
+            {(photos ?? new Array(2).fill(null))
+              .map((photo, index) => <Photo photo={photo} key={photo?.id ?? index} />)}
           </div>
         )}
     </Card>

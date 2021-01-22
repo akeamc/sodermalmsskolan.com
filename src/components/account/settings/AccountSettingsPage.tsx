@@ -51,7 +51,7 @@ const AccountSettingsPage: FunctionComponent<AccountSettingsPageProps> = ({
           <>
             Inloggad som
             {" "}
-            {user.displayName || <Emphasis>Namnlös</Emphasis>}
+            {user.displayName ?? <Emphasis>Namnlös</Emphasis>}
           </>
         )}
       />

@@ -75,7 +75,7 @@ const AuthorPage: NextPage<AuthorPageProps> = ({
     return <NotFoundPage />;
   }
 
-  const authorNameComponent = author?.name || <InlineSkeleton width="4em" />;
+  const authorNameComponent = author?.name ?? <InlineSkeleton width="4em" />;
 
   const filterPosts = getAuthorPostFilter(author?.slug);
 
@@ -87,7 +87,7 @@ const AuthorPage: NextPage<AuthorPageProps> = ({
       type: "profile",
     }}
     >
-      <SimpleHeader title={author?.name || <InlineSkeleton />} sub={author?.bio} />
+      <SimpleHeader title={author?.name ?? <InlineSkeleton />} sub={author?.bio} />
       <PostListSection
         header={{
           title: (

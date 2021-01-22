@@ -66,7 +66,7 @@ export class ServerMessage extends Message {
 
     const before = query.before?.toString();
     const after = query.after?.toString();
-    const limit = (query.limit || 50).toString();
+    const limit = (query.limit ?? 50).toString();
 
     if (
       !validator.isInt(limit, {

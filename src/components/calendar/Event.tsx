@@ -184,7 +184,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             fontWeight: 500,
           }}
           >
-            <Emoji>{minified ? shortTitle || title : title}</Emoji>
+            <Emoji>{minified ? shortTitle ?? title : title}</Emoji>
           </div>
           {description ? (
             <div css={{

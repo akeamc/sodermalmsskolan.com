@@ -31,9 +31,9 @@ const MenuSection: FunctionComponent<MenuSectionProps> = ({ limit = 30, ...secti
         gap: "2rem",
       }}
       >
-        {(data || new Array(limit).fill(null))
+        {(data ?? new Array(limit).fill(null))
           .map((menu, index) => (
-            <Fragment key={menu?.date?.getTime() || index}>
+            <Fragment key={menu?.date?.getTime() ?? index}>
               {index % 3 === 0 ? <Menu ad /> : null}
               <Menu menu={menu} />
             </Fragment>

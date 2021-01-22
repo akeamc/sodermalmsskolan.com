@@ -12,7 +12,7 @@ const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
   const { data, loading } = useDayMenu();
   const { language } = useLocale();
 
-  const dishes = data?.dishes || (loading ? new Array(2).fill(null) : null);
+  const dishes = data?.dishes ?? (loading ? new Array(2).fill(null) : null);
 
   const fallbackSuper = loading ? <InlineSkeleton width="12em" /> : null;
 
@@ -39,8 +39,8 @@ const DayMenuSection: FunctionComponent<SectionProps> = (props) => {
         }}
       >
         {dishes?.map((dish, index) => (
-          <DishCard key={dish?.id || index} dish={dish} big />
-        )) || <SmallParagraph>Menyn är inte tillgänglig.</SmallParagraph>}
+          <DishCard key={dish?.id ?? index} dish={dish} big />
+        )) ?? <SmallParagraph>Menyn är inte tillgänglig.</SmallParagraph>}
       </div>
       <SmallParagraph
         css={{

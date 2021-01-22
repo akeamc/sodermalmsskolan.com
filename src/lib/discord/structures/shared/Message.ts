@@ -39,7 +39,7 @@ export interface MessageSearchParams extends Record<string, string | number> {
  */
 export function getParams(query: MessageQuery): MessageSearchParams {
   return {
-    limit: query.limit || 50,
+    limit: query.limit ?? 50,
     before: query.before,
     after: query.after,
   };

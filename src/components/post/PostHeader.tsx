@@ -20,7 +20,7 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
   const wrapperRef = useRef<HTMLDivElement>();
 
   const scrollProgress = useTransform(scrollY,
-    ((y) => (y / wrapperRef?.current?.getBoundingClientRect()?.height) || 0));
+    ((y) => (y / wrapperRef?.current?.getBoundingClientRect()?.height) ?? 0));
 
   const backgroundOpacity = useTransform(scrollProgress, (progress) => (0.5 + progress));
   const foregroundOpacity = useTransform(scrollProgress, (progress) => (1 - progress));
@@ -71,7 +71,7 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
               opacity: foregroundOpacity,
             }}
           >
-            <HeaderHeading>{post?.title || <InlineSkeleton />}</HeaderHeading>
+            <HeaderHeading>{post?.title ?? <InlineSkeleton />}</HeaderHeading>
             <SubTitle css={{
               marginTop: "2rem",
             }}
@@ -87,8 +87,8 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
                 opacity: 0.7,
               }}
               >
-                {(post?.authors || new Array(2).fill(null)).map((author, index) => (
-                  <Fragment key={author?.id || index}>
+                {(post?.authors ?? new Array(2).fill(null)).map((author, index) => (
+                  <Fragment key={author?.id ?? index}>
                     {index !== 0 ? ", " : null}
                     <AuthorName author={author} />
                   </Fragment>

@@ -13,7 +13,7 @@ const AccountActionPage: NextPage = () => {
 
   const mode = query.mode?.toString() as AccountActionMode;
   const oobCode = query.oobCode?.toString();
-  const continueUrl = query.continueUrl?.toString() || "/konto";
+  const continueUrl = query.continueUrl?.toString() ?? "/konto";
 
   return (
     <AccountActionHandler mode={mode} oobCode={oobCode} continueUrl={continueUrl} />
