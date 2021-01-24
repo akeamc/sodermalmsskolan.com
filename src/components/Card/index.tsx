@@ -34,6 +34,8 @@ const Card: FunctionComponent<CardProps> = ({
         justifyContent: big ? "center" : null,
         textAlign: big ? "center" : null,
       }, href ? {
+        flex: 1,
+
         "&:hover": {
           borderColor: "var(--color-text-primary)",
         },
@@ -68,6 +70,7 @@ const Card: FunctionComponent<CardProps> = ({
         <a
           css={{
             textDecoration: "none",
+            display: "flex",
           }}
         >
           {inner}

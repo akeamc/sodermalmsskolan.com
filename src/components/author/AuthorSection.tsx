@@ -34,10 +34,10 @@ const AuthorSection: FunctionComponent<AuthorSectionProps> = ({ limit, ...sectio
         flexWrap: "wrap",
       }}
       >
-        {(data || new Array(skeletonAuthors).fill(null))
+        {(data ?? new Array(skeletonAuthors).fill(null))
           .map(((author, index) => (
             <div
-              key={author?.id || index}
+              key={author?.id ?? index}
               css={{
                 flex: "0 0 50%",
                 padding: "0.5rem",

@@ -18,14 +18,14 @@ const MenuText: FunctionComponent = () => {
           Det blir
           {" "}
           {data?.dishes?.map((dish, index) => (
-            <Fragment key={dish?.id || index}>
+            <Fragment key={dish?.id ?? index}>
               {index !== 0 ? " och " : null}
               <Emphasis
                 css={{
                   color: "var(--color-text-primary",
                 }}
               >
-                {dish?.title || <InlineSkeleton />}
+                {dish?.title ?? <InlineSkeleton />}
               </Emphasis>
             </Fragment>
           ))}

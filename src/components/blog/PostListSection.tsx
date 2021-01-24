@@ -16,10 +16,9 @@ export interface PostListSectionProps extends SectionProps {
 /**
  * A section displaying all posts.
  *
- * @param props
- * @param props.limit
- * @param props.filter
- * @param props.showMoreButton
+ * @param {React.PropsWithChildren<PostListSectionProps>} props The props.
+ *
+ * @returns {React.ReactElement} The rendered section.
  */
 const PostListSection: FunctionComponent<PostListSectionProps> = ({
   limit = "all", filter = () => true, showMoreButton = false, ...sectionProps
@@ -41,8 +40,8 @@ const PostListSection: FunctionComponent<PostListSectionProps> = ({
       }}
       {...sectionProps}
     >
-      {(posts || new Array(skeletonPosts).fill(null))
-        .map((post, index) => <PostCard post={post} key={post?.id || index} />)}
+      {(posts ?? new Array(skeletonPosts).fill(null))
+        .map((post, index) => <PostCard post={post} key={post?.id ?? index} />)}
 
     </CardGridSection>
   );

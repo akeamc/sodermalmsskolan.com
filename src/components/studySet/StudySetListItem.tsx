@@ -23,7 +23,7 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
     id,
   });
 
-  const details = data?.details || ({} as StudySetDetails);
+  const details = data?.details ?? ({} as StudySetDetails);
 
   const {
     title, description, author, terms,
@@ -79,7 +79,7 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
           marginRight: "0.75rem",
         }}
         >
-          {typeof description !== "undefined" ? (description || "—") : <InlineSkeleton width="20em" />}
+          {typeof description !== "undefined" ? (description ?? "—") : <InlineSkeleton width="20em" />}
         </div>
         <div>
           {typeof terms !== "undefined" ? (

@@ -16,7 +16,7 @@ const LetterSection: FunctionComponent = () => {
   const { user } = useAuth();
   const router = useRouter();
 
-  const letters: ClientLetter[] = data || new Array(12).fill(null);
+  const letters: ClientLetter[] = data ?? new Array(12).fill(null);
 
   return (
     <div css={{
@@ -42,7 +42,7 @@ const LetterSection: FunctionComponent = () => {
       )}
       >
         {letters
-          .map((letter, index) => <LetterCard letter={letter} key={letter?.id || index} />)}
+          .map((letter, index) => <LetterCard letter={letter} key={letter?.id ?? index} />)}
       </CardGrid>
     </div>
   );

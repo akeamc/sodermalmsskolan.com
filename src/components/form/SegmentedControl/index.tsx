@@ -53,7 +53,7 @@ const SegmentedControl: FunctionComponent<SegmentedControlProps> = ({
 
   const previousValueRef = useRef<string>();
 
-  const value = externalValue || internalValue;
+  const value = externalValue ?? internalValue;
   const selectedOptionIndex = options.findIndex((option) => option.value === value);
 
   const handleChange = (newValue: FormValue) => {

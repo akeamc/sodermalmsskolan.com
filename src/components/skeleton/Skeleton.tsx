@@ -37,7 +37,7 @@ const Skeleton: FunctionComponent<SkeletonProps> = ({ width, height, ...props })
       borderRadius: "0.3125rem",
       display: "inline-block",
       lineHeight: 1,
-      width: width || "100%",
+      width: width ?? "100%",
       height,
     }]}
     {...props}

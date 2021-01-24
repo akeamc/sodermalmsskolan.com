@@ -76,7 +76,7 @@ const Calendar: FunctionComponent<CalendarProps> = ({
     triggerEvaluation();
   }, [events, eventsSignature, viewEnd, viewStart]);
 
-  const eventInstances = evaluatedEvents || placeholderEvents;
+  const eventInstances = evaluatedEvents ?? placeholderEvents;
 
   const [earliest, latest] = useMemo(() => eventInstances
     .reduce(([min, max], { start, data: { duration } }) => {

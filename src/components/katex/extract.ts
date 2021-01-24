@@ -127,7 +127,7 @@ const splitWithDelimiters = (text, delimiters: Delimeters) => {
       data,
       delimiter.left,
       delimiter.right,
-      delimiter.display || false,
+      delimiter.display ?? false,
     );
   }
   return data;

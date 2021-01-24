@@ -30,7 +30,7 @@ const AccountCard: FunctionComponent = () => {
   const { language } = useLocale();
   const router = useRouter();
 
-  const displayName = user?.displayName || <Emphasis>Namnlös</Emphasis>;
+  const displayName = user?.displayName ?? <Emphasis>Namnlös</Emphasis>;
 
   const { data } = useChannelMessages({
     channel: DISCORD_CHANNELS.photos.id,

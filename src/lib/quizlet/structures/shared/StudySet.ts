@@ -19,7 +19,7 @@ export class StudySet implements Serializable<StudySetStatic> {
 
   constructor({ id, details }: StudySetStatic) {
     this.id = id;
-    this.details = details || null;
+    this.details = details ?? null;
   }
 
   public get url(): string {

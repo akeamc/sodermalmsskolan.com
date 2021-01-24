@@ -17,10 +17,9 @@ export interface DigibruhSectionProps extends SectionProps {
 /**
  * A section presenting a few Digibruh articles.
  *
- * @param props
- * @param props.limit
- * @param props.filter
- * @param props.showMoreButton
+ * @param {React.PropsWithChildren<DigibruhSectionProps>} props Props.
+ *
+ * @returns {React.ReactElement} Rendered element.
  */
 const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({
   limit = "all", filter = () => true, showMoreButton = false, ...sectionProps
@@ -35,7 +34,7 @@ const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({
     <CardGridSection
       header={{
         superTitle: <>
-          {data?.length || <InlineSkeleton width="1.5em" />}
+          {data?.length ?? <InlineSkeleton width="1.5em" />}
           {" "}
           artiklar
           {/* eslint-disable-next-line react/jsx-closing-tag-location */}
@@ -45,8 +44,8 @@ const DigibruhArticleSection: FunctionComponent<DigibruhSectionProps> = ({
       bottomText={showMoreButton ? <Button href="/digibruh" primary>Öppna Digibruh</Button> : null}
       {...sectionProps}
     >
-      {(articles || new Array(skeletonArticles).fill(null))
-        .map((post, index) => <ArticleCard post={post} key={post?.id || index} />)}
+      {(articles ?? new Array(skeletonArticles).fill(null))
+        .map((post, index) => <ArticleCard post={post} key={post?.id ?? index} />)}
     </CardGridSection>
   );
 };

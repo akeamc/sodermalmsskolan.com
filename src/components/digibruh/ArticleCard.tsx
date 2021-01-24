@@ -10,6 +10,13 @@ export interface ArticleCardProps extends CardProps {
   post: Post
 }
 
+/**
+ * A card displaying a Digibruh article.
+ *
+ * @param {React.PropsWithChildren<ArticleCardProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered article card.
+ */
 const ArticleCard: FunctionComponent<ArticleCardProps> = ({ post, ...cardProps }) => {
   const subject = extractSubjectFromPost(post);
   const url = useArticleUrl(post);
@@ -22,8 +29,8 @@ const ArticleCard: FunctionComponent<ArticleCardProps> = ({ post, ...cardProps }
       href={url}
       {...cardProps}
     >
-      <SmallCardHeading>{subject?.name || <InlineSkeleton width="10em" />}</SmallCardHeading>
-      <CardTitle>{post?.title || <InlineSkeleton count={2} />}</CardTitle>
+      <SmallCardHeading>{subject?.name ?? <InlineSkeleton width="10em" />}</SmallCardHeading>
+      <CardTitle>{post?.title ?? <InlineSkeleton count={2} />}</CardTitle>
     </Card>
   );
 };

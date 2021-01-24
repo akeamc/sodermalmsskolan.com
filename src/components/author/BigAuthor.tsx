@@ -42,7 +42,7 @@ const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
         marginTop: "1rem",
       }}
       >
-        {author?.name || <InlineSkeleton />}
+        {author?.name ?? <InlineSkeleton />}
       </CardTitle>
     </a>
   );

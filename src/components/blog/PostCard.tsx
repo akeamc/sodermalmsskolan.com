@@ -11,6 +11,13 @@ export interface PostCardProps extends CardProps {
   post: Post
 }
 
+/**
+ * A card displaying a post.
+ *
+ * @param {React.PropsWithChildren<PostCardProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered element.
+ */
 const PostCard: FunctionComponent<PostCardProps> = ({ post, ...cardProps }) => {
   const { language } = useLocale();
   const url = usePostUrl(post?.slug);
@@ -24,7 +31,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post, ...cardProps }) => {
       {...cardProps}
     >
       <SmallCardHeading>{post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <InlineSkeleton />}</SmallCardHeading>
-      <CardTitle>{post?.title || <InlineSkeleton count={2} />}</CardTitle>
+      <CardTitle>{post?.title ?? <InlineSkeleton count={2} />}</CardTitle>
     </Card>
   );
 };

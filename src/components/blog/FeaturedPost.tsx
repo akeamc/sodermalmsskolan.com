@@ -11,7 +11,18 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { H2, SmallHeading } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 
-const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
+export interface FeaturedPostProps {
+  post: Post;
+}
+
+/**
+ * A post that is featured.
+ *
+ * @param {React.PropsWithChildren<FeaturedPostProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered post.
+ */
+const FeaturedPost: FunctionComponent<FeaturedPostProps> = ({ post }) => {
   const { language } = useLocale();
   const url = usePostUrl(post?.slug);
 
@@ -52,13 +63,13 @@ const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
           opacity: 0.5,
         }}
         >
-          {timestamp?.format("D MMMM YYYY HH:mm") || <InlineSkeleton width="11em" />}
+          {timestamp?.format("D MMMM YYYY HH:mm") ?? <InlineSkeleton width="11em" />}
         </SmallHeading>
         <H2 css={{
           maxWidth: "37.5rem",
         }}
         >
-          {post?.title || <InlineSkeleton count={2} />}
+          {post?.title ?? <InlineSkeleton count={2} />}
         </H2>
         <CardDescription css={{
           display: "-webkit-box",
@@ -68,7 +79,7 @@ const FeaturedPost: FunctionComponent<{post: Post}> = ({ post }) => {
           width: "90%",
         }}
         >
-          {post?.excerpt || <InlineSkeleton count={5} />}
+          {post?.excerpt ?? <InlineSkeleton count={5} />}
         </CardDescription>
       </div>
       <figure css={{

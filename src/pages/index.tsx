@@ -22,7 +22,7 @@ const HomeImage: FunctionComponent = () => {
 
   const photos = useDishPhotos(dish?.id);
 
-  const src = photos?.[0]?.url || "https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG";
+  const src = photos?.[0]?.url ?? "https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/08/DSC02558.JPG";
 
   return (
     <Image
