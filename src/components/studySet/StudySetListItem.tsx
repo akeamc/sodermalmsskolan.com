@@ -79,7 +79,7 @@ const StudySetListItem: FunctionComponent<StudySetListItemProps> = ({
           marginRight: "0.75rem",
         }}
         >
-          {typeof description !== "undefined" ? (description ?? "—") : <InlineSkeleton width="20em" />}
+          {typeof description !== "undefined" ? (description || "—") : <InlineSkeleton width="20em" />}
         </div>
         <div>
           {typeof terms !== "undefined" ? (
