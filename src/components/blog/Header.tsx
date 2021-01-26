@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from "react";
 import { usePosts } from "../../lib/blog/hooks/post";
+import { LimitParam } from "../../lib/ghost/common";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
-import CardGrid from "../grid/CardGrid";
-import FeaturedPost from "./FeaturedPost";
-import PostCard from "./PostCard";
+import PostTitle, { PostTitleSize } from "./PostTitle";
 
 export interface BlogHeaderProps {
-  postCount?: number;
+  postCount?: LimitParam;
 }
 
 /**
@@ -17,13 +16,16 @@ export interface BlogHeaderProps {
  *
  * @returns {React.ReactElement} The rendered header.
  */
-const BlogHeader: FunctionComponent<BlogHeaderProps> = ({ postCount = 3 }) => {
-  const { data } = usePosts(
-    postCount,
-  );
+const BlogHeader: FunctionComponent<BlogHeaderProps> = ({
+  postCount = "all",
+}) => {
+  const { data } = usePosts(postCount);
 
   const featured = data?.[0];
-  const rest = data?.slice(1, postCount);
+
+  const rest = data.slice(1);
+
+  const fallbackPostCount = typeof postCount === "number" ? postCount - 1 : 12;
 
   return (
     <div>
@@ -32,21 +34,42 @@ const BlogHeader: FunctionComponent<BlogHeaderProps> = ({ postCount = 3 }) => {
       }}
       >
         <Container>
-          <CardGrid>
+          <div css={{
+            display: "grid",
+            gridTemplateColumns: "repeat(6, 1fr)",
+            gap: "1.5rem",
+
+            [media(breakpoints.medium)]: {
+              gap: "2rem",
+            },
+          }}
+          >
             <div css={{
-              [media(breakpoints.medium)]: {
-                gridColumn: "1 / span 2",
-                gridRow: "1 / span 2",
-              },
+              gridColumn: "span 6",
             }}
             >
-              <FeaturedPost
+              <PostTitle
+                size="large"
+                layout="card"
                 post={featured}
               />
             </div>
-            {(rest ?? new Array(postCount - 1).fill(null))
-              .map((post, index) => <PostCard post={post} key={post?.id ?? index} />)}
-          </CardGrid>
+            {(rest ?? new Array(fallbackPostCount).fill(null))
+              .map((post, index) => {
+                const size: PostTitleSize = index <= 1 ? "medium" : "small";
+
+                return (
+                  <PostTitle
+                    size={size}
+                    post={post}
+                    key={post?.id ?? index}
+                    css={{
+                      gridColumn: size === "medium" ? "span 3" : "span 2",
+                    }}
+                  />
+                );
+              })}
+          </div>
         </Container>
       </header>
     </div>

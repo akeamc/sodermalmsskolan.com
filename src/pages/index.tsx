@@ -5,10 +5,10 @@ import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
 import Button from "../components/button/Button";
 import DayMenuSection from "../components/menu/DayMenuSection";
-import PostListSection from "../components/blog/PostListSection";
 import { useDayMenu } from "../lib/food/hooks/menu";
 import { useDishPhotos } from "../lib/food/hooks/photos";
 import DigibruhArticleSection from "../components/digibruh/Section";
+import FeaturedPostSection from "../components/blog/FeaturedPostSection";
 
 /**
  * Image shown on the home page.
@@ -59,14 +59,12 @@ const HomePage: NextPage = () => (
         )}
     />
     <DayMenuSection />
-    <PostListSection
+    <FeaturedPostSection
       header={{
         superTitle: "Blogg",
-        title: "Senaste inläggen",
+        title: "Utvalda inlägg",
         promo: true,
       }}
-      limit={6}
-      showMoreButton
     />
     <DigibruhArticleSection
       header={{
