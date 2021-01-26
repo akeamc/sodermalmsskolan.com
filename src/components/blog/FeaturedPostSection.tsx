@@ -14,11 +14,11 @@ import PostTitle from "./PostTitle";
 const FeaturedPostSection: FunctionComponent<SectionProps> = ({
   ...sectionProps
 }) => {
-  const { data } = usePosts("all");
+  const { data } = usePosts(1);
 
   return (
     <Section {...sectionProps} css={darkTheme}>
-      <PostTitle post={data[0]} layout="background" size="large" />
+      <PostTitle post={data?.[0]} layout="background" size="large" />
     </Section>
   );
 };
