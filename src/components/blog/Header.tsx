@@ -23,7 +23,7 @@ const BlogHeader: FunctionComponent<BlogHeaderProps> = ({
 
   const featured = data?.[0];
 
-  const rest = data.slice(1);
+  const rest = data?.slice(1);
 
   const fallbackPostCount = typeof postCount === "number" ? postCount - 1 : 12;
 
