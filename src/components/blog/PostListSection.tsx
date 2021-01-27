@@ -5,7 +5,7 @@ import { PostFilter } from "../../lib/ghost/post";
 import Button from "../button/Button";
 import CardGridSection from "../CardGridSection";
 import { SectionProps } from "../section/Section";
-import PostCard from "./PostCard";
+import PostTitle from "./PostTitle";
 
 export interface PostListSectionProps extends SectionProps {
   limit?: LimitParam,
@@ -41,8 +41,7 @@ const PostListSection: FunctionComponent<PostListSectionProps> = ({
       {...sectionProps}
     >
       {(posts ?? new Array(skeletonPosts).fill(null))
-        .map((post, index) => <PostCard post={post} key={post?.id ?? index} />)}
-
+        .map((post, index) => <PostTitle size="small" post={post} key={post?.id ?? index} />)}
     </CardGridSection>
   );
 };

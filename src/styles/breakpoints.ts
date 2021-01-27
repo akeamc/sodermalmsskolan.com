@@ -1,4 +1,6 @@
-export interface Breakpoints<T> extends Record<string, T> {
+export type Breakpoint = "small" | "medium" | "large" | "extraLarge";
+
+export interface Breakpoints<T> extends Record<Breakpoint, T> {
   small: T;
   medium: T;
   large: T;
@@ -23,6 +25,6 @@ export const breakpoints: Breakpoints<number> = {
  *
  * @returns {string} The media query.
  */
-export function media(minWidth: number): string {
-  return `@media screen and (min-width: ${minWidth}px)`;
-}
+export const media = (minWidth: number): string => (
+  `@media screen and (min-width: ${minWidth}px)`
+);
