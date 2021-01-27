@@ -46,7 +46,7 @@ const LetterCard: FunctionComponent<LetterCardProps> = ({ letter, rows = 5 }) =>
         },
       }}
       >
-        {excerpt ?? <InlineSkeleton count={rows} />}
+        {excerpt || <InlineSkeleton count={rows} />}
       </CardDescription>
     </Card>
   );
