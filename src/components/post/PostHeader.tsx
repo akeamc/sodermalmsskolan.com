@@ -1,6 +1,5 @@
-import React, { Fragment, FunctionComponent, useEffect, useRef } from "react";
+import React, { Fragment, FunctionComponent } from "react";
 import Image from "next/image";
-import { motion, useTransform, useViewportScroll } from "framer-motion";
 import dayjs from "dayjs";
 import Post from "../../lib/ghost/post";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
@@ -23,22 +22,11 @@ export interface PostHeaderProps {
  * @returns {React.ReactElement} The rendered header.
  */
 const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
-  const { scrollY } = useViewportScroll();
-  const wrapperRef = useRef<HTMLDivElement>();
-
-  const scrollProgress = useTransform(scrollY,
-    ((y) => (y / wrapperRef?.current?.getBoundingClientRect()?.height) || 0));
-
-  const backgroundOpacity = useTransform(scrollProgress, (progress) => (0.5 + progress));
-  const foregroundOpacity = useTransform(scrollProgress, (progress) => (1 - progress));
-
   const { language } = useLocale();
 
   return (
     <>
-
       <div
-        ref={wrapperRef}
         css={{
           position: "relative",
           minHeight: "80vh",
@@ -52,17 +40,13 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
             marginLeft: "3rem",
             marginRight: "3rem",
           },
-
-          img: {
-            objectFit: "cover",
-          },
         }}
       >
         <Container css={[darkTheme, {
           flex: 1,
         }]}
         >
-          <motion.div
+          <div
             css={{
               position: "relative",
               padding: "3rem 0",
@@ -73,9 +57,6 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
                 paddingTop: "6rem",
                 paddingBottom: "6rem",
               },
-            }}
-            style={{
-              opacity: foregroundOpacity,
             }}
           >
             <HeaderHeading>{post?.title ?? <InlineSkeleton />}</HeaderHeading>
@@ -104,15 +85,17 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
                 {post?.publishedAt ? dayjs(post?.publishedAt).locale(language).format("HH:mm D MMMM YYYY") : <InlineSkeleton width="10em" />}
               </SmallHeading>
             </div>
-          </motion.div>
+          </div>
         </Container>
         {post?.cover ? (
-          <motion.div style={{
-            opacity: backgroundOpacity,
-          }}
-          >
-            <Image src={post?.cover} layout="fill" />
-          </motion.div>
+          <Image
+            src={post?.cover}
+            layout="fill"
+            css={{
+              objectFit: "cover",
+              filter: "brightness(0.3)",
+            }}
+          />
         ) : null}
       </div>
     </>
