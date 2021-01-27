@@ -9,6 +9,7 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { fonts } from "../../styles/text";
 import { breakpoints, media } from "../../styles/breakpoints";
 import darkTheme from "../../styles/themes/dark";
+import { skeletonBackground } from "../skeleton/Skeleton";
 
 export type PostTitleSize = "small" | "medium" | "large";
 
@@ -28,28 +29,15 @@ export interface PostTitleProps {
  * @returns {React.ReactElement} The rendered element.
  */
 const PostTitle: FunctionComponent<PostTitleProps> = ({
-  post, size = "medium", layout = "card", ...props
+  post,
+  size = "medium",
+  layout = "card",
+  ...props
 }) => {
   const { language } = useLocale();
   const url = usePostUrl(post?.slug);
 
-  let titleSize: string;
-
-  // eslint-disable-next-line default-case
-  switch (size) {
-    case "large": {
-      titleSize = layout === "background" ? "3rem" : "2rem";
-      break;
-    }
-    case "medium": {
-      titleSize = "1.5rem";
-      break;
-    }
-    case "small": {
-      titleSize = "1.125rem";
-      break;
-    }
-  }
+  const mediaWidth = layout === "background" ? 1200 : 600;
 
   const inner = (
     <a
@@ -61,7 +49,7 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
         color: "var(--color-text-primary)",
         textDecoration: "none",
         backgroundColor: "var(--color-bg-primary)",
-        boxShadow: layout === "card" ? "0 0 0 1px var(--color-border-primary)" : undefined,
+        boxShadow: layout === "card" ? "inset 0 0 0 1px var(--color-border-primary)" : undefined,
         position: "relative",
 
         "&:hover": {
@@ -85,19 +73,33 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
       {...props}
     >
       <figure
-        css={[{
+        css={[skeletonBackground, {
           position: "relative",
           flex: "0 0 10.625rem",
           display: "block",
           margin: 0,
           padding: 0,
           overflow: "hidden",
+
+          "> div": {
+            width: "100% !important",
+            height: "100% !important",
+            position: "absolute !important" as never,
+            top: 0,
+            left: 0,
+          },
         }, size === "medium" ? {
-          flexBasis: "16rem",
+          [media(breakpoints.medium)]: {
+            flexBasis: "16rem",
+          },
         } : undefined, size === "large" ? {
           [media(breakpoints.medium)]: {
-            flexBasis: "42rem",
+            flexBasis: "30rem",
             flexShrink: 1,
+          },
+
+          [media(breakpoints.large)]: {
+            flexBasis: "42rem",
           },
         } : undefined, layout === "background" ? {
           position: "absolute",
@@ -112,21 +114,27 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
             left: 0,
             bottom: 0,
             right: 0,
-            paddingTop: "33.75%",
+            paddingTop: "100%",
             backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9))",
+
+            [media(breakpoints.medium)]: {
+              paddingTop: "33.75%",
+            },
           },
         } : undefined]}
       >
         {typeof post?.cover === "string" ? (
           <Image
             src={post.cover}
-            layout="fill"
+            layout="fixed"
+            width={mediaWidth}
+            height={mediaWidth}
+            objectFit="cover"
             css={{
-              objectFit: "cover",
               transition: "all 0.2s ease-in-out",
             }}
           />
-        ) : null}
+        ) : undefined}
       </figure>
       <div
         css={[{
@@ -145,8 +153,8 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
             marginTop: "auto",
           }] : undefined]}
       >
-        <h3 css={{
-          fontSize: titleSize,
+        <h3 css={[{
+          fontSize: "1.125rem",
           margin: 0,
           letterSpacing: "-0.012em",
           fontFamily: fonts.sans,
@@ -154,9 +162,19 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
           lineHeight: 1.2,
           marginBottom: "0.5em",
           color: "var(--color-text-primary)",
-        }}
+        }, size === "medium" ? {
+          [media(breakpoints.medium)]: {
+            fontSize: "1.5rem",
+          },
+        } : undefined, size === "large" ? {
+          [media(breakpoints.medium)]: {
+            fontSize: "2rem",
+          },
+        } : undefined, layout === "background" ? {
+          fontSize: "3rem !important",
+        } : undefined]}
         >
-          {post?.title}
+          {post?.title ?? <InlineSkeleton count={3} />}
         </h3>
         <time css={{
           fontSize: "0.875rem",
@@ -167,7 +185,7 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
           lineHeight: 1.2,
         }}
         >
-          {post?.publishedAt ? dayjs(post.publishedAt).locale(language).format("D MMMM YYYY") : <InlineSkeleton />}
+          {post?.publishedAt ? dayjs(post.publishedAt).locale(language).format("D MMMM YYYY") : <InlineSkeleton width="8em" />}
         </time>
       </div>
     </a>

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import Base from "../../components/Base";
-import BlogHeader from "../../components/blog/Header";
+import BlogOverview from "../../components/blog/BlogOverview";
 
 /**
  * The front cover of the blog.
@@ -13,7 +13,7 @@ const BlogIndexPage: NextPage = () => (
     title: "Blogg",
   }}
   >
-    <BlogHeader />
+    <BlogOverview />
   </Base>
 );
 

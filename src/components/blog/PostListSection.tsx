@@ -42,7 +42,6 @@ const PostListSection: FunctionComponent<PostListSectionProps> = ({
     >
       {(posts ?? new Array(skeletonPosts).fill(null))
         .map((post, index) => <PostTitle size="small" post={post} key={post?.id ?? index} />)}
-
     </CardGridSection>
   );
 };

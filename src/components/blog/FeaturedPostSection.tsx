@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
 import { usePosts } from "../../lib/blog/hooks/post";
-import darkTheme from "../../styles/themes/dark";
 import Section, { SectionProps } from "../section/Section";
 import PostTitle from "./PostTitle";
 
@@ -17,7 +16,7 @@ const FeaturedPostSection: FunctionComponent<SectionProps> = ({
   const { data } = usePosts(1);
 
   return (
-    <Section {...sectionProps} css={darkTheme}>
+    <Section {...sectionProps}>
       <PostTitle post={data?.[0]} layout="background" size="large" />
     </Section>
   );

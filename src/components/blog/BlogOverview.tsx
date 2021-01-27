@@ -5,47 +5,50 @@ import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";
 import PostTitle, { PostTitleSize } from "./PostTitle";
 
-export interface BlogHeaderProps {
-  postCount?: LimitParam;
+export interface BlogOverviewProps {
+  postLimit?: LimitParam;
 }
 
 /**
- * A blog header.
+ * A blog overview component.
  *
- * @param {React.PropsWithChildren<BlogHeaderProps>} props Props!
+ * @param {React.PropsWithChildren<BlogOverviewProps>} props Props!
  *
- * @returns {React.ReactElement} The rendered header.
+ * @returns {React.ReactElement} The rendered container.
  */
-const BlogHeader: FunctionComponent<BlogHeaderProps> = ({
-  postCount = "all",
+const BlogOverview: FunctionComponent<BlogOverviewProps> = ({
+  postLimit = "all",
 }) => {
-  const { data } = usePosts(postCount);
+  const { data } = usePosts(postLimit);
 
   const featured = data?.[0];
 
   const rest = data?.slice(1);
 
-  const fallbackPostCount = typeof postCount === "number" ? postCount - 1 : 12;
+  const fallbackPostCount = typeof postLimit === "number" ? postLimit - 1 : 12;
 
   return (
     <div>
-      <header css={{
-        padding: "var(--header-padding)",
+      <div css={{
+        paddingTop: "var(--page-gutter)",
       }}
       >
         <Container>
           <div css={{
             display: "grid",
-            gridTemplateColumns: "repeat(6, 1fr)",
+            gridTemplateColumns: "1fr",
             gap: "1.5rem",
 
-            [media(breakpoints.medium)]: {
+            [media(breakpoints.small)]: {
               gap: "2rem",
+              gridTemplateColumns: "repeat(6, 1fr)",
             },
           }}
           >
             <div css={{
-              gridColumn: "span 6",
+              [media(breakpoints.small)]: {
+                gridColumn: "span 6",
+              },
             }}
             >
               <PostTitle
@@ -64,16 +67,22 @@ const BlogHeader: FunctionComponent<BlogHeaderProps> = ({
                     post={post}
                     key={post?.id ?? index}
                     css={{
-                      gridColumn: size === "medium" ? "span 3" : "span 2",
+                      [media(breakpoints.small)]: {
+                        gridColumn: "span 3",
+                      },
+
+                      [media(breakpoints.medium)]: {
+                        gridColumn: size === "medium" ? "span 3" : "span 2",
+                      },
                     }}
                   />
                 );
               })}
           </div>
         </Container>
-      </header>
+      </div>
     </div>
   );
 };
 
-export default BlogHeader;
+export default BlogOverview;
