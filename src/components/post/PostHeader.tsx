@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent, useRef } from "react";
+import React, { Fragment, FunctionComponent, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import dayjs from "dayjs";
@@ -15,12 +15,19 @@ export interface PostHeaderProps {
   post: Post;
 }
 
+/**
+ * Post header, with a nice picture.
+ *
+ * @param {React.PropsWithChildren<PostHeaderProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered header.
+ */
 const PostHeader: FunctionComponent<PostHeaderProps> = ({ post }) => {
   const { scrollY } = useViewportScroll();
   const wrapperRef = useRef<HTMLDivElement>();
 
   const scrollProgress = useTransform(scrollY,
-    ((y) => (y / wrapperRef?.current?.getBoundingClientRect()?.height) ?? 0));
+    ((y) => (y / wrapperRef?.current?.getBoundingClientRect()?.height) || 0));
 
   const backgroundOpacity = useTransform(scrollProgress, (progress) => (0.5 + progress));
   const foregroundOpacity = useTransform(scrollProgress, (progress) => (1 - progress));
