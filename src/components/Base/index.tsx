@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import BannerAd from "../ads/BannerAd";
 import Container from "../Container";
 import Footer from "../footer/Footer";
-import SiteHead, { SiteMetadata } from "../Head";
+import SiteHead, { SiteMetadata } from "../head/Head";
 import MainNavbar from "../navigation/MainNavbar";
 import MobileNavbar from "../navigation/MobileNavbar";
 

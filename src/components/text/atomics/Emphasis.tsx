@@ -1,12 +1,16 @@
 import React, { FunctionComponent } from "react";
 import { HTMLElementProps } from "../../../styles/overrides";
 
+export type EmphasisProps = HTMLElementProps<HTMLElement>;
+
 /**
  * Some bit of text that is REALLY important.
  *
- * @param props
+ * @param {React.PropsWithChildren<EmphasisProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered `<em>` tag.
  */
-const Emphasis: FunctionComponent<HTMLElementProps<HTMLElement>> = (
+const Emphasis: FunctionComponent<EmphasisProps> = (
   props,
 ) => (
   <em
