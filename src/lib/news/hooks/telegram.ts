@@ -6,7 +6,9 @@ import Telegram, { telegramFromMessage } from "../telegram";
 /**
  * Fetch the latest telegram, but only if it's not older than a specified ttl.
  *
- * @param ttl The maximum age of the telegram in seconds.
+ * @param {number} ttl The maximum age of the telegram in seconds.
+ *
+ * @returns {Telegram[]} Telegrams.
  */
 const useFreshTelegrams = (ttl = 86400): Telegram[] => {
   const { data } = useChannelMessages({
