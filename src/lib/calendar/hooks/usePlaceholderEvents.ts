@@ -5,24 +5,30 @@ import map from "../../utils/map";
 import CalendarEvent from "../event/CalendarEvent";
 import CalendarEventInstance from "../event/CalendarEventInstance";
 
+export type GetPlaceholderEventSeed = (index: number) => string;
+
 /**
- * Generate placeholder events from a common seed, making it SSR-safe.
+ * Generate placeholder events from a common seed, thus making it SSR-safe.
  *
- * @param after
- * @param before
- * @param count
+ * @param {Dayjs} after The start date.
+ * @param {Dayjs} before The end date.
+ * @param {number} count The number of events to generate **per day**.
+ * @param {GetPlaceholderEventSeed} seed Function to get the seed of the day based on its index.
+ *
+ * @returns {CalendarEventInstance[]} The generated event instances.
  */
 const usePlaceholderEvents = (
   after: Dayjs,
   before: Dayjs,
   count = 3,
+  seed: GetPlaceholderEventSeed = (index) => index.toString(),
 ): CalendarEventInstance[] => useMemo(() => {
   const days = before.diff(after, "day");
 
   return Array.from({
     length: days + 1,
   }).map((_, index) => {
-    const rng = seedrandom(index.toString());
+    const rng = seedrandom(seed(index));
 
     return Array.from({
       length: count,
@@ -40,6 +46,6 @@ const usePlaceholderEvents = (
       }));
     });
   }).flat();
-}, [after, before, count]);
+}, [after, before, count, seed]);
 
 export default usePlaceholderEvents;

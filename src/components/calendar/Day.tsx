@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 import useLocale from "../../hooks/useLocale";
 import useTime from "../../hooks/useTime";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
-import useEventInstanceTransform from "../../lib/calendar/hooks/useEventInstanceTransform";
+import useEventInstanceEffect from "../../lib/calendar/hooks/useEventInstanceEffect";
 import secondsSinceMidnight from "../../lib/calendar/utils/secondsSinceMidnight";
 import { breakpoints, media } from "../../styles/breakpoints";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
@@ -94,7 +94,7 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
   eventInstances,
   active = false,
 }) => {
-  const instanceProps = useEventInstanceTransform<CalendarEventViewProps[]>(
+  const instanceProps = useEventInstanceEffect<CalendarEventViewProps[]>(
     eventInstances,
     () => {
       const sorted = eventInstances.sort((a, b) => a.start.getTime() - b.start.getTime());

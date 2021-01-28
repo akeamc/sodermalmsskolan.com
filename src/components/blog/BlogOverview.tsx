@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { usePosts } from "../../lib/blog/hooks/post";
+import usePosts from "../../lib/blog/hooks/usePosts";
 import { LimitParam } from "../../lib/ghost/common";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Container from "../Container";

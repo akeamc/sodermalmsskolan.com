@@ -2,7 +2,7 @@ import createPersistedState from "use-persisted-state";
 import {
   useMemo,
 } from "react";
-import { ReactState } from "./state";
+import { ReactState } from "./ReactState";
 
 /**
  * A persistent, SSR-compliant, `useState`.

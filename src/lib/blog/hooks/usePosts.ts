@@ -6,11 +6,13 @@ import Post, { browsePosts } from "../../ghost/post";
 /**
  * Use the latest posts published on the blog.
  *
- * @param limit
+ * @param {LimitParam} limit How many posts to fetch.
+ *
+ * @returns {responseInterface<Post[], any>} The `responseInterface` containing the posts.
  */
-export const usePosts = (limit: LimitParam = "all"): responseInterface<Post[], unknown> => useSWR(`/blog/posts?limit=${limit}`, () => browsePosts({
+const usePosts = (limit: LimitParam = "all"): responseInterface<Post[], unknown> => useSWR(`/blog/posts?limit=${limit}`, () => browsePosts({
   limit,
   filter: `tag:-${digibruhTagPrefix}`,
 }));
 
-export const usePostUrl = (slug: string): string => (slug ? `/blogg/${slug}` : undefined);
+export default usePosts;
