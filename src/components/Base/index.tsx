@@ -2,7 +2,8 @@ import React, { FunctionComponent } from "react";
 import BannerAd from "../ads/BannerAd";
 import Container from "../Container";
 import Footer from "../footer/Footer";
-import SiteHead, { SiteMetadata } from "../head/Head";
+import SiteHead from "../head/Head";
+import { SiteMetadata } from "../head/MetaHead";
 import MainNavbar from "../navigation/MainNavbar";
 import MobileNavbar from "../navigation/MobileNavbar";
 
@@ -16,12 +17,9 @@ export interface BaseProps {
 /**
  * The base of the page, with important metadata and common page components such as the navbar.
  *
- * @param props
- * @param props.metadata
- * @param props.leadingAd
- * @param props.children
- * @param props.navbar
- * @param props.footer
+ * @param {React.PropsWithChildren<BaseProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered base.
  */
 const Base: FunctionComponent<BaseProps> = ({
   metadata,
