@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.1.4",
     "@tryghost/content-api": "^1.4.1",
+    "@tryghost/string": "^0.1.16",
     "dayjs": "^1.10.3",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
