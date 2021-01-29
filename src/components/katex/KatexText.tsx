@@ -1,15 +1,20 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import dynamic from "next/dynamic";
-import extractKatex from "./extract";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
+import extractKatex from "../../lib/katex/extractKatex";
+
+export interface KatexTextProps {
+  text: string;
+}
 
 /**
- * A Katex renderer that dynamically imports Katex only when necessary.
+ * A Katex renderer that dynamically imports Katex **if necessary**.
  *
- * @param props
- * @param props.text
+ * @param {React.PropsWithChildren<KatexTextProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered text.
  */
-const KatexText: FunctionComponent<{text: string}> = ({ text }) => {
+const KatexText: FunctionComponent<KatexTextProps> = ({ text }) => {
   const fragments = extractKatex(text);
 
   if (!fragments) {
@@ -33,4 +38,4 @@ const KatexText: FunctionComponent<{text: string}> = ({ text }) => {
   );
 };
 
-export default KatexText;
+export default memo(KatexText);

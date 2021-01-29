@@ -3,7 +3,7 @@ import React, { FunctionComponent, useMemo } from "react";
 import ReactHtmlParser, { convertNodeToElement, Transform } from "react-html-parser";
 import { breakpoints, media } from "../../styles/breakpoints";
 import { fonts } from "../../styles/text";
-import KatexText from "../katex/Text";
+import KatexText from "../katex/KatexText";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Skeleton from "../skeleton/Skeleton";
 import Table from "../Table";

@@ -2,7 +2,7 @@ import renderer from "react-test-renderer";
 import React from "react";
 import Emoji from ".";
 
-describe("emoji test", () => {
+describe("<Emoji /> test", () => {
   it("should render standalone emojis correctly", () => {
     const tree = renderer
       // eslint-disable-next-line jsx-a11y/accessible-emoji

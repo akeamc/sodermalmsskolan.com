@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`button test should render primary buttons correctly 1`] = `
+exports[`<Button /> test should render primary buttons correctly 1`] = `
 .emotion-0 {
   color: var(--color-text-primary);
   background-color: transparent;
@@ -48,7 +48,7 @@ exports[`button test should render primary buttons correctly 1`] = `
 </button>
 `;
 
-exports[`button test should render small buttons correctly 1`] = `
+exports[`<Button /> test should render small buttons correctly 1`] = `
 .emotion-0 {
   color: var(--color-text-primary);
   background-color: transparent;

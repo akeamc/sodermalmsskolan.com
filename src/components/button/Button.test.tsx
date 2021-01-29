@@ -2,7 +2,7 @@ import renderer from "react-test-renderer";
 import React from "react";
 import Button from "./Button";
 
-describe("button test", () => {
+describe("<Button /> test", () => {
   it("should render primary buttons correctly", () => {
     const tree = renderer
       .create(<Button primary>My primary button</Button>)
