@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`emoji test should render inline emojis correctly 1`] = `
+exports[`<Emoji /> test should render inline emojis correctly 1`] = `
 Array [
   .emotion-0 img {
   height: 1em;
@@ -38,7 +38,7 @@ Array [
 ]
 `;
 
-exports[`emoji test should render standalone emojis correctly 1`] = `
+exports[`<Emoji /> test should render standalone emojis correctly 1`] = `
 .emotion-0 img {
   height: 1em;
   width: 1em;

@@ -1,4 +1,4 @@
-  {
+{
   "presets": [
     [
       "next/babel",
@@ -10,5 +10,12 @@
       }
     ]
   ],
-  "plugins": ["@emotion/babel-plugin"]
+  "plugins": ["@emotion/babel-plugin"],
+  "env": {
+    "test": {
+      "plugins": [
+        "dynamic-import-node"
+      ]
+    }
+  }
 }
