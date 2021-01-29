@@ -41,4 +41,6 @@ jobs:
 
       - run: yarn install
 
-      - run: yarn test
+      - run: yarn test --coverage
+
+      - run: bash <(curl -s https://codecov.io/bash)
