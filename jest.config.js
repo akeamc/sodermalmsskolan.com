@@ -1,3 +1,4 @@
 module.exports = {
-  snapshotSerializers: ["@emotion/jest/serializer"]
+  snapshotSerializers: ["@emotion/jest/serializer"],
+  collectCoverageFrom: ["src/**/*.{ts,tsx}"],
 };
