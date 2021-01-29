@@ -24,7 +24,7 @@ const TelegramList: FunctionComponent = () => {
 
   const telegrams = data?.flat()?.map(telegramFromMessage) ?? new Array(3).fill(null);
   const { language } = useLocale();
-  const now = useTime(1000);
+  const now = useTime();
 
   return (
     <ul css={{

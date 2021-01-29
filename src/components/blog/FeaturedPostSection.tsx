@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { usePosts } from "../../lib/blog/hooks/post";
+import usePosts from "../../lib/blog/hooks/usePosts";
 import Section, { SectionProps } from "../section/Section";
 import PostTitle from "./PostTitle";
 

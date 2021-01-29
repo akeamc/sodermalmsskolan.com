@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test page head should render correctly 1`] = `
+Array [
+  <title>
+    test page · södermalmsskolan.com
+  </title>,
+  <meta
+    content="an interesting description"
+    name="description"
+  />,
+  <link
+    href="https://xn--sdermalmsskolan-8sb.com/undefined"
+    rel="canonical"
+  />,
+  <meta
+    content="södermalmsskolan.com"
+    property="og:site_name"
+  />,
+  <meta
+    content="test page"
+    property="og:title"
+  />,
+  <meta
+    content="an interesting description"
+    property="og:description"
+  />,
+  <meta
+    content="https://xn--sdermalmsskolan-8sb.com/undefined"
+    property="og:url"
+  />,
+  <meta
+    content="website"
+    property="og:type"
+  />,
+  <meta
+    content="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
+    property="og:image"
+  />,
+]
+`;

@@ -3,7 +3,7 @@ import React, {
   FunctionComponent,
   useContext,
 } from "react";
-import { ReactState } from "../state/state";
+import { ReactState } from "../state/ReactState";
 import usePersistedState from "../state/usePersistedState";
 import { CHOICES } from "./choice";
 

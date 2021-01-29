@@ -3,13 +3,13 @@ import React, { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useLocale from "../../hooks/useLocale";
-import { usePostUrl } from "../../lib/blog/hooks/post";
 import Post from "../../lib/ghost/post";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { fonts } from "../../styles/text";
 import { breakpoints, media } from "../../styles/breakpoints";
 import darkTheme from "../../styles/themes/dark";
 import { skeletonBackground } from "../skeleton/Skeleton";
+import getPostPath from "../../lib/blog/utils/getPostPath";
 
 export type PostTitleSize = "small" | "medium" | "large";
 
@@ -35,7 +35,7 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
   ...props
 }) => {
   const { language } = useLocale();
-  const url = usePostUrl(post?.slug);
+  const url = getPostPath(post?.slug);
 
   const mediaWidth = layout === "background" ? 1200 : 600;
 

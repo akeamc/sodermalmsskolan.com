@@ -1,4 +1,4 @@
 module.exports = {
-  preset: "ts-jest",
-  testEnvironment: "node",
+  snapshotSerializers: ["@emotion/jest/serializer"],
+  collectCoverageFrom: ["src/**/*.{ts,tsx}"],
 };

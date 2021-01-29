@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from "react";
-import { usePosts } from "../../lib/blog/hooks/post";
+import usePosts from "../../lib/blog/hooks/usePosts";
 import { LimitParam } from "../../lib/ghost/common";
 import { PostFilter } from "../../lib/ghost/post";
 import Button from "../button/Button";
