@@ -1,4 +1,6 @@
-export interface Fonts<T = string> extends Record<string, T> {
+export type Font = "sans" | "serif" | "monospace";
+
+export interface Fonts<T = string> extends Record<Font, T> {
   sans: T;
   serif: T;
   monospace: T;
