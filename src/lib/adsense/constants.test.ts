@@ -27,7 +27,7 @@ describe("adsense publisher id test", () => {
     const field = fields
       .find(({ publisherAccountID }) => ADSENSE_CLIENT.indexOf(publisherAccountID) >= 0);
 
-    expect(field).toBeTruthy();
+    expect(field).toBeDefined();
   });
 });
 

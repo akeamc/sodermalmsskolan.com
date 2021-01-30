@@ -67,7 +67,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
     duration,
     title,
     shortTitle,
-    color,
+    color = "#000",
     location,
     tag,
     canceled = false,
