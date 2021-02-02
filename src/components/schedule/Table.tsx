@@ -2,6 +2,11 @@ import React, { FunctionComponent } from "react";
 import usePeriods from "../../lib/schedule/hooks/usePeriods";
 import Calendar from "../calendar/Calendar";
 
+/**
+ * A `Calendar` displaying the periods.
+ *
+ * @returns {React.ReactElement} The rendered calendar.
+ */
 const ScheduleTable: FunctionComponent = () => {
   const periods = usePeriods();
 

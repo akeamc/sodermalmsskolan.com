@@ -14,6 +14,8 @@ export interface LocalizationDetails {
 
 /**
  * Hook used to get the locale from the router.
+ *
+ * @returns {LocalizationDetails} Details about the locale.
  */
 const useLocale = (): LocalizationDetails => {
   const { locale } = useRouter();
