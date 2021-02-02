@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
-import React, { FunctionComponent, useMemo, useState } from "react";
+import React, {
+  FunctionComponent, useEffect, useMemo, useState,
+} from "react";
 import useLocale from "../../hooks/useLocale";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 import capitalize from "../../lib/utils/capitalize";
@@ -39,11 +41,13 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
     return options;
   }, [dayCount, language]);
 
-  const [activeTab, setActiveTab] = useState<string>(() => {
+  const [activeTab, setActiveTab] = useState<number>(0);
+
+  useEffect(() => {
     const weekday = (dayjs().isoWeekday() + 6) % 7;
 
-    return Math.min(weekday, dayCount - 1).toString();
-  });
+    setActiveTab(Math.min(weekday, dayCount - 1));
+  }, [dayCount]);
 
   return (
     <div>
@@ -57,8 +61,8 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
       >
         <SegmentedControl
           options={weekdayControlOptions}
-          onChange={setActiveTab}
-          value={activeTab}
+          onChange={(weekday) => setActiveTab(parseInt(weekday, 10))}
+          value={activeTab.toString()}
         />
       </div>
       <div css={{
@@ -81,7 +85,7 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
               key={weekday}
               weekday={weekday}
               placeholder={placeholder}
-              active={weekday === parseInt(activeTab, 10)}
+              active={weekday === activeTab}
             />
           ))}
       </div>
