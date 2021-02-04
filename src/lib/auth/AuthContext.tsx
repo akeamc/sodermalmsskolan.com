@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import firebase from "firebase";
-import _ from "lodash";
+import { cloneDeep } from "lodash";
 import { auth } from "../firebase/firebase";
 
 export type UserSetter = (user: firebase.User) => void;
@@ -46,7 +46,7 @@ export const AuthProvider: FunctionComponent = (props) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange((newUser) => {
-      setUser(_.cloneDeep(newUser));
+      setUser(cloneDeep(newUser));
       setLoading(false);
     });
 
@@ -61,7 +61,7 @@ export const AuthProvider: FunctionComponent = (props) => {
   const reloadUser = async () => {
     await auth.currentUser?.reload();
 
-    setUser(_.cloneDeep(auth?.currentUser));
+    setUser(cloneDeep(auth?.currentUser));
   };
 
   return (
