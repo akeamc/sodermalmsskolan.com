@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () =>
     params: { slug: page.slug },
   }));
 
-  return { paths, fallback: "blocking" };
+  return { paths, fallback: false };
 };
 
 /**
@@ -37,22 +37,13 @@ export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () =>
 export const getStaticProps: GetStaticProps<PagePageProps, GhostStaticPathParams> = async ({
   params,
 }) => {
-  try {
-    const slug = params.slug?.toString();
-    const page = await readPage({ slug });
+  const slug = params.slug?.toString();
+  const page = await readPage({ slug });
 
-    return {
-      props: { page },
-      revalidate: 300,
-    };
-  } catch (error) {
-    return {
-      props: {
-        page: null,
-      },
-      revalidate: 1,
-    };
-  }
+  return {
+    props: { page },
+    revalidate: 30,
+  };
 };
 
 /**
