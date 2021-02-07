@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
-import Author from "../../lib/ghost/author";
-import { useAuthorUrl } from "../../lib/ghost/hooks/author";
+import Author, { getAuthorPath } from "../../lib/ghost/author";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 export interface AuthorNameProps {
@@ -16,7 +15,7 @@ export interface AuthorNameProps {
  * @returns {React.ReactElement} The rendered name.
  */
 const AuthorName: FunctionComponent<AuthorNameProps> = ({ author }) => {
-  const url = useAuthorUrl(author?.slug);
+  const url = getAuthorPath(author?.slug);
 
   const inner = (
     <a css={{
