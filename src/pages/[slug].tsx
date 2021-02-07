@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () =>
     params: { slug: page.slug },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 /**
