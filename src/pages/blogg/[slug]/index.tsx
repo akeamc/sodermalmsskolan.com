@@ -28,6 +28,7 @@ export const getStaticPaths: GetStaticPaths<GhostStaticPathParams> = async () =>
  * `getStaticProps` for the blog posts.
  *
  * @param {import("next").GetStaticPropsContext<GhostStaticPathParams>} context The context.
+ *
  * @returns {Promise<import("next").GetStaticPropsResult<PostPageProps>>} The props for each page.
  */
 export const getStaticProps: GetStaticProps<
@@ -58,7 +59,6 @@ GhostStaticPathParams
 
 /**
  * @param {PostPageProps} props Props.
- * @param {import("../../../lib/ghost/post")} props.post The post.
  *
  * @returns {React.ReactElement} The blog post page.
  */

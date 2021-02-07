@@ -13,6 +13,13 @@ export default interface Author extends Identification {
   bio?: string;
 }
 
+/**
+ * Convert a Ghost `Author` to an `Author`.
+ *
+ * @param {GhostAuthor} author Input Ghost `Author`.
+ *
+ * @returns {Author} The converted author.
+ */
 export const ghostAuthorToAuthor = ({
   id,
   slug,
@@ -32,7 +39,9 @@ export const ghostAuthorToAuthor = ({
 /**
  * Browse authors.
  *
- * @param params
+ * @param {BrowseAuthorsParams} params Parameters.
+ *
+ * @returns {Promise<Author[]>} The authors.
  */
 export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<Author[]> => {
   const authors = await api.authors.browse(defaultSharedParams(params));
@@ -43,10 +52,21 @@ export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<A
 /**
  * Get the details of an author.
  *
- * @param params
+ * @param {ReadParams} params Regular read parameters.
+ *
+ * @returns {Promise<Author>} The (possibly undefined) author.
  */
 export const getAuthor = async (params: ReadParams): Promise<Author> => {
   const author = await api.authors.read(defaultReadParams(params));
 
   return ghostAuthorToAuthor(author);
 };
+
+/**
+ * Get the path of an author based on their slug.
+ *
+ * @param {string} slug Author slug.
+ *
+ * @returns {string} The path.
+ */
+export const getAuthorPath = (slug: string): string => `/${encodeURIComponent("författare")}/${slug}`;

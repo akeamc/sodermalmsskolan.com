@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { LimitParam } from "../../lib/ghost/common";
-import { useAuthors } from "../../lib/ghost/hooks/author";
+import useAuthors from "../../lib/ghost/hooks/useAuthors";
 import { breakpoints, media } from "../../styles/breakpoints";
 import Section, { SectionProps } from "../section/Section";
 import BigAuthor from "./BigAuthor";
@@ -12,8 +12,9 @@ export interface AuthorSectionProps extends SectionProps {
 /**
  * A section displaying authors.
  *
- * @param props
- * @param props.limit
+ * @param {AuthorSectionProps} props Props.
+ *
+ * @returns {React.ReactElement} The rendered section.
  */
 const AuthorSection: FunctionComponent<AuthorSectionProps> = ({ limit, ...sectionProps }) => {
   const { data } = useAuthors(limit);

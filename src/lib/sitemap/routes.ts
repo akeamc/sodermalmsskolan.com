@@ -59,6 +59,10 @@ export const useRoutes = (): Routes => {
       name: "Organisationen",
       routes: [
         {
+          name: "Om oss",
+          href: "/om-oss",
+        },
+        {
           name: "Författare",
           href: "/författare",
         },

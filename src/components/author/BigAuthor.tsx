@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
-import Author from "../../lib/ghost/author";
-import { useAuthorUrl } from "../../lib/ghost/hooks/author";
+import Author, { getAuthorPath } from "../../lib/ghost/author";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { skeletonBackground } from "../skeleton/Skeleton";
 import { CardTitle } from "../text/headings";
@@ -14,7 +13,7 @@ import { CardTitle } from "../text/headings";
  * @param props.author
  */
 const BigAuthor: FunctionComponent<{ author: Author }> = ({ author }) => {
-  const url = useAuthorUrl(author?.slug);
+  const url = getAuthorPath(author?.slug);
 
   const inner = (
     <a css={{
