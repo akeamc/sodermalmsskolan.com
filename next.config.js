@@ -15,7 +15,7 @@ module.exports = withBundleAnalyzer({
   },
   i18n: {
     // Be sure to include the DayJS locales in the root!
-    locales: ["sv"],
-    defaultLocale: "sv",
+    locales: ["sv-SE"],
+    defaultLocale: "sv-SE",
   },
 });

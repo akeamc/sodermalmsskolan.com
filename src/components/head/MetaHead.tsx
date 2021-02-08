@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
 
@@ -26,20 +27,16 @@ export interface SiteMetadata {
  *
  * @returns {React.ReactElement} The rendered meta tags.
  */
-export const MetaHead: FunctionComponent<{ metadata: SiteMetadata }> = ({
-  metadata,
+export const MetaHead: FunctionComponent<SiteMetadata> = ({
+  title,
+  description = "Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services.",
+  type = "website",
+  images = [
+    "https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg",
+  ],
+  noIndex = false,
+  article,
 }) => {
-  const {
-    title,
-    description = "Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services.",
-    type = "website",
-    images = [
-      "https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg",
-    ],
-    noIndex = false,
-    article,
-  } = metadata;
-
   const titleFragments = ["södermalmsskolan.com"];
 
   if (title) {
@@ -50,10 +47,10 @@ export const MetaHead: FunctionComponent<{ metadata: SiteMetadata }> = ({
 
   const router = useRouter();
 
-  const canonical = new URL(router?.asPath, "https://södermalmsskolan.com").href;
+  const canonical = new URL(router.asPath, "https://södermalmsskolan.com").href;
 
   return (
-    <>
+    <Head>
       <title>{metaTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
@@ -76,6 +73,6 @@ export const MetaHead: FunctionComponent<{ metadata: SiteMetadata }> = ({
           {article?.modified ? <meta property="og:article:modified_time" content={article.modified.toISOString()} /> : null}
         </>
       ) : null}
-    </>
+    </Head>
   );
 };

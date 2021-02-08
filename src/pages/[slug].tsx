@@ -5,11 +5,10 @@ import RichText from "../components/post/RichText";
 import Section from "../components/section/Section";
 import { HeaderHeading } from "../components/text/headings";
 import { GhostStaticPathParams } from "../lib/ghost/common";
-import { browsePages, readPage } from "../lib/ghost/page";
-import Post from "../lib/ghost/post";
+import Page, { browsePages, readPage } from "../lib/ghost/page";
 
 export interface PagePageProps {
-  page: Post;
+  page: Page;
 }
 
 /**
