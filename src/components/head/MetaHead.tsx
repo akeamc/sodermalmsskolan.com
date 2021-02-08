@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
 
@@ -50,10 +51,10 @@ export const MetaHead: FunctionComponent<{ metadata: SiteMetadata }> = ({
 
   const router = useRouter();
 
-  const canonical = new URL(router?.asPath, "https://södermalmsskolan.com").href;
+  const canonical = new URL(router.asPath, "https://södermalmsskolan.com").href;
 
   return (
-    <>
+    <Head>
       <title>{metaTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
@@ -76,6 +77,6 @@ export const MetaHead: FunctionComponent<{ metadata: SiteMetadata }> = ({
           {article?.modified ? <meta property="og:article:modified_time" content={article.modified.toISOString()} /> : null}
         </>
       ) : null}
-    </>
+    </Head>
   );
 };

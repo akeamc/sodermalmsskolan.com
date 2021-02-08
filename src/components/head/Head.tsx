@@ -16,9 +16,9 @@ export interface SiteHeadProps {
  */
 const SiteHead: React.FunctionComponent<SiteHeadProps> = ({ metadata = {} }) => (
   <>
-    <Head>
-      <MetaHead metadata={metadata} />
+    <MetaHead metadata={metadata} />
 
+    <Head>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
