@@ -16,7 +16,7 @@ export interface SiteHeadProps {
  */
 const SiteHead: React.FunctionComponent<SiteHeadProps> = ({ metadata = {} }) => (
   <>
-    <MetaHead metadata={metadata} />
+    <MetaHead {...metadata} />
 
     <Head>
       <link

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test page head should render correctly 1`] = `
+exports[`test <MetaHead />> should render correctly with specific parameters 1`] = `
 <DocumentFragment>
   <title>
     test page · södermalmsskolan.com
@@ -35,6 +35,94 @@ exports[`test page head should render correctly 1`] = `
   />
   <meta
     content="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
+    property="og:image"
+  />
+</DocumentFragment>
+`;
+
+exports[`test <MetaHead />> should return proper OpenGraph parameters for articles 1`] = `
+<DocumentFragment>
+  <title>
+    södermalmsskolan.com
+  </title>
+  <meta
+    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+    name="description"
+  />
+  <link
+    href="https://xn--sdermalmsskolan-8sb.com/"
+    rel="canonical"
+  />
+  <meta
+    content="södermalmsskolan.com"
+    property="og:site_name"
+  />
+  <meta
+    content="södermalmsskolan.com"
+    property="og:title"
+  />
+  <meta
+    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+    property="og:description"
+  />
+  <meta
+    content="https://xn--sdermalmsskolan-8sb.com/"
+    property="og:url"
+  />
+  <meta
+    content="article"
+    property="og:type"
+  />
+  <meta
+    content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
+    property="og:image"
+  />
+  <meta
+    content="2020-01-01T00:00:00.000Z"
+    property="og:article:published_time"
+  />
+  <meta
+    content="2020-06-11T00:00:00.000Z"
+    property="og:article:modified_time"
+  />
+</DocumentFragment>
+`;
+
+exports[`test <MetaHead />> should work fine without parameters 1`] = `
+<DocumentFragment>
+  <title>
+    södermalmsskolan.com
+  </title>
+  <meta
+    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+    name="description"
+  />
+  <link
+    href="https://xn--sdermalmsskolan-8sb.com/"
+    rel="canonical"
+  />
+  <meta
+    content="södermalmsskolan.com"
+    property="og:site_name"
+  />
+  <meta
+    content="södermalmsskolan.com"
+    property="og:title"
+  />
+  <meta
+    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+    property="og:description"
+  />
+  <meta
+    content="https://xn--sdermalmsskolan-8sb.com/"
+    property="og:url"
+  />
+  <meta
+    content="website"
+    property="og:type"
+  />
+  <meta
+    content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
     property="og:image"
   />
 </DocumentFragment>
