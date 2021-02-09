@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import React, { FunctionComponent } from "react";
 import reportEvent from "../../lib/analytics/reportEvent";
 import { auth } from "../../lib/firebase/firebase";
