@@ -1,7 +1,12 @@
 import gtag from "./gtag";
 
+export type AuthMethod = "password" | "google";
+
 export interface AnalyticsAuthValues {
-  method?: string;
+  /**
+   * Authentication method used.
+   */
+  method?: AuthMethod;
 }
 
 export interface AnalyticsEvent {

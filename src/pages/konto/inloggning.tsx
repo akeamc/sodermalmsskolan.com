@@ -10,7 +10,6 @@ import { auth } from "../../lib/firebase/firebase";
 import EmailAndPassword from "../../components/auth/EmailAndPassword";
 import { AuthQueryParams, resetLink, signupLink } from "../../lib/auth/href";
 import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
-import { useAuth } from "../../lib/auth/AuthContext";
 import FormText from "../../components/form/text/FormText";
 import SubmitButton from "../../components/form/SubmitButton";
 import reportEvent from "../../lib/analytics/reportEvent";
@@ -25,16 +24,11 @@ const LoginPage: NextPage = () => {
   const initialEmail = usePrefilledEmail();
   const redirectUri = useRedirectUri();
   const formRef = useRef<FormikProps<LoginFormValues>>();
-  const { user } = useAuth();
 
   const initialValues: LoginFormValues = {
     email: initialEmail,
     password: "",
   };
-
-  if (user) {
-    router.push(redirectUri);
-  }
 
   /**
    * Query to pass along to other routes.
@@ -52,6 +46,8 @@ const LoginPage: NextPage = () => {
       metadata={{
         title: "Inloggning",
       }}
+      showExternalProviders
+      prohibitAuthenticated
     >
       <Formik
         initialValues={initialValues}
