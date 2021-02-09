@@ -4,7 +4,7 @@ import "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBd8VR6t9g4xhxT8vtqzzjAoLXLbFaaMug",
-  authDomain: "sodermalmsskolan-a8013.firebaseapp.com",
+  authDomain: "auth.xn--sdermalmsskolan-8sb.com",
   databaseURL: "https://sodermalmsskolan-a8013.firebaseio.com",
   projectId: "sodermalmsskolan-a8013",
   storageBucket: "sodermalmsskolan-a8013.appspot.com",
