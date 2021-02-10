@@ -2,6 +2,8 @@ import React, { FunctionComponent, ReactNode } from "react";
 import { fonts } from "../../../styles/text";
 import { DangerParagraph } from "../../text/paragraphs";
 
+export type AutoComplete = "off" | "on" | "name" | "honorific-prefix" | "given-name" | "additional-name" | "family-name" | "honorific-suffix" | "nickname" | "email" | "username" | "new-password" | "current-password" | "one-time-code";
+
 export interface TextFieldProps {
   name: string;
   id?: string;
@@ -13,6 +15,7 @@ export interface TextFieldProps {
   disabled?: boolean;
   prefix?: ReactNode;
   suffix?: ReactNode;
+  autoComplete?: AutoComplete;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }

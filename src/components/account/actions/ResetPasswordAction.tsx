@@ -87,7 +87,7 @@ const ResetPasswordAction: AccountAction = ({
         innerRef={formRef}
       >
         <Form>
-          <PasswordField placeholder="Nytt lösenord" disabled={!email} />
+          <PasswordField placeholder="Nytt lösenord" disabled={!email} autoComplete="new-password" />
           <SubmitButton disabled={email ? undefined : true}>Byt lösenord</SubmitButton>
         </Form>
       </Formik>

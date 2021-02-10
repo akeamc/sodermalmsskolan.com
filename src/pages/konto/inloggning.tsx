@@ -7,12 +7,13 @@ import AuthFormPage from "../../components/auth/AuthFormPage";
 import usePrefilledEmail, { prefilledEmailQueryKey } from "../../lib/auth/hooks/usePrefilledEmail";
 import { LoginFormValues, translateFirebaseError } from "../../lib/auth/forms";
 import { auth } from "../../lib/firebase/firebase";
-import EmailAndPassword from "../../components/auth/EmailAndPassword";
 import { AuthQueryParams, resetLink, signupLink } from "../../lib/auth/href";
 import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import FormText from "../../components/form/text/FormText";
 import SubmitButton from "../../components/form/SubmitButton";
 import reportEvent from "../../lib/analytics/reportEvent";
+import EmailField from "../../components/auth/EmailField";
+import PasswordField from "../../components/auth/PasswordField";
 
 /**
  * Login page. Used to log in.
@@ -77,7 +78,8 @@ const LoginPage: NextPage = () => {
           isSubmitting,
         }) => (
           <Form>
-            <EmailAndPassword />
+            <EmailField />
+            <PasswordField autoComplete="current-password" />
             <FormText>
               <Link href={resetLink(query())}>Glömt lösenordet?</Link>
             </FormText>

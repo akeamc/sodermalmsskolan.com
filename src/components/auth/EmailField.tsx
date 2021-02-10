@@ -16,7 +16,7 @@ const EmailField: FunctionComponent = () => (
         error,
       },
     }) => (
-      <TextField {...field} type="email" placeholder="E-post" error={error} />
+      <TextField {...field} type="email" placeholder="E-post" autoComplete="email" error={error} />
     )}
   </Field>
 );
