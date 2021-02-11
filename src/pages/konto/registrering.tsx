@@ -7,13 +7,14 @@ import AuthFormPage from "../../components/auth/AuthFormPage";
 import usePrefilledEmail, { prefilledEmailQueryKey } from "../../lib/auth/hooks/usePrefilledEmail";
 import { SignupFormValues, translateFirebaseError } from "../../lib/auth/forms";
 import { auth } from "../../lib/firebase/firebase";
-import EmailAndPassword from "../../components/auth/EmailAndPassword";
 import { loginLink } from "../../lib/auth/href";
 import useRedirectUri, { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import FormText from "../../components/form/text/FormText";
 import SubmitButton from "../../components/form/SubmitButton";
 import { sendEmailVerification } from "../../components/account/EmailVerificationButton";
 import reportEvent from "../../lib/analytics/reportEvent";
+import EmailField from "../../components/auth/EmailField";
+import PasswordField from "../../components/auth/PasswordField";
 
 /**
  * The page used by users to create an account.
@@ -69,7 +70,8 @@ const RegistrationPage: NextPage = () => {
           isSubmitting,
         }) => (
           <Form>
-            <EmailAndPassword />
+            <EmailField />
+            <PasswordField autoComplete="new-password" />
             <SubmitButton>
               {isSubmitting ? "Skapar konto ..." : "Skapa konto"}
             </SubmitButton>

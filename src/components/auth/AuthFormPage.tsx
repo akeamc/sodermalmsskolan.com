@@ -91,21 +91,26 @@ const AuthFormPage: FunctionComponent<AuthFormPageProps> = ({
               <SmallHeading>{showLoader ? <InlineSkeleton width="10em" /> : title}</SmallHeading>
               {description ? <FormText>{description}</FormText> : null}
             </div>
-            <div css={{
-              opacity: showLoader ? 0 : 1,
+            <div css={[{
               transition: "opacity 0.2s",
-            }}
+            }, showLoader ? {
+              opacity: 0,
+              pointerEvents: "none",
+              visibility: "hidden",
+            } : null]}
             >
-              {children}
-            </div>
-            {showExternalProviders ? (
-              <div css={{
-                marginTop: "var(--card-padding-y)",
-              }}
-              >
-                <ExternalAuthProviders />
+              <div>
+                {children}
               </div>
-            ) : null}
+              {showExternalProviders ? (
+                <div css={{
+                  marginTop: "var(--card-padding-y)",
+                }}
+                >
+                  <ExternalAuthProviders />
+                </div>
+              ) : null}
+            </div>
           </Card>
         </div>
       </div>
