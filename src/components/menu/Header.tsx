@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
-import SimpleHeader from "../header/Simple";
+import HeaderSection from "../sections/HeaderSection";
 import MenuText from "./Text";
 
 const MenuHeader: FunctionComponent = () => (
-  <SimpleHeader
+  <HeaderSection
     title="Meny"
     sub={<MenuText />}
   />

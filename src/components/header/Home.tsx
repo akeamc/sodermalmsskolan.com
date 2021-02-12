@@ -2,10 +2,11 @@ import React, { FunctionComponent, ReactNode } from "react";
 import Container from "../Container";
 import { breakpoints, media } from "../../styles/breakpoints";
 import {
-  PromoHeaderHeading, SmallHeading, SubTitle,
+  SmallHeading, SubTitle,
 } from "../text/headings";
 import ButtonRow from "../button/row";
 import HeaderProps from "./props";
+import PageHeading from "../atomics/headings/PageHeading";
 
 export interface HomeHeaderProps extends HeaderProps {
   superTitle?: ReactNode;
@@ -62,7 +63,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
             {superTitle}
           </SmallHeading>
         ) : null}
-        <PromoHeaderHeading>{title}</PromoHeaderHeading>
+        <PageHeading>{title}</PageHeading>
         {sub ? <SubTitle>{sub}</SubTitle> : null}
         {buttons ? (
           <ButtonRow css={{
