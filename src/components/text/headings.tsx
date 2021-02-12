@@ -6,7 +6,9 @@ import { fonts } from "../../styles/text";
 
 export type HeadingProps = HTMLElementProps<HTMLHeadingElement>;
 
-export type Heading = FunctionComponent<HeadingProps>;
+export type Heading<
+  P extends Record<string, unknown> = Record<string, never>,
+> = FunctionComponent<HeadingProps & P>;
 
 /**
  * A section heading intended to be used for things *not* related to promotionals.

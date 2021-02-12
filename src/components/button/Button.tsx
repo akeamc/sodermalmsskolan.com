@@ -4,7 +4,9 @@ import Link from "next/link";
 import { css, CSSObject, SerializedStyles } from "@emotion/react";
 import { fonts } from "../../styles/text";
 
-export type ButtonSize = "medium" | "small";
+export type ButtonSize = "small" | "medium";
+
+export type ButtonType = "button" | "submit" | "reset";
 
 export interface ButtonProps {
   /**
@@ -15,7 +17,7 @@ export interface ButtonProps {
   size?: ButtonSize;
   onClick?: () => void;
   disabled?: boolean;
-  type?: "button" | "submit" | "reset",
+  type?: ButtonType,
 }
 
 const disabledSelector = "&:disabled, &[disabled]";
@@ -33,15 +35,15 @@ const baseStyles = (size: ButtonSize): SerializedStyles => {
 
   // eslint-disable-next-line default-case
   switch (size) {
-    case "medium": {
-      paddingX = "1.5rem";
-      paddingY = "1rem";
-      break;
-    }
-
     case "small": {
       paddingX = "1rem";
       paddingY = "0.75rem";
+      break;
+    }
+
+    case "medium": {
+      paddingX = "1.5rem";
+      paddingY = "1rem";
       break;
     }
   }
@@ -98,10 +100,6 @@ const secondaryStyles = css({
  * A button with a link. Neat, right?
  *
  * @param {React.PropsWithChildren<ButtonProps>} props Button props.
- * @param {string} props.href Optional `href`.
- * @param {boolean} props.primary Is the button primary?
- * @param {ButtonSize} props.size Size of the button.
- * @param {boolean} props.disabled Is the button clickable?
  *
  * @returns {React.ReactElement} The rendered button.
  */
