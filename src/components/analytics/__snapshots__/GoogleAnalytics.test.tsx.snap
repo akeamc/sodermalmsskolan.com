@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GoogleAnalytics /> test should return the correct tags 1`] = `
+<DocumentFragment>
+  <script
+    async=""
+    src="https://www.googletagmanager.com/gtag/js?id=G-P3DFFXTCY0"
+  />
+  <script>
+    window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+  </script>
+</DocumentFragment>
+`;
