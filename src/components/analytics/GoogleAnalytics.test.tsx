@@ -7,13 +7,7 @@ jest.mock("../../lib/analytics/gtag");
 
 describe("<GoogleAnalytics /> test", () => {
   it("should return the correct tags", () => {
-    const result = render(
-      <GoogleAnalytics
-        trackingId={ANALYTICS_ID}
-        appName="södermalmsskolan.com"
-        appVersion="test"
-      />,
-    );
+    const result = render(<GoogleAnalytics trackingId={ANALYTICS_ID} />);
 
     expect(result.asFragment()).toMatchSnapshot();
   });

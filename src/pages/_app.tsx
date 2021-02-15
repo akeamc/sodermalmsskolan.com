@@ -45,11 +45,7 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
         </Banner>
       ) : null}
 
-      <GoogleAnalytics
-        trackingId={ANALYTICS_ID}
-        appName={process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}
-        appVersion={process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}
-      />
+      <GoogleAnalytics trackingId={ANALYTICS_ID} />
 
       <ToastContainer
         position="bottom-right"
