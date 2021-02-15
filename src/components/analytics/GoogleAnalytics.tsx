@@ -4,8 +4,6 @@ import gtag from "../../lib/analytics/gtag";
 
 export interface GoogleAnalyticsProps {
   trackingId: string;
-  appName: string;
-  appVersion: string;
 }
 
 /**
@@ -17,18 +15,12 @@ export interface GoogleAnalyticsProps {
  */
 const GoogleAnalytics: FunctionComponent<GoogleAnalyticsProps> = ({
   trackingId,
-  appName,
-  appVersion,
 }) => {
   useEffect(() => {
     // Required for GA to function, as per the snippet.
     gtag("js", new Date());
     gtag("config", trackingId);
-
-    // Not required, but only specified during initialization.
-    gtag("set", "appName", appName);
-    gtag("set", "appVersion", appVersion);
-  }, [appName, appVersion, trackingId]);
+  }, [trackingId]);
 
   return (
     <Head>
