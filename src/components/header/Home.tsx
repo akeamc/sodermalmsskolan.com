@@ -2,7 +2,8 @@ import React, { FunctionComponent, ReactNode } from "react";
 import Container from "../Container";
 import { breakpoints, media } from "../../styles/breakpoints";
 import {
-  PromoHeaderHeading, SmallHeading, SubTitle,
+  HeaderHeading,
+  SmallHeading, SubTitle,
 } from "../text/headings";
 import ButtonRow from "../button/row";
 import HeaderProps from "./props";
@@ -62,7 +63,7 @@ const HomeHeader: FunctionComponent<HomeHeaderProps> = ({
             {superTitle}
           </SmallHeading>
         ) : null}
-        <PromoHeaderHeading>{title}</PromoHeaderHeading>
+        <HeaderHeading>{title}</HeaderHeading>
         {sub ? <SubTitle>{sub}</SubTitle> : null}
         {buttons ? (
           <ButtonRow css={{
