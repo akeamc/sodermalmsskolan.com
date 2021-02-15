@@ -75,13 +75,5 @@ exports[`<SiteHead /> test should render correctly 1`] = `
     async=""
     src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
   />
-  <script
-    async=""
-    src="https://www.googletagmanager.com/gtag/js?id=G-P3DFFXTCY0"
-  />
-  <script>
-    window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-  </script>
 </DocumentFragment>
 `;

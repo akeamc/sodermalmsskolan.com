@@ -1,7 +1,5 @@
 import Head from "next/head";
 import React from "react";
-import ANALYTICS_ID from "../../lib/analytics/constants";
-import GoogleAnalytics from "../analytics/GoogleAnalytics";
 import { MetaHead, SiteMetadata } from "./MetaHead";
 
 export interface SiteHeadProps {
@@ -47,12 +45,6 @@ const SiteHead: React.FunctionComponent<SiteHeadProps> = ({ metadata = {} }) => 
         src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
       />
     </Head>
-
-    <GoogleAnalytics
-      trackingId={ANALYTICS_ID}
-      appName="södermalmsskolan.com"
-      appVersion={process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}
-    />
   </>
 );
 

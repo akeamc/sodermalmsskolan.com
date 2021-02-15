@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { GlobalStyles } from "../styles/global";
 import { AuthProvider } from "../lib/auth/AuthContext";
 import { fonts } from "../styles/text";
+import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
+import ANALYTICS_ID from "../lib/analytics/constants";
 
 /**
  * The main application, batteries included.
@@ -25,6 +27,7 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <AuthProvider>
       <GlobalStyles />
+
       {telegrams?.length > 0 ? (
         <Banner>
           {telegrams
@@ -41,6 +44,13 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
             ))}
         </Banner>
       ) : null}
+
+      <GoogleAnalytics
+        trackingId={ANALYTICS_ID}
+        appName="södermalmsskolan.com"
+        appVersion={process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}
+      />
+
       <ToastContainer
         position="bottom-right"
         closeButton={false}
@@ -67,6 +77,7 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
           },
         }}
       />
+
       <Component {...pageProps} />
     </AuthProvider>
   );
