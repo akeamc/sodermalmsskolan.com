@@ -4,8 +4,8 @@ import MenuText from "./Text";
 
 const MenuHeader: FunctionComponent = () => (
   <HeaderSection
-    title="Meny"
-    sub={<MenuText />}
+    headline="Meny"
+    subhead={<MenuText />}
   />
 );
 

@@ -6,7 +6,7 @@ import {
 } from "../text/headings";
 import ButtonRow from "../button/row";
 import HeaderProps from "./props";
-import PageHeading from "../atomics/headings/PageHeading";
+import PageHeading from "../typography/hierarchy/page/PageHeading";
 
 export interface HomeHeaderProps extends HeaderProps {
   superTitle?: ReactNode;

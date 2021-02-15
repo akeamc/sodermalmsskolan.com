@@ -1,18 +1,22 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import PageHeading from "../atomics/headings/PageHeading";
 import Section, { SectionProps } from "../section/Section";
+import PageHeading from "../typography/hierarchy/page/PageHeading";
+import PageSubhead from "../typography/hierarchy/page/PageSubhead";
 
 export interface HeaderSectionProps extends SectionProps {
-  title: ReactNode;
+  headline: ReactNode;
+  subhead?: ReactNode;
 }
 
 const HeaderSection: FunctionComponent<HeaderSectionProps> = ({
-  title,
+  headline,
+  subhead,
   ...sectionProps
 }) => (
   <Section {...sectionProps}>
-    <PageHeading>{title}</PageHeading>
+    <PageHeading>{headline}</PageHeading>
+    {subhead ? <PageSubhead>{subhead}</PageSubhead> : null}
   </Section>
-)
+);
 
 export default HeaderSection;
