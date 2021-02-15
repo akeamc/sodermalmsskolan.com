@@ -82,8 +82,6 @@ exports[`<SiteHead /> test should render correctly 1`] = `
   <script>
     window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-P3DFFXTCY0');
   </script>
 </DocumentFragment>
 `;

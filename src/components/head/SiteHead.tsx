@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import ANALYTICS_ID from "../../lib/analytics/constants";
+import GoogleAnalytics from "../analytics/GoogleAnalytics";
 import { MetaHead, SiteMetadata } from "./MetaHead";
 
 export interface SiteHeadProps {
@@ -45,22 +46,13 @@ const SiteHead: React.FunctionComponent<SiteHeadProps> = ({ metadata = {} }) => 
         async
         src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
       />
-
-      {/* Global site tag (gtag.js) - Google Analytics */}
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`}
-      />
-      <script
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${ANALYTICS_ID}');`,
-        }}
-      />
     </Head>
+
+    <GoogleAnalytics
+      trackingId={ANALYTICS_ID}
+      appName="södermalmsskolan.com"
+      appVersion={process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}
+    />
   </>
 );
 
