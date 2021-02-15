@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react";
-import HeaderSection from "../sections/HeaderSection";
+import SimpleHeader from "../header/Simple";
 import MenuText from "./Text";
 
 const MenuHeader: FunctionComponent = () => (
-  <HeaderSection
-    headline="Meny"
-    subhead={<MenuText />}
+  <SimpleHeader
+    title="Meny"
+    sub={<MenuText />}
   />
 );
 
