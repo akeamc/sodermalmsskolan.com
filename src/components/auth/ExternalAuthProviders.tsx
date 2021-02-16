@@ -14,11 +14,11 @@ const ExternalAuthProviders: FunctionComponent = () => (
     onClick={() => {
       const provider = new firebase.auth.GoogleAuthProvider();
 
-      auth.signInWithRedirect(provider).then(() => {
-        reportEvent("login", {
-          method: "google",
-        });
+      reportEvent("login", {
+        method: "google",
       });
+
+      auth.signInWithRedirect(provider);
     }}
     size="small"
   >
