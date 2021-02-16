@@ -41,7 +41,7 @@ const HomeImage: FunctionComponent = () => {
  * @returns {React.ReactElement} JSX element.
  */
 const HomePage: NextPage = () => (
-  <Base>
+  <Base leadingAd>
     <HomeHeader
       superTitle="södermalmsskolan.com"
       title="Snille och smak"
