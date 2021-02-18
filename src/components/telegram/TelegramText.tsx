@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import dayjs from "dayjs";
-import Telegram from "../../lib/news/telegram";
+import Telegram from "../../lib/news/structures/Telegram";
 import useLocale from "../../hooks/useLocale";
 import Emoji from "../Emoji";
 

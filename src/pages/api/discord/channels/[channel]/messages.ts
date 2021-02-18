@@ -1,30 +1,47 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { ServerChannel } from "../../../../../lib/discord/structures/server/Channel";
-import {
-  IDiscordAPIMessage,
-  MessageQuery,
-} from "../../../../../lib/discord/structures/shared/Message";
-import { ServerMessage } from "../../../../../lib/discord/structures/server/Message";
+import validator from "validator";
+import DiscordMessage, { toDiscordMessage } from "../../../../../lib/discord/structures/DiscordMessage";
+import withTextChannel, { TextChannelHandler } from "../../../../../lib/discord/wrappers/withTextChannel";
 
-export type ChannelMessagesHandler<T = unknown> = (
-  req: NextApiRequest,
-  res: NextApiResponse<T>,
-  channel: ServerChannel,
-  query: MessageQuery
-) => void | Promise<void>;
-
-const handler: ChannelMessagesHandler<IDiscordAPIMessage[]> = async (
-  _,
+/**
+ * Discord channel messages endpoint.
+ *
+ * @param {import("next").NextApiRequest} req Request.
+ * @param {import("next").NextApiResponse} res Response.
+ * @param {import("discord.js").TextChannel} channel Input text channel.
+ *
+ * @returns {void} Nothing.
+ */
+const handler: TextChannelHandler<DiscordMessage[] | string> = async (
+  req,
   res,
-  channel: ServerChannel,
-  query: MessageQuery,
+  channel,
 ) => {
-  const messages = await ServerMessage.fetchMany(channel.id, query);
+  const { query } = req;
 
-  return res.json(messages.map((message) => message.serialize()));
+  const before = query.before?.toString();
+  const after = query.after?.toString();
+  const limit = (query.limit ?? 50).toString();
+
+  if (
+    !validator.isInt(limit, {
+      max: 100,
+      min: 1,
+    })
+  ) {
+    return res
+      .status(400)
+      .send(
+        "`limit` must be a positive integer less than or equal to 100.",
+      );
+  }
+
+  const messages = await channel.messages.fetch({
+    before,
+    after,
+    limit: parseInt(limit, 10),
+  });
+
+  return res.json(messages.map(toDiscordMessage));
 };
 
-export default ServerChannel.wrapHandler(async (oReq, oRes, channel) => {
-  await ServerMessage
-    .wrapQueryHandler(async (iReq, iRes, query) => handler(iReq, iRes, channel, query))(oReq, oRes);
-});
+export default withTextChannel(handler);

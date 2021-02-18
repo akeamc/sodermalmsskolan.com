@@ -1,7 +1,7 @@
 import useTime from "../../../hooks/useTime";
 import { DISCORD_CHANNELS } from "../../discord/constants";
-import { useChannelMessages } from "../../discord/structures/client/Channel";
-import Telegram, { telegramFromMessage } from "../telegram";
+import useChannelMessages from "../../discord/hooks/useChannelMessages";
+import Telegram, { telegramFromMessage } from "../structures/Telegram";
 
 /**
  * Fetch the latest telegram, but only if it's not older than a specified ttl.
@@ -18,7 +18,7 @@ const useFreshTelegrams = (ttl = 86400): Telegram[] => {
   const now = useTime(60000);
 
   const messages = data?.flat()
-    ?.filter((message) => message.createdAt.getTime() >= now.getTime() - ttl * 1000);
+    ?.filter((message) => new Date(message.createdAt).getTime() >= now.getTime() - ttl * 1000);
 
   return messages?.map(telegramFromMessage);
 };

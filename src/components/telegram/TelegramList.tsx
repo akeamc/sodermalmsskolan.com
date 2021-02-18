@@ -5,8 +5,8 @@ import Linkify from "react-linkify";
 import useLocale from "../../hooks/useLocale";
 import useTime from "../../hooks/useTime";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
-import { useChannelMessages } from "../../lib/discord/structures/client/Channel";
-import { telegramFromMessage } from "../../lib/news/telegram";
+import useChannelMessages from "../../lib/discord/hooks/useChannelMessages";
+import { telegramFromMessage } from "../../lib/news/structures/Telegram";
 import Emoji from "../Emoji";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 
