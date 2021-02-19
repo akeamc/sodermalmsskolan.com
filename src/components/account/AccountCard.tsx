@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import useLocale from "../../hooks/useLocale";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
-import { useChannelMessages } from "../../lib/discord/structures/client/Channel";
 import { auth } from "../../lib/firebase/firebase";
 import { breakpoints, media } from "../../styles/breakpoints";
 import UserAvatar from "./UserAvatar";
@@ -19,6 +18,7 @@ import { WarningParagraph } from "../text/paragraphs";
 import EmailVerificationButton from "./EmailVerificationButton";
 import { translateFirebaseError } from "../../lib/auth/forms";
 import { fonts } from "../../styles/text";
+import useChannelMessages from "../../lib/discord/hooks/useChannelMessages";
 
 /**
  * Informative card with an overview of a user's account.

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { DISCORD_CHANNELS } from "../../discord/constants";
-import { useChannelMessages } from "../../discord/structures/client/Channel";
+import useChannelMessages from "../../discord/hooks/useChannelMessages";
 import { useDish } from "./dish";
 
 export interface FoodPhoto {
@@ -13,7 +13,9 @@ export interface FoodPhoto {
 /**
  * Search *The Discords* for images labeled with the dishes title. Very advanced.
  *
- * @param id ID of the dish.
+ * @param {string} id ID of the dish.
+ *
+ * @returns {FoodPhoto[]} The photos.
  */
 export const useDishPhotos = (id: string): FoodPhoto[] => {
   const dish = useDish(id);
@@ -31,7 +33,7 @@ export const useDishPhotos = (id: string): FoodPhoto[] => {
             url: attachment.url,
             id: attachment.id,
             label: message.content,
-            timestamp: message.createdAt,
+            timestamp: new Date(message.createdAt),
           }));
 
           photos.push(...messagePhotos);

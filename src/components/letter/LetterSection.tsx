@@ -4,19 +4,25 @@ import React, { FunctionComponent } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import { loginLink } from "../../lib/auth/href";
-import ClientLetter, { useLetters } from "../../lib/news/structures/client/letter";
+import useLetters from "../../lib/news/hooks/useLetters";
+import Letter from "../../lib/news/structures/Letter";
 import Card from "../Card";
 import CardGrid from "../grid/CardGrid";
 import { CardTitle } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";
 import LetterCard from "./LetterCard";
 
+/**
+ * Section displaying letters.
+ *
+ * @returns {React.ReactElement} The rendered section.
+ */
 const LetterSection: FunctionComponent = () => {
   const { data } = useLetters();
   const { user } = useAuth();
   const router = useRouter();
 
-  const letters: ClientLetter[] = data ?? new Array(12).fill(null);
+  const letters: Letter[] = data ?? new Array(12).fill(null);
 
   return (
     <div css={{

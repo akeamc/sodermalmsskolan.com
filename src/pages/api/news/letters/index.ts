@@ -1,12 +1,29 @@
 import { NextApiHandler } from "next";
 import withAuth from "../../../../lib/auth/withAuth";
-import ServerLetter from "../../../../lib/news/structures/server/letter";
-import { LetterStatic } from "../../../../lib/news/structures/shared/letter";
+import { DISCORD_CHANNELS } from "../../../../lib/discord/constants";
+import { toDiscordMessage } from "../../../../lib/discord/structures/DiscordMessage";
+import fetchTextChannel from "../../../../lib/discord/utils/fetchTextChannel";
+import Letter from "../../../../lib/news/structures/Letter";
+import parseMessage from "../../../../lib/news/utils/parseMessage";
 
-const handler: NextApiHandler<LetterStatic[]> = async (_, res) => {
-  const letters = await ServerLetter.fetchAll();
+/**
+ * API route returning all letters.
+ *
+ * @param {import("next").NextApiRequest} _ Request.
+ * @param {import("next").NextApiResponse} res Response
+ *
+ * @returns {void} Nothing.
+ */
+const handler: NextApiHandler<Letter[]> = async (_, res) => {
+  const channel = await fetchTextChannel(DISCORD_CHANNELS.news.id);
 
-  return res.json(letters.map((letter) => letter.serialize()));
+  const messages = await channel.messages.fetch({
+    limit: 100,
+  });
+
+  const letters = await Promise.all(messages.map(toDiscordMessage).map(parseMessage));
+
+  return res.json(letters);
 };
 
 export default withAuth(handler);

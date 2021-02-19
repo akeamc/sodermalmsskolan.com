@@ -3,13 +3,9 @@ export interface ChannelDetails {
   authenticated: boolean;
 }
 
-export interface Channels extends Record<string, ChannelDetails> {
-  photos: ChannelDetails;
-  news: ChannelDetails;
-  telegrams: ChannelDetails;
-}
+export type ChannelName = "photos" | "news" | "telegrams" | "schedule";
 
-export const DISCORD_CHANNELS: Channels = {
+export const DISCORD_CHANNELS: Record<ChannelName, ChannelDetails> = {
   photos: {
     id: process.env.NEXT_PUBLIC_DISCORD_PHOTOS_CHANNEL,
     authenticated: false,
@@ -28,7 +24,15 @@ export const DISCORD_CHANNELS: Channels = {
   },
 };
 
-export const getChannelDetails = (id: string): ChannelDetails => Object.values(DISCORD_CHANNELS)
-  .find((details) => details.id === id);
+/**
+ * Get the channel details for a channel with the specified `id`.
+ *
+ * @param {string} id Channel ID.
+ *
+ * @returns {ChannelDetails} The (possibly undefined) object with details about the channel.
+ */
+export const getChannelDetails = (id: string): ChannelDetails => (
+  Object.values(DISCORD_CHANNELS).find((details) => details.id === id)
+);
 
 export const DISCORD_INVITE_LINK = "https://discord.gg/4hEnTpd";

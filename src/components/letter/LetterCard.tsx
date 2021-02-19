@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from "react";
+import Letter from "../../lib/news/structures/Letter";
 import getLetterExcerpt from "../../lib/news/utils/getLetterExcerpt";
-import Letter from "../../lib/news/structures/shared/letter";
 import Card from "../Card";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { CardTitle } from "../text/headings";
