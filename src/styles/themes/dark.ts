@@ -15,6 +15,7 @@ const darkTheme: CSSObject = {
   "--accents-8": "#fafafa",
 
   "--color-bg-primary": "#111111",
+  "--color-bg-secondary": "#222222",
   "--color-bg-transparent": transparentize(1, "#111111"),
 
   "--color-text-primary": "#ffffff",
