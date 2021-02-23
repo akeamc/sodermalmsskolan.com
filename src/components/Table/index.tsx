@@ -1,5 +1,12 @@
 import React, { FunctionComponent } from "react";
 
+/**
+ * A table!
+ *
+ * @param {React.PropsWithChildren} props Standard props.
+ *
+ * @returns {React.ReactElement} The rendered table.
+ */
 const Table: FunctionComponent = (props) => (
   <div css={{
     overflowX: "auto",

@@ -8,6 +8,13 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Skeleton from "../skeleton/Skeleton";
 import Table from "../Table";
 
+/**
+ * Figure used in posts.
+ *
+ * @param {React.PropsWithChildren} props Standard HTML props.
+ *
+ * @returns {React.ReactElement} Rendered figure.
+ */
 const Figure: FunctionComponent = (props) => (
   <div
     css={{
@@ -28,6 +35,14 @@ const Figure: FunctionComponent = (props) => (
   />
 );
 
+/**
+ * Function used to transform the HTML elements.
+ *
+ * @param {any} node The node.
+ * @param {any} index Index of the element.
+ *
+ * @returns {React.ReactElement} The transformed element.
+ */
 const transform: Transform = (node, index) => {
   if (node.name === "a") {
     const { href } = node.attribs;
@@ -170,8 +185,9 @@ export interface RichTextProps {
 /**
  * XSS-safe HTML renderer.
  *
- * @param props
- * @param props.html
+ * @param {React.PropsWithChildren<RichTextProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered HTML.
  */
 const RichText: FunctionComponent<RichTextProps> = ({ html, ...props }) => {
   const parsedHtml = useMemo(() => {
@@ -181,13 +197,13 @@ const RichText: FunctionComponent<RichTextProps> = ({ html, ...props }) => {
 
     return (
       <>
-        <Skeleton height="20rem" />
         <h2>
           <InlineSkeleton />
         </h2>
         <p>
           <InlineSkeleton count={5} />
         </p>
+        <Skeleton height="20rem" />
       </>
     );
   }, [html]);
