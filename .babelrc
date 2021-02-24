@@ -10,7 +10,7 @@
       }
     ]
   ],
-  "plugins": ["@emotion/babel-plugin"],
+  "plugins": ["@emotion/babel-plugin", "babel-plugin-dynamic-import-node"],
   "env": {
     "test": {
       "plugins": [

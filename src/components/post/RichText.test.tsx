@@ -1,10 +1,19 @@
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import React from "react";
+import preloadAll from "jest-next-dynamic";
 import RichText from "./RichText";
 
 const html = `
 <h1>Title</h1>
 <h2>Smaller title</h2>
+<p>
+  How does it handle
+  multiple
+  lines?
+</p>
+<p>
+  $$\\frac{1}{x}$$
+</p>
 <script>
 alert("oof");
 </script>
@@ -38,9 +47,15 @@ alert("oof");
 <blockquote>deep quote</blockquote>
 `;
 
+beforeAll(async () => {
+  await preloadAll();
+});
+
 describe("<RichText /> test", () => {
-  it("renders as usual", () => {
+  it("renders as usual", async () => {
     const result = render(<RichText html={html} />);
+
+    await act(async () => {});
 
     expect(result.asFragment()).toMatchSnapshot();
   });

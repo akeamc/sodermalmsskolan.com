@@ -48,7 +48,7 @@ exports[`<CalendarEventView /> renders properly 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1 {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #000;
     border-color: #000;
     color: #ffffff;
   }

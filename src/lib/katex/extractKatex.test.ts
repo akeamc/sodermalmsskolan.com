@@ -21,5 +21,14 @@ describe("extract katex test", () => {
       data: " And that's a fact.",
       type: "text",
     }]);
+
+    expect(extractKatex("\\(e^(\\pi i)\\) is quite beautiful.")).toEqual<SplitFragment[]>([{
+      data: "e^(\\pi i)",
+      display: false,
+      type: "math",
+    }, {
+      data: " is quite beautiful.",
+      type: "text",
+    }]);
   });
 });
