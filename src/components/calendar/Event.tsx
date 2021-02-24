@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { darken, transparentize } from "polished";
+import { darken, shade } from "polished";
 import React, { FunctionComponent, memo, PropsWithChildren } from "react";
 import CalendarEvent from "../../lib/calendar/event/CalendarEvent";
 import { getHumanReadableDuration } from "../../lib/calendar/utils/humanReadable";
@@ -122,7 +122,7 @@ const CalendarEventView: FunctionComponent<CalendarEventViewProps> = ({
             outline: "none",
 
             "@media (prefers-color-scheme: dark)": {
-              backgroundColor: transparentize(0.5, color),
+              backgroundColor: shade(0.5, color),
               borderColor: color,
               color: "#ffffff",
             },
