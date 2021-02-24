@@ -21,7 +21,7 @@ const splitWithDelimiters = (text: string, delimiters: Delimeter[]): SplitFragme
     );
   }
 
-  return data;
+  return data.filter((fragment) => fragment.data?.length > 0);
 };
 
 export default splitWithDelimiters;

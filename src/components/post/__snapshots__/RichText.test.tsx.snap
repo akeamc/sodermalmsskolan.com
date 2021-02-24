@@ -192,6 +192,13 @@ exports[`<RichText /> test renders as usual 1`] = `
     <h2>
       Smaller title
     </h2>
+    <p>
+      
+  How does it handle
+  multiple
+  lines?
+
+    </p>
     <a
       class="emotion-1"
       href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -201,22 +208,16 @@ exports[`<RichText /> test renders as usual 1`] = `
     <div
       class="emotion-2"
     >
-      
-  
       <img
         class="emotion-3"
         loading="lazy"
         src="https://media1.tenor.com/images/467d353f7e2d43563ce13fddbb213709/tenor.gif?itemid=12136175"
       />
-      
-  
       <figcaption
         class="emotion-4"
       >
         my favorite gif
       </figcaption>
-      
-
     </div>
     <div
       class="emotion-5"
@@ -224,8 +225,6 @@ exports[`<RichText /> test renders as usual 1`] = `
       <table
         class="emotion-6"
       >
-        
-  
         <thead>
           <tr>
             <th>
@@ -239,8 +238,6 @@ exports[`<RichText /> test renders as usual 1`] = `
             </th>
           </tr>
         </thead>
-        
-  
         <tbody>
           <tr>
             <td>
@@ -265,8 +262,6 @@ exports[`<RichText /> test renders as usual 1`] = `
             </td>
           </tr>
         </tbody>
-        
-
       </table>
     </div>
     <div

@@ -5,6 +5,11 @@ import RichText from "./RichText";
 const html = `
 <h1>Title</h1>
 <h2>Smaller title</h2>
+<p>
+  How does it handle
+  multiple
+  lines?
+</p>
 <script>
 alert("oof");
 </script>

@@ -170,6 +170,10 @@ const transform: Transform = (node, index) => {
   }
 
   if (node.type === "text") {
+    if (/^\s+$/.test(node.data)) {
+      return null;
+    }
+
     return <KatexText text={node.data} key={index} />;
   }
 
