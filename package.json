@@ -41,7 +41,7 @@
     "react-linkify": "^1.0.0-alpha",
     "react-select": "^3.2.0",
     "react-toastify": "^7.0.3",
-    "rrule": "2.6.6",
+    "rrule": "2.6.8",
     "seedrandom": "^3.0.5",
     "swr": "^0.4.2",
     "twemoji": "^13.0.1",
