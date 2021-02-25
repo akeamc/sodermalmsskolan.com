@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "postinstall": "patch-package"
   },
   "license": "Apache-2.0",
   "private": true,
@@ -30,6 +31,7 @@
     "luxon": "^1.25.0",
     "next": "^10.0.5",
     "node-html-parser": "^3.0.3",
+    "patch-package": "^6.2.2",
     "pdf-parse": "^1.1.1",
     "polished": "^4.1.0",
     "query-string": "^6.13.8",

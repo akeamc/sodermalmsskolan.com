@@ -1,6 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
 import ky from "ky-universal";
-import { getPage } from "next-page-tester";
 import Route from "./route";
 import { useRoutes } from "./routes";
 
@@ -9,23 +8,15 @@ describe("useRoutes test", () => {
 
   const categories = result.current;
 
-  const routes: Route[] = categories.reduce((acc, category) => acc.concat(...category.routes), []);
+  const externalRoutes: Route[] = categories
+    .flatMap((category) => category.routes)
+    .filter(({ href }) => href.indexOf("//") >= 0);
 
-  routes.forEach(({ href }) => {
-    test(`${href} is not dead`, async () => {
-      const isExternal = href.indexOf("//") >= 0;
+  externalRoutes.forEach(({ href }) => {
+    test(`${href} is not a dead link`, async () => {
+      const res = await ky.get(href);
 
-      if (isExternal) {
-        const res = await ky.get(href);
-
-        expect(res.ok).toBe(true);
-      } else {
-        const { render } = await getPage({
-          route: href,
-        });
-
-        render();
-      }
+      expect(res.ok).toBe(true);
     });
   });
 });
