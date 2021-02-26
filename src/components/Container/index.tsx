@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { CSSDistance } from "../../styles/types/distance";
 
 export type ContainerWidth = "wide" | "normal" | "narrow";
 
@@ -7,9 +8,9 @@ export type ContainerWidth = "wide" | "normal" | "narrow";
  *
  * @param {ContainerWidth} width Container width literal.
  *
- * @returns {string} The evaluated width, in CSS.
+ * @returns {CSSDistance} The evaluated width, in CSS.
  */
-export const evaluateContainerWidth = (width: ContainerWidth): string => {
+export const evaluateContainerWidth = (width: ContainerWidth): CSSDistance => {
   switch (width) {
     case "narrow": {
       return "840px";

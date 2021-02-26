@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
-import { HTMLElementProps } from "../../styles/overrides";
+import { HTMLElementProps } from "../../styles/types/overrides";
 import { skeletonBackground } from "../skeleton/Skeleton";
 
 export const fallbackAvatarUrl = "https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg";

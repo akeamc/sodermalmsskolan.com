@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import React, { FunctionComponent } from "react";
 import { breakpoints, media } from "../../styles/breakpoints";
-import { HTMLElementProps } from "../../styles/overrides";
+import { HTMLElementProps } from "../../styles/types/overrides";
 import { fonts } from "../../styles/text";
 
 export type HeadingProps = HTMLElementProps<HTMLHeadingElement>;
