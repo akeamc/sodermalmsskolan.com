@@ -1,3 +1,5 @@
+import { CSSDistance } from "./types/distance";
+
 export type Breakpoint = "small" | "medium" | "large" | "extraLarge";
 
 export interface Breakpoints<T> extends Record<Breakpoint, T> {

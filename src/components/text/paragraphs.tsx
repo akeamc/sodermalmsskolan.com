@@ -1,6 +1,6 @@
 import React, { ComponentType, FunctionComponent } from "react";
 import { AlertCircle, AlertTriangle, CheckCircle } from "react-feather";
-import { HTMLElementProps } from "../../styles/overrides";
+import { HTMLElementProps } from "../../styles/types/overrides";
 import { fonts } from "../../styles/text";
 
 export type ParagraphProps = HTMLElementProps<HTMLParagraphElement>;

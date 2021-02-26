@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { HTMLElementProps } from "../../../styles/overrides";
+import { HTMLElementProps } from "../../../styles/types/overrides";
 
 export type EmphasisProps = HTMLElementProps<HTMLElement>;
 
