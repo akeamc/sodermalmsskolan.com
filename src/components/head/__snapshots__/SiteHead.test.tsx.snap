@@ -34,8 +34,16 @@ exports[`<SiteHead /> test should render correctly 1`] = `
     property="og:type"
   />
   <meta
+    content="sv-SE"
+    property="og:locale"
+  />
+  <meta
     content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
     property="og:image"
+  />
+  <meta
+    content="summary"
+    name="twitter:card"
   />
   <link
     href="/apple-touch-icon.png"
