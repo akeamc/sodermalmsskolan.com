@@ -4,11 +4,14 @@ import React, { FunctionComponent } from "react";
 
 export type OgType = "website" | "article" | "music" | "video" | "book" | "profile";
 
+export type TwitterCardType = "summary" | "summary_large_image" | "app" | "player";
+
 export interface SiteMetadata {
   title?: string;
   description?: string;
   type?: OgType;
   images?: string[];
+  twitterCard?: TwitterCardType;
   noIndex?: boolean;
 
   /**
@@ -35,6 +38,7 @@ export const MetaHead: FunctionComponent<SiteMetadata> = ({
     "https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg",
   ],
   noIndex = false,
+  twitterCard = "summary",
   article,
 }) => {
   const titleFragments = ["södermalmsskolan.com"];
@@ -60,10 +64,13 @@ export const MetaHead: FunctionComponent<SiteMetadata> = ({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={type} />
+      <meta property="og:locale" content={router.locale} />
 
       {images.map((image) => (
         <meta key={image} property="og:image" content={image} />
       ))}
+
+      <meta name="twitter:card" content={twitterCard} />
 
       {noIndex ? <meta name="robots" content="noindex" /> : null}
 

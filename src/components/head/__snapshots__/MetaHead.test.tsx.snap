@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test <MetaHead />> should render correctly with specific parameters 1`] = `
+exports[`<MetaHead /> test should render correctly with specific parameters 1`] = `
 <DocumentFragment>
   <title>
     test page · södermalmsskolan.com
@@ -34,13 +34,21 @@ exports[`test <MetaHead />> should render correctly with specific parameters 1`]
     property="og:type"
   />
   <meta
+    content="sv-SE"
+    property="og:locale"
+  />
+  <meta
     content="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
     property="og:image"
+  />
+  <meta
+    content="summary"
+    name="twitter:card"
   />
 </DocumentFragment>
 `;
 
-exports[`test <MetaHead />> should return proper OpenGraph parameters for articles 1`] = `
+exports[`<MetaHead /> test should return proper OpenGraph parameters for articles 1`] = `
 <DocumentFragment>
   <title>
     södermalmsskolan.com
@@ -74,8 +82,16 @@ exports[`test <MetaHead />> should return proper OpenGraph parameters for articl
     property="og:type"
   />
   <meta
+    content="sv-SE"
+    property="og:locale"
+  />
+  <meta
     content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
     property="og:image"
+  />
+  <meta
+    content="summary"
+    name="twitter:card"
   />
   <meta
     content="2020-01-01T00:00:00.000Z"
@@ -88,7 +104,7 @@ exports[`test <MetaHead />> should return proper OpenGraph parameters for articl
 </DocumentFragment>
 `;
 
-exports[`test <MetaHead />> should work fine without parameters 1`] = `
+exports[`<MetaHead /> test should work fine without parameters 1`] = `
 <DocumentFragment>
   <title>
     södermalmsskolan.com
@@ -122,8 +138,16 @@ exports[`test <MetaHead />> should work fine without parameters 1`] = `
     property="og:type"
   />
   <meta
+    content="sv-SE"
+    property="og:locale"
+  />
+  <meta
     content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
     property="og:image"
+  />
+  <meta
+    content="summary"
+    name="twitter:card"
   />
 </DocumentFragment>
 `;

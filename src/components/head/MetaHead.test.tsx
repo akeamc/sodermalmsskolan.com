@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { MetaHead } from "./MetaHead";
 
-describe("test <MetaHead />>", () => {
+describe("<MetaHead /> test", () => {
   it("should render correctly with specific parameters", () => {
     const result = render(
       <MetaHead

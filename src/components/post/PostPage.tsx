@@ -23,6 +23,7 @@ const PostPage: FunctionComponent<PostPageProps> = ({ post }) => (
     title: post?.title,
     description: post?.excerpt,
     images: [post?.cover],
+    twitterCard: "summary_large_image",
     type: "article",
     article: {
       published: post?.publishedAt ? new Date(post?.publishedAt) : null,
