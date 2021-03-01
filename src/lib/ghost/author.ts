@@ -1,6 +1,7 @@
 import { Author as GhostAuthor, Identification } from "@tryghost/content-api";
 import {
-  defaultReadParams, defaultSharedParams, ReadParams, SharedParams,
+  defaultBrowseParams,
+  defaultReadParams, ReadParams, SharedParams,
 } from "./common";
 import api from "./credentials";
 
@@ -44,7 +45,7 @@ export const ghostAuthorToAuthor = ({
  * @returns {Promise<Author[]>} The authors.
  */
 export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<Author[]> => {
-  const authors = await api.authors.browse(defaultSharedParams(params));
+  const authors = await api.authors.browse(defaultBrowseParams(params));
 
   return authors.map(ghostAuthorToAuthor);
 };

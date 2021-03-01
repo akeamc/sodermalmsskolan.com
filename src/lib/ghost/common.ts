@@ -1,7 +1,14 @@
-import { FormatParam, IncludeParam, OrderParam } from "@tryghost/content-api";
 import { ParsedUrlQuery } from "querystring";
 
 export type LimitParam = number | "all";
+export type FilterParam = string;
+export type FormatParam = "html" | "plaintext";
+export type IncludeParam = "authors" | "tags" | "count.posts";
+
+export type Orderable = "published_at" | "title" | "name";
+export type Ordering = "ASC" | "DESC";
+
+export type OrderParam = `${Orderable} ${Ordering}`;
 
 /**
  * Parameters used by all API requests.
@@ -10,11 +17,15 @@ export interface SharedParams {
   include?: IncludeParam | IncludeParam[];
   limit?: LimitParam;
   formats?: FormatParam | FormatParam[];
-  order?: OrderParam;
 }
 
 export interface ReadParams extends SharedParams {
   slug: string;
+}
+
+export interface BrowseParams extends SharedParams {
+  filter?: FilterParam;
+  order?: OrderParam;
 }
 
 /**
@@ -26,7 +37,6 @@ export interface ReadParams extends SharedParams {
  */
 export const defaultSharedParams = (input: SharedParams): SharedParams => ({
   include: ["tags", "authors"],
-  order: "published_at DESC",
   limit: "all",
   ...input,
 });
@@ -40,7 +50,20 @@ export const defaultSharedParams = (input: SharedParams): SharedParams => ({
  */
 export const defaultReadParams = (input: ReadParams): ReadParams => ({
   ...defaultSharedParams(input),
-  slug: input.slug,
+  ...input,
+});
+
+/**
+ * Add the default parameters to a `BrowseParams` object.
+ *
+ * @param {BrowseParams} input Input parameters.
+ *
+ * @returns {BrowseParams} Browse parameters with the default options.
+ */
+export const defaultBrowseParams = (input: BrowseParams): BrowseParams => ({
+  ...defaultSharedParams(input),
+  order: "published_at DESC",
+  ...input,
 });
 
 export interface GhostStaticPathParams extends ParsedUrlQuery {

@@ -1,9 +1,12 @@
 import { PostOrPage as GhostPostOrPage } from "@tryghost/content-api";
-import { defaultReadParams, defaultSharedParams, ReadParams } from "./common";
+import {
+  BrowseParams,
+  defaultBrowseParams,
+  defaultReadParams,
+  ReadParams,
+} from "./common";
 import api from "./credentials";
-import Post, { BrowsePostsParams, ghostPostToPost } from "./post";
-
-export type BrowsePagesParams = BrowsePostsParams;
+import Post, { ghostPostToPost } from "./post";
 
 type Page = Post;
 
@@ -21,12 +24,12 @@ export const ghostPageToPage = (post: GhostPostOrPage): Page => ghostPostToPost(
 /**
  * Browse pages.
  *
- * @param {BrowsePagesParams} params Parameters.
+ * @param {BrowseParams} params Parameters.
  *
  * @returns {Promise<Page[]>} A promise containing the pages.
  */
-export const browsePages = async (params: BrowsePagesParams = {}): Promise<Page[]> => {
-  const pages = await api.pages.browse(defaultSharedParams(params));
+export const browsePages = async (params: BrowseParams = {}): Promise<Page[]> => {
+  const pages = await api.pages.browse(defaultBrowseParams(params));
 
   return pages.map(ghostPageToPage);
 };
