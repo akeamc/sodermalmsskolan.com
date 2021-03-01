@@ -1,7 +1,13 @@
 require("dotenv").config();
 
+const analyzeEnabled = process.env.ANALYZE === "true";
+
+if (analyzeEnabled) {
+  console.log("Analyzing bundle ...");
+}
+
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
+  enabled: analyzeEnabled,
 });
 
 module.exports = withBundleAnalyzer({
