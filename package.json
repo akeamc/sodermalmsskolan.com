@@ -57,7 +57,7 @@
     "@emotion/babel-plugin": "^11.1.2",
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/eslint-plugin": "^11.2.0",
-    "@emotion/jest": "^11.1.0",
+    "@emotion/jest": "^11.2.0",
     "@next/bundle-analyzer": "^10.0.6",
     "@storybook/addon-actions": "^6.1.17",
     "@storybook/addon-essentials": "^6.1.17",
