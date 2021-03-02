@@ -6,10 +6,9 @@ import Tag, { ghostTagToTag } from "./tag";
 import Author, { ghostAuthorToAuthor } from "./author";
 import {
   BrowseParams,
-  defaultBrowseParams,
-  defaultReadParams, ReadParams,
+  ReadParams,
 } from "./common";
-import api from "./credentials";
+import { browseResource, GhostAPIResponse, readResource } from "./api";
 
 export default interface Post extends Identification {
   title: string;
@@ -58,6 +57,10 @@ export const ghostPostToPost = ({
   featured: !!featured,
 });
 
+export interface GhostPostsResponse extends GhostAPIResponse {
+  posts: GhostPostOrPage[];
+}
+
 /**
  * Browse posts.
  *
@@ -65,9 +68,9 @@ export const ghostPostToPost = ({
  * @returns {Promise<Post[]>} The posts (wrapped in a `Promise`).
  */
 export const browsePosts = async (params: BrowseParams = {}): Promise<Post[]> => {
-  const posts = await api.posts.browse(defaultBrowseParams(params));
+  const res = await browseResource<GhostPostsResponse>("posts", params);
 
-  return posts.map(ghostPostToPost);
+  return res.posts.map(ghostPostToPost);
 };
 
 /**
@@ -77,9 +80,9 @@ export const browsePosts = async (params: BrowseParams = {}): Promise<Post[]> =>
  * @returns {Promise<Post>} The post, wrapped in a `Promise`.
  */
 export const readPost = async (params: ReadParams): Promise<Post> => {
-  const post = await api.posts.read(defaultReadParams(params));
+  const res = await readResource<GhostPostsResponse>("posts", params);
 
-  return ghostPostToPost(post);
+  return ghostPostToPost(res.posts[0]);
 };
 
 export type PostFilter = (post: Post) => boolean;
