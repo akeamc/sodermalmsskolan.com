@@ -8,7 +8,7 @@ import {
   BrowseParams,
   ReadParams,
 } from "./common";
-import { browseResource, GhostAPIResponse, readResource } from "./api";
+import { browseResource, readResource } from "./api";
 
 export default interface Post extends Identification {
   title: string;
@@ -57,10 +57,6 @@ export const ghostPostToPost = ({
   featured: !!featured,
 });
 
-export interface GhostPostsResponse extends GhostAPIResponse {
-  posts: GhostPostOrPage[];
-}
-
 /**
  * Browse posts.
  *
@@ -68,9 +64,9 @@ export interface GhostPostsResponse extends GhostAPIResponse {
  * @returns {Promise<Post[]>} The posts (wrapped in a `Promise`).
  */
 export const browsePosts = async (params: BrowseParams = {}): Promise<Post[]> => {
-  const res = await browseResource<GhostPostsResponse>("posts", params);
+  const { posts } = await browseResource("posts", params);
 
-  return res.posts.map(ghostPostToPost);
+  return posts.map(ghostPostToPost);
 };
 
 /**
@@ -80,9 +76,9 @@ export const browsePosts = async (params: BrowseParams = {}): Promise<Post[]> =>
  * @returns {Promise<Post>} The post, wrapped in a `Promise`.
  */
 export const readPost = async (params: ReadParams): Promise<Post> => {
-  const res = await readResource<GhostPostsResponse>("posts", params);
+  const { posts } = await readResource("posts", params);
 
-  return ghostPostToPost(res.posts[0]);
+  return ghostPostToPost(posts[0]);
 };
 
 export type PostFilter = (post: Post) => boolean;

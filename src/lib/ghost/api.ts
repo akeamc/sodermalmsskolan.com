@@ -1,5 +1,7 @@
-import ky from "ky-universal";
-import { BrowseParams, ReadParams, SharedParams } from "./common";
+import { Author, PostOrPage, Tag } from "@tryghost/content-api";
+import {
+  BrowseParams, LimitParam, ReadParams, SharedParams,
+} from "./common";
 
 export interface GhostAPICredential {
   url: string;
@@ -15,9 +17,37 @@ export type Serialized<T> = {
   [key in keyof T]: string;
 };
 
-export type GhostResource = "posts" | "pages" | "tags" | "authors";
+export interface ResponseMeta {
+  pagination: {
+    page: number;
+    limit: LimitParam;
+    pages: number;
+    total: number;
+    next: number | null;
+    prev: number | null;
+  }
+}
 
-export type GhostAPIResponse = Record<GhostResource, unknown>;
+export interface Response {
+  posts: {
+    posts: PostOrPage[];
+    meta?: ResponseMeta;
+  };
+  pages: {
+    pages: PostOrPage[];
+    meta?: ResponseMeta;
+  };
+  authors: {
+    authors: Author[];
+    meta?: ResponseMeta;
+  }
+  tags: {
+    tags: Tag[];
+    meta?: ResponseMeta;
+  }
+}
+
+export type ResourceType = keyof Response;
 
 export type RequestParams = Partial<SharedParams & BrowseParams & ReadParams>;
 
@@ -39,39 +69,43 @@ export const serializeParams = (params: RequestParams): Serialized<RequestParams
 /**
  * Make a request to the Ghost Content API.
  *
- * @param {GhostResource} resource The resource.
+ * @param {ResourceType} resource The resource.
  * @param {RequestParams} params Request parameters.
  * @param {string} path Optional path.
  *
  * @returns {Promise<any>} The fetched resource.
  */
-const makeRequest = async <T>(resource: GhostResource, params: RequestParams = {}, path = ""): Promise<T> => {
+const makeRequest = async <T extends ResourceType>(resource: T, params: RequestParams = {}, path = ""): Promise<Response[T]> => {
   const serializedParams = serializeParams({
     include: ["tags", "authors"],
     limit: "all",
     ...params,
   });
 
-  return ky.get(`${GHOST_API_CREDENTIAL.url}/ghost/api/v3/content/${resource}${path}`, {
-    searchParams: {
-      key: GHOST_API_CREDENTIAL.key,
-      ...serializedParams,
-    },
-  }).json<T>();
+  const url = new URL(`${GHOST_API_CREDENTIAL.url}/ghost/api/v3/content/${resource}${path}`);
+
+  url.search = new URLSearchParams({
+    key: GHOST_API_CREDENTIAL.key,
+    ...serializedParams,
+  }).toString();
+
+  const res = await fetch(url.toString());
+
+  return res.json();
 };
 
 /**
  * Browse resources.
  *
- * @param {GhostResource} resource What resource?
+ * @param {ResourceType} resource What resource?
  * @param {BrowseParams} params Parameters.
  *
  * @returns {Promise<any>} Resources.
  */
-export const browseResource = <T>(
-  resource: GhostResource,
+export const browseResource = <T extends ResourceType>(
+  resource: T,
   params: BrowseParams = {},
-): Promise<T> => makeRequest<T>(resource, {
+): Promise<Response[T]> => makeRequest<T>(resource, {
     order: "published_at DESC",
     ...params,
   });
@@ -79,12 +113,12 @@ export const browseResource = <T>(
 /**
  * Read a resource.
  *
- * @param {GhostResource} resource What resource?
+ * @param {ResourceType} resource What resource?
  * @param {BrowseParams} params Parameters.
  *
  * @returns {Promise<any>} Resource.
  */
-export const readResource = <T>(
-  resource: GhostResource,
+export const readResource = <T extends ResourceType>(
+  resource: T,
   { slug, ...params }: ReadParams,
-): Promise<T> => makeRequest<T>(resource, params, `/slug/${slug}`);
+): Promise<Response[T]> => makeRequest<T>(resource, params, `/slug/${slug}`);

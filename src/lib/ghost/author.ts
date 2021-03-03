@@ -1,5 +1,5 @@
 import { Author as GhostAuthor, Identification } from "@tryghost/content-api";
-import { browseResource, GhostAPIResponse, readResource } from "./api";
+import { browseResource, readResource } from "./api";
 import {
   ReadParams, SharedParams,
 } from "./common";
@@ -36,10 +36,6 @@ export const ghostAuthorToAuthor = ({
   bio,
 });
 
-export interface GhostAuthorsResponse extends GhostAPIResponse {
-  authors: GhostAuthor[];
-}
-
 /**
  * Browse authors.
  *
@@ -48,9 +44,9 @@ export interface GhostAuthorsResponse extends GhostAPIResponse {
  * @returns {Promise<Author[]>} The authors.
  */
 export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<Author[]> => {
-  const res = await browseResource<GhostAuthorsResponse>("authors", params);
+  const { authors } = await browseResource("authors", params);
 
-  return res.authors.map(ghostAuthorToAuthor);
+  return authors.map(ghostAuthorToAuthor);
 };
 
 /**
@@ -61,9 +57,9 @@ export const browseAuthors = async (params: BrowseAuthorsParams = {}): Promise<A
  * @returns {Promise<Author>} The (possibly undefined) author.
  */
 export const getAuthor = async (params: ReadParams): Promise<Author> => {
-  const res = await readResource<GhostAuthorsResponse>("authors", params);
+  const { authors } = await readResource("authors", params);
 
-  return ghostAuthorToAuthor(res.authors[0]);
+  return ghostAuthorToAuthor(authors[0]);
 };
 
 /**

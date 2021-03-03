@@ -3,7 +3,7 @@ import {
   BrowseParams,
   ReadParams,
 } from "./common";
-import { browseResource, GhostAPIResponse, readResource } from "./api";
+import { browseResource, readResource } from "./api";
 import Post, { ghostPostToPost } from "./post";
 
 type Page = Post;
@@ -19,10 +19,6 @@ export default Page;
  */
 export const ghostPageToPage = (post: GhostPostOrPage): Page => ghostPostToPost(post);
 
-export interface GhostPagesResponse extends GhostAPIResponse {
-  pages: GhostPostOrPage[];
-}
-
 /**
  * Browse pages.
  *
@@ -31,9 +27,9 @@ export interface GhostPagesResponse extends GhostAPIResponse {
  * @returns {Promise<Page[]>} A promise containing the pages.
  */
 export const browsePages = async (params: BrowseParams = {}): Promise<Page[]> => {
-  const res = await browseResource<GhostPagesResponse>("pages", params);
+  const { pages } = await browseResource("pages", params);
 
-  return res.pages.map(ghostPageToPage);
+  return pages.map(ghostPageToPage);
 };
 
 /**
@@ -44,7 +40,7 @@ export const browsePages = async (params: BrowseParams = {}): Promise<Page[]> =>
  * @returns {Promise<Page>} The page.
  */
 export const readPage = async (params: ReadParams): Promise<Page> => {
-  const res = await readResource<GhostPagesResponse>("pages", params);
+  const { pages } = await readResource("pages", params);
 
-  return ghostPageToPage(res.pages[0]);
+  return ghostPageToPage(pages[0]);
 };
