@@ -90,7 +90,7 @@ const makeRequest = async <T extends ResourceType>(resource: T, params: RequestP
   }).toString();
 
   // For some reason, ky wouldn't work with a ?limit value of more than 7. Instead of debugging
-  // this issue like any sensible developer would do, I switched to fetch and it seems like it's 
+  // this issue like any sensible developer would do, I switched to fetch and it seems like it's
   // working.
   const res = await fetch(url.toString());
 
