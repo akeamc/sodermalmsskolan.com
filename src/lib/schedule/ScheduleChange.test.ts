@@ -1,4 +1,3 @@
-import { parseHumanReadableDuration } from "../calendar/utils/humanReadable";
 import ScheduleChange, { parseMessageContent, parseTimeChange, TimeChange } from "./ScheduleChange";
 
 describe("ScheduleChange tests", () => {
