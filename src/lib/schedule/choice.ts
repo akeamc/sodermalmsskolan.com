@@ -1,4 +1,4 @@
-import PeriodCollection from "./collection";
+import PeriodCollection from "./PeriodCollection";
 import Period from "./Period";
 import { SUBJECTS } from "./subject";
 

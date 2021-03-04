@@ -1,5 +1,8 @@
 import Period from "./Period";
 
+/**
+ * A collection of 'Period's.
+ */
 export default class PeriodCollection {
   fullName: string;
 
