@@ -15,24 +15,24 @@ export interface TimeChange {
 }
 
 /**
- * Parse a time change literal, such as `12:30-`, `-9:30` or `6:00-6:30`.
+ * Parse a time change string, such as `12:30-`, `-9:30` or `6:00-6:30`.
  *
- * @param {string} literal The input literal.
+ * @param {string} input The input.
  * @param {string} [canceledLiteral="C"] A custom "canceled" literal indicator.
  *
  * @returns {TimeChange} The time change.
  */
-export const parseTimeChange = (literal: string, canceledLiteral = "C"): TimeChange => {
-  if (literal === canceledLiteral) {
+export const parseTimeChange = (input: string, canceledLiteral = "C"): TimeChange => {
+  if (input === canceledLiteral) {
     return {
       canceled: true,
     };
   }
 
-  const separatorIndex = literal.indexOf("-");
+  const separatorIndex = input.indexOf("-");
 
-  const start = literal.substring(0, separatorIndex);
-  const end = literal.substring(separatorIndex + 1);
+  const start = input.substring(0, separatorIndex);
+  const end = input.substring(separatorIndex + 1);
 
   return {
     canceled: false,

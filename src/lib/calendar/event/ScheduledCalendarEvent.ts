@@ -6,7 +6,9 @@ import CalendarEventInstance from "./CalendarEventInstance";
 /**
  * Normalize a strange date. Makes it easier to handle.
  *
- * @param input
+ * @param {Date} input The strange date.
+ *
+ * @returns {Date} The charm date.
  */
 export const normalizeRRuleDate = (input: Date): Date => (
   DateTime.fromJSDate(input)
@@ -15,6 +17,9 @@ export const normalizeRRuleDate = (input: Date): Date => (
     .toJSDate()
 );
 
+/**
+ * A (recurring) calendar event.
+ */
 export default class ScheduledCalendarEvent {
   rrule: RRule;
 
@@ -38,8 +43,10 @@ export default class ScheduledCalendarEvent {
   /**
    * Find all scheduled events within a timeframe.
    *
-   * @param after
-   * @param before
+   * @param {Date} after Lower time limit.
+   * @param {Date} before Upper time limit.
+   *
+   * @returns {CalendarEventInstance[]} The "rendered" `CalendarEventInstance`s.
    */
   public evaluate(after: Date, before: Date): CalendarEventInstance[] {
     const occurrences = this.rrule

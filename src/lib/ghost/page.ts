@@ -1,9 +1,10 @@
 import { PostOrPage as GhostPostOrPage } from "@tryghost/content-api";
-import { defaultReadParams, defaultSharedParams, ReadParams } from "./common";
-import api from "./credentials";
-import Post, { BrowsePostsParams, ghostPostToPost } from "./post";
-
-export type BrowsePagesParams = BrowsePostsParams;
+import {
+  BrowseParams,
+  ReadParams,
+} from "./common";
+import { browseResource, readResource } from "./api";
+import Post, { ghostPostToPost } from "./post";
 
 type Page = Post;
 
@@ -21,12 +22,12 @@ export const ghostPageToPage = (post: GhostPostOrPage): Page => ghostPostToPost(
 /**
  * Browse pages.
  *
- * @param {BrowsePagesParams} params Parameters.
+ * @param {BrowseParams} params Parameters.
  *
  * @returns {Promise<Page[]>} A promise containing the pages.
  */
-export const browsePages = async (params: BrowsePagesParams = {}): Promise<Page[]> => {
-  const pages = await api.pages.browse(defaultSharedParams(params));
+export const browsePages = async (params: BrowseParams = {}): Promise<Page[]> => {
+  const { pages } = await browseResource("pages", params);
 
   return pages.map(ghostPageToPage);
 };
@@ -39,7 +40,7 @@ export const browsePages = async (params: BrowsePagesParams = {}): Promise<Page[
  * @returns {Promise<Page>} The page.
  */
 export const readPage = async (params: ReadParams): Promise<Page> => {
-  const page = await api.pages.read(defaultReadParams(params));
+  const { pages } = await readResource("pages", params);
 
-  return ghostPageToPage(page);
+  return ghostPageToPage(pages[0]);
 };

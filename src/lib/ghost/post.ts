@@ -1,18 +1,14 @@
 import {
   PostOrPage as GhostPostOrPage,
-  FilterParam,
 } from "@tryghost/content-api";
-import api from "./credentials";
 import Identification from "./identification";
 import Tag, { ghostTagToTag } from "./tag";
 import Author, { ghostAuthorToAuthor } from "./author";
 import {
-  defaultReadParams, defaultSharedParams, ReadParams, SharedParams,
+  BrowseParams,
+  ReadParams,
 } from "./common";
-
-export interface BrowsePostsParams extends SharedParams {
-  filter?: FilterParam;
-}
+import { browseResource, readResource } from "./api";
 
 export default interface Post extends Identification {
   title: string;
@@ -64,11 +60,11 @@ export const ghostPostToPost = ({
 /**
  * Browse posts.
  *
- * @param {BrowsePostsParams} params Browsing parameters passed to the API.
+ * @param {BrowseParams} params Browsing parameters passed to the API.
  * @returns {Promise<Post[]>} The posts (wrapped in a `Promise`).
  */
-export const browsePosts = async (params: BrowsePostsParams = {}): Promise<Post[]> => {
-  const posts = await api.posts.browse(defaultSharedParams(params));
+export const browsePosts = async (params: BrowseParams = {}): Promise<Post[]> => {
+  const { posts } = await browseResource("posts", params);
 
   return posts.map(ghostPostToPost);
 };
@@ -80,9 +76,9 @@ export const browsePosts = async (params: BrowsePostsParams = {}): Promise<Post[
  * @returns {Promise<Post>} The post, wrapped in a `Promise`.
  */
 export const readPost = async (params: ReadParams): Promise<Post> => {
-  const post = await api.posts.read(defaultReadParams(params));
+  const { posts } = await readResource("posts", params);
 
-  return ghostPostToPost(post);
+  return ghostPostToPost(posts[0]);
 };
 
 export type PostFilter = (post: Post) => boolean;
