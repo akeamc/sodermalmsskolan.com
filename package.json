@@ -34,7 +34,7 @@
     "node-html-parser": "^3.0.3",
     "patch-package": "^6.2.2",
     "pdf-parse": "^1.1.1",
-    "polished": "^4.1.0",
+    "polished": "^4.1.1",
     "query-string": "^6.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.14.0",
