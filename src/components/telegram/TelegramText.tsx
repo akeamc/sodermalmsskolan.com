@@ -4,7 +4,7 @@ import Telegram from "../../lib/news/structures/Telegram";
 import useLocale from "../../hooks/useLocale";
 import Emoji from "../Emoji";
 
-const TelegramText: FunctionComponent<{telegram: Telegram}> = ({ telegram }) => {
+const TelegramText: FunctionComponent<{ telegram: Telegram }> = ({ telegram }) => {
   const { language } = useLocale();
 
   return (

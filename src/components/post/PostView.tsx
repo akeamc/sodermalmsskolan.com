@@ -19,7 +19,7 @@ const SidebarSection: FunctionComponent = (props) => (
   />
 );
 
-const PostView: FunctionComponent<{post: Post}> = ({ post }) => (
+const PostView: FunctionComponent<{ post: Post }> = ({ post }) => (
   <div css={{
     display: "flex",
     justifyContent: "center",
