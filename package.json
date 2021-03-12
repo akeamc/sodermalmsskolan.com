@@ -21,7 +21,7 @@
     "dayjs": "^1.10.4",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "firebase": "^8.2.9",
+    "firebase": "^8.3.0",
     "firebase-admin": "^9.5.0",
     "formik": "^2.2.6",
     "got": "^11.8.2",
