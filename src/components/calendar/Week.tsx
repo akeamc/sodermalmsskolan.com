@@ -13,7 +13,6 @@ import CalendarDay from "./Day";
 export interface CalendarWeekProps {
   dayCount?: number;
   eventInstances: CalendarEventInstance[];
-  placeholder?: boolean;
 }
 
 /**
@@ -26,7 +25,6 @@ export interface CalendarWeekProps {
 const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
   dayCount = 7,
   eventInstances,
-  placeholder = false,
 }) => {
   const { language } = useLocale();
 
@@ -84,7 +82,6 @@ const CalendarWeek: FunctionComponent<CalendarWeekProps> = ({
               // eslint-disable-next-line react/no-array-index-key
               key={weekday}
               weekday={weekday}
-              placeholder={placeholder}
               active={weekday === activeTab}
             />
           ))}

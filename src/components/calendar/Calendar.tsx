@@ -14,6 +14,7 @@ import usePlaceholderEvents from "../../lib/calendar/hooks/usePlaceholderEvents"
 import ScheduledCalendarEvent from "../../lib/calendar/event/ScheduledCalendarEvent";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 import secondsSinceMidnight from "../../lib/calendar/utils/secondsSinceMidnight";
+import { CalendarContext } from "../../lib/calendar/CalendarContext";
 
 dayjs.extend(isoWeek);
 
@@ -92,7 +93,16 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const rows = 86400 / rowDuration - rowPadStart - rowPadEnd;
 
   return (
-    <div>
+    <CalendarContext.Provider value={{
+      earliestEventStart: earliest,
+      latestEventEnd: latest,
+      showPlaceholder: !events,
+      rowCount: rows,
+      rowPadStart,
+      rowPadEnd,
+      rowDuration,
+    }}
+    >
       <div css={{
         position: "relative",
         "--row-duration": rowDuration,
@@ -108,19 +118,13 @@ const Calendar: FunctionComponent<CalendarProps> = ({
         },
       }}
       >
-        <CalendarLabels
-          placeholder={!events}
-          rowCount={rows}
-          rowPadStart={rowPadStart}
-          rowDuration={rowDuration}
-        />
+        <CalendarLabels />
         <CalendarWeek
-          placeholder={!events}
           dayCount={dayCount}
           eventInstances={eventInstances}
         />
       </div>
-    </div>
+    </CalendarContext.Provider>
   );
 };
 
