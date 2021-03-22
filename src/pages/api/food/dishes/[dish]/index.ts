@@ -16,7 +16,7 @@ import { getCacheHeader } from "../../../../../lib/utils/cache";
  */
 const handler: ServerDishHandler<DishStatic> = async (_, res, dish) => {
   res.setHeader("Cache-Control", getCacheHeader({
-    maxAge: 86400,
+    sharedMaxAge: 86400,
   }));
 
   return res.json(dish.serialize());

@@ -15,7 +15,7 @@ const handler: NextApiHandler<DishStatic[]> = async (_, res) => {
   const dishes = await ServerDish.fetchAll();
 
   res.setHeader("Cache-Control", getCacheHeader({
-    maxAge: 86400,
+    sharedMaxAge: 86400,
   }));
 
   return res.json(dishes.map((dish) => dish.serialize()));

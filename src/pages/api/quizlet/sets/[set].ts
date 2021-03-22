@@ -25,7 +25,7 @@ const handler: NextApiHandler<StudySetStatic> = async (req, res) => {
   await studySet.fetchDetails();
 
   res.setHeader("Cache-Control", getCacheHeader({
-    maxAge: 86400,
+    sharedMaxAge: 86400,
     staleWhileRevalidate: 604800,
   }));
 

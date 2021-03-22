@@ -15,7 +15,7 @@ const handler: NextApiHandler<IMenu[]> = async (_, res) => {
   const menus = await ServerMenu.fetchAll();
 
   res.setHeader("Cache-Control", getCacheHeader({
-    maxAge: 3600,
+    sharedMaxAge: 3600,
     staleWhileRevalidate: 86400,
   }));
 
