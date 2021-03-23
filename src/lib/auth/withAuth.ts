@@ -24,14 +24,14 @@ const withAuth = <T>(
       return admin
         .auth()
         .verifyIdToken(token)
-        .catch(() => res.status(403).send("invalid access token"))
         .then(async (decoded) => {
           if (decoded) {
             return handler(req, res, decoded);
           }
 
           return res.status(500).send("unknown error");
-        });
+        })
+        .catch(() => res.status(403).send("invalid access token"));
     }
 
     return res
