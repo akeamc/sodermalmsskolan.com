@@ -1,7 +1,10 @@
 import dayjs from "dayjs";
+import { clamp } from "lodash";
 import React, { FunctionComponent } from "react";
 import useLocale from "../../hooks/useLocale";
 import useTime from "../../hooks/useTime";
+import { useCalendarContext } from "../../lib/calendar/CalendarContext";
+import CalendarDayContext, { useCalendarDayContext } from "../../lib/calendar/CalendarDayContext";
 import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
 import useEventInstanceEffect from "../../lib/calendar/hooks/useEventInstanceEffect";
 import secondsSinceMidnight from "../../lib/calendar/utils/secondsSinceMidnight";
@@ -18,7 +21,7 @@ export interface CalendarDayProps {
   /**
    * Whether the calendar day is a placeholder and should display fake events.
    */
-  placeholder?: boolean;
+  isPlaceholder?: boolean;
 
   eventInstances: CalendarEventInstance[];
 
@@ -28,32 +31,20 @@ export interface CalendarDayProps {
   active?: boolean;
 }
 
-export interface CalendarTextProps {
-  weekday?: number;
-  placeholder?: boolean;
-  dayEnd?: number;
-}
-
 /**
  * Component displaying the name of a day in the calendar.
  *
- * @param {React.PropsWithChildren<CalendarTextProps>} props Props.
- *
  * @returns {React.ReactElement} The rendered text.
  */
-export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
-  weekday,
-  placeholder = false,
-  dayEnd = 60 * 60 * 24,
-}) => {
+export const CalendarDayText: FunctionComponent = () => {
   const { language } = useLocale();
-
-  const dateNow = useTime();
-  const now = dayjs(dateNow);
+  const { weekday, dayEnd } = useCalendarDayContext();
+  const { showPlaceholder } = useCalendarContext();
+  const now = useTime();
 
   const isoWeekday = weekday + 1;
 
-  const weekdayDiff = isoWeekday - now.isoWeekday();
+  const weekdayDiff = isoWeekday - now.getDay();
 
   let isPast = false;
 
@@ -62,7 +53,7 @@ export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
   }
 
   if (weekdayDiff === 0) {
-    isPast = secondsSinceMidnight(dateNow) > dayEnd;
+    isPast = secondsSinceMidnight(now) > dayEnd;
   }
 
   return (
@@ -76,8 +67,48 @@ export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
       textDecoration: "line-through",
     } : null]}
     >
-      {placeholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).isoWeekday(isoWeekday).format("dddd")}
+      {showPlaceholder ? <InlineSkeleton width="4em" /> : dayjs().locale(language).isoWeekday(isoWeekday).format("dddd")}
     </span>
+  );
+};
+
+/**
+ * Line of doom.
+ *
+ * @returns {React.ReactElement} Rendered line.
+ */
+const CalendarDayIndicator: FunctionComponent = () => {
+  const { weekday } = useCalendarDayContext();
+  const { earliestEventStart, latestEventEnd } = useCalendarContext();
+
+  const now = useTime();
+
+  const isToday = weekday + 1 === now.getDay();
+
+  if (!isToday) {
+    return null;
+  }
+
+  const seconds = secondsSinceMidnight(now);
+
+  const clamped = clamp(seconds, earliestEventStart, latestEventEnd);
+
+  const isClamped = clamped !== seconds;
+
+  return (
+    <div
+      css={{
+        [media(breakpoints.large)]: {
+          position: "absolute",
+          height: 2,
+          width: "100%",
+          backgroundColor: "var(--color-border-danger)",
+          top: `calc(((${clamped} / var(--row-duration)) - var(--row-pad-start)) * var(--row-height))`,
+          zIndex: 1,
+          opacity: isClamped ? 0.5 : 1,
+        },
+      }}
+    />
   );
 };
 
@@ -90,7 +121,6 @@ export const CalendarDayText: FunctionComponent<CalendarTextProps> = ({
  */
 const CalendarDay: FunctionComponent<CalendarDayProps> = ({
   weekday,
-  placeholder = false,
   eventInstances,
   active = false,
 }) => {
@@ -159,53 +189,60 @@ const CalendarDay: FunctionComponent<CalendarDayProps> = ({
     }, 0);
 
   return (
-    <section css={{
-      flex: 1,
-      display: active ? "initial" : "none",
-
-      [media(breakpoints.large)]: {
-        borderRight: "1px solid var(--color-border-primary)",
-        display: "initial",
-
-        "&:first-of-type": {
-          borderLeft: "1px solid var(--color-border-primary)",
-        },
-      },
+    <CalendarDayContext.Provider value={{
+      weekday,
+      dayEnd,
     }}
     >
-      <div css={{
-        height: "var(--header-height)",
-        width: "100%",
-        position: "sticky",
-        top: "var(--navbar-height)",
-        backgroundColor: "var(--color-bg-primary)",
-        zIndex: 2,
-        boxShadow: "0 1px 0 0 var(--color-border-primary)",
-        display: "none",
-        alignItems: "center",
-        justifyContent: "center",
+      <section css={{
+        flex: 1,
+        display: active ? "initial" : "none",
 
         [media(breakpoints.large)]: {
-          display: "flex",
+          borderRight: "1px solid var(--color-border-primary)",
+          display: "initial",
+
+          "&:first-of-type": {
+            borderLeft: "1px solid var(--color-border-primary)",
+          },
         },
       }}
       >
-        <CalendarDayText weekday={weekday} placeholder={placeholder} dayEnd={dayEnd} />
-      </div>
-      <ul css={{
-        position: "relative",
-        padding: 0,
-        margin: 0,
+        <div css={{
+          height: "var(--header-height)",
+          width: "100%",
+          position: "sticky",
+          top: "var(--navbar-height)",
+          backgroundColor: "var(--color-bg-primary)",
+          zIndex: 2,
+          boxShadow: "0 1px 0 0 var(--color-border-primary)",
+          display: "none",
+          alignItems: "center",
+          justifyContent: "center",
 
-        [media(breakpoints.large)]: {
-          height: "calc(var(--rows) * var(--row-height))",
-        },
-      }}
-      >
-        {instanceProps
-          .map((props) => <CalendarEventView {...props} key={props.data.signature} />)}
-      </ul>
-    </section>
+          [media(breakpoints.large)]: {
+            display: "flex",
+          },
+        }}
+        >
+          <CalendarDayText />
+        </div>
+        <ul css={{
+          position: "relative",
+          padding: 0,
+          margin: 0,
+
+          [media(breakpoints.large)]: {
+            height: "calc(var(--rows) * var(--row-height))",
+          },
+        }}
+        >
+          <CalendarDayIndicator />
+          {instanceProps
+            .map((props) => <CalendarEventView {...props} key={props.data.signature} />)}
+        </ul>
+      </section>
+    </CalendarDayContext.Provider>
   );
 };
 

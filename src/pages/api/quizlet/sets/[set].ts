@@ -1,7 +1,16 @@
 import { NextApiHandler } from "next";
 import { ServerStudySet } from "../../../../lib/quizlet/structures/server/StudySet";
 import { StudySetStatic } from "../../../../lib/quizlet/structures/shared/StudySet";
+import { getCacheHeader } from "../../../../lib/utils/cache";
 
+/**
+ * Study set API handler.
+ *
+ * @param {import("next").NextApiRequest} req Request.
+ * @param {import("next").NextApiResponse} res Response.
+ *
+ * @returns {void}
+ */
 const handler: NextApiHandler<StudySetStatic> = async (req, res) => {
   const id = req.query.set?.toString();
 
@@ -15,7 +24,10 @@ const handler: NextApiHandler<StudySetStatic> = async (req, res) => {
 
   await studySet.fetchDetails();
 
-  res.setHeader("Cache-Control", "s-maxage=86400");
+  res.setHeader("Cache-Control", getCacheHeader({
+    sharedMaxAge: 86400,
+    staleWhileRevalidate: 604800,
+  }));
 
   return res.json(studySet.serialize());
 };
