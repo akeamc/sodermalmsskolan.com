@@ -14,39 +14,53 @@ export interface CellProps {
  * @returns {React.ReactElement} Rendered cell.
  */
 const Cell: FunctionComponent<CellProps> = ({ date }) => {
-  const { cursor, setCursor } = useCalendarContext();
+  const { cursor, setCursor, scope } = useCalendarContext();
 
   const isSelectedMonth = date.isSame(cursor, "month");
   const isCursor = date.isSame(cursor, "day");
+  const isInScope = date.isSame(cursor, scope);
+
+  const leftBorderRadius = !isInScope || cursor.startOf(scope).isSame(date, "date");
+  const rightBorderRadius = !isInScope || cursor.endOf(scope).isSame(date, "date");
 
   return (
     <button
       css={[{
-        backgroundColor: "transparent",
+        backgroundColor: isInScope ? "var(--accents-2)" : "transparent",
         color: isSelectedMonth ? "var(--color-text-primary)" : "var(--color-text-tertiary)",
         fontWeight: isSelectedMonth ? 500 : 400,
         position: "relative",
-        borderRadius: 8,
         border: "none",
         display: "block",
         padding: 0,
         cursor: "pointer",
         transition: "all 0.1s",
         fontFamily: "var(--font-sans)",
+        borderRadius: "var(--cell-border-radius)",
+
+        ":hover": {
+          backgroundColor: "var(--accents-2)",
+        },
 
         "::after": {
           content: "\"\"",
           display: "block",
           paddingBottom: "100%",
         },
-      }, isCursor ? {
-        backgroundColor: "var(--color-highlight)",
+      }, !leftBorderRadius ? {
+        borderTopLeftRadius: 0,
+        borderBottomLeftRadius: 0,
+      } : undefined, !rightBorderRadius ? {
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+      } : undefined, isCursor ? {
         color: "#fff",
-      } : {
-        ":hover": {
-          backgroundColor: "var(--accents-2)",
+
+        "::after": {
+          backgroundColor: "var(--color-highlight)",
+          borderRadius: "var(--cell-border-radius)",
         },
-      }]}
+      } : undefined]}
       onClick={() => setCursor(date)}
       type="button"
     >
@@ -86,7 +100,7 @@ const CalendarWidget: FunctionComponent = () => {
 
   return (
     <div css={{
-      "--widget-highlight-color": "",
+      "--cell-border-radius": "8px",
     }}
     >
       <button onClick={() => moveMonths(-1)} type="button">Back</button>
@@ -99,7 +113,6 @@ const CalendarWidget: FunctionComponent = () => {
           gridTemplateColumns: "repeat(7, 1fr)",
           gridTemplateRows: "auto",
           gridAutoRows: "1fr",
-          gap: 2,
         }}
       >
         {Array
@@ -114,11 +127,7 @@ const CalendarWidget: FunctionComponent = () => {
               fontSize: 14,
             }}
             >
-              {
-                topLeftDate
-                  .add(i, "days")
-                  .format("dd")
-              }
+              {topLeftDate.add(i, "days").format("dd")}
             </div>
           ))}
         {Array

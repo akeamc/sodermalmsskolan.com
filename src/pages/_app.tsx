@@ -6,7 +6,7 @@ import { GlobalStyles } from "../styles/global";
 import { AuthProvider } from "../lib/auth/AuthContext";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import ANALYTICS_ID from "../lib/analytics/constants";
-import "../styles/fonts.css";
+import "../styles/fonts.scss";
 
 /**
  * The main application, batteries included.

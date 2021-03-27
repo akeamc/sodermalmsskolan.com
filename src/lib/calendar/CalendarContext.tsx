@@ -9,12 +9,16 @@ export interface CalendarContextData {
   cursor: Dayjs;
   setCursor: (cursor: Dayjs) => void,
   moveMonths: (months: number) => void,
+  scope: CalendarScope,
+  setScope: (scope: CalendarScope) => void,
 }
 
 const defaultCalendarContextData: CalendarContextData = {
   cursor: dayjs().locale("sv"),
   setCursor: () => {},
   moveMonths: () => {},
+  scope: "week",
+  setScope: () => {},
 };
 
 const CalendarContext = createContext<CalendarContextData>(defaultCalendarContextData);
@@ -35,6 +39,7 @@ export const useCalendarContext = (): CalendarContextData => useContext(Calendar
  */
 export const CalendarContextProvider: FunctionComponent = (props) => {
   const [cursor, setCursor] = useState(defaultCalendarContextData.cursor);
+  const [scope, setScope] = useState(defaultCalendarContextData.scope);
 
   /**
    * Move the cursor `months` number of months forward or backward.
@@ -51,6 +56,8 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
         cursor,
         setCursor,
         moveMonths,
+        scope,
+        setScope,
       }}
       {...props}
     />
