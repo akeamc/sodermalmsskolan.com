@@ -10,15 +10,17 @@ import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
 export default {
   title: "CalendarWidget",
   component: CalendarWidget,
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  decorators: [(Widget) => (
+    <CalendarContextProvider>
+      <Widget />
+    </CalendarContextProvider>
+  )],
 };
 
 const Template: Story<
 ComponentProps<typeof CalendarWidget>
 // eslint-disable-next-line require-jsdoc
-> = (args) => (
-  <CalendarContextProvider>
-    <CalendarWidget {...args} />
-  </CalendarContextProvider>
-);
+> = (args) => <CalendarWidget {...args} />;
 
 export const Default = Template.bind({});

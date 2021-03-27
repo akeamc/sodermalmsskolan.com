@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import React, { FunctionComponent } from "react";
 import { useCalendarContext } from "../../lib/calendar/CalendarContext";
 
@@ -23,18 +23,16 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
     <button
       css={[{
         backgroundColor: "transparent",
-        color: isSelectedMonth ? undefined : "rgba(0, 0, 0, 0.25)",
+        color: isSelectedMonth ? "var(--color-text-primary)" : "var(--color-text-tertiary)",
+        fontWeight: isSelectedMonth ? 500 : 400,
         position: "relative",
-        borderRadius: "50%",
+        borderRadius: 8,
         border: "none",
         display: "block",
         padding: 0,
         cursor: "pointer",
-        transition: "background-color 0.1s",
-
-        ":hover": {
-          backgroundColor: "rgba(255, 0, 0, 0.1)",
-        },
+        transition: "all 0.1s",
+        fontFamily: "var(--font-sans)",
 
         "::after": {
           content: "\"\"",
@@ -42,9 +40,13 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
           paddingBottom: "100%",
         },
       }, isCursor ? {
-        backgroundColor: "red !important",
-        color: "white",
-      } : undefined]}
+        backgroundColor: "var(--color-highlight)",
+        color: "#fff",
+      } : {
+        ":hover": {
+          backgroundColor: "var(--accents-2)",
+        },
+      }]}
       onClick={() => setCursor(date)}
       type="button"
     >
@@ -52,12 +54,17 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
         position: "absolute",
         width: "100%",
         height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
       >
         <span css={{
           textAlign: "center",
           display: "inline-block",
-          fontFamily: "monospace",
+          fontSize: 16,
+          lineHeight: 1,
+          fontFeatureSettings: "\"ss01\"",
         }}
         >
           {date.format("D")}
@@ -78,16 +85,21 @@ const CalendarWidget: FunctionComponent = () => {
   const bottomRightDate = cursor.endOf("month").endOf("week");
 
   return (
-    <div>
+    <div css={{
+      "--widget-highlight-color": "",
+    }}
+    >
       <button onClick={() => moveMonths(-1)} type="button">Back</button>
       <h1>{cursor.format("MMMM YYYY")}</h1>
       <button onClick={() => moveMonths(1)} type="button">Forward</button>
-      <table
+      <div
         css={{
           width: 300,
           display: "grid",
           gridTemplateColumns: "repeat(7, 1fr)",
+          gridTemplateRows: "auto",
           gridAutoRows: "1fr",
+          gap: 2,
         }}
       >
         {Array
@@ -95,13 +107,17 @@ const CalendarWidget: FunctionComponent = () => {
             length: 7,
           })
           .map((_, i) => (
-            <div>
+            <div css={{
+              color: "var(--color-text-tertiary)",
+              textAlign: "center",
+              fontWeight: 400,
+              fontSize: 14,
+            }}
+            >
               {
-                dayjs()
-                  .locale(cursor.locale())
-                  .startOf("week")
+                topLeftDate
                   .add(i, "days")
-                  .format("ddd")
+                  .format("dd")
               }
             </div>
           ))}
@@ -112,7 +128,7 @@ const CalendarWidget: FunctionComponent = () => {
           .map((_, i) => (
             <Cell date={topLeftDate.add(i, "days")} />
           ))}
-      </table>
+      </div>
     </div>
   );
 };

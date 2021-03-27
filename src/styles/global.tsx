@@ -4,10 +4,14 @@ import {
 } from "@emotion/react";
 import darkTheme from "./themes/dark";
 import baseTheme from "./themes/base";
+import "./fonts.css";
 
 export const globalStyles = css({
   "body, html": {
     margin: 0,
+    backgroundColor: "var(--color-bg-primary)",
+    color: "var(--color-text-primary)",
+    fontFamily: "var(--font-sans)",
   },
 });
 

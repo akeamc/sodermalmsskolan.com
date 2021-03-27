@@ -24,7 +24,6 @@ export default class MyDocument extends Document<Props> {
     return (
       <Html>
         <Head>
-          <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
           {this.props.styles}
         </Head>
         <body>
