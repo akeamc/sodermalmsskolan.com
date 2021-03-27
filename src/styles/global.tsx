@@ -4,7 +4,6 @@ import {
 } from "@emotion/react";
 import darkTheme from "./themes/dark";
 import baseTheme from "./themes/base";
-import "./fonts.css";
 
 export const globalStyles = css({
   "body, html": {
