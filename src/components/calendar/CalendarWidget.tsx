@@ -14,14 +14,20 @@ export interface CellProps {
  * @returns {React.ReactElement} Rendered cell.
  */
 const Cell: FunctionComponent<CellProps> = ({ date }) => {
-  const { cursor, setCursor, scope } = useCalendarContext();
+  const {
+    cursor,
+    setCursor,
+    scope,
+    startOfScope,
+    endOfScope,
+  } = useCalendarContext();
 
   const isSelectedMonth = date.isSame(cursor, "month");
   const isCursor = date.isSame(cursor, "day");
   const isInScope = date.isSame(cursor, scope);
 
-  const leftBorderRadius = !isInScope || cursor.startOf(scope).isSame(date, "date");
-  const rightBorderRadius = !isInScope || cursor.endOf(scope).isSame(date, "date");
+  const leftBorderRadius = !isInScope || startOfScope.isSame(date, "date");
+  const rightBorderRadius = !isInScope || endOfScope.isSame(date, "date");
 
   return (
     <button
@@ -120,12 +126,15 @@ const CalendarWidget: FunctionComponent = () => {
             length: 7,
           })
           .map((_, i) => (
-            <div css={{
-              color: "var(--color-text-tertiary)",
-              textAlign: "center",
-              fontWeight: 400,
-              fontSize: 14,
-            }}
+            <div
+              // eslint-disable-next-line react/no-array-index-key
+              key={i}
+              css={{
+                color: "var(--color-text-tertiary)",
+                textAlign: "center",
+                fontWeight: 400,
+                fontSize: 14,
+              }}
             >
               {topLeftDate.add(i, "days").format("dd")}
             </div>
@@ -135,7 +144,8 @@ const CalendarWidget: FunctionComponent = () => {
             length: bottomRightDate.diff(topLeftDate, "days") + 1,
           })
           .map((_, i) => (
-            <Cell date={topLeftDate.add(i, "days")} />
+            // eslint-disable-next-line react/no-array-index-key
+            <Cell key={i} date={topLeftDate.add(i, "days")} />
           ))}
       </div>
     </div>

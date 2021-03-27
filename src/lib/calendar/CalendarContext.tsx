@@ -11,6 +11,8 @@ export interface CalendarContextData {
   moveMonths: (months: number) => void,
   scope: CalendarScope,
   setScope: (scope: CalendarScope) => void,
+  startOfScope: Dayjs,
+  endOfScope: Dayjs,
 }
 
 const defaultCalendarContextData: CalendarContextData = {
@@ -19,6 +21,8 @@ const defaultCalendarContextData: CalendarContextData = {
   moveMonths: () => {},
   scope: "week",
   setScope: () => {},
+  startOfScope: dayjs(),
+  endOfScope: dayjs(),
 };
 
 const CalendarContext = createContext<CalendarContextData>(defaultCalendarContextData);
@@ -58,6 +62,8 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
         moveMonths,
         scope,
         setScope,
+        startOfScope: cursor.startOf(scope),
+        endOfScope: cursor.endOf(scope),
       }}
       {...props}
     />
