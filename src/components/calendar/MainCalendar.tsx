@@ -34,6 +34,7 @@ const MainCalendar: FunctionComponent = () => {
   return (
     <div css={{
       "--border-color": "var(--accents-2)",
+      width: "100%",
     }}
     >
       <h1>{cursor.format("MMMM YYYY")}</h1>

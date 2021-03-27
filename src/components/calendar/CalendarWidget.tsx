@@ -107,6 +107,7 @@ const CalendarWidget: FunctionComponent = () => {
   return (
     <div css={{
       "--cell-border-radius": "8px",
+      width: 300,
     }}
     >
       <button onClick={() => moveMonths(-1)} type="button">Back</button>
@@ -114,7 +115,6 @@ const CalendarWidget: FunctionComponent = () => {
       <button onClick={() => moveMonths(1)} type="button">Forward</button>
       <div
         css={{
-          width: 300,
           display: "grid",
           gridTemplateColumns: "repeat(7, 1fr)",
           gridTemplateRows: "auto",
