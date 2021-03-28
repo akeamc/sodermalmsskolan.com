@@ -1,13 +1,10 @@
 import { Dayjs } from "dayjs";
 import React, { FunctionComponent } from "react";
 import { useCalendarContext } from "../../lib/calendar/CalendarContext";
-import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
-import useEventInstances from "../../lib/calendar/hooks/useEventInstances";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 export interface CellProps {
   date: Dayjs;
-  eventInstances: CalendarEventInstance[];
 }
 
 /**
@@ -17,13 +14,14 @@ export interface CellProps {
  *
  * @returns {React.ReactElement} Rendered cell.
  */
-const Cell: FunctionComponent<CellProps> = ({ date, eventInstances }) => {
+const Cell: FunctionComponent<CellProps> = ({ date }) => {
   const {
     cursor,
     setCursor,
     scope,
     startOfScope,
     endOfScope,
+    getEventInstances,
   } = useCalendarContext();
 
   const isSelectedMonth = date.isSame(cursor, "month");
@@ -32,6 +30,8 @@ const Cell: FunctionComponent<CellProps> = ({ date, eventInstances }) => {
 
   const leftBorderRadius = !isInScope || startOfScope.isSame(date, "date");
   const rightBorderRadius = !isInScope || endOfScope.isSame(date, "date");
+
+  const eventInstances = getEventInstances(date);
 
   return (
     <button
@@ -133,8 +133,6 @@ const CalendarWidget: FunctionComponent = () => {
   const topLeftDate = cursor.startOf("month").startOf("week");
   const bottomRightDate = topLeftDate.add(5, "weeks").endOf("week");
 
-  const eventInstances = useEventInstances(topLeftDate, bottomRightDate, true);
-
   return (
     <div css={{
       "--cell-border-radius": "8px",
@@ -178,7 +176,7 @@ const CalendarWidget: FunctionComponent = () => {
             const date = topLeftDate.add(i, "days");
 
             return (
-              <Cell key={date.unix()} date={date} eventInstances={eventInstances?.filter(({ start }) => date.isSame(start, "date"))} />
+              <Cell key={date.unix()} date={date} />
             );
           })}
       </div>

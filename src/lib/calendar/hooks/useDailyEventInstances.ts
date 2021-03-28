@@ -1,6 +1,6 @@
 import { Dayjs } from "dayjs";
+import { useCalendarContext } from "../CalendarContext";
 import CalendarEventInstance from "../event/CalendarEventInstance";
-import useEventInstances from "./useEventInstances";
 
 /**
  * Use the event instances for a particular date.
@@ -9,8 +9,12 @@ import useEventInstances from "./useEventInstances";
  *
  * @returns {CalendarEventInstance[]} Event instances.
  */
-const useDailyEventInstances = (date: Dayjs): CalendarEventInstance[] => (
-  useEventInstances(date.startOf("day"), date.endOf("day"), true)
-);
+const useDailyEventInstances = (date: Dayjs): CalendarEventInstance[] => {
+  const {
+    getEventInstances,
+  } = useCalendarContext();
+
+  return getEventInstances(date);
+};
 
 export default useDailyEventInstances;
