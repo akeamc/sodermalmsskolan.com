@@ -29,7 +29,7 @@ const CalendarController: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered calendar.
  */
 const MainCalendar: FunctionComponent = () => {
-  const { cursor, scope } = useCalendarContext();
+  const { cursor } = useCalendarContext();
 
   return (
     <div css={{

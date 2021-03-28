@@ -2,17 +2,21 @@ import dayjs, { Dayjs } from "dayjs";
 import React, {
   createContext, FunctionComponent, useContext, useState,
 } from "react";
+import CalendarEventSchedule from "./event/CalendarEventSchedule";
+import useCalendarEventSchedules from "./hooks/useCalendarEventSchedules";
 
 export type CalendarScope = "day" | "week" | "month";
 
 export interface CalendarContextData {
   cursor: Dayjs;
-  setCursor: (cursor: Dayjs) => void,
-  moveMonths: (months: number) => void,
-  scope: CalendarScope,
-  setScope: (scope: CalendarScope) => void,
-  startOfScope: Dayjs,
-  endOfScope: Dayjs,
+  setCursor: (cursor: Dayjs) => void;
+  moveMonths: (months: number) => void;
+  scope: CalendarScope;
+  setScope: (scope: CalendarScope) => void;
+  startOfScope: Dayjs;
+  endOfScope: Dayjs;
+  schedules: CalendarEventSchedule[];
+  schedulesSignature: string;
 }
 
 const defaultCalendarContextData: CalendarContextData = {
@@ -23,6 +27,8 @@ const defaultCalendarContextData: CalendarContextData = {
   setScope: () => {},
   startOfScope: dayjs(),
   endOfScope: dayjs(),
+  schedules: [],
+  schedulesSignature: "",
 };
 
 const CalendarContext = createContext<CalendarContextData>(defaultCalendarContextData);
@@ -42,6 +48,8 @@ export const useCalendarContext = (): CalendarContextData => useContext(Calendar
  * @returns {React.ReactElement} Provider.
  */
 export const CalendarContextProvider: FunctionComponent = (props) => {
+  const schedules = useCalendarEventSchedules();
+
   const [cursor, setCursor] = useState(defaultCalendarContextData.cursor);
   const [scope, setScope] = useState(defaultCalendarContextData.scope);
 
@@ -64,6 +72,8 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
         setScope,
         startOfScope: cursor.startOf(scope),
         endOfScope: cursor.endOf(scope),
+        schedules,
+        schedulesSignature: schedules.map((schedule) => schedule.signature).join(","),
       }}
       {...props}
     />

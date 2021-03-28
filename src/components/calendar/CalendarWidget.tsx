@@ -1,9 +1,13 @@
 import { Dayjs } from "dayjs";
 import React, { FunctionComponent } from "react";
 import { useCalendarContext } from "../../lib/calendar/CalendarContext";
+import CalendarEventInstance from "../../lib/calendar/event/CalendarEventInstance";
+import useEventInstances from "../../lib/calendar/hooks/useEventInstances";
+import InlineSkeleton from "../skeleton/InlineSkeleton";
 
 export interface CellProps {
   date: Dayjs;
+  eventInstances: CalendarEventInstance[];
 }
 
 /**
@@ -13,7 +17,7 @@ export interface CellProps {
  *
  * @returns {React.ReactElement} Rendered cell.
  */
-const Cell: FunctionComponent<CellProps> = ({ date }) => {
+const Cell: FunctionComponent<CellProps> = ({ date, eventInstances }) => {
   const {
     cursor,
     setCursor,
@@ -87,8 +91,33 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
           fontFeatureSettings: "\"ss01\"",
         }}
         >
-          {date.format("D")}
+          {typeof eventInstances !== "undefined" ? date.format("D") : <InlineSkeleton width="1em" />}
         </span>
+        <div css={{
+          position: "absolute",
+          bottom: 6,
+          display: "flex",
+        }}
+        >
+          {eventInstances?.map(({
+            details: {
+              color,
+            },
+            signature,
+          }) => (
+            <span
+              key={signature}
+              css={{
+                height: 4,
+                width: 4,
+                borderRadius: "50%",
+                backgroundColor: isCursor ? "currentColor" : color,
+                display: "block",
+                margin: "0 2px",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </button>
   );
@@ -102,7 +131,9 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
 const CalendarWidget: FunctionComponent = () => {
   const { cursor, moveMonths } = useCalendarContext();
   const topLeftDate = cursor.startOf("month").startOf("week");
-  const bottomRightDate = cursor.endOf("month").endOf("week");
+  const bottomRightDate = topLeftDate.add(5, "weeks").endOf("week");
+
+  const eventInstances = useEventInstances(topLeftDate, bottomRightDate, true);
 
   return (
     <div css={{
@@ -143,10 +174,13 @@ const CalendarWidget: FunctionComponent = () => {
           .from({
             length: bottomRightDate.diff(topLeftDate, "days") + 1,
           })
-          .map((_, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Cell key={i} date={topLeftDate.add(i, "days")} />
-          ))}
+          .map((_, i) => {
+            const date = topLeftDate.add(i, "days");
+
+            return (
+              <Cell key={date.unix()} date={date} eventInstances={eventInstances?.filter(({ start }) => date.isSame(start, "date"))} />
+            );
+          })}
       </div>
     </div>
   );
