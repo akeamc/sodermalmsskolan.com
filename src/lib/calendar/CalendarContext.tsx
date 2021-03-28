@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from "dayjs";
 import React, {
-  createContext, FunctionComponent, useContext, useEffect, useRef, useState,
+  createContext, FunctionComponent, useCallback, useContext, useEffect, useRef, useState,
 } from "react";
 import CalendarEventInstance from "./event/CalendarEventInstance";
 import CalendarEventSchedule from "./event/CalendarEventSchedule";
@@ -75,11 +75,8 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
     setCursor(cursor.add(months, "months").startOf("month"));
   };
 
+  const prevSchedulesSignatureRef = useRef<string>();
   const schedulesSignature = schedules.map((schedule) => schedule.signature).join(",");
-
-  useEffect(() => {
-    eventInstanceRef.current.clear();
-  }, [schedulesSignature]);
 
   /**
    * Preload the `CalendarEventInstance`s for a specified date and granuality
@@ -88,7 +85,7 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
    * @param {Dayjs} around Cursor date.
    * @param {dayjs.OpUnitType} granuality Unit.
    */
-  const preloadEventInstances = (around: Dayjs, granuality: dayjs.OpUnitType): void => {
+  const preloadEventInstances = useCallback((around: Dayjs, granuality: dayjs.OpUnitType): void => {
     const before = around.startOf(granuality);
     const after = around.endOf(granuality);
 
@@ -116,7 +113,16 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
 
       eventInstanceRef.current.set(key, foundInstances);
     }
-  };
+  }, [schedules]);
+
+  useEffect(() => {
+    if (prevSchedulesSignatureRef.current !== schedulesSignature) {
+      prevSchedulesSignatureRef.current = schedulesSignature;
+
+      eventInstanceRef.current.clear();
+      preloadEventInstances(cursor, "year");
+    }
+  }, [cursor, preloadEventInstances, schedulesSignature]);
 
   /**
    * Return the cached event instances. If a cache miss occurs, the cache is revalidated.
