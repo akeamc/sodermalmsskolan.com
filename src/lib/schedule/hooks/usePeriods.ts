@@ -1,28 +1,119 @@
-import Period from "../Period";
+import CalendarEventSchedule from "../../calendar/event/CalendarEventSchedule";
+import { getPeriodEventSchedule, PeriodCollection } from "../Period";
+
+// TODO: Make this less messy
+const collection: PeriodCollection = {
+  group: "O93",
+  periods: [{
+    weekday: 0,
+    hour: 8,
+    minute: 30,
+    duration: 3600,
+    subject: "english",
+    room: "A307",
+  }, {
+    weekday: 0,
+    hour: 9,
+    minute: 45,
+    duration: 4500,
+    subject: "math",
+    room: "A311",
+  }, {
+    weekday: 0,
+    hour: 11,
+    minute: 10,
+    duration: 4500,
+    subject: "socialStudies",
+    room: "A309",
+  }, {
+    weekday: 0,
+    hour: 13,
+    minute: 15,
+    duration: 4200,
+    subject: "swedish",
+    room: "A308",
+  }, {
+    weekday: 1,
+    hour: 8,
+    minute: 25,
+    duration: 3900,
+    subject: "math",
+    room: "A311",
+  }, {
+    weekday: 1,
+    hour: 9,
+    minute: 50,
+    duration: 3000,
+    subject: "sports",
+    room: "B501",
+  }, {
+    weekday: 1,
+    hour: 13,
+    minute: 10,
+    duration: 3900,
+    subject: "swedish",
+    room: "A308",
+  }, {
+    weekday: 2,
+    hour: 11,
+    minute: 20,
+    duration: 3900,
+    subject: "socialStudies",
+    room: "A309",
+  }, {
+    weekday: 2,
+    hour: 13,
+    minute: 15,
+    duration: 3000,
+    subject: "english",
+    room: "A307",
+  }, {
+    weekday: 3,
+    hour: 9,
+    minute: 35,
+    duration: 6000,
+    subject: "engineering",
+    room: "A417",
+  }, {
+    weekday: 3,
+    hour: 11,
+    minute: 25,
+    duration: 3300,
+    subject: "math",
+    room: "A311",
+  }, {
+    weekday: 3,
+    hour: 13,
+    minute: 5,
+    duration: 3000,
+    subject: "socialStudies",
+    room: "A309",
+  }, {
+    weekday: 4,
+    hour: 13,
+    minute: 0,
+    duration: 6600,
+    subject: "art",
+    room: "A302",
+  }, {
+    weekday: 4,
+    hour: 14,
+    minute: 55,
+    duration: 3000,
+    subject: "science",
+    room: "A417",
+  }],
+};
 
 /**
  * Returns the periods.
  *
- * @returns {Period[]} The periods.
+ * @returns {CalendarEventSchedule[]} The periods.
  */
-const usePeriods = (): Period[] => [
-  new Period(0, 8, 25, 60, "english", "A307"),
-  new Period(0, 9, 45, 75, "math", "A311"),
-  new Period(0, 11, 10, 75, "socialStudies", "A309"),
-  new Period(0, 13, 15, 70, "swedish", "A308"),
-  new Period(1, 8, 25, 65, "math", "A311"),
-  new Period(1, 9, 50, 50, "sports", "B501"),
-  new Period(1, 13, 10, 65, "swedish", "A308"),
-  new Period(2, 8, 20, 55, "science", "A417"),
-  new Period(2, 9, 25, 50, "math", "A311"),
-  new Period(2, 10, 20, 50, "swedish", "A308"),
-  new Period(2, 11, 20, 65, "socialStudies", "A309"),
-  new Period(2, 13, 15, 50, "english", "A307"),
-  new Period(3, 9, 35, 100, "engineering", "A417"),
-  new Period(3, 11, 25, 55, "math", "A311"),
-  new Period(3, 13, 5, 50, "socialStudies", "A309"),
-  new Period(4, 13, 0, 110, "art", "A302"),
-  new Period(4, 14, 55, 50, "science", "A417"),
-];
+const usePeriods = (): CalendarEventSchedule[] => {
+  const periods = collection.periods.map(getPeriodEventSchedule);
+
+  return periods;
+};
 
 export default usePeriods;

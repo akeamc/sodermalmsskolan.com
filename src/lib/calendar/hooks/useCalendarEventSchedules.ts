@@ -9,7 +9,7 @@ import CalendarEventSchedule from "../event/CalendarEventSchedule";
 const useCalendarEventSchedules = (): CalendarEventSchedule[] => {
   const periods = usePeriods();
 
-  return periods.map((period) => period.eventSchedule());
+  return periods;
 };
 
 export default useCalendarEventSchedules;
