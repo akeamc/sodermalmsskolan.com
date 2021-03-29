@@ -2,6 +2,7 @@ import dayjs, { Dayjs } from "dayjs";
 import React, {
   createContext, FunctionComponent, useCallback, useContext, useEffect, useRef, useState,
 } from "react";
+import useLocale from "../../hooks/useLocale";
 import CalendarEventInstance from "./event/CalendarEventInstance";
 import CalendarEventSchedule from "./event/CalendarEventSchedule";
 import useCalendarEventSchedules from "./hooks/useCalendarEventSchedules";
@@ -22,7 +23,7 @@ export interface CalendarContextData {
 }
 
 const defaultCalendarContextData: CalendarContextData = {
-  cursor: dayjs().locale("sv"),
+  cursor: dayjs(),
   setCursor: () => {},
   moveMonths: () => {},
   scope: "week",
@@ -63,7 +64,9 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
   const schedules = useCalendarEventSchedules();
   const eventInstanceRef = useRef<Map<string, CalendarEventInstance[]>>(new Map());
 
-  const [cursor, setCursor] = useState(defaultCalendarContextData.cursor);
+  const { language } = useLocale();
+
+  const [cursor, setCursor] = useState(() => dayjs().locale(language));
   const [scope, setScope] = useState(defaultCalendarContextData.scope);
 
   /**

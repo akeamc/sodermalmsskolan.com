@@ -4,7 +4,7 @@ import { globalStyles, GlobalStyles } from "./global";
 
 describe("global stylesheet test", () => {
   it("returns the same styles as always", () => {
-    expect(globalStyles).toMatchSnapshot();
+    expect(globalStyles.styles).toMatchSnapshot();
   });
 });
 

@@ -1,5 +1,6 @@
 import { Dayjs } from "dayjs";
 import React, { FunctionComponent } from "react";
+import useTime from "../../hooks/useTime";
 import { useCalendarContext } from "../../lib/calendar/CalendarContext";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 
@@ -24,9 +25,12 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
     getEventInstances,
   } = useCalendarContext();
 
+  const now = useTime();
+
   const isSelectedMonth = date.isSame(cursor, "month");
-  const isCursor = date.isSame(cursor, "day");
+  const isCursor = date.isSame(cursor, "date");
   const isInScope = date.isSame(cursor, scope);
+  const isNow = date.isSame(now, "date");
 
   const leftBorderRadius = !isInScope || startOfScope.isSame(date, "date");
   const rightBorderRadius = !isInScope || endOfScope.isSame(date, "date");
@@ -63,6 +67,8 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
       } : undefined, !rightBorderRadius ? {
         borderTopRightRadius: 0,
         borderBottomRightRadius: 0,
+      } : undefined, isNow ? {
+        color: "var(--color-highlight)",
       } : undefined, isCursor ? {
         color: "#fff",
 

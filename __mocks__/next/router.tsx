@@ -3,7 +3,7 @@ import nextOptions from "../../next.config";
 
 const { i18n } = nextOptions;
 
-const router: Partial<NextRouter> = {
+export const mockedRouter: Partial<NextRouter> = {
   locale: i18n.defaultLocale,
   locales: i18n.locales,
   defaultLocale: i18n.defaultLocale,
@@ -21,5 +21,5 @@ const router: Partial<NextRouter> = {
 
 // eslint-disable-next-line import/prefer-default-export
 export const useRouter = jest.fn(() => ({
-  ...router,
+  ...mockedRouter,
 }));
