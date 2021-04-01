@@ -1,7 +1,8 @@
 import { NextPage } from "next";
 import React from "react";
-import CalendarWidget from "../../components/calendar/CalendarWidget";
+import CalendarSidebar from "../../components/calendar/CalendarSidebarContent";
 import MainCalendar from "../../components/calendar/MainCalendar";
+import DashboardContainer from "../../components/dashboard/DashboardContainer";
 import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
 
 /**
@@ -12,8 +13,12 @@ import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
 const CalendarPage: NextPage = () => (
   <div>
     <CalendarContextProvider>
-      <CalendarWidget />
-      <MainCalendar />
+      <DashboardContainer aside={
+        <CalendarSidebar />
+      }
+      >
+        <MainCalendar />
+      </DashboardContainer>
     </CalendarContextProvider>
   </div>
 );

@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
-import useTime from "../../hooks/useTime";
-import { getHumanReadableDuration } from "../../lib/calendar/utils/humanReadable";
-import secondsSinceMidnight from "../../lib/calendar/utils/secondsSinceMidnight";
+import useTime from "../../../hooks/useTime";
+import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
+import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
+import Time from "../../typography/atomics/Time";
 
 export interface HorizontalBarProps {
   color?: string;
@@ -57,15 +58,19 @@ const SidebarLabel: FunctionComponent<SidebarLabelProps> = ({
       position: "relative",
       color: "var(--color-text-tertiary)",
       fontSize: 14,
+
+      ":last-of-type": {
+        height: "auto",
+      },
     }}
   >
-    <span css={{
+    <Time css={{
       position: "absolute",
       top: "-0.5em",
     }}
     >
       {getHumanReadableDuration(hours * 3600, true)}
-    </span>
+    </Time>
     {hours < 24 ? (
       <>
         <HorizontalBar top="25%" left="0" length="32px" />
@@ -87,13 +92,17 @@ const SidebarIndicator: FunctionComponent = () => {
   const hours = secondsSinceMidnight(now.toDate()) / 3600;
 
   return (
-    <div css={{
-      position: "absolute",
-      top: `calc(var(--hour-height) * ${hours})`,
-      width: "100%",
-    }}
+    <div
+      css={{
+        position: "absolute",
+        width: "100%",
+        zIndex: 1,
+      }}
+      style={{
+        top: `calc(var(--hour-height) * ${hours})`,
+      }}
     >
-      <span css={{
+      <Time css={{
         position: "absolute",
         transform: "translateY(-50%)",
         display: "inline-block",
@@ -108,7 +117,7 @@ const SidebarIndicator: FunctionComponent = () => {
       }}
       >
         {now.format("HH:mm")}
-      </span>
+      </Time>
       <HorizontalBar color="var(--color-border-danger)" />
     </div>
   );
@@ -124,16 +133,17 @@ const WeeklyCalendarSidebar: FunctionComponent = () => (
     position: "absolute",
     width: "100%",
     height: "100%",
-    fontFeatureSettings: "\"ss01\", \"tnum\"",
   }}
   >
+    {/* IMPORTANT! Do not place any div element after the SidebarLabels as CSS selectors are
+    in use. */}
+    <SidebarIndicator />
     {Array.from({
       length: 25,
     }).map((_, i) => (
       // eslint-disable-next-line react/no-array-index-key
       <SidebarLabel hours={i} key={i} />
     ))}
-    <SidebarIndicator />
   </div>
 );
 

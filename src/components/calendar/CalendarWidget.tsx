@@ -2,7 +2,9 @@ import { Dayjs } from "dayjs";
 import React, { FunctionComponent } from "react";
 import useTime from "../../hooks/useTime";
 import { useCalendarContext } from "../../lib/calendar/CalendarContext";
+import capitalize from "../../lib/utils/capitalize";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
+import SidebarHeading from "../typography/headings/SidebarHeading";
 
 export interface CellProps {
   date: Dayjs;
@@ -51,6 +53,7 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
         transition: "all 0.1s",
         fontFamily: "var(--font-sans)",
         borderRadius: "var(--cell-border-radius)",
+        margin: 0,
 
         ":hover": {
           backgroundColor: "var(--accents-2)",
@@ -142,11 +145,11 @@ const CalendarWidget: FunctionComponent = () => {
   return (
     <div css={{
       "--cell-border-radius": "8px",
-      width: 300,
+      width: "100%",
     }}
     >
       <button onClick={() => moveMonths(-1)} type="button">Back</button>
-      <h1>{cursor.format("MMMM YYYY")}</h1>
+      <SidebarHeading>{capitalize(cursor.format("MMMM YYYY"))}</SidebarHeading>
       <button onClick={() => moveMonths(1)} type="button">Forward</button>
       <div
         css={{
@@ -169,9 +172,11 @@ const CalendarWidget: FunctionComponent = () => {
                 textAlign: "center",
                 fontWeight: 400,
                 fontSize: 14,
+                lineHeight: 1,
+                marginBottom: 4,
               }}
             >
-              {topLeftDate.add(i, "days").format("dd")}
+              {capitalize(topLeftDate.add(i, "days").format("dd"))}
             </div>
           ))}
         {Array

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { useCalendarContext } from "../../lib/calendar/CalendarContext";
-import DayColumn, { DayColumnHeading } from "./DayColumn";
+import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
+import DayColumn, { DayColumnHeading } from "../DayColumn";
 import WeeklyCalendarSidebar from "./WeeklyCalendarSidebar";
 
 /**
@@ -59,6 +59,7 @@ const WeeklyCalendar: FunctionComponent = () => {
       </div>
       <div css={{
         position: "relative",
+        paddingBottom: 24,
       }}
       >
         <WeeklyCalendarSidebar />

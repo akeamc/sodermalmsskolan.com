@@ -25,7 +25,7 @@ export const subjects: Record<SubjectID, Subject> = {
   socialStudies: {
     name: "SO",
     symbol: "SO",
-    color: "#888888",
+    color: "#222222",
   },
   sports: {
     name: "Idrott",

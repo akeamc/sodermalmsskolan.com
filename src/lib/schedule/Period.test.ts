@@ -13,6 +13,9 @@ describe("Period tests", () => {
 
     const schedule = getPeriodEventSchedule(period);
 
-    expect(schedule.signature()).toBe("Tyska..#ffa400.A311.216000.DTSTART;TZID=Europe/Stockholm:20200113T083000\nRRULE:UNTIL=20220201T000000;FREQ=WEEKLY");
+    expect(schedule.signature()).toMatchInlineSnapshot(`
+      "Engelska..#ff4e42.A307.3600.DTSTART;TZID=Europe/Stockholm:20200113T082500
+      RRULE:UNTIL=20220201T000000;FREQ=WEEKLY"
+    `);
   });
 });

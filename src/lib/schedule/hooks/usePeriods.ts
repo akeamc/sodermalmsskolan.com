@@ -7,7 +7,7 @@ const collection: PeriodCollection = {
   periods: [{
     weekday: 0,
     hour: 8,
-    minute: 30,
+    minute: 25,
     duration: 3600,
     subject: "english",
     room: "A307",
