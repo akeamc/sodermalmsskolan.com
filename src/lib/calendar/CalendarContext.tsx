@@ -23,15 +23,23 @@ export interface CalendarContextData {
 
 const defaultCalendarContextData: CalendarContextData = {
   cursor: DateTime.now(),
-  setCursor: () => {},
-  moveMonths: () => {},
+  setCursor: () => {
+    throw new Error("`setCursor` hasn't been implemented.");
+  },
+  moveMonths: () => {
+    throw new Error("`moveMonths` hasn't been implemented.");
+  },
   scope: "week",
-  setScope: () => {},
+  setScope: () => {
+    throw new Error("`setScope` hasn't been implemented.");
+  },
   startOfScope: DateTime.now(),
   endOfScope: DateTime.now(),
   schedules: [],
   schedulesSignature: "",
-  getEventInstances: () => [],
+  getEventInstances: () => {
+    throw new Error("`getEventInstances` hasn't been implemented.");
+  },
 };
 
 const CalendarContext = createContext<CalendarContextData>(defaultCalendarContextData);
@@ -78,11 +86,11 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
    *
    * @param {number} months How many months to jump.
    */
-  const moveMonths = (months: number) => {
+  const moveMonths = useCallback((months: number) => {
     setCursor(cursor.plus({
       months,
     }).startOf("month"));
-  };
+  }, [cursor]);
 
   const prevSchedulesSignatureRef = useRef<string>();
   const schedulesSignature = schedules.map((schedule) => schedule.signature).join(",");
