@@ -2,8 +2,8 @@ import React, { ComponentProps } from "react";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Story } from "@storybook/react";
-import CalendarWidget from "./CalendarWidget";
-import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
+import CalendarWidget from ".";
+import { CalendarContextProvider } from "../../../lib/calendar/CalendarContext";
 
 export default {
   title: "CalendarWidget",

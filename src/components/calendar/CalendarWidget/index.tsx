@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
 import React, { FunctionComponent, useMemo } from "react";
-import useTime from "../../hooks/useTime";
-import { useCalendarContext } from "../../lib/calendar/CalendarContext";
-import capitalize from "../../lib/utils/capitalize";
-import InlineSkeleton from "../skeleton/InlineSkeleton";
-import SidebarHeading from "../typography/headings/SidebarHeading";
+import useTime from "../../../hooks/useTime";
+import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
+import capitalize from "../../../lib/utils/capitalize";
+import InlineSkeleton from "../../skeleton/InlineSkeleton";
+import SidebarHeading from "../../typography/headings/SidebarHeading";
 
 export interface CellProps {
   date: DateTime;

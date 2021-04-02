@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { FunctionComponent, useMemo } from "react";
 import { transparentize } from "polished";
 import { toast } from "react-toastify";
+import { DateTime } from "luxon";
 import useLocale from "../../hooks/useLocale";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
@@ -18,7 +19,6 @@ import EmailVerificationButton from "./EmailVerificationButton";
 import { translateFirebaseError } from "../../lib/auth/forms";
 import { fonts } from "../../styles/text";
 import useChannelMessages from "../../lib/discord/hooks/useChannelMessages";
-import { DateTime } from "luxon";
 
 /**
  * Informative card with an overview of a user's account.

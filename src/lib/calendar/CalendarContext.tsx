@@ -52,18 +52,25 @@ export const useCalendarContext = (): CalendarContextData => useContext(Calendar
  */
 const getEventInstanceCacheKey = (date: DateTime): string => date.toISODate();
 
+export interface CalendarContextProviderProps {
+  initialCursor?: DateTime;
+}
+
 /**
  * Calendar context provider.
  *
- * @param {React.PropsWithChildren} props Props.
+ * @param {React.PropsWithChildren<CalendarContextProviderProps>} props Props.
  *
  * @returns {React.ReactElement} Provider.
  */
-export const CalendarContextProvider: FunctionComponent = (props) => {
+export const CalendarContextProvider: FunctionComponent<CalendarContextProviderProps> = ({
+  initialCursor = DateTime.now(),
+  ...props
+}) => {
   const schedules = useCalendarEventSchedules();
   const eventInstanceRef = useRef<Map<string, CalendarEventInstance[]>>(new Map());
 
-  const [cursor, setCursor] = useState(() => DateTime.now());
+  const [cursor, setCursor] = useState(initialCursor);
   const [scope, setScope] = useState(defaultCalendarContextData.scope);
 
   /**
@@ -127,8 +134,8 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
   useEffect(() => {
     if (prevSchedulesSignatureRef.current !== schedulesSignature) {
       prevSchedulesSignatureRef.current = schedulesSignature;
-
       eventInstanceRef.current.clear();
+
       preloadEventInstances(cursor, "year");
     }
   }, [cursor, preloadEventInstances, schedulesSignature]);
@@ -140,15 +147,15 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
    *
    * @returns {CalendarEventInstance[]} Event instances.
    */
-  const getEventInstances = (date: DateTime): CalendarEventInstance[] => {
+  const getEventInstances = useCallback((date: DateTime): CalendarEventInstance[] => {
     const cacheKey = getEventInstanceCacheKey(date);
 
     if (!eventInstanceRef.current.has(cacheKey)) {
       preloadEventInstances(date, "year");
     }
 
-    return eventInstanceRef.current.get(cacheKey) ?? [];
-  };
+    return eventInstanceRef.current.get(cacheKey);
+  }, [preloadEventInstances]);
 
   return (
     <CalendarContext.Provider
