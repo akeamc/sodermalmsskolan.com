@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import useTime from "../../hooks/useTime";
 import { useCalendarContext } from "../../lib/calendar/CalendarContext";
 import capitalize from "../../lib/utils/capitalize";
@@ -37,7 +37,7 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
   const leftBorderRadius = !isInScope || startOfScope.hasSame(date, "day");
   const rightBorderRadius = !isInScope || endOfScope.hasSame(date, "day");
 
-  const eventInstances = getEventInstances(date);
+  const eventInstances = useMemo(() => getEventInstances(date), [date, getEventInstances]);
 
   return (
     <button
@@ -133,6 +133,40 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
 };
 
 /**
+ * Head row for the calendar widget.
+ *
+ * @returns {React.ReactElement} The days of the week.
+ */
+const CalendarWidgetHead: FunctionComponent = () => (
+  <>
+    {Array
+      .from({
+        length: 7,
+      })
+      .map((_, i) => (
+        <div
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          css={{
+            color: "var(--color-text-tertiary)",
+            textAlign: "center",
+            fontWeight: 400,
+            fontSize: 14,
+            lineHeight: 1,
+            marginBottom: 4,
+          }}
+        >
+          {capitalize(DateTime.now().startOf("week").plus({
+            days: i,
+          }).toLocaleString({
+            weekday: "short",
+          }))}
+        </div>
+      ))}
+  </>
+);
+
+/**
  * A minified calendar, showing events as dots.
  *
  * @returns {React.ReactElement} The rendered widget.
@@ -166,30 +200,7 @@ const CalendarWidget: FunctionComponent = () => {
           gridAutoRows: "1fr",
         }}
       >
-        {Array
-          .from({
-            length: 7,
-          })
-          .map((_, i) => (
-            <div
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-              css={{
-                color: "var(--color-text-tertiary)",
-                textAlign: "center",
-                fontWeight: 400,
-                fontSize: 14,
-                lineHeight: 1,
-                marginBottom: 4,
-              }}
-            >
-              {capitalize(topLeftDate.plus({
-                days: i,
-              }).toLocaleString({
-                weekday: "short",
-              }))}
-            </div>
-          ))}
+        <CalendarWidgetHead />
         {Array
           .from({
             length: bottomRightDate.diff(topLeftDate, "days").days + 1,
