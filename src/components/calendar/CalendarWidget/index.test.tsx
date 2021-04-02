@@ -34,5 +34,8 @@ describe("<CalendarWidget /> tests", () => {
 
     userEvent.click(screen.getByText("Forward"));
     expect(screen.getByText(cursorRegExp).textContent).toBe("Cursor: 2021-02-01T00:00:00.000Z");
+
+    userEvent.click(screen.getByText("Back"));
+    expect(screen.getByText(cursorRegExp).textContent).toBe("Cursor: 2021-01-01T00:00:00.000Z");
   });
 });
