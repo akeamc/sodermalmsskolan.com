@@ -27,7 +27,7 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
     getEventInstances,
   } = useCalendarContext();
 
-  const now = useTime();
+  const now = useTime(10000);
 
   const isSelectedMonth = date.hasSame(cursor, "month");
   const isCursor = date.hasSame(cursor, "day");

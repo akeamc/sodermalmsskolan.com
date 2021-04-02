@@ -104,8 +104,12 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
           margin: 0,
           marginTop: "0.5em",
           fontWeight: 500,
-          fontSize: 16,
+          fontSize: 12,
           letterSpacing: "-0.022em",
+
+          [media(breakpoints.large)]: {
+            fontSize: 16,
+          },
 
           [media(breakpoints.extraLarge)]: {
             fontSize: 18,

@@ -2,7 +2,6 @@ import React from "react";
 import { NextPage } from "next";
 import Base from "../components/Base";
 import SimpleHeader from "../components/header/Simple";
-import MenuText from "../components/menu/Text";
 
 /**
  * The `HTTP 404` page of the website.
@@ -18,7 +17,6 @@ const NotFoundPage: NextPage = () => (
   >
     <SimpleHeader
       title="Sidan hittades inte"
-      sub={<MenuText />}
     />
   </Base>
 );

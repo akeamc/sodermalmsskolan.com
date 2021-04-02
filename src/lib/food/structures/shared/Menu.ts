@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { DishStatic, Dish } from "./Dish";
 
 export interface IMenu {
@@ -8,22 +9,22 @@ export interface IMenu {
 export class Menu {
   dishes: Dish[];
 
-  date: Date;
+  date: DateTime;
 
   constructor({ dishes, date }: IMenu) {
     this.dishes = dishes.map((dish) => new Dish(dish));
-    this.date = new Date(date);
+    this.date = DateTime.fromISO(date);
   }
 
   public serialize(): IMenu {
     return {
       dishes: this.dishes.map((dish) => dish.serialize()),
-      date: this.date.toISOString(),
+      date: this.date.toISO(),
     };
   }
 
   public get id(): string {
-    return this.date.getTime().toString();
+    return this.date.toISO();
   }
 }
 
