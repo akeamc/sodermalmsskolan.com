@@ -1,6 +1,5 @@
 import { GlobalStyles } from "../src/styles/global";
 import "../src/styles/fonts.scss";
-import "dayjs/locale/sv";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 
 export const parameters = {

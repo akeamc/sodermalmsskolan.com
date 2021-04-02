@@ -1,12 +1,12 @@
-import { Dayjs } from "dayjs";
+import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
-import useTime from "../../hooks/useTime";
-import useDailyEventInstances from "../../lib/calendar/hooks/useDailyEventInstances";
-import capitalize from "../../lib/utils/capitalize";
-import CalendarEventDisplay from "./CalendarEventDisplay";
+import useTime from "../../../hooks/useTime";
+import useDailyEventInstances from "../../../lib/calendar/hooks/useDailyEventInstances";
+import capitalize from "../../../lib/utils/capitalize";
+import CalendarEventDisplay from "../CalendarEventDisplay";
 
 export interface DayColumnheadingProps {
-  date: Dayjs;
+  date: DateTime;
 }
 
 /**
@@ -21,7 +21,7 @@ export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
 }) => {
   const now = useTime();
 
-  const isNow = date.isSame(now, "date");
+  const isNow = date.hasSame(now, "day");
 
   return (
     <div
@@ -44,20 +44,25 @@ export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
         color: "var(--color-text-primary)",
       }}
       >
-        {capitalize(date.format("dddd"))}
+        {capitalize(date.toLocaleString({
+          weekday: "long",
+        }))}
       </h2>
       <h3 css={{
         color: "var(--color-text-tertiary)",
       }}
       >
-        {date.format("D/M")}
+        {date.toLocaleString({
+          month: "numeric",
+          day: "numeric",
+        })}
       </h3>
     </div>
   );
 };
 
 export interface DayColumnProps {
-  date: Dayjs,
+  date: DateTime,
 }
 
 /**

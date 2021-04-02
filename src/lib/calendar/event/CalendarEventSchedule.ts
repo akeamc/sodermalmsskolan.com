@@ -8,13 +8,12 @@ import CalendarEventInstance from "./CalendarEventInstance";
  *
  * @param {Date} input The strange date.
  *
- * @returns {Date} The charm date.
+ * @returns {DateTime} The charm date.
  */
-export const normalizeRRuleDate = (input: Date): Date => (
+export const normalizeRRuleDate = (input: Date): DateTime => (
   DateTime.fromJSDate(input)
     .toUTC()
     .setZone("local", { keepLocalTime: true })
-    .toJSDate()
 );
 
 /**
@@ -43,15 +42,15 @@ export default class CalendarEventSchedule {
   /**
    * Find all scheduled events within a timeframe.
    *
-   * @param {Date} after Lower time limit.
-   * @param {Date} before Upper time limit.
+   * @param {DateTime} after Lower time limit.
+   * @param {DateTime} before Upper time limit.
    * @param {boolean} inclusive Should the limits be inclusive?
    *
    * @returns {CalendarEventInstance[]} The "rendered" `CalendarEventInstance`s.
    */
-  public evaluate(after: Date, before: Date, inclusive = true): CalendarEventInstance[] {
+  public evaluate(after: DateTime, before: DateTime, inclusive = true): CalendarEventInstance[] {
     const occurrences = this.rrule
-      .between(after, before, inclusive)
+      .between(after.toJSDate(), before.toJSDate(), inclusive)
       .map(normalizeRRuleDate);
 
     return occurrences.map((start) => new CalendarEventInstance(start, this.details));

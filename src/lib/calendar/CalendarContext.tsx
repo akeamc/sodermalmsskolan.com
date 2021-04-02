@@ -1,8 +1,7 @@
-import dayjs, { Dayjs } from "dayjs";
+import { DateTime, DurationObjectUnits } from "luxon";
 import React, {
   createContext, FunctionComponent, useCallback, useContext, useEffect, useRef, useState,
 } from "react";
-import useLocale from "../../hooks/useLocale";
 import CalendarEventInstance from "./event/CalendarEventInstance";
 import CalendarEventSchedule from "./event/CalendarEventSchedule";
 import useCalendarEventSchedules from "./hooks/useCalendarEventSchedules";
@@ -10,26 +9,26 @@ import useCalendarEventSchedules from "./hooks/useCalendarEventSchedules";
 export type CalendarScope = "day" | "week" | "month";
 
 export interface CalendarContextData {
-  cursor: Dayjs;
-  setCursor: (cursor: Dayjs) => void;
+  cursor: DateTime;
+  setCursor: (cursor: DateTime) => void;
   moveMonths: (months: number) => void;
   scope: CalendarScope;
   setScope: (scope: CalendarScope) => void;
-  startOfScope: Dayjs;
-  endOfScope: Dayjs;
+  startOfScope: DateTime;
+  endOfScope: DateTime;
   schedules: CalendarEventSchedule[];
   schedulesSignature: string;
-  getEventInstances: (date: Dayjs) => CalendarEventInstance[];
+  getEventInstances: (date: DateTime) => CalendarEventInstance[];
 }
 
 const defaultCalendarContextData: CalendarContextData = {
-  cursor: dayjs(),
+  cursor: DateTime.now(),
   setCursor: () => {},
   moveMonths: () => {},
   scope: "week",
   setScope: () => {},
-  startOfScope: dayjs(),
-  endOfScope: dayjs(),
+  startOfScope: DateTime.now(),
+  endOfScope: DateTime.now(),
   schedules: [],
   schedulesSignature: "",
   getEventInstances: () => [],
@@ -47,11 +46,11 @@ export const useCalendarContext = (): CalendarContextData => useContext(Calendar
 /**
  * Get a cache key for a day.
  *
- * @param {Dayjs} date Date.
+ * @param {DateTime} date Date.
  *
  * @returns {string} The cache key.
  */
-const getEventInstanceCacheKey = (date: Date): string => `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+const getEventInstanceCacheKey = (date: DateTime): string => date.toISODate();
 
 /**
  * Calendar context provider.
@@ -64,9 +63,7 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
   const schedules = useCalendarEventSchedules();
   const eventInstanceRef = useRef<Map<string, CalendarEventInstance[]>>(new Map());
 
-  const { language } = useLocale();
-
-  const [cursor, setCursor] = useState(() => dayjs().locale(language));
+  const [cursor, setCursor] = useState(() => DateTime.now());
   const [scope, setScope] = useState(defaultCalendarContextData.scope);
 
   /**
@@ -75,7 +72,9 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
    * @param {number} months How many months to jump.
    */
   const moveMonths = (months: number) => {
-    setCursor(cursor.add(months, "months").startOf("month"));
+    setCursor(cursor.plus({
+      months,
+    }).startOf("month"));
   };
 
   const prevSchedulesSignatureRef = useRef<string>();
@@ -85,22 +84,29 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
    * Preload the `CalendarEventInstance`s for a specified date and granuality
    * (whether to preload a week, month, or year, e.g).
    *
-   * @param {Dayjs} around Cursor date.
-   * @param {dayjs.OpUnitType} granuality Unit.
+   * @param {DateTime} around Cursor date.
+   * @param {keyof DurationObjectUnits} granuality Unit.
    */
-  const preloadEventInstances = useCallback((around: Dayjs, granuality: dayjs.OpUnitType): void => {
+  const preloadEventInstances = useCallback((
+    around: DateTime,
+    granuality: keyof DurationObjectUnits,
+  ): void => {
     const before = around.startOf(granuality);
     const after = around.endOf(granuality);
 
     const eventInstances = schedules.flatMap((eventSchedule) => eventSchedule.evaluate(
-      before.toDate(),
-      after.toDate(),
+      before,
+      after,
       true,
     ));
 
-    for (let dayIndex = 0; dayIndex <= after.diff(before, "days") + 1; dayIndex += 1) { // Loop through every date.
-      const date = before.add(dayIndex, "days");
-      const key = getEventInstanceCacheKey(date.toDate());
+    const dayCount = after.diff(before, "days").days + 1;
+
+    for (let dayIndex = 0; dayIndex <= dayCount; dayIndex += 1) { // Loop through every date.
+      const date = before.plus({
+        days: dayIndex,
+      });
+      const key = getEventInstanceCacheKey(date);
 
       const foundInstances = [];
 
@@ -108,7 +114,7 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
       for (let i = eventInstances.length - 1; i >= 0; i -= 1) {
         const instance = eventInstances[i];
 
-        if (date.isSame(instance.start, "date")) {
+        if (date.hasSame(instance.start, "day")) {
           foundInstances.push(instance);
           eventInstances.splice(i, 1);
         }
@@ -130,12 +136,12 @@ export const CalendarContextProvider: FunctionComponent = (props) => {
   /**
    * Return the cached event instances. If a cache miss occurs, the cache is revalidated.
    *
-   * @param {Dayjs} date Date to search.
+   * @param {DateTime} date Date to search.
    *
    * @returns {CalendarEventInstance[]} Event instances.
    */
-  const getEventInstances = (date: Dayjs): CalendarEventInstance[] => {
-    const cacheKey = getEventInstanceCacheKey(date.toDate());
+  const getEventInstances = (date: DateTime): CalendarEventInstance[] => {
+    const cacheKey = getEventInstanceCacheKey(date);
 
     if (!eventInstanceRef.current.has(cacheKey)) {
       preloadEventInstances(date, "year");

@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { FunctionComponent, useMemo } from "react";
 import { transparentize } from "polished";
@@ -19,6 +18,7 @@ import EmailVerificationButton from "./EmailVerificationButton";
 import { translateFirebaseError } from "../../lib/auth/forms";
 import { fonts } from "../../styles/text";
 import useChannelMessages from "../../lib/discord/hooks/useChannelMessages";
+import { DateTime } from "luxon";
 
 /**
  * Informative card with an overview of a user's account.
@@ -134,7 +134,7 @@ const AccountCard: FunctionComponent = () => {
             Senaste inloggningen:
             {" "}
             {user
-              ? dayjs(user.metadata.lastSignInTime).locale(language).format("HH:mm D MMMM YYYY")
+              ? DateTime.fromISO(user.metadata.lastSignInTime).toLocaleString()
               : <InlineSkeleton width="10em" />}
           </span>
           {user && !user?.emailVerified ? (

@@ -1,8 +1,7 @@
-import dayjs from "dayjs";
 import React, { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import useLocale from "../../hooks/useLocale";
+import { DateTime } from "luxon";
 import Post from "../../lib/ghost/post";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { fonts } from "../../styles/text";
@@ -34,7 +33,6 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
   layout = "card",
   ...props
 }) => {
-  const { language } = useLocale();
   const url = getPostPath(post?.slug);
 
   const mediaWidth = layout === "background" ? 1200 : 600;
@@ -185,7 +183,7 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
           lineHeight: 1.2,
         }}
         >
-          {post?.publishedAt ? dayjs(post.publishedAt).locale(language).format("D MMMM YYYY") : <InlineSkeleton width="8em" />}
+          {post?.publishedAt ? post.publishedAt.toLocaleString(DateTime.DATE_MED) : <InlineSkeleton width="8em" />}
         </time>
       </div>
     </a>

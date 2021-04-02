@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
 import useLocale from "../../hooks/useLocale";
 import { ClientDish } from "../../lib/food/structures/client/Dish";
@@ -15,7 +15,7 @@ export interface MenuProps {
 }
 
 interface MenuTitleProps {
-  date: Date;
+  date: DateTime;
 }
 
 interface MenuDishesProps {
@@ -31,15 +31,11 @@ interface MenuDishesProps {
  */
 const MenuTitle: FunctionComponent<MenuTitleProps> = ({
   date,
-}) => {
-  const { language } = useLocale();
-
-  return (
-    <>
-      {date ? dayjs(date).locale(language).format("dddd D MMMM") : <InlineSkeleton height="100%" />}
-    </>
-  );
-};
+}) => (
+  <>
+    {date ? date.toLocaleString(DateTime.DATE_FULL) : <InlineSkeleton height="100%" />}
+  </>
+);
 
 /**
  * Dishes, displayed neatly.

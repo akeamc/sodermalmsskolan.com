@@ -1,6 +1,5 @@
 import React from "react";
 import { AppProps } from "next/app";
-import "dayjs/locale/sv";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalStyles } from "../styles/global";
 import { AuthProvider } from "../lib/auth/AuthContext";

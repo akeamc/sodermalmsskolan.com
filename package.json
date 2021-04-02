@@ -18,7 +18,6 @@
     "@emotion/react": "^11.1.5",
     "@tryghost/content-api": "^1.4.14",
     "@tryghost/string": "^0.1.17",
-    "dayjs": "^1.10.4",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "firebase": "^8.3.0",

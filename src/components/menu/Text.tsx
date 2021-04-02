@@ -1,5 +1,5 @@
 import React, { Fragment, FunctionComponent } from "react";
-import { useDayMenu } from "../../lib/food/hooks/menu";
+import { useDayMenu } from "../../lib/food/hooks/useMenus";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Emphasis from "../text/atomics/Emphasis";
 

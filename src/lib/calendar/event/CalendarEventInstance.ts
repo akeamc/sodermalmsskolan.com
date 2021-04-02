@@ -1,21 +1,22 @@
+import { DateTime } from "luxon";
 import CalendarEventDetails, { getEventDetailsCharacteristics } from "./CalendarEventDetails";
 
 /**
  * A `CalendarEvent` with a concrete starting date.
  */
 export default class CalendarEventInstance {
-  start: Date;
+  start: DateTime;
 
   details: CalendarEventDetails;
 
-  constructor(start: Date, details: CalendarEventDetails) {
+  constructor(start: DateTime, details: CalendarEventDetails) {
     this.start = start;
     this.details = details;
   }
 
   public get characteristics(): string[] {
     return getEventDetailsCharacteristics(this.details).concat([
-      this.start.getTime().toString(),
+      this.start.toISO(),
     ]);
   }
 

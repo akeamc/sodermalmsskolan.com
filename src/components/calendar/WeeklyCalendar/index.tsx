@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
-import DayColumn, { DayColumnHeading } from "../DayColumn";
+import DayColumn, { DayColumnHeading } from "./DayColumn";
 import WeeklyCalendarSidebar from "./WeeklyCalendarSidebar";
 
 /**
@@ -29,7 +29,9 @@ const DaysSection: FunctionComponent = (props) => (
 const WeeklyCalendar: FunctionComponent = () => {
   const { startOfScope } = useCalendarContext();
 
-  const dates = Array.from({ length: 7 }).map((_, i) => startOfScope.add(i, "days"));
+  const dates = Array.from({ length: 7 }).map((_, i) => startOfScope.plus({
+    days: i,
+  }));
 
   return (
     <div css={{
@@ -43,7 +45,7 @@ const WeeklyCalendar: FunctionComponent = () => {
       <div css={{
         position: "sticky",
         top: 0,
-        zIndex: 1,
+        zIndex: 2,
       }}
       >
         <DaysSection css={{
@@ -53,7 +55,7 @@ const WeeklyCalendar: FunctionComponent = () => {
         }}
         >
           {dates.map((date) => (
-            <DayColumnHeading date={date} key={date.toISOString()} />
+            <DayColumnHeading date={date} key={date.toISO()} />
           ))}
         </DaysSection>
       </div>
@@ -65,7 +67,7 @@ const WeeklyCalendar: FunctionComponent = () => {
         <WeeklyCalendarSidebar />
         <DaysSection>
           {dates.map((date) => (
-            <DayColumn key={date.toISOString()} date={date} />
+            <DayColumn key={date.toISO()} date={date} />
           ))}
         </DaysSection>
       </div>

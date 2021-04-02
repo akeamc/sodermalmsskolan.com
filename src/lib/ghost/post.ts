@@ -1,6 +1,7 @@
 import {
   PostOrPage as GhostPostOrPage,
 } from "@tryghost/content-api";
+import { DateTime } from "luxon";
 import Identification from "./identification";
 import Tag, { ghostTagToTag } from "./tag";
 import Author, { ghostAuthorToAuthor } from "./author";
@@ -15,9 +16,9 @@ export default interface Post extends Identification {
   tags: Tag[];
   cover?: string;
   html: string;
-  createdAt: string;
-  publishedAt?: string;
-  updatedAt?: string;
+  createdAt: DateTime;
+  publishedAt?: DateTime;
+  updatedAt?: DateTime;
   authors: Author[];
   excerpt?: string;
   featured: boolean;
@@ -49,9 +50,9 @@ export const ghostPostToPost = ({
   slug,
   cover: feature_image,
   html,
-  createdAt: new Date(created_at).toISOString(),
-  publishedAt: new Date(published_at).toISOString(),
-  updatedAt: new Date(updated_at).toISOString(),
+  createdAt: DateTime.fromISO(created_at),
+  publishedAt: DateTime.fromISO(published_at),
+  updatedAt: DateTime.fromISO(updated_at),
   authors: authors.map(ghostAuthorToAuthor),
   excerpt,
   featured: !!featured,

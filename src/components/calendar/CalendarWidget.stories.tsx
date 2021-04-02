@@ -19,6 +19,13 @@ export default {
 const Template: Story<
 ComponentProps<typeof CalendarWidget>
 // eslint-disable-next-line require-jsdoc
-> = (args) => <CalendarWidget {...args} />;
+> = (args) => (
+  <div css={{
+    maxWidth: 300,
+  }}
+  >
+    <CalendarWidget {...args} />
+  </div>
+);
 
 export const Default = Template.bind({});

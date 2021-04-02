@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
 import useTime from "../../../hooks/useTime";
 import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
@@ -89,7 +90,7 @@ const SidebarLabel: FunctionComponent<SidebarLabelProps> = ({
  */
 const SidebarIndicator: FunctionComponent = () => {
   const now = useTime();
-  const hours = secondsSinceMidnight(now.toDate()) / 3600;
+  const hours = secondsSinceMidnight(now) / 3600;
 
   return (
     <div
@@ -116,7 +117,7 @@ const SidebarIndicator: FunctionComponent = () => {
         width: "calc(var(--sidebar-width) - var(--cell-spacing))",
       }}
       >
-        {now.format("HH:mm")}
+        {now.toLocaleString(DateTime.TIME_24_SIMPLE)}
       </Time>
       <HorizontalBar color="var(--color-border-danger)" />
     </div>

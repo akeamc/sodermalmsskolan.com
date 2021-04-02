@@ -39,7 +39,12 @@ const MainCalendar: FunctionComponent = () => {
       width: "100%",
     }}
     >
-      <PageHeading>{capitalize(cursor.format("MMMM YYYY"))}</PageHeading>
+      <PageHeading>
+        {capitalize(cursor.toLocaleString({
+          year: "numeric",
+          month: "long",
+        }))}
+      </PageHeading>
       <CalendarController />
     </div>
   );

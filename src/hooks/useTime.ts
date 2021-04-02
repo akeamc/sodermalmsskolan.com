@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from "dayjs";
+import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
 
 /**
@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
  * @param {number} refreshCycle How often to update the time, in milliseconds.
  * @param {Function} getTime Function used to get time.
  *
- * @returns {Dayjs} The date.
+ * @returns {DateTime} The date.
  */
 const useTime = (
   refreshCycle = 1000,
-  getTime: () => Dayjs = () => dayjs(),
-): Dayjs => {
-  const [time, setTime] = useState<Dayjs>(getTime);
+  getTime: () => DateTime = () => DateTime.now(),
+): DateTime => {
+  const [time, setTime] = useState<DateTime>(getTime);
 
   useEffect(() => {
     const intervalId = setInterval(() => setTime(getTime()), refreshCycle);

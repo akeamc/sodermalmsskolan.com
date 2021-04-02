@@ -5,7 +5,7 @@ import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
 import Button from "../components/button/Button";
 import DayMenuSection from "../components/menu/DayMenuSection";
-import { useDayMenu } from "../lib/food/hooks/menu";
+import { useDayMenu } from "../lib/food/hooks/useMenus";
 import { useDishPhotos } from "../lib/food/hooks/photos";
 import DigibruhArticleSection from "../components/digibruh/Section";
 import FeaturedPostSection from "../components/blog/FeaturedPostSection";

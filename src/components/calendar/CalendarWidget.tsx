@@ -1,4 +1,4 @@
-import { Dayjs } from "dayjs";
+import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
 import useTime from "../../hooks/useTime";
 import { useCalendarContext } from "../../lib/calendar/CalendarContext";
@@ -7,7 +7,7 @@ import InlineSkeleton from "../skeleton/InlineSkeleton";
 import SidebarHeading from "../typography/headings/SidebarHeading";
 
 export interface CellProps {
-  date: Dayjs;
+  date: DateTime;
 }
 
 /**
@@ -29,13 +29,13 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
 
   const now = useTime();
 
-  const isSelectedMonth = date.isSame(cursor, "month");
-  const isCursor = date.isSame(cursor, "date");
-  const isInScope = date.isSame(cursor, scope);
-  const isNow = date.isSame(now, "date");
+  const isSelectedMonth = date.hasSame(cursor, "month");
+  const isCursor = date.hasSame(cursor, "day");
+  const isInScope = date.hasSame(cursor, scope);
+  const isNow = date.hasSame(now, "day");
 
-  const leftBorderRadius = !isInScope || startOfScope.isSame(date, "date");
-  const rightBorderRadius = !isInScope || endOfScope.isSame(date, "date");
+  const leftBorderRadius = !isInScope || startOfScope.hasSame(date, "day");
+  const rightBorderRadius = !isInScope || endOfScope.hasSame(date, "day");
 
   const eventInstances = getEventInstances(date);
 
@@ -100,7 +100,7 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
           fontFeatureSettings: "\"ss01\"",
         }}
         >
-          {typeof eventInstances !== "undefined" ? date.format("D") : <InlineSkeleton width="1em" />}
+          {typeof eventInstances !== "undefined" ? date.day : <InlineSkeleton width="1em" />}
         </span>
         <div css={{
           position: "absolute",
@@ -140,7 +140,9 @@ const Cell: FunctionComponent<CellProps> = ({ date }) => {
 const CalendarWidget: FunctionComponent = () => {
   const { cursor, moveMonths } = useCalendarContext();
   const topLeftDate = cursor.startOf("month").startOf("week");
-  const bottomRightDate = topLeftDate.add(5, "weeks").endOf("week");
+  const bottomRightDate = topLeftDate.plus({
+    weeks: 5,
+  }).endOf("week");
 
   return (
     <div css={{
@@ -149,7 +151,12 @@ const CalendarWidget: FunctionComponent = () => {
     }}
     >
       <button onClick={() => moveMonths(-1)} type="button">Back</button>
-      <SidebarHeading>{capitalize(cursor.format("MMMM YYYY"))}</SidebarHeading>
+      <SidebarHeading>
+        {capitalize(cursor.toLocaleString({
+          month: "long",
+          year: "numeric",
+        }))}
+      </SidebarHeading>
       <button onClick={() => moveMonths(1)} type="button">Forward</button>
       <div
         css={{
@@ -176,18 +183,24 @@ const CalendarWidget: FunctionComponent = () => {
                 marginBottom: 4,
               }}
             >
-              {capitalize(topLeftDate.add(i, "days").format("dd"))}
+              {capitalize(topLeftDate.plus({
+                days: i,
+              }).toLocaleString({
+                weekday: "short",
+              }))}
             </div>
           ))}
         {Array
           .from({
-            length: bottomRightDate.diff(topLeftDate, "days") + 1,
+            length: bottomRightDate.diff(topLeftDate, "days").days + 1,
           })
           .map((_, i) => {
-            const date = topLeftDate.add(i, "days");
+            const date = topLeftDate.plus({
+              days: i,
+            });
 
             return (
-              <Cell key={date.unix()} date={date} />
+              <Cell key={date.toISO()} date={date} />
             );
           })}
       </div>
