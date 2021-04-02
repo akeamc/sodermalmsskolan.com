@@ -101,11 +101,14 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
     const before = around.startOf(granuality);
     const after = around.endOf(granuality);
 
-    const eventInstances = schedules.flatMap((eventSchedule) => eventSchedule.evaluate(
-      before,
-      after,
-      true,
-    ));
+    const eventInstances = schedules
+      .flatMap((eventSchedule) => eventSchedule.evaluate(
+        before,
+        after,
+        true,
+      ))
+      // Sort the instances in order to make subsequent reads faster.
+      .sort((a, b) => a.start.toMillis() - b.start.toMillis());
 
     const dayCount = after.diff(before, "days").days + 1;
 
@@ -113,21 +116,16 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
       const date = before.plus({
         days: dayIndex,
       });
-      const key = getEventInstanceCacheKey(date);
 
-      const foundInstances = [];
+      let i = 0;
 
-      // The following loop filters the `eventInstances` array, *extracting* relevant events.
-      for (let i = eventInstances.length - 1; i >= 0; i -= 1) {
-        const instance = eventInstances[i];
-
-        if (date.hasSame(instance.start, "day")) {
-          foundInstances.push(instance);
-          eventInstances.splice(i, 1);
-        }
+      // Find the index last element in the sorted array with the correct date.
+      while (i < eventInstances.length && date.hasSame(eventInstances[i].start, "day")) {
+        i += 1;
       }
 
-      eventInstanceRef.current.set(key, foundInstances);
+      // Fetch and remove the instances from the array and insert them into the map.
+      eventInstanceRef.current.set(getEventInstanceCacheKey(date), eventInstances.splice(0, i));
     }
   }, [schedules]);
 
