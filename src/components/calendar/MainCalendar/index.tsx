@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
 import PageHeading from "../../typography/headings/PageHeading";
-import WeeklyCalendar from "../WeeklyCalendar";
+import CalendarTable from "../CalendarTable";
 
 /**
  * A component returning different calendars depending on the specified `scope`.
@@ -13,15 +13,11 @@ import WeeklyCalendar from "../WeeklyCalendar";
 const CalendarController: FunctionComponent = () => {
   const { scope } = useCalendarContext();
 
-  // eslint-disable-next-line default-case
   switch (scope) {
-    case "day":
-      return <p>day</p>;
-    case "week":
-      return <WeeklyCalendar />;
     case "month":
       return <p>month</p>;
-    default: return <p>bruh</p>;
+    default:
+      return <CalendarTable />;
   }
 };
 
@@ -31,7 +27,7 @@ const CalendarController: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered calendar.
  */
 const MainCalendar: FunctionComponent = () => {
-  const { cursor } = useCalendarContext();
+  const { cursor, scope, setScope } = useCalendarContext();
 
   return (
     <div css={{
@@ -39,6 +35,7 @@ const MainCalendar: FunctionComponent = () => {
       width: "100%",
     }}
     >
+      <button onClick={() => setScope(scope === "week" ? "day" : "week")} type="button">toggle scope</button>
       <PageHeading>
         {capitalize(cursor.toLocaleString({
           year: "numeric",

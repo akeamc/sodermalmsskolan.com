@@ -1,9 +1,9 @@
-import Period, { getPeriodEventSchedule } from "./Period";
+import Period, { getPeriodEventSchedules } from "./Period";
 
 describe("Period tests", () => {
   it("works", () => {
     const period: Period = {
-      weekday: 0,
+      weekdays: 0,
       hour: 8,
       minute: 25,
       duration: 3600,
@@ -11,7 +11,7 @@ describe("Period tests", () => {
       room: "A307",
     };
 
-    const schedule = getPeriodEventSchedule(period);
+    const schedule = getPeriodEventSchedules(period)[0];
 
     expect(schedule.signature()).toMatchInlineSnapshot(`
       "Engelska..#ff4e42.A307.3600.DTSTART;TZID=Europe/Stockholm:20200113T082500

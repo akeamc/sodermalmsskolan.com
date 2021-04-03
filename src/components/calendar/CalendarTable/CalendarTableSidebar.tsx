@@ -129,7 +129,7 @@ const SidebarIndicator: FunctionComponent = () => {
  *
  * @returns {React.ReactElement} The rendered sidebar.
  */
-const WeeklyCalendarSidebar: FunctionComponent = () => (
+const CalendarTableSidebar: FunctionComponent = () => (
   <div css={{
     position: "absolute",
     width: "100%",
@@ -148,4 +148,4 @@ const WeeklyCalendarSidebar: FunctionComponent = () => (
   </div>
 );
 
-export default WeeklyCalendarSidebar;
+export default CalendarTableSidebar;

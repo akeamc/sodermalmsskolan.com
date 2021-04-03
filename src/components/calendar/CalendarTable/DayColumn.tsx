@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
 import useTime from "../../../hooks/useTime";
+import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import useDailyEventInstances from "../../../lib/calendar/hooks/useDailyEventInstances";
 import capitalize from "../../../lib/utils/capitalize";
 import CalendarEventDisplay from "../CalendarEventDisplay";
@@ -19,20 +20,23 @@ export interface DayColumnheadingProps {
 export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
   date,
 }) => {
+  const { scope } = useCalendarContext();
   const now = useTime();
 
   const isNow = date.hasSame(now, "day");
+
+  const big = scope === "day";
 
   return (
     <div
       css={{
         flex: 1,
         borderRight: "1px solid var(--border-color)",
-        textAlign: "center",
-        padding: "16px 0",
+        textAlign: big ? undefined : "center",
+        padding: 16,
 
         "h2, h3": {
-          fontSize: 16,
+          fontSize: big ? 24 : 16,
           fontWeight: 600,
           letterSpacing: "-0.022em",
           margin: 0,

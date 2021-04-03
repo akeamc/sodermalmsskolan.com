@@ -33,6 +33,7 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
 
   const startInSeconds = secondsSinceMidnight(start);
   const endInSeconds = startInSeconds + duration;
+  const compact = duration <= 1800;
 
   return (
     <div css={{
@@ -45,25 +46,30 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
       paddingTop: "var(--cell-spacing)",
     }}
     >
-      <div css={{
+      <div css={[{
         height: "100%",
         width: "100%",
         backgroundColor: color,
         color: relativelyReadableColor(color),
-        padding: 8,
+        padding: compact ? 6 : 8,
         boxSizing: "border-box",
         borderRadius: 6,
         wordBreak: "break-word",
-
-        [media(breakpoints.extraLarge)]: {
-          padding: 12,
-        },
 
         "@media (prefers-color-scheme: dark)": {
           backgroundColor: transparentize(0.8, color),
           color: "#fff",
         },
-      }}
+      }, compact ? {
+        display: "flex",
+        flexDirection: "row-reverse",
+        justifyContent: "space-between",
+        alignItems: "center",
+      } : {
+        [media(breakpoints.extraLarge)]: {
+          padding: 12,
+        },
+      }]}
       >
         <span css={{
           margin: 0,
@@ -102,7 +108,8 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
         </span>
         <h2 css={{
           margin: 0,
-          marginTop: "0.5em",
+          marginTop: compact ? undefined : "0.5em",
+          marginRight: compact ? 4 : undefined,
           fontWeight: 500,
           fontSize: 12,
           letterSpacing: "-0.022em",

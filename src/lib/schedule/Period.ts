@@ -4,7 +4,7 @@ import CalendarEventSchedule from "../calendar/event/CalendarEventSchedule";
 import { SubjectID, subjects } from "./Subject";
 
 export default interface Period {
-  weekday: number;
+  weekdays: number[] | number;
   hour: number;
   minute: number;
 
@@ -13,11 +13,11 @@ export default interface Period {
    */
   duration: number;
   subject: SubjectID;
-  room: string;
+  room?: string;
 }
 
 export interface PeriodCollection {
-  group: string;
+  appliesTo: RegExp;
   periods: Period[];
 }
 
@@ -50,19 +50,21 @@ export const getPeriodEventDetails = ({
  *
  * @returns {CalendarEventSchedule} The generated schedule.
  */
-export const getPeriodEventSchedule = (period: Period): CalendarEventSchedule => {
-  const { weekday, hour, minute } = period;
+export const getPeriodEventSchedules = (period: Period): CalendarEventSchedule[] => {
+  const { weekdays, hour, minute } = period;
 
-  const rrule = new RRule({
-    dtstart: new Date(
-      Date.UTC(2020, 0, 13 + weekday, hour, minute), // January 13th, 2020 is a monday.
-    ),
-    until: new Date(Date.UTC(2022, 1, 1)),
-    freq: RRule.WEEKLY,
-    tzid: "Europe/Stockholm",
+  return [].concat(weekdays).map((weekday) => {
+    const rrule = new RRule({
+      dtstart: new Date(
+        Date.UTC(2020, 0, 13 + weekday, hour, minute), // January 13th, 2020 is a monday.
+      ),
+      until: new Date(Date.UTC(2022, 1, 1)),
+      freq: RRule.WEEKLY,
+      tzid: "Europe/Stockholm",
+    });
+
+    const details = getPeriodEventDetails(period);
+
+    return new CalendarEventSchedule(rrule, details);
   });
-
-  const details = getPeriodEventDetails(period);
-
-  return new CalendarEventSchedule(rrule, details);
 };

@@ -4,7 +4,7 @@ export default interface Subject {
   color: string;
 }
 
-export type SubjectID = "math" | "science" | "english" | "socialStudies" | "sports" | "swedish" | "random" | "studentsChoice" | "german" | "french" | "spanish" | "art" | "engineering";
+export type SubjectID = "math" | "science" | "english" | "socialStudies" | "sports" | "swedish" | "random" | "studentsChoice" | "german" | "french" | "spanish" | "art" | "engineering" | "lunch";
 
 export const subjects: Record<SubjectID, Subject> = {
   math: {
@@ -40,7 +40,7 @@ export const subjects: Record<SubjectID, Subject> = {
   random: {
     name: "Mentorstid",
     symbol: "MT",
-    color: "#ffffff",
+    color: "#f0f0f0",
   },
   studentsChoice: {
     name: "Elevens val",
@@ -71,5 +71,10 @@ export const subjects: Record<SubjectID, Subject> = {
     name: "Teknik",
     symbol: "TK",
     color: "#0cce6b",
+  },
+  lunch: {
+    name: "Lunch",
+    symbol: "LU",
+    color: "#f0f0f0",
   },
 };

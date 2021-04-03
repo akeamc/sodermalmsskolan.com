@@ -75,7 +75,7 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
   initialCursor = DateTime.now(),
   ...props
 }) => {
-  const schedules = useCalendarEventSchedules();
+  const schedules = useCalendarEventSchedules(["o93", "o9ty", "o9ma", "o9dka"]);
   const eventInstanceRef = useRef<Map<string, CalendarEventInstance[]>>(new Map());
 
   const [cursor, setCursor] = useState(initialCursor);

@@ -4,10 +4,12 @@ import CalendarEventSchedule from "../event/CalendarEventSchedule";
 /**
  * Get the schedules.
  *
+ * @param {string[]} periodGroups Groups.
+ *
  * @returns {CalendarEventSchedule[]} The schedules.
  */
-const useCalendarEventSchedules = (): CalendarEventSchedule[] => {
-  const periods = usePeriods();
+const useCalendarEventSchedules = (periodGroups: string[]): CalendarEventSchedule[] => {
+  const periods = usePeriods(periodGroups);
 
   return periods;
 };

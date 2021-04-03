@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import DayColumn, { DayColumnHeading } from "./DayColumn";
-import WeeklyCalendarSidebar from "./WeeklyCalendarSidebar";
+import CalendarTableSidebar from "./CalendarTableSidebar";
 
 /**
  * Main section of the weekly calendar, without the sidebar.
@@ -22,14 +22,16 @@ const DaysSection: FunctionComponent = (props) => (
 );
 
 /**
- * A calendar displaying one week.
+ * A calendar displaying one or more days.
  *
  * @returns {React.ReactElement} The rendered calendar.
  */
-const WeeklyCalendar: FunctionComponent = () => {
-  const { startOfScope } = useCalendarContext();
+const CalendarTable: FunctionComponent = () => {
+  const { startOfScope, endOfScope } = useCalendarContext();
 
-  const dates = Array.from({ length: 7 }).map((_, i) => startOfScope.plus({
+  const dayCount = endOfScope.diff(startOfScope, "days").days + 1;
+
+  const dates = Array.from({ length: dayCount }).map((_, i) => startOfScope.plus({
     days: i,
   }));
 
@@ -64,7 +66,7 @@ const WeeklyCalendar: FunctionComponent = () => {
         paddingBottom: 24,
       }}
       >
-        <WeeklyCalendarSidebar />
+        <CalendarTableSidebar />
         <DaysSection>
           {dates.map((date) => (
             <DayColumn key={date.toISO()} date={date} />
@@ -75,4 +77,4 @@ const WeeklyCalendar: FunctionComponent = () => {
   );
 };
 
-export default WeeklyCalendar;
+export default CalendarTable;
