@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { extractSubjectFromPost } from "../../lib/digibruh/category";
+import { extractSubjectFromPost } from "../../lib/digibruh/DigibruhSubject";
 import { useArticleUrl } from "../../lib/digibruh/hooks/article";
 import Post from "../../lib/ghost/post";
 import Card, { CardProps } from "../Card";

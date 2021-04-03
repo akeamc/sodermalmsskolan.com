@@ -9,6 +9,13 @@ export default interface DigibruhSubject {
 
 export const subjectRegex = new RegExp(`^${digibruhTagPrefix}-[a-zA-Z]+$`);
 
+/**
+ * Does what it says.
+ *
+ * @param {Tag} tag Ghost tag.
+ *
+ * @returns {DigibruhSubject} Converted tag.
+ */
 export const convertTagToSubject = (tag: Tag): DigibruhSubject => ({
   name: tag.name.substring(1), // All Digibruh tag names are prefixed with # to make them internal.
   slug: tag.slug.substring(digibruhTagPrefix.length + 1), // +1 because the # must be accounted for.
@@ -17,7 +24,9 @@ export const convertTagToSubject = (tag: Tag): DigibruhSubject => ({
 /**
  * Extract a Digibruh subject.
  *
- * @param article
+ * @param {Post} article Article to scan.
+ *
+ * @returns {DigibruhSubject} The subject.
  */
 export const extractSubjectFromPost = (article: Post): DigibruhSubject => {
   const tag = article?.tags?.find(({ slug }) => subjectRegex.test(slug));

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FunctionComponent } from "react";
-import { useCalendarContext } from "../../lib/calendar/CalendarContext";
-import capitalize from "../../lib/utils/capitalize";
-import PageHeading from "../typography/headings/PageHeading";
-import WeeklyCalendar from "./WeeklyCalendar";
+import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
+import capitalize from "../../../lib/utils/capitalize";
+import PageHeading from "../../typography/headings/PageHeading";
+import WeeklyCalendar from "../WeeklyCalendar";
 
 /**
  * A component returning different calendars depending on the specified `scope`.
