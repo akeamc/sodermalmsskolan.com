@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
 import PageHeading from "../../typography/headings/PageHeading";
@@ -29,13 +29,24 @@ const CalendarController: FunctionComponent = () => {
 const MainCalendar: FunctionComponent = () => {
   const { cursor, scope, setScope } = useCalendarContext();
 
+  useEffect(() => {
+    window.addEventListener("keypress", (e) => {
+      if (e.code === "KeyW") {
+        setScope("week");
+      }
+
+      if (e.code === "KeyD") {
+        setScope("day");
+      }
+    });
+  });
+
   return (
     <div css={{
       "--border-color": "var(--accents-2)",
       width: "100%",
     }}
     >
-      <button onClick={() => setScope(scope === "week" ? "day" : "week")} type="button">toggle scope</button>
       <PageHeading>
         {capitalize(cursor.toLocaleString({
           year: "numeric",

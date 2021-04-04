@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import useTime from "../../../hooks/useTime";
 import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
@@ -148,4 +148,4 @@ const CalendarTableSidebar: FunctionComponent = () => (
   </div>
 );
 
-export default CalendarTableSidebar;
+export default memo(CalendarTableSidebar);

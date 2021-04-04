@@ -89,6 +89,7 @@ const DayColumn: FunctionComponent<DayColumnProps> = ({ date }) => {
     >
       <div css={{
         position: "relative",
+        zIndex: 1,
       }}
       >
         {eventInstances?.map((event) => (
