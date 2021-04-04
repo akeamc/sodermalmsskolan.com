@@ -1,3 +1,4 @@
+import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import React, {
   FunctionComponent,
@@ -8,6 +9,9 @@ import React, {
 import useTime from "../../../hooks/useTime";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import CalendarEventInstance from "../../../lib/calendar/event/CalendarEventInstance";
+import styles from "./CalendarWidgetCell.module.scss";
+
+const cx = classNames.bind(styles);
 
 export interface CalendarWidgetCellProps {
   date: DateTime;
@@ -56,73 +60,22 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
 
   return (
     <button
-      css={[{
-        backgroundColor: isInScope ? "var(--accents-2)" : "transparent",
-        color: isSelectedMonth ? "var(--color-text-primary)" : "var(--color-text-tertiary)",
-        fontWeight: isSelectedMonth ? 500 : 400,
-        position: "relative",
-        border: "none",
-        display: "block",
-        padding: 0,
-        cursor: "pointer",
-        transition: "all 0.1s",
-        fontFamily: "var(--font-sans)",
-        borderRadius: "var(--cell-border-radius)",
-        margin: 0,
-
-        ":hover": {
-          backgroundColor: "var(--accents-2)",
-        },
-
-        "::after": {
-          content: "\"\"",
-          display: "block",
-          paddingBottom: "100%",
-        },
-      }, !leftBorderRadius ? {
-        borderTopLeftRadius: 0,
-        borderBottomLeftRadius: 0,
-      } : undefined, !rightBorderRadius ? {
-        borderTopRightRadius: 0,
-        borderBottomRightRadius: 0,
-      } : undefined, isToday ? {
-        color: "var(--color-highlight)",
-      } : undefined, isCursor ? {
-        color: "#fff",
-
-        "::after": {
-          backgroundColor: "var(--color-highlight)",
-          borderRadius: "var(--cell-border-radius)",
-        },
-      } : undefined]}
+      className={cx("base", {
+        inScope: isInScope,
+        selectedMonth: isSelectedMonth,
+        today: isToday,
+        cursor: isCursor,
+        sharpLeftCorners: !leftBorderRadius,
+        sharpRightCorners: !rightBorderRadius,
+      })}
       onClick={() => setCursor(date)}
       type="button"
     >
-      <div css={{
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      >
-        <span css={{
-          textAlign: "center",
-          display: "inline-block",
-          fontSize: 16,
-          lineHeight: 1,
-          fontFeatureSettings: "\"ss01\"",
-        }}
-        >
+      <div className={cx("textContainer")}>
+        <span className={cx("cellLabel")}>
           {date.day}
         </span>
-        <div css={{
-          position: "absolute",
-          bottom: 6,
-          display: "flex",
-        }}
-        >
+        <div className={cx("eventDotContainer")}>
           {eventInstances?.map(({
             details: {
               color,
@@ -131,13 +84,8 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
           }) => (
             <span
               key={signature}
-              css={{
-                height: 4,
-                width: 4,
-                borderRadius: "50%",
-                backgroundColor: isCursor ? "currentColor" : color,
-                display: "block",
-                margin: "0 2px",
+              style={{
+                ["--event-dot-color" as string]: isCursor ? "currentColor" : color,
               }}
             />
           ))}
