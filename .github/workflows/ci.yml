@@ -21,7 +21,9 @@ jobs:
 
       - run: yarn install
 
-      - run: yarn lint
+      - run: yarn eslint
+
+      - run: yarn stylelint
 
   test:
     runs-on: ubuntu-latest

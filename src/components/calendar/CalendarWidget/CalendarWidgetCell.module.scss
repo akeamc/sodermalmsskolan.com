@@ -1,16 +1,16 @@
 .base {
-  color: var(--color-text-tertiary);
-  font-weight: 400;
-  position: relative;
-  border: none;
-  display: block;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.1s;
-  font-family: var(--font-sans);
-  border-radius: var(--cell-border-radius);
   background-color: transparent;
+  border: 0;
+  border-radius: var(--cell-border-radius);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 400;
   margin: 0;
+  padding: 0;
+  position: relative;
+  transition: all 0.1s;
 
   &:hover {
     background-color: var(--accents-2);
@@ -23,11 +23,11 @@
   }
 }
 
-.inScope {
+.in-scope {
   background-color: var(--accents-2);
 }
 
-.selectedMonth {
+.selected-month {
   color: var(--color-text-primary);
   font-weight: 500;
 }
@@ -38,51 +38,51 @@
 
 .cursor {
   color: #fff;
-  
+
   &::after {
     background-color: var(--color-highlight);
     border-radius: var(--cell-border-radius);
   }
 }
 
-.sharpLeftCorners {
-  border-top-left-radius: 0;
+.sharp-left-corners {
   border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
-.sharpRightCorners {
-  border-top-right-radius: 0;
+.sharp-right-corners {
   border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
-.textContainer {
+.text-container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
   position: absolute;
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.cellLabel {
-  text-align: center;
+.cell-label {
   display: inline-block;
+  font-feature-settings: "ss01";
   font-size: 16px;
   line-height: 1;
-  font-feature-settings: "ss01";
+  text-align: center;
 }
 
-.eventDotContainer {
-  position: absolute;
+.event-dot-container {
   bottom: 6px;
   display: flex;
+  position: absolute;
 
   > span {
-    height: 4px;
-    width: 4px;
+    background-color: var(--event-dot-color);
     border-radius: 50%;
     display: block;
+    height: 4px;
     margin: 0 2px;
-    background-color: var(--event-dot-color);
+    width: 4px;
   }
 }

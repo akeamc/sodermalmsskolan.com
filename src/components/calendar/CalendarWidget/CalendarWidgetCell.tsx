@@ -61,21 +61,21 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
   return (
     <button
       className={cx("base", {
-        inScope: isInScope,
-        selectedMonth: isSelectedMonth,
+        "in-scope": isInScope,
+        "selected-month": isSelectedMonth,
         today: isToday,
         cursor: isCursor,
-        sharpLeftCorners: !leftBorderRadius,
-        sharpRightCorners: !rightBorderRadius,
+        "sharp-left-corners": !leftBorderRadius,
+        "sharp-right-corners": !rightBorderRadius,
       })}
       onClick={() => setCursor(date)}
       type="button"
     >
-      <div className={cx("textContainer")}>
-        <span className={cx("cellLabel")}>
+      <div className={cx("text-container")}>
+        <span className={cx("cell-label")}>
           {date.day}
         </span>
-        <div className={cx("eventDotContainer")}>
+        <div className={cx("event-dot-container")}>
           {eventInstances?.map(({
             details: {
               color,

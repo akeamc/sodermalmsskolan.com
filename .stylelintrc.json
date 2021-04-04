@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-sass-guidelines",
+    "stylelint-order",
+    "stylelint-config-css-modules"
+  ],
+  "rules": {
+    "string-quotes": "double"
+  }
+}

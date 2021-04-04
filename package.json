@@ -5,7 +5,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "eslint": "eslint .",
+    "stylelint": "stylelint .",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -108,6 +109,11 @@
     "sass": "^1.32.8",
     "sass-loader": "10",
     "style-loader": "^2.0.0",
+    "stylelint": "^13.12.0",
+    "stylelint-config-css-modules": "^2.2.0",
+    "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-order": "^4.1.0",
     "ts-jest": "^26.5.3",
     "typescript": "^4.2.3"
   }

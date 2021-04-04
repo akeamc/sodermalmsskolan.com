@@ -1,43 +1,11 @@
-import { DateTime } from "luxon";
+import classNames from "classnames/bind";
 import React, { FunctionComponent, memo } from "react";
-import useTime from "../../../hooks/useTime";
 import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
-import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
 import Time from "../../typography/atomics/Time";
+import CalendarTableSidebarIndicator from "./CalendarTableSidebarIndicator";
+import styles from "./CalendarTableSidebar.module.scss";
 
-export interface HorizontalBarProps {
-  color?: string;
-  length?: string;
-  top?: string | number;
-  left?: string | number;
-}
-
-/**
- * A horizontal bar.
- *
- * @param {React.PropsWithChildren<HorizontalBarProps>} props Props.
- *
- * @returns {React.ReactElement} A rendered horizontal bar.
- */
-const HorizontalBar: FunctionComponent<HorizontalBarProps> = ({
-  color = "var(--border-color)",
-  length = "calc(100% - var(--sidebar-width))",
-  top = 0,
-  left = "var(--sidebar-width)",
-}) => (
-  <hr css={{
-    height: "1px",
-    width: length,
-    left,
-    position: "absolute",
-    backgroundColor: color,
-    display: "block",
-    border: 0,
-    top,
-    margin: 0,
-  }}
-  />
-);
+const cx = classNames.bind(styles);
 
 export interface SidebarLabelProps {
   hours: number;
@@ -73,56 +41,15 @@ const SidebarLabel: FunctionComponent<SidebarLabelProps> = ({
       {getHumanReadableDuration(hours * 3600, true)}
     </Time>
     {hours < 24 ? (
-      <>
-        <HorizontalBar top="25%" left="0" length="32px" />
-        <HorizontalBar top="50%" left="0" length="48px" />
-        <HorizontalBar top="75%" left="0" length="32px" />
-      </>
+      <div>
+        <hr className={cx("quarter-hour-bar")} />
+        <hr className={cx("quarter-hour-bar")} />
+        <hr className={cx("quarter-hour-bar")} />
+      </div>
     ) : undefined}
-    <HorizontalBar />
+    <hr className={cx("full-width-bar")} />
   </div>
 );
-
-/**
- * Small tag floating along on the sidebar, indicating the current time.
- *
- * @returns {React.ReactElement} The rendered indicator.
- */
-const SidebarIndicator: FunctionComponent = () => {
-  const now = useTime();
-  const hours = secondsSinceMidnight(now) / 3600;
-
-  return (
-    <div
-      css={{
-        position: "absolute",
-        width: "100%",
-        zIndex: 1,
-      }}
-      style={{
-        top: `calc(var(--hour-height) * ${hours})`,
-      }}
-    >
-      <Time css={{
-        position: "absolute",
-        transform: "translateY(-50%)",
-        display: "inline-block",
-        backgroundColor: "var(--color-bg-danger)",
-        color: "#fff",
-        fontSize: 14,
-        padding: "4px 0",
-        textAlign: "center",
-        borderRadius: 6,
-        fontWeight: 500,
-        width: "calc(var(--sidebar-width) - var(--cell-spacing))",
-      }}
-      >
-        {now.toLocaleString(DateTime.TIME_24_SIMPLE)}
-      </Time>
-      <HorizontalBar color="var(--color-border-danger)" />
-    </div>
-  );
-};
 
 /**
  * A sidebar for the weekly calendar, showing the current time and a nice scale.
@@ -130,15 +57,10 @@ const SidebarIndicator: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered sidebar.
  */
 const CalendarTableSidebar: FunctionComponent = () => (
-  <div css={{
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-  }}
-  >
+  <div className={cx("sidebar")}>
     {/* IMPORTANT! Do not place any div element after the SidebarLabels as CSS selectors are
     in use. */}
-    <SidebarIndicator />
+    <CalendarTableSidebarIndicator />
     {Array.from({
       length: 25,
     }).map((_, i) => (

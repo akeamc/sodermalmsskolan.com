@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import classNames from "classnames/bind";
 import React, { FunctionComponent, useEffect } from "react";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
 import PageHeading from "../../typography/headings/PageHeading";
 import CalendarTable from "../CalendarTable";
+import styles from "./index.module.scss";
+
+const cx = classNames.bind(styles);
 
 /**
  * A component returning different calendars depending on the specified `scope`.
@@ -27,7 +31,7 @@ const CalendarController: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered calendar.
  */
 const MainCalendar: FunctionComponent = () => {
-  const { cursor, scope, setScope } = useCalendarContext();
+  const { cursor, setScope } = useCalendarContext();
 
   useEffect(() => {
     window.addEventListener("keypress", (e) => {
@@ -42,11 +46,7 @@ const MainCalendar: FunctionComponent = () => {
   });
 
   return (
-    <div css={{
-      "--border-color": "var(--accents-2)",
-      width: "100%",
-    }}
-    >
+    <div className={cx("base")}>
       <PageHeading>
         {capitalize(cursor.toLocaleString({
           year: "numeric",
