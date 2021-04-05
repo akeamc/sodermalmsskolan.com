@@ -4,6 +4,23 @@
   width: 100%;
 }
 
+.label {
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+  height: var(--hour-height);
+  position: relative;
+
+  &:last-of-type {
+    height: auto;
+  }
+
+  time {
+    font-feature-settings: "ss01", "tnum";
+    position: absolute;
+    top: -0.5em;
+  }
+}
+
 .horizontal-bar {
   background-color: var(--bar-color, var(--border-color));
   border: 0;

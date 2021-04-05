@@ -1,11 +1,15 @@
 import classNames from "classnames/bind";
 import { DateTime } from "luxon";
-import React, { FunctionComponent } from "react";
+import React, { CSSProperties, FunctionComponent } from "react";
 import useTime from "../../../hooks/useTime";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
 import styles from "./CalendarTableSidebarIndicator.module.scss";
 
 const cx = classNames.bind(styles);
+
+export interface CSSVariables extends CSSProperties {
+  "--hours": number;
+}
 
 /**
  * Small tag floating along on the sidebar, indicating the current time.
@@ -21,11 +25,11 @@ const CalendarTableSidebarIndicator: FunctionComponent = () => {
       className={cx("container")}
       style={{
         "--hours": hours,
-      }}
+      } as CSSVariables}
     >
-      <span className={cx("label")}>
+      <time className={cx("label")}>
         {now.toLocaleString(DateTime.TIME_24_SIMPLE)}
-      </span>
+      </time>
       <hr className={cx("bar")} />
     </div>
   );
