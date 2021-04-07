@@ -3,7 +3,6 @@ import React, { FunctionComponent, useMemo } from "react";
 import { transparentize } from "polished";
 import { toast } from "react-toastify";
 import { DateTime } from "luxon";
-import useLocale from "../../hooks/useLocale";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { auth } from "../../lib/firebase/firebase";
@@ -27,7 +26,6 @@ import useChannelMessages from "../../lib/discord/hooks/useChannelMessages";
  */
 const AccountCard: FunctionComponent = () => {
   const { user, reloadUser } = useAuth();
-  const { language } = useLocale();
   const router = useRouter();
 
   const displayName = user?.displayName ?? <Emphasis>Namnlös</Emphasis>;
