@@ -183,7 +183,7 @@ const PostTitle: FunctionComponent<PostTitleProps> = ({
           lineHeight: 1.2,
         }}
         >
-          {post?.publishedAt ? post.publishedAt.toLocaleString(DateTime.DATE_MED) : <InlineSkeleton width="8em" />}
+          {post?.publishedAt ? DateTime.fromISO(post.publishedAt).toLocaleString(DateTime.DATE_MED) : <InlineSkeleton width="8em" />}
         </time>
       </div>
     </a>

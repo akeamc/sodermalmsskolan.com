@@ -2,6 +2,9 @@ import ky from "ky-universal";
 import { ClientDish } from "./Dish";
 import { IMenu, Menu } from "../shared/Menu";
 
+/**
+ * Client-side `Menu`.
+ */
 export default class ClientMenu extends Menu {
   dishes: ClientDish[];
 
@@ -16,7 +19,7 @@ export default class ClientMenu extends Menu {
 
     const menus = res
       .map((menu) => new ClientMenu(menu))
-      .sort((a, b) => a.date.getTime() - b.date.getTime());
+      .sort((a, b) => a.date.toMillis() - b.date.toMillis());
 
     return menus;
   }

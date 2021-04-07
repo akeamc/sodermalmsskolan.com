@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import useTime from "../../../hooks/useTime";
 import { DISCORD_CHANNELS } from "../../discord/constants";
 import useChannelMessages from "../../discord/hooks/useChannelMessages";
@@ -16,9 +17,10 @@ const useFreshTelegrams = (ttl = 86400): Telegram[] => {
   });
 
   const now = useTime(60000);
+  const exp = now.toMillis() - ttl * 1000;
 
   const messages = data?.flat()
-    ?.filter((message) => new Date(message.createdAt).getTime() >= now.getTime() - ttl * 1000);
+    ?.filter((message) => DateTime.fromISO(message.createdAt).toMillis() >= exp);
 
   return messages?.map(telegramFromMessage);
 };

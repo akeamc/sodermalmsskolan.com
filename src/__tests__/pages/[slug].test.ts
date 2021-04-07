@@ -5,6 +5,8 @@ describe("blog page test", () => {
   jest.unmock("next/head");
 
   it("should render the `about us` page correctly", async () => {
+    jest.setTimeout(10000);
+
     const { render } = await getPage({
       route: "/om-oss",
       useDocument: true,

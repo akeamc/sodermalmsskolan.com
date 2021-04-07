@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
 import Post from "../../lib/ghost/post";
 import BannerAd from "../ads/BannerAd";
@@ -26,8 +27,8 @@ const PostPage: FunctionComponent<PostPageProps> = ({ post }) => (
     twitterCard: "summary_large_image",
     type: "article",
     article: {
-      published: post?.publishedAt ? new Date(post?.publishedAt) : null,
-      modified: post?.updatedAt ? new Date(post?.updatedAt) : null,
+      published: DateTime.fromISO(post?.publishedAt),
+      modified: DateTime.fromISO(post?.updatedAt),
     },
   }}
   >
