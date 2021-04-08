@@ -5,6 +5,12 @@
  *
  * @returns {string} The capitalized string.
  */
-const capitalize = (input: string): string => input[0].toLocaleUpperCase() + input.slice(1);
+const capitalize = (input?: string): string => {
+  if (typeof input !== "string") {
+    return undefined;
+  }
+
+  return input[0].toLocaleUpperCase() + input.slice(1);
+};
 
 export default capitalize;

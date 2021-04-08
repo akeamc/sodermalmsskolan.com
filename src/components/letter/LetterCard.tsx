@@ -21,7 +21,7 @@ export interface LetterCardProps {
 const LetterCard: FunctionComponent<LetterCardProps> = ({ letter, rows = 5 }) => {
   const content = letter?.attachment?.content;
 
-  const excerpt = useMemo(() => getLetterExcerpt(content), [content]);
+  const { excerpt } = useMemo(() => getLetterExcerpt(content), [content]);
 
   return (
     <Card href={letter?.url}>

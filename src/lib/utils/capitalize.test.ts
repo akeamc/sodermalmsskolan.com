@@ -8,3 +8,7 @@ test("capitalization", () => {
 test("non-ASCII capitalization", () => {
   expect(capitalize("ö")).toBe("Ö");
 });
+
+test("should not break on undefined values", () => {
+  expect(capitalize(undefined)).toBeUndefined();
+});
