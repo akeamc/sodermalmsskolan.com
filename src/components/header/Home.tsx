@@ -5,7 +5,7 @@ import {
   HeaderHeading,
   SmallHeading, SubTitle,
 } from "../text/headings";
-import ButtonRow from "../button/row";
+import ButtonRow from "../old-button/row";
 import HeaderProps from "./props";
 
 export interface HomeHeaderProps extends HeaderProps {
