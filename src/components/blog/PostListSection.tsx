@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from "react";
 import usePosts from "../../lib/blog/hooks/usePosts";
 import { LimitParam } from "../../lib/ghost/common";
 import { PostFilter } from "../../lib/ghost/post";
-import Button from "../button/Button";
+import Button from "../old-button/Button";
 import CardGridSection from "../CardGridSection";
 import { SectionProps } from "../section/Section";
 import PostTitle from "./PostTitle";

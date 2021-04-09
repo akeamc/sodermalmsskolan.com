@@ -1,6 +1,6 @@
 import { FormikProps, FormikValues, useFormikContext } from "formik";
 import React, { FunctionComponent } from "react";
-import Button, { ButtonProps } from "../../button/Button";
+import Button, { ButtonProps } from "../../old-button/Button";
 
 /**
  * Helper function determining whether or not the submit button of a form is disabled.

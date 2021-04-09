@@ -8,7 +8,7 @@ import { DISCORD_CHANNELS } from "../../lib/discord/constants";
 import { auth } from "../../lib/firebase/firebase";
 import { breakpoints, media } from "../../styles/breakpoints";
 import UserAvatar from "./UserAvatar";
-import Button from "../button/Button";
+import Button from "../old-button/Button";
 import Card from "../Card";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Emphasis from "../text/atomics/Emphasis";

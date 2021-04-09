@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { loginLink, signupLink } from "../../lib/auth/href";
-import Button from "../button/Button";
+import Button from "../old-button/Button";
 import UserAvatar from "../account/UserAvatar";
 
 /**

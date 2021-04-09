@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import React, { FunctionComponent } from "react";
 import reportEvent from "../../lib/analytics/reportEvent";
 import { auth } from "../../lib/firebase/firebase";
-import Button from "../button/Button";
+import Button from "../old-button/Button";
 
 /**
  * React component used to display the various external authentication methods.

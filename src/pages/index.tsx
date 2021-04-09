@@ -2,7 +2,7 @@ import React from "react";
 import { NextPage } from "next";
 import Base from "../components/Base";
 import HomeHeader from "../components/header/Home";
-import Button from "../components/button/Button";
+import Button from "../components/old-button/Button";
 import DigibruhArticleSection from "../components/digibruh/Section";
 import FeaturedPostSection from "../components/blog/FeaturedPostSection";
 

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../lib/auth/AuthContext";
 import { translateFirebaseError } from "../../lib/auth/forms";
 import { auth } from "../../lib/firebase/firebase";
-import Button, { ButtonProps } from "../button/Button";
+import Button, { ButtonProps } from "../old-button/Button";
 
 /**
  * Send an email verification to the specified email address.
