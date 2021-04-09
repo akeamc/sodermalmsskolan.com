@@ -1,9 +1,15 @@
+import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
+import { ChevronLeft, ChevronRight } from "react-feather";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
+import Button, { ButtonProps } from "../../Button";
 import SidebarHeading from "../../typography/headings/SidebarHeading";
 import CalendarWidgetCell from "./CalendarWidgetCell";
+import styles from "./index.module.scss";
+
+const cx = classNames.bind(styles);
 
 /**
  * Head row for the calendar widget.
@@ -17,18 +23,8 @@ const CalendarWidgetHead: FunctionComponent = () => (
         length: 7,
       })
       .map((_, i) => (
-        <div
-          // eslint-disable-next-line react/no-array-index-key
-          key={i}
-          css={{
-            color: "var(--color-text-tertiary)",
-            textAlign: "center",
-            fontWeight: 400,
-            fontSize: 14,
-            lineHeight: 1,
-            marginBottom: 4,
-          }}
-        >
+        // eslint-disable-next-line react/no-array-index-key
+        <div className={cx("table-head")} key={i}>
           {capitalize(DateTime.now().startOf("week").plus({
             days: i,
           }).toLocaleString({
@@ -51,28 +47,25 @@ const CalendarWidget: FunctionComponent = () => {
     weeks: 5,
   }).endOf("week");
 
+  const buttonProps: ButtonProps = {
+    type: "button",
+    variant: "secondary",
+    size: "small",
+  };
+
   return (
-    <div css={{
-      "--cell-border-radius": "8px",
-      width: "100%",
-    }}
-    >
-      <button onClick={() => moveMonths(-1)} type="button">Back</button>
-      <SidebarHeading>
-        {capitalize(cursor.toLocaleString({
-          month: "long",
-          year: "numeric",
-        }))}
+    <div className={cx("base")}>
+      <SidebarHeading className={cx("heading")}>
+        <span>
+          {capitalize(cursor.toLocaleString({
+            month: "long",
+            year: "numeric",
+          }))}
+        </span>
+        <Button onClick={() => moveMonths(-1)} icon={ChevronLeft} title="Föregående månad" {...buttonProps} />
+        <Button onClick={() => moveMonths(1)} icon={ChevronRight} title="Nästa månad" {...buttonProps} />
       </SidebarHeading>
-      <button onClick={() => moveMonths(1)} type="button">Forward</button>
-      <div
-        css={{
-          display: "grid",
-          gridTemplateColumns: "repeat(7, 1fr)",
-          gridTemplateRows: "auto",
-          gridAutoRows: "1fr",
-        }}
-      >
+      <div className={cx("table")}>
         <CalendarWidgetHead />
         {Array
           .from({

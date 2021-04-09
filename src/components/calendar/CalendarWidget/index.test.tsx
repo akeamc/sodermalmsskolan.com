@@ -10,7 +10,6 @@ describe("<CalendarWidget /> tests", () => {
     const initialCursor = DateTime.fromISO("2021-01-14T07:30:00", {
       zone: "utc",
     });
-    const cursorRegExp = /^Cursor:/;
 
     render(
       <CalendarContextProvider initialCursor={initialCursor}>
@@ -27,15 +26,18 @@ describe("<CalendarWidget /> tests", () => {
       </CalendarContextProvider>,
     );
 
-    expect(screen.getByText(cursorRegExp).textContent).toBe("Cursor: 2021-01-14T07:30:00.000Z");
+    // eslint-disable-next-line require-jsdoc
+    const getCursor = () => screen.getByText(/^Cursor:/).textContent;
+
+    expect(getCursor()).toBe("Cursor: 2021-01-14T07:30:00.000Z");
 
     userEvent.click(screen.getByText("10"));
-    expect(screen.getByText(cursorRegExp).textContent).toBe("Cursor: 2021-01-10T00:00:00.000Z");
+    expect(getCursor()).toBe("Cursor: 2021-01-10T00:00:00.000Z");
 
-    userEvent.click(screen.getByText("Forward"));
-    expect(screen.getByText(cursorRegExp).textContent).toBe("Cursor: 2021-02-01T00:00:00.000Z");
+    userEvent.click(screen.getByTitle(/nästa/i));
+    expect(getCursor()).toBe("Cursor: 2021-02-01T00:00:00.000Z");
 
-    userEvent.click(screen.getByText("Back"));
-    expect(screen.getByText(cursorRegExp).textContent).toBe("Cursor: 2021-01-01T00:00:00.000Z");
+    userEvent.click(screen.getByTitle(/föregående/i));
+    expect(getCursor()).toBe("Cursor: 2021-01-01T00:00:00.000Z");
   });
 });

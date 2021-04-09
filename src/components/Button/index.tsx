@@ -1,14 +1,13 @@
 import classNames from "classnames/bind";
 import React, { ComponentType, FunctionComponent } from "react";
+import { IconProps } from "react-feather";
 import styles from "./index.module.scss";
 
 const cx = classNames.bind(styles);
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonSize = "small" | "medium" | "large";
-export type ButtonIcon = ComponentType<
-React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
->;
+export type ButtonIcon = ComponentType<IconProps>;
 
 export interface ButtonProps extends React.DetailedHTMLProps<
 React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement
@@ -60,6 +59,7 @@ const Button: FunctionComponent<ButtonProps> = ({
     })}
     // eslint-disable-next-line react/button-has-type
     type={type}
+    disabled={disabled}
     {...props}
   >
     {LeftIcon ? <LeftIcon className={cx("icon", "left-icon")} /> : undefined}

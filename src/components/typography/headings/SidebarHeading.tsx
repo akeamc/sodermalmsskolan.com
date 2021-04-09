@@ -1,23 +1,23 @@
+import classNames from "classnames/bind";
 import React, { FunctionComponent } from "react";
+import HeadingProps from "../types/HeadingProps";
+import styles from "./SidebarHeading.module.scss";
+
+const cx = classNames.bind(styles);
 
 /**
  * Heading for sidebars.
  *
- * @param {React.PropsWithChildren} props Props.
+ * @param {React.PropsWithChildren<HeadingProps>} props Props.
  *
  * @returns {React.ReactElement} Rendered heading.
  */
-const SidebarHeading: FunctionComponent = (props) => (
+const SidebarHeading: FunctionComponent<HeadingProps> = ({
+  className,
+  ...props
+}) => (
   // eslint-disable-next-line jsx-a11y/heading-has-content
-  <h3
-    css={{
-      margin: "2em 0 1em 0",
-      fontWeight: 700,
-      letterSpacing: "-0.019em",
-      fontSize: 24,
-    }}
-    {...props}
-  />
+  <h3 className={cx("heading", className)} {...props} />
 );
 
 export default SidebarHeading;
