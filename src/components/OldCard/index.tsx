@@ -14,6 +14,8 @@ export interface CardProps extends HTMLAttributes<HTMLOrSVGElement> {
  * @param {React.PropsWithChildren<CardProps>} props Props.
  *
  * @returns {React.ReactElement} The rendered card.
+ *
+ * @deprecated
  */
 const Card: FunctionComponent<CardProps> = ({
   href, big, footer, children, ...rest
