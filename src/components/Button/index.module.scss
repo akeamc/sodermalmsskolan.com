@@ -1,0 +1,50 @@
+.base {
+  background-color: transparent;
+  border: 0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  transition: background-color 0.1s;
+}
+
+.primary {
+  background-color: var(--color-highlight);
+  color: #fff;
+
+  &:hover {
+    background-color: var(--color-highlight-light);
+  }
+
+  &:active {
+    background-color: var(--color-highlight);
+  }
+}
+
+.secondary {
+  border: 1px solid var(--accents-2);
+
+  &:hover {
+    background-color: var(--accents-1);
+  }
+
+  &:active {
+    background-color: var(--accents-2);
+  }
+}
+
+.small {
+  padding: 0.5rem 1rem;
+}
+
+.medium {
+  padding: 0.75rem 1rem;
+}
+
+.large {
+  padding: 1rem 1.5rem;
+}
