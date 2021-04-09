@@ -26,10 +26,11 @@ const baseTheme: CSSObject = {
 
   "--color-highlight": "#4969ed",
   "--color-highlight-light": "#607cef",
+  "--color-highlight-transparent": transparentize(0.9, "#4969ed"),
 
-  "--shadow-color": transparentize(0.8, "#000000"),
+  "--shadow-color": transparentize(0.9, "#000000"),
 
-  "--shadow-small": "0 2px 10px 0 var(--shadow-color)",
+  "--shadow-small": "0 2px 5px 0 var(--shadow-color)",
   "--shadow-large": "0 60px 120px -10px var(--shadow-color)",
 
   "--color-border-primary": "var(--accents-2)",
@@ -42,8 +43,6 @@ const baseTheme: CSSObject = {
 
   "--segmented-control-track": "var(--accents-2)",
   "--segmented-control-indicator": "var(--color-bg-primary)",
-
-  "--select-selected-background": transparentize(0.9, "#4969ed"),
 
   "--code-background": "rgba(0, 0, 0, 0.1)",
 

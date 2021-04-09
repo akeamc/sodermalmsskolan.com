@@ -54,7 +54,7 @@
   color: var(--color-highlight);
 
   &:hover {
-    background-color: var(--select-selected-background);
+    background-color: var(--color-highlight-transparent);
   }
 
   &.disabled {

@@ -1,0 +1,16 @@
+.card {
+  border-radius: 0.75rem;
+  padding: 1rem;
+  word-wrap: break-word;
+}
+
+.normal {
+  background-color: var(--color-bg-primary);
+  box-shadow: 0 0 0 1px var(--color-border-primary);
+}
+
+.colorful {
+  background-color: var(--color-highlight-transparent);
+  box-shadow: 0;
+  color: var(--color-highlight);
+}

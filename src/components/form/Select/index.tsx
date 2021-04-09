@@ -83,7 +83,7 @@ const Select: FunctionComponent<SelectProps> = (props) => (
         let backgroundColor = "transparent";
 
         if (isSelected) {
-          backgroundColor = "var(--select-selected-background)";
+          backgroundColor = "var(--color-highlight-transparent)";
         } else if (isFocused) {
           backgroundColor = "var(--accents-2)";
         }

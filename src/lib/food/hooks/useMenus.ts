@@ -1,5 +1,4 @@
-import useSWR from "swr";
-import { UseSWRResource } from "../../common/usable";
+import useSWR, { responseInterface } from "swr";
 import ClientMenu from "../structures/client/Menu";
 
 /**
@@ -7,7 +6,7 @@ import ClientMenu from "../structures/client/Menu";
  *
  * @returns {ClientMenu[]} The menus.
  */
-const useMenus: UseSWRResource<ClientMenu[]> = () => useSWR("/api/food/menus", async () => {
+const useMenus = (): responseInterface<ClientMenu[], unknown> => useSWR("/api/food/menus", async () => {
   const menus = await ClientMenu.fetchAll();
 
   return menus;

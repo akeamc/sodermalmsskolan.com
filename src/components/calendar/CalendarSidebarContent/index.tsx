@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import MenuCard from "../../menu/MenuCard";
 import CalendarWidget from "../CalendarWidget";
 
 /**
@@ -8,7 +9,12 @@ import CalendarWidget from "../CalendarWidget";
  */
 const CalendarSidebarContent: FunctionComponent = () => (
   <>
-    <CalendarWidget />
+    <section>
+      <CalendarWidget />
+    </section>
+    <section>
+      <MenuCard />
+    </section>
   </>
 );
 

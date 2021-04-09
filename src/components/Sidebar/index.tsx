@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import styles from "./index.module.scss";
 
 /**
  * A sidebar.
@@ -10,19 +11,8 @@ import React, { FunctionComponent } from "react";
 const Sidebar: FunctionComponent = ({
   children,
 }) => (
-  <aside
-    css={{
-      backgroundColor: "var(--color-bg-secondary)",
-      flex: "0 0 300px",
-      padding: "0 24px",
-    }}
-  >
-    <div css={{
-      position: "sticky",
-      top: 0,
-      padding: "24px 0",
-    }}
-    >
+  <aside className={styles.sidebar}>
+    <div className={styles.sticky}>
       {children}
     </div>
   </aside>
