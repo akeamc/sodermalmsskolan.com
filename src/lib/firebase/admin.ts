@@ -1,4 +1,5 @@
 import * as admin from "firebase-admin";
+import { firebaseConfig } from "./firebase";
 
 if (admin.apps.length <= 0) {
   if (process.env.NODE_ENV === "test") {
@@ -15,7 +16,7 @@ if (admin.apps.length <= 0) {
 
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
-      databaseURL: "https://sodermalmsskolan-a8013.firebaseio.com",
+      databaseURL: firebaseConfig.databaseURL,
     });
   }
 }
