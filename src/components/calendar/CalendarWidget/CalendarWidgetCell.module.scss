@@ -73,7 +73,7 @@
 }
 
 .event-dot-container {
-  bottom: 6px;
+  bottom: 8px;
   display: flex;
   position: absolute;
 
@@ -81,8 +81,8 @@
     background-color: var(--event-dot-color);
     border-radius: 50%;
     display: block;
-    height: 4px;
-    margin: 0 2px;
-    width: 4px;
+    height: 3px;
+    margin: 0 1px;
+    width: 3px;
   }
 }
