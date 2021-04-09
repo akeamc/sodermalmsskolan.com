@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import React, {
+  CSSProperties,
   FunctionComponent,
   useEffect,
   useRef,
@@ -15,6 +16,10 @@ const cx = classNames.bind(styles);
 
 export interface CalendarWidgetCellProps {
   date: DateTime;
+}
+
+export interface CSSVariables extends CSSProperties {
+  "--event-dot-color": string;
 }
 
 /**
@@ -85,8 +90,8 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
             <span
               key={signature}
               style={{
-                ["--event-dot-color" as string]: isCursor ? "currentColor" : color,
-              }}
+                "--event-dot-color": isCursor ? "currentColor" : color,
+              } as CSSVariables}
             />
           ))}
         </div>
