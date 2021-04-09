@@ -51,6 +51,13 @@ Tertiary.args = {
   variant: "tertiary",
 };
 
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  children: "Disabled",
+  disabled: true,
+};
+
 export const WithIcon = Template.bind({});
 
 WithIcon.args = {

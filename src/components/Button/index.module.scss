@@ -26,6 +26,11 @@
   &:active {
     background-color: var(--color-highlight);
   }
+
+  &.disabled {
+    background-color: var(--accents-2);
+    color: var(--accents-3);
+  }
 }
 
 .secondary {
@@ -38,14 +43,28 @@
   &:active {
     background-color: var(--accents-2);
   }
+
+  &.disabled {
+    background-color: transparent;
+    color: var(--accents-3);
+  }
 }
 
 .tertiary {
   color: var(--color-highlight);
 
   &:hover {
-    background-color: var(--accents-2);
+    background-color: var(--select-selected-background);
   }
+
+  &.disabled {
+    background-color: transparent;
+    color: var(--accents-3);
+  }
+}
+
+.disabled {
+  cursor: default;
 }
 
 .small {

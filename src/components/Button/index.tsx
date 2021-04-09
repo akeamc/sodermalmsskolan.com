@@ -30,6 +30,8 @@ React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement
    * Icon placed on the right.
    */
   rightIcon?: ButtonIcon;
+
+  disabled?: boolean;
 }
 
 /**
@@ -48,11 +50,13 @@ const Button: FunctionComponent<ButtonProps> = ({
   leftIcon: LeftIcon,
   rightIcon: RightIcon,
   children,
+  disabled,
   ...props
 }) => (
   <button
     className={cx("base", variant, size, className, {
       "icon-only": typeof Icon !== "undefined",
+      disabled,
     })}
     // eslint-disable-next-line react/button-has-type
     type={type}
