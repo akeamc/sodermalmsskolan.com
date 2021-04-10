@@ -4,7 +4,7 @@ import React, { FunctionComponent, ReactNode } from "react";
 import { useAuth } from "../../lib/auth/AuthContext";
 import useRedirectUri from "../../lib/auth/hooks/useRedirectUri";
 import Base, { BaseProps } from "../Base";
-import Card from "../Card";
+import Card from "../OldCard";
 import FormText from "../form/text/FormText";
 import LogoIcon from "../logo/Icon";
 import InlineSkeleton from "../skeleton/InlineSkeleton";

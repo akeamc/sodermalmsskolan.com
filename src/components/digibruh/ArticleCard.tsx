@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { extractSubjectFromPost } from "../../lib/digibruh/DigibruhSubject";
 import { useArticleUrl } from "../../lib/digibruh/hooks/article";
 import Post from "../../lib/ghost/post";
-import Card, { CardProps } from "../Card";
+import Card, { CardProps } from "../OldCard";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { CardTitle, SmallCardHeading } from "../text/headings";
 

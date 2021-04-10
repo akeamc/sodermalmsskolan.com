@@ -4,7 +4,7 @@ import React, { FunctionComponent } from "react";
 import { useDishEmissions } from "../../lib/food/hooks/dish";
 import { FoodPhoto, useDishPhotos } from "../../lib/food/hooks/photos";
 import { ClientDish } from "../../lib/food/structures/client/Dish";
-import Card, { CardProps } from "../Card";
+import Card, { CardProps } from "../OldCard";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { skeletonBackground } from "../skeleton/Skeleton";
 import { CardTitle } from "../text/headings";

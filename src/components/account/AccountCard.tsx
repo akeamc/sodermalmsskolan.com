@@ -9,7 +9,7 @@ import { auth } from "../../lib/firebase/firebase";
 import { breakpoints, media } from "../../styles/breakpoints";
 import UserAvatar from "./UserAvatar";
 import Button from "../old-button/Button";
-import Card from "../Card";
+import Card from "../OldCard";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import Emphasis from "../text/atomics/Emphasis";
 import { SectionHeading } from "../text/headings";

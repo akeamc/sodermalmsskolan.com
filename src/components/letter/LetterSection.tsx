@@ -6,7 +6,7 @@ import { redirectUriQueryKey } from "../../lib/auth/hooks/useRedirectUri";
 import { loginLink } from "../../lib/auth/href";
 import useLetters from "../../lib/news/hooks/useLetters";
 import Letter from "../../lib/news/structures/Letter";
-import Card from "../Card";
+import Card from "../OldCard";
 import CardGrid from "../grid/CardGrid";
 import { CardTitle } from "../text/headings";
 import { CardDescription } from "../text/paragraphs";

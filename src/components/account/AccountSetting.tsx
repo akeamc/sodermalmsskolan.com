@@ -5,7 +5,7 @@ import {
 import React, {
   PropsWithChildren, ReactElement, ReactNode,
 } from "react";
-import Card from "../Card";
+import Card from "../OldCard";
 import SubmitButton from "../form/SubmitButton";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 import { CardTitle } from "../text/headings";
