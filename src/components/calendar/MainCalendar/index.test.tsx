@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { DateTime } from "luxon";
 import React from "react";
-import { CalendarContextProvider } from "../../../lib/calendar/CalendarContext";
+import userEvent from "@testing-library/user-event";
+import CalendarContext, { CalendarContextProvider, CalendarScope } from "../../../lib/calendar/CalendarContext";
 import MainCalendar from ".";
 
 describe("<MainCalendar /> tests", () => {
@@ -20,5 +21,28 @@ describe("<MainCalendar /> tests", () => {
     }), "i");
 
     expect(screen.getByText(expected)).toBeDefined();
+  });
+
+  test("scope should be changeable with keyboard", () => {
+    render(
+      <CalendarContextProvider>
+        <MainCalendar />
+        <CalendarContext.Consumer>
+          {({ scope }) => (
+            <code title="scope">{scope}</code>
+          )}
+        </CalendarContext.Consumer>
+      </CalendarContextProvider>,
+    );
+
+    // eslint-disable-next-line require-jsdoc
+    const getScope = (): CalendarScope => screen.getByTitle("scope").textContent as CalendarScope;
+
+    userEvent.keyboard("W");
+    expect(getScope()).toBe<CalendarScope>("week");
+
+    userEvent.keyboard("D");
+    userEvent.keyboard("Z"); // Resilience
+    expect(getScope()).toBe<CalendarScope>("day");
   });
 });
