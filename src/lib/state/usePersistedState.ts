@@ -1,8 +1,14 @@
 import createPersistedState from "use-persisted-state";
 import {
+  Dispatch,
+  SetStateAction,
   useMemo,
 } from "react";
-import { ReactState } from "./ReactState";
+
+export type ReactState<T> = [
+  T,
+  Dispatch<SetStateAction<T>>,
+];
 
 /**
  * A persistent, SSR-compliant, `useState`.
