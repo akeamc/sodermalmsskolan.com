@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import classNames from "classnames/bind";
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useCallback, useEffect } from "react";
+import useKeypressEffect from "../../../hooks/useKeypressEffect";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
 import PageHeading from "../../typography/headings/PageHeading";
@@ -33,17 +34,15 @@ const CalendarController: FunctionComponent = () => {
 const MainCalendar: FunctionComponent = () => {
   const { cursor, setScope } = useCalendarContext();
 
-  useEffect(() => {
-    window.addEventListener("keypress", (e) => {
-      if (e.code === "KeyW") {
-        setScope("week");
-      }
+  const keypressCallback = useCallback(({ code }: KeyboardEvent) => {
+    if (code === "KeyW") {
+      setScope("week");
+    } else if (code === "KeyD") {
+      setScope("day");
+    }
+  }, [setScope]);
 
-      if (e.code === "KeyD") {
-        setScope("day");
-      }
-    });
-  });
+  useKeypressEffect(keypressCallback);
 
   return (
     <div className={cx("base")}>
