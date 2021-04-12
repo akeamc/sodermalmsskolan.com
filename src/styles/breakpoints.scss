@@ -1,0 +1,22 @@
+$breakpoints: (
+  s: 480px,
+  m: 768px,
+  l: 1024px,
+  xl: 1200px,
+);
+
+@mixin breakpoint($breakpoint, $direction) {
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+  @if $direction == max {
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  }
+
+  @if $direction == min {
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  }
+}
