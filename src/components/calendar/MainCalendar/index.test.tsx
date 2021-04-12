@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { DateTime } from "luxon";
 import React from "react";
 import userEvent from "@testing-library/user-event";
-import CalendarContext, { CalendarContextProvider, CalendarScope } from "../../../lib/calendar/CalendarContext";
+import CalendarContext, { CalendarContextProvider, CalendarScope, defaultCalendarContextData } from "../../../lib/calendar/CalendarContext";
 import MainCalendar from ".";
 
 describe("<MainCalendar /> tests", () => {
@@ -37,6 +37,9 @@ describe("<MainCalendar /> tests", () => {
 
     // eslint-disable-next-line require-jsdoc
     const getScope = (): CalendarScope => screen.getByTitle("scope").textContent as CalendarScope;
+
+    userEvent.keyboard("Q"); // Resilience
+    expect(getScope()).toBe<CalendarScope>(defaultCalendarContextData.scope);
 
     userEvent.keyboard("W");
     expect(getScope()).toBe<CalendarScope>("week");

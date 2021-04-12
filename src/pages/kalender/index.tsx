@@ -11,16 +11,14 @@ import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
  * @returns {React.ReactElement} Rendered page.
  */
 const CalendarPage: NextPage = () => (
-  <div>
-    <CalendarContextProvider>
-      <DashboardContainer aside={
-        <CalendarSidebar />
-      }
-      >
-        <MainCalendar />
-      </DashboardContainer>
-    </CalendarContextProvider>
-  </div>
+  <CalendarContextProvider>
+    <DashboardContainer aside={
+      <CalendarSidebar />
+    }
+    >
+      <MainCalendar />
+    </DashboardContainer>
+  </CalendarContextProvider>
 );
 
 export default CalendarPage;

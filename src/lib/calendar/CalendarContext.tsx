@@ -21,8 +21,8 @@ export interface CalendarContextData {
   getEventInstances: (date: DateTime) => CalendarEventInstance[];
 }
 
-const defaultCalendarContextData: CalendarContextData = {
-  cursor: DateTime.now(),
+export const defaultCalendarContextData: CalendarContextData = {
+  cursor: DateTime.utc(1970, 1, 1),
   setCursor: () => {
     throw new Error("`setCursor` hasn't been implemented.");
   },
@@ -33,8 +33,8 @@ const defaultCalendarContextData: CalendarContextData = {
   setScope: () => {
     throw new Error("`setScope` hasn't been implemented.");
   },
-  startOfScope: DateTime.now(),
-  endOfScope: DateTime.now(),
+  startOfScope: DateTime.utc(1970, 1, 1).startOf("week"),
+  endOfScope: DateTime.utc(1970, 1, 1).endOf("week"),
   schedules: [],
   schedulesSignature: "",
   getEventInstances: () => {
@@ -61,7 +61,7 @@ export const useCalendarContext = (): CalendarContextData => useContext(Calendar
 const getEventInstanceCacheKey = (date: DateTime): string => date.toISODate();
 
 export interface CalendarContextProviderProps {
-  initialCursor?: DateTime;
+  initialCursor?: DateTime | (() => DateTime);
 }
 
 /**
@@ -72,7 +72,7 @@ export interface CalendarContextProviderProps {
  * @returns {React.ReactElement} Provider.
  */
 export const CalendarContextProvider: FunctionComponent<CalendarContextProviderProps> = ({
-  initialCursor = DateTime.now(),
+  initialCursor = () => DateTime.now(),
   ...props
 }) => {
   const schedules = useCalendarEventSchedules(["o93", "o9ty", "o9ma", "o9dka"]);
@@ -118,9 +118,14 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
       // Sort the instances in order to make subsequent reads faster.
       .sort((a, b) => a.start.toMillis() - b.start.toMillis());
 
-    const dayCount = after.diff(before, "days").days + 1;
+    const dayCount = after.diff(before, "days").days;
 
-    for (let dayIndex = 0; dayIndex <= dayCount; dayIndex += 1) { // Loop through every date.
+    // Instead of looping through every date and searching the entire array of event instances,
+    // the array is sorted and thus easier to search: only the first few elements with the correct
+    // dates need to be retrieved. To make it even faster, those event instances are *removed* from
+    // the array since they won't be used later. Thus, no element that has been found is checked
+    // twice.
+    for (let dayIndex = 0; dayIndex < dayCount; dayIndex += 1) {
       const date = before.plus({
         days: dayIndex,
       });

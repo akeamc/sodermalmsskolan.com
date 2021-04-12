@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Sidebar from "../Sidebar";
+import styles from "./DashboardContainer.module.scss";
 
 export interface DashboardContainerProps {
   aside: React.ReactNode,
@@ -16,21 +16,13 @@ const DashboardContainer: FunctionComponent<DashboardContainerProps> = ({
   children,
   aside,
 }) => (
-  <div css={{
-    display: "flex",
-    width: "100%",
-  }}
-  >
-    <main css={{
-      flex: 1,
-      padding: "0 24px",
-    }}
-    >
+  <div className={styles.container}>
+    <main className={styles.main}>
       {children}
     </main>
-    <Sidebar>
+    <aside className={styles.sidebar}>
       {aside}
-    </Sidebar>
+    </aside>
   </div>
 );
 
