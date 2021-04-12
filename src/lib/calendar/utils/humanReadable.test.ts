@@ -6,6 +6,7 @@ test("get human readable duration", () => {
 
   expect(getHumanReadableDuration(58800)).toBe("16:20");
   expect(getHumanReadableDuration(58800, true)).toBe("16:20");
+  expect(getHumanReadableDuration(58801, true)).toBe("16:20");
 });
 
 test("parse human readable duration", () => {

@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
+import dynamic from "next/dynamic";
 import React, { FunctionComponent, memo } from "react";
 import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
-import CalendarTableSidebarIndicator from "./CalendarTableSidebarIndicator";
 import styles from "./CalendarTableSidebar.module.scss";
 
 const cx = classNames.bind(styles);
@@ -40,18 +40,24 @@ const SidebarLabel: FunctionComponent<SidebarLabelProps> = ({
  *
  * @returns {React.ReactElement} The rendered sidebar.
  */
-const CalendarTableSidebar: FunctionComponent = () => (
-  <div className={cx("sidebar")}>
-    {/* IMPORTANT! Do not place any div element after the SidebarLabels as CSS selectors are
-    in use. */}
-    <CalendarTableSidebarIndicator />
-    {Array.from({
-      length: 25,
-    }).map((_, i) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <SidebarLabel hours={i} key={i} />
-    ))}
-  </div>
-);
+const CalendarTableSidebar: FunctionComponent = () => {
+  const CalendarTableSidebarIndicator = dynamic(() => import("./CalendarTableSidebarIndicator"), {
+    ssr: false,
+  });
+
+  return (
+    <div className={cx("sidebar")}>
+      {/* IMPORTANT! Do not place any div element after the SidebarLabels as CSS selectors are
+      in use. */}
+      <CalendarTableSidebarIndicator />
+      {Array.from({
+        length: 25,
+      }).map((_, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <SidebarLabel hours={i} key={i} />
+      ))}
+    </div>
+  );
+};
 
 export default memo(CalendarTableSidebar);

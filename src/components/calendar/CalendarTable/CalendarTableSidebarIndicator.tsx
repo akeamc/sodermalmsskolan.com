@@ -1,7 +1,10 @@
 import classNames from "classnames/bind";
-import { DateTime } from "luxon";
-import React, { CSSProperties, FunctionComponent } from "react";
+import React, {
+  CSSProperties, FunctionComponent, useEffect, useRef,
+} from "react";
 import useTime from "../../../hooks/useTime";
+import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
+import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
 import styles from "./CalendarTableSidebarIndicator.module.scss";
 
@@ -14,21 +17,39 @@ export interface CSSVariables extends CSSProperties {
 /**
  * Small tag floating along on the sidebar, indicating the current time.
  *
+ * **Do not render this component on the server!**
+ *
  * @returns {React.ReactElement} The rendered indicator.
  */
 const CalendarTableSidebarIndicator: FunctionComponent = () => {
   const now = useTime();
-  const hours = secondsSinceMidnight(now) / 3600;
+  const { cursor } = useCalendarContext();
+  const elementRef = useRef<HTMLDivElement>();
+
+  const seconds = secondsSinceMidnight(now);
+  const cursorIsToday = cursor.hasSame(now, "day");
+
+  useEffect(() => {
+    if (cursorIsToday) {
+      elementRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [cursorIsToday]);
 
   return (
     <div
       className={cx("container")}
       style={{
-        "--hours": hours,
+        // Any sensible person would prevent SSR errors with useEffect. Another solution is to
+        // dynamically import this whole component. I have chosen the latter.
+        "--hours": seconds / 3600,
       } as CSSVariables}
+      ref={elementRef}
     >
       <time className={cx("label")}>
-        {now.toLocaleString(DateTime.TIME_24_SIMPLE)}
+        {getHumanReadableDuration(seconds, true)}
       </time>
       <hr className={cx("bar")} />
     </div>
