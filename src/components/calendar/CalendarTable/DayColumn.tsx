@@ -1,3 +1,4 @@
+import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
 import useTime from "../../../hooks/useTime";
@@ -5,6 +6,9 @@ import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import useDailyEventInstances from "../../../lib/calendar/hooks/useDailyEventInstances";
 import capitalize from "../../../lib/utils/capitalize";
 import CalendarEventDisplay from "../CalendarEventDisplay";
+import styles from "./DayColumn.module.scss";
+
+const cx = classNames.bind(styles);
 
 export interface DayColumnheadingProps {
   date: DateTime;
@@ -28,34 +32,17 @@ export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
   const big = scope === "day";
 
   return (
-    <div
-      css={{
-        flex: 1,
-        borderRight: "1px solid var(--border-color)",
-        textAlign: big ? undefined : "center",
-        padding: 16,
-
-        "h2, h3": {
-          fontSize: big ? 24 : 16,
-          fontWeight: 600,
-          letterSpacing: "-0.022em",
-          margin: 0,
-          color: isNow ? "var(--color-highlight)" : undefined,
-        },
-      }}
+    <div className={cx("heading", {
+      now: isNow,
+      big,
+    })}
     >
-      <h2 css={{
-        color: "var(--color-text-primary)",
-      }}
-      >
+      <h2>
         {capitalize(date.toLocaleString({
           weekday: "long",
         }))}
       </h2>
-      <h3 css={{
-        color: "var(--color-text-tertiary)",
-      }}
-      >
+      <h3>
         {date.toLocaleString({
           month: "numeric",
           day: "numeric",
