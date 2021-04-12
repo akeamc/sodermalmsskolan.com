@@ -30,7 +30,7 @@ const CalendarTableSidebarIndicator: FunctionComponent = () => {
   const cursorIsToday = cursor.hasSame(now, "day");
 
   useEffect(() => {
-    if (cursorIsToday) {
+    if (cursorIsToday && typeof elementRef.current.scrollIntoView === "function") {
       elementRef.current.scrollIntoView({
         behavior: "smooth",
         block: "center",

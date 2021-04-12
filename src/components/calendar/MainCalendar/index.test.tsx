@@ -1,12 +1,17 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { DateTime } from "luxon";
 import React from "react";
 import userEvent from "@testing-library/user-event";
+import preloadAll from "jest-next-dynamic";
 import CalendarContext, { CalendarContextProvider, CalendarScope, defaultCalendarContextData } from "../../../lib/calendar/CalendarContext";
 import MainCalendar from ".";
 
+beforeAll(async () => {
+  await preloadAll();
+});
+
 describe("<MainCalendar /> tests", () => {
-  test("the heading should display the cursor", () => {
+  test("the heading should display the cursor", async () => {
     const initialCursor = DateTime.utc(2020, 1, 1, 6, 30);
 
     render(
@@ -14,6 +19,8 @@ describe("<MainCalendar /> tests", () => {
         <MainCalendar />
       </CalendarContextProvider>,
     );
+
+    await act(async () => {});
 
     const expected = new RegExp(initialCursor.toLocaleString({
       year: "numeric",
@@ -23,7 +30,7 @@ describe("<MainCalendar /> tests", () => {
     expect(screen.getByText(expected)).toBeDefined();
   });
 
-  test("scope should be changeable with keyboard", () => {
+  test("scope should be changeable with keyboard", async () => {
     render(
       <CalendarContextProvider>
         <MainCalendar />
@@ -34,6 +41,8 @@ describe("<MainCalendar /> tests", () => {
         </CalendarContext.Consumer>
       </CalendarContextProvider>,
     );
+
+    await act(async () => {});
 
     // eslint-disable-next-line require-jsdoc
     const getScope = (): CalendarScope => screen.getByTitle("scope").textContent as CalendarScope;
