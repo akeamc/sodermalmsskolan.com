@@ -23,4 +23,10 @@ export default class CalendarEventInstance {
   public get signature(): string {
     return this.characteristics.join(".");
   }
+
+  public get end(): DateTime {
+    return this.start.plus({
+      seconds: this.details.duration,
+    });
+  }
 }

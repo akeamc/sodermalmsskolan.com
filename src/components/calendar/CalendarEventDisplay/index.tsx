@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { transparentize } from "polished";
-import React, { CSSProperties, FunctionComponent, useMemo } from "react";
+import React, { CSSProperties, FunctionComponent } from "react";
 import CalendarEventInstance from "../../../lib/calendar/event/CalendarEventInstance";
 import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
@@ -39,9 +39,10 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
       location,
     },
     start,
+    end,
   } = calendarEvent;
 
-  const startInSeconds = useMemo(() => secondsSinceMidnight(start), [start]);
+  const startInSeconds = secondsSinceMidnight(start);
   const endInSeconds = startInSeconds + duration;
   const compact = duration <= 1800;
 
@@ -63,13 +64,17 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
       })}
       >
         <span className={cx("meta")}>
-          <time>
-            {getHumanReadableDuration(startInSeconds)}
+          <span>
+            <time dateTime={start.toISO()}>
+              {getHumanReadableDuration(startInSeconds)}
+            </time>
             <span className={cx("end")}>
               –
-              {getHumanReadableDuration(endInSeconds)}
+              <time dateTime={end.toISO()}>
+                {getHumanReadableDuration(endInSeconds)}
+              </time>
             </span>
-          </time>
+          </span>
           {location ? (
             <span>{location}</span>
           ) : undefined}

@@ -1,3 +1,4 @@
+import useSWR from "swr";
 import CalendarEventSchedule from "../../calendar/event/CalendarEventSchedule";
 import collections from "../collections";
 import { getPeriodEventSchedules, PeriodCollection } from "../Period";
@@ -23,9 +24,13 @@ const getCollections = (groups: string[]): PeriodCollection[] => (
  *
  * @returns {CalendarEventSchedule[]} The periods.
  */
-const usePeriods = (groups: string[]): CalendarEventSchedule[] => (
-  getCollections(groups)
-    .flatMap(({ periods }) => periods.flatMap(getPeriodEventSchedules))
-);
+const usePeriods = (groups: string[]): CalendarEventSchedule[] => {
+  const { data } = useSWR("periods", () => (
+    getCollections(groups)
+      .flatMap(({ periods }) => periods.flatMap(getPeriodEventSchedules))
+  ));
+
+  return data;
+};
 
 export default usePeriods;

@@ -93,7 +93,7 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
   }, [cursor]);
 
   const prevSchedulesSignatureRef = useRef<string>();
-  const schedulesSignature = schedules.map((schedule) => schedule.signature).join(",");
+  const schedulesSignature = schedules?.map((schedule) => schedule.signature).join(",");
 
   /**
    * Preload the `CalendarEventInstance`s for a specified date and granuality
@@ -110,13 +110,14 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
     const after = around.endOf(granuality);
 
     const eventInstances = schedules
-      .flatMap((eventSchedule) => eventSchedule.evaluate(
+      ?.flatMap((eventSchedule) => eventSchedule.evaluate(
         before,
         after,
         true,
       ))
       // Sort the instances in order to make subsequent reads faster.
-      .sort((a, b) => a.start.toMillis() - b.start.toMillis());
+      ?.sort((a, b) => a.start.toMillis() - b.start.toMillis())
+      ?? [];
 
     const dayCount = after.diff(before, "days").days;
 

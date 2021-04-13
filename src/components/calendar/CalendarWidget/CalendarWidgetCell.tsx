@@ -3,13 +3,10 @@ import { DateTime } from "luxon";
 import React, {
   CSSProperties,
   FunctionComponent,
-  useEffect,
-  useRef,
-  useState,
 } from "react";
 import useTime from "../../../hooks/useTime";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
-import CalendarEventInstance from "../../../lib/calendar/event/CalendarEventInstance";
+import useDailyEventInstances from "../../../lib/calendar/hooks/useDailyEventInstances";
 import styles from "./CalendarWidgetCell.module.scss";
 
 const cx = classNames.bind(styles);
@@ -36,14 +33,11 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
     scope,
     startOfScope,
     endOfScope,
-    getEventInstances,
   } = useCalendarContext();
 
   const now = useTime(10000);
 
-  const prevDateMillisRef = useRef<number>();
-
-  const [eventInstances, setEventInstances] = useState<CalendarEventInstance[]>([]);
+  const eventInstances = useDailyEventInstances(date);
 
   const isSelectedMonth = date.hasSame(cursor, "month");
   const isCursor = date.hasSame(cursor, "day");
@@ -52,16 +46,6 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
 
   const leftBorderRadius = !isInScope || startOfScope.hasSame(date, "day");
   const rightBorderRadius = !isInScope || endOfScope.hasSame(date, "day");
-
-  useEffect(() => {
-    const millis = date.toMillis();
-
-    if (prevDateMillisRef.current !== millis) {
-      prevDateMillisRef.current = millis;
-
-      setEventInstances(getEventInstances(date));
-    }
-  }, [date, getEventInstances]);
 
   return (
     <button
