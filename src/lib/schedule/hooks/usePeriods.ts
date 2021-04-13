@@ -24,13 +24,9 @@ const getCollections = (groups: string[]): PeriodCollection[] => (
  *
  * @returns {CalendarEventSchedule[]} The periods.
  */
-const usePeriods = (groups: string[]): CalendarEventSchedule[] => {
-  const { data } = useSWR("periods", () => (
-    getCollections(groups)
-      .flatMap(({ periods }) => periods.flatMap(getPeriodEventSchedules))
-  ));
-
-  return data;
-};
+const usePeriods = (groups: string[]): CalendarEventSchedule[] => (
+  getCollections(groups)
+    .flatMap(({ periods }) => periods.flatMap(getPeriodEventSchedules))
+);
 
 export default usePeriods;
