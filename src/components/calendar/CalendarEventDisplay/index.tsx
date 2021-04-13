@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { transparentize } from "polished";
-import React, { CSSProperties, FunctionComponent } from "react";
+import React, { CSSProperties, FunctionComponent, useMemo } from "react";
 import CalendarEventInstance from "../../../lib/calendar/event/CalendarEventInstance";
 import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
@@ -41,7 +41,7 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
     start,
   } = calendarEvent;
 
-  const startInSeconds = secondsSinceMidnight(start);
+  const startInSeconds = useMemo(() => secondsSinceMidnight(start), [start]);
   const endInSeconds = startInSeconds + duration;
   const compact = duration <= 1800;
 
