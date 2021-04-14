@@ -7,7 +7,7 @@
  * @returns {string} The human readable time.
  */
 export const getHumanReadableDuration = (totalSeconds: number, padHour = false): string => {
-  const totalMinutes = Math.round(totalSeconds / 60);
+  const totalMinutes = Math.floor(totalSeconds / 60);
 
   const hour = Math.floor(totalMinutes / 60).toString();
   const minute = (totalMinutes % 60).toString().padStart(2, "0");
