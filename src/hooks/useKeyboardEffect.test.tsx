@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { FunctionComponent, useCallback, useState } from "react";
-import useKeypressEffect from "./useKeypressEffect";
+import useKeyboardEffect from "./useKeyboardEffect";
 
 /**
  * Test component displaying the most recently pressed key code.
@@ -13,7 +13,7 @@ const KeypressComponent: FunctionComponent = () => {
 
   const callback = useCallback((event: KeyboardEvent) => setKey(event.code), []);
 
-  useKeypressEffect(callback);
+  useKeyboardEffect(callback);
 
   return (
     <kbd title="key">{key}</kbd>
@@ -40,5 +40,9 @@ describe("useKeypressEffect test", () => {
 
     userEvent.keyboard("0");
     expect(keycode()).toBe("Digit0");
+
+    // Special keys
+    userEvent.keyboard("[ArrowRight]");
+    expect(keycode()).toBe("ArrowRight");
   });
 });

@@ -8,10 +8,12 @@ import useCalendarEventSchedules from "./hooks/useCalendarEventSchedules";
 
 export type CalendarScope = "day" | "week" | "month";
 
+export type MoveCursor = (steps: number, granuality?: keyof DurationObjectUnits) => void;
+
 export interface CalendarContextData {
   cursor: DateTime;
   setCursor: (cursor: DateTime) => void;
-  moveMonths: (months: number) => void;
+  moveCursor: MoveCursor;
   scope: CalendarScope;
   setScope: (scope: CalendarScope) => void;
   startOfScope: DateTime;
@@ -26,8 +28,8 @@ export const defaultCalendarContextData: CalendarContextData = {
   setCursor: () => {
     throw new Error("`setCursor` hasn't been implemented.");
   },
-  moveMonths: () => {
-    throw new Error("`moveMonths` hasn't been implemented.");
+  moveCursor: () => {
+    throw new Error("`moveCursor` hasn't been implemented.");
   },
   scope: "week",
   setScope: () => {
@@ -82,15 +84,15 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
   const [scope, setScope] = useState(defaultCalendarContextData.scope);
 
   /**
-   * Move the cursor `months` number of months forward or backward.
+   * Move the cursor `steps` number of scopes forward or backward.
    *
    * @param {number} months How many months to jump.
    */
-  const moveMonths = useCallback((months: number) => {
+  const moveCursor: MoveCursor = useCallback((steps, granuality = scope) => {
     setCursor(cursor.plus({
-      months,
-    }).startOf("month"));
-  }, [cursor]);
+      [granuality]: steps,
+    }).startOf(granuality));
+  }, [cursor, scope]);
 
   const prevSchedulesSignatureRef = useRef<string>();
   const schedulesSignature = schedules?.map((schedule) => schedule.signature).join(",");
@@ -174,7 +176,7 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
       value={{
         cursor,
         setCursor,
-        moveMonths,
+        moveCursor,
         scope,
         setScope,
         startOfScope: cursor.startOf(scope),

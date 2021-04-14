@@ -41,7 +41,7 @@ const CalendarWidgetHead: FunctionComponent = () => (
  * @returns {React.ReactElement} The rendered widget.
  */
 const CalendarWidget: FunctionComponent = () => {
-  const { cursor, moveMonths } = useCalendarContext();
+  const { cursor, moveCursor } = useCalendarContext();
   const topLeftDate = cursor.startOf("month").startOf("week");
   const bottomRightDate = topLeftDate.plus({
     weeks: 5,
@@ -62,8 +62,8 @@ const CalendarWidget: FunctionComponent = () => {
             year: "numeric",
           }))}
         </span>
-        <Button onClick={() => moveMonths(-1)} icon={ChevronLeft} title="Föregående månad" {...buttonProps} />
-        <Button onClick={() => moveMonths(1)} icon={ChevronRight} title="Nästa månad" {...buttonProps} />
+        <Button onClick={() => moveCursor(-1, "month")} icon={ChevronLeft} title="Föregående månad" {...buttonProps} />
+        <Button onClick={() => moveCursor(1, "month")} icon={ChevronRight} title="Nästa månad" {...buttonProps} />
       </SidebarHeading>
       <div className={cx("table")}>
         <CalendarWidgetHead />

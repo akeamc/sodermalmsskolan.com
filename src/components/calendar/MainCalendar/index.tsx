@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import classNames from "classnames/bind";
-import React, { FunctionComponent, useCallback, useEffect } from "react";
-import useKeypressEffect from "../../../hooks/useKeypressEffect";
+import React, { FunctionComponent, useCallback } from "react";
+import useKeyboardEffect from "../../../hooks/useKeyboardEffect";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
 import PageHeading from "../../typography/headings/PageHeading";
@@ -32,17 +32,27 @@ const CalendarController: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered calendar.
  */
 const MainCalendar: FunctionComponent = () => {
-  const { cursor, setScope } = useCalendarContext();
+  const { cursor, setScope, moveCursor } = useCalendarContext();
 
   const keypressCallback = useCallback(({ code }: KeyboardEvent) => {
-    if (code === "KeyW") {
-      setScope("week");
-    } else if (code === "KeyD") {
-      setScope("day");
+    switch (code) {
+      case "KeyW":
+        setScope("week");
+        break;
+      case "KeyD":
+        setScope("day");
+        break;
+      case "ArrowRight":
+        moveCursor(1);
+        break;
+      case "ArrowLeft":
+        moveCursor(-1);
+        break;
+      default:
     }
-  }, [setScope]);
+  }, [moveCursor, setScope]);
 
-  useKeypressEffect(keypressCallback);
+  useKeyboardEffect(keypressCallback);
 
   return (
     <div className={cx("base")}>
