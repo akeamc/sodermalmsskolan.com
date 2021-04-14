@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import RRule from "rrule";
 import CalendarEventDetails from "../calendar/event/CalendarEventDetails";
 import CalendarEventSchedule from "../calendar/event/CalendarEventSchedule";
@@ -55,9 +56,8 @@ export const getPeriodEventSchedules = (period: Period): CalendarEventSchedule[]
 
   return [].concat(weekdays).map((weekday) => {
     const rrule = new RRule({
-      dtstart: new Date(
-        Date.UTC(2020, 0, 13 + weekday, hour, minute), // January 13th, 2020 is a monday.
-      ),
+      dtstart: DateTime
+        .utc(2020, 1, 13 + weekday, hour, minute).toJSDate(),
       until: new Date(Date.UTC(2022, 1, 1)),
       freq: RRule.WEEKLY,
       tzid: "Europe/Stockholm",

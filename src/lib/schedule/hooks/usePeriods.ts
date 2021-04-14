@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import { useEffect, useRef, useState } from "react";
 import CalendarEventSchedule from "../../calendar/event/CalendarEventSchedule";
 import collections from "../collections";
 import { getPeriodEventSchedules, PeriodCollection } from "../Period";
@@ -24,9 +24,22 @@ const getCollections = (groups: string[]): PeriodCollection[] => (
  *
  * @returns {CalendarEventSchedule[]} The periods.
  */
-const usePeriods = (groups: string[]): CalendarEventSchedule[] => (
-  getCollections(groups)
-    .flatMap(({ periods }) => periods.flatMap(getPeriodEventSchedules))
-);
+const usePeriods = (groups: string[]): CalendarEventSchedule[] => {
+  const [data, setData] = useState<CalendarEventSchedule[]>();
+  const prevGropKeyRef = useRef<string>();
+
+  useEffect(() => {
+    const groupKey = groups.toString();
+
+    if (prevGropKeyRef.current !== groupKey) {
+      prevGropKeyRef.current = groupKey;
+
+      setData(getCollections(groups)
+        .flatMap(({ periods }) => periods.flatMap(getPeriodEventSchedules)));
+    }
+  }, [groups]);
+
+  return data;
+};
 
 export default usePeriods;

@@ -5,7 +5,9 @@ import { ChevronLeft, ChevronRight } from "react-feather";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
 import Button, { ButtonProps } from "../../Button";
+import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import SidebarHeading from "../../typography/headings/SidebarHeading";
+import MonthText from "../MonthText";
 import CalendarWidgetCell from "./CalendarWidgetCell";
 import styles from "./index.module.scss";
 
@@ -16,24 +18,28 @@ const cx = classNames.bind(styles);
  *
  * @returns {React.ReactElement} The days of the week.
  */
-const CalendarWidgetHead: FunctionComponent = () => (
-  <>
-    {Array
-      .from({
-        length: 7,
-      })
-      .map((_, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <div className={cx("table-head")} key={i}>
-          {capitalize(DateTime.now().startOf("week").plus({
-            days: i,
-          }).toLocaleString({
-            weekday: "short",
-          }))}
-        </div>
-      ))}
-  </>
-);
+const CalendarWidgetHead: FunctionComponent = () => {
+  const { loadingSchedules } = useCalendarContext();
+
+  return (
+    <>
+      {Array
+        .from({
+          length: 7,
+        })
+        .map((_, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div className={cx("table-head")} key={i}>
+            {loadingSchedules ? <InlineSkeleton width="50%" /> : capitalize(DateTime.now().startOf("week").plus({
+              days: i,
+            }).toLocaleString({
+              weekday: "short",
+            }))}
+          </div>
+        ))}
+    </>
+  );
+};
 
 /**
  * A minified calendar, showing events as dots.
@@ -56,12 +62,7 @@ const CalendarWidget: FunctionComponent = () => {
   return (
     <div className={cx("base")}>
       <SidebarHeading className={cx("heading")}>
-        <span>
-          {capitalize(cursor.toLocaleString({
-            month: "long",
-            year: "numeric",
-          }))}
-        </span>
+        <MonthText />
         <Button onClick={() => moveCursor(-1, "month")} icon={ChevronLeft} title="Föregående månad" {...buttonProps} />
         <Button onClick={() => moveCursor(1, "month")} icon={ChevronRight} title="Nästa månad" {...buttonProps} />
       </SidebarHeading>

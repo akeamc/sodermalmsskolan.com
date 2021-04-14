@@ -1,8 +1,8 @@
 import classNames from "classnames/bind";
+import { DateTime } from "luxon";
 import { transparentize } from "polished";
 import React, { CSSProperties, FunctionComponent } from "react";
 import CalendarEventInstance from "../../../lib/calendar/event/CalendarEventInstance";
-import { getHumanReadableDuration } from "../../../lib/calendar/utils/humanReadable";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
 import relativelyReadableColor from "../../../styles/utils/relativelyReadableColor";
 import styles from "./index.module.scss";
@@ -43,7 +43,6 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
   } = calendarEvent;
 
   const startInSeconds = secondsSinceMidnight(start);
-  const endInSeconds = startInSeconds + duration;
   const compact = duration <= 1800;
 
   const variables: CSSVariables = {
@@ -66,12 +65,12 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
         <span className={cx("meta")}>
           <span>
             <time dateTime={start.toISO()}>
-              {getHumanReadableDuration(startInSeconds)}
+              {start.toLocaleString(DateTime.TIME_24_SIMPLE)}
             </time>
             <span className={cx("end")}>
               –
               <time dateTime={end.toISO()}>
-                {getHumanReadableDuration(endInSeconds)}
+                {end.toLocaleString(DateTime.TIME_24_SIMPLE)}
               </time>
             </span>
           </span>

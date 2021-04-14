@@ -20,6 +20,7 @@ export interface CalendarContextData {
   endOfScope: DateTime;
   schedules: CalendarEventSchedule[];
   schedulesSignature: string;
+  loadingSchedules: boolean;
   getEventInstances: (date: DateTime) => CalendarEventInstance[];
 }
 
@@ -39,6 +40,7 @@ export const defaultCalendarContextData: CalendarContextData = {
   endOfScope: DateTime.utc(1970, 1, 1).endOf("week"),
   schedules: [],
   schedulesSignature: "",
+  loadingSchedules: true,
   getEventInstances: () => {
     throw new Error("`getEventInstances` hasn't been implemented.");
   },
@@ -80,7 +82,7 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
   const schedules = useCalendarEventSchedules(["o93", "o9ty", "o9ma", "o9dka"]);
   const eventInstanceRef = useRef<Map<string, CalendarEventInstance[]>>(new Map());
 
-  const [cursor, setCursor] = useState(initialCursor);
+  const [cursor, setCursor] = useState<DateTime>(initialCursor);
   const [scope, setScope] = useState(defaultCalendarContextData.scope);
 
   /**
@@ -108,20 +110,20 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
     around: DateTime,
     granuality: keyof DurationObjectUnits,
   ): void => {
-    const before = around.startOf(granuality);
-    const after = around.endOf(granuality);
+    const after = around.startOf(granuality);
+    const before = around.endOf(granuality);
 
     const eventInstances = schedules
       ?.flatMap((eventSchedule) => eventSchedule.evaluate(
-        before,
         after,
+        before,
         true,
       ))
       // Sort the instances in order to make subsequent reads faster.
       ?.sort((a, b) => a.start.toMillis() - b.start.toMillis())
       ?? [];
 
-    const dayCount = after.diff(before, "days").days;
+    const dayCount = before.diff(after, "days").days;
 
     // Instead of looping through every date and searching the entire array of event instances,
     // the array is sorted and thus easier to search: only the first few elements with the correct
@@ -129,7 +131,7 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
     // the array since they won't be used later. Thus, no element that has been found is checked
     // twice.
     for (let dayIndex = 0; dayIndex < dayCount; dayIndex += 1) {
-      const date = before.plus({
+      const date = after.plus({
         days: dayIndex,
       });
 
@@ -183,6 +185,7 @@ export const CalendarContextProvider: FunctionComponent<CalendarContextProviderP
         endOfScope: cursor.endOf(scope),
         schedules,
         schedulesSignature,
+        loadingSchedules: !schedules,
         getEventInstances,
       }}
       {...props}

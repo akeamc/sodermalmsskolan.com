@@ -4,8 +4,10 @@ import React, { FunctionComponent, useCallback } from "react";
 import useKeyboardEffect from "../../../hooks/useKeyboardEffect";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
+import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import PageHeading from "../../typography/headings/PageHeading";
 import CalendarTable from "../CalendarTable";
+import MonthText from "../MonthText";
 import styles from "./index.module.scss";
 
 const cx = classNames.bind(styles);
@@ -32,7 +34,10 @@ const CalendarController: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered calendar.
  */
 const MainCalendar: FunctionComponent = () => {
-  const { cursor, setScope, moveCursor } = useCalendarContext();
+  const {
+    setScope,
+    moveCursor,
+  } = useCalendarContext();
 
   const keypressCallback = useCallback(({ code }: KeyboardEvent) => {
     switch (code) {
@@ -57,10 +62,7 @@ const MainCalendar: FunctionComponent = () => {
   return (
     <div className={cx("base")}>
       <PageHeading>
-        {capitalize(cursor.toLocaleString({
-          year: "numeric",
-          month: "long",
-        }))}
+        <MonthText />
       </PageHeading>
       <CalendarController />
     </div>

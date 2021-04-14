@@ -50,8 +50,16 @@ export default class CalendarEventSchedule {
    */
   public evaluate(after: DateTime, before: DateTime, inclusive = true): CalendarEventInstance[] {
     const occurrences = this.rrule
-      .between(after.toJSDate(), before.toJSDate(), inclusive)
-      .map(normalizeRRuleDate);
+      .between(after.toUTC().toJSDate(), before.toUTC().toJSDate(), inclusive)
+      .map(normalizeRRuleDate)
+      // Time zones are horrific.
+      .filter((timestamp) => {
+        if (inclusive) {
+          return timestamp >= after && timestamp <= before;
+        }
+
+        return timestamp > after && timestamp < before;
+      });
 
     return occurrences.map((start) => new CalendarEventInstance(start, this.details));
   }

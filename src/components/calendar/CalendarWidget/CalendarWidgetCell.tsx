@@ -7,6 +7,7 @@ import React, {
 import useTime from "../../../hooks/useTime";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import useDailyEventInstances from "../../../lib/calendar/hooks/useDailyEventInstances";
+import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import styles from "./CalendarWidgetCell.module.scss";
 
 const cx = classNames.bind(styles);
@@ -33,6 +34,7 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
     scope,
     startOfScope,
     endOfScope,
+    loadingSchedules,
   } = useCalendarContext();
 
   const now = useTime(10000);
@@ -62,7 +64,7 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
     >
       <div className={cx("text-container")}>
         <span className={cx("cell-label")}>
-          {date.day}
+          {loadingSchedules ? <InlineSkeleton width="1em" /> : date.day}
         </span>
         <div className={cx("event-dot-container")}>
           {eventInstances?.map(({

@@ -1,10 +1,11 @@
 import classNames from "classnames/bind";
 import { DateTime } from "luxon";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import useTime from "../../../hooks/useTime";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import useDailyEventInstances from "../../../lib/calendar/hooks/useDailyEventInstances";
 import capitalize from "../../../lib/utils/capitalize";
+import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import CalendarEventDisplay from "../CalendarEventDisplay";
 import styles from "./DayColumn.module.scss";
 
@@ -24,10 +25,13 @@ export interface DayColumnheadingProps {
 export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
   date,
 }) => {
-  const { scope } = useCalendarContext();
+  const { scope, loadingSchedules } = useCalendarContext();
   const now = useTime();
+  const [isNow, setIsNow] = useState(false);
 
-  const isNow = date.hasSame(now, "day");
+  useEffect(() => {
+    setIsNow(date.hasSame(now, "day"));
+  }, [date, now]);
 
   const big = scope === "day";
 
@@ -38,12 +42,12 @@ export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
     })}
     >
       <h2>
-        {capitalize(date.toLocaleString({
+        {loadingSchedules ? <InlineSkeleton width="50%" /> : capitalize(date.toLocaleString({
           weekday: "long",
         }))}
       </h2>
       <h3>
-        {date.toLocaleString({
+        {loadingSchedules ? <InlineSkeleton width="25%" /> : date.toLocaleString({
           month: "numeric",
           day: "numeric",
         })}
