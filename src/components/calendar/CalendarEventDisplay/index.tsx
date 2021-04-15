@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import { transparentize } from "polished";
 import React, { CSSProperties, FunctionComponent } from "react";
+import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import CalendarEventInstance from "../../../lib/calendar/event/CalendarEventInstance";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
 import relativelyReadableColor from "../../../styles/utils/relativelyReadableColor";
@@ -31,6 +32,8 @@ export interface CSSVariables extends CSSProperties {
 const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
   calendarEvent,
 }) => {
+  const { scope } = useCalendarContext();
+
   const {
     details: {
       summary,
@@ -43,7 +46,8 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
   } = calendarEvent;
 
   const startInSeconds = secondsSinceMidnight(start);
-  const compact = duration <= 1800;
+  const horizontal = duration <= 1800;
+  const compact = scope !== "day";
 
   const variables: CSSVariables = {
     "--start": startInSeconds,
@@ -59,6 +63,7 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
       style={variables}
     >
       <div className={cx("calendar-event", {
+        horizontal,
         compact,
       })}
       >

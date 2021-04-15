@@ -21,7 +21,7 @@ ComponentProps<typeof CalendarWidget>
 // eslint-disable-next-line require-jsdoc
 > = (args) => (
   <div css={{
-    maxWidth: 300,
+    maxWidth: 250,
   }}
   >
     <CalendarWidget {...args} />

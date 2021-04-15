@@ -11,6 +11,30 @@
   width: 100%;
 }
 
+.meta {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+  margin: 0;
+  opacity: 0.5;
+  word-break: break-all;
+
+  @include breakpoint(xl, min) {
+    font-size: 14px;
+  }
+
+  time {
+    font-feature-settings: "ss01";
+    word-break: normal;
+  }
+
+  > *:not(:last-child)::after {
+    content: " · ";
+  }
+}
+
 .calendar-event {
   background-color: var(--color);
   border-radius: 6px;
@@ -29,7 +53,7 @@
     color: #fff;
   }
 
-  &.compact {
+  &.horizontal {
     align-items: center;
     display: flex;
     flex-direction: row-reverse;
@@ -57,31 +81,31 @@
     }
   }
 
-  &.compact h2 {
+  &.horizontal h2 {
+    font-size: 12px;
     margin-right: 4px;
     margin-top: 0;
   }
-}
 
-.meta {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: -0.022em;
-  line-height: 1.1;
-  margin: 0;
-  opacity: 0.5;
+  &.compact h2 {
+    font-size: 12px;
 
-  @include breakpoint(xl, min) {
-    font-size: 14px;
+    @include breakpoint(xl, min) {
+      font-size: 16px;
+    }
   }
 
-  time {
-    font-feature-settings: "ss01";
+  &.horizontal .meta {
+    font-size: 10px;
+    font-weight: 600;
   }
 
-  > *:not(:last-child)::after {
-    content: " · ";
+  &.compact .meta {
+    font-size: 10px;
+
+    @include breakpoint(l, min) {
+      font-size: 12px;
+    }
   }
 }
 

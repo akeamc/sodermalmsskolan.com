@@ -5,6 +5,13 @@ export interface InlineSkeletonProps extends SkeletonProps {
   count?: number;
 }
 
+/**
+ * An inline skeleton.
+ *
+ * @param {React.PropsWithChildren<InlineSkeletonProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered skeleton.
+ */
 const InlineSkeleton: FunctionComponent<InlineSkeletonProps> = ({
   count = 1,
   ...skeletonProps
