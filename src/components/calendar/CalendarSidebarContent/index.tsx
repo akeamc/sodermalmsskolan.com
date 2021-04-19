@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import LetterWidget from "../../letter/LetterWidget";
 import MenuCard from "../../menu/MenuCard";
 import CalendarWidget from "../CalendarWidget";
 
@@ -14,6 +15,9 @@ const CalendarSidebarContent: FunctionComponent = () => (
     </section>
     <section>
       <MenuCard />
+    </section>
+    <section>
+      <LetterWidget />
     </section>
   </>
 );
