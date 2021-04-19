@@ -34,7 +34,6 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
     scope,
     startOfScope,
     endOfScope,
-    loadingSchedules,
   } = useCalendarContext();
 
   const now = useTime(10000);
@@ -48,6 +47,8 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
 
   const leftBorderRadius = !isInScope || startOfScope.hasSame(date, "day");
   const rightBorderRadius = !isInScope || endOfScope.hasSame(date, "day");
+
+  const placeholder = !eventInstances;
 
   return (
     <button
@@ -64,7 +65,7 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
     >
       <div className={cx("text-container")}>
         <span className={cx("cell-label")}>
-          {loadingSchedules ? <InlineSkeleton width="1em" /> : date.day}
+          {placeholder ? <InlineSkeleton width="1em" /> : date.day}
         </span>
         <div className={cx("event-dot-container")}>
           {eventInstances?.map(({

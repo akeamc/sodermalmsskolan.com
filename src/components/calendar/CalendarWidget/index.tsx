@@ -78,7 +78,7 @@ const CalendarWidget: FunctionComponent = () => {
             });
 
             return (
-              <CalendarWidgetCell key={date.toISO()} date={date} />
+              <CalendarWidgetCell key={date.toISODate()} date={date} />
             );
           })}
       </div>

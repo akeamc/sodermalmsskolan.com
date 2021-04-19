@@ -1,22 +1,29 @@
 import React, { FunctionComponent } from "react";
+import classNames from "classnames/bind";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import DayColumn, { DayColumnHeading } from "./DayColumn";
 import CalendarTableSidebar from "./CalendarTableSidebar";
+import styles from "./index.module.scss";
+
+const cx = classNames.bind(styles);
+
+export type DaysSectionProps = React.DetailedHTMLProps<
+React.HTMLAttributes<HTMLDivElement>, HTMLDivElement
+>;
 
 /**
  * Main section of the weekly calendar, without the sidebar.
  *
- * @param {React.PropsWithChildren} props Generic props.
+ * @param {React.PropsWithChildren<DaysSectionProps>} props Generic props.
  *
  * @returns {React.ReactElement} Rendered section.
  */
-const DaysSection: FunctionComponent = (props) => (
+const DaysSection: FunctionComponent<DaysSectionProps> = ({
+  className,
+  ...props
+}) => (
   <div
-    css={{
-      display: "flex",
-      marginLeft: "var(--sidebar-width)",
-      borderLeft: "1px solid var(--border-color)",
-    }}
+    className={cx("days-section", className)}
     {...props}
   />
 );
@@ -36,36 +43,13 @@ const CalendarTable: FunctionComponent = () => {
   }));
 
   return (
-    <div css={{
-      "--hour-height": "128px",
-      "--sidebar-width": "64px",
-      "--cell-spacing": "4px",
-      position: "relative",
-      borderTop: "1px solid var(--border-color)",
-    }}
-    >
-      <div css={{
-        position: "sticky",
-        top: 0,
-        zIndex: 2,
-      }}
-      >
-        <DaysSection css={{
-          backgroundColor: "var(--color-bg-primary)",
-          borderBottom: "1px solid var(--border-color)",
-          marginBottom: -1,
-        }}
-        >
-          {dates.map((date) => (
-            <DayColumnHeading date={date} key={date.toISO()} />
-          ))}
-        </DaysSection>
-      </div>
-      <div css={{
-        position: "relative",
-        paddingBottom: 24,
-      }}
-      >
+    <div className={cx("wrapper")}>
+      <DaysSection className={cx("head")}>
+        {dates.map((date) => (
+          <DayColumnHeading date={date} key={date.toISO()} />
+        ))}
+      </DaysSection>
+      <div className={cx("body")}>
         <CalendarTableSidebar />
         <DaysSection>
           {dates.map((date) => (

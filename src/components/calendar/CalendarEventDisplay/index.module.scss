@@ -101,9 +101,9 @@
   }
 
   &.compact .meta {
-    font-size: 10px;
+    font-size: 8px;
 
-    @include breakpoint(l, min) {
+    @include breakpoint(xl, min) {
       font-size: 12px;
     }
   }

@@ -1,12 +1,20 @@
+@import "../../../styles/breakpoints";
+
 .sidebar {
+  --label-size: 12px;
+
   height: 100%;
   position: absolute;
   width: 100%;
+
+  @include breakpoint(l, min) {
+    --label-size: 14px;
+  }
 }
 
 .label {
   color: var(--color-text-tertiary);
-  font-size: 14px;
+  font-size: var(--label-size);
   height: var(--hour-height);
   position: relative;
 

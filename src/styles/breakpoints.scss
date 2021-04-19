@@ -12,11 +12,11 @@ $breakpoints: (
     @media (max-width: ($breakpoint-value - 1)) {
       @content;
     }
-  }
-
-  @if $direction == min {
+  } @else if $direction == min {
     @media (min-width: $breakpoint-value) {
       @content;
     }
+  } @else {
+    @error "$direction must be \"max\" or \"min\".";
   }
 }

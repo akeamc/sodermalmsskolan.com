@@ -14,7 +14,7 @@ const useDailyEventInstances = (date: DateTime): CalendarEventInstance[] => {
   const prevDateMillisRef = useRef<number>();
   const prevSchedulesSignatureRef = useRef<string>();
 
-  const [eventInstances, setEventInstances] = useState<CalendarEventInstance[]>([]);
+  const [eventInstances, setEventInstances] = useState<CalendarEventInstance[]>();
 
   const {
     getEventInstances,
