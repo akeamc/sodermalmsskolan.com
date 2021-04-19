@@ -1,12 +1,11 @@
+import { render } from "@testing-library/react";
 import React from "react";
-import renderer from "react-test-renderer";
 import Emphasis from "./Emphasis";
 
 describe("emphasis", () => {
   it("renders correctly", () => {
-    const tree = renderer
-      .create(<Emphasis>Important text</Emphasis>)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const { asFragment } = render(<Emphasis>Important text</Emphasis>);
+
+    expect(asFragment()).toMatchSnapshot();
   });
 });

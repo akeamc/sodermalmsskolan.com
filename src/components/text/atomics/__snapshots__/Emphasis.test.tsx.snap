@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`emphasis renders correctly 1`] = `
-.emotion-0 {
+<DocumentFragment>
+  .emotion-0 {
   color: var(--color-text-primary);
   font-style: italic;
 }
 
 <em
-  className="emotion-0"
->
-  Important text
-</em>
+    class="emotion-0"
+  >
+    Important text
+  </em>
+</DocumentFragment>
 `;

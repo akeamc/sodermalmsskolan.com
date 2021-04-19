@@ -1,22 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Emoji /> test should render inline emojis correctly 1`] = `
-Array [
-  .emotion-0 img {
-  height: 1em;
-  width: 1em;
-  margin: 0 0.05em 0 0.1em;
-  vertical-align: -0.1em;
-}
-
-<span
-    className="emotion-0"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "Hello <img class=\\"emoji\\" draggable=\\"false\\" alt=\\"🐢\\" src=\\"https://twemoji.maxcdn.com/v/13.0.1/svg/1f422.svg\\"/>.",
-      }
-    }
-  />,
+<DocumentFragment>
+  <span
+    class="emoji-container"
+  >
+    Hello 
+    <img
+      alt="🐢"
+      class="emoji"
+      draggable="false"
+      src="https://twemoji.maxcdn.com/v/13.0.1/svg/1f422.svg"
+    />
+    .
+  </span>
   <span>
     Do
     <span>
@@ -34,24 +31,21 @@ Array [
         </span>
       </span>
     </span>
-  </span>,
-]
+  </span>
+</DocumentFragment>
 `;
 
 exports[`<Emoji /> test should render standalone emojis correctly 1`] = `
-.emotion-0 img {
-  height: 1em;
-  width: 1em;
-  margin: 0 0.05em 0 0.1em;
-  vertical-align: -0.1em;
-}
-
-<span
-  className="emotion-0"
-  dangerouslySetInnerHTML={
-    Object {
-      "__html": "<img class=\\"emoji\\" draggable=\\"false\\" alt=\\"🐢\\" src=\\"https://twemoji.maxcdn.com/v/13.0.1/svg/1f422.svg\\"/>",
-    }
-  }
-/>
+<DocumentFragment>
+  <span
+    class="emoji-container"
+  >
+    <img
+      alt="🐢"
+      class="emoji"
+      draggable="false"
+      src="https://twemoji.maxcdn.com/v/13.0.1/svg/1f422.svg"
+    />
+  </span>
+</DocumentFragment>
 `;

@@ -1,5 +1,9 @@
+import classNames from "classnames/bind";
 import React, { FunctionComponent, ReactNode } from "react";
 import twemoji from "twemoji";
+import styles from "./index.module.scss";
+
+const cx = classNames.bind(styles);
 
 export interface EmojiProps {
   children: ReactNode;
@@ -20,14 +24,7 @@ const Emoji: FunctionComponent<EmojiProps> = ({
       if (typeof child === "string") {
         return (
           <span
-            css={{
-              img: {
-                height: "1em",
-                width: "1em",
-                margin: "0 0.05em 0 0.1em",
-                verticalAlign: "-0.1em",
-              },
-            }}
+            className={cx("emoji-container")}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: twemoji.parse(child, {

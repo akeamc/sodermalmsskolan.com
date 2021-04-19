@@ -1,43 +1,38 @@
-import renderer from "react-test-renderer";
+import { render } from "@testing-library/react";
 import React from "react";
 import Emoji from ".";
 
 describe("<Emoji /> test", () => {
   it("should render standalone emojis correctly", () => {
-    const tree = renderer
-      // eslint-disable-next-line jsx-a11y/accessible-emoji
-      .create(<Emoji>🐢</Emoji>)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const { asFragment } = render(<Emoji>🐢</Emoji>);
+    expect(asFragment()).toMatchSnapshot();
   });
 
   it("should render inline emojis correctly", () => {
-    const tree = renderer
-      .create(
-        // eslint-disable-next-line jsx-a11y/accessible-emoji
-        <Emoji>
-          Hello 🐢.
+    const { asFragment } = render(
+      // eslint-disable-next-line jsx-a11y/accessible-emoji
+      <Emoji>
+        Hello 🐢.
+        <span>
+          Do
           <span>
-            Do
+            you
             <span>
-              you
+              even
               <span>
-                even
+                nest
+                {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
                 <span>
-                  nest
-                  {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-                  <span>
-                    🐢
-                    <span>?</span>
-                  </span>
+                  🐢
+                  <span>?</span>
                 </span>
               </span>
             </span>
           </span>
-        </Emoji>,
-      )
-      .toJSON();
+        </span>
+      </Emoji>,
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 });
