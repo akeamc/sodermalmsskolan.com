@@ -72,12 +72,10 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
             <time dateTime={start.toISO()}>
               {start.toLocaleString(DateTime.TIME_24_SIMPLE)}
             </time>
-            <span className={cx("end")}>
-              –
-              <time dateTime={end.toISO()}>
-                {end.toLocaleString(DateTime.TIME_24_SIMPLE)}
-              </time>
-            </span>
+            –
+            <time dateTime={end.toISO()}>
+              {end.toLocaleString(DateTime.TIME_24_SIMPLE)}
+            </time>
           </span>
           {location ? (
             <span>{location}</span>
