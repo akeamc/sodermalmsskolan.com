@@ -1,18 +1,29 @@
+@use "../../styles/breakpoints";
+
 .container {
   --sidebar-width: 282px;
   --sidebar-transition: all 0.25s ease;
+  --dashboard-padding: 16px;
 
   display: flex;
   height: 100vh;
   overflow: hidden;
   width: 100%;
 
+  @include breakpoints.m(min) {
+    --dashboard-padding: 24px;
+  }
+
   > main {
     flex: 1 1;
     overflow-y: auto;
-    padding: 0 1.5rem;
+    padding: 0 8px;
     transition: var(--sidebar-transition);
     width: 100%;
+
+    @include breakpoints.m(min) {
+      padding: 0 var(--dashboard-padding);
+    }
   }
 
   &.sidebar-hidden > main {
@@ -25,7 +36,7 @@
     flex: 0 0 var(--sidebar-width);
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 0 1.5rem;
+    padding: 0 var(--dashboard-padding);
     transition: var(--sidebar-transition);
   }
 
