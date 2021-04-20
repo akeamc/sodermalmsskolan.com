@@ -20,3 +20,27 @@ $breakpoints: (
     @error "$direction must be \"max\" or \"min\".";
   }
 }
+
+@mixin s($direction) {
+  @include breakpoint(s, $direction) {
+    @content;
+  }
+}
+
+@mixin m($direction) {
+  @include breakpoint(m, $direction) {
+    @content;
+  }
+}
+
+@mixin l($direction) {
+  @include breakpoint(l, $direction) {
+    @content;
+  }
+}
+
+@mixin xl($direction) {
+  @include breakpoint(xl, $direction) {
+    @content;
+  }
+}

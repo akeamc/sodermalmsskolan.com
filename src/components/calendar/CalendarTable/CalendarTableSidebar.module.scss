@@ -1,4 +1,4 @@
-@import "../../../styles/breakpoints";
+@use "../../../styles/breakpoints";
 
 .sidebar {
   --label-size: 12px;
@@ -7,7 +7,7 @@
   position: absolute;
   width: 100%;
 
-  @include breakpoint(l, min) {
+  @include breakpoints.l(min) {
     --label-size: 14px;
   }
 }

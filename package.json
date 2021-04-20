@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "eslint": "eslint .",
-    "stylelint": "stylelint .",
+    "stylelint": "stylelint src",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",

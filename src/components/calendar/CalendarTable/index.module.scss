@@ -1,4 +1,4 @@
-@import "../../../styles/breakpoints";
+@use "../../../styles/breakpoints";
 
 .wrapper {
   --hour-height: 96px;
@@ -8,7 +8,7 @@
   border-top: 1px solid var(--border-color);
   position: relative;
 
-  @include breakpoint(l, min) {
+  @include breakpoints.l(min) {
     --sidebar-width: 64px;
   }
 }

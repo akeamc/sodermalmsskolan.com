@@ -1,4 +1,4 @@
-@import "../../../styles/breakpoints";
+@use "../../../styles/breakpoints";
 
 .container {
   border-top: 1px solid var(--color);
@@ -21,7 +21,7 @@
   opacity: 0.5;
   word-break: break-all;
 
-  @include breakpoint(xl, min) {
+  @include breakpoints.xl(min) {
     font-size: 14px;
   }
 
@@ -44,7 +44,7 @@
   width: 100%;
   word-wrap: break-word;
 
-  @include breakpoint(xl, min) {
+  @include breakpoints.xl(min) {
     padding: 12px;
   }
 
@@ -72,11 +72,11 @@
     letter-spacing: -0.022em;
     margin: 0.5em 0 0;
 
-    @include breakpoint(l, min) {
+    @include breakpoints.l(min) {
       font-size: 16px;
     }
 
-    @include breakpoint(xl, min) {
+    @include breakpoints.xl(min) {
       font-size: 18px;
     }
   }
@@ -90,7 +90,7 @@
   &.compact h2 {
     font-size: 12px;
 
-    @include breakpoint(xl, min) {
+    @include breakpoints.xl(min) {
       font-size: 16px;
     }
   }
@@ -103,14 +103,14 @@
   &.compact .meta {
     font-size: 8px;
 
-    @include breakpoint(xl, min) {
+    @include breakpoints.xl(min) {
       font-size: 12px;
     }
   }
 }
 
 .end {
-  @include breakpoint(m, max) {
+  @include breakpoints.m(max) {
     display: none;
   }
 }
