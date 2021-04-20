@@ -2,8 +2,9 @@ import { AnimatePresence, motion, Variants } from "framer-motion";
 import { capitalize } from "lodash";
 import { DateTime } from "luxon";
 import React, { FunctionComponent, useRef } from "react";
-import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
+import { CalendarScope, useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
+import WeekNumberBadge from "../CalendarWeekNumberBadge";
 import styles from "./index.module.scss";
 
 const variants: Variants = {
@@ -22,23 +23,38 @@ const variants: Variants = {
   }),
 };
 
+export interface CursorTextProps {
+  scope?: CalendarScope;
+}
+
 /**
- * Animated text displaying the current month and year.
+ * Animated text displaying the current cursor in varying formats depending on the scope.
+ *
+ * @param {React.PropsWithChildren<CursorTextProps>} props Props.
  *
  * @returns {React.ReactElement} Rendered elements!
  */
-const MonthText: FunctionComponent = () => {
-  const { cursor, loadingSchedules } = useCalendarContext();
+const CursorText: FunctionComponent<CursorTextProps> = ({
+  scope: forcedScope,
+}) => {
+  const { cursor, loadingSchedules, scope: contextScope } = useCalendarContext();
   const prevCursorRef = useRef<DateTime>();
+
+  const scope = forcedScope ?? contextScope;
 
   const content = capitalize(cursor.toLocaleString({
     month: "long",
     year: "numeric",
+    day: scope === "day" ? "numeric" : undefined,
   }));
 
-  const isBefore = prevCursorRef.current < cursor;
+  const showWeekNumber = scope !== "month";
 
-  const direction = isBefore ? 1 : -1;
+  let direction = prevCursorRef.current < cursor ? 1 : -1;
+
+  if (prevCursorRef.current?.hasSame(cursor, "month")) {
+    direction = 0; // Only fade if the month is the same.
+  }
 
   prevCursorRef.current = cursor;
 
@@ -58,6 +74,7 @@ const MonthText: FunctionComponent = () => {
             }}
           >
             {content}
+            {showWeekNumber ? <WeekNumberBadge className={styles.badge} size="small" /> : undefined}
           </motion.div>
         </AnimatePresence>
       )}
@@ -65,4 +82,4 @@ const MonthText: FunctionComponent = () => {
   );
 };
 
-export default MonthText;
+export default CursorText;

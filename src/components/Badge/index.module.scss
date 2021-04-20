@@ -1,0 +1,18 @@
+.badge {
+  background-color: var(--accents-1);
+  border: 1px solid var(--accents-2);
+  border-radius: 16px;
+  color: var(--color-text-primary);
+  font-feature-settings: "tnum";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 2px 7px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.small {
+  font-size: 12px;
+  padding: 3px 7px;
+}

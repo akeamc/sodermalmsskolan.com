@@ -8,7 +8,7 @@ import capitalize from "../../../lib/utils/capitalize";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import PageHeading from "../../typography/headings/PageHeading";
 import CalendarTable from "../CalendarTable";
-import MonthText from "../MonthText";
+import CursorText from "../CursorText";
 import styles from "./index.module.scss";
 
 const cx = classNames.bind(styles);
@@ -69,7 +69,7 @@ const MainCalendar: FunctionComponent = () => {
   return (
     <div className={cx("base")}>
       <PageHeading>
-        <MonthText />
+        <CursorText />
       </PageHeading>
       <CalendarController />
     </div>

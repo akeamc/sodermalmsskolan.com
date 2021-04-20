@@ -11,25 +11,6 @@ beforeAll(async () => {
 });
 
 describe("<MainCalendar /> tests", () => {
-  test("the heading should display the cursor", async () => {
-    const initialCursor = DateTime.utc(2020, 1, 1, 6, 30);
-
-    render(
-      <CalendarContextProvider initialCursor={initialCursor}>
-        <MainCalendar />
-      </CalendarContextProvider>,
-    );
-
-    await act(async () => {});
-
-    const expected = new RegExp(initialCursor.toLocaleString({
-      year: "numeric",
-      month: "long",
-    }), "i");
-
-    expect(screen.getByText(expected)).toBeDefined();
-  });
-
   test("scope should be changeable with keyboard", async () => {
     render(
       <CalendarContextProvider initialCursor={DateTime.utc(2020, 1, 1, 12)}>

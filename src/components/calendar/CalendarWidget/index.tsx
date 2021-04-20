@@ -7,7 +7,7 @@ import capitalize from "../../../lib/utils/capitalize";
 import Button, { ButtonProps } from "../../Button";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import SidebarHeading from "../../typography/headings/SidebarHeading";
-import MonthText from "../MonthText";
+import CursorText from "../CursorText";
 import CalendarWidgetCell from "./CalendarWidgetCell";
 import styles from "./index.module.scss";
 
@@ -62,7 +62,7 @@ const CalendarWidget: FunctionComponent = () => {
   return (
     <div className={cx("base")}>
       <SidebarHeading className={cx("heading")}>
-        <MonthText />
+        <CursorText scope="month" />
         <Button onClick={() => moveCursor(-1, "month")} icon={ChevronLeft} title="Föregående månad" {...buttonProps} />
         <Button onClick={() => moveCursor(1, "month")} icon={ChevronRight} title="Nästa månad" {...buttonProps} />
       </SidebarHeading>
