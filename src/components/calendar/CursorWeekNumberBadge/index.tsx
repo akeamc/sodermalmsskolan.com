@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
-import Badge, { BadgeProps } from "../../Badge";
+import { BadgeProps } from "../../Badge";
+import WeekNumberBadge from "../../WeekNumberBadge";
 
 /**
  * A badge showing the week number of the cursor.
@@ -9,16 +10,12 @@ import Badge, { BadgeProps } from "../../Badge";
  *
  * @returns {React.ReactElement} The rendered badge.
  */
-const WeekNumberBadge: FunctionComponent<BadgeProps> = (props) => {
+const CursorWeekNumberBadge: FunctionComponent<BadgeProps> = (props) => {
   const { cursor } = useCalendarContext();
 
   return (
-    <Badge {...props}>
-      Vecka
-      {" "}
-      {cursor.weekNumber}
-    </Badge>
+    <WeekNumberBadge date={cursor} {...props} />
   );
 };
 
-export default WeekNumberBadge;
+export default CursorWeekNumberBadge;

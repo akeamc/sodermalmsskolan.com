@@ -3,6 +3,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import useKeyboardEffect from "../../hooks/useKeyboardEffect";
 import useWindowSize from "../../hooks/useWindowSize";
 import styles from "./DashboardContainer.module.scss";
+import DashboardNavbar from "./DashboardNavbar";
 
 const cx = classNames.bind(styles);
 
@@ -48,16 +49,19 @@ const DashboardContainer: FunctionComponent<DashboardContainerProps> = ({
   });
 
   return (
-    <div className={cx("container", {
-      "sidebar-hidden": !showSidebar,
-    })}
-    >
-      <main>
-        {children}
-      </main>
-      <aside>
-        {aside}
-      </aside>
+    <div className={cx("container")}>
+      <DashboardNavbar />
+      <div className={cx("columns", {
+        "sidebar-hidden": !showSidebar,
+      })}
+      >
+        <main>
+          {children}
+        </main>
+        <aside>
+          {aside}
+        </aside>
+      </div>
     </div>
   );
 };

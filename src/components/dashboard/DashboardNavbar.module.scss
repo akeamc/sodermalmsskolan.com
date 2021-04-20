@@ -1,0 +1,16 @@
+@use "../../styles/breakpoints";
+
+.navbar {
+  align-items: center;
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--accents-2);
+  box-sizing: border-box;
+  display: flex;
+  height: var(--navbar-height);
+  justify-content: space-between;
+  padding: 0 var(--dashboard-gutter);
+}
+
+.logo {
+  width: 24px;
+}

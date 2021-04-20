@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { DateTime } from "luxon";
 import React from "react";
-import WeekNumberBadge from ".";
+import CursorWeekNumberBadge from ".";
 import { CalendarContextProvider } from "../../../lib/calendar/CalendarContext";
 
 test("badge should show correct date", () => {
   render(
     <CalendarContextProvider initialCursor={DateTime.utc(2020, 6, 8, 12)}>
-      <WeekNumberBadge />
+      <CursorWeekNumberBadge />
     </CalendarContextProvider>,
   );
 

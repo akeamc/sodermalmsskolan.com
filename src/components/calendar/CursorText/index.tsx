@@ -4,7 +4,7 @@ import { DateTime } from "luxon";
 import React, { FunctionComponent, useRef } from "react";
 import { CalendarScope, useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
-import WeekNumberBadge from "../CalendarWeekNumberBadge";
+import CursorWeekNumberBadge from "../CursorWeekNumberBadge";
 import styles from "./index.module.scss";
 
 const variants: Variants = {
@@ -74,7 +74,7 @@ const CursorText: FunctionComponent<CursorTextProps> = ({
             }}
           >
             {content}
-            {showWeekNumber ? <WeekNumberBadge className={styles.badge} size="small" /> : undefined}
+            {showWeekNumber ? <CursorWeekNumberBadge className={styles.badge} size="small" /> : undefined}
           </motion.div>
         </AnimatePresence>
       )}
