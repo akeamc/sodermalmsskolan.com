@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import classNames from "classnames/bind";
-import React, { FunctionComponent, useCallback } from "react";
+import React, { FunctionComponent, useCallback, useEffect } from "react";
 import useKeyboardEffect from "../../../hooks/useKeyboardEffect";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
+import useResponsiveCalendarScope from "../../../lib/calendar/hooks/useResponsiveCalendarScope";
 import capitalize from "../../../lib/utils/capitalize";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import PageHeading from "../../typography/headings/PageHeading";
@@ -39,6 +40,8 @@ const MainCalendar: FunctionComponent = () => {
     moveCursor,
   } = useCalendarContext();
 
+  const responsiveScope = useResponsiveCalendarScope();
+
   const keypressCallback = useCallback(({ code }: KeyboardEvent) => {
     switch (code) {
       case "KeyW":
@@ -58,6 +61,10 @@ const MainCalendar: FunctionComponent = () => {
   }, [moveCursor, setScope]);
 
   useKeyboardEffect(keypressCallback);
+
+  useEffect(() => {
+    setScope(responsiveScope);
+  }, [responsiveScope, setScope]);
 
   return (
     <div className={cx("base")}>
