@@ -19,7 +19,7 @@ export interface DashboardContainerProps {
 export const useSidebarRecommendation = (): boolean => {
   const { width } = useWindowSize();
 
-  return width > 1200;
+  return width > 1024;
 };
 
 /**
