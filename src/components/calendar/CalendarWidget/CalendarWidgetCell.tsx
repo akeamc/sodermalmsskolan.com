@@ -3,6 +3,8 @@ import { DateTime } from "luxon";
 import React, {
   CSSProperties,
   FunctionComponent,
+  useEffect,
+  useState,
 } from "react";
 import useTime from "../../../hooks/useTime";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
@@ -18,6 +20,13 @@ export interface CalendarWidgetCellProps {
 
 export interface CSSVariables extends CSSProperties {
   "--event-dot-color": string;
+}
+
+interface CellState {
+  isSelectedMonth: boolean;
+  isInScope: boolean;
+  isCursor: boolean;
+  isToday: boolean;
 }
 
 /**
@@ -37,18 +46,32 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
   } = useCalendarContext();
 
   const now = useTime(10000);
-
   const eventInstances = useDailyEventInstances(date);
+  const [{
+    isCursor,
+    isInScope,
+    isSelectedMonth,
+    isToday,
+  }, setCellState] = useState<CellState>({
+    isCursor: false,
+    isInScope: false,
+    isSelectedMonth: false,
+    isToday: false,
+  });
 
-  const isSelectedMonth = date.hasSame(cursor, "month");
-  const isCursor = date.hasSame(cursor, "day");
-  const isInScope = date.hasSame(cursor, scope);
-  const isToday = date.hasSame(now, "day");
-
-  const leftBorderRadius = !isInScope || startOfScope.hasSame(date, "day");
+  const leftBorderRadius = !isCursor || startOfScope.hasSame(date, "day");
   const rightBorderRadius = !isInScope || endOfScope.hasSame(date, "day");
 
   const placeholder = !eventInstances;
+
+  useEffect(() => {
+    setCellState({
+      isSelectedMonth: date.hasSame(cursor, "month"),
+      isCursor: date.hasSame(cursor, "day"),
+      isInScope: date.hasSame(cursor, scope),
+      isToday: date.hasSame(now, "day"),
+    });
+  }, [date, cursor, scope, now]);
 
   return (
     <button
