@@ -9,6 +9,8 @@
   height: var(--navbar-height);
   justify-content: space-between;
   padding: 0 var(--dashboard-gutter);
+  position: sticky;
+  top: 0;
 }
 
 .logo {

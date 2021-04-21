@@ -71,18 +71,8 @@ const DayColumn: FunctionComponent<DayColumnProps> = ({ date }) => {
   const eventInstances = useDailyEventInstances(date);
 
   return (
-    <div css={{
-      flex: 1,
-      height: "calc(var(--hour-height) * 24)",
-      borderRight: "1px solid var(--border-color)",
-      padding: "0 var(--cell-spacing)",
-    }}
-    >
-      <div css={{
-        position: "relative",
-        zIndex: 1,
-      }}
-      >
+    <div className={cx("wrapper")}>
+      <div className={cx("container")}>
         {eventInstances?.map((event) => (
           <CalendarEventDisplay calendarEvent={event} key={event.signature} />
         ))}
