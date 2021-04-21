@@ -107,4 +107,10 @@
       font-size: 12px;
     }
   }
+
+  &.tiny .meta {
+    @include breakpoints.l(max) {
+      display: none;
+    }
+  }
 }

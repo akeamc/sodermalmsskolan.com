@@ -1,10 +1,12 @@
 import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import React, { FunctionComponent, useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import useTime from "../../../hooks/useTime";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import useDailyEventInstances from "../../../lib/calendar/hooks/useDailyEventInstances";
 import capitalize from "../../../lib/utils/capitalize";
+import { breakpoints } from "../../../styles/breakpoints";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import CalendarEventDisplay from "../CalendarEventDisplay";
 import styles from "./DayColumn.module.scss";
@@ -28,6 +30,11 @@ export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
   const { scope, loadingSchedules } = useCalendarContext();
   const now = useTime();
   const [isNow, setIsNow] = useState(false);
+  const viewportIsSufficient = useMediaQuery({
+    query: `(min-width: ${breakpoints.large}px)`,
+  });
+
+  const compact = !(scope === "day" || viewportIsSufficient);
 
   useEffect(() => {
     setIsNow(date.hasSame(now, "day"));
@@ -43,12 +50,12 @@ export const DayColumnHeading: FunctionComponent<DayColumnheadingProps> = ({
     >
       <h2>
         {loadingSchedules ? <InlineSkeleton width="50%" /> : capitalize(date.toLocaleString({
-          weekday: "long",
+          weekday: compact ? "narrow" : "long",
         }))}
       </h2>
       <h3>
         {loadingSchedules ? <InlineSkeleton width="25%" /> : date.toLocaleString({
-          month: "numeric",
+          month: compact ? undefined : "numeric",
           day: "numeric",
         })}
       </h3>

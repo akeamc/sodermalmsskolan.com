@@ -65,6 +65,7 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
       <div className={cx("calendar-event", {
         horizontal,
         compact,
+        tiny: scope !== "day",
       })}
       >
         <span className={cx("meta")}>
