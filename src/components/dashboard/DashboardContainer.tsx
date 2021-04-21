@@ -1,7 +1,8 @@
 import classNames from "classnames/bind";
 import React, { FunctionComponent, useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import useKeyboardEffect from "../../hooks/useKeyboardEffect";
-import useWindowSize from "../../hooks/useWindowSize";
+import { breakpoints } from "../../styles/breakpoints";
 import styles from "./DashboardContainer.module.scss";
 import DashboardNavbar from "./DashboardNavbar";
 
@@ -10,18 +11,6 @@ const cx = classNames.bind(styles);
 export interface DashboardContainerProps {
   aside: React.ReactNode,
 }
-
-/**
- * React hook that returns `true` or `false` whether the viewport is large enough to comfortably
- * display the sidebar.
- *
- * @returns {boolean} `true` is the device is large enough.
- */
-export const useSidebarRecommendation = (): boolean => {
-  const { width } = useWindowSize();
-
-  return width > 1024;
-};
 
 /**
  * The main container for dashboards.
@@ -34,8 +23,11 @@ const DashboardContainer: FunctionComponent<DashboardContainerProps> = ({
   children,
   aside,
 }) => {
-  const shouldShowSidebar = useSidebarRecommendation();
   const [showSidebar, setShowSidebar] = useState(false);
+
+  const shouldShowSidebar = useMediaQuery({
+    query: `(min-width: ${breakpoints.medium}px)`,
+  });
 
   useEffect(() => {
     setShowSidebar(shouldShowSidebar);

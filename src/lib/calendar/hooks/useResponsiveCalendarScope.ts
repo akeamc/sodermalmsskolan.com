@@ -1,4 +1,5 @@
-import useWindowSize from "../../../hooks/useWindowSize";
+import { useMediaQuery } from "react-responsive";
+import { breakpoints } from "../../../styles/breakpoints";
 import { CalendarScope } from "../CalendarContext";
 
 /**
@@ -7,13 +8,11 @@ import { CalendarScope } from "../CalendarContext";
  * @returns {CalendarScope} The most fitting calendar scope.
  */
 const useResponsiveCalendarScope = (): CalendarScope => {
-  const { width } = useWindowSize();
+  const isLarge = useMediaQuery({
+    query: `(min-width: ${breakpoints.large}px)`,
+  });
 
-  if (width > 768) {
-    return "week";
-  }
-
-  return "day";
+  return isLarge ? "week" : "day";
 };
 
 export default useResponsiveCalendarScope;

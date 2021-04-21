@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import preloadAll from "jest-next-dynamic";
-import CalendarContext, { CalendarContextProvider, CalendarScope, defaultCalendarContextData } from "../../../lib/calendar/CalendarContext";
+import CalendarContext, { CalendarContextProvider, CalendarScope } from "../../../lib/calendar/CalendarContext";
 import MainCalendar from ".";
 
 beforeAll(async () => {
@@ -34,7 +34,7 @@ describe("<MainCalendar /> tests", () => {
     const getCursor = (): string => screen.getByTitle("cursor").textContent;
 
     userEvent.keyboard("Q"); // Resilience
-    expect(getScope()).toBe<CalendarScope>(defaultCalendarContextData.scope);
+    expect(getScope()).toBe<CalendarScope>("day");
 
     userEvent.keyboard("W");
     expect(getScope()).toBe<CalendarScope>("week");
