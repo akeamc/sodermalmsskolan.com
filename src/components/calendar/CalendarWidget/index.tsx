@@ -1,10 +1,8 @@
 import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
-import { ChevronLeft, ChevronRight } from "react-feather";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import capitalize from "../../../lib/utils/capitalize";
-import Button, { ButtonProps } from "../../Button";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import SidebarHeading from "../../typography/headings/SidebarHeading";
 import CursorText from "../CursorText";
@@ -47,24 +45,16 @@ const CalendarWidgetHead: FunctionComponent = () => {
  * @returns {React.ReactElement} The rendered widget.
  */
 const CalendarWidget: FunctionComponent = () => {
-  const { cursor, moveCursor } = useCalendarContext();
+  const { cursor } = useCalendarContext();
   const topLeftDate = cursor.startOf("month").startOf("week");
   const bottomRightDate = topLeftDate.plus({
     weeks: 5,
   }).endOf("week");
 
-  const buttonProps: ButtonProps = {
-    type: "button",
-    variant: "secondary",
-    size: "small",
-  };
-
   return (
     <div className={cx("base")}>
-      <SidebarHeading className={cx("heading")}>
-        <CursorText scope="month" />
-        <Button onClick={() => moveCursor(-1, "month")} icon={ChevronLeft} title="Föregående månad" {...buttonProps} />
-        <Button onClick={() => moveCursor(1, "month")} icon={ChevronRight} title="Nästa månad" {...buttonProps} />
+      <SidebarHeading>
+        <CursorText scope="month" controls="right" />
       </SidebarHeading>
       <div className={cx("table")}>
         <CalendarWidgetHead />

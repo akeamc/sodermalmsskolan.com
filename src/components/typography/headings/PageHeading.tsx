@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import styles from "./PageHeading.module.scss";
 
 /**
  * Main page heading.
@@ -10,12 +11,7 @@ import React, { FunctionComponent } from "react";
 const PageHeading: FunctionComponent = (props) => (
   // eslint-disable-next-line jsx-a11y/heading-has-content
   <h1
-    css={{
-      margin: "0 0 1em",
-      fontSize: 36,
-      letterSpacing: "-0.022em",
-      lineHeight: 1.25,
-    }}
+    className={styles.heading}
     {...props}
   />
 );

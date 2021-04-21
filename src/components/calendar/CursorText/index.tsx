@@ -1,11 +1,16 @@
+import classNames from "classnames/bind";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { capitalize } from "lodash";
 import { DateTime } from "luxon";
 import React, { FunctionComponent, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "react-feather";
 import { CalendarScope, useCalendarContext } from "../../../lib/calendar/CalendarContext";
+import Button, { ButtonProps } from "../../Button";
 import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import CursorWeekNumberBadge from "../CursorWeekNumberBadge";
 import styles from "./index.module.scss";
+
+const cx = classNames.bind(styles);
 
 const variants: Variants = {
   enter: (direction: number) => ({
@@ -25,6 +30,7 @@ const variants: Variants = {
 
 export interface CursorTextProps {
   scope?: CalendarScope;
+  controls?: "left" | "right";
 }
 
 /**
@@ -35,9 +41,15 @@ export interface CursorTextProps {
  * @returns {React.ReactElement} Rendered elements!
  */
 const CursorText: FunctionComponent<CursorTextProps> = ({
+  controls,
   scope: forcedScope,
 }) => {
-  const { cursor, loadingSchedules, scope: contextScope } = useCalendarContext();
+  const {
+    cursor,
+    loadingSchedules,
+    scope: contextScope,
+    moveCursor,
+  } = useCalendarContext();
   const prevCursorRef = useRef<DateTime>();
 
   const scope = forcedScope ?? contextScope;
@@ -50,35 +62,45 @@ const CursorText: FunctionComponent<CursorTextProps> = ({
 
   const showWeekNumber = scope !== "month";
 
-  let direction = prevCursorRef.current < cursor ? 1 : -1;
-
-  if (prevCursorRef.current?.hasSame(cursor, "month")) {
-    direction = 0; // Only fade if the month is the same.
-  }
+  const direction = prevCursorRef.current < cursor ? 1 : -1;
 
   prevCursorRef.current = cursor;
 
+  const buttonProps: ButtonProps = {
+    type: "button",
+    variant: "secondary",
+    size: "small",
+  };
+
   return (
-    <span className={styles.container}>
-      {loadingSchedules ? <InlineSkeleton width="6em" /> : (
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={content}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            style={{
-              pointerEvents: "initial",
-            }}
-          >
-            {content}
-            {showWeekNumber ? <CursorWeekNumberBadge className={styles.badge} size="small" /> : undefined}
-          </motion.div>
-        </AnimatePresence>
-      )}
-    </span>
+    <div className={cx("container", controls)}>
+      <div className={cx("track")}>
+        {loadingSchedules ? <InlineSkeleton width="6em" /> : (
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={content}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              style={{
+                pointerEvents: "initial",
+              }}
+            >
+              {content}
+              {showWeekNumber ? <CursorWeekNumberBadge className={cx("badge")} size="small" /> : undefined}
+            </motion.div>
+          </AnimatePresence>
+        )}
+      </div>
+      {controls ? (
+        <div className={cx("controls")}>
+          <Button onClick={() => moveCursor(-1, scope)} icon={ChevronLeft} title="Föregående" {...buttonProps} />
+          <Button onClick={() => moveCursor(1, scope)} icon={ChevronRight} title="Nästa" {...buttonProps} />
+        </div>
+      ) : undefined}
+    </div>
   );
 };
 

@@ -13,6 +13,7 @@
   letter-spacing: 0;
   padding: var(--button-padding-y) var(--button-padding-x);
   transition: background-color 0.1s;
+  z-index: 1;
 }
 
 .primary {

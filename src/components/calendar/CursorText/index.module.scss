@@ -1,4 +1,38 @@
+.controls {
+  display: inline-flex;
+
+  button:not(:last-of-type) {
+    margin-right: var(--button-spacing);
+  }
+}
+
 .container {
+  --button-spacing: 0.25em;
+
+  align-items: center;
+  display: flex;
+  white-space: nowrap;
+
+  &.left {
+    flex-direction: row-reverse;
+    justify-content: start;
+  }
+
+  &.right {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &.left .controls {
+    margin-right: var(--button-spacing);
+  }
+
+  &.right .controls {
+    margin-left: var(--button-spacing);
+  }
+}
+
+.track {
   display: inline-grid;
 
   > * {

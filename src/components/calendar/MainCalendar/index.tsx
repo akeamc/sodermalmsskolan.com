@@ -4,8 +4,6 @@ import React, { FunctionComponent, useCallback, useEffect } from "react";
 import useKeyboardEffect from "../../../hooks/useKeyboardEffect";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import useResponsiveCalendarScope from "../../../lib/calendar/hooks/useResponsiveCalendarScope";
-import capitalize from "../../../lib/utils/capitalize";
-import InlineSkeleton from "../../skeleton/InlineSkeleton";
 import PageHeading from "../../typography/headings/PageHeading";
 import CalendarTable from "../CalendarTable";
 import CursorText from "../CursorText";
@@ -69,7 +67,7 @@ const MainCalendar: FunctionComponent = () => {
   return (
     <div className={cx("base")}>
       <PageHeading>
-        <CursorText />
+        <CursorText controls="left" />
       </PageHeading>
       <CalendarController />
     </div>

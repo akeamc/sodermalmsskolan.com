@@ -27,6 +27,8 @@ interface CellState {
   isInScope: boolean;
   isCursor: boolean;
   isToday: boolean;
+  leftBorderRadius: boolean;
+  rightBorderRadius: boolean;
 }
 
 /**
@@ -52,26 +54,32 @@ const CalendarWidgetCell: FunctionComponent<CalendarWidgetCellProps> = ({ date }
     isInScope,
     isSelectedMonth,
     isToday,
+    leftBorderRadius,
+    rightBorderRadius,
   }, setCellState] = useState<CellState>({
     isCursor: false,
     isInScope: false,
     isSelectedMonth: false,
     isToday: false,
+    leftBorderRadius: false,
+    rightBorderRadius: false,
   });
-
-  const leftBorderRadius = !isCursor || startOfScope.hasSame(date, "day");
-  const rightBorderRadius = !isInScope || endOfScope.hasSame(date, "day");
 
   const placeholder = !eventInstances;
 
   useEffect(() => {
+    const newIsCursor = date.hasSame(cursor, "day");
+    const newIsInScope = date.hasSame(cursor, scope);
+
     setCellState({
       isSelectedMonth: date.hasSame(cursor, "month"),
-      isCursor: date.hasSame(cursor, "day"),
-      isInScope: date.hasSame(cursor, scope),
+      isCursor: newIsCursor,
+      isInScope: newIsInScope,
       isToday: date.hasSame(now, "day"),
+      leftBorderRadius: !newIsInScope || startOfScope.hasSame(date, "day"),
+      rightBorderRadius: !newIsInScope || endOfScope.hasSame(date, "day"),
     });
-  }, [date, cursor, scope, now]);
+  }, [date, cursor, scope, now, startOfScope, endOfScope]);
 
   return (
     <button
