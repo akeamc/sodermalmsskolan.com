@@ -14,7 +14,7 @@ const CalendarPage: NextPage = () => (
   <CalendarContextProvider>
     <DashboardContainer
       aside={<CalendarSidebar />}
-      meta={{
+      metadata={{
         title: "Kalender",
         description: "En kalender från södermalmsskolan.com.",
       }}

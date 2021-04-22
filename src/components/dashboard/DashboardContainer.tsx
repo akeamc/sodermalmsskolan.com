@@ -3,7 +3,8 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import useKeyboardEffect from "../../hooks/useKeyboardEffect";
 import { breakpoints } from "../../styles/breakpoints";
-import { MetaHead, SiteMetadata } from "../head/MetaHead";
+import { SiteMetadata } from "../head/MetaHead";
+import SiteHead from "../head/SiteHead";
 import styles from "./DashboardContainer.module.scss";
 import DashboardNavbar from "./DashboardNavbar";
 
@@ -11,7 +12,7 @@ const cx = classNames.bind(styles);
 
 export interface DashboardContainerProps {
   aside: React.ReactNode,
-  meta?: SiteMetadata;
+  metadata?: SiteMetadata;
 }
 
 /**
@@ -24,7 +25,7 @@ export interface DashboardContainerProps {
 const DashboardContainer: FunctionComponent<DashboardContainerProps> = ({
   children,
   aside,
-  meta,
+  metadata,
 }) => {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -45,7 +46,7 @@ const DashboardContainer: FunctionComponent<DashboardContainerProps> = ({
 
   return (
     <>
-      <MetaHead {...meta} />
+      <SiteHead metadata={metadata} />
       <div className={cx("container")}>
         <DashboardNavbar />
         <div className={cx("columns", {
