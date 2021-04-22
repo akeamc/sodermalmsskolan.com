@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { DateTime } from "luxon";
 import React from "react";
-import CalendarWidget from ".";
+import CalendarMonthWidget from ".";
 import CalendarContext, { CalendarContextProvider } from "../../../lib/calendar/CalendarContext";
 
-describe("<CalendarWidget /> tests", () => {
+describe("<CalendarMonthWidget /> tests", () => {
   test("misc. buttons should be clickable", () => {
     const initialCursor = DateTime.fromISO("2021-01-14T07:30:00", {
       zone: "utc",
@@ -13,7 +13,7 @@ describe("<CalendarWidget /> tests", () => {
 
     render(
       <CalendarContextProvider initialCursor={initialCursor}>
-        <CalendarWidget />
+        <CalendarMonthWidget />
         <CalendarContext.Consumer>
           {({ cursor }) => (
             <span>

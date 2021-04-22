@@ -12,9 +12,12 @@ import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
  */
 const CalendarPage: NextPage = () => (
   <CalendarContextProvider>
-    <DashboardContainer aside={
-      <CalendarSidebar />
-    }
+    <DashboardContainer
+      aside={<CalendarSidebar />}
+      meta={{
+        title: "Kalender",
+        description: "En kalender från södermalmsskolan.com.",
+      }}
     >
       <MainCalendar />
     </DashboardContainer>

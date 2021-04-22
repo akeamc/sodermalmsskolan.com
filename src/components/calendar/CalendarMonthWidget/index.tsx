@@ -44,7 +44,7 @@ const CalendarWidgetHead: FunctionComponent = () => {
  *
  * @returns {React.ReactElement} The rendered widget.
  */
-const CalendarWidget: FunctionComponent = () => {
+const CalendarMonthWidget: FunctionComponent = () => {
   const { cursor } = useCalendarContext();
   const topLeftDate = cursor.startOf("month").startOf("week");
   const bottomRightDate = topLeftDate.plus({
@@ -76,4 +76,4 @@ const CalendarWidget: FunctionComponent = () => {
   );
 };
 
-export default CalendarWidget;
+export default CalendarMonthWidget;

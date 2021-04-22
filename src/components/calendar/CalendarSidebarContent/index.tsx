@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import LetterWidget from "../../letter/LetterWidget";
 import MenuCard from "../../menu/MenuCard";
-import CalendarWidget from "../CalendarWidget";
+import CalendarMonthWidget from "../CalendarMonthWidget";
 
 /**
  * The content of the calendar sidebar.
@@ -11,7 +11,7 @@ import CalendarWidget from "../CalendarWidget";
 const CalendarSidebarContent: FunctionComponent = () => (
   <>
     <section>
-      <CalendarWidget />
+      <CalendarMonthWidget />
     </section>
     <section>
       <MenuCard />

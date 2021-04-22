@@ -3,6 +3,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import useKeyboardEffect from "../../hooks/useKeyboardEffect";
 import { breakpoints } from "../../styles/breakpoints";
+import { MetaHead, SiteMetadata } from "../head/MetaHead";
 import styles from "./DashboardContainer.module.scss";
 import DashboardNavbar from "./DashboardNavbar";
 
@@ -10,6 +11,7 @@ const cx = classNames.bind(styles);
 
 export interface DashboardContainerProps {
   aside: React.ReactNode,
+  meta?: SiteMetadata;
 }
 
 /**
@@ -22,6 +24,7 @@ export interface DashboardContainerProps {
 const DashboardContainer: FunctionComponent<DashboardContainerProps> = ({
   children,
   aside,
+  meta,
 }) => {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -41,20 +44,23 @@ const DashboardContainer: FunctionComponent<DashboardContainerProps> = ({
   });
 
   return (
-    <div className={cx("container")}>
-      <DashboardNavbar />
-      <div className={cx("columns", {
-        "sidebar-hidden": !showSidebar,
-      })}
-      >
-        <main>
-          {children}
-        </main>
-        <aside>
-          {aside}
-        </aside>
+    <>
+      <MetaHead {...meta} />
+      <div className={cx("container")}>
+        <DashboardNavbar />
+        <div className={cx("columns", {
+          "sidebar-hidden": !showSidebar,
+        })}
+        >
+          <main>
+            {children}
+          </main>
+          <aside>
+            {aside}
+          </aside>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

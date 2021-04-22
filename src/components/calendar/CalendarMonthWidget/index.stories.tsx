@@ -2,12 +2,12 @@ import React, { ComponentProps } from "react";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Story } from "@storybook/react";
-import CalendarWidget from ".";
+import CalendarMonthWidget from ".";
 import { CalendarContextProvider } from "../../../lib/calendar/CalendarContext";
 
 export default {
-  title: "CalendarWidget",
-  component: CalendarWidget,
+  title: "CalendarMonthWidget",
+  component: CalendarMonthWidget,
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   decorators: [(Widget) => (
     <CalendarContextProvider>
@@ -17,14 +17,14 @@ export default {
 };
 
 const Template: Story<
-ComponentProps<typeof CalendarWidget>
+ComponentProps<typeof CalendarMonthWidget>
 // eslint-disable-next-line require-jsdoc
 > = (args) => (
   <div css={{
     maxWidth: 250,
   }}
   >
-    <CalendarWidget {...args} />
+    <CalendarMonthWidget {...args} />
   </div>
 );
 
