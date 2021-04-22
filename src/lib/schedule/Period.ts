@@ -18,8 +18,36 @@ export default interface Period {
 }
 
 export interface PeriodCollection {
+  /**
+   * Regular expression matching every group that this period collection should be appended to.
+   */
   appliesTo: RegExp;
   periods: Period[];
+}
+
+export interface Grade {
+  /**
+   * All selectable period collections.
+   */
+  periodCollections: PeriodCollection[];
+
+  /**
+   * Display name of the grade.
+   */
+  name: string;
+
+  /**
+   * 2D array listing every possible period collection. Every row specifies a "category" and must
+   * saturate the `periodCollections`. In other words, every `PeriodCollection` must be selectable
+   * in some way.
+   *
+   * @example
+   * [
+   *   ["German", "French", "Spanish"],
+   *   ["Saxophone", "Piano", "Choir"],
+   * ]
+   */
+  choiceMatrix: string[][];
 }
 
 /**

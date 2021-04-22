@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CalendarEventSchedule from "../../calendar/event/CalendarEventSchedule";
-import collections from "../collections";
+import grades from "../grades";
 import { getPeriodEventSchedules, PeriodCollection } from "../Period";
 
 /**
@@ -11,7 +11,8 @@ import { getPeriodEventSchedules, PeriodCollection } from "../Period";
  * @returns {PeriodCollection[]} The collections, filtered.
  */
 const getCollections = (groups: string[]): PeriodCollection[] => (
-  collections
+  grades
+    .flatMap((grade) => grade.periodCollections)
     .filter(({ appliesTo }) => (
       groups.findIndex((group) => appliesTo.test(group)) >= 0
     ))
