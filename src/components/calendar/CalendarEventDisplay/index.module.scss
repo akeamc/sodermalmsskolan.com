@@ -113,4 +113,10 @@
       display: none;
     }
   }
+
+  &.tiny h2 {
+    @include breakpoints.s(max) {
+      display: none;
+    }
+  }
 }

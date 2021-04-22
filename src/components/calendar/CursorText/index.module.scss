@@ -7,7 +7,7 @@
 }
 
 .container {
-  --button-spacing: 0.25em;
+  --button-spacing: 4px;
 
   align-items: center;
   display: flex;
@@ -24,11 +24,11 @@
   }
 
   &.left .controls {
-    margin-right: var(--button-spacing);
+    margin-right: calc(2 * var(--button-spacing));
   }
 
   &.right .controls {
-    margin-left: var(--button-spacing);
+    margin-left: calc(2 * var(--button-spacing));
   }
 }
 
