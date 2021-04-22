@@ -1,14 +1,13 @@
 import classNames from "classnames/bind";
-import React, { DetailedHTMLProps, FunctionComponent, HTMLAttributes } from "react";
+import { HTMLMotionProps, motion } from "framer-motion";
+import React, { FunctionComponent } from "react";
 import styles from "./index.module.scss";
 
 const cx = classNames.bind(styles);
 
 export type BadgeSize = "small" | "medium";
 
-export interface BadgeProps extends DetailedHTMLProps<
-HTMLAttributes<HTMLSpanElement>, HTMLSpanElement
-> {
+export interface BadgeProps extends HTMLMotionProps<"span"> {
   size?: BadgeSize;
 }
 
@@ -24,8 +23,11 @@ const Badge: FunctionComponent<BadgeProps> = ({
   size = "medium",
   ...props
 }) => (
-  <span
+  <motion.span
     className={cx("badge", size, className)}
+    initial={{ y: "100%", opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    exit={{ y: "-100%", opacity: 0 }}
     {...props}
   />
 );

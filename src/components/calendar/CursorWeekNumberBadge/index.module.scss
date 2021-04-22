@@ -1,0 +1,9 @@
+.container {
+  display: inline-grid;
+  vertical-align: middle;
+
+  > * {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
