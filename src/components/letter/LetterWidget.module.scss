@@ -1,0 +1,17 @@
+.letter {
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title {
+  flex: 1;
+  margin-right: 4px;
+}
+
+.icon {
+  color: var(--color-highlight);
+  height: 16px;
+  width: 16px;
+}
