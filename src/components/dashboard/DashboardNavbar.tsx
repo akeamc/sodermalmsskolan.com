@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
-import useTime from "../../hooks/useTime";
+import { Menu } from "react-feather";
+import Button from "../Button";
 import LogoIcon from "../logo/Icon";
-import WeekNumberBadge from "../WeekNumberBadge";
+import { useDashboardContext } from "./DashboardContext";
 import styles from "./DashboardNavbar.module.scss";
 
 /**
@@ -10,12 +11,20 @@ import styles from "./DashboardNavbar.module.scss";
  * @returns {React.ReactElement} The rendered navbar.
  */
 const DashboardNavbar: FunctionComponent = () => {
-  const now = useTime();
+  const [{ showSidebar }, dispatch] = useDashboardContext();
 
   return (
     <nav className={styles.navbar}>
       <LogoIcon className={styles.logo} />
-      <WeekNumberBadge date={now} />
+      <Button
+        icon={Menu}
+        variant="tertiary"
+        onClick={() => dispatch({
+          show: !showSidebar,
+          type: "setSidebarState",
+        })}
+        title="Meny"
+      />
     </nav>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import CalendarSidebar from "../../components/calendar/CalendarSidebarContent";
 import MainCalendar from "../../components/calendar/MainCalendar";
 import DashboardContainer from "../../components/dashboard/DashboardContainer";
+import DashboardPage from "../../components/dashboard/DashboardPage";
 import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
 
 /**
@@ -11,17 +12,20 @@ import { CalendarContextProvider } from "../../lib/calendar/CalendarContext";
  * @returns {React.ReactElement} Rendered page.
  */
 const CalendarPage: NextPage = () => (
-  <CalendarContextProvider>
-    <DashboardContainer
-      aside={<CalendarSidebar />}
-      metadata={{
-        title: "Kalender",
-        description: "En kalender från södermalmsskolan.com.",
-      }}
-    >
-      <MainCalendar />
-    </DashboardContainer>
-  </CalendarContextProvider>
+  <DashboardPage
+    metadata={{
+      title: "Kalender",
+      description: "En kalender från södermalmsskolan.com.",
+    }}
+  >
+    <CalendarContextProvider>
+      <DashboardContainer
+        aside={<CalendarSidebar />}
+      >
+        <MainCalendar />
+      </DashboardContainer>
+    </CalendarContextProvider>
+  </DashboardPage>
 );
 
 export default CalendarPage;
