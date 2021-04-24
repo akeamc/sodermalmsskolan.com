@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import useLetters from "../../lib/news/hooks/useLetters";
 import VerticalStack from "../list/VerticalStack";
@@ -20,9 +19,9 @@ const LetterWidget: FunctionComponent = () => {
       <VerticalStack>
         {letters?.map((letter, index) => (
           <li key={letter?.id ?? index}>
-            <Link href={letter?.url ?? ""}>
+            <a href={letter?.url ?? ""}>
               {letter?.title ?? <InlineSkeleton />}
-            </Link>
+            </a>
           </li>
         ))}
       </VerticalStack>

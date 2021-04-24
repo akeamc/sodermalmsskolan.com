@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { DateTime } from "luxon";
 import { transparentize } from "polished";
-import React, { CSSProperties, FunctionComponent } from "react";
+import React, { CSSProperties, FunctionComponent, memo } from "react";
 import { useCalendarContext } from "../../../lib/calendar/CalendarContext";
 import CalendarEventInstance from "../../../lib/calendar/event/CalendarEventInstance";
 import secondsSinceMidnight from "../../../lib/calendar/utils/secondsSinceMidnight";
@@ -92,4 +92,6 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
   );
 };
 
-export default CalendarEventDisplay;
+export default memo(CalendarEventDisplay, (prevProps, nextProps) => (
+  prevProps.calendarEvent.signature === nextProps.calendarEvent.signature
+));
