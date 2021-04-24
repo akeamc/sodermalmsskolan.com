@@ -29,6 +29,17 @@ const DaysSection: FunctionComponent<DaysSectionProps> = ({
 );
 
 /**
+ * The main wrapper of the calendar table.
+ *
+ * @param {React.PropsWithChildren} props Generic props.
+ *
+ * @returns {React.ReactElement} The rendered wrapper.
+ */
+export const CalendarTableWrapper: FunctionComponent = (props) => (
+  <div className={cx("wrapper")} {...props} />
+);
+
+/**
  * A calendar displaying one or more days.
  *
  * @returns {React.ReactElement} The rendered calendar.
@@ -43,7 +54,7 @@ const CalendarTable: FunctionComponent = () => {
   }));
 
   return (
-    <div className={cx("wrapper")}>
+    <CalendarTableWrapper>
       <DaysSection className={cx("head")}>
         {dates.map((date) => (
           <DayColumnHeading date={date} key={date.toISO()} />
@@ -57,7 +68,7 @@ const CalendarTable: FunctionComponent = () => {
           ))}
         </DaysSection>
       </div>
-    </div>
+    </CalendarTableWrapper>
   );
 };
 

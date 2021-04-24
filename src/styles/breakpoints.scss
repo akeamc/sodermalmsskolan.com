@@ -12,11 +12,11 @@ $breakpoints: (
     @media (max-width: ($breakpoint-value - 1)) {
       @content;
     }
-  } @else if $direction == min {
+  } @else if $direction == min { /* stylelint-disable-line */
     @media (min-width: $breakpoint-value) {
       @content;
     }
-  } @else {
+  } @else { /* stylelint-disable-line */
     @error "$direction must be \"max\" or \"min\".";
   }
 }

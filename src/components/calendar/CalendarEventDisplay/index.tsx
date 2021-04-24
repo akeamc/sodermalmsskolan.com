@@ -50,9 +50,11 @@ const CalendarEventDisplay: FunctionComponent<CalendarEventDisplayProps> = ({
   const compact = scope !== "day";
 
   const variables: CSSVariables = {
+    // stylelint-disable-next-line
     "--start": startInSeconds,
     "--duration": duration,
     "--color": color,
+    // stylelint-disable-next-line
     "--text-color": relativelyReadableColor(color),
     "--dark-color": transparentize(0.8, color),
   };
