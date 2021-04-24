@@ -55,7 +55,6 @@
   color: var(--color-highlight);
 
   &.icon-only {
-    border-radius: 50%;
     color: var(--color-text-tertiary);
   }
 
@@ -91,6 +90,8 @@
 
 .icon-only {
   --button-padding-x: var(--button-padding-y);
+
+  border-radius: 50%;
 }
 
 .icon {
