@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import React, { FunctionComponent, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { breakpoints } from "../../styles/breakpoints";
+import MainNavbar from "../navigation/MainNavbar";
 import styles from "./DashboardContainer.module.scss";
 import { useDashboardContext } from "./DashboardContext";
 import DashboardNavbar from "./DashboardNavbar";

@@ -44,3 +44,9 @@ $breakpoints: (
     @content;
   }
 }
+
+@mixin mobile-navbar {
+  @include s(max) {
+    @content;
+  }
+}

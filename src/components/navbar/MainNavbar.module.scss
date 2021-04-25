@@ -1,0 +1,74 @@
+@use "../../styles/breakpoints";
+
+.nav {
+  background-color: var(--color-bg-primary);
+  border-right: 1px solid var(--accents-2);
+  flex: 0 0 var(--navbar-size);
+  z-index: 10;
+
+  @include breakpoints.mobile-navbar {
+    border-right: 0;
+    border-top: 1px solid var(--accents-2);
+    bottom: 0;
+    height: var(--navbar-size);
+    left: 0;
+    position: fixed;
+    width: 100%;
+  }
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoints.mobile-navbar {
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+  }
+
+  > ul > li {
+    flex: 0 0 var(--navbar-size);
+  }
+}
+
+.item {
+  align-items: center;
+  border-left: 2px solid transparent;
+  box-sizing: border-box;
+  color: var(--color-text-tertiary);
+  display: flex;
+  flex-direction: column;
+  height: var(--navbar-size);
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.1s;
+  width: var(--navbar-size);
+
+  @include breakpoints.mobile-navbar {
+    border: 0;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &.selected {
+    border-color: var(--color-highlight);
+    color: var(--color-highlight);
+  }
+}
+
+.icon {
+  width: 32px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 4px;
+  white-space: nowrap;
+}

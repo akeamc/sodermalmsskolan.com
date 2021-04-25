@@ -1,0 +1,20 @@
+@use "../../styles/breakpoints";
+
+.columns {
+  --navbar-size: 64px;
+
+  display: flex;
+  height: 100vh;
+
+  @include breakpoints.mobile-navbar {
+    flex-direction: column-reverse;
+  }
+}
+
+.content {
+  flex: 1;
+
+  @include breakpoints.mobile-navbar {
+    padding-bottom: var(--navbar-size);
+  }
+}
