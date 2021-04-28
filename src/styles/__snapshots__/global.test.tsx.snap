@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<GlobalStyles /> component test renders correctly 1`] = `null`;
-
-exports[`global stylesheet test returns the same styles as always 1`] = `"body, html{margin:0;background-color:var(--color-bg-primary);color:var(--color-text-primary);font-family:var(--font-sans);};label:globalStyles;"`;

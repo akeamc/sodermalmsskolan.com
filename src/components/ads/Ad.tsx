@@ -13,6 +13,13 @@ export interface AdProps {
   fullWidthResponsive?: boolean,
 }
 
+/**
+ * Google AdSense ad.
+ *
+ * @param {React.PropsWithChildren<AdProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered ad.
+ */
 const Ad: FunctionComponent<AdProps> = ({
   className = "adsbygoogle",
   format = "auto",
@@ -30,9 +37,6 @@ const Ad: FunctionComponent<AdProps> = ({
   return (
     <ins
       className={className}
-      css={{
-        display: "block",
-      }}
       data-ad-format={format}
       data-ad-layout-key={layoutKey}
       data-ad-layout={layout}

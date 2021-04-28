@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import Skeleton, { SkeletonProps } from "./Skeleton";
+import Skeleton from "./Skeleton";
 
-export interface InlineSkeletonProps extends SkeletonProps {
+export interface InlineSkeletonProps {
   count?: number;
 }
 

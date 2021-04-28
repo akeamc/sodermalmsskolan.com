@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Base /> 1`] = `
+<DocumentFragment>
+  <title>
+    södermalmsskolan.com
+  </title>
+  <meta
+    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+    name="description"
+  />
+  <link
+    href="https://xn--sdermalmsskolan-8sb.com/"
+    rel="canonical"
+  />
+  <meta
+    content="södermalmsskolan.com"
+    property="og:site_name"
+  />
+  <meta
+    content="södermalmsskolan.com"
+    property="og:title"
+  />
+  <meta
+    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+    property="og:description"
+  />
+  <meta
+    content="https://xn--sdermalmsskolan-8sb.com/"
+    property="og:url"
+  />
+  <meta
+    content="website"
+    property="og:type"
+  />
+  <meta
+    content="sv-SE"
+    property="og:locale"
+  />
+  <meta
+    content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
+    property="og:image"
+  />
+  <meta
+    content="summary"
+    name="twitter:card"
+  />
+  <link
+    href="/apple-touch-icon.png"
+    rel="apple-touch-icon"
+    sizes="180x180"
+  />
+  <link
+    href="/favicon-32x32.png"
+    rel="icon"
+    sizes="32x32"
+    type="image/png"
+  />
+  <link
+    href="/favicon-16x16.png"
+    rel="icon"
+    sizes="16x16"
+    type="image/png"
+  />
+  <link
+    href="/site.webmanifest"
+    rel="manifest"
+  />
+  <link
+    color="#000000"
+    href="/safari-pinned-tab.svg"
+    rel="mask-icon"
+  />
+  <meta
+    content="#da532c"
+    name="msapplication-TileColor"
+  />
+  <meta
+    content="#ffffff"
+    name="theme-color"
+  />
+  <script
+    async=""
+    src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  />
+  <main />
+</DocumentFragment>
+`;

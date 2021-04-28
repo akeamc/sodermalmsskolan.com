@@ -1,0 +1,25 @@
+@keyframes skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-bg {
+  animation: skeleton 2s ease-in-out infinite;
+  background-color: var(--skeleton-base);
+  background-image: linear-gradient(270deg, var(--skeleton-base), var(--skeleton-highlight), var(--skeleton-base));
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+}
+
+.skeleton {
+  border-radius: 0.3125rem;
+  composes: skeleton-bg;
+  display: inline-block;
+  line-height: 1;
+  width: 100%;
+}

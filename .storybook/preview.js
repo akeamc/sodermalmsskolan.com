@@ -1,5 +1,4 @@
-import { GlobalStyles } from "../src/styles/global";
-import "../src/styles/fonts.scss";
+import "../src/styles/global.scss";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 
 export const parameters = {
@@ -16,8 +15,6 @@ export const decorators = [
       asPath: "/",
       basePath: "/",
     }}>
-      <GlobalStyles />
-
       <Story />
     </RouterContext.Provider>
   ),

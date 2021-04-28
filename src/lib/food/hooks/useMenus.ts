@@ -1,15 +1,15 @@
-import useSWR, { responseInterface } from "swr";
-import ClientMenu from "../structures/client/Menu";
+import useSWR from "swr";
+import Menu from "../Menu";
 
 /**
  * Use the menus.
  *
- * @returns {ClientMenu[]} The menus.
+ * @returns {Menu[]} The menus.
  */
-const useMenus = (): responseInterface<ClientMenu[], unknown> => useSWR("/api/food/menus", async () => {
-  const menus = await ClientMenu.fetchAll();
+const useMenus = (): Menu[] => {
+  const { data } = useSWR("/api/menus", (path) => fetch(path).then((res) => res.json()));
 
-  return menus;
-});
+  return data;
+};
 
 export default useMenus;

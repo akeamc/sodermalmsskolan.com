@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InlineSkeleton /> 1`] = `
+<DocumentFragment>
+  <span>
+    <span>
+      ‌
+    </span>
+  </span>
+</DocumentFragment>
+`;

@@ -30,7 +30,6 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "@emotion",
     "jsdoc",
     "jest"
   ],
