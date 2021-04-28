@@ -20,7 +20,7 @@ const MenuDisplay: FunctionComponent<MenuDisplayProps> = ({
   <div className="my-4">
     <h3 className="text-xl font-semibold">
       {menu?.date
-        ? DateTime.fromISO(menu?.date).toLocaleString(DateTime.DATE_FULL)
+        ? DateTime.fromISO(menu?.date).toLocaleString(DateTime.DATE_HUGE)
         : <InlineSkeleton width="8em" className="max-w-full" />}
     </h3>
     <ul>
