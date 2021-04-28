@@ -19,7 +19,7 @@ const Base: FunctionComponent<BaseProps> = ({
 }) => (
   <>
     <SiteHead metadata={metadata} />
-    <main>
+    <main className="container mx-auto px-4">
       {children}
     </main>
   </>

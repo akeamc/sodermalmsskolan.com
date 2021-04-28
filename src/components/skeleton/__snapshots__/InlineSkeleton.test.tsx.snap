@@ -3,7 +3,9 @@
 exports[`<InlineSkeleton /> 1`] = `
 <DocumentFragment>
   <span>
-    <span>
+    <span
+      class="skeleton"
+    >
       ‌
     </span>
   </span>

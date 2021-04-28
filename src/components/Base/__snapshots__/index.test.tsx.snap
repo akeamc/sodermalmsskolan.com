@@ -83,6 +83,8 @@ exports[`<Base /> 1`] = `
     async=""
     src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
   />
-  <main />
+  <main
+    class="container mx-auto px-4"
+  />
 </DocumentFragment>
 `;

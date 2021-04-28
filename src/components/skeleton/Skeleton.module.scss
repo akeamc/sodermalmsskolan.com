@@ -10,10 +10,10 @@
 
 .skeleton-bg {
   animation: skeleton 2s ease-in-out infinite;
-  background-color: var(--skeleton-base);
-  background-image: linear-gradient(270deg, var(--skeleton-base), var(--skeleton-highlight), var(--skeleton-base));
   background-repeat: no-repeat;
   background-size: 200% 100%;
+
+  @apply bg-gray-200 bg-gradient-to-r from-gray-200 via-gray-50 to-gray-200 dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900;
 }
 
 .skeleton {

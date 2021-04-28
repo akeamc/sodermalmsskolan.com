@@ -11,6 +11,3 @@ node_modules
 
 # Logs
 *.log
-
-# Storybook
-storybook-static
