@@ -22,7 +22,9 @@ const fetchMenus = async (): Promise<Menu[]> => {
   const data = ical.parseICS(ics);
 
   const dates = Object.values(data).reduce((accu, ev) => {
-    if (ev.type === "VEVENT") {
+    const dish = ev.summary;
+
+    if (ev.type === "VEVENT" && dish?.length > 0) {
       const localDate = DateTime.fromJSDate(ev.start).toISODate();
 
       if (typeof accu[localDate] === "undefined") {
@@ -30,7 +32,7 @@ const fetchMenus = async (): Promise<Menu[]> => {
         accu[localDate] = [];
       }
 
-      accu[localDate].push(ev.summary);
+      accu[localDate].push(dish);
     }
 
     return accu;

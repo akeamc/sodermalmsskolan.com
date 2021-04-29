@@ -10,7 +10,7 @@ import MenuList from "../components/menu/MenuList";
  */
 const HomePage: NextPage = () => (
   <Base>
-    <h1 className="text-4xl font-bold">Meny</h1>
+    <h1 className="text-4xl font-bold tracking-tight">Meny</h1>
     <MenuList />
   </Base>
 );

@@ -22,11 +22,11 @@ const MenuDisplay: FunctionComponent<MenuDisplayProps> = ({
     <h3 className="text-xl font-semibold">
       {menu?.date
         ? capitalize(DateTime.fromISO(menu?.date).toLocaleString(DateTime.DATE_HUGE))
-        : <InlineSkeleton width="8em" className="max-w-full" />}
+        : <InlineSkeleton width="12em" />}
     </h3>
     <ul>
       {(menu?.dishes ?? new Array(2).fill(undefined)).map((dish, i) => (
-        <li key={dish ?? i} className="text-gray-500 font-medium">{dish ?? <InlineSkeleton className="max-w-full" width="40em" />}</li>
+        <li key={dish ?? i} className="text-gray-500 font-medium leading-snug my-1">{dish ?? <InlineSkeleton width="40em" />}</li>
       ))}
     </ul>
   </div>

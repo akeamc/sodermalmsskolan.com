@@ -18,4 +18,12 @@ describe("fetchMenus test", () => {
       expect(a >= b).toBe(true);
     }
   });
+
+  test("no dish should be an empty string", async () => {
+    const menus = await fetchMenus();
+
+    menus.flatMap((menu) => menu.dishes).forEach((dish) => {
+      expect(dish.length).toBeGreaterThan(0);
+    });
+  });
 });

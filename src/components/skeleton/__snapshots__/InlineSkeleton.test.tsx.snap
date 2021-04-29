@@ -4,7 +4,7 @@ exports[`<InlineSkeleton /> 1`] = `
 <DocumentFragment>
   <span>
     <span
-      class="skeleton"
+      class="skeleton max-w-full"
     >
       ‌
     </span>
