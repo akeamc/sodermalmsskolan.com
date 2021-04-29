@@ -14,7 +14,7 @@ export const fetchICS = (): Promise<string> => fetch(ICAL_URL).then((res) => res
 /**
  * Fetch the menus from a calendar.
  *
- * @returns {Menu[]} The menus.
+ * @returns {Menu[]} The menus, sorted by date in descending order.
  */
 const fetchMenus = async (): Promise<Menu[]> => {
   const ics = await fetchICS();
@@ -36,10 +36,13 @@ const fetchMenus = async (): Promise<Menu[]> => {
     return accu;
   }, {} as Record<string, Dishes>);
 
-  return Object.entries(dates).map(([date, dishes]) => ({
-    date,
-    dishes,
-  }));
+  return Object
+    .entries(dates)
+    .sort(([a], [b]) => b.localeCompare(a))
+    .map(([date, dishes]) => ({
+      date,
+      dishes,
+    }));
 };
 
 export default fetchMenus;
