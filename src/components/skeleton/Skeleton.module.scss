@@ -17,9 +17,8 @@
 }
 
 .skeleton {
-  border-radius: 0.3125rem;
   composes: skeleton-bg;
-  display: inline-block;
   line-height: 1;
-  width: 100%;
+
+  @apply rounded w-full inline-block;
 }
