@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const analyzeEnabled = process.env.ANALYZE === "true";
 
 if (analyzeEnabled) {
