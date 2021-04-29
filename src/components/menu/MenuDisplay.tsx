@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
+import { capitalize } from "lodash";
 import Menu from "../../lib/food/Menu";
 import InlineSkeleton from "../skeleton/InlineSkeleton";
 
@@ -20,7 +21,7 @@ const MenuDisplay: FunctionComponent<MenuDisplayProps> = ({
   <div className="my-4">
     <h3 className="text-xl font-semibold">
       {menu?.date
-        ? DateTime.fromISO(menu?.date).toLocaleString(DateTime.DATE_HUGE)
+        ? capitalize(DateTime.fromISO(menu?.date).toLocaleString(DateTime.DATE_HUGE))
         : <InlineSkeleton width="8em" className="max-w-full" />}
     </h3>
     <ul>

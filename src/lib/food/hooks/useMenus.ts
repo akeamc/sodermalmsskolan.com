@@ -7,7 +7,7 @@ import Menu from "../Menu";
  * @returns {Menu[]} The menus.
  */
 const useMenus = (): Menu[] => {
-  const { data } = useSWR("/api/menus", (path) => fetch(path).then((res) => res.json()));
+  const { data } = useSWR<Menu[]>("/api/menus", (path) => fetch(path).then((res) => res.json()));
 
   return data;
 };
