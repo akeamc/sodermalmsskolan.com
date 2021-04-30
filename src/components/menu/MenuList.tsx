@@ -25,7 +25,7 @@ const MenuList: FunctionComponent = () => {
   return (
     <ul>
       {(menus ?? new Array(expectedCount).fill(undefined)).map((menu, i) => (
-        <li key={menu.date ?? i}>
+        <li key={menu?.date ?? i}>
           <MenuDisplay menu={menu} />
         </li>
       ))}
