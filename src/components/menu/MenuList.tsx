@@ -20,7 +20,7 @@ const MenuList: FunctionComponent = () => {
 
   const menus = useMenus({ first, last });
 
-  const expectedCount = Math.ceil(last?.diff(first, "days").days ?? 0);
+  const expectedCount = Math.ceil(last?.diff(first, "days")?.days ?? 0);
 
   return (
     <ul>
