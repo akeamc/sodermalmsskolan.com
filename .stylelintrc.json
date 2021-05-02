@@ -9,6 +9,9 @@
     "string-quotes": "double",
     "at-rule-no-unknown": [true, {
       "ignoreAtRules": ["function", "if", "else", "each", "error", "include", "use", "mixin", "apply", "tailwind"]
+    }],
+    "scss/at-rule-no-unknown": [true, {
+      "ignoreAtRules": ["tailwind", "apply"]
     }]
   }
 }
