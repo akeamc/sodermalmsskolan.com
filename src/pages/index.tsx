@@ -2,6 +2,7 @@ import React from "react";
 import { NextPage } from "next";
 import Base from "../components/Base";
 import MenuList from "../components/menu/MenuList";
+import { MenuContextProvider } from "../lib/food/MenuContext";
 
 /**
  * The home page of [södermalmsskolan.com](https://södermalmsskolan.com).
@@ -11,7 +12,9 @@ import MenuList from "../components/menu/MenuList";
 const HomePage: NextPage = () => (
   <Base>
     <h1 className="text-4xl font-bold tracking-tight">Meny</h1>
-    <MenuList />
+    <MenuContextProvider>
+      <MenuList />
+    </MenuContextProvider>
   </Base>
 );
 

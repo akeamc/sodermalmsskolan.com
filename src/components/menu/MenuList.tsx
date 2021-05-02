@@ -1,7 +1,8 @@
-import { DateTime } from "luxon";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent } from "react";
 import useMenus from "../../lib/food/hooks/useMenus";
+import { useMenuContext } from "../../lib/food/MenuContext";
 import MenuDisplay from "./MenuDisplay";
+import MenuToolbar from "./MenuToolbar";
 
 /**
  * A list of menus.
@@ -9,26 +10,26 @@ import MenuDisplay from "./MenuDisplay";
  * @returns {React.ReactElement} The rendered list.
  */
 const MenuList: FunctionComponent = () => {
-  const [cursor, setCursor] = useState<DateTime>();
-  const first = cursor?.startOf("week");
-  const last = cursor?.endOf("week");
+  const { cursor, scope } = useMenuContext();
 
-  useEffect(() => {
-    setCursor(DateTime.now());
-  }, []);
+  const first = cursor?.startOf(scope);
+  const last = cursor?.endOf(scope);
 
   const menus = useMenus({ first, last });
 
   const expectedCount = Math.ceil((last?.diff(first, "days")?.days ?? 0) * (5 / 7)); // Usually, school is closed on weekends.
 
   return (
-    <ul>
-      {(menus ?? new Array(expectedCount).fill(undefined)).map((menu, i) => (
-        <li key={menu?.date ?? i}>
-          <MenuDisplay menu={menu} />
-        </li>
-      ))}
-    </ul>
+    <div>
+      <MenuToolbar />
+      <ul className="my-4">
+        {(menus ?? new Array(expectedCount).fill(undefined)).map((menu, i) => (
+          <li key={menu?.date ?? i}>
+            <MenuDisplay menu={menu} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
