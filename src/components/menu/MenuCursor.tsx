@@ -1,3 +1,4 @@
+import { capitalize } from "lodash";
 import { DateTime } from "luxon";
 import React, { FunctionComponent } from "react";
 import { MenuScope, useMenuContext } from "../../lib/food/MenuContext";
@@ -45,6 +46,10 @@ const MenuCursor: FunctionComponent<MenuCursorProps> = ({
     case "month":
       return (
         <>
+          {capitalize(cursor.toLocaleString({
+            month: "long",
+            year: "numeric",
+          }))}
         </>
       );
     default:

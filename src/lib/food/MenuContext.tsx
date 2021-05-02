@@ -21,7 +21,7 @@ const MenuContext = createContext<MenuContextData>({
   moveCursor: () => {
     throw new Error("`moveCursor` is not implemented.");
   },
-  scope: "month",
+  scope: "week",
 });
 
 export interface MenuContextProviderProps {
