@@ -10,13 +10,12 @@ import MenuDisplay from "./MenuDisplay";
  */
 const MenuList: FunctionComponent = () => {
   const [cursor, setCursor] = useState<DateTime>();
+  const first = cursor?.startOf("week");
+  const last = cursor?.endOf("week");
 
   useEffect(() => {
     setCursor(DateTime.now());
   }, []);
-
-  const first = cursor?.startOf("week");
-  const last = cursor?.endOf("week");
 
   const menus = useMenus({ first, last });
 

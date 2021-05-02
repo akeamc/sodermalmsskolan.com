@@ -13,4 +13,7 @@ module.exports = withBundleAnalyzer({
     locales: ["sv-SE"],
     defaultLocale: "sv-SE",
   },
+  future: {
+    webpack5: true,
+  },
 });
