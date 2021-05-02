@@ -19,7 +19,7 @@ const MenuList: FunctionComponent = () => {
 
   const menus = useMenus({ first, last });
 
-  const expectedCount = Math.ceil(last?.diff(first, "days")?.days ?? 0);
+  const expectedCount = Math.ceil((last?.diff(first, "days")?.days ?? 0) * (5 / 7)); // Usually, school is closed on weekends.
 
   return (
     <ul>
