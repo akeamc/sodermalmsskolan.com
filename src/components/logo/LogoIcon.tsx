@@ -1,5 +1,4 @@
 import React, { FunctionComponent, SVGProps } from "react";
-import styles from "./LogoIcon.module.scss";
 
 export type LogoIconProps = SVGProps<SVGSVGElement>;
 
@@ -15,7 +14,6 @@ const LogoIcon: FunctionComponent<LogoIconProps> = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 237.86041 270.93334"
     version="1.1"
-    className={styles.icon}
     {...props}
   >
     <g>
