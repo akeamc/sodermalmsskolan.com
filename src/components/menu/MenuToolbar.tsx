@@ -30,7 +30,7 @@ export const MenuToolbarButton: FunctionComponent<MenuToolbarButtonProps> = ({
   return (
     <button
       className={classNames(
-        "text-blue-500 leading-tight hover:text-blue-300 dark:hover:text-blue-700 transition-color whitespace-nowrap",
+        "text-blue-500 leading-tight hover:text-blue-300 dark:hover:text-blue-700 transition-colors whitespace-nowrap",
         className,
       )}
       onClick={() => moveCursor(delta)}

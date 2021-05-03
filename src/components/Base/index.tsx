@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import SiteHead from "../head/SiteHead";
 import { SiteMetadata } from "../head/MetaHead";
+import Footer from "../Footer";
 
 export interface BaseProps {
   metadata?: SiteMetadata;
@@ -19,9 +20,10 @@ const Base: FunctionComponent<BaseProps> = ({
 }) => (
   <>
     <SiteHead metadata={metadata} />
-    <main className="container mx-auto px-4">
+    <main className="container">
       {children}
     </main>
+    <Footer />
   </>
 );
 
