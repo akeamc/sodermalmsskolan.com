@@ -1,11 +1,15 @@
 import classNames from "classnames";
-import React, { DetailedHTMLProps, FunctionComponent, HTMLAttributes } from "react";
+import React, {
+  ButtonHTMLAttributes, DetailedHTMLProps, FunctionComponent, HTMLAttributes,
+} from "react";
 import { useMenuContext } from "../../lib/food/MenuContext";
 import MenuCursor from "./MenuCursor";
+import styles from "./MenuToolbar.module.scss";
 
-export interface MenuToolbarButtonProps {
+export interface MenuToolbarButtonProps extends DetailedHTMLProps<
+ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement
+> {
   delta: number;
-  title: string;
 }
 
 /**
@@ -17,16 +21,20 @@ export interface MenuToolbarButtonProps {
  */
 export const MenuToolbarButton: FunctionComponent<MenuToolbarButtonProps> = ({
   delta,
-  title,
+  className,
+  ...props
 }) => {
   const { cursor, moveCursor, scope } = useMenuContext();
 
   return (
     <button
-      className="text-blue-500 leading-tight border-b-2 border-blue-100 dark:border-blue-900 hover:border-blue-400 dark:hover:border-blue-700 transition-all"
+      className={classNames(
+        "text-blue-500 leading-tight border-b-2 border-blue-100 dark:border-blue-900 hover:border-blue-400 dark:hover:border-blue-700 transition-all whitespace-nowrap",
+        className,
+      )}
       onClick={() => moveCursor(delta)}
       type="button"
-      title={title}
+      {...props}
     >
       <MenuCursor cursor={cursor?.plus({ [scope]: delta })} />
     </button>
@@ -46,12 +54,18 @@ const MenuToolbar: FunctionComponent<MenuToolbarProps> = ({
   className,
   ...props
 }) => (
-  <div className={classNames("flex justify-between items-center my-4", className)} {...props}>
-    <MenuToolbarButton delta={-1} title="Föregående" />
-    <h2 className="text-sm text-gray-900 dark:text-gray-300 font-semibold tracking-widest uppercase">
-      <MenuCursor showYear />
-    </h2>
-    <MenuToolbarButton delta={1} title="Nästa" />
+  <div className={classNames("my-4 gap-1", styles.container, className)} {...props}>
+    <div>
+      <MenuToolbarButton delta={-1} title="Föregående" className="mr-auto" />
+    </div>
+    <div>
+      <h2 className="text-sm text-center text-gray-900 dark:text-gray-300 font-semibold tracking-widest uppercase flex-1">
+        <MenuCursor showYear />
+      </h2>
+    </div>
+    <div>
+      <MenuToolbarButton delta={1} title="Nästa" className="ml-auto" />
+    </div>
   </div>
 );
 

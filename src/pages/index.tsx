@@ -11,7 +11,7 @@ import { MenuContextProvider } from "../lib/food/MenuContext";
  */
 const HomePage: NextPage = () => (
   <Base>
-    <h1 className="text-4xl font-bold tracking-tight">Meny</h1>
+    <h1 className="text-4xl font-bold tracking-tight mt-4 md:mt-16">Meny</h1>
     <MenuContextProvider>
       <MenuList />
     </MenuContextProvider>
