@@ -1,0 +1,272 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MenuList /> tests should fall back to skeletons 1`] = `
+<DocumentFragment>
+  <ul
+    class="my-4"
+  >
+    <li>
+      <div
+        class="my-4"
+      >
+        <h3
+          class="text-xl font-semibold"
+        >
+          <span>
+            <span
+              class="skeleton max-w-full"
+              style="width: 12em;"
+            >
+              ‌
+            </span>
+          </span>
+        </h3>
+        <ul>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div
+        class="my-4"
+      >
+        <h3
+          class="text-xl font-semibold"
+        >
+          <span>
+            <span
+              class="skeleton max-w-full"
+              style="width: 12em;"
+            >
+              ‌
+            </span>
+          </span>
+        </h3>
+        <ul>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div
+        class="my-4"
+      >
+        <h3
+          class="text-xl font-semibold"
+        >
+          <span>
+            <span
+              class="skeleton max-w-full"
+              style="width: 12em;"
+            >
+              ‌
+            </span>
+          </span>
+        </h3>
+        <ul>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div
+        class="my-4"
+      >
+        <h3
+          class="text-xl font-semibold"
+        >
+          <span>
+            <span
+              class="skeleton max-w-full"
+              style="width: 12em;"
+            >
+              ‌
+            </span>
+          </span>
+        </h3>
+        <ul>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div
+        class="my-4"
+      >
+        <h3
+          class="text-xl font-semibold"
+        >
+          <span>
+            <span
+              class="skeleton max-w-full"
+              style="width: 12em;"
+            >
+              ‌
+            </span>
+          </span>
+        </h3>
+        <ul>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+          <li
+            class="text-gray-500 font-medium leading-snug my-1"
+          >
+            <span>
+              <span
+                class="skeleton max-w-full"
+                style="width: 40em;"
+              >
+                ‌
+              </span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<MenuList /> tests should return some helpful text if there are no menus 1`] = `
+<DocumentFragment>
+  <div
+    class="my-4 text-gray-400 dark:text-gray-500"
+  >
+    <svg
+      class="mx-auto w-16 h-16 text-gray-300 dark:text-gray-700 mb-2"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="8"
+        y2="12"
+      />
+      <line
+        x1="12"
+        x2="12.01"
+        y1="16"
+        y2="16"
+      />
+    </svg>
+    <p
+      class="text-center leading-tight"
+    >
+      Ingen meny hittades.
+    </p>
+  </div>
+</DocumentFragment>
+`;
