@@ -26,4 +26,14 @@ describe("fetchMenus test", () => {
       expect(dish.length).toBeGreaterThan(0);
     });
   });
+
+  test("there should not be any duplicates", async () => {
+    const menus = await fetchMenus();
+
+    menus.forEach(({ dishes }) => {
+      const hasDuplicates = dishes.some((dish, index) => dishes.indexOf(dish) !== index);
+
+      expect(hasDuplicates).toBe(false);
+    });
+  });
 });

@@ -32,7 +32,9 @@ const fetchMenus = async (): Promise<Menu[]> => {
         accu[localDate] = [];
       }
 
-      accu[localDate].push(dish);
+      if (accu[localDate].indexOf(dish) < 0) {
+        accu[localDate].push(dish);
+      }
     }
 
     return accu;
