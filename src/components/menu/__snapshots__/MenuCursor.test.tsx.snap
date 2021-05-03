@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MenuCursor /> tests should fall back to skeletons 1`] = `
+<DocumentFragment>
+  <span>
+    <span
+      class="skeleton max-w-full"
+      style="width: 6em;"
+    >
+      ‌
+    </span>
+  </span>
+</DocumentFragment>
+`;
