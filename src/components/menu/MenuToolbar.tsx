@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, {
   ButtonHTMLAttributes, DetailedHTMLProps, FunctionComponent, HTMLAttributes,
 } from "react";
+import { ChevronLeft, ChevronRight } from "react-feather";
 import { useMenuContext } from "../../lib/food/MenuContext";
 import MenuCursor from "./MenuCursor";
 import styles from "./MenuToolbar.module.scss";
@@ -29,14 +30,16 @@ export const MenuToolbarButton: FunctionComponent<MenuToolbarButtonProps> = ({
   return (
     <button
       className={classNames(
-        "text-blue-500 leading-tight border-b-2 border-blue-100 dark:border-blue-900 hover:border-blue-400 dark:hover:border-blue-700 transition-all whitespace-nowrap",
+        "text-blue-500 leading-tight hover:text-blue-300 dark:hover:text-blue-700 transition-color whitespace-nowrap",
         className,
       )}
       onClick={() => moveCursor(delta)}
       type="button"
       {...props}
     >
+      {delta < 0 ? <ChevronLeft className="inline mr-1 -mt-1 w-4 h-4" strokeWidth="3" /> : undefined}
       <MenuCursor cursor={cursor?.plus({ [scope]: delta })} />
+      {delta > 0 ? <ChevronRight className="inline ml-1 -mt-1 w-4 h-4" strokeWidth="3" /> : undefined}
     </button>
   );
 };
