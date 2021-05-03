@@ -2,122 +2,126 @@
 
 exports[`<Base /> 1`] = `
 <DocumentFragment>
-  <title>
-    södermalmsskolan.com
-  </title>
-  <meta
-    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
-    name="description"
-  />
-  <link
-    href="https://xn--sdermalmsskolan-8sb.com/"
-    rel="canonical"
-  />
-  <meta
-    content="södermalmsskolan.com"
-    property="og:site_name"
-  />
-  <meta
-    content="södermalmsskolan.com"
-    property="og:title"
-  />
-  <meta
-    content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
-    property="og:description"
-  />
-  <meta
-    content="https://xn--sdermalmsskolan-8sb.com/"
-    property="og:url"
-  />
-  <meta
-    content="website"
-    property="og:type"
-  />
-  <meta
-    content="sv-SE"
-    property="og:locale"
-  />
-  <meta
-    content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
-    property="og:image"
-  />
-  <meta
-    content="summary"
-    name="twitter:card"
-  />
-  <link
-    href="/apple-touch-icon.png"
-    rel="apple-touch-icon"
-    sizes="180x180"
-  />
-  <link
-    href="/favicon-32x32.png"
-    rel="icon"
-    sizes="32x32"
-    type="image/png"
-  />
-  <link
-    href="/favicon-16x16.png"
-    rel="icon"
-    sizes="16x16"
-    type="image/png"
-  />
-  <link
-    href="/site.webmanifest"
-    rel="manifest"
-  />
-  <link
-    color="#000000"
-    href="/safari-pinned-tab.svg"
-    rel="mask-icon"
-  />
-  <meta
-    content="#da532c"
-    name="msapplication-TileColor"
-  />
-  <meta
-    content="#ffffff"
-    name="theme-color"
-  />
-  <script
-    async=""
-    src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  />
-  <main
-    class="container"
-  />
-  <footer
-    class="container mt-16 mb-4 text-center"
+  <div
+    class="flex flex-col min-h-screen"
   >
-    <div
-      class="text-center text-gray-700 dark:text-gray-500"
+    <title>
+      södermalmsskolan.com
+    </title>
+    <meta
+      content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+      name="description"
+    />
+    <link
+      href="https://xn--sdermalmsskolan-8sb.com/"
+      rel="canonical"
+    />
+    <meta
+      content="södermalmsskolan.com"
+      property="og:site_name"
+    />
+    <meta
+      content="södermalmsskolan.com"
+      property="og:title"
+    />
+    <meta
+      content="Vi visar den verkliga innebörden av Sodexos slogan Quality of Life Services."
+      property="og:description"
+    />
+    <meta
+      content="https://xn--sdermalmsskolan-8sb.com/"
+      property="og:url"
+    />
+    <meta
+      content="website"
+      property="og:type"
+    />
+    <meta
+      content="sv-SE"
+      property="og:locale"
+    />
+    <meta
+      content="https://cdn.discordapp.com/attachments/575993879837409290/588012243745243136/IMG_20190611_161511.jpg"
+      property="og:image"
+    />
+    <meta
+      content="summary"
+      name="twitter:card"
+    />
+    <link
+      href="/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
+    <link
+      href="/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      href="/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      href="/site.webmanifest"
+      rel="manifest"
+    />
+    <link
+      color="#000000"
+      href="/safari-pinned-tab.svg"
+      rel="mask-icon"
+    />
+    <meta
+      content="#da532c"
+      name="msapplication-TileColor"
+    />
+    <meta
+      content="#ffffff"
+      name="theme-color"
+    />
+    <script
+      async=""
+      src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    />
+    <main
+      class="container"
+    />
+    <footer
+      class="container pt-16 pb-4 text-center mt-auto"
     >
-      <a
-        class="inline-block hover:text-gray-500 dark:hover:text-gray-700 transition-colors"
-        href="//github.com/ThePicoNerd/sodermalmsskolan.com/"
+      <div
+        class="text-center text-gray-700 dark:text-gray-500"
       >
-        <svg
-          fill="none"
-          height="24"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          width="24"
-          xmlns="http://www.w3.org/2000/svg"
+        <a
+          class="inline-block hover:text-gray-500 dark:hover:text-gray-700 transition-colors"
+          href="//github.com/ThePicoNerd/sodermalmsskolan.com/"
         >
-          <path
-            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-          />
-        </svg>
-      </a>
-      <p
-        class="mt-4 text-gray-500 font-medium"
-      >
-        © 2019–2021 Åke Amcoff
-      </p>
-    </div>
-  </footer>
+          <svg
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+            />
+          </svg>
+        </a>
+        <p
+          class="mt-4 text-gray-500 font-medium"
+        >
+          © 2019–2021 Åke Amcoff
+        </p>
+      </div>
+    </footer>
+  </div>
 </DocumentFragment>
 `;

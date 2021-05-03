@@ -1,13 +1,21 @@
-import React, { FunctionComponent } from "react";
+import classNames from "classnames";
+import React, { DetailedHTMLProps, FunctionComponent, HTMLAttributes } from "react";
 import { GitHub } from "react-feather";
+
+export type FooterProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 
 /**
  * A page footer.
  *
+ * @param {React.PropsWithChildren<FooterProps>} props Props.
+ *
  * @returns {React.ReactElement} The rendered footer.
  */
-const Footer: FunctionComponent = () => (
-  <footer className="container mt-16 mb-4 text-center">
+const Footer: FunctionComponent<FooterProps> = ({
+  className,
+  ...props
+}) => (
+  <footer className={classNames("container pt-16 pb-4 text-center", className)} {...props}>
     <div className="text-center text-gray-700 dark:text-gray-500">
       <a
         href="//github.com/ThePicoNerd/sodermalmsskolan.com/"

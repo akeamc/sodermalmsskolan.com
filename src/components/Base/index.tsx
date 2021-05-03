@@ -18,13 +18,13 @@ const Base: FunctionComponent<BaseProps> = ({
   metadata,
   children,
 }) => (
-  <>
+  <div className="flex flex-col min-h-screen">
     <SiteHead metadata={metadata} />
     <main className="container">
       {children}
     </main>
-    <Footer />
-  </>
+    <Footer className="mt-auto" />
+  </div>
 );
 
 export default Base;
