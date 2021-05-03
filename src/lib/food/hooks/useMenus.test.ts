@@ -1,6 +1,11 @@
 import { DateTime } from "luxon";
+import { renderHook } from "@testing-library/react-hooks";
+import { setupServer } from "msw/node";
 import Menu from "../Menu";
-import { filterMenus } from "./useMenus";
+import useMenus, { filterMenus } from "./useMenus";
+import handlers from "../../../mocks/handlers";
+
+const server = setupServer(...handlers);
 
 /**
  * Generate menus from an array of dates.
@@ -32,5 +37,32 @@ describe("menu filter", () => {
     })).toEqual(data.slice(1, 4));
 
     expect(filterMenus()).toBeUndefined();
+  });
+});
+
+describe("useMenus", () => {
+  beforeAll(() => {
+    server.listen();
+  });
+
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return the menus in the right order", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useMenus());
+
+    await waitForNextUpdate();
+
+    const menus = result.current;
+
+    expect(menus.length).toBeGreaterThanOrEqual(2);
+
+    for (let i = 0; i < menus.length - 1; i += 1) {
+      const a = DateTime.fromISO(menus[i].date);
+      const b = DateTime.fromISO(menus[i + 1].date);
+
+      expect(+a).toBeLessThanOrEqual(+b);
+    }
   });
 });

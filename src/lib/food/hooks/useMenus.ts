@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import useSWR from "swr";
+import { MenuAPIResponse } from "../../../pages/api/menus";
 import Menu from "../Menu";
 
 export interface MenuFilterQuery {
@@ -44,12 +45,12 @@ export const filterMenus = (data?: Menu[], { first, last }: MenuFilterQuery = {}
  *
  * @param {MenuFilterQuery} query The query.
  *
- * @returns {Menu[]} The menus.
+ * @returns {Menu[]} The menus, sorted chronologically with the earliest first.
  */
 const useMenus = (query: MenuFilterQuery = {}): Menu[] => {
-  const { data } = useSWR<Menu[]>("/api/menus", (path) => fetch(path).then((res) => res.json()));
+  const { data } = useSWR<MenuAPIResponse>("/api/menus", (path) => fetch(path).then((res) => res.json()));
 
-  return filterMenus(data, query);
+  return filterMenus(data, query)?.reverse();
 };
 
 export default useMenus;
