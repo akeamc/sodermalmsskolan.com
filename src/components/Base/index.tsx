@@ -23,7 +23,7 @@ const Base: FunctionComponent<BaseProps> = ({
   className,
   ...props
 }) => (
-  <div className={classNames("flex flex-col min-h-screen overflow-x-hidden", className)} {...props}>
+  <div className={classNames("flex flex-col min-h-screen", className)} {...props}>
     <SiteHead metadata={metadata} />
     <main className="container">
       {children}
