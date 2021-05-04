@@ -1,9 +1,12 @@
-import React, { FunctionComponent } from "react";
+import React, { DetailedHTMLProps, FunctionComponent, HTMLAttributes } from "react";
+import classNames from "classnames";
 import SiteHead from "../head/SiteHead";
 import { SiteMetadata } from "../head/MetaHead";
 import Footer from "../Footer";
 
-export interface BaseProps {
+export interface BaseProps extends DetailedHTMLProps<
+HTMLAttributes<HTMLDivElement>, HTMLDivElement
+> {
   metadata?: SiteMetadata;
 }
 
@@ -17,8 +20,10 @@ export interface BaseProps {
 const Base: FunctionComponent<BaseProps> = ({
   metadata,
   children,
+  className,
+  ...props
 }) => (
-  <div className="flex flex-col min-h-screen">
+  <div className={classNames("flex flex-col min-h-screen", className)} {...props}>
     <SiteHead metadata={metadata} />
     <main className="container">
       {children}

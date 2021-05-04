@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { FunctionComponent, SVGProps } from "react";
 
 export type LogoIconProps = SVGProps<SVGSVGElement>;
@@ -9,11 +10,15 @@ export type LogoIconProps = SVGProps<SVGSVGElement>;
  *
  * @returns {React.ReactElement} The rendered logo.
  */
-const LogoIcon: FunctionComponent<LogoIconProps> = (props) => (
+const LogoIcon: FunctionComponent<LogoIconProps> = ({
+  className,
+  ...props
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 237.86041 270.93334"
     version="1.1"
+    className={classNames("fill-current", className)}
     {...props}
   >
     <g>
