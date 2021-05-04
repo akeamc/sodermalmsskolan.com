@@ -1,5 +1,6 @@
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import React, { FunctionComponent } from "react";
+import { ArrowDown } from "react-feather";
 import LogoIcon from "../logo/LogoIcon";
 
 export interface LogoAnimationProps {
@@ -33,6 +34,9 @@ const LogoAnimation: FunctionComponent<LogoAnimationProps> = ({
   const logoScale = useTransform(animationProgress, [0, 1], [0.5, 1], {
     clamp: false,
   });
+
+  const scrollPromptY = useTransform(scrollY, (value) => 0.25 * value);
+  const scrollPromptOpacity = useTransform(scrollPromptY, [0, 25], [1, 0]);
 
   return (
     <div
@@ -68,6 +72,16 @@ const LogoAnimation: FunctionComponent<LogoAnimationProps> = ({
           }}
           className="w-full h-full object-cover"
         />
+        <motion.div
+          style={{
+            y: scrollPromptY,
+            opacity: scrollPromptOpacity,
+          }}
+          className="absolute bottom-4 left-0 right-0 text-white flex flex-col justify-center items-center"
+        >
+          <span className="tracking-wide">Skrolla</span>
+          <ArrowDown className="animate-bounce mt-2" />
+        </motion.div>
       </motion.div>
     </div>
   );
