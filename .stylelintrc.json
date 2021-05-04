@@ -12,6 +12,9 @@
     }],
     "scss/at-rule-no-unknown": [true, {
       "ignoreAtRules": ["tailwind", "apply"]
+    }],
+    "value-keyword-case": ["lower", {
+      "ignoreKeywords": ["/^[a-z]+([A-Z][a-z]*)*$/"]
     }]
   }
 }

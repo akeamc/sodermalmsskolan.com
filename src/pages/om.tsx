@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
+import LogoAnimation from "../components/animation/LogoAnimation";
 import Base from "../components/Base";
-import LogoIcon from "../components/logo/LogoIcon";
 
 /**
  * About us page.
@@ -14,8 +14,14 @@ const AboutPage: NextPage = () => (
     description: "Vår historia.",
   }}
   >
-    <div className="flex min-h-screen justify-center items-center">
-      <LogoIcon className="w-32 h-32 my-4" />
+    <LogoAnimation />
+    <div className="text-center my-8">
+      <h1 className="text-8xl font-bold tracking-tighter leading-none mb-4">Snille och smak</h1>
+      <p className="text-gray-500 font-medium max-w-2xl mx-auto">
+        södermalmsskolan.com grundades i maj 2019 av Åke Amcoff och Bo Strömberg.
+        Till en början var syftet helt och hållet att sprida bilder på maten som
+        serverades i skolmatsalen.
+      </p>
     </div>
   </Base>
 );
