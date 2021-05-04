@@ -49,7 +49,7 @@ const LogoAnimation: FunctionComponent<LogoAnimationProps> = ({
         style={{
           y: containerY,
         }}
-        className="h-screen relative"
+        className="h-screen py-8 relative"
       >
         <MotionLogoIcon
           style={{
@@ -70,14 +70,14 @@ const LogoAnimation: FunctionComponent<LogoAnimationProps> = ({
             opacity: imageOpacity,
             filter: imageFilter,
           }}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-3xl"
         />
         <motion.div
           style={{
             y: scrollPromptY,
             opacity: scrollPromptOpacity,
           }}
-          className="absolute bottom-4 left-0 right-0 text-white flex flex-col justify-center items-center"
+          className="absolute bottom-16 left-0 right-0 text-white flex flex-col justify-center items-center"
         >
           <span className="tracking-wide">Skrolla</span>
           <ArrowDown className="animate-bounce mt-2" />
