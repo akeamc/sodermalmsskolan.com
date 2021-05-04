@@ -23,7 +23,7 @@ export const MenuListDisplay: FunctionComponent<MenuListDisplayProps> = ({
 }) => {
   if (menus?.length === 0) {
     return (
-      <div className="my-4 text-gray-400 dark:text-gray-500">
+      <div className="my-8 md:my-16 text-gray-400 dark:text-gray-500">
         <AlertOctagon className="mx-auto w-16 h-16 text-gray-300 dark:text-gray-700 mb-2" strokeWidth="1" />
         <p className="text-center leading-tight">Ingen meny hittades.</p>
       </div>
