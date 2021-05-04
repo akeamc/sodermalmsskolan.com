@@ -232,7 +232,7 @@ exports[`<MenuList /> tests should fall back to skeletons 1`] = `
 exports[`<MenuList /> tests should return some helpful text if there are no menus 1`] = `
 <DocumentFragment>
   <div
-    class="my-4 text-gray-400 dark:text-gray-500"
+    class="my-8 md:my-16 text-gray-400 dark:text-gray-500"
   >
     <svg
       class="mx-auto w-16 h-16 text-gray-300 dark:text-gray-700 mb-2"
