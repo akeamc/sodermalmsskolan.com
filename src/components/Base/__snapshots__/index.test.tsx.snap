@@ -90,7 +90,7 @@ exports[`<Base /> 1`] = `
       class="container"
     />
     <footer
-      class="container pt-16 pb-4 text-center mt-auto"
+      class="container py-16 text-center mt-auto"
     >
       <div
         class="text-center text-gray-700 dark:text-gray-500"
