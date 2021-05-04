@@ -15,7 +15,7 @@ const Footer: FunctionComponent<FooterProps> = ({
   className,
   ...props
 }) => (
-  <footer className={classNames("container pt-16 pb-8 text-center", className)} {...props}>
+  <footer className={classNames("container py-16 text-center", className)} {...props}>
     <div className="text-center text-gray-700 dark:text-gray-500">
       <a
         href="//github.com/ThePicoNerd/sodermalmsskolan.com/"
