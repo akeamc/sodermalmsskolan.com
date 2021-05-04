@@ -22,14 +22,14 @@ const MotionLogoIcon = motion(LogoIcon);
  */
 const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = ({
   imgSrc,
-  progress,
+  scrollProgress,
   scrollY,
 }) => {
-  const imageOpacity = useTransform(progress, [0, 1], [1, 0]);
-  const imageFilter = useTransform(progress, (value) => `blur(${value * 100}px)`);
+  const imageOpacity = useTransform(scrollProgress, [0, 1], [1, 0]);
+  const imageFilter = useTransform(scrollProgress, (value) => `blur(${value * 100}px)`);
 
   const logoOpacity = useTransform(imageOpacity, (value) => 1 - value);
-  const logoScale = useTransform(progress, [0, 1], [0.5, 1], {
+  const logoScale = useTransform(scrollProgress, [0, 1], [0.5, 1], {
     clamp: false,
   });
 

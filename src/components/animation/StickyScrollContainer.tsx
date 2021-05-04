@@ -1,8 +1,17 @@
 import { MotionValue, useTransform, useViewportScroll } from "framer-motion";
-import React, { ComponentType, FunctionComponent, ReactElement } from "react";
+import React, {
+  ComponentType, FunctionComponent, ReactElement, useCallback, useEffect, useRef, useState,
+} from "react";
 
 export interface StickyScrollContainerChildProps {
-  progress: MotionValue<number>;
+  /**
+   * Scroll progress *within* the sticky container.
+   */
+  scrollProgress: MotionValue<number>;
+
+  /**
+   * Vertical scroll. A number between `0` and `duration` (when the container is in view).
+   */
   scrollY: MotionValue<number>;
 }
 
@@ -30,9 +39,29 @@ const StickyScrollContainer: FunctionComponent<StickyScrollContainerProps> = ({
   duration,
   children,
 }) => {
-  const { scrollY } = useViewportScroll();
+  const [offsetTop, setOffsetTop] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>();
 
-  const progress = useTransform(scrollY, [0, duration], [0, 1]);
+  const updateOffsetTop = useCallback(() => {
+    setOffsetTop(containerRef.current?.offsetTop ?? 0);
+  }, []);
+
+  useEffect(updateOffsetTop, [updateOffsetTop]);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateOffsetTop);
+
+    return () => {
+      window.removeEventListener("resize", updateOffsetTop);
+    };
+  });
+
+  const { scrollY: viewportScrollY } = useViewportScroll();
+
+  const scrollY = useTransform(viewportScrollY, (value) => value - offsetTop);
+  const scrollProgress = useTransform(scrollY, [0, duration], [0, 1], {
+    clamp: false,
+  });
 
   return (
     <div
@@ -40,11 +69,12 @@ const StickyScrollContainer: FunctionComponent<StickyScrollContainerProps> = ({
       style={{
         height: `calc(100vh + ${duration}px)`,
       }}
+      ref={containerRef}
     >
       <div className="h-screen sticky top-0">
         {children({
           scrollY,
-          progress,
+          scrollProgress,
         })}
       </div>
     </div>
