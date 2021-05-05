@@ -1,7 +1,8 @@
-import { MotionValue, useTransform, useViewportScroll } from "framer-motion";
+import { MotionValue, useTransform } from "framer-motion";
 import React, {
-  ComponentType, FunctionComponent, ReactElement, useCallback, useEffect, useRef, useState,
+  ComponentType, FunctionComponent, ReactElement, useRef,
 } from "react";
+import useRelativeViewportScroll from "../../lib/animation/hooks/useRelativeViewportScroll";
 
 export interface StickyScrollContainerChildProps {
   /**
@@ -39,26 +40,9 @@ const StickyScrollContainer: FunctionComponent<StickyScrollContainerProps> = ({
   duration,
   children,
 }) => {
-  const [offsetTop, setOffsetTop] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>();
+  const scrollY = useRelativeViewportScroll(containerRef);
 
-  const updateOffsetTop = useCallback(() => {
-    setOffsetTop(containerRef.current?.offsetTop ?? 0);
-  }, []);
-
-  useEffect(updateOffsetTop, [updateOffsetTop]);
-
-  useEffect(() => {
-    window.addEventListener("resize", updateOffsetTop);
-
-    return () => {
-      window.removeEventListener("resize", updateOffsetTop);
-    };
-  });
-
-  const { scrollY: viewportScrollY } = useViewportScroll();
-
-  const scrollY = useTransform(viewportScrollY, (value) => value - offsetTop);
   const scrollProgress = useTransform(scrollY, [0, duration], [0, 1], {
     clamp: false,
   });
