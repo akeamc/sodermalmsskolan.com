@@ -37,7 +37,7 @@ const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = 
   const scrollPromptOpacity = useTransform(scrollPromptY, [0, 25], [1, 0]);
 
   return (
-    <div className="relative py-8 h-screen overflow-hidden">
+    <div className="relative py-8 h-screen">
       <MotionLogoIcon
         style={{
           width: "40%",
@@ -64,7 +64,7 @@ const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = 
           y: scrollPromptY,
           opacity: scrollPromptOpacity,
         }}
-        className="absolute bottom-16 left-0 right-0 text-white flex flex-col justify-center items-center"
+        className="absolute bottom-16 left-0 right-0 text-white flex flex-col justify-center items-center pointer-events-none"
       >
         <span className="tracking-wide">Skrolla</span>
         <ArrowDown className="animate-bounce mt-2" />
