@@ -26,7 +26,7 @@ const AboutPage: NextPage = () => (
         serverades i skolmatsalen.
       </p>
     </div>
-    <Parallax xVelocity={0.5} yVelocity={0} className="h-screen flex items-center justify-center overflow-x-hidden">
+    <Parallax x={0.5} y={0} rotate={0.1} scrollOptions={{ viewportOffset: 0.5, targetOffset: 0.5 }} className="h-96 flex items-center justify-center overflow-x-hidden">
       <img alt="" className="w-64 rounded-2xl" src="https://blogg.södermalmsskolan.com/content/images/2020/06/Bj-rkeby.jpg" />
     </Parallax>
   </Base>

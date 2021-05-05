@@ -7,12 +7,13 @@ describe("useElementOffset tests", () => {
     // eslint-disable-next-line require-jsdoc
     const SampleComponent: FunctionComponent = () => {
       const elementRef = useRef();
-      const { offsetTop } = useElementOffsets(elementRef);
+      const { offsetTop, offsetWidth } = useElementOffsets(elementRef);
 
       return (
         <div>
           <div ref={elementRef}>
-            <data title="offset-top">{offsetTop}</data>
+            <data title="top">{offsetTop}</data>
+            <data title="width">{offsetWidth}</data>
           </div>
         </div>
       );
@@ -20,6 +21,7 @@ describe("useElementOffset tests", () => {
 
     render(<SampleComponent />);
 
-    expect(screen.getByTitle("offset-top").textContent).toBe("0");
+    expect(screen.getByTitle("top").textContent).toBe("0");
+    expect(screen.getByTitle("width").textContent).toBe("0");
   });
 });
