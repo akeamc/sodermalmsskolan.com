@@ -5,8 +5,8 @@ import Parallax, { ParallaxProps } from "./Parallax";
 
 export interface ParallaxImageProps extends ParallaxProps {
   src: string;
-  captionBruh?: ReactNode;
-  captionHeadingBruh?: ReactNode;
+  caption?: ReactNode;
+  captionHeading?: ReactNode;
 }
 
 /**
@@ -18,8 +18,8 @@ export interface ParallaxImageProps extends ParallaxProps {
  */
 const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
   src,
-  captionBruh: description,
-  captionHeadingBruh: imageTitle,
+  caption,
+  captionHeading,
   ...parallaxProps
 }) => {
   const imageRef = useRef<HTMLDivElement>();
@@ -39,9 +39,9 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
           />
         </div>
         <figcaption className="font-medium mt-6">
-          <h5 className="inline">{imageTitle}</h5>
+          <h5 className="inline">{captionHeading}</h5>
           {" "}
-          <span className="text-gray-500">{description}</span>
+          <span className="text-gray-500">{caption}</span>
         </figcaption>
       </figure>
     </Parallax>

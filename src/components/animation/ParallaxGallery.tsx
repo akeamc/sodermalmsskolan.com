@@ -11,13 +11,13 @@ const ParallaxGallery: FunctionComponent = () => (
     <ParallaxImage
       y={-0.1}
       src="https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/06/Bj-rkeby.jpg"
-      captionHeadingBruh={(
+      captionHeading={(
         <>
           <del>Fisk </del>
           Björkeby.
         </>
       )}
-      captionBruh={(
+      caption={(
         <>
           Den 11 juni 2020 vandrade vi nästan fyra mil till Björkeby i Barkaby och tillbaka,
           till minne av den ökända maträtten
