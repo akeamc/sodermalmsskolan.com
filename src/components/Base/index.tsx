@@ -8,6 +8,7 @@ export interface BaseProps extends DetailedHTMLProps<
 HTMLAttributes<HTMLDivElement>, HTMLDivElement
 > {
   metadata?: SiteMetadata;
+  fullWidth?: boolean;
 }
 
 /**
@@ -21,11 +22,12 @@ const Base: FunctionComponent<BaseProps> = ({
   metadata,
   children,
   className,
+  fullWidth,
   ...props
 }) => (
   <div className={classNames("flex flex-col min-h-screen", className)} {...props}>
     <SiteHead metadata={metadata} />
-    <main className="container">
+    <main className={fullWidth ? undefined : "container"}>
       {children}
     </main>
     <Footer className="mt-auto" />

@@ -37,7 +37,7 @@ const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = 
   const scrollPromptOpacity = useTransform(scrollPromptY, [0, 25], [1, 0]);
 
   return (
-    <div className="relative py-8 h-screen">
+    <div className="relative py-8 h-screen container">
       <MotionLogoIcon
         style={{
           width: "40%",
@@ -57,6 +57,7 @@ const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = 
           opacity: imageOpacity,
           filter: imageFilter,
         }}
+        alt=""
         className="w-full h-full object-cover rounded-3xl"
       />
       <motion.div
