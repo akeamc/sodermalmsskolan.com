@@ -1,7 +1,6 @@
 import { MotionValue, useTransform, useViewportScroll } from "framer-motion";
-import {
-  MutableRefObject, useCallback, useEffect, useState,
-} from "react";
+import { MutableRefObject } from "react";
+import useElementOffsets from "./useElementOffsets";
 
 /**
  * Framer Motion `useViewportScroll` adjusted to the element's top offset.
@@ -11,21 +10,7 @@ import {
  * @returns {MotionValue<number>} Vertical scroll.
  */
 const useRelativeViewportScroll = (ref: MutableRefObject<HTMLElement>): MotionValue<number> => {
-  const [offsetTop, setOffsetTop] = useState<number>(0);
-
-  const updateOffsetTop = useCallback(() => {
-    setOffsetTop(ref.current?.offsetTop ?? 0);
-  }, [ref]);
-
-  useEffect(updateOffsetTop, [updateOffsetTop]);
-
-  useEffect(() => {
-    window.addEventListener("resize", updateOffsetTop);
-
-    return () => {
-      window.removeEventListener("resize", updateOffsetTop);
-    };
-  });
+  const { offsetTop } = useElementOffsets(ref);
 
   const { scrollY: viewportScrollY } = useViewportScroll();
 
