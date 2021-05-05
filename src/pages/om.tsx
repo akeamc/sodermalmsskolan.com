@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
 import LogoAnimation from "../components/animation/LogoAnimation";
-import Parallax from "../components/animation/Parallax";
 import ParallaxGallery from "../components/animation/ParallaxGallery";
 import TumbleweedSpacer from "../components/animation/TumbleweedSpacer";
 import Base from "../components/Base";
