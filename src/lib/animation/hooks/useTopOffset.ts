@@ -1,9 +1,8 @@
 import { MotionValue, useTransform, useViewportScroll } from "framer-motion";
 import { MutableRefObject } from "react";
-import useElementOffsets from "./useElementOffsets";
 import useWindowDimensions from "./useWindowDimensions";
 
-export interface RelativeViewportScrollOptions {
+export interface UseTopOffsetOptions {
   /**
    * How much to shift the zero value, in number of viewport heights.
    */
@@ -19,29 +18,32 @@ export interface RelativeViewportScrollOptions {
  * Framer Motion `useViewportScroll` adjusted to the element's top offset.
  *
  * @param {MutableRefObject<HTMLElement>} ref Target element.
- * @param {RelativeViewportScrollOptions} options Options.
+ * @param {UseTopOffsetOptions} options Options.
  *
  * @returns {MotionValue<number>} Vertical scroll.
  */
-const useRelativeViewportScroll = (
+const useTopOffset = (
   ref: MutableRefObject<HTMLElement>,
   {
     viewportOffset = 0,
     targetOffset = 0,
-  }: RelativeViewportScrollOptions = {},
+  }: UseTopOffsetOptions = {},
 ): MotionValue<number> => {
-  const { offsetTop, offsetHeight } = useElementOffsets(ref);
   const { height: viewportHeight = 0 } = useWindowDimensions();
 
   const { scrollY: viewportScrollY } = useViewportScroll();
 
-  const scrollY = useTransform(viewportScrollY, (value) => {
-    const zeroOffset = (viewportHeight * viewportOffset) - (offsetHeight * targetOffset);
+  const scrollY = useTransform(viewportScrollY, () => {
+    const rect = ref.current?.getBoundingClientRect();
+    const top = rect?.top ?? 0;
+    const height = rect?.height ?? 0;
 
-    return value - offsetTop + zeroOffset;
+    const zeroOffset = (viewportHeight * viewportOffset) - (height * targetOffset);
+
+    return zeroOffset - top;
   });
 
   return scrollY;
 };
 
-export default useRelativeViewportScroll;
+export default useTopOffset;

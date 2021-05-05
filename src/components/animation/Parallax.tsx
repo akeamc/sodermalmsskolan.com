@@ -2,7 +2,7 @@ import { motion, useTransform } from "framer-motion";
 import React, {
   DetailedHTMLProps, FunctionComponent, HTMLAttributes, useRef,
 } from "react";
-import useRelativeViewportScroll, { RelativeViewportScrollOptions } from "../../lib/animation/hooks/useRelativeViewportScroll";
+import useTopOffset, { UseTopOffsetOptions } from "../../lib/animation/hooks/useTopOffset";
 
 export interface ParallaxProps extends DetailedHTMLProps<
 HTMLAttributes<HTMLDivElement>, HTMLDivElement
@@ -10,7 +10,7 @@ HTMLAttributes<HTMLDivElement>, HTMLDivElement
   x?: number;
   y?: number;
   rotate?: number;
-  scrollOptions?: RelativeViewportScrollOptions;
+  scrollOptions?: UseTopOffsetOptions;
 }
 
 /**
@@ -29,7 +29,7 @@ const Parallax: FunctionComponent<ParallaxProps> = ({
   ...props
 }) => {
   const containerRef = useRef<HTMLDivElement>();
-  const scrollY = useRelativeViewportScroll(containerRef, scrollOptions);
+  const scrollY = useTopOffset(containerRef, scrollOptions);
   const x = useTransform(scrollY, (value) => value * xSpeed);
   const y = useTransform(scrollY, (value) => value * ySpeed);
   const rotate = useTransform(scrollY, (value) => value * rotationSpeed);
