@@ -39,7 +39,7 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
 
   return (
     <Parallax {...parallaxProps}>
-      <figure className="w-64 md:w-96 flex flex-col">
+      <figure className="w-64 md:w-96 max-w-full flex flex-col">
         <div
           style={{ "--aspect-ratio": aspectRatio } as CSSVariables}
           className={classNames(styles.image, "relative w-full overflow-hidden rounded-xl")}
