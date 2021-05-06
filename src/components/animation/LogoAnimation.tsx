@@ -29,9 +29,7 @@ const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = 
   const imageFilter = useTransform(scrollProgress, (value) => `blur(${value * 100}px)`);
 
   const logoOpacity = useTransform(imageOpacity, (value) => 1 - value);
-  const logoScale = useTransform(scrollProgress, [0, 1], [0.5, 1], {
-    clamp: false,
-  });
+  const logoScale = useTransform(scrollProgress, [0, 1], [0.5, 1]);
 
   const scrollPromptY = useTransform(scrollY, (value) => 0.25 * value);
   const scrollPromptOpacity = useTransform(scrollPromptY, [0, 25], [1, 0]);
