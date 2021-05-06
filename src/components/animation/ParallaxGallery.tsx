@@ -9,6 +9,7 @@ import ParallaxImage from "./ParallaxImage";
 const ParallaxGallery: FunctionComponent = () => (
   <div className="my-16 container">
     <ParallaxImage
+      aspectRatio={4 / 3}
       y={-0.1}
       src="https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/06/Bj-rkeby.jpg"
       captionHeading={(

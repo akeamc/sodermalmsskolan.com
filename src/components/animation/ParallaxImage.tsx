@@ -1,12 +1,22 @@
 import { motion, useTransform } from "framer-motion";
-import React, { FunctionComponent, ReactNode, useRef } from "react";
+import React, {
+  CSSProperties, FunctionComponent, ReactNode, useRef,
+} from "react";
+import classNames from "classnames";
 import useTopOffset from "../../lib/animation/hooks/useTopOffset";
 import Parallax, { ParallaxProps } from "./Parallax";
+
+import styles from "./ParallaxImage.module.scss";
 
 export interface ParallaxImageProps extends ParallaxProps {
   src: string;
   caption?: ReactNode;
   captionHeading?: ReactNode;
+  aspectRatio?: number;
+}
+
+interface CSSVariables extends CSSProperties {
+  "--aspect-ratio": number;
 }
 
 /**
@@ -20,6 +30,7 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
   src,
   caption,
   captionHeading,
+  aspectRatio = 1,
   ...parallaxProps
 }) => {
   const imageRef = useRef<HTMLDivElement>();
@@ -29,7 +40,11 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
   return (
     <Parallax {...parallaxProps}>
       <figure className="w-64 md:w-96 flex flex-col">
-        <div className="relative w-full h-64 md:h-96 overflow-hidden rounded-xl" ref={imageRef}>
+        <div
+          style={{ "--aspect-ratio": aspectRatio } as CSSVariables}
+          className={classNames(styles.image, "relative w-full overflow-hidden rounded-xl")}
+          ref={imageRef}
+        >
           <motion.img
             src={src}
             style={{
