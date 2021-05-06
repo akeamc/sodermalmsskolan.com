@@ -34,15 +34,15 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
   ...parallaxProps
 }) => {
   const imageRef = useRef<HTMLDivElement>();
-  const scrollY = useTopOffset(imageRef, { viewportOffset: 1, targetOffset: 1 });
-  const imageScale = useTransform(scrollY, [0, 200], [1.25, 1]);
+  const scrollY = useTopOffset(imageRef, { viewportOffset: 1, targetOffset: 0 });
+  const imageScale = useTransform(scrollY, [0, 300], [1.1, 1]);
 
   return (
     <Parallax {...parallaxProps}>
-      <figure className="w-64 md:w-96 max-w-full flex flex-col">
+      <figure className="max-w-full flex flex-col">
         <div
           style={{ "--aspect-ratio": aspectRatio } as CSSVariables}
-          className={classNames(styles.image, "relative w-full overflow-hidden rounded-xl")}
+          className={classNames(styles.image, "relative w-full overflow-hidden")}
           ref={imageRef}
         >
           <motion.img
@@ -53,7 +53,7 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
-        <figcaption className="font-medium mt-6">
+        <figcaption className="font-medium mt-6 max-w-xl">
           <h5 className="inline">{captionHeading}</h5>
           {" "}
           <span className="text-gray-500">{caption}</span>

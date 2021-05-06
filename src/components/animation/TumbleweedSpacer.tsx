@@ -36,7 +36,7 @@ const TumbleweedSpacer: FunctionComponent<TumbleweedSpacerProps> = ({
     {...parallaxProps}
   >
     <div className="w-64 h-64">
-      <img alt="" className="max-w-full max-h-full mx-auto rounded-2xl" src={src} />
+      <img alt="" className="max-w-full max-h-full mx-auto" src={src} />
     </div>
   </Parallax>
 );

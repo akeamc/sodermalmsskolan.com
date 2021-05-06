@@ -56,7 +56,7 @@ const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = 
           filter: imageFilter,
         }}
         alt=""
-        className="w-full h-full object-cover rounded-3xl"
+        className="w-full h-full object-cover"
       />
       <motion.div
         style={{
