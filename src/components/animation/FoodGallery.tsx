@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import Counter from "./Counter";
 import ParallaxGallery from "./ParallaxGallery";
 import ParallaxImage from "./ParallaxImage";
 
@@ -9,16 +8,7 @@ import ParallaxImage from "./ParallaxImage";
  * @returns {React.ReactElement} Rendered gallery.
  */
 const FoodGallery: FunctionComponent = () => (
-  <ParallaxGallery heading={(
-    <>
-      Vi fotade skolmaten
-      {" "}
-      <Counter from={0} to={10000} decimals={0} duration={5} />
-      {" "}
-      gånger.
-    </>
-  )}
-  >
+  <ParallaxGallery heading="Vi fotade skolmaten 10 000 gånger.">
     <ParallaxImage
       aspectRatio={3 / 4}
       src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
