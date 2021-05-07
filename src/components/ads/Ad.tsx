@@ -28,10 +28,8 @@ const Ad: FunctionComponent<AdProps> = ({
   fullWidthResponsive,
 }) => {
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
   }, []);
 
   return (

@@ -23,7 +23,7 @@ HTMLAttributes<HTMLDivElement>, HTMLDivElement
  */
 const Parallax: FunctionComponent<ParallaxProps> = ({
   x: xSpeed = 0,
-  y: ySpeed = 0.5,
+  y: ySpeed = 0,
   rotate: rotationSpeed = 0,
   children,
   scrollOptions,

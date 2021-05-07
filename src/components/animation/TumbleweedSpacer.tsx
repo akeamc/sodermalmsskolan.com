@@ -19,7 +19,7 @@ const TumbleweedSpacer: FunctionComponent<TumbleweedSpacerProps> = ({
   src,
   x = 1,
   y = 0,
-  rotate = 0.1,
+  rotate = 0.25,
   scrollOptions = {
     viewportOffset: 0.5,
     targetOffset: 0.5,
