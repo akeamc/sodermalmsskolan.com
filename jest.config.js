@@ -4,4 +4,5 @@ module.exports = {
     "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.ts"
   },
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
+  testEnvironment: "jsdom",
 };
