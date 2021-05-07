@@ -34,6 +34,7 @@ const ParallaxGallery: FunctionComponent = () => (
             </>
           )}
           className="md:mt-16 lg:col-span-2"
+          staticOnMobile
         />
         <ParallaxImage
           aspectRatio={4 / 3}

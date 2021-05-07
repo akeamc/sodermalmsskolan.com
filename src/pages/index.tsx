@@ -12,7 +12,7 @@ import MenuToolbar from "../components/menu/MenuToolbar";
  */
 const HomePage: NextPage = () => (
   <Base>
-    <h1 className="text-4xl font-bold tracking-tight mt-4 md:mt-16">Meny</h1>
+    <h1 className="text-4xl font-semibold tracking-tight mt-4 md:mt-16">Meny</h1>
     <MenuContextProvider>
       <MenuToolbar />
       <MenuList />

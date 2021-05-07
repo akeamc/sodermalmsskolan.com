@@ -11,6 +11,7 @@ HTMLAttributes<HTMLDivElement>, HTMLDivElement
   y?: number;
   rotate?: number;
   scrollOptions?: UseTopOffsetOptions;
+  staticOnMobile?: boolean;
 }
 
 /**
@@ -26,6 +27,7 @@ const Parallax: FunctionComponent<ParallaxProps> = ({
   rotate: rotationSpeed = 0,
   children,
   scrollOptions,
+  staticOnMobile = false,
   ...props
 }) => {
   const containerRef = useRef<HTMLDivElement>();
@@ -36,11 +38,13 @@ const Parallax: FunctionComponent<ParallaxProps> = ({
 
   return (
     <div {...props} ref={containerRef}>
-      <motion.div style={{
-        x,
-        y,
-        rotate,
-      }}
+      <motion.div
+        style={{
+          x,
+          y,
+          rotate,
+        }}
+        className={staticOnMobile ? "to-md:!transform-none" : undefined}
       >
         {children}
       </motion.div>

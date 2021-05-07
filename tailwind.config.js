@@ -1,11 +1,27 @@
-const { fontFamily } = require("tailwindcss/defaultTheme");
+const { fontFamily, screens } = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
+
+const toScreens = Object
+  .fromEntries(
+    Object
+      .entries(screens)
+      .map(([screen, size]) => [
+        `to-${screen}`,
+        { max: `${parseInt(size, 10) - 1}px` },
+      ]),
+  );
+
+console.log(screens);
 
 module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media",
   theme: {
+    screens: {
+      ...toScreens,
+      ...screens,
+    },
     container: {
       center: true,
       padding: {
