@@ -12,7 +12,7 @@ const ParagraphSection: FunctionComponent = ({
   children,
 }) => (
   <AnimationSection>
-    <p className="text-3xl md:text-4xl font-semibold tracking-tight max-w-xl">
+    <p className="text-2xl md:text-4xl font-semibold tracking-tight max-w-xl">
       {children}
     </p>
   </AnimationSection>
