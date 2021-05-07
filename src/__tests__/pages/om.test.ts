@@ -16,6 +16,6 @@ describe("about us test", () => {
 
     render();
 
-    expect(screen.getByText(/©/)).toBeDefined();
+    expect(screen.getAllByText(/Björkeby/i).length).toBeGreaterThan(0);
   });
 });

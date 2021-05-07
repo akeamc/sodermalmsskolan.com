@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { DetailedHTMLProps, FunctionComponent, HTMLAttributes } from "react";
+import Link from "next/link";
 import { GitHub } from "react-feather";
 
 export type FooterProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
@@ -15,15 +16,24 @@ const Footer: FunctionComponent<FooterProps> = ({
   className,
   ...props
 }) => (
-  <footer className={classNames("container py-16 text-center", className)} {...props}>
-    <div className="text-center text-gray-700 dark:text-gray-500">
-      <a
-        href="//github.com/ThePicoNerd/sodermalmsskolan.com/"
-        className="inline-block hover:text-gray-500 dark:hover:text-gray-700 transition-colors"
-      >
-        <GitHub />
-      </a>
-      <p className="mt-4 text-gray-500 font-medium">© 2019–2021 Åke Amcoff</p>
+  <footer className={classNames("container pt-16 pb-4", className)} {...props}>
+    <div className="text-gray-400 dark:text-gray-700 text-sm font-medium flex items-center leading-tight">
+      <div className="flex-1 flex">
+        <span className="mr-auto">© 2019–2021 Åke Amcoff</span>
+      </div>
+      <div className="flex-1 flex">
+        <a
+          href="//github.com/ThePicoNerd/sodermalmsskolan.com/"
+          className="inline-block hover:text-gray-500 transition-colors mx-auto"
+        >
+          <GitHub />
+        </a>
+      </div>
+      <div className="flex-1 flex">
+        <Link href="/om">
+          <a className="ml-auto hover:text-gray-500 transition-colors">Om oss</a>
+        </Link>
+      </div>
     </div>
   </footer>
 );
