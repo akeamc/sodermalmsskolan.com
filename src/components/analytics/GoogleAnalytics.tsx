@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { FunctionComponent, useEffect } from "react";
-import gtag from "../../lib/analytics/gtag";
 
 export interface GoogleAnalyticsProps {
   trackingId: string;
@@ -17,9 +16,18 @@ const GoogleAnalytics: FunctionComponent<GoogleAnalyticsProps> = ({
   trackingId,
 }) => {
   useEffect(() => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    // eslint-disable-next-line func-names
+    (window as any).gtag = function () {
+      // eslint-disable-next-line prefer-rest-params
+      (window as any).dataLayer.push(arguments);
+    };
+
     // Required for GA to function, as per the snippet.
-    gtag("js", new Date());
-    gtag("config", trackingId);
+    (window as any).gtag("js", new Date());
+    (window as any).gtag("config", trackingId);
+    /* eslint-enable @typescript-eslint/no-explicit-any */
   }, [trackingId]);
 
   return (
@@ -28,13 +36,6 @@ const GoogleAnalytics: FunctionComponent<GoogleAnalyticsProps> = ({
       <script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
-      />
-      <script
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}`,
-        }}
       />
     </Head>
   );

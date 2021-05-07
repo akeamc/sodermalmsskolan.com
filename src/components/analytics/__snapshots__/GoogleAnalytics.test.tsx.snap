@@ -6,9 +6,5 @@ exports[`<GoogleAnalytics /> test should return the correct tags 1`] = `
     async=""
     src="https://www.googletagmanager.com/gtag/js?id=G-P3DFFXTCY0"
   />
-  <script>
-    window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-  </script>
 </DocumentFragment>
 `;
