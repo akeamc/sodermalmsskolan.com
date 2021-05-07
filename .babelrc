@@ -9,12 +9,4 @@
       }
     ]
   ],
-  "plugins": ["babel-plugin-dynamic-import-node"],
-  "env": {
-    "test": {
-      "plugins": [
-        "dynamic-import-node"
-      ]
-    }
-  }
 }
