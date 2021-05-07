@@ -10,7 +10,7 @@ import Base from "../components/Base";
  *
  * @returns {React.ReactElement} Rendered page.
  */
-const AboutPage: NextPage = (): React.ReactElement => (
+const AboutPage: NextPage = () => (
   <Base
     metadata={{
       title: "Om oss",
