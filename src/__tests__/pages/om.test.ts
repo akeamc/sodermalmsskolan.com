@@ -4,8 +4,6 @@ import { screen } from "@testing-library/react";
 describe("about us test", () => {
   jest.unmock("next/head");
 
-  console.log(process.cwd());
-
   it("should render correctly", async () => {
     jest.setTimeout(10000);
 
