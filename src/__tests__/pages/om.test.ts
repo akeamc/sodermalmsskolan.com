@@ -8,7 +8,7 @@ describe("about us test", () => {
     jest.setTimeout(10000);
 
     const { render } = await getPage({
-      route: "/om",
+      route: "/om/",
     });
 
     render();
