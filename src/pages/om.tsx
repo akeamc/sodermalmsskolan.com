@@ -3,6 +3,7 @@ import React from "react";
 import FoodGallery from "../components/animation/FoodGallery";
 import HikeGallery from "../components/animation/HikeGallery";
 import LogoAnimation from "../components/animation/LogoAnimation";
+import ParagraphSection from "../components/animation/ParagraphSection";
 import TumbleweedSpacer from "../components/animation/TumbleweedSpacer";
 import Base from "../components/Base";
 
@@ -31,6 +32,11 @@ const AboutPage: NextPage = () => (
       </p>
     </div>
     <FoodGallery />
+    <ParagraphSection>
+      södermalmsskolan.com är en (ofrivilligt) icke-vinstdrivande organisation.
+      Vi står för elevers rättigheter i skolan och motsätter oss all form av censur
+      och byråkratisk jargong.
+    </ParagraphSection>
     <TumbleweedSpacer src="https://cdn.discordapp.com/attachments/575993879837409290/746316140262981672/image0.jpg" />
     <HikeGallery />
     <TumbleweedSpacer src="https://cdn.discordapp.com/attachments/575993879837409290/755738540469387294/image0.jpg" />
