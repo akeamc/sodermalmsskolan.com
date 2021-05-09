@@ -1,4 +1,4 @@
-import { motion, useTransform } from "framer-motion";
+import { motion, transform, useTransform } from "framer-motion";
 import React, {
   CSSProperties, FunctionComponent, ReactNode, useRef,
 } from "react";
@@ -35,8 +35,12 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
   ...parallaxProps
 }) => {
   const imageRef = useRef<HTMLDivElement>();
-  const scrollY = useTopOffset(imageRef, { viewportOffset: 1, targetOffset: 0 });
-  const imageScale = useTransform(scrollY, [0, 300], [1.1, 1]);
+  const scrollY = useTopOffset(imageRef, { viewportOffset: 1 });
+  const imageScale = useTransform(scrollY, (value) => {
+    const height = imageRef.current?.offsetHeight ?? 250;
+
+    return transform(value, [0, height], [1.2, 1]);
+  });
 
   return (
     <Parallax {...parallaxProps}>
