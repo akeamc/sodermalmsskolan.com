@@ -7,6 +7,7 @@ import useTopOffset from "../../lib/animation/hooks/useTopOffset";
 import Parallax, { ParallaxProps } from "./Parallax";
 
 import styles from "./ParallaxImage.module.scss";
+import FadeIn from "./FadeIn";
 
 export interface ParallaxImageProps extends ParallaxProps {
   src: string;
@@ -40,24 +41,28 @@ const ParallaxImage: FunctionComponent<ParallaxImageProps> = ({
   return (
     <Parallax {...parallaxProps}>
       <figure className="max-w-full flex flex-col">
-        <div
-          style={{ "--aspect-ratio": aspectRatio } as CSSVariables}
-          className={classNames(styles.image, "relative w-full overflow-hidden")}
-          ref={imageRef}
-        >
-          <motion.img
-            src={src}
-            style={{
-              scale: imageScale,
-            }}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-        <figcaption className="font-medium mt-6 max-w-xl">
-          <h5 className="inline">{captionHeading}</h5>
-          {" "}
-          <span className="text-gray-500">{caption}</span>
-        </figcaption>
+        <FadeIn>
+          <div
+            style={{ "--aspect-ratio": aspectRatio } as CSSVariables}
+            className={classNames(styles.image, "relative w-full overflow-hidden")}
+            ref={imageRef}
+          >
+            <motion.img
+              src={src}
+              style={{
+                scale: imageScale,
+              }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+        </FadeIn>
+        <FadeIn>
+          <figcaption className="font-medium mt-6 max-w-xl">
+            <h5 className="inline">{captionHeading}</h5>
+            {" "}
+            <span className="text-gray-500">{caption}</span>
+          </figcaption>
+        </FadeIn>
       </figure>
     </Parallax>
   );
