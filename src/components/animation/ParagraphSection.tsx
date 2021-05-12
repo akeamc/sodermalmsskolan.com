@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import AnimationSection from "./AnimationSection";
+import FadeIn from "./FadeIn";
 
 /**
  * Section with a paragraph.
@@ -12,9 +13,11 @@ const ParagraphSection: FunctionComponent = ({
   children,
 }) => (
   <AnimationSection>
-    <p className="text-2xl md:text-4xl font-semibold tracking-tight max-w-xl">
-      {children}
-    </p>
+    <FadeIn>
+      <p className="text-2xl md:text-4xl font-semibold tracking-tight max-w-xl">
+        {children}
+      </p>
+    </FadeIn>
   </AnimationSection>
 );
 
