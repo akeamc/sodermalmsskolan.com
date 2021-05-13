@@ -10,7 +10,7 @@ export interface AdProps {
   className?: string;
   format?: AdFormat,
   layoutKey?: string,
-  layout?: string,
+  layout?: AdLayout,
   fullWidthResponsive?: boolean,
 }
 
