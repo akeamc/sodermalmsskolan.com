@@ -13,7 +13,9 @@ import BannerAd from "../components/ads/BannerAd";
  */
 const HomePage: NextPage = () => (
   <Base>
-    <BannerAd />
+    <div>
+      <BannerAd />
+    </div>
     <h1 className="text-4xl font-semibold tracking-tight mt-4 md:mt-16">Meny</h1>
     <MenuContextProvider>
       <MenuToolbar />
