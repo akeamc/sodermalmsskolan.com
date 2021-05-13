@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect } from "react";
+import classNames from "classnames";
 import { ADSENSE_CLIENT, ADSENSE_SLOT } from "../../lib/adsense/constants";
 
 export type AdFormat = "auto" | "fluid";
@@ -34,7 +35,7 @@ const Ad: FunctionComponent<AdProps> = ({
 
   return (
     <ins
-      className={className}
+      className={classNames("block", className)}
       data-ad-format={format}
       data-ad-layout-key={layoutKey}
       data-ad-layout={layout}
