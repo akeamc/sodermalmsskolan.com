@@ -10,7 +10,7 @@ if (admin.apps.length <= 0) {
       process.env.FIREBASE_TOKEN,
       "base64",
     ).toString("ascii");
-    
+
     const serviceAccount = JSON.parse(serviceAccountJson);
 
     admin.initializeApp({
