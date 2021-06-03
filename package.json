@@ -37,7 +37,7 @@
     "@testing-library/react-hooks": "^5.1.0",
     "@testing-library/user-event": "^13.1.1",
     "@types/ical": "^0.6.2",
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.168",
     "@types/luxon": "^1.26.5",
     "@types/node": "^14.14.33",
