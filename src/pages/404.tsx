@@ -1,26 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 import { NextPage } from "next";
-import Base from "../components/Base";
-import SimpleHeader from "../components/header/Simple";
-import MenuText from "../components/menu/Text";
 
 /**
- * The `HTTP 404` page of the website.
+ * Custom 404 page that redirects back home.
  *
- * @returns {React.ReactElement} A very helpful and informative page guiding the user back to
- * safety.
+ * @returns {React.ReactElement} Rendered page.
  */
-const NotFoundPage: NextPage = () => (
-  <Base metadata={{
-    title: "Sidan hittades inte",
-    noIndex: true,
-  }}
-  >
-    <SimpleHeader
-      title="Sidan hittades inte"
-      sub={<MenuText />}
-    />
-  </Base>
-);
+const NotFound: NextPage = () => {
+  const router = useRouter();
 
-export default NotFoundPage;
+  useEffect(() => {
+    router.replace("/");
+  });
+
+  return (
+    <data value={router.asPath}>
+      Omdirigerar ...
+    </data>
+  );
+};
+
+export default NotFound;

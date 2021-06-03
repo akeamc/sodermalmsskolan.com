@@ -11,3 +11,6 @@ node_modules
 
 # Logs
 *.log
+
+# Annoying
+public/mockServiceWorker.js

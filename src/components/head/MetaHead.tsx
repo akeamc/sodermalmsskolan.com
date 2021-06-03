@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
@@ -18,8 +19,8 @@ export interface SiteMetadata {
    * Data to be specified if the `type` property is set to `article`.
    */
   article?: {
-    published?: Date,
-    modified?: Date,
+    published?: DateTime,
+    modified?: DateTime,
   }
 }
 
@@ -76,8 +77,8 @@ export const MetaHead: FunctionComponent<SiteMetadata> = ({
 
       {article ? (
         <>
-          {article?.published ? <meta property="og:article:published_time" content={article.published.toISOString()} /> : null}
-          {article?.modified ? <meta property="og:article:modified_time" content={article.modified.toISOString()} /> : null}
+          {article?.published ? <meta property="og:article:published_time" content={article.published.toISO()} /> : null}
+          {article?.modified ? <meta property="og:article:modified_time" content={article.modified.toISO()} /> : null}
         </>
       ) : null}
     </Head>

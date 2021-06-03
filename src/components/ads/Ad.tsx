@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect } from "react";
+import classNames from "classnames";
 import { ADSENSE_CLIENT, ADSENSE_SLOT } from "../../lib/adsense/constants";
 
 export type AdFormat = "auto" | "fluid";
@@ -9,10 +10,17 @@ export interface AdProps {
   className?: string;
   format?: AdFormat,
   layoutKey?: string,
-  layout?: string,
+  layout?: AdLayout,
   fullWidthResponsive?: boolean,
 }
 
+/**
+ * Google AdSense ad.
+ *
+ * @param {React.PropsWithChildren<AdProps>} props Props.
+ *
+ * @returns {React.ReactElement} The rendered ad.
+ */
 const Ad: FunctionComponent<AdProps> = ({
   className = "adsbygoogle",
   format = "auto",
@@ -21,18 +29,13 @@ const Ad: FunctionComponent<AdProps> = ({
   fullWidthResponsive,
 }) => {
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
   }, []);
 
   return (
     <ins
-      className={className}
-      css={{
-        display: "block",
-      }}
+      className={classNames("block", className)}
       data-ad-format={format}
       data-ad-layout-key={layoutKey}
       data-ad-layout={layout}

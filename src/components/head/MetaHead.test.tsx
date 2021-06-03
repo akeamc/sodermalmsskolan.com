@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import { DateTime } from "luxon";
 import { MetaHead } from "./MetaHead";
 
 describe("<MetaHead /> test", () => {
@@ -34,8 +35,8 @@ describe("<MetaHead /> test", () => {
       <MetaHead
         type="article"
         article={{
-          published: new Date("2020-01-01"),
-          modified: new Date("2020-06-11"),
+          published: DateTime.utc(2020, 1, 1),
+          modified: DateTime.utc(2020, 6, 11),
         }}
       />,
     );

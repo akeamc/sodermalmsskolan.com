@@ -1,0 +1,24 @@
+@keyframes skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-bg {
+  animation: skeleton 2s ease-in-out infinite;
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+
+  @apply bg-gray-200 bg-gradient-to-r from-gray-200 via-gray-50 to-gray-200 dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900;
+}
+
+.skeleton {
+  composes: skeleton-bg;
+  line-height: 1;
+
+  @apply rounded w-full inline-block;
+}

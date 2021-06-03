@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Ad /> 1`] = `
+<DocumentFragment>
+  <ins
+    class="block adsbygoogle"
+    data-ad-client="ca-pub-1944185766034883"
+    data-ad-format="auto"
+    data-ad-slot="5909725353"
+  />
+</DocumentFragment>
+`;

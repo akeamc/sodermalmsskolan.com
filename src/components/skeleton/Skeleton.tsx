@@ -1,28 +1,15 @@
-import { css, keyframes } from "@emotion/react";
+import classNames from "classnames/bind";
 import React, { FunctionComponent } from "react";
+import styles from "./Skeleton.module.scss";
 
-const animation = keyframes({
-  "0%": {
-    backgroundPosition: "200% 0",
-  },
+const cx = classNames.bind(styles);
 
-  "100%": {
-    backgroundPosition: "-200% 0",
-  },
-});
-
-export interface SkeletonProps { width?: string, height?: string }
-
-/**
- * CSS styles for a skeleton background.
- */
-export const skeletonBackground = css({
-  backgroundColor: "var(--skeleton-base)",
-  backgroundImage: "linear-gradient(270deg, var(--skeleton-base), var(--skeleton-highlight), var(--skeleton-base))",
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "200% 100%",
-  animation: `${animation} 2s ease-in-out infinite`,
-});
+export interface SkeletonProps extends React.DetailedHTMLProps<
+React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement
+> {
+  width?: string;
+  height?: string;
+}
 
 /**
  * A loading skeleton, used as a placeholder.
@@ -31,15 +18,15 @@ export const skeletonBackground = css({
  *
  * @returns {React.ReactElement} The skeleton.
  */
-const Skeleton: FunctionComponent<SkeletonProps> = ({ width, height, ...props }) => (
+const Skeleton: FunctionComponent<SkeletonProps> = ({
+  className, width, height, ...props
+}) => (
   <span
-    css={[skeletonBackground, {
-      borderRadius: "0.3125rem",
-      display: "inline-block",
-      lineHeight: 1,
-      width: width ?? "100%",
+    className={cx("skeleton", className)}
+    style={{
+      width,
       height,
-    }]}
+    }}
     {...props}
   />
 );
