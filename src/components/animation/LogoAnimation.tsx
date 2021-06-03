@@ -81,7 +81,7 @@ const InnerLogoAnimation: StickyScrollContainerChild<InnerLogoAnimationProps> = 
  */
 const LogoAnimation: FunctionComponent<LogoAnimationProps> = ({
   duration = 1000,
-  imgSrc = "https://media.discordapp.net/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg",
+  imgSrc = "/assets/potato.jpg",
 }) => (
   <StickyScrollContainer duration={duration}>
     {(props) => <InnerLogoAnimation {...props} duration={duration} imgSrc={imgSrc} />}

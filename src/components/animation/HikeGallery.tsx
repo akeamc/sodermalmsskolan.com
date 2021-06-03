@@ -11,7 +11,7 @@ const HikeGallery: FunctionComponent = () => (
   <ParallaxGallery heading="Vi vandrade till Björkeby, Järfälla.">
     <ParallaxImage
       aspectRatio={3 / 4}
-      src="https://cdn.discordapp.com/attachments/575993879837409290/775684513430110218/20201110_123305.jpg"
+      src="/assets/fish.jpg"
       captionHeading="Nästan Fisk Björkeby."
       caption="Efter att södermalmsskolan.com grundades serverades aldrig Fisk Björkeby igen – åtminstone inte under samma namn. Den sågs senast den femte februari 2020."
     />

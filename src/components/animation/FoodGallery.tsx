@@ -11,7 +11,7 @@ const FoodGallery: FunctionComponent = () => (
   <ParallaxGallery heading="Vi fotade skolmaten 387 gånger.">
     <ParallaxImage
       aspectRatio={3 / 4}
-      src="https://cdn.discordapp.com/attachments/575993879837409290/576074256723476491/IMG_20190507_121005.jpg"
+      src="/assets/potato.jpg"
       y={-0.1}
       staticOnMobile
       captionHeading="Den första bilden"
@@ -25,7 +25,7 @@ const FoodGallery: FunctionComponent = () => (
     />
     <ParallaxImage
       aspectRatio={3 / 4}
-      src="https://cdn.discordapp.com/attachments/575993879837409290/692690136873566269/image0.jpg"
+      src="/assets/paper.jpg"
       captionHeading="Tallrikar av papper."
       caption={(
         <>
@@ -36,7 +36,7 @@ const FoodGallery: FunctionComponent = () => (
     />
     <ParallaxImage
       aspectRatio={3 / 4}
-      src="https://cdn.discordapp.com/attachments/575993879837409290/746316140262981672/image0.jpg"
+      src="/assets/glass.jpg"
       captionHeading="Glasglas!"
       caption={(
         <>

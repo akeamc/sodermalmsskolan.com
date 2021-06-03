@@ -37,9 +37,9 @@ const AboutPage: NextPage = () => (
       Vi står för elevers rättigheter i skolan och motsätter oss all form av censur
       och byråkratisk jargong.
     </ParagraphSection>
-    <TumbleweedSpacer src="https://cdn.discordapp.com/attachments/575993879837409290/778584831311085588/20201118_123736.jpg" />
+    <TumbleweedSpacer src="/assets/burger.jpg" />
     <HikeGallery />
-    <TumbleweedSpacer src="https://cdn.discordapp.com/attachments/575993879837409290/687619219105513491/JPEG_20200312_121314.jpg" />
+    <TumbleweedSpacer src="/assets/pasta.jpg" />
   </Base>
 );
 
