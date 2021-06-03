@@ -28,7 +28,7 @@
     "swr": "^0.4.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "@next/bundle-analyzer": "^10.0.8",
     "@tailwindcss/jit": "^0.1.18",
