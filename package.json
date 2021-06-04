@@ -33,7 +33,7 @@
     "@next/bundle-analyzer": "^10.0.8",
     "@tailwindcss/jit": "^0.1.18",
     "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
+    "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "^5.1.0",
     "@testing-library/user-event": "^13.1.1",
     "@types/ical": "^0.6.2",
