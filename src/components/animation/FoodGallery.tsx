@@ -8,7 +8,7 @@ import ParallaxImage from "./ParallaxImage";
  * @returns {React.ReactElement} Rendered gallery.
  */
 const FoodGallery: FunctionComponent = () => (
-  <ParallaxGallery heading="Vi fotade skolmaten 387 gånger.">
+  <ParallaxGallery heading="Vi fotade skolmaten 388 gånger.">
     <ParallaxImage
       aspectRatio={3 / 4}
       src="/assets/potato.jpg"
@@ -41,7 +41,7 @@ const FoodGallery: FunctionComponent = () => (
       caption={(
         <>
           Första dagen i årskurs nio överraskades vi av glas tillverkade av glas – de tidigare
-          versionerna gjordes i plast och hade en tendens att färgas svagt bruna.
+          versionerna gjordes av plast och hade en tendens att färgas svagt bruna.
         </>
       )}
     />
