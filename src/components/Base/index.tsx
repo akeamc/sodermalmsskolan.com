@@ -1,17 +1,14 @@
-import React, { FunctionComponent } from "react";
-import BannerAd from "../ads/BannerAd";
-import Container from "../Container";
-import Footer from "../footer/Footer";
+import React, { DetailedHTMLProps, FunctionComponent, HTMLAttributes } from "react";
+import classNames from "classnames";
 import SiteHead from "../head/SiteHead";
 import { SiteMetadata } from "../head/MetaHead";
-import MainNavbar from "../navigation/MainNavbar";
-import MobileNavbar from "../navigation/MobileNavbar";
+import Footer from "../Footer";
 
-export interface BaseProps {
+export interface BaseProps extends DetailedHTMLProps<
+HTMLAttributes<HTMLDivElement>, HTMLDivElement
+> {
   metadata?: SiteMetadata;
-  leadingAd?: boolean;
-  navbar?: boolean;
-  footer?: boolean;
+  fullWidth?: boolean;
 }
 
 /**
@@ -23,30 +20,18 @@ export interface BaseProps {
  */
 const Base: FunctionComponent<BaseProps> = ({
   metadata,
-  leadingAd = false,
   children,
-  navbar = true,
-  footer = true,
+  className,
+  fullWidth,
+  ...props
 }) => (
-  <>
+  <div className={classNames("flex flex-col min-h-screen", className)} {...props}>
     <SiteHead metadata={metadata} />
-    {navbar ? <MainNavbar /> : null}
-    <main
-      css={{
-        backgroundColor: "var(--color-bg-primary)",
-        color: "var(--color-text-primary)",
-      }}
-    >
-      {leadingAd ? (
-        <Container>
-          <BannerAd />
-        </Container>
-      ) : null}
+    <main className={fullWidth ? undefined : "container"}>
       {children}
     </main>
-    {footer ? <Footer /> : null}
-    {navbar ? <MobileNavbar /> : null}
-  </>
+    <Footer className="mt-auto" />
+  </div>
 );
 
 export default Base;

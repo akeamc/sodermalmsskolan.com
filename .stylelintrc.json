@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-sass-guidelines",
+    "stylelint-order",
+    "stylelint-config-css-modules"
+  ],
+  "rules": {
+    "string-quotes": "double",
+    "at-rule-no-unknown": [true, {
+      "ignoreAtRules": ["function", "if", "else", "each", "error", "include", "use", "mixin", "apply", "tailwind", "screen"]
+    }],
+    "scss/at-rule-no-unknown": [true, {
+      "ignoreAtRules": ["tailwind", "apply", "screen"]
+    }],
+    "value-keyword-case": ["lower", {
+      "ignoreKeywords": ["/^[a-z]+([A-Z][a-z]*)*$/"]
+    }]
+  }
+}

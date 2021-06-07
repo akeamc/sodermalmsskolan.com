@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InlineSkeleton /> 1`] = `
+<DocumentFragment>
+  <span>
+    <span
+      class="skeleton max-w-full"
+    >
+      ‌
+    </span>
+  </span>
+</DocumentFragment>
+`;

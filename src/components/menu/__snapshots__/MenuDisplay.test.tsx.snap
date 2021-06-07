@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MenuDisplay /> test should return a skeleton if the menu is undefined 1`] = `
+<DocumentFragment>
+  <div
+    class="my-4"
+  >
+    <h3
+      class="text-xl font-semibold"
+    >
+      <span>
+        <span
+          class="skeleton max-w-full"
+          style="width: 12em;"
+        >
+          ‌
+        </span>
+      </span>
+    </h3>
+    <ul>
+      <li
+        class="text-gray-500 font-medium leading-snug my-1"
+      >
+        <span>
+          <span
+            class="skeleton max-w-full"
+            style="width: 40em;"
+          >
+            ‌
+          </span>
+        </span>
+      </li>
+      <li
+        class="text-gray-500 font-medium leading-snug my-1"
+      >
+        <span>
+          <span
+            class="skeleton max-w-full"
+            style="width: 40em;"
+          >
+            ‌
+          </span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
