@@ -17,7 +17,7 @@ const AboutPage: NextPage = () => (
     metadata={{
       title: "Om oss",
       description: "Vår historia.",
-      images: ["https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/06/Bj-rkeby.jpg"],
+      images: ["/assets/bjorkeby.jpg"],
       twitterCard: "summary_large_image",
     }}
     fullWidth

@@ -18,7 +18,7 @@ const HikeGallery: FunctionComponent = () => (
     <ParallaxImage
       aspectRatio={3 / 2}
       y={-0.2}
-      src="https://blogg.södermalmsskolan.com/content/images/2020/06/DSC02598.JPG"
+      src="/assets/school.jpg"
       captionHeading="Vallfärden."
       caption={(
         <>
@@ -34,7 +34,7 @@ const HikeGallery: FunctionComponent = () => (
     />
     <ParallaxImage
       aspectRatio={3 / 2}
-      src="https://blogg.xn--sdermalmsskolan-8sb.com/content/images/2020/06/Bj-rkeby.jpg"
+      src="/assets/bjorkeby.jpg"
       className="col-start-1 col-span-full md:-mx-32"
       captionHeading={(
         <>
@@ -46,7 +46,7 @@ const HikeGallery: FunctionComponent = () => (
     />
     <ParallaxImage
       aspectRatio={3 / 2}
-      src="https://blogg.södermalmsskolan.com/content/images/2020/06/DSC02721.JPG"
+      src="/assets/hike.jpg"
       className="col-start-1 col-span-full"
       caption="Vissa av oss tog sitt förnuft till fånga och reste hem kommunalt, medan andra vandrade tillbaka också."
     />
