@@ -16,7 +16,7 @@ const HomePage: NextPage = () => (
       Nu finns matsedeln på
       {" "}
       <a
-        href="https://skolorna.com/menyer/https://skolorna.com/menyer/c18303fe-8b6a-54e8-a26c-9efcb35bbc1a?utm_source=sodermalmsskolan&utm_medium=sodermalmsskolan&utm_campaign=sodermalmsskolan"
+        href="https://skolorna.com/menyer/c18303fe-8b6a-54e8-a26c-9efcb35bbc1a?utm_source=sodermalmsskolan&utm_medium=sodermalmsskolan&utm_campaign=sodermalmsskolan"
         className="text-blue-500"
       >
         skolorna.com
